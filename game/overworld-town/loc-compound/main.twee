@@ -51,16 +51,21 @@ You are in the compound on Elk Street. Three red brick buildings stand surrounde
 			<<beastNEWinit 1 dog>>
 			A guard <<beasttype>> runs towards you. <<bHe>> stops a few feet away and starts barking.
 			<br><br>
-			<<if $deviancy gte 15>>
-				<<link [[Calm it|Elk Compound Bestiality]]>><<set $sexstart to 1>><</link>><<deviant2>>
+			<<if $monster is 1 or $bestialitydisable is "f">>
+				<<if $deviancy gte 15>>
+					<<link [[Calm it|Elk Compound Bestiality]]>><<set $sexstart to 1>><</link>><<deviant2>>
+					<br>
+				<</if>>
+				<<link [[Fight|Elk Compound Bestiality]]>><<set $molestationstart to 1>><</link>>
+				<br>
+				<<link [[Escape the compound|Elk Compound Run]]>><<crimeup 30>><</link>><<athleticsdifficulty 1 1000>><<crime>>
+				<br>
+			<<else>>
+				<<link [[Escape the compound|Elk Compound Run]]>><<crimeup 30>><<set $athleticsSuccess to true>><</link>><<crime>>
 				<br>
 			<</if>>
-			<<link [[Fight|Elk Compound Bestiality]]>><<set $molestationstart to 1>><</link>>
-			<br>
-			<<link [[Escape the compound|Elk Compound Run]]>><<crimeup 30>><</link>><<athleticsdifficulty 1 1000>><<crime>>
-			<br>
 		<<else>>
-			A hand rests on your shoulder. <<generate1>><<person1>>"Alright <<girl>>, playtime's over," <<he>> waves <<his>> baton in front of your face. "I found <<phim>> outside," <<he>> says into <<his>> radio. "Alright, I'll keep <<phim>> here until then."
+			A hand rests on your shoulder. <<generateSecurity 1>><<person1>>"Alright <<girl>>, playtime's over," <<he>> waves <<his>> baton in front of your face. "I found <<phim>> outside," <<he>> says into <<his>> radio. "Alright, I'll keep <<phim>> here until then."
 			<br><br>
 
 			<<if $compoundbluff is 1>>
@@ -120,7 +125,7 @@ The door opens easily and you enter the building. The inside is full of a sweet-
 <<set $outside to 1>><<set $location to "compound">><<effects>><<set $lock to 300>>
 The door is locked tight.
 <br><br>
-<<if $skulduggery gte $lock>>
+<<if currentSkillValue('skulduggery') gte $lock>>
 	<span class="green">The lock looks easy to pick.</span>
 	<br><br>
 	<<link [[Break in (0:05)|Elk Compound Interior]]>><<pass 5>><<crimeup 1>><</link>><<crime>><<gsecurity>>
@@ -211,7 +216,7 @@ The <<person>> slams the door. An alarm blares a moment later.
 	<<molested>>
 	<<beastCombatInit>>
 	<<set $enemytrust -= 40>><<set $enemyanger += 20>>
-	<<set $rescue to 1>>
+	<<enable_rescue>>
 <<elseif $sexstart is 1>>
 	<<set $sexstart to 0>>
 	<<consensual>>
@@ -221,7 +226,7 @@ The <<person>> slams the door. An alarm blares a moment later.
 	<<set $enemytrust -= 40>>
 	You drop to the floor and adopt a mating posture. The <<beasttype>> stops barking, but now has something else in mind.
 	<<deviancy2>>
-	<<set $rescue to 1>>
+	<<enable_rescue>>
 <</if>>
 <<effects>>
 <<effectsman>>
@@ -247,7 +252,7 @@ The <<person>> slams the door. An alarm blares a moment later.
 
 <<set $outside to 1>><<set $location to "compound">><<effects>>
 <<if $athleticsSuccess>>
-	You <span class="green">successfully</span> climb the fence and haul yourself over the top, landing on Elk Street proper. <<beasttype>>s bark behind you and alert the guards who arrive in time to see you escape.
+	You <span class="green">successfully</span> climb the fence and haul yourself over the top, landing on Elk Street proper. You hear <<beasttype>>s bark behind you, alerting the guards, who arrive in time to see you escape.
 	<br><br>
 	<<set $compoundalarm to 0>>
 	<<set $compoundpipes to 0>>
@@ -286,7 +291,7 @@ The <<person>> slams the door. An alarm blares a moment later.
 	<<link [[Next|Elk Compound]]>><<set $eventskip to 1>><</link>>
 	<br>
 <<elseif $alarm is 1 and $rescue is 1>>
-	<<generate2>><<generate3>><<person2>>A <<person>> and <<person3>><<person>> arrive to investigate the noise.
+	<<generateSecurity 2>><<generateSecurity 3>><<person2>>A <<person>> and <<person3>><<person>> arrive to investigate the noise.
 	<<if $NPCList[0].stance is "top">>
 		They see the <<beasttype 0>> humping you and laugh. "Good <<beasttype 0>>," the <<person2>><<person>> says.
 		<br><br>
@@ -395,12 +400,7 @@ The <<person3>><<person>> films you.
 	"I'm delivering something," you say. "Go ask your boss."
 <</if>>
 <br><br>
-<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
-	<<skulduggeryskilluse>>
-<<else>>
-	<span class="blue">That was too easy. You didn't learn anything.</span>
-	<br><br>
-<</if>>
+<<skulduggeryuse>>
 <<skulduggerycheck>>
 <<if $skulduggerysuccess is 1>>
 	<<set $compoundbluff to 1>>
@@ -458,7 +458,7 @@ The <<person3>><<person>> films you.
 <<else>>
 	door to the central building opens.
 <</if>>
-A <<generate3>><<person3>><<person>> in a lab coat exits.
+A <<generate3>><<npcClothesType $NPCList[2] "compoundLab">><<person3>><<person>> in a lab coat exits.
 <br><br>
 "I'll take the <<girl>> from here," <<he>> says. "They want to speak to <<phim>> downstairs."
 <br><br>
@@ -504,26 +504,26 @@ As soon as the <<person>> touches your arm a jolt surges through you. You lose c
 <<set $compoundsmoke to 0>>
 <<set $compoundcentre to 0>>
 <<set $compoundbluff to 0>>
-You wake up, naked <<if $worn.genitals.type.includes("chastity")>>save for your $worn.genitals.name<</if>> and strapped to a metal board. Pipes and wires protrude from concrete walls. <<generate1>><<person1>>A <<person>> works at a console in the corner. <<He>> glances at you. "Aha," <<he>> says. "You're awake." <<He>> pushes <<himself>> towards you on <<his>> chair and produces a bundle of wires from <<his>> lab coat.
+You wake up, naked <<if $worn.genitals.type.includes("chastity")>>save for your $worn.genitals.name<</if>> and strapped to a metal board. Pipes and wires protrude from concrete walls. <<generate1>><<npcClothesType $NPCList[0] "compoundLab">><<person1>>A <<person>> works at a console in the corner. <<He>> glances at you. "Aha," <<he>> says. "You're awake." <<He>> pushes <<himself>> towards you on <<his>> chair and produces a bundle of wires from <<his>> lab coat.
 <br><br>
 The wires have pads on one end. <<He>> starts sticking them to your body. <<He>> goes about <<his>> work with a clinical professionalism that makes you feel less humiliated by your <<lewdness>> than you'd expect. That is until <<he>> places one on each of your <<nipples>>.
 <br><br>
 <<if $worn.genitals.type.includes("chastity")>>
 	<<He>> places a whole bunch on your $worn.genitals.name. "We can turn up the frequency, this is no problem," <<he>> mutters to <<himself>>.
 <</if>>
-<<if $penisexist is 1 and $vaginaexist is 1 and !$worn.genitals.type.includes("chastity")>>
+<<if $player.penisExist and $player.vaginaExist and !$worn.genitals.type.includes("chastity")>>
 	<<He>> places one right on the tip of your <<penis>>, one on each teste, and then pushes one into your <<pussy>>. You tense at the sensation.
 <<else>>
-	<<if $penisexist is 1 and !$worn.genitals.type.includes("chastity")>>
+	<<if $player.penisExist and !$worn.genitals.type.includes("chastity")>>
 		<<He>> places one right on the tip of your <<penis>> and one on each teste. You tense at the sensation.
 	<</if>>
-	<<if $vaginaexist is 1 and !$worn.genitals.type.includes("chastity")>>
+	<<if $player.vaginaExist and !$worn.genitals.type.includes("chastity")>>
 		<<He>> pushes one into your <<pussy>>, then another. You tense at the sensation.
 	<</if>>
 <</if>>
 "There we go," <<he>> says, plugging the other end of the wires into a machine beside <<him>>. "Now <<girl>>, tell me, who are you working for?"
 <br><br>
-<<if $penisexist is 1 and $vaginaexist is 1>>
+<<if $player.penisExist and $player.vaginaExist>>
 	"You should count yourself fortunate," <<he>> adds, glancing at your genitals. "If it were up to me, we'd keep you here for experimentation. True hermaphrodites are rare."
 	<br><br>
 <</if>>
@@ -591,7 +591,7 @@ The wires have pads on one end. <<He>> starts sticking them to your body. <<He>>
 	<<set $tentacles[0].shaft to "waist">>
 <</if>>
 <<statetentacles>>
-You count $tentacles.active tentacles surrounding you.
+
 <<effects>>
 <<effectstentacles>>
 <<tentacles>>
@@ -618,7 +618,7 @@ The creature loses interest in you, and disappears into the pink liquid. <<tearf
 
 <<set $outside to 0>><<set $location to "compound">><<effects>>
 You walk deeper into the building. The entrance is swallowed behind you. You make your way through a maze of pipes and machinery of unknown use. The smoke starts to make you feel warm.
-<<set $drugged += 60>>
+<<drugs 60>>
 <br><br>
 You come to a plinth with a purple crystal sat atop it. It looks valuable.
 <<if $trash_key isnot 1>>Beside it is a large discoloured key.<</if>>
@@ -652,14 +652,14 @@ Finding your way out is much easier than getting here.
 <<if $compoundhonest is 1>>
 	"I'm not working for anyone," you say. "I'm here alone."
 	<br><br>
-	<<He>> looks at a screen that you can only see the back of, then turns a dial. Soothing waves emanate from the pads attached to you, pleasuring every inch of your body. "Good. See, that wasn't so bad was it? Now then, why are you here?"
+	<<He>> looks at a screen that you can only see the back of, then turns a dial. Soothing waves emanate from the pads attached to you, pleasuring every inch of your body. "Good. See, that wasn't so bad, was it? Now then, why are you here?"
 	<br><br>
 <<elseif $compoundhonest is 2>>
 	"I<<if $blackmoney is 0>> was trapped while robbing a car. It drove me here<<else>>'m here to steal things<</if>>," you say. "<<if $blackmoney is 0>>Honest<<else>>For money<</if>>."
-	<<He>> turns the dial again, and you are once more assailed by the soothing waves. "Now," <<he>> says. "What did you <<if $blackmoney is 0>>try to<</if>>steal?"
+	<<He>> turns the dial again, and you are once more assailed by the soothing waves. "Now," <<he>> says. "What did you <<if $blackmoney is 0>>try to<</if>> steal?"
 	<br><br>
 <<elseif $compoundhonest is 3>>
-	"<<if $blackmoney is 0>>M<<else>>I steal m<</if>>oney or anything I can sell." you say.
+	"<<if $blackmoney is 0>>M<<else>>I steal m<</if>>oney or anything I can sell," you say.
 	<br><br>
 	<<He>> turns the dial again, and you are once more assailed by the soothing waves. "Where do you sell things?"
 	<br><br>
@@ -771,28 +771,28 @@ Finding your way out is much easier than getting here.
 <<set $outside to 0>><<set $location to "compound">><<effects>>
 <<if $compoundflirt is 1>>
 	"You have me all tied up and exposed," you say. "Isn't there something else you'd rather do to me?"<<promiscuity1>>
-	<br><br>
+	
 	<<He>> blushes, unsure how to respond. "D-don't joke around like that. You're in big trouble." You control your breathing and focus.
 	<br><br>
 <<elseif $compoundflirt is 2>>
 	"Some people would pay good money for the treatment you're giving me," you say. "I should thank you properly."<<promiscuity2>>
-	<br><br>
+	
 	<<He>> shifts uncomfortably. "Don't think you can sweet talk me. It won't work."
 	<br><br>
 <<elseif $compoundflirt is 3>>
 	"The real torture here," you say. "Is being denied your touch."
 	<<promiscuity3>>
-	<br><br>
+	
 	<<He>> moves <<his>> hand away from the dials and rubs <<his>> temple. "Just stop it will you?"
 	<br><br>
 <<elseif $compoundflirt is 4>>
 	"You're such a tease. I can't wait to see what you want for the main course." You wink.
-	<br><br>
+	<<promiscuity4>>
 	"This is the main course," <<he>> says, blushing. "Where did you learn to talk like this?"
 	<br><br>
 <<else>>
 	"I'm getting too hot here," you say. "Please help me. I'm at your mercy. Your fingers, your tongue, your..."
-	<br><br>
+	<<promiscuity5>>
 	"Stop! Right now." <<He>> seems serious.
 	<br><br>
 <</if>>
@@ -844,7 +844,7 @@ The inside is dominated by a large lift. You see no way to operate it, but a lap
 	<<set $compoundalarm += 1>>
 	<<set $compoundstate to 1>>
 	<br><br>
-	<<if $vaginaexist is 1 or $analdisable is "f">>
+	<<if $player.vaginaExist or $analdisable is "f">>
 		<<link [[Protest|Elk Compound Interior Seduce]]>><</link>>
 		<br>
 	<</if>>
@@ -864,7 +864,7 @@ The inside is dominated by a large lift. You see no way to operate it, but a lap
 <<seductioncheck>>
 <br><br>
 <<if $seductionskill lt 1000>>
-	<span class="gold">You feel more confident in your powers of seduction.</span>
+	<span class="gold">당신은 유혹하는 데 좀 더 자신감이 붙었다.</span>
 	<br><br>
 <</if>>
 <<seductionskilluse>>
@@ -883,14 +883,14 @@ The inside is dominated by a large lift. You see no way to operate it, but a lap
 
 	<span class="red">INTRUDER REFUSING TO COOPERATE.</span> A jolt runs through the metal arms, shocking you.<<gpain>><<pain 4>>
 	<br><br>
-	<<generate1>><<generate2>>
+	<<generateSecurity 1>><<generateSecurity 2>>
 	A <<person1>><<person>> and <<person2>><<person>> rush in, batons ready. They relax when they see you.
 	<br><br>
 
 	"This junk was worth bringing up," the <<person1>><<person>> says, strapping the baton to <<his>> side.
 	<br><br>
 
-	"Shut it down," the <<person2>><<person>> says. "I'll let downstairs know." <<He>> unclips a radio from <<his>> side
+	"Shut it down," the <<person2>><<person>> says. "I'll let downstairs know." <<He>> unclips a radio from <<his>> side.
 	<br><br>
 
 
@@ -914,10 +914,10 @@ The inside is dominated by a large lift. You see no way to operate it, but a lap
 	<<neutral 1>>
 
 	<<set $machine_health to 10>><<set $machine_ammo to 8>>
-	<<if $vaginaexist is 1 and $analdisable is "f">>
+	<<if $player.vaginaExist and $analdisable is "f">>
 		<<machine_init vaginal arm_chains>>
 		<<set $machine.vaginal.armed to 1>>
-	<<elseif $vaginaexist is 1>>
+	<<elseif $player.vaginaExist>>
 		<<machine_init vaginal arm_chains>>
 		<<set $machine.vaginal.armed to 1>>
 	<<else>>
@@ -936,9 +936,9 @@ The inside is dominated by a large lift. You see no way to operate it, but a lap
 <<machine_actions>>
 
 <<if $machine.number lte 0 or $finish is 1>>
-	<<link [[Next|Elk Compound Machine Rape End]]>><</link>>
+	<span id="next"><<link [[Next|Elk Compound Machine Rape End]]>><</link>></span><<nexttext>>
 <<else>>
-	<<link [[Next|Elk Compound Machine Rape]]>><</link>>
+	<span id="next"><<link [[Next|Elk Compound Machine Rape]]>><</link>></span><<nexttext>>
 <</if>>
 <br>
 
@@ -966,7 +966,7 @@ The inside is dominated by a large lift. You see no way to operate it, but a lap
 :: Elk Compound Interior Struggle
 <<effects>>
 
-<<generate1>><<generate2>>
+<<generateSecurity 1>><<generateSecurity 2>>
 You pull against the metal grip, but it's too tight. The doors open. A <<person1>><<person>> and <<person2>><<person>> rush in, batons ready. They relax when they see you.
 <br><br>
 
@@ -1122,14 +1122,14 @@ You remain silent as the <<person2>><<person>> talks into <<his>> radio.
 :: Elk Compound Approach
 <<set $outside to 1>><<set $location to "compound">>
 
-You walk up to the gate. It's guarded by two security guards. <<generate1>><<generate2>><<person1>>One of them, a <<person>>, puts an arm out as you approach. "No closer, <<girl>>. This is private property." <<His>> companion sizes you up.
+You walk up to the gate. It's guarded by two security guards. <<generateSecurity 1>><<generateSecurity 2>><<person1>>One of them, a <<person>>, puts an arm out as you approach. "No closer, <<girl>>. This is private property." <<His>> companion sizes you up.
 <br><br>
 
 <<if $phials_held gte 1>>
 	<<link [[Show them the aphrodisiac phial|Elk Compound Show]]>><</link>>
 	<br>
 <</if>>
-<<if $compoundcard is 1>>
+<<if $compoundcard is 1 and $compoundstate is undefined>>
 	<<link [[Show them the stolen card|Elk Compound Card]]>><</link>>
 	<br>
 <</if>>
@@ -1148,7 +1148,6 @@ You hold out the phial. The <<person>> peers at it. "Hmph," <<he>> sounds. "Fine
 
 :: Elk Compound Card
 <<effects>>
-
 <<if $submissive gte 1150>>
 	"S-sorry <<sir>>," you say. "But I was told to come here." You hold out the card you stole.
 <<elseif $submissive lte 850>>
@@ -1171,7 +1170,7 @@ The carriage slows as it arrives on a new platform, surrounded by stone brickwor
 <br><br>
 
 
-<<generate1>><<generate2>>
+<<generateSecurity 1>><<generateSecurity 2>>
 You walk towards the carriage entrance. The blue door shudders open, and you take cover. A <<person1>><<person>> and <<person2>><<person>> jog through, wearing white uniforms and holding large guns. They haven't noticed you.
 <br><br>
 

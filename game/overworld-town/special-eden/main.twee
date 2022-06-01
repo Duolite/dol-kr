@@ -18,9 +18,14 @@ You pass out again.
 You cross the road. Eden spots you. "You think this is funny?" <<He>> shouts, marching towards you. "I've been worried half to death!" <<He>> grasps your arm. "I'm taking you home, and never letting you leave again. I'll keep you in a cage if I have to."
 <br><br>
 
-<<if $worn.neck.collared isnot 1>><<neckwear 1>>
-<<He>> fastens a collar around your neck.
-<br><br>
+<<if $worn.neck.collared isnot 1>>
+	<<neckwear 21>>
+	<<He>> fastens a collar around your neck.
+	<br><br>
+<<else>>
+	<<attach_leash>>
+	<<He>> attaches a leash to your collar.
+	<br><br>
 <</if>>
 <<He>> grabs hold of your leash and pulls. "Come on. I'll punish you when we get home."
 <br><br>
@@ -57,9 +62,14 @@ Eden calms down a bit once you're in the forest.
 	"You think this is funny?" <<He>> shouts. "I've been worried half to death!" <<His>> grip is tight. "I'm taking you home, and never letting you leave again. I'll keep you in a cage if I have to."
 	<br><br>
 
-	<<if $worn.neck.collared isnot 1>><<neckwear 1>>
-	<<He>> fastens a collar around your neck.
-	<br><br>
+	<<if $worn.neck.collared isnot 1>>
+		<<neckwear 21>>
+		<<He>> fastens a collar around your neck.
+		<br><br>
+	<<else>>
+		<<attach_leash>>
+		<<He>> attaches a leash to your collar.
+		<br><br>
 	<</if>>
 	<<He>> grabs hold of your leash and pulls. "Come on. I'll punish you when we get home."
 	<br><br>
@@ -172,7 +182,7 @@ closing the door behind you.
 	<<He>> frowns as <<he>> examines you. "Fuckers." <<He>> mutters. "This is why you shouldn't go anywhere alone." You feel warmed by the reassurance.
 	<br><br>
 
-	<<He>> offers you a glass of water, then retrieves a first aid kid, before tending to your various bruises.
+	<<He>> offers you a glass of water, then retrieves a first aid kit, before tending to your various bruises.
 	<br><br>
 
 	"Here," <<he>> says. "Take these. Painkillers. They'll help". You take the tablets and drink the water. You feel much better.
@@ -191,6 +201,7 @@ closing the door behind you.
 	<br><br>
 
 	"It's late. I need to go to bed." <<He>> gives you a last look, then strips down before climbing between the sheets.
+	<br><br>
 <</if>>
 
 <<link [[Next|Eden Cabin]]>><<endevent>><</link>>
@@ -201,7 +212,7 @@ closing the door behind you.
 You shake your head, and try to explain that you can't go with <<him>>, that you've got other things to do.
 <br><br>
 
-"So this is all more important than me?" <<He>> asks. <<He>> glances around the street.
+"So this is all more important than me?" <<he>> asks. <<He>> glances around the street.
 <br><br>
 
 <<if $english gte 500>>
@@ -228,11 +239,11 @@ You shake your head, and try to explain that you can't go with <<him>>, that you
 <<effects>>
 
 <<if $bus is "park">>
-	"I'd like to spend some time with you. Would you like to stay here in the park with me?" You ask.
+	"I'd like to spend some time with you. Would you like to stay here in the park with me?" you ask.
 	<<set _there to "here">>
 	<<set _go to "stay">>
 <<else>>
-	"I'd like to spend some time with you. Would you like to come to the park with me?" You ask.
+	"I'd like to spend some time with you. Would you like to come to the park with me?" you ask.
 	<<set _there to "there">>
 	<<set _go to "go">>
 <</if>>
@@ -261,7 +272,7 @@ You shake your head, and try to explain that you can't go with <<him>>, that you
 :: Street Eden Worried Suggest Shopping
 <<effects>>
 
-"Would you like to come shopping with me?" You ask.
+"Would you like to come shopping with me?" you ask.
 <br>
 
 "Not if I can help it," <<he>> grumbles.
@@ -289,7 +300,7 @@ You shake your head, and try to explain that you can't go with <<him>>, that you
 
 You arrive at the park.
 <<if $daystate is "dawn">>
-	There are a few people out walking or jogging. Some have dogs with them. 
+	There are a few people out walking or jogging. Some have dogs with them.
 	Eden steers you away whenever possible.
 <<elseif $daystate is "day">>
 	<<if $weather is "rain">>
@@ -369,7 +380,7 @@ You arrive at the park.
 		<br><br>
 
 		Eden snarls. The <<beasttype>> halts in <<bhis>> tracks. They stand off for a moment, then the <<beasttype>> backs away.
-		
+
 		<<if $monster is 1>>
 			"I'll find the pretty human <<girl>> another time," <<bhe>> mutters, skulking away. Eden snorts.
 		<<else>>
@@ -380,7 +391,7 @@ You arrive at the park.
 		<<endevent>>
 		<<npc Eden>>
 		Eden turns back to you. "Fucking mutt." <<He>> mutters, pulling you up to your feet.
-		
+
 		<br><br>
 
 		<<if $submissive gte 1150>>
@@ -416,8 +427,8 @@ You arrive at the park.
 		Eden steers clear of them.
 		<br><br>
 
-		You find a secluded bench along the water. Eden sits down, and pulls you onto <<his>> lap. <<He>> wraps <<his>> arms around you, pulling you against <<his>> 
-		
+		You find a secluded bench along the water. Eden sits down, and pulls you onto <<his>> lap. <<He>> wraps <<his>> arms around you, pulling you against <<his>>
+
 		<<if $NPCList[0].breastsize gte 1>>
 			$NPCList[0].breastsdesc.
 		<<else>>
@@ -458,7 +469,7 @@ You break into a run. Eden curses behind you, but you hear <<his>> bootfalls as 
 		The wind and rain pound against your face.
 	<</if>>
 	<br><br>
-	
+
 	Eden's fast, <span class="green">but you're faster.</span> <<He>> falls further and further behind. Satisfied that you've proven your victory, you come to a stop beside the river.
 	<<athletics 10>><<trauma -5>><<stress -50>><<tiredness 10>><<physique 5>>
 	<<gathletics>><<lstress>><<ltrauma>><<gtiredness>>
@@ -467,8 +478,8 @@ You break into a run. Eden curses behind you, but you hear <<his>> bootfalls as 
 
 	You double over, panting. You hear Eden's feet approach. "I thought," <<he>> pauses to catch <<his>> breath. "Thought I'd lose you again. You're fit, but what if something snatched you while we were apart?" <<He>> seems more relieved than anything.
 	<br><br>
-	
-	[[Next|Town Eden Park Finish]]
+
+	<<link [[Next|Town Eden Park Finish]]>><</link>>
 <<else>>
 	/* We run a silent second athletics check that is slightly easier, to determine if you come close or are utterly outclassed */
 	<<athleticsdifficulty 250 1000 true>>
@@ -488,15 +499,15 @@ You break into a run. Eden curses behind you, but you hear <<his>> bootfalls as 
 		<<gathletics>><<gtiredness>>
 		<<npcincr Eden dom 2>><<gdom>>
 		<br><br>
-		
+
 		<<He>> pins you against the grass, straddling your body with <<hers>> while holding your wrists. "That wasn't funny," <<he>> says. <<He>> pauses to catch <<his>> breath. "What if something snatched you while we were apart?"
 		<br><br>
-		
+
 		<<link [[Tease|Town Eden Park Race Tease]]>><</link>>
 		<br>
 		<<link [[Apologise|Town Eden Park Race Apologise]]>><<npcincr Eden dom 1>><</link>><<gdom>>
 		<br>
-		
+
 	<<else>>
 		You tear through the park, putting everything you have into the sprint. Your muscles protest however. You have a slight head start, <span class="red">but Eden soon closes the gap.</span>
 		<br><br>
@@ -509,15 +520,15 @@ You break into a run. Eden curses behind you, but you hear <<his>> bootfalls as 
 
 		<<He>> pins you against the grass, straddling your body with <<hers>> while holding your wrists. "That wasn't funny," <<he>> says. <<He>> pauses to catch <<his>> breath. "What if something snatched you while we were apart?"
 		<br><br>
-		
+
 		<<link [[Tease|Town Eden Park Race Tease]]>><</link>>
 		<br>
 		<<link [[Apologise|Town Eden Park Race Apologise]]>><<npcincr Eden dom 1>><</link>><<gdom>>
 		<br>
-		
+
 	<</if>>
 <</if>>
-	
+
 :: Town Eden Park Race Tease
 <<effects>>
 
@@ -533,7 +544,7 @@ You break into a run. Eden curses behind you, but you hear <<his>> bootfalls as 
 Eden glares at you, then glances around the park. <<He>> climbs to <<his>> feet. "This place is dangerous," <<he>> says. "I mean it."
 <br><br>
 
-[[Next|Town Eden Park Finish]]
+<<link [[Next|Town Eden Park Finish]]>><</link>>
 
 :: Town Eden Park Race Apologise
 <<effects>>
@@ -550,7 +561,7 @@ Eden glares at you, then glances around the park. <<He>> climbs to <<his>> feet.
 Eden glances around the park, then climbs to <<his>> feet. "I can't bear the thought of losing you," <<he>> says. "Just stay close. This place is dangerous."
 <br><br>
 
-[[Next|Town Eden Park Finish]]
+<<link [[Next|Town Eden Park Finish]]>><</link>>
 
 
 :: Town Eden Park Flirt
@@ -571,7 +582,7 @@ You move close to Eden.
 	<</if>>
 	<<npcincr Eden lust 2>><<glust>>
 <<else>>
-	You smile at <<him>>, letting your eyes and body convey what your words cannot. 
+	You smile at <<him>>, letting your eyes and body convey what your words cannot.
 <</if>>
 <<promiscuity1>>
 
@@ -609,7 +620,7 @@ You move close to Eden.
 	"Wait until we get home <<girl>>," <<he>> says. "Then I'll remind you who you belong to." Eden gives you a quick kiss, as if to pre-empt any objections.
 	<<takeKissVirginity Eden romantic>>
 	<br><br>
-	[[Next|Town Eden Park Finish]]
+	<<link [[Next|Town Eden Park Finish]]>><</link>>
 <</if>>
 
 :: Town Eden Park Flirt Sex
@@ -637,9 +648,9 @@ You move close to Eden.
 <<if $finish is 1
 	or $enemyhealth lte 0
 	or $enemyarousal gte $enemyarousalmax>>
-	[[Next|Town Eden Park Flirt Sex Finish]]
+	<<link [[Next|Town Eden Park Flirt Sex Finish]]>><</link>>
 <<else>>
-	[[Next|Town Eden Park Flirt Sex]]
+	<<link [[Next|Town Eden Park Flirt Sex]]>><</link>>
 <</if>>
 </span>
 
@@ -671,7 +682,7 @@ You move close to Eden.
 <<endcombat>>
 <<npc Eden>><<person1>>
 
-[[Next|Town Eden Park Finish]]
+<<link [[Next|Town Eden Park Finish]]>><</link>>
 
 :: Town Eden Park Finish
 <<effects>>
@@ -794,11 +805,11 @@ You arrive at the shopping centre.
 
 <<switch random(2)>>
 	<<case 0>>
-		[[Next|Town Eden Shopping Petshop]]
+		<<link [[Next|Town Eden Shopping Petshop]]>><</link>>
 	<<case 1>>
-		[[Next|Town Eden Shopping Clothes Eden Dress Up]]
+		<<link [[Next|Town Eden Shopping Clothes Eden Dress Up]]>><</link>>
 	<<case 2>>
-		[[Next|Town Eden Shopping Clothes PC Dress Up]]
+		<<link [[Next|Town Eden Shopping Clothes PC Dress Up]]>><</link>>
 <</switch>>
 
 :: Town Eden Shopping Petshop
@@ -847,7 +858,7 @@ The animals fall quiet as Eden passes. Some retreat deeper into their cages. Ede
 	"Too late for that." <<He>> moves on.
 <</if>>
 <br><br>
-[[Next|Town Eden Shopping Finish]]
+<<link [[Next|Town Eden Shopping Finish]]>><</link>>
 
 :: Town Eden Shopping Clothes Eden Dress Up
 <<effects>>
@@ -937,9 +948,9 @@ You suspect <<hes>> enjoying <<himself>> more than <<he>> would ever admit.<<gar
 
 <<He>> slips off the clothes, and picks up the last item, $eden_underwear_model[2]. There's not much fabric.
 <<He>> slips it on, and poses before you. <<He>> turns on the spot, letting you view <<him>> from all sides.
-<<if $penisexist is 1>>
+<<if $player.penisExist>>
 	You feel your <<penis>> react to <<his>> teasing.
-<<elseif $vaginaexist is 1>>
+<<elseif $player.vaginaExist>>
 	You feel your pulse pick up in response to <<his>> teasing.
 <</if>>
 <<garousal>><<arousal 200>>
@@ -962,7 +973,7 @@ You suspect <<hes>> enjoying <<himself>> more than <<he>> would ever admit.<<gar
 <<else>>
 	Eden gets dressed, and together you leave the changing room.
 	<br><br>
-	[[Next|Town Eden Shopping Finish]]
+	<<link [[Next|Town Eden Shopping Finish]]>><</link>>
 <</if>>
 
 :: Town Eden Shopping Clothes Eden Dress Up Sex
@@ -995,9 +1006,9 @@ You suspect <<hes>> enjoying <<himself>> more than <<he>> would ever admit.<<gar
 <<if $finish is 1
 	or $enemyhealth lte 0
 	or $enemyarousal gte $enemyarousalmax>>
-	[[Next|Town Eden Shopping Clothes Eden Dress Up Sex Finish]]
+	<<link [[Next|Town Eden Shopping Clothes Eden Dress Up Sex Finish]]>><</link>>
 <<else>>
-	[[Next|Town Eden Shopping Clothes Eden Dress Up Sex]]
+	<<link [[Next|Town Eden Shopping Clothes Eden Dress Up Sex]]>><</link>>
 <</if>>
 </span>
 
@@ -1042,7 +1053,7 @@ You accompany <<him>> from the shopping centre once dressed.
 <<endcombat>>
 <<npc Eden>><<person1>>
 
-[[Next|Town Eden Shopping Finish]]
+<<link [[Next|Town Eden Shopping Finish]]>><</link>>
 
 :: Town Eden Shopping Clothes PC Dress Up
 <<effects>>
@@ -1062,7 +1073,7 @@ When <<he>> has a small armful, <<he>> pushes you into a changing room.
 <br>
 "I don't think we're supposed to-"
 <br>
-Eden laughs, and pushes a 
+Eden laughs, and pushes a
 <<if $player.gender_appearance is "f">>
 	pair of boyshorts
 <<else>>
@@ -1109,7 +1120,7 @@ into your chest.
 		<</link>><<exhibitionist2>>
 		<br>
 	<</if>>
-	
+
 	<<link [[Refuse|Town Eden Shopping Clothes PC Dress Up Flaunt Refuse]]>><</link>>
 <<elseif $phase is 2>>
 	You take the <<if $player.gender_appearance is "f">>lacey underwear<<else>>speedos<</if>> and examine them.
@@ -1122,7 +1133,7 @@ into your chest.
 	<br><br>
 	You turn around before putting them on. They don't hide much at all, but you allow Eden to look. You even give <<him>> a little twirl.
 	<<exhibitionism2>>
-	
+
 	Eden looks lustful. <<Hes>> enjoying this.
 	<<glust>><<npcincr Eden lust 10>>
 	<br><br>
@@ -1148,28 +1159,28 @@ into your chest.
 	<<link [[Refuse|Town Eden Shopping Clothes PC Dress Up Flaunt Refuse]]>><</link>>
 <<elseif $phase is 3>>
 	<<if $player.gender_appearance is "f">>
-		You run the thong through your fingers. It will keep your <<if $vaginaexist is 1>>pussy<<else>>genitals<</if>> covered, but only just. It will leave most of your <<bottom>> exposed as well.
+		You run the thong through your fingers. It will keep your <<print ($player.vaginaExist ? "pussy" : "genitals")>> covered, but only just. It will leave most of your <<bottom>> exposed as well.
 	<<else>>
-		You run the g-string through your fingers. There is just about enough fabric to cover your <<if $penisexist is 1>>penis<<else>>genitals<</if>>, but your <<bottom>> will be exposed.
+		You run the g-string through your fingers. There is just about enough fabric to cover your <<if $player.penisExist>>penis<<else>>genitals<</if>>, but your <<bottom>> will be exposed.
 	<</if>>
 	<br><br>
 	You turn and slip it on. You feel naked as you face Eden. There's a hungry look in <<his>> eyes. You tease <<him>>, giving your ass a little wiggle. <<He>> smacks and squeezes it.
 	<<exhibitionism3>>
-	
+
 	Your little performance is having an effect on <<him>>.<<glust>><<npcincr Eden lust 20>>
 	<br><br>
 
 	<<if $NPCName[$NPCNameList.indexOf("Eden")].lust gte 50>>
 		<<He>> wraps <<his>> arms around your waist, and slips <<his>> fingers beneath the waistband of your underwear. <<He>> tugs them down,
-		<<if $penisexist is 1>>
+		<<if $player.penisExist>>
 			exposing your penis.
-		<<elseif $vaginaexist is 1>>
+		<<elseif $player.vaginaExist>>
 			exposing your pussy.
 		<</if>>
 		<<undress "basket">>
 		<br><br>
 
-		
+
 		<<link [[Go along with it|Town Eden Shopping Clothes PC Dress Up Sex]]>><<set $sexstart to 1>><</link>>
 		<br>
 		<<link [[Refuse|Town Eden Shopping Clothes PC Dress Up Sex]]>><<set $molestationstart to 1>><</link>>
@@ -1179,16 +1190,16 @@ into your chest.
 		<br><br>
 		You consider teasing <<him>> more, but decide to dress as asked.
 		<br><br>
-		
+
 		Eden pays for your new underwear on the way out.
 		<<storeon "basket">>
 		<<clotheson>>
 		<br><br>
-		
-		[[Next|Town Eden Shopping Finish]]
+
+		<<link [[Next|Town Eden Shopping Finish]]>><</link>>
 	<</if>>
 <<else>>
-	[[Next|Town Eden Shopping Finish]]
+	<<link [[Next|Town Eden Shopping Finish]]>><</link>>
 <</if>>
 
 :: Town Eden Shopping Clothes PC Dress Up Flaunt Refuse
@@ -1202,7 +1213,7 @@ Eden looks disappointed, but doesn't push you.
 <<clotheson>>
 <br>
 
-[[Next|Town Eden Shopping Finish]]
+<<link [[Next|Town Eden Shopping Finish]]>><</link>>
 
 :: Town Eden Shopping Clothes PC Dress Up Sex
 <<if $sexstart is 1>>
@@ -1221,7 +1232,7 @@ Eden looks disappointed, but doesn't push you.
 	<br><br>
 	<<He>> advances on you, <<his>> eyes still full of hunger.
 	<br><br>
-	<<set $rescue to 1>>
+	<<enable_rescue>>
 	<<set $molestationstart to 0>>
 	<<controlloss>>
 	<<violence 1>>
@@ -1245,9 +1256,9 @@ Eden looks disappointed, but doesn't push you.
 	or $enemyhealth lte 0
 	or $enemyarousal gte $enemyarousalmax
 	or $alarm is 1 and $rescue is 1>>
-	[[Next|Town Eden Shopping Clothes PC Dress Up Sex Finish]]
+	<<link [[Next|Town Eden Shopping Clothes PC Dress Up Sex Finish]]>><</link>>
 <<else>>
-	[[Next|Town Eden Shopping Clothes PC Dress Up Sex]]
+	<<link [[Next|Town Eden Shopping Clothes PC Dress Up Sex]]>><</link>>
 <</if>>
 </span>
 
@@ -1287,7 +1298,7 @@ Eden looks disappointed, but doesn't push you.
 <<if _store_check is 1>>
 	<<storeon "basket">>
 	<<clotheson>>
-	
+
 	Eden dresses faster than you, and disappears through the curtain. You exit to find <<him>> buying the underwear.
 	<br><br>
 <<else>>

@@ -1,15 +1,15 @@
 :: widget clothesPost [widget nobr]
 <<widget "undertopPost">><<silently>>
-    <<if $worn.under_upper.name isnot "naked">>
-        <<trClothes "under_upper" $worn.under_upper.name "name" $args[0] $args[1]>>
+    <<if $worn.under_upper.exposed lte 0>>
+        <<trClothes "under_upper" $worn.under_upper.name "name" _args[0] _args[1]>>
     <<else>>
-        <<breastsPost $args[0] $args[1]>>
+        <<breastsPost _args[0] _args[1]>>
     <</if>>
 <</silently>><<print _trResult>><</widget>>
 
 <<widget "groinPost">><<silently>>
-    <<genitalsPost $args[0] $args[1]>><<set _trTemp1 to _trResult>>
-    <<if !$worn.lower.type.includes("naked") and $worn.lower.skirt isnot 1>>
+    <<genitalsPost _args[0] _args[1]>><<set _trTemp1 to _trResult>>
+    <<if !$worn.lower.type.includes("naked") and setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt isnot 1>>
         <<trClothes "lower" $worn.lower.name>>
         <<set _trResult to _trResult + " 너머로 " + _trTemp1>>
     <<elseif !$worn.under_lower.type.includes("naked")>>
@@ -22,83 +22,83 @@
 
 <<widget "crotchPost">><<silently>>
 	<<if !$worn.over_lower.type.includes("naked")>>
-		<<trClothes "over_lower" $worn.over_lower.name "name" $args[0] $args[1]>>
+		<<trClothes "over_lower" $worn.over_lower.name "name" _args[0] _args[1]>>
     <<elseif !$worn.lower.type.includes("naked")>>
-        <<trClothes "lower" $worn.lower.name "name" $args[0] $args[1]>>
+        <<trClothes "lower" $worn.lower.name "name" _args[0] _args[1]>>
     <<elseif !$worn.under_lower.type.includes("naked")>>
-        <<trClothes "under_lower" $worn.under_lower.name "name" $args[0] $args[1]>>
+        <<trClothes "under_lower" $worn.under_lower.name "name" _args[0] _args[1]>>
     <<else>>
-        <<genitalsPost $args[0] $args[1]>>
+        <<genitalsPost _args[0] _args[1]>>
     <</if>>
 <</silently>><<print _trResult>><</widget>>
 
 <<widget "undiesPost">><<silently>>
     <<if !$worn.under_lower.type.includes("naked")>>
-        <<trClothes "under_lower" $worn.under_lower.name "name" $args[0] $args[1]>>
+        <<trClothes "under_lower" $worn.under_lower.name "name" _args[0] _args[1]>>
     <<elseif !$worn.genitals.type.includes("naked")>>
-        <<trClothes "genitals" $worn.genitals.name "name" $args[0] $args[1]>>
+        <<trClothes "genitals" $worn.genitals.name "name" _args[0] _args[1]>>
     <<else>>
-        <<genitalsPost $args[0] $args[1]>>
+        <<genitalsPost _args[0] _args[1]>>
     <</if>>
 <</silently>><<print _trResult>><</widget>>
 
 <<widget "bottomsPost">><<silently>>
 	<<outfitChecks>>
 	<<if _middleOutfit>>
-        <<trClothes "upper" $worn.upper.name "name" $args[0] $args[1]>>
+        <<trClothes "upper" $worn.upper.name "name" _args[0] _args[1]>>
     <<else>>
-        <<trClothes "lower" $worn.lower.name "name" $args[0] $args[1]>>
+        <<trClothes "lower" $worn.lower.name "name" _args[0] _args[1]>>
     <</if>>
 <</silently>><<print _trResult>><</widget>>
 
 <<widget "underbottomsPost">><<silently>>
 	<<outfitChecks>>
 	<<if _underOutfit>>
-        <<trClothes "under_upper" $worn.under_upper.name "name" $args[0] $args[1]>>
+        <<trClothes "under_upper" $worn.under_upper.name "name" _args[0] _args[1]>>
     <<else>>
-        <<trClothes "under_lower" $worn.under_lower.name "name" $args[0] $args[1]>>
+        <<trClothes "under_lower" $worn.under_lower.name "name" _args[0] _args[1]>>
     <</if>>
 <</silently>><<print _trResult>><</widget>>
 
 <<widget "topPost">><<silently>>
     <<if !$worn.upper.type.includes("naked")>>
-        <<trClothes "upper" $worn.upper.name "name" $args[0] $args[1]>>
+        <<trClothes "upper" $worn.upper.name "name" _args[0] _args[1]>>
     <<elseif !$worn.under_upper.type.includes("naked")>>
-        <<trClothes "under_upper" $worn.under_upper.name "name" $args[0] $args[1]>>
+        <<trClothes "under_upper" $worn.under_upper.name "name" _args[0] _args[1]>>
     <<else>>
-        <<set _trResult to "상의">><<trPost 1 $args[0] $args[1]>>
+        <<set _trResult to "상의">><<trPost 1 _args[0] _args[1]>>
     <</if>>
 <</silently>><<print _trResult>><</widget>>
 
 <<widget "topasidePost">><<silently>>
     <<if $worn.upper.exposed lte 1>>
-        <<trClothes "upper" $worn.upper.name "name" $args[0] $args[1]>>
+        <<trClothes "upper" $worn.upper.name "name" _args[0] _args[1]>>
     <<elseif $worn.under_upper.exposed is 0>>
-        <<trClothes "under_upper" $worn.under_upper.name "name" $args[0] $args[1]>>
+        <<trClothes "under_upper" $worn.under_upper.name "name" _args[0] _args[1]>>
     <<else>>
-        <<set _trResult to "상의">><<trPost 1 $args[0] $args[1]>>
+        <<set _trResult to "상의">><<trPost 1 _args[0] _args[1]>>
     <</if>>
 <</silently>><<print _trResult>><</widget>>
 
 <<widget "breastsasidePost">><<silently>>
     <<if $worn.upper.exposed lte 1>>
-        <<trClothes "upper" $worn.upper.name "name" $args[0] $args[1]>>
+        <<trClothes "upper" $worn.upper.name "name" _args[0] _args[1]>>
     <<elseif $worn.under_upper.exposed is 0>>
-        <<trClothes "under_upper" $worn.under_upper.name "name" $args[0] $args[1]>>
+        <<trClothes "under_upper" $worn.under_upper.name "name" _args[0] _args[1]>>
     <<else>>
-        <<breastsPost $args[0] $args[1]>>
+        <<breastsPost _args[0] _args[1]>>
     <</if>>
 <</silently>><<print _trResult>><</widget>>
 
 <<widget "outfitPost">><<silently>>
 	<<outfitChecks>>
 	<<if _middleOutfit>>
-        <<trClothes "upper" $worn.upper.name "name" $args[0] $args[1]>>
+        <<trClothes "upper" $worn.upper.name "name" _args[0] _args[1]>>
         <<set $stripset to 1>>
     <<else>>
         <<trClothes "upper" $worn.upper.name "name" "과">>
         <<set _trTemp1 to _trResult>>
-        <<trClothes "lower" $worn.lower.name "name" $args[0] $args[1]>>
+        <<trClothes "lower" $worn.lower.name "name" _args[0] _args[1]>>
         <<set _trResult to _trTemp1 + " " + _trResult>>
         <<set $stripset to 0>>
     <</if>>
@@ -106,79 +106,80 @@
 
 <<widget "underoutfitPost">><<silently>>
 <<outfitChecks>>
-<<if _underOutfit is true>>
-	<<trClothes "under_upper" $worn.under_upper.name "name" $args[0] $args[1]>>
+<<if _underOutfit>>
+	<<trClothes "under_upper" $worn.under_upper.name "name" _args[0] _args[1]>>
 <<elseif $worn.under_upper.name is "naked" and $worn.under_lower.name is "naked">>
 	<<breastsPost "과">>
 	<<set _trTemp1 to _trResult>>
-	<<genitalsPost $args[0] $args[1]>>
+	<<genitalsPost _args[0] _args[1]>>
 	<<set _trResult to _trTemp1 + " " + _trResult>>
 <<elseif $worn.under_lower.name is "naked">>
-	<<genitals $args[0] $args[1]>>
+	<<genitals _args[0] _args[1]>>
 	<<set _trTemp1 to _trResult>>
 	<<trClothes "under_upper" $worn.under_upper.name "name" "과">>
     <<set _trResult to _trResult + " " + _trTemp1>>
 <<elseif $worn.under_upper.name is "naked">>
 	<<breastsPost "과">>
 	<<set _trTemp1 to _trResult>>
-	<<trClothes "under_lower" $worn.under_lower.name "name" $args[0] $args[1]>>
+	<<trClothes "under_lower" $worn.under_lower.name "name" _args[0] _args[1]>>
     <<set _trResult to _trTemp1 + " " + _trResult>>
 <<else>>
 	<<trClothes "under_upper" $worn.under_upper.name "name" "과">><<set _trTemp1 to _trResult>>
-    <<trClothes "under_lower" $worn.under_lower.name "name" $args[0] $args[1]>>
+    <<trClothes "under_lower" $worn.under_lower.name "name" _args[0] _args[1]>>
     <<set _trResult to _trTemp1 + " " + _trResult>>
 <</if>>
 <</silently>><<print _trResult>><</widget>>
 
 <<widget "lewdnessPost">><<silently>>
 <<exposure>>
+<<genitalsPost _args[0] _args[1]>>
+<<set _genitals to _trResult>><<set _genitalsPost to _trPost>>
+<<undertopPost "과">><<set _undertop_and to _trResult>>
+<<undertopPost _args[0] _args[1]>>
+<<set _undertop to _trResult>><<set _undertopPost to _trPost>>
 <<if $worn.under_lower.exposed gte 1 and $worn.lower.exposed gte 2 and $worn.upper.exposed lte 1>>
-	<<genitalsPost $args[0] $args[1]>>
-    <<set _trResult to "<span class=\"lewd\">노출된 " + _trResult + "</span>">>
+	<<set _trResult to '<span class="lewd">노출된 _genitals</span>'>><<set _trPost to _genitalsPost>>
 <<elseif $worn.under_lower.exposed lte 0 and $worn.lower.exposed gte 2 and $worn.upper.exposed lte 1>>
-   <<trClothes "under_lower" $worn.under_lower.name "name" $args[0] $args[1]>>
-   <<set _trResult to "<span class=\"lewd\">노출된 "+ _trResult + "</span>">>
+	<<trClothes "under_lower" $worn.under_lower.name "name" _args[0] _args[1]>><<set $_clothes to _trResult>>
+	<<set _trResult to '<span class="lewd">노출된 $_clothes</span>'>>
 <<elseif $worn.upper.exposed gte 2 and $worn.lower.exposed lte 1 and $player.gender_appearance is "m" and $player.gender is "m">>
-   <<set _trResult to "<span class=\"lewd\">음탕함</span>">>
-   <<trPost 0 $args[0] $args[1]>>
+	<<set _trResult to '<span class="lewd">음탕함</span>'>><<trPost 0 _args[0] _args[1]>>
 <<elseif $worn.upper.exposed gte 2 and $worn.lower.exposed lte 1>>
-   <<undertopPost $args[0] $args[1]>>
-   <<set _trResult to "<span class=\"lewd\">노출된 "+ _trResult + "</span>">>
+	<<set _trResult to '<span class="lewd">노출된 _undertop</span>'>><<set _trPost to _undertopPost>>
 <<elseif $worn.upper.exposed gte 2 and $worn.lower.exposed gte 2 and $worn.under_lower.exposed lte 0 and $player.gender_appearance is "m" and $player.gender is "m">>
-   <<trClothes "under_lower" $worn.under_lower.name "name" $args[0] $args[1]>>
-   <<set _trResult to "<span class=\"lewd\">노출된 "+ _trResult + "</span>">>
+	<<trClothes "under_lower" $worn.under_lower.name "name" _args[0] _args[1]>><<set $_clothes to _trResult>>
+	<<set _trResult to '<span class="lewd">노출된 $_clothes</span>'>>
 <<elseif $worn.upper.exposed gte 2 and $worn.lower.exposed gte 2 and $worn.under_lower.exposed lte 0>>
-   <<undertopPost "과">><<set _trTemp1 to _trResult>>
-   <<trClothes "under_lower" $worn.under_lower.name "name" $args[0] $args[1]>>
-   <<set _trResult to "<span class=\"lewd\">노출된 " + _trTemp1 + " "+ _trResult + "</span>">>
+	<<trClothes "under_lower" $worn.under_lower.name "name" _args[0] _args[1]>><<set $_clothes to _trResult>>
+	<<set _trResult to '<span class="lewd">노출된 _undertop_and $_clothes</span>'>>
 <<elseif $worn.under_lower.exposed gte 1 and $worn.lower.exposed gte 2 and $player.gender_appearance is "m" and $player.gender is "m">>
-   <<genitalsPost $args[0] $args[1]>>
-   <<set _trResult to "<span class=\"lewd\">노출된 " + _trResult + "</span>">>
+	<<set _trResult to '<span class="lewd">노출된 _genitals</span>'>><<set _trPost to _genitalsPost>>
 <<elseif $worn.upper.exposed gte 2 and $worn.lower.exposed gte 2 and $worn.under_lower.exposed gte 1>>
-    <<undertopPost "과">><<set _trTemp1 to _trResult>>
-    <<genitalsPost $args[0] $args[1]>>
-    <<set _trResult to "<span class=\"lewd\">노출된 " + _trTemp1 + " "+ _trResult + "</span>">>
+	<<if $player.penisExist and $player.vaginaExist>>
+		<<set _trResult to '<span class="lewd">노출된 _undertop, _genitals</span>'>><<set _trPost to _genitalsPost>>
+	<<else>>
+		<<set _trResult to '<span class="lewd">노출된 _undertop_and _genitals</span>'>><<set _trPost to _genitalsPost>>
+	<</if>>
 <<else>>
-   <<set _trResult to "<span class=\"lewd\">음탕함</span>">>
-   <<trPost 0 $args[0] $args[1]>>
+	<<set _trResult to '<span class="lewd">음탕함</span>'>><<trPost 0 _args[0] _args[1]>>
 <</if>>
 <</silently>><<print _trResult>><</widget>>
 
 <<widget "nudityPost">><<silently>><<exposure>>
-<<genitalsPost $args[0] $args[1]>><<set _genitals to _trResult>><<set _genitalsPost to _trPost>>
+<<genitalsPost _args[0] _args[1]>><<set _genitals to _trResult>><<set _genitalsPost to _trPost>>
 <<genitalsPost "과">><<set _genitals_and to _trResult>>
-<<breastsPost $args[0] $args[1]>><<set _breasts to _trResult>><<set _breastsPost to _trPost>>
+<<breastsPost _args[0] _args[1]>><<set _breasts to _trResult>><<set _breastsPost to _trPost>>
 <<set _nudityPost to "">><<set _nudityPostend to "">>
 <<if $worn.under_lower.type.includes("naked") and $worn.lower.type.includes("naked")>>
 	<<if !$worn.upper.type.includes("naked")>>
         <<set _nudityPost to "<span class=\"lewd\">노출된 " + _genitals + "</span>">><<set _trPost to _genitalsPost>><<set _nudityPostend to " 덮힌 가슴이 아랫부위를 더욱 돋보이게 한다.">>
 	<<elseif !$worn.under_upper.type.includes("naked")>>
-		<<undertopPost $args[0] $args[1]>>
+		<<undertopPost _args[0] _args[1]>>
 		<<set _undertop to _trResult>>
         <<set _nudityPost to "<span class=\"lewd\">노출된 " + _genitals_and + " " + _undertop + "</span>">><<set _nudityPostend to " 조금 덮힌 가슴이 아랫부위를 더욱 돋보이게 한다.">>
 	<<else>>
         <<set _nudityPost to "<span class=\"lewd\">노출된</span> ">>
-		<<if $breastsize gte 3>>
+		<<if $player.breastsize gte 3>>
 			<<if $player.gender is "m">>
 			    <<set _nudityPost to _nudityPost + "<span class=\"lewd\">" + _genitals_and + " " + _breasts + "</span>">><<set _trPost to _breastsPost>>
 			<<else>>
@@ -204,7 +205,7 @@
 			<<trClothes "under_lower" $worn.under_lower.name>><<set _nudityPostend to " 오직 " + _trResult + "만이 일말의 체면을 지켜주고 있다.">>
 		<</if>>
 	<<else>>
-		<<undertopPost $args[0] $args[1]>>
+		<<undertopPost _args[0] _args[1]>>
 		<<set _undertop to _trResult>>
 		<<if $worn.lower.type.includes("naked") and _underOutfit is false>>
             <<undiesPost "과">>
@@ -215,10 +216,10 @@
 		<</if>>
 	<</if>>
 <<elseif $worn.lower.type.includes("naked")>>
-    <<trClothes "under_lower" $worn.under_lower.name "name" $args[0] $args[1]>><<set _nudityPost to "<span class=\"lewd\">노출된 " + _trResult + "</span>">>
+    <<trClothes "under_lower" $worn.under_lower.name "name" _args[0] _args[1]>><<set _nudityPost to "<span class=\"lewd\">노출된 " + _trResult + "</span>">>
 <<else>>
-	<<set _trResult to "야한 옷">><<trPost 0 $args[0] $args[1]>><<set _nudityPost to "<span class=\"lewd\">" + _trResult + "</span>">>
-	<<if $worn.lower.type.includes("naked") and $worn.upper.type.includes("naked") and $worn.under_upper.type.includes("naked")>>
+	<<set _trResult to "야한 옷">><<trPost 0 _args[0] _args[1]>><<set _nudityPost to "<span class=\"lewd\">" + _trResult + "</span>">>
+	<<if $worn.lower.type.includes("naked") and _underOutfit is false>>
 		<<trClothes "under_lower" $worn.under_lower.name>><<set _nudityPostend to " 오직 " + _trResult + "만이 일말의 체면을 지켜주고 있다.">>
 	<</if>>
 <</if>>
@@ -231,91 +232,177 @@
 <<widget "nudityPostend">><<print _nudityPostend>><</widget>>
 
 <<widget "allTopsPost">><<silently>>
+	<<set $_clothes to "">>
 	<<if $worn.over_upper.name isnot "naked">>
 		<<if $worn.upper.name isnot "naked">>
-			<<trClothes "over_upper" $worn.over_upper.name "name" "과">>
+			<<trClothes "over_upper" $worn.over_upper.name "name" "과">><<set $_clothes += _trResult + " ">>
 		<<else>>
-			<<trClothes "over_upper" $worn.over_upper.name "name" $args[0] $args[1]>>
+			<<trClothes "over_upper" $worn.over_upper.name "name" _args[0] _args[1]>><<set $_clothes += _trResult>>
 		<</if>>
 	<</if>>
 	<<if $worn.upper.name isnot "naked">>
-		<<trClothes "upper" $worn.upper.name "name" $args[0] $args[1]>>
+		<<trClothes "upper" $worn.upper.name "name" _args[0] _args[1]>><<set $_clothes += _trResult>>
 	<</if>>
+	<<set _trResult to $_clothes>>
 <</silently>><<print _trResult>><</widget>>
 
 <<widget "allBottomsPost">><<silently>>
+	<<set $_clothes to "">>
 	<<if $worn.over_lower.name isnot "naked">>
 		<<if $worn.lower.name isnot "naked">>
-			<<trClothes "over_lower" $worn.over_lower.name "name" "과">>
+			<<trClothes "over_lower" $worn.over_lower.name "name" "과">><<set $_clothes += _trResult + " ">>
 		<<else>>
-			<<trClothes "over_lower" $worn.over_lower.name "name" $args[0] $args[1]>>
+			<<trClothes "over_lower" $worn.over_lower.name "name" _args[0] _args[1]>><<set $_clothes += _trResult>>
 		<</if>>
 	<</if>>
 	<<if $worn.lower.name isnot "naked">>
-		<<trClothes "lower" $worn.lower.name "name" $args[0] $args[1]>>
+		<<trClothes "lower" $worn.lower.name "name" _args[0] _args[1]>><<set $_clothes += _trResult>>
 	<</if>>
+	<<set _trResult to $_clothes>>
 <</silently>><<print _trResult>><</widget>>
 
 <<widget "allTopsUnderwearPost">><<silently>>
+	<<set $_clothes to "">>
 	<<if $worn.over_upper.name isnot "naked">>
 		<<if $worn.upper.name isnot "naked" or $worn.under_upper.name isnot "naked">>
-			<<trClothes "over_upper" $worn.over_upper.name "name" "과">>
+			<<trClothes "over_upper" $worn.over_upper.name "name" "과">><<set $_clothes += _trResult + " ">>
 		<<else>>
-			<<trClothes "over_upper" $worn.over_upper.name "name" $args[0] $args[1]>>
+			<<trClothes "over_upper" $worn.over_upper.name "name" _args[0] _args[1]>><<set $_clothes += _trResult>>
 		<</if>>
 	<</if>>
 	<<if $worn.upper.name isnot "naked">>
 		<<if $worn.under_upper.name isnot "naked">>
-			<<trClothes "upper" $worn.upper.name "name" "과">>
+			<<trClothes "upper" $worn.upper.name "name" "과">><<set $_clothes += _trResult + " ">>
 		<<else>>
-			<<trClothes "upper" $worn.upper.name "name" $args[0] $args[1]>>
+			<<trClothes "upper" $worn.upper.name "name" _args[0] _args[1]>><<set $_clothes += _trResult>>
 		<</if>>
 	<</if>>
 	<<if $worn.under_upper.name isnot "naked">>
-		<<trClothes "under_upper" $worn.under_upper.name "name" $args[0] $args[1]>>
+		<<trClothes "under_upper" $worn.under_upper.name "name" _args[0] _args[1]>><<set $_clothes += _trResult>>
 	<</if>>
+	<<set _trResult to $_clothes>>
 <</silently>><<print _trResult>><</widget>>
 
 <<widget "allBottomsUnderwearPost">><<silently>>
+	<<set $_clothes to "">>
 	<<if $worn.over_lower.name isnot "naked">>
 		<<if $worn.lower.name isnot "naked" or $worn.under_lower.name isnot "naked">>
-			<<trClothes "over_lower" $worn.over_lower.name "name" "과">>
+			<<trClothes "over_lower" $worn.over_lower.name "name" "과">><<set $_clothes += _trResult + " ">>
 		<<else>>
-			<<trClothes "over_lower" $worn.over_lower.name "name" $args[0] $args[1]>>
+			<<trClothes "over_lower" $worn.over_lower.name "name" _args[0] _args[1]>><<set $_clothes += _trResult>>
 		<</if>>
 	<</if>>
 	<<if $worn.lower.name isnot "naked">>
 		<<if $worn.under_lower.name isnot "naked">>
-			<<trClothes "lower" $worn.lower.name "name" "과">>
+			<<trClothes "lower" $worn.lower.name "name" "과">><<set $_clothes += _trResult + " ">>
 		<<else>>
-			<<trClothes "lower" $worn.lower.name "name" $args[0] $args[1]>>
+			<<trClothes "lower" $worn.lower.name "name" _args[0] _args[1]>><<set $_clothes += _trResult>>
 		<</if>>
 	<</if>>
 	<<if $worn.under_lower.name isnot "naked">>
-		<<trClothes "under_lower" $worn.under_lower.name "name" $args[0] $args[1]>>
+		<<trClothes "under_lower" $worn.under_lower.name "name" _args[0] _args[1]>><<set $_clothes += _trResult>>
 	<</if>>
+	<<set _trResult to $_clothes>>
 <</silently>><<print _trResult>><</widget>>
 
 <<widget "exposedupperPost">><<silently>>
 <<if $worn.over_upper.exposed is 0>>
-	<<trClothes "over_upper" $worn.over_upper.name "name" $args[0] $args[1]>>
+	<<trClothes "over_upper" $worn.over_upper.name "name" _args[0] _args[1]>>
 <<elseif $worn.upper.exposed is 0>>
-	<<trClothes "upper" $worn.upper.name "name" $args[0] $args[1]>>
+	<<trClothes "upper" $worn.upper.name "name" _args[0] _args[1]>>
 <<elseif $worn.under_upper.exposed is 0>>
-	<<trClothes "under_upper" $worn.under_upper.name "name" $args[0] $args[1]>>
+	<<trClothes "under_upper" $worn.under_upper.name "name" _args[0] _args[1]>>
 <<else>>
-	<<breastsPost $args[0] $args[1]>>
+	<<breastsPost _args[0] _args[1]>>
 <</if>>
 <</silently>><<print _trResult>><</widget>>
 
 <<widget "exposedlowerPost">><<silently>>
 <<if $worn.over_lower.exposed is 0>>
-	<<trClothes "over_lower" $worn.over_lower.name "name" $args[0] $args[1]>>
+	<<trClothes "over_lower" $worn.over_lower.name "name" _args[0] _args[1]>>
 <<elseif $worn.lower.exposed is 0>>
-	<<trClothes "lower" $worn.lower.name "name" $args[0] $args[1]>>
+	<<trClothes "lower" $worn.lower.name "name" _args[0] _args[1]>>
 <<elseif $worn.under_lower.exposed is 0>>
-	<<trClothes "under_lower" $worn.under_lower.name "name" $args[0] $args[1]>>
+	<<trClothes "under_lower" $worn.under_lower.name "name" _args[0] _args[1]>>
 <<else>>
-	<<genitalsPost $args[0] $args[1]>>
+	<<genitalsPost _args[0] _args[1]>>
+<</if>>
+<</silently>><<print _trResult>><</widget>>
+
+<<widget "dressPost">><<silently>>
+<<if $worn.upper.set is $worn.lower.set>>
+	<<if setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1>>
+		<<set _trResult to "드레스">><<trPost 1 _args[0] _args[1]>>
+	<<else>>
+		<<set _trResult to "옷">><<trPost 0 _args[0] _args[1]>>
+	<</if>>
+<<else>>
+	<<set _trResult to "상의">><<trPost 1 _args[0] _args[1]>>
+<</if>>
+<</silently>><<print _trResult>><</widget>>
+
+<<widget "skirtPost">><<silently>>
+<<if $worn.upper.set is $worn.lower.set>>
+	<<if setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1>>
+		<<set _trResult to "드레스">><<trPost 1 _args[0] _args[1]>>
+	<<else>>
+		<<set _trResult to "옷">><<trPost 0 _args[0] _args[1]>>
+	<</if>>
+<<else>>
+	<<if setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1>>
+		<<set _trResult to "스커트">><<trPost 1 _args[0] _args[1]>>
+	<<else>>
+		<<set _trResult to "하의">><<trPost 1 _args[0] _args[1]>>
+	<</if>>
+<</if>>
+<</silently>><<print _trResult>><</widget>>
+
+<<widget "pantiesPost">><<silently>>
+<<if $worn.under_upper.set is $worn.under_lower.set>>
+	<<set _trResult to "속옷">><<trPost 0 _args[0] _args[1]>>
+<<else>>
+	<<if setup.clothes.under_lower[clothesIndex('under_lower', $worn.under_lower)].skirt is 1>>
+		<<set _trResult to "스커트">><<trPost 1 _args[0] _args[1]>>
+	<<else>>
+		<<if $worn.under_lower.gender is "f">>
+			<<if random(1, 2) is 2>>
+				<<set _trResult to "팬티">><<trPost 1 _args[0] _args[1]>>
+			<<else>>
+				<<set _trResult to "속바지">><<trPost 1 _args[0] _args[1]>>
+			<</if>>
+		<<else>>
+			<<set _trResult to "속옷">><<trPost 0 _args[0] _args[1]>>
+		<</if>>
+	<</if>>
+<</if>>
+<</silently>><<print _trResult>><</widget>>
+
+<<widget "braPost">><<silently>>
+<<if $worn.under_upper.set is $worn.under_lower.set>>
+	<<set _trResult to "속옷">><<trPost 0 _args[0] _args[1]>>
+<<else>>
+	<<if $worn.under_upper.gender is "f" and setup.clothes.under_upper[clothesIndex('under_upper', $worn.under_upper)].state_base is "midriff">>
+		<<set _trResult to "브라">><<trPost 1 _args[0] _args[1]>>
+	<<else>>
+		<<set _trResult to "상의">><<trPost 1 _args[0] _args[1]>>
+	<</if>>
+<</if>>
+<</silently>><<print _trResult>><</widget>>
+
+/* <<npcClothesTextPost *NpcObject *part post sep>> */
+<<widget "npcClothesTextPost">><<silently>>
+<<if _args[0]>>
+	<<set $_npc to _args[0]>>
+	<<set $_part to (_args[1] ? _args[1] : "both")>>
+	<<switch $_part>>
+		<<case "both">>
+			<<set $_npcClothesName to setup.npcClothesSets.find(item => item.name === $_npc.clothes.set).desc>><<trNpcClothes "set" $_npcClothesName _args[2] _args[3]>>
+		<<case "upper">>
+			<<trNpcClothes "upper" $_npc.clothes.upper.name _args[2] _args[3]>>
+		<<case "lower">>
+			<<trNpcClothes "lower" $_npc.clothes.lower.name _args[2] _args[3]>>
+		<<default>>
+			<<set _trResult to '<span class="red">ERROR: Invalid NPC clothing case. (NPC: $_npc.fullDescription, part called: $_part) Please inform PurityGuy</span>'>>
+	<</switch>>
 <</if>>
 <</silently>><<print _trResult>><</widget>>

@@ -113,6 +113,10 @@
 	background-color: #ff481b;
 }
 
+.searchButtons button {
+	max-width: 120px;
+}
+
 .clothing-reveal,
 .clothing-integrity,
 .clothing-warmth {
@@ -819,6 +823,17 @@
 		width: 100px;
 		margin-left: 1em;
 	}
+}
+
+#sendItemsTo .returnOptions {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	margin: 1em 0;
+}
+
+#sendItemsTo .returnOptions div {
+	width: 10em;
 }
 
 /* Buy & Try on buttons */

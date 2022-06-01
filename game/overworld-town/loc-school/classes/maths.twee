@@ -6,15 +6,15 @@
 		<<outfitChecks>>
 		/*Check for when the pc is only wearing an overcoat*/
 		<<if $worn.over_upper.name isnot "naked" and $worn.over_lower.name isnot "naked" and $worn.under_upper.name is "naked" and $worn.under_lower.name is "naked">>
-			As you go to hang your <<if _middleOutfit>>$worn.over_upper.name<<else>>$worn.over_upper.name and $worn.over_lower.name<</if>>, you remember that you're naked underneath.
+			<<if _middleOutfit>><<worn_over_upper_name_ul>><<else>><<worn_over_upper_name_gwa>> <<worn_over_lower_name_ul>><</if>> 벗자마자, 당신은 외투 아래에 아무것도 입지 않았다는 사실을 자각했다.
 		<<elseif $worn.over_upper.name isnot "naked" and $worn.over_lower.name isnot "naked" and ($worn.under_upper.type.includes("swim") or $worn.under_lower.type.includes("swim"))>>
-			As you go to hang your <<if _middleOutfit>>$worn.over_upper.name<<else>>$worn.over_upper.name and $worn.over_lower.name<</if>>, you remember that you're only wearing swimwear underneath.
+			<<if _middleOutfit>><<worn_over_upper_name_ul>><<else>><<worn_over_upper_name_gwa>> <<worn_over_lower_name_ul>><</if>> 벗자마자, 당신은 외투 아래에 수영복만 입고 있다는 사실을 자각했다.
 		<<elseif $worn.over_upper.name isnot "naked" and $worn.over_lower.name isnot "naked" and $worn.under_upper.name isnot "naked" and $worn.under_lower.name isnot "naked">>
-			As you go to hang your <<if _middleOutfit>>$worn.over_upper.name<<else>>$worn.over_upper.name and $worn.over_lower.name<</if>>, you remember that you're only wearing underwear underneath.
+			<<if _middleOutfit>><<worn_over_upper_name_ul>><<else>><<worn_over_upper_name_gwa>> <<worn_over_lower_name_ul>><</if>> 벗자마자, 당신은 외투 아래에 속옷만 입고 있다는 사실을 자각했다.
 		<</if>>
 		<br><br>
 		<<npc River>><<person1>>
-		River's eyes narrow as you glance at <<him>>. "You can't be trying to attend my lesson without a uniform. Go see the head."
+		당신이 리버를 쳐다보자 <<his_yi>> 눈이 가늘어진다. "교복 없이는 내 수업을 들을 수 없어. 교장실로 가렴."
 		<br><br>
 		<!--<<link [[Hang up coat|]]>><<endevent>><</link>>
 		<br><br> good starting point for when you can go to class naked-->
@@ -44,10 +44,16 @@
 		<<else>>
 			당신은 수학 교실에 들어간다.
 			<<npc River>><<person1>>
-			리버가 말을 하다 말고 당신을 바라본다. "늦었구나. 징계를 받다보면 앞으로도 이렇게 게으름을 피우는 일을 방지할 수 있겠지."
-			<<gdelinquency>>
+			리버가 말을 하다 말고 당신을 바라본다.
+			<<if $mathsExcused>>
+				<<unset $mathsExcused>>
+				"자리에 앉아서 따라잡도록 해라." <<He_nun>> 당신의 지각에 대해 언급하지 않는다.
+			<<else>>
+				"늦었구나. 징계를 받다보면 앞으로도 이렇게 게으름을 피우는 일을 방지할 수 있겠지."
+				<<gdelinquency>>
+				<<detention 1>>
+			<</if>>
 			<br><br>
-			<<detention 1>>
 			당신은
 			<<if $worn.over_upper.name isnot "naked" or $worn.over_lower.name isnot "naked" or $worn.over_head.name isnot "naked">>
 				교실 뒷편에 코트를 건 뒤
@@ -97,6 +103,9 @@
 <<else>>
 	당신은 수학 교실에 있다. 벽에 차트나 그래프가 잔뜩 걸려있다.
 	<br><br>
+	<<if $arousal gte $arousalmax>>
+		<<orgasmLocation "emptyClassroom">>
+	<</if>>
 	<<storeon "mathsClassroom" "check">>
 	<<if _store_check is 1>>
 		<<storeon "mathsClassroom">>
@@ -133,26 +142,34 @@
 	<</if>>
 	<br><br>
 	<<endevent>>
+	<<if $arousal gte $arousalmax>>
+		<<set _teacher to "River">>
+		<<orgasmLocation "classroom">>
+	<</if>>
 	<<exam_cheat maths>>
-	<<link [[집중한다|Maths Exam]]>><<stress 6>><<set $phase to 0>><<set $exam_chance += 5>><</link>><<gstress>> | <span class="green">+ 5% 합격 기회</span>
+	<<link [[집중한다|Maths Exam]]>><<stress 6>><<set $phase to 0>><<set $exam_chance += 5>><</link>><<gstress>><<passPercent 5>>
 	<br>
 	<<link [[진정한다|Maths Exam]]>><<set $phase to 1>><</link>>
 	<br>
 	<<link [[부정행위|Maths Exam]]>><<set $phase to 2>><</link>><<skulduggerydifficulty>>
 	<br>
 	<<if $whitneymaths is "active">>
-		<<link [[휘트니의 지우개를 잡는다|Maths Exam]]>>/*'>>*/<<set $phase to 3>><</link>><<dancedifficulty 1 1000>>
+		<<link [[휘트니의 지우개를 잡는다|Maths Exam]]>><<set $phase to 3>><</link>><<dancedifficulty 1 1000>>
 		<br>
-	<<elseif $whitneymaths is "seat" and $promiscuity gte 35>>
-		<<npc Whitney>><<person1>>
-		<<if $NPCList[0].penis isnot "none">>
-			<<link [[손으로 휘트니를 만족시킨다|Maths Exam]]>><<set $phase to 4>><<npcincr Whitney love 1>><<npcincr Whitney lust 1>><</link>><<skill_difficulty handskill "Hand Skill" 1 1000>><<ghandskill>><<glove>><<glust>>
-			<br>
-		<<else>>
-			<<link [[손가락으로 휘트니를 만족시킨다|Maths Exam]]>><<set $phase to 5>><<npcincr Whitney love 1>><<npcincr Whitney lust 1>><</link>><<skill_difficulty handskill "Hand Skill" 1 1000>><<ghandskill>><<glove>><<glust>>
-			<br>
+	<<elseif $whitneymaths is "seat">>
+		<<if $promiscuity gte 35>>
+			<<npc Whitney>><<person1>>
+			<<if $NPCList[0].penis isnot "none">>
+				<<link [[손으로 휘트니를 만족시킨다|Maths Exam]]>><<set $phase to 4>><<npcincr Whitney love 1>><<npcincr Whitney lust 1>><</link>><<skill_difficulty handskill "Hand Skill" 1 1000>><<ghandskill>><<glove>><<glust>>
+				<br>
+			<<else>>
+				<<link [[손가락으로 휘트니를 만족시킨다|Maths Exam]]>><<set $phase to 5>><<npcincr Whitney love 1>><<npcincr Whitney lust 1>><</link>><<skill_difficulty handskill "Hand Skill" 1 1000>><<ghandskill>><<glove>><<glust>>
+				<br>
+			<</if>>
+			<<endevent>>
 		<</if>>
-		<<endevent>>
+		<<link [[보복한다|Whitney Maths Exam]]>><<def 1>><</link>><<physiquedifficulty 1 $physiquemax>>
+		<br>
 	<</if>>
 <<else>>
 	<<if $time lte ($hour * 60 + 5)>>
@@ -161,6 +178,10 @@
 	<<else>>
 		수학 수업이 계속된다. 무엇을 할까?
 		<br><br>
+	<</if>>
+	<<if $arousal gte $arousalmax>>
+		<<set _teacher to "River">>
+		<<orgasmLocation "classroom">>
 	<</if>>
 
 	<<link [[수업에 집중한다|Maths Lesson Focus]]>><</link>><<gstress>><<gmaths>>

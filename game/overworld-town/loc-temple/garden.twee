@@ -45,13 +45,17 @@ The garden looks <span class="red">wild,</span> barely a garden at all. The hedg
 			<br>
 		<<elseif $temple_garden lt 100>>
 			<<link [[Work in the garden (1:00)|Temple Garden Work]]>>
-			<<if $tending gte 800>>
+			<<if currentSkillValue('tending') gte 1500>>
+				<<set $temple_garden += 9>>
+			<<elseif currentSkillValue('tending') gte 1200>>
+				<<set $temple_garden += 8>>
+			<<elseif currentSkillValue('tending') gte 800>>
 				<<set $temple_garden += 7>>
-			<<elseif $tending gte 600>>
+			<<elseif currentSkillValue('tending') gte 600>>
 				<<set $temple_garden += 6>>
-			<<elseif $tending gte 400>>
+			<<elseif currentSkillValue('tending') gte 400>>
 				<<set $temple_garden += 5>>
-			<<elseif $tending gte 200>>
+			<<elseif currentSkillValue('tending') gte 200>>
 				<<set $temple_garden += 4>>
 			<<else>>
 				<<set $temple_garden += 3>>
@@ -78,7 +82,7 @@ The garden looks <span class="red">wild,</span> barely a garden at all. The hedg
 <<if $rng gte 81>>
 You ask a priest what work needs doing around the garden. You're asked to trim a row of hedges. You take a pair of shears and get to work.
 <br><br>
-	<<if $danger gte (9900 - $allure) and $tentacledisable is "f" and $hallucinations gte 2>>
+	<<if $danger gte (9900 - $allure) and $tentacledisable is "f" and ($hallucinations gte 2 or $backgroundTraits.includes("plantlover"))>>
 		<<tending_text>> It's hard going, but you neaten things up a great deal. <<physique 6>>
 		<br><br>
 		You're reaching in to cut a rogue branch when your wrist gets stuck. You reach your other hand in to help free yourself, and that gets stuck too. You feel something wrap around both ankles. A force pulls you off your feet and into the hedge.
@@ -97,10 +101,10 @@ You ask a priest what work needs doing around the garden. You're asked to trim a
 		<br>
 	<</if>>
 <<elseif $rng gte 61>>
-You ask a priest what work needs doing around the garden. You're asked to deweed the flower beds. You drop to your knees and get to work.
-<br><br>
-	<<if $danger gte (9900 - $allure)>><!-- Modified for Beast People -->
+	You ask a priest what work needs doing around the garden. You're asked to deweed the flower beds. You drop to your knees and get to work.
+	<br><br>
 	<<beastNEWinit 1 wolf>>
+	<<if $danger gte (9900 - $allure) and ($monster is 1 or $bestialitydisable is "f")>><!-- Modified for Beast People -->
 		<<tending_text>> Your hands get dirty, and beads of sweat slip down your cheek, but the flowers have lots more space when you're done. <<physique 6>>
 		<br><br>
 			<<if $syndromewolves is 1>>
@@ -125,7 +129,7 @@ You ask a priest what work needs doing around the garden. You're asked to deweed
 		<<tending_text>> Your hands get dirty, and beads of sweat slip down your cheek, but the flowers have lots more space when you're done. <<physique 6>>
 		<br><br>
 
-		<<link [[Next|Temple Garden]]>><</link>>
+		<<link [[Next|Temple Garden]]>><<endevent>><</link>>
 		<br>
 	<</if>>
 <<elseif $rng gte 41>>
@@ -135,7 +139,7 @@ You ask a priest what work needs doing around the garden. You're asked to gather
 		Basket in hand, you climb a stepladder and start picking <<print either("lemons", "limes", "apples", "oranges", "pears")>>. <<tending_text>> It's pleasant, though you need to stretch pretty far to reach some of them. <<physique 6>><<lstress>><<stress -6>>
 		<br><br>
 
-		<<generate1>><<person1>>
+		<<generateTemple 1>><<person1>>
 		"Need a hand up there?" a <<monk>> says behind you. Without waiting for a response, <<he>> climbs the step ladder. There's not much room at the top. <<He>> grasps your hips to steady <<himself>>. <<if $NPCList[0].penis isnot "none">><span class="lewd">You feel something hard beneath <<his>> habit, rubbing against your <<bottom>>.</span><</if>>
 		<br><br>
 
@@ -203,10 +207,10 @@ You ask a priest what work needs doing around the garden. You're asked to tend t
 		<br>
 	<</if>>
 <<else>>
-<<generate1>><<person1>>
+<<generateTemple 1>><<person1>>
 You ask a priest what work needs doing around the garden. You're asked to assist the <<monk>> tending to the crops at the forest's edge.
 <br><br>
-You find <<him>> tending to a row of trellises, each bearing a vibrant bine of hops.
+You find <<him>> tending to a row of trellises, each bearing a vibrant vine of hops.
 	<<set $rng to random(1, 100)>>
 	<<if $rng gte 81>>
 		<<He>> has you search the plants for mites. <<tending_text>>
@@ -215,7 +219,7 @@ You find <<him>> tending to a row of trellises, each bearing a vibrant bine of h
 	<<elseif $rng gte 41>>
 		<<He>> has you remove weeds from the soil. <<tending_text>>
 	<<elseif $rng gte 21>>
-		<<He>> has you removes weeds from the soil. <<tending_text>>
+		<<He>> has you remove weeds from the soil. <<tending_text>>
 	<<else>>
 		<<He>> has you harvest the riper plants. <<tending_text>>
 	<</if>>
@@ -227,10 +231,10 @@ You find <<him>> tending to a row of trellises, each bearing a vibrant bine of h
 	<br><br>
 
 	<<if $danger gte (9900 - $allure) and $grace lt 0 or $danger gte (9900 - $allure) and random(1, 10) is 10>>
-		<<link [[Drink|Temple Drink Drugged]]>><<set $drunk += 180>><<set $drugged += 180>><</link>>
+		<<link [[Drink|Temple Drink Drugged]]>><<alcohol 180>><<drugs 180>><</link>>
 		<br>
 	<<else>>
-		<<link [[Drink|Temple Drink]]>><<set $drunk += 180>><</link>>
+		<<link [[Drink|Temple Drink]]>><<alcohol 180>><</link>>
 		<br>
 	<</if>>
 	<<link [[Refuse|Temple Drink Refuse]]>><<grace -1 monk>><</link>><<lgrace monk>>
@@ -271,9 +275,9 @@ You refuse the drink. The <<monk>> is disappointed, but doesn't press you.
 :: Temple Drink
 <<set $outside to 1>><<set $location to "temple">><<temple_effects>><<effects>>
 
-You sip the drink. It's bitter, but fruity. "Good right?" the <<monk>> says. <<He>> continues without waiting for an answer. "We make harder stuff too, but we don't sell it. Used in rituals. They make you drink it when becoming a <<monk>>, but only the priests and bishop know what's in it."
+You sip the drink. It's bitter, but fruity. "Good, right?" the <<monk>> says. <<He>> continues without waiting for an answer. "We make harder stuff too, but we don't sell it. Used in rituals. They make you drink it when becoming a <<monk>>, but only the priests and bishop know what's in it."
 <br><br>
-You finish the drink as the <<monk>> speaks, until the mug is empty. "Thanks for the help," <<he>> says.
+You drain the mug as the <<monk>> speaks. "Thanks for the help," <<he>> says.
 <br><br>
 
 <<endevent>>
@@ -284,7 +288,7 @@ You finish the drink as the <<monk>> speaks, until the mug is empty. "Thanks for
 :: Temple Drink Drugged
 <<set $outside to 1>><<set $location to "temple">><<temple_effects>><<effects>>
 
-You sip the drink. It's <span class="red">sweet</span> and fruity. "Good right?" the <<monk>> says. <<He>> continues without waiting for an answer. "We make harder stuff too, but we don't..." <<his>> voice fades and your vision blurs. Everything fades to black.
+You sip the drink. It's <span class="red">sweet</span> and fruity. "Good, right?" the <<monk>> says. <<He>> continues without waiting for an answer. "We make harder stuff too, but we don't..." <<his>> voice fades and your vision blurs. Everything fades to black.
 <br><br>
 
 <<set $temple_harassed += 1>>
@@ -294,14 +298,14 @@ You sip the drink. It's <span class="red">sweet</span> and fruity. "Good right?"
 
 :: Temple Garden Bound
 <<set $outside to 0>><<set $location to "temple">><<temple_effects>><<effects>>
-<<generate2>><<pass 60>>
+<<generateTemple 2>><<pass 60>>
 <<bind>><<facewear 6>>
 You awaken in darkness. <span class="red">Your arms are bound and mouth gagged.</span> You feel something around your head. A blindfold. You're sat down.
 <br><br>
 "<<pShes>> awake," says a familiar voice. It's the <<monk>> from the garden.
 <br><br>
 
-"Lovely," says an unfamiliar <<person2>><<if $pronoun is "m">>man<<else>>woman<</if>>. Their voice echoes. "Nice and nubile. Just my type." You hear a clatter to your left. It sounded far away.
+"Lovely," says an unfamiliar <<person2>><<personsimple>>. Their voice echoes. "Nice and nubile. Just my type." You hear a clatter to your left. It sounded far away.
 <br><br>
 
 "Now listen close," the <<person1>><<monk>> says. You think you hear a distant howl to your right, but you might be imagining it. "You're gonna be a good <<girl>> and do as we say. Understood?" Hands grope your <<bottom>> and <<breasts>>.
@@ -338,7 +342,7 @@ You jump to your feet and run.
 :: Temple Garden Left
 <<set $outside to 0>><<set $location to "temple">><<temple_effects>><<effects>>
 
-You run left, and collide with someone. You stumble, but manage to recover. Whoever you collided with isn't so lucky. "Fuck," you hear the <<person2>><<if $pronoun is "m">>man<<else>>woman<</if>> say beneath you. You keep going.
+You run left, and collide with someone. You stumble, but manage to recover. Whoever you collided with isn't so lucky. "Fuck," you hear the <<person2>><<personsimple>> say beneath you. You keep going.
 <br><br>
 
 Your footsteps start to echo. You hear other footsteps behind you. You keep running until you feel stale air blast you from the front.
@@ -347,11 +351,11 @@ Your footsteps start to echo. You hear other footsteps behind you. You keep runn
 "There's a drop in front of you <<girl>>." the <<person1>><<monk>> shouts, fast approaching. "A dead end. Give up."
 <br><br>
 
-<<link [[Run Forward|Temple Garden Pit]]>><</link>>
+<<link [[Run forward|Temple Garden Pit]]>><</link>>
 <br>
-<<link [[Run Left|Temple Garden Wall]]>><</link>>
+<<link [[Run left|Temple Garden Wall]]>><</link>>
 <br>
-<<link [[Run Right|Temple Garden Escape]]>><</link>>
+<<link [[Run right|Temple Garden Escape]]>><</link>>
 <br>
 <<link [[Give up|Temple Garden Give up]]>><<set $submissive += 1>><</link>>
 <br>
@@ -380,7 +384,7 @@ A hand rests on your shoulder. You try to pull away, until another lifts the bli
 <<set $worn.face.type.push("broken")>>
 <<faceruined>>
 <<unbind>>
-<<generate3>><<generate4>><<person3>>
+<<generateTemple 3>><<generateTemple 4>><<person3>>
 
 You see a <<person>> smiling at you, your blindfold in <<his>> hand. <<He>> wears a <<priestapo>> garb. <<He>> starts untying your gag and unbinding your arms. A <<person4>><<person>> stands behind <<person3>><<him>>. Concern creases <<his>> face.
 
@@ -492,9 +496,9 @@ You run straight into another wall.
 <br><br>
 "Dead end, <<girl>>," the <<person1>><<person>> shouts behind you. "Give up."
 <br><br>
-<<link [[Run Left|Temple Garden Forest]]>><</link>>
+<<link [[Run left|Temple Garden Forest]]>><</link>>
 <br>
-<<link [[Run Right|Temple Garden Maiden]]>><</link>>
+<<link [[Run right|Temple Garden Maiden]]>><</link>>
 <br>
 <<link [[Give up|Temple Garden Give up]]>><<set $submissive += 1>><</link>>
 <br>
@@ -564,7 +568,7 @@ A shadow leaps from above, landing a few paces away. A wolf. It watches the pair
 <<elseif $enemyarousal gte $enemyarousalmax>>
 	<span id="next"><<link [[Next|Temple Garden Forest Wolf Rape Finish]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link "Next">><<script>>state.display(state.active.title, null)<</script>><</link>></span><<nexttext>>
+	<span id="next"><<link [[Next|Temple Garden Forest Wolf Rape]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: Temple Garden Forest Wolf Rape Finish
@@ -615,7 +619,6 @@ You hear muffled laughter, then a grinding sound. "I said it was a dead end <<gi
 <</if>>
 <<effects>>
 <<effectsman>><<man>>
-<<if $enemyhealth gt 0>><<npcdamage>><</if>>
 <<stateman>>
 <br><br>
 <<actionsman>>
@@ -706,7 +709,7 @@ You put up with it. You continue picking fruit off the tree, now with the <<monk
 	<<molested>>
 	<<beastCombatInit>>
 	<<if $daystate isnot "night">>
-		<<set $rescue to 1>>
+		<<enable_rescue>>
 	<</if>>
 <</if>>
 <<effects>>
@@ -724,7 +727,7 @@ You put up with it. You continue picking fruit off the tree, now with the <<monk
 <<elseif $rescue is 1 and $alarm is 1>>
 	<span id="next"><<link [[Next|Temple Garden Work Wolf Finish]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link "Next">><<script>>state.display(state.active.title, null)<</script>><</link>></span><<nexttext>>
+	<span id="next"><<link [[Next|Temple Garden Work Wolf]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: Temple Garden Work Wolf Finish
@@ -800,10 +803,10 @@ You put up with it. You continue picking fruit off the tree, now with the <<monk
 	<<set $enemytype to "tentacles">>
 	<<molested>>
 	<<controlloss>>
-	<<tentaclestart 7 15>>
+	<<tentaclestart 4 15 "vine" "vine" true>>
 <</if>>
 <<statetentacles>>
-You count $tentacles.active tentacles surrounding you.
+
 <<effects>>
 <<effectstentacles>>
 <<tentacles>>
@@ -836,8 +839,9 @@ You keep low as you move between hedges, peeking around each corner before makin
 	Maybe they've stored some nearby out of the snow.
 <</if>>
 <br><br>
-<<if $rng gte 51>><!-- Modified for Beast People -->
-	<<beastNEWinit 1 wolf>>
+<<set $rng to random(1, 100)>>
+<<beastNEWinit 1 wolf>>
+<<if $rng gte 51 and ($monster is 1 or $bestialitydisable is "f")>><!-- Modified for Beast People -->
 	You hear something behind you.
 	<<if $syndromewolves is 1>>
 		A <<beasttype>> emerges from beneath a hedge, a bundle of cloth in its maw.
@@ -856,6 +860,7 @@ You keep low as you move between hedges, peeking around each corner before makin
 		<br>
 	<</if>>
 <<else>>
+	<<endevent>>
 	<<generate1>><<generate2>>
 	You see a nun's habit hanging on a line <<if $weather is "rain">>that's been shifted out of the rain in haste<<elseif $weather is "snow">>that's been shifted out of the snow in haste<<else>>above a bed of flowers<</if>>. There are some towels on the same line. The towels are closer. A <<person1>><<person>> and <<person2>><<person>>, each wearing a habit, are tending to a flower bed nearby. Their backs are turned.
 	<br><br>
@@ -876,12 +881,7 @@ You lie prone and shuffle towards the line, conscious of your <<nudity>>.
 <<if $skulduggerysuccess is 1>>
 	You crawl next to the pair. The <<persons>> arm reaches behind <<him>>, and pads the ground as if searching for something. A trowel lies nearby, so you lift it and place the handle in <<his>> hand. <span class="green"><<He>> returns to gardening,</span> oblivious to your presence.
 	<br><br>
-	<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
-		<<skulduggeryskilluse>>
-	<<else>>
-		<span class="blue">That was too easy. You didn't learn anything.</span>
-		<br><br>
-	<</if>>
+	<<skulduggeryuse>>
 	You crawl beneath the habit and tug it off the line. You won't be able to dress like this, so you crawl back to the safety of the hedges.
 	<br><br>
 	<<upperwear 13>>
@@ -892,12 +892,7 @@ You lie prone and shuffle towards the line, conscious of your <<nudity>>.
 	You crawl next to the pair. The <<person1>><<persons>> arm reaches behind <<him>>, and pads the ground as if searching for something. <span class="red"><<His>> hand finds your <<bottom>> instead.</span> <<He>> leaps to <<his>> feet with a shriek. <<He>> and the <<person2>><<person>> run toward the temple.
 	<<llgrace>><<grace -5>><<garousal>><<arousal 600>>
 	<br><br>
-	<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
-		<<skulduggeryskilluse>>
-	<<else>>
-		<span class="blue">That was too easy. You didn't learn anything.</span>
-		<br><br>
-	<</if>>
+	<<skulduggeryuse>>
 	You dash to the habit, snatch it off the line, and rush back to the safety of the hedges.
 	<br><br>
 	<<upperwear 13>>
@@ -915,12 +910,7 @@ You lie prone and shuffle towards the line, conscious of your <<nudity>>.
 <<if $skulduggerysuccess is 1>>
 	You've almost reached the line when the <<person1>><<person>> turns around. You freeze. <<He>> picks up a trowel and <span class="green">returns to gardening,</span> oblivious to your presence.
 	<br><br>
-	<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
-		<<skulduggeryskilluse>>
-	<<else>>
-		<span class="blue">That was too easy. You didn't learn anything.</span>
-		<br><br>
-	<</if>>
+	<<skulduggeryuse>>
 	You crawl beneath the towels and tug them off the line. You won't be able to dress like this, so you crawl back to the safety of the hedges.
 	<br><br>
 	<<towelup>>
@@ -931,12 +921,7 @@ You lie prone and shuffle towards the line, conscious of your <<nudity>>.
 	You've almost reached the line when the <<person1>><<person>> turns around. You freeze. <span class="red">The <<person>> spots you,</span> and leaps to <<his>> feet with a shriek. <<He>> and the <<person2>><<person>> run toward the temple.
 	<<llgrace>><<grace -5>><<garousal>><<arousal 600>>
 	<br><br>
-	<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
-		<<skulduggeryskilluse>>
-	<<else>>
-		<span class="blue">That was too easy. You didn't learn anything.</span>
-		<br><br>
-	<</if>>
+	<<skulduggeryuse>>
 	You dash to the habit, snatch it off the line, and rush back to the safety of the hedges.
 	<br><br>
 	<<towelup>>
@@ -954,7 +939,7 @@ You lie prone and shuffle towards the line, conscious of your <<nudity>>.
 	<<neutral 1>>
 	<<molested>>
 	<<beastCombatInit>>
-	<<if $daystate isnot "night">><<set $rescue to 1>><</if>>
+	<<if $daystate isnot "night">><<enable_rescue>><</if>>
 <</if>>
 <<effects>>
 <<effectsman>>
@@ -971,7 +956,7 @@ You lie prone and shuffle towards the line, conscious of your <<nudity>>.
 <<elseif $alarm is 1 and $rescue is 1>>
 	<span id="next"><<link [[Next|Temple Garden Wolf Finish]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link "Next">><<script>>state.display(state.active.title, null)<</script>><</link>></span><<nexttext>>
+	<span id="next"><<link [[Next|Temple Garden Wolf]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: Temple Garden Wolf Finish

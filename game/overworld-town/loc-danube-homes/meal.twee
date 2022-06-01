@@ -37,12 +37,19 @@ You hear a door opening, and then you fly through the air before landing on hard
 <<beastNEWinit 3 dog>>
 You have yet to recover your bearings when a growl sends a chill down your back. You realise why they would just dump food onto the ground like this. Three stray <<beastsplural>> advance on you, hunger in their eyes.
 <!-- Modified for Beast People -->
-	<!-- You flee, dropping cream and strawberries as you go. You manage to escape them, but not without injury. <<beastescape>> -->
-	<!-- <br><br> -->
-	<!-- <<set $stress -= 1000>> -->
-	<!-- <<residentialquick>> -->
-	<br><br>
+<br><br>
+<<if $monster is 1 or $bestialitydisable is "f">>
 	<<link [[Next|Danube Meal Dogs]]>><<set $molestationstart to 1>><</link>>
+	<br>
+<<else>>
+	You flee, dropping cream and strawberries as you go. You manage to escape them, but not without injury. <<beastescape>>
+	<br><br>
+	<<set $stress -= 1000>>
+	<<endevent>>
+	<<residentialquick>>
+<</if>>
+
+
 
 :: Widgets Danube Meal [widget]
 
@@ -101,7 +108,7 @@ You have yet to recover your bearings when a growl sends a chill down your back.
 	<<else>>
 		No one comes to your aid.
 		<<set $alarm to 0>>
-		<<if $drugged gte 1>>The drugs inhibit you, you couldn't cry very convincingly.<</if>>
+		<<if $drugged gte 1>>약에 취한 상태로는, 당신의 비명소리는 별로 설득력 있게 들리지 않는다.<</if>>
 		<br><br>
 		<<if $enemyarousal gte $enemyarousalmax>>
 			<span id="next"><<link [[Next|Danube Meal Dogs Ejaculation]]>><</link>></span><<nexttext>>
@@ -127,12 +134,12 @@ You have yet to recover your bearings when a growl sends a chill down your back.
 	Satisfied, the dog leaves you be. Another takes its place.
 	<<combatTrainAdvance>>
 	<br><br>
-	[[Next|Danube Meal Dogs]]
+	<<link [[Next|Danube Meal Dogs]]>><</link>>
 <<else>>
 	Satisfied, the dog leaves you be.
 	<<combatTrainAdvance>>
 	<br><br>
-	[[Next|Danube Meal Dogs End]]
+	<<link [[Next|Danube Meal Dogs End]]>><</link>>
 <</if>>
 
 :: Danube Meal Dogs Escape
@@ -143,12 +150,12 @@ You have yet to recover your bearings when a growl sends a chill down your back.
 	The <<beasttype>> recoils in pain and fear, but another takes its place.
 	<<combatTrainAdvance>>
 	<br><br>
-	[[Next|Danube Meal Dogs]]
+	<<link [[Next|Danube Meal Dogs]]>><</link>>
 <<else>>
 	The dog recoils in pain and fear.
 	<<combatTrainAdvance>>
 	<br><br>
-	[[Next|Danube Meal Dogs End]]
+	<<link [[Next|Danube Meal Dogs End]]>><</link>>
 <</if>>
 
 :: Danube Meal Dogs End

@@ -1,5 +1,4 @@
 :: Sea Dolphins
-<<set $outside to 1>><<set $location to "sea">>
 <<if $molestationstart is 1>>
 	<<set $molestationstart to 0>>
 	<<controlloss>>
@@ -8,13 +7,15 @@
 	<<molested>>
 	<<beastCombatInit>>
 	<<beastTrainGenerate>>
-	<<set $water to 1>><<set $claws to 0>>
+	<<set $water to 1>>
+	<!-- <<set $claws to 0>> -->
 	<<if $daystate isnot "night" and $location is "beach">>
-		<<set $rescue to 1>>
+		<<enable_rescue>>
 	<</if>>
 	<<if $bus isnot "sea">>
-		<<set $bus to "sea">><span class="pink">The <<beastsplural>> push you out to sea.</span>
+		<span class="pink">The <<beastsplural>> push you out to sea.</span>
 	<</if>>
+	<<location "sea">>
 <</if>>
 <<effects>>
 <<effectsman>>
@@ -85,7 +86,7 @@
 	<<destinationeventend>>
 <<elseif $alarm is 1 and $rescue is 1>>
 	<<set $rescued += 1>>
-	<<generate1>><<person1>>A whistle blows, startling the <<beastsplural>>. A lifeguard in a small boat races toward you. The <<beastsplural>> make a chittering noise, then flee away from the shore. Seeing them leave, the lifeguard heads back to the beach.
+	A whistle blows, startling the <<beastsplural>>. A lifeguard in a small boat races toward you. The <<beastsplural>> make a chittering noise, then flee away from the shore. Seeing them leave, the lifeguard heads back to the beach.
 	<br><br>
 	<<tearful>> you gather yourself.
 	<<clotheson>>
@@ -95,14 +96,14 @@
 
 :: Sea Eels
 
-<<set $outside to 1>><<set $location to "sea">><<effects>>
+<<if $location isnot "sea">><<location "sea">><</if>><<effects>>
 <<if $molestationstart is 1>>
 	<<set $molestationstart to 0>>
 	<<molested>>
 	<<controlloss>>
 	<<set $combat to 1>>
 	<<set $enemytype to "swarm">>
-	<<swarminit "eels" "swarms" "moving towards you" "encircle you" "fend off" 1 9>>
+	<<swarminit "eels" "swarm" "moving towards you" "encircle you" "fend off" 1 9>>
 
 	<<set $swimdistance to 15>>
 	<<set $water to 1>>
@@ -127,7 +128,7 @@
 <<elseif $swimdistance lte 0>>
 	<span id="next"><<link [[Next|Sea Eels Finish]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link "Next">><<script>>state.display(state.active.title, null)<</script>><</link>></span><<nexttext>>
+	<span id="next"><<link [[Next|Sea Eels]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: Sea Eels Finish
@@ -168,7 +169,7 @@
 	<<molested>>
 	<<maninit>>
 	<<if $daystate isnot "night" and $location is "beach">>
-		<<set $rescue to 1>>
+		<<enable_rescue>>
 	<</if>>
 	<<if $phase isnot 1>>
 		You try to pull away, but <<he>> won't let you!
@@ -187,7 +188,7 @@
 	<<maninit>>
 	<<set $enemytrust += 100>>
 	<<if $daystate isnot "night" and $location is "beach">>
-		<<set $rescue to 1>>
+		<<enable_rescue>>
 	<</if>>
 <</if>>
 <<effects>>
@@ -243,7 +244,7 @@
 	<<destinationeventend>>
 <<elseif $alarm is 1 and $rescue is 1>>
 	<<set $rescued += 1>>
-	<<generate1>><<person1>>A whistle blows, startling the <<person>>. A lifeguard in a small boat races toward you. The <<person>> gives you an angry look, but leaves without further fuss. Seeing <<him>> leave, the lifeguard heads back to the beach. <<tearful>> you gather yourself.
+	A whistle blows, startling the <<person>>. A lifeguard in a small boat races toward you. The <<person>> gives you an angry look, but leaves without further fuss. Seeing <<him>> leave, the lifeguard heads back to the beach. <<tearful>> you gather yourself.
 	<br><br>
 	<<clotheson>>
 	<<endcombat>>
@@ -301,7 +302,7 @@
 
 :: Sea Vore
 
-<<set $outside to 1>><<set $location to "sea">><<effects>>
+<<if $location isnot "sea">><<location "sea">><</if>><<effects>>
 <<if $molestationstart is 1>>
 	<<set $molestationstart to 0>>
 	<<set $combat to 1>>
@@ -310,9 +311,9 @@
 	<<if $tentacledisable is "f" and $hallucinations gte 1>>
 		<<set $enemytype to "tentacles">>
 		<<tentaclestart 2 15>>
-		<<set $tentacles[0].shaft to "leftarm">><<set $leftarm to "grappled">>
-		<<set $tentacles[1].shaft to "rightarm">><<set $rightarm to "grappled">>
-		<span class="purple">A $tentacles[0].desc tentacle and $tentacles[1].desc tentacle emerge from the creature and restrain your arms.</span>
+		<<set $tentacles[0].shaft to "leftarm">><<set $leftarm to "tentgrappled">><<set $lefttarget to "tentacles">>
+		<<set $tentacles[1].shaft to "rightarm">><<set $rightarm to "tentgrappled">><<set $righttarget to "tentacles">>
+		<span class="purple">A $tentacles[0].fullDesc and $tentacles[1].fullDesc emerge from the creature and restrain your arms.</span>
 		<br><br>
 	<<else>>
 		<<set $enemytype to "vore">>
@@ -332,7 +333,7 @@
 	<<voreeffects>><<effectstentacles>>
 	<<vore>><<tentacles>>
 	<<statetentacles>>
-	<<voreactions>><<actionstentacles>>
+	<<actionsvorentacles>>
 <<else>>
 	<<voreeffects>>
 	<<vore>>
@@ -345,7 +346,7 @@
 <<elseif $vorestomach gte 5>>
 	<span id="next"><<link [[Next|Sea Vore Finish]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link "Next">><<script>>state.display(state.active.title, null)<</script>><</link>></span><<nexttext>>
+	<span id="next"><<link [[Next|Sea Vore]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: Sea Vore Finish
@@ -440,7 +441,7 @@ You start to untangle yourself without undressing. It takes a minute to free you
 
 :: Sea Tentacles
 
-<<set $outside to 1>><<set $location to "sea">>
+<<if $location isnot "sea">><<location "sea">><</if>>
 <<if $molestationstart is 1>>
 	<<set $molestationstart to 0>>
 	<<set $combat to 1>>
@@ -481,9 +482,10 @@ The creature loses interest in you, and returns to the depths. <<tearful>> you s
 
 	<<beastTrainGenerate>>
 
-	<<set $water to 1>><<set $claws to 0>>
+	<<set $water to 1>>
+	<!-- <<set $claws to 0>> -->
 	<<if $daystate isnot "night" and $location is "beach">>
-		<<set $rescue to 1>>
+		<<enable_rescue>>
 	<</if>>
 	You pet further and further down the $NPCList[0].type's belly. They take the hint, and swim closer to you in excitement.
 	<br>
@@ -564,7 +566,7 @@ The creature loses interest in you, and returns to the depths. <<tearful>> you s
 	<<destinationeventend>>
 <<elseif $alarm is 1 and $rescue is 1>>
 	<<set $rescued += 1>>
-	<<generate1>><<person1>>A whistle blows, startling the <<beastsplural>>. A lifeguard in a small boat races toward you. The <<beastsplural>> make a chittering noise, then flee away from the shore. Seeing them leave, the lifeguard heads back to the beach.
+	A whistle blows, startling the <<beastsplural>>. A lifeguard in a small boat races toward you. The <<beastsplural>> make a chittering noise, then flee away from the shore. Seeing them leave, the lifeguard heads back to the beach.
 	<br><br>
 	<<tearful>> you gather yourself.
 	<<clotheson>>
@@ -695,7 +697,7 @@ You shove the <<person3>><<person>>, and <<he>> tumbles overboard. The <<person2
 <<effects>>
 
 <<if $submissive gte 1150>>
-	"Pl-please stop," you plead. "I never wanted to fight."
+	"P-please stop," you plead. "I never wanted to fight."
 <<elseif $submissive lte 850>>
 	"Calm down," you say. "No one has to know you got your asses kicked by a <<girl>> you met at sea."
 <<else>>
@@ -954,10 +956,10 @@ You've pushed yourself too much.
 
 
 <<if $struggle.done gte $struggle.number>>
-	<<link [[Next|Sea Struggle End]]>><</link>>
+	<span id="next"><<link [[Next|Sea Struggle End]]>><</link>></span>
 	<br>
 <<else>>
-	<<link [[Next|Sea Struggle]]>><</link>>
+	<span id="next"><<link [[Next|Sea Struggle]]>><</link>></span>
 	<br>
 <</if>>
 

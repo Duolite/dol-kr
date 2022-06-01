@@ -18,15 +18,15 @@
 <<else>>
 	<<if $arousal gte ($arousalmax / 5) * 4>>
 		<<if $pain gte 40>>
-			당신은 떨리는 넓적다리를 <<thightext>> <<theirPost "의">> 입에 대고 누른다.
+			당신은 <<thightext>> 떨리는 넓적다리를 <<their_yi _args[0]>> 입에 대고 누른다.
 		<<else>>
-			당신은 덜덜 떨리는 넓적다리를 <<thightext>> <<theirPost "의">> 입에 대고 누른다.
+			당신은 <<thightext>> 덜덜 떨리는 넓적다리를 <<their_yi _args[0]>> 입에 대고 누른다.
 		<</if>>
 	<<else>>
 		<<if $pain gte 40>>
-			당신은 부들부들 떨리는 넓적다리를 <<thightext>> <<theirPost "의">> 입에 대고 누른다.
+			당신은 <<thightext>> 부들부들 떨리는 넓적다리를 <<their_yi _args[0]>> 입에 대고 누른다.
 		<<else>>
-			당신은 넓적다리를 <<thightext>> <<theirPost "의">> 입에 대고 누른다.
+			당신은 <<thightext>> 넓적다리를 <<their_yi _args[0]>> 입에 대고 누른다.
 		<</if>>
 	<</if>>
 <</if>>
@@ -52,15 +52,15 @@
 <<else>>
 	<<if $arousal gte ($arousalmax / 5) * 4>>
 		<<if $pain gte 40>>
-			당신은 <<peniletext>> <<theirPost "의">> 혀에 <<penisPost "을">> 문지른다.
+			당신은 <<peniletext>> <<their_yi _args[0]>> 혀에 <<penisPost "을">> 문지른다.
 		<<else>>
-			당신은 <<peniletext>> <<penisPost "으로">> <<theirPost "의">> 혀를 찰싹 때린다.
+			당신은 <<peniletext>> <<penisPost "으로">> <<their_yi _args[0]>> 혀를 찰싹 때린다.
 		<</if>>
 	<<else>>
 		<<if $pain gte 40>>
-			당신은 <<peniletext>> <<theirPost "의">> 뺨을 <<penisPost "으로">> 문지른다.
+			당신은 <<peniletext>> <<their_yi _args[0]>> 뺨을 <<penisPost "으로">> 문지른다.
 		<<else>>
-			당신은 <<peniletext>> <<penisPost "으로">> <<theirPost "의">> 뺨을 찰싹 때린다.
+			당신은 <<peniletext>> <<penisPost "으로">> <<their_yi _args[0]>> 뺨을 찰싹 때린다.
 		<</if>>
 	<</if>>
 <</if>>
@@ -86,19 +86,34 @@
 <<else>>
 	<<if $arousal gte ($arousalmax / 5) * 4>>
 		<<if $pain gte 40>>
-		당신은 <<peniletext>> <<theirPost "의">> 입술 틈을 <<penisPost>> 끝부분으로 문지른다.
+		당신은 <<peniletext>> <<their_yi _args[0]>> 입술 틈을 <<penisPost>> 끝부분으로 문지른다.
 		<<else>>
-		당신은 <<peniletext>> <<theirPost "의">> 입술을 <<penisPost "으로">> 애무한다.
+		당신은 <<peniletext>> <<their_yi _args[0]>> 입술을 <<penisPost "으로">> 애무한다.
 		<</if>>
 	<<else>>
 		<<if $pain gte 40>>
-		당신은 <<peniletext>> <<theirPost "의">> 입술을 <<penisPost>> 끝부분으로 둥글게 문지른다.
+		당신은 <<peniletext>> <<their_yi _args[0]>> 입술을 <<penisPost>> 끝부분으로 둥글게 문지른다.
 		<<else>>
-		당신은 <<peniletext>> <<theirPost "의">> 입술을 <<penisPost>> 끝부분으로 쿡쿡 찌른다.
+		당신은 <<peniletext>> <<their_yi _args[0]>> 입술을 <<penisPost>> 끝부분으로 쿡쿡 찌른다.
 		<</if>>
 	<</if>>
 <</if>>
 
+<</widget>>
+
+<<widget "penises">>
+	<!-- possible alternatives:  ...-->
+	<<if $arousal gte ($arousalmax / 5) * 4>>
+		육봉을
+	<<elseif $arousal gte ($arousalmax / 5) * 3>>
+		발기한 자지를
+	<<elseif $arousal gte ($arousalmax / 5) * 2>>
+		자지를
+	<<elseif $arousal gte $arousalmax / 5>>
+		귀두를
+	<<else>>
+		자지를
+	<</if>>
 <</widget>>
 
 <<widget "pussies">>
@@ -134,44 +149,76 @@
 	<<else>>
 		<<if $arousal gte ($arousalmax / 5) * 4>>
                <<if $pain gte 40>>
-               당신은 <<vaginaltext>> <<pussies>> 한데 문지른다.
+               당신은 <<vaginaltext>> <<pussies>> 같이 문지른다.
                <<else>>
-               당신은 <<vaginaltext>> <<pussies>> 한데 문댄다.
+               당신은 <<vaginaltext>> <<pussies>> 같이 문댄다.
                <</if>>
        <<else>>
                <<if $pain gte 40>>
-               당신은 <<vaginaltext>> <<pussyPost "으로">> <<theirPost "의">> 것에 문지른다.
+               당신은 <<vaginaltext>> <<pussyPost "으로">> <<their_yi _args[0]>> 것에 문지른다.
                <<else>>
-               당신은 <<vaginaltext>> <<pussyPost "으로">> <<theirPost "의">> 것에 키스한다.
+               당신은 <<vaginaltext>> <<pussyPost "으로">> <<their_yi _args[0]>> 것에 키스한다.
                <</if>>
        <</if>>
+	<</if>>
+<</widget>>
+
+<<widget "actionsotherpenispenisrub">> /* fencing */
+	<<if $enemytype is "beast">>
+		<<if $arousal gte ($arousalmax / 5) * 4>>
+			<<if $pain gte 40>>
+				당신은 <<peniletext>> 또 조심스럽게 <<beasttypes_yi>> 자지를 당신의 <<penis_ro>> 문지른다.
+			<<else>>
+				당신은 <<peniletext>> <<beasttypes_yi>> 자지를 당신의 <<penis_ro>> 문지른다.
+			<</if>>
+		<<else>>
+			<<if $pain gte 40>>
+				당신은 <<peniletext>> 또 조심스럽게 <<beasttypes_yi>> 자지를 당신의 <<penis_ro>> 애무한다.
+			<<else>>
+				당신은 <<peniletext>> <<beasttypes_yi>> 자지를 당신의 <<penis_ro>> 애무한다.
+			<</if>>
+		<</if>>
+	<<else>>
+		<<if $arousal gte ($arousalmax / 5) * 4>>
+			<<if $pain gte 40>>
+				당신은 <<peniletext>> <<penises>> 같이 문지른다.
+			<<else>>
+				당신은 <<peniletext>> <<penises>> 같이 문댄다.
+			<</if>>
+		<<else>>
+			<<if $pain gte 40>>
+				당신은 <<peniletext>> <<penis_ro>> <<their_yi _args[0]>> 것을 문지른다.
+			<<else>>
+				당신은 <<peniletext>> <<penis_ro>> <<their_yi _args[0]>> 것을 애무한다.
+			<</if>>
+		<</if>>
 	<</if>>
 <</widget>>
 
 <<widget "actionsothermouthpenisthrust">>
 <<if $enemyarousal gte ($enemyarousalmax / 5) * 4>>
 		<<if $arousal gte ($arousalmax / 5) * 4>>
-		<<theirPost "의">> 입이 당신의 <<penisPost "을">> 무자비하게 따먹는다. 본능적으로, 당신은 절정에 다다르며 <<peniletext>> 밀어낸다.
+		<<their_yi _args[0]>> 입이 당신의 <<penisPost "을">> 무자비하게 따먹는다. 본능적으로, 당신은 절정에 다다르며 <<peniletext>> 밀어낸다.
 		<<elseif $arousal gte ($arousalmax / 5) * 2>>
-		<<theirPost "의">> 입이 당신의 <<penisPost "을">> 무자비하게 따먹는다. 당신은 <<peniletext>> 그 움직임을 밀어낸다.
+		<<their_yi _args[0]>> 입이 당신의 <<penisPost "을">> 무자비하게 따먹는다. 당신은 <<peniletext>> 그 움직임을 밀어낸다.
 	<<else>>
-		<<theirPost "의">> 입이 당신의 <<penisPost "을">> 무자비하게 따먹는다. 당신은 <<peniletext>> 밀어내며, 불편함을 조금 줄이고자 한다.
+		<<their_yi _args[0]>> 입이 당신의 <<penisPost "을">> 무자비하게 따먹는다. 당신은 <<peniletext>> 밀어내며, 불편함을 조금 줄이고자 한다.
 	<</if>>
 	<<elseif $enemyarousal gte ($enemyarousalmax / 5) * 2>>
 		<<if $arousal gte ($arousalmax / 5) * 4>>
-			<<theirPost "의">> 입이 당신의 <<penisPost "을">> 게걸스레 삼킨다. 본능적으로, 당신은 절정에 다다르며 <<peniletext>> 밀어낸다.
+			<<their_yi _args[0]>> 입이 당신의 <<penisPost "을">> 게걸스럽게 삼킨다. 본능적으로, 당신은 절정에 다다르며 <<peniletext>> 밀어낸다.
 		<<elseif $arousal gte ($arousalmax / 5) * 2>>
-			<<theirPost "의">> 입이 당신의 <<penisPost "을">> 게걸스레 삼킨다. 당신은 그 움직임을 <<peniletext>> 밀어낸다.
+			<<their_yi _args[0]>> 입이 당신의 <<penisPost "을">> 게걸스럽게 삼킨다. 당신은 그 움직임을 <<peniletext>> 밀어낸다.
 		<<else>>
-			<<theirPost "의">> 입이 당신의 <<penisPost "을">> 게걸스레 삼킨다. 당신은 <<peniletext>> 밀어내며, 불편함을 조금 줄이고자 한다.
+			<<their_yi _args[0]>> 입이 당신의 <<penisPost "을">> 게걸스럽게 삼킨다. 당신은 <<peniletext>> 밀어내며, 불편함을 조금 줄이고자 한다.
 		<</if>>
 	<<else>>
 		<<if $arousal gte ($arousalmax / 5) * 4>>
-			<<theirPost "의">> 입이 당신의 <<penisPost "을">> 리드미컬하게 삼키고 내뱉길 반복한다. 본능적으로, 당신은 절정에 다다르며 <<peniletext>> 밀어낸다.
+			<<their_yi _args[0]>> 입이 당신의 <<penisPost "을">> 리드미컬하게 삼키고 내뱉길 반복한다. 본능적으로, 당신은 절정에 다다르며 <<peniletext>> 밀어낸다.
 		<<elseif $arousal gte ($arousalmax / 5) * 2>>
-			<<theirPost "의">> 입이 당신의 <<penisPost "을">> 리드미컬하게 삼키고 내뱉길 반복한다. 당신은 그 움직임을 <<peniletext>> 밀어낸다.
+			<<their_yi _args[0]>> 입이 당신의 <<penisPost "을">> 리드미컬하게 삼키고 내뱉길 반복한다. 당신은 그 움직임을 <<peniletext>> 밀어낸다.
 		<<else>>
-			<<theirPost "의">> 입이 당신의 <<penisPost "을">> 리드미컬하게 삼키고 내뱉길 반복한다. 당신은 <<peniletext>> 밀어내며, 불편함을 조금 줄이고자 한다.
+			<<their_yi _args[0]>> 입이 당신의 <<penisPost "을">> 리드미컬하게 삼키고 내뱉길 반복한다. 당신은 <<peniletext>> 밀어내며, 불편함을 조금 줄이고자 한다.
 		<</if>>
 	<</if>>
 <</widget>>
@@ -187,11 +234,11 @@
 		<</if>>
 	<<else>>
 		<<if $pain lte 20>>
-			<span class="blue">당신은 골반을 움직여, <<theirPost "의">> 입에서 <<penisPost "을">> 치운다.</span>
+			<span class="blue">당신은 골반을 움직여, <<their_yi _args[0]>> 입에서 <<penisPost "을">> 치운다.</span>
 		<<elseif $pain lte 60>>
-			<span class="blue">당신은 골반을 움직여, <<theirPost "의">> 입에서 <<penisPost "을">> 치운다.</span>
+			<span class="blue">당신은 골반을 움직여, <<their_yi _args[0]>> 입에서 <<penisPost "을">> 치운다.</span>
 		<<else>>
-			<span class="blue">당신은 자포자기하여 골반을 움직여, <<theirPost "의">> 입에서 <<penisPost "을">> 치운다.</span>
+			<span class="blue">당신은 필사적으로 골반을 움직여, <<their_yi _args[0]>> 입에서 <<penisPost "을">> 치운다.</span>
 		<</if>>
 	<</if>>
 <</widget>>
@@ -215,15 +262,15 @@
 <<else>>
 	<<if $arousal gte ($arousalmax / 5) * 4>>
 		<<if $pain gte 40>>
-		당신은 <<vaginaltext>> <<theirPost "의">> 혀에 <<pussyPost "을">> 문지른다.
+		당신은 <<vaginaltext>> <<their_yi _args[0]>> 혀에 <<pussyPost "을">> 문지른다.
 		<<else>>
-		당신은 <<vaginaltext>> <<theirPost "의">> 혀를 <<pussyPost "으로">> 애무한다.
+		당신은 <<vaginaltext>> <<their_yi _args[0]>> 혀를 <<pussyPost "으로">> 애무한다.
 		<</if>>
 	<<else>>
 		<<if $pain gte 40>>
-		당신은 <<vaginaltext>> <<theirPost "의">> 뺨에 <<pussyPost "을">> 문지른다.
+		당신은 <<vaginaltext>> <<their_yi _args[0]>> 뺨에 <<pussyPost "을">> 문지른다.
 		<<else>>
-		당신은 <<vaginaltext>> <<pussyPost "으로">> <<theirPost "의">> 뺨에 키스한다.
+		당신은 <<vaginaltext>> <<pussyPost "으로">> <<their_yi _args[0]>> 뺨에 키스한다.
 		<</if>>
 	<</if>>
 <</if>>
@@ -249,15 +296,15 @@
 <<else>>
 	<<if $arousal gte ($arousalmax / 5) * 4>>
 		<<if $pain gte 40>>
-		당신은 <<vaginaltext>> <<theirPost "의">> 혀에 <<pussyPost "을">> 문지른다.
+		당신은 <<vaginaltext>> <<their_yi _args[0]>> 혀에 <<pussyPost "을">> 문지른다.
 		<<else>>
-		당신은 <<vaginaltext>> <<theirPost "의">> 혀를 <<pussyPost "으로">> 애무한다.
+		당신은 <<vaginaltext>> <<their_yi _args[0]>> 혀를 <<pussyPost "으로">> 애무한다.
 		<</if>>
 	<<else>>
 		<<if $pain gte 40>>
-		당신은 <<vaginaltext>> <<pussyPost "으로">> <<theirPost "의">> 혀에 키스한다.
+		당신은 <<vaginaltext>> <<pussyPost "으로">> <<their_yi _args[0]>> 혀에 키스한다.
 		<<else>>
-		당신은 <<vaginaltext>> <<theirPost "의">> 입술을 <<pussyPost "으로">> 문지른다.
+		당신은 <<vaginaltext>> <<their_yi _args[0]>> 입술을 <<pussyPost "으로">> 문지른다.
 		<</if>>
 	<</if>>
 <</if>>
@@ -267,27 +314,27 @@
 <<widget "actionsothermouthvaginathrust">>
 <<if $enemyarousal gte ($enemyarousalmax / 5) * 4>>
 	<<if $arousal gte ($arousalmax / 5) * 4>>
-	<<theirPost "의">> 입술이 당신의 음순을 주무르며, 혀가 무자비하게 <<pussyPost "에">> 들어온다. 본능적으로, 당신은 절정에 다다르며 <<vaginaltext>> 밀어낸다.
+	<<their_yi _args[0]>> 입술이 당신의 음순을 주무르며, 혀가 무자비하게 <<pussyPost "에">> 들어온다. 본능적으로, 당신은 절정에 다다르며 <<vaginaltext>> 밀어낸다.
 	<<elseif $arousal gte ($arousalmax / 5) * 2>>
-	<<theirPost "의">> 입술이 당신의 음순을 주무르며, 혀가 무자비하게 <<pussyPost "에">> 들어온다. 당신은 <<vaginaltext>> 그 움직임을 밀어낸다.
+	<<their_yi _args[0]>> 입술이 당신의 음순을 주무르며, 혀가 무자비하게 <<pussyPost "에">> 들어온다. 당신은 <<vaginaltext>> 그 움직임을 밀어낸다.
 	<<else>>
-	<<theirPost "의">> 입술이 당신의 음순을 주무르며, 혀가 무자비하게 <<pussyPost "에">> 들어온다. 당신은 <<vaginaltext>> 밀어내며, 불편함을 조금 줄이고자 한다.
+	<<their_yi _args[0]>> 입술이 당신의 음순을 주무르며, 혀가 무자비하게 <<pussyPost "에">> 들어온다. 당신은 <<vaginaltext>> 밀어내며, 불편함을 조금 줄이고자 한다.
 	<</if>>
 <<elseif $enemyarousal gte ($enemyarousalmax / 5) * 2>>
 	<<if $arousal gte ($arousalmax / 5) * 4>>
-	<<theirPost "의">> 입술이 당신의 음순을 주무르며, 혀가 게걸스레 <<pussyPost "을">> 꿰뚫는다. 본능적으로, 당신은 절정에 다다르며 <<vaginaltext>> 밀어낸다.
+	<<their_yi _args[0]>> 입술이 당신의 음순을 주무르며, 혀가 게걸스럽게 <<pussyPost "을">> 꿰뚫는다. 본능적으로, 당신은 절정에 다다르며 <<vaginaltext>> 밀어낸다.
 	<<elseif $arousal gte ($arousalmax / 5) * 2>>
-	<<theirPost "의">> 입술이 당신의 음순을 주무르며, 혀가 게걸스레 <<pussyPost "을">> 꿰뚫는다. 당신은 <<vaginaltext>> 그 움직임을 밀어낸다.
+	<<their_yi _args[0]>> 입술이 당신의 음순을 주무르며, 혀가 게걸스럽게 <<pussyPost "을">> 꿰뚫는다. 당신은 <<vaginaltext>> 그 움직임을 밀어낸다.
 	<<else>>
-	<<theirPost "의">> 입술이 당신의 음순을 주무르며, 혀가 게걸스레 <<pussyPost "을">> 꿰뚫는다. 당신은 <<vaginaltext>> 밀어내며, 불편함을 조금 줄이고자 한다.
+	<<their_yi _args[0]>> 입술이 당신의 음순을 주무르며, 혀가 게걸스럽게 <<pussyPost "을">> 꿰뚫는다. 당신은 <<vaginaltext>> 밀어내며, 불편함을 조금 줄이고자 한다.
 	<</if>>
 <<else>>
 	<<if $arousal gte ($arousalmax / 5) * 4>>
-	<<theirPost "의">> 입술이 당신의 음순을 주무르며, 혀가 리드미컬하게 <<pussyPost "에">> 침입해온다. 본능적으로, 당신은 절정에 다다르며 <<vaginaltext>> 밀어낸다.
+	<<their_yi _args[0]>> 입술이 당신의 음순을 주무르며, 혀가 리드미컬하게 <<pussyPost "에">> 침입해온다. 본능적으로, 당신은 절정에 다다르며 <<vaginaltext>> 밀어낸다.
 	<<elseif $arousal gte ($arousalmax / 5) * 2>>
-	<<theirPost "의">> 입술이 당신의 음순을 주무르며, 혀가 리드미컬하게 <<pussyPost "에">> 침입해온다. 당신은 <<vaginaltext>> 그 움직임을 밀어낸다.
+	<<their_yi _args[0]>> 입술이 당신의 음순을 주무르며, 혀가 리드미컬하게 <<pussyPost "에">> 침입해온다. 당신은 <<vaginaltext>> 그 움직임을 밀어낸다.
 	<<else>>
-	<<theirPost "의">> 입술이 당신의 음순을 주무르며, 혀가 리드미컬하게 <<pussyPost "에">> 침입해온다. 당신은 <<vaginaltext>> 밀어내며, 불편함을 조금 줄이고자 한다.
+	<<their_yi _args[0]>> 입술이 당신의 음순을 주무르며, 혀가 리드미컬하게 <<pussyPost "에">> 침입해온다. 당신은 <<vaginaltext>> 밀어내며, 불편함을 조금 줄이고자 한다.
 	<</if>>
 <</if>>
 <</widget>>
@@ -304,11 +351,11 @@
 	<</if>>
 <<else>>
 	<<if $pain lte 20>>
-	<span class="blue">당신은 골반을 움직여, <<theirPost "의">> 입에서 <<pussyPost "을">> 치운다.</span>
+	<span class="blue">당신은 골반을 움직여, <<their_yi _args[0]>> 입에서 <<pussyPost "을">> 치운다.</span>
 	<<elseif $pain lte 60>>
-	<span class="blue">당신은 골반을 움직여, <<theirPost "의">> 입에서 <<pussyPost "을">> 치운다.</span>
+	<span class="blue">당신은 골반을 움직여, <<their_yi _args[0]>> 입에서 <<pussyPost "을">> 치운다.</span>
 	<<else>>
-	<span class="blue">당신은 자포자기하여 골반을 움직여, <<theirPost "의">> 입에서 <<pussyPost "을">> 치운다.</span>
+	<span class="blue">당신은 필사적으로 골반을 움직여, <<their_yi _args[0]>> 입에서 <<pussyPost "을">> 치운다.</span>
 	<</if>>
 <</if>>
 
@@ -333,15 +380,15 @@
 <<else>>
 	<<if $arousal gte ($arousalmax / 5) * 4>>
 		<<if $pain gte 40>>
-		당신은 <<bottomtext>> 떨리는 <<bottomPost "을">> <<theirPost "의">> 입에 대고 누른다.
+		당신은 <<bottomtext>> 떨리는 <<bottomPost "을">> <<their_yi _args[0]>> 입에 대고 누른다.
 		<<else>>
-		당신은 <<bottomtext>> 덜덜 떨리는 <<bottomPost "을">> <<theirPost "의">> 입에 대고 누른다.
+		당신은 <<bottomtext>> 덜덜 떨리는 <<bottomPost "을">> <<their_yi _args[0]>> 입에 대고 누른다.
 		<</if>>
 	<<else>>
 		<<if $pain gte 40>>
-		당신은 <<bottomtext>> 부들부들 떨리는 <<bottomPost "을">> <<theirPost "의">> 입에 대고 누른다.
+		당신은 <<bottomtext>> 부들부들 떨리는 <<bottomPost "을">> <<their_yi _args[0]>> 입에 대고 누른다.
 		<<else>>
-		당신은 <<bottomtext>> <<bottomPost "을">> <<theirPost "의">> 입에 대고 누른다.
+		당신은 <<bottomtext>> <<bottomPost "을">> <<their_yi _args[0]>> 입에 대고 누른다.
 		<</if>>
 	<</if>>
 <</if>>
@@ -367,15 +414,15 @@
 <<else>>
 	<<if $arousal gte ($arousalmax / 5) * 4>>
 		<<if $pain gte 40>>
-		당신은 <<analtext>> <<theirPost "의">> 입술에 <<bottomPost "을">> 문지른다.
+		당신은 <<analtext>> <<their_yi _args[0]>> 입술에 <<bottomPost "을">> 문지른다.
 		<<else>>
-		당신은 <<analtext>> <<theirPost "의">> 얼굴에 <<bottomPost "을">> 문지른다.
+		당신은 <<analtext>> <<their_yi _args[0]>> 얼굴에 <<bottomPost "을">> 문지른다.
 		<</if>>
 	<<else>>
 		<<if $pain gte 40>>
-		당신은 <<analtext>> <<theirPost "의">> 볼에 <<bottomPost "을">> 문지른다.
+		당신은 <<analtext>> <<their_yi _args[0]>> 볼에 <<bottomPost "을">> 문지른다.
 		<<else>>
-		당신은 <<analtext>> <<theirPost "의">> 볼에 <<bottomPost "을">> 문지른다.
+		당신은 <<analtext>> <<their_yi _args[0]>> 볼에 <<bottomPost "을">> 문지른다.
 		<</if>>
 	<</if>>
 <</if>>
@@ -401,15 +448,15 @@
 <<else>>
 	<<if $arousal gte ($arousalmax / 5) * 4>>
 		<<if $pain gte 40>>
-		당신은 <<analtext>> <<theirPost "의">> 혀에 항문을 문지른다.
+		당신은 <<analtext>> <<their_yi _args[0]>> 혀에 항문을 문지른다.
 		<<else>>
-		당신은 <<analtext>> <<theirPost "의">> 혀를 항문으로 애무한다.
+		당신은 <<analtext>> <<their_yi _args[0]>> 혀를 항문으로 애무한다.
 		<</if>>
 	<<else>>
 		<<if $pain gte 40>>
-		당신은 <<analtext>> <<theirPost "의">> 혀를 <<bottomPost "으로">> 문지른다.
+		당신은 <<analtext>> <<their_yi _args[0]>> 혀를 <<bottomPost "으로">> 문지른다.
 		<<else>>
-		당신은 <<analtext>> <<theirPost "의">> 입술을 <<bottomPost "으로">> 문지른다.
+		당신은 <<analtext>> <<their_yi _args[0]>> 입술을 <<bottomPost "으로">> 문지른다.
 		<</if>>
 	<</if>>
 <</if>>
@@ -419,27 +466,118 @@
 <<widget "actionsothermouthanusthrust">>
 <<if $enemyarousal gte ($enemyarousalmax / 5) * 4>>
 	<<if $arousal gte ($arousalmax / 5) * 4>>
-	<<theirPost "의">> 입술이 당신의 항문을 주무르며, 혀가 무자비하게 <<bottomPost "에">> 들어온다. 본능적으로, 당신은 절정에 다다르며 <<analtext>> 밀어낸다.
+	<<their_yi _args[0]>> 입술이 당신의 항문을 주무르며, 혀가 무자비하게 <<bottomPost "에">> 들어온다. 본능적으로, 당신은 절정에 다다르며 <<analtext>> 밀어낸다.
 	<<elseif $arousal gte ($arousalmax / 5) * 2>>
-	<<theirPost "의">> 입술이 당신의 항문을 주므르며, 혀가 무자비하게 <<bottomPost "에">> 들어온다. 당신은 <<analtext>> 그 움직임을 밀어낸다.
+	<<their_yi _args[0]>> 입술이 당신의 항문을 주므르며, 혀가 무자비하게 <<bottomPost "에">> 들어온다. 당신은 <<analtext>> 그 움직임을 밀어낸다.
 	<<else>>
-	<<theirPost "의">> 입술이 당신의 항문을 주므르며, 혀가 무자비하게 <<bottomPost "에">> 들어온다. 당신은 <<analtext>> 밀어내며, 불편함을 조금 줄이고자 한다.
+	<<their_yi _args[0]>> 입술이 당신의 항문을 주므르며, 혀가 무자비하게 <<bottomPost "에">> 들어온다. 당신은 <<analtext>> 밀어내며, 불편함을 조금 줄이고자 한다.
 	<</if>>
 <<elseif $enemyarousal gte ($enemyarousalmax / 5) * 2>>
 	<<if $arousal gte ($arousalmax / 5) * 4>>
-	<<theirPost "의">> 입술이 당신의 항문을 주므르며, 혀가 게걸스레 <<bottomPost "을">> 꿰뚫는다. 본능적으로, 당신은 절정에 다다르며 <<analtext>> 밀어낸다.
+	<<their_yi _args[0]>> 입술이 당신의 항문을 주므르며, 혀가 게걸스럽게 <<bottomPost "을">> 꿰뚫는다. 본능적으로, 당신은 절정에 다다르며 <<analtext>> 밀어낸다.
 	<<elseif $arousal gte ($arousalmax / 5) * 2>>
-	<<theirPost "의">> 입술이 당신의 항문을 주므르며, 혀가 게걸스레 <<bottomPost "을">> 꿰뚫는다. 당신은 <<analtext>> 그 움직임을 밀어낸다.
+	<<their_yi _args[0]>> 입술이 당신의 항문을 주므르며, 혀가 게걸스럽게 <<bottomPost "을">> 꿰뚫는다. 당신은 <<analtext>> 그 움직임을 밀어낸다.
 	<<else>>
-	<<theirPost "의">> 입술이 당신의 항문을 주므르며, 혀가 무자비하게 <<bottomPost "에">> 들어온다. 당신은 <<analtext>> 밀어내며, 불편함을 조금 줄이고자 한다.
+	<<their_yi _args[0]>> 입술이 당신의 항문을 주므르며, 혀가 무자비하게 <<bottomPost "에">> 들어온다. 당신은 <<analtext>> 밀어내며, 불편함을 조금 줄이고자 한다.
 	<</if>>
 <<else>>
 	<<if $arousal gte ($arousalmax / 5) * 4>>
-	<<theirPost "의">> 입술이 당신의 항문을 주므르며, 혀가 리드미컬하게 <<bottomPost "에">> 침입해온다. 본능적으로, 당신은 절정에 다다르며 <<analtext>> 밀어낸다.
+	<<their_yi _args[0]>> 입술이 당신의 항문을 주므르며, 혀가 리드미컬하게 <<bottomPost "에">> 침입해온다. 본능적으로, 당신은 절정에 다다르며 <<analtext>> 밀어낸다.
 	<<elseif $arousal gte ($arousalmax / 5) * 2>>
-	<<theirPost "의">> 입술이 당신의 항문을 주므르며, 혀가 리드미컬하게 <<bottomPost "에">> 침입해온다. 당신은 <<analtext>> 그 움직임을 밀어낸다.
+	<<their_yi _args[0]>> 입술이 당신의 항문을 주므르며, 혀가 리드미컬하게 <<bottomPost "에">> 침입해온다. 당신은 <<analtext>> 그 움직임을 밀어낸다.
 	<<else>>
-	<<theirPost "의">> 입술이 당신의 항문을 주므르며, 혀가 리드미컬하게 <<bottomPost "에">> 침입해온다. 당신은 <<analtext>> 밀어내며, 불편함을 조금 줄이고자 한다.
+	<<their_yi _args[0]>> 입술이 당신의 항문을 주므르며, 혀가 리드미컬하게 <<bottomPost "에">> 침입해온다. 당신은 <<analtext>> 밀어내며, 불편함을 조금 줄이고자 한다.
+	<</if>>
+<</if>>
+<</widget>>
+
+<<widget "actionshandanustease">>
+
+<<if $enemytype is "beast">>
+	<<if $arousal gte ($arousalmax / 5) * 4>>
+		<<if $pain gte 40>>
+		당신은 <<analtext>> 그리고 조심스럽게 <<beasttypes_yi>> 발가락을 당신의 <<bottom_uro>> 문지른다.
+		<<else>>
+		당신은 <<analtext>> <<beasttypes_yi>> 발가락을 당신의 <<bottom_uro>> 문지른다.
+		<</if>>
+	<<else>>
+		<<if $pain gte 40>>
+		당신은 <<analtext>> 그리고 조심스럽게 <<beasttypes_yi>> 발가락을 당신의 <<bottom_uro>> 문지른다.
+		<<else>>
+		당신은 <<analtext>> <<beasttypes_yi>> 발가락을 당신의 <<bottom_uro>> 문지른다.
+		<</if>>
+	<</if>>
+<<else>>
+	<<if $arousal gte ($arousalmax / 5) * 4>>
+		<<if $pain gte 40>>
+		당신은 <<analtext>> 당신의 <<bottom_ul>> <<their_yi _args[0]>> 손가락 위에 문지른다.
+		<<else>>
+		당신은 <<analtext>> 당신의 <<their_yi _args[0]>> 손가락을 <<bottom_uro>> 문지른다.
+		<</if>>
+	<<else>>
+		<<if $pain gte 40>>
+		당신은 <<analtext>> 당신의 <<bottom_ul>> <<their_yi _args[0]>> 손 위에 문지른다.
+		<<else>>
+		당신은 <<analtext>> 당신의 <<their_yi _args[0]>> 손을 <<bottom_uro>> 문지른다.
+		<</if>>
+	<</if>>
+<</if>>
+
+<</widget>>
+
+
+<<widget "actionshandanusthrust">>
+<<if $enemyarousal gte ($enemyarousalmax / 5) * 4>>
+	<<if $arousal gte ($arousalmax / 5) * 4>>
+	<<their_yi _args[0]>> 손가락이 당신의 항문을 쳐대며 당신의 <<bottom_un>> 무자비하게 <<their_yi _args[0]>> 손으로 따먹힌다. 본능적으로, 당신은 <<analtext>> 절정에 다다를 때까지 마주 밀어낸다.
+	<<elseif $arousal gte ($arousalmax / 5) * 2>>
+	<<their_yi _args[0]>> 손가락이 당신의 항문을 쳐대며 당신의 <<bottom_un>> 무자비하게 <<their_yi _args[0]>> 손으로 따먹힌다. 당신은 <<analtext>> 그 움직임을 마주 밀어낸다.
+	<<else>>
+	<<their_yi _args[0]>> 손가락이 당신의 항문을 쳐대며 당신의 <<bottom_un>> 무자비하게 <<their_yi _args[0]>> 손으로 따먹힌다. 당신은 <<analtext>> 뭔가 불편함을 줄이려 마주 밀어낸다.
+	<</if>>
+<<elseif $enemyarousal gte ($enemyarousalmax / 5) * 2>>
+	<<if $arousal gte ($arousalmax / 5) * 4>>
+	<<their_yi _args[0]>> 손가락이 당신의 항문을 쳐대며 게걸스럽게 <<their_yi _args[0]>> 손으로 당신의 <<bottom_ul>> 찔러댄다. 본능적으로, 당신은 <<analtext>> 절정에 다다를 때까지 마주 밀어낸다.
+	<<elseif $arousal gte ($arousalmax / 5) * 2>>
+	<<their_yi _args[0]>> 손가락이 당신의 항문을 쳐대며 게걸스럽게 <<their_yi _args[0]>> 손으로 당신의 <<bottom_ul>> 찔러댄다. 당신은 <<analtext>> 그 움직임을 마주 밀어낸다.
+	<<else>>
+	<<their_yi _args[0]>> 손가락이 당신의 항문을 쳐대며 게걸스럽게 <<their_yi _args[0]>> 손으로 당신의 <<bottom_ul>> 찔러댄다. 당신은 <<analtext>> 뭔가 불편함을 줄이려 마주 밀어낸다.
+	<</if>>
+<<else>>
+	<<if $arousal gte ($arousalmax / 5) * 4>>
+	<<their_yi _args[0]>> 손가락이 당신의 항문을 쳐대며 <<their_yi _args[0]>> 손이 당신의 <<bottomPost>>에 침입해온다. 본능적으로, 당신은 <<analtext>> 절정에 다다를 때까지 마주 밀어낸다.
+	<<elseif $arousal gte ($arousalmax / 5) * 2>>
+	<<their_yi _args[0]>> 손가락이 당신의 항문을 쳐대며 <<their_yi _args[0]>> 손이 당신의 <<bottomPost>>에 침입해온다. 당신은 <<analtext>> 그 움직임을 마주 밀어낸다.
+	<<else>>
+	<<their_yi _args[0]>> 손가락이 당신의 항문을 쳐대며 <<their_yi _args[0]>> 손이 당신의 <<bottomPost>>에 침입해온다. 당신은 <<analtext>> 뭔가 불편함을 줄이려 마주 밀어낸다.
+	<</if>>
+<</if>>
+<</widget>>
+
+<<widget "actionshandanustake">>
+<<if $enemyarousal gte ($enemyarousalmax / 5) * 4>>
+	<<if $arousal gte ($arousalmax / 5) * 4>>
+		당신의 항문은 손가락으로 무자비하게 따먹힌다.
+	<<elseif $arousal gte ($arousalmax / 5) * 2>>
+		당신의 항문은 손가락으로 무자비하게 따먹힌다.
+	<<else>>
+		당신의 항문은 손가락으로 무자비하게 따먹힌다.
+	<</if>>
+<<elseif $enemyarousal gte ($enemyarousalmax / 5) * 2>>
+	<<if $arousal gte ($arousalmax / 5) * 4>>
+		당신의 항문은 <<their_yi _args[0]>> 손가락으로 게걸스럽게 찔러진다.
+	<<elseif $arousal gte ($arousalmax / 5) * 2>>
+		당신의 항문은 <<their_yi _args[0]>> 손가락으로 게걸스럽게 찔러진다.
+	<<else>>
+		당신의 항문은 <<their_yi _args[0]>> 손가락으로 게걸스럽게 찔러진다.
+	<</if>>
+<<else>>
+	<<if $arousal gte ($arousalmax / 5) * 4>>
+		당신의 항문은 <<their_yi _args[0]>> 손가락의 반복되는 삽입에 굴복한다.
+	<<elseif $arousal gte ($arousalmax / 5) * 2>>
+		당신의 항문은 <<their_yi _args[0]>> 손가락의 반복되는 삽입에 굴복한다.
+	<<else>>
+		당신의 항문은 <<their_yi _args[0]>> 손가락의 반복되는 삽입에 굴복한다.
 	<</if>>
 <</if>>
 <</widget>>
@@ -456,11 +594,11 @@
 	<</if>>
 <<else>>
 	<<if $pain lte 20>>
-	<span class="blue">당신은 골반을 움직여, <<theirPost "의">> 입에서 <<bottomPost "을">> 치운다.</span>
+	<span class="blue">당신은 골반을 움직여, <<their_yi _args[0]>> 입에서 <<bottomPost "을">> 치운다.</span>
 	<<elseif $pain lte 60>>
-	<span class="blue">당신은 골반을 움직여, <<theirPost "의">> 입에서 <<bottomPost "을">> 치운다.</span>
+	<span class="blue">당신은 골반을 움직여, <<their_yi _args[0]>> 입에서 <<bottomPost "을">> 치운다.</span>
 	<<else>>
-	<span class="blue">당신은 자포자기하여 골반을 움직여, <<theirPost "의">> 입에서 <<bottomPost "을">> 치운다.</span>
+	<span class="blue">당신은 필사적으로 골반을 움직여, <<their_yi _args[0]>> 입에서 <<bottomPost "을">> 치운다.</span>
 	<</if>>
 <</if>>
 
@@ -468,52 +606,75 @@
 
 <<widget "actionspenisstroke">>
 <<if $enemytype is "beast">>
-당신은 조심조심 짐승의 자지를 애무한다.
+	당신은 조심조심 짐승의 자지를 애무한다.
 <<else>>
+	<<if _args[1] isnot undefined>>
+		<<set $_target to "two">>
+	<<elseif _args[0] isnot undefined>>
+		<<set $_target to _args[0]>>
+	<<else>>
+		<<set $_target to 0>>
+	<</if>>
 	<<if $consensual is 1>>
 		<<if $arousal lte ($arousalmax / 5) * 3>>
-당신은 <<someonesPost "의">> 자지로 손을 뻗어 부드럽게 애무한다.
+			당신은 <<someones_yi $_target>> 자지로 손을 뻗어 부드럽게 애무한다.
 		<<else>>
-당신은 적극적으로 <<someonesPost "의">> 자지로 손을 뻗어 애무한다.
+			당신은 적극적으로 <<someones_yi $_target>> 자지로 손을 뻗어 애무한다.
 		<</if>>
 	<<else>>
-당신은 조심조심 <<someonesPost "의">> 자지를 문지른다.
+		당신은 조심조심 <<someones_yi $_target>> 자지를 문지른다.
 	<</if>>
 <</if>>
 <</widget>>
 
-<<widget "actionsstroke">>
-<<if $enemytype is "beast">>
-당신은 <<beasttypePost "의">> 머리를 쓰다듬는다.
-<<else>>
-	<<if $consensual is 1>>
-		<<if $arousal lte ($arousalmax / 5) * 3>>
-당신은 <<someonesPost "의">> 살갗을 부드럽게 쓰다듬는다.
-		<<else>>
-당신은 <<someonesPost "의">> 살갗을 열정적으로 쓰다듬는다.
-		<</if>>
-	<<else>>
-당신은 <<someonesPost "의">> 살갗을 소극적으로 쓰다듬는다.
+<<widget "actionsStroke">>
+	<<if _args.length lte 0>>
+		<<set $_message to "Missing parameters for <<actionsStroke>>">>
+		<<set $_source to "Called from: " + Utils.GetStack()>>
+		<<error $_message $_source>>
 	<</if>>
-<</if>>
+	<<if $enemytype is "beast">>
+		당신은 <<beasttypePost "의">> 머리를 쓰다듬는다.
+	<<else>>
+		당신은
+		<<if _args.length is 2 and _args[0] isnot _args[1]>>
+			<<personselect _args[0]>><<person_gwa>> <<personselect _args[1]>><<persons_yi>>
+		<<elseif $enemyno lte 1>>
+			<<personselect _args[0]>><<his_yi>>
+		<<else>>
+			<<personselect _args[0]>><<persons_yi>>
+		<</if>>
+		피부를 ?stroke.
+	<</if>>
 <</widget>>
 
 <<widget "actionshit">>
+<<if _args[0] is "both">>
+	<<set _hand to "양손">>
+	<<set $_target to $lefttarget>>
+<<else>>
+	<<set _hand to "손">>
+	<<if _args[0] isnot undefined>>
+		<<set $_target to _args[0]>>
+	<<else>>
+		<<set $_target to 0>>
+	<</if>>
+<</if>>
 <<if $enemytype is "beast">>
 	<<if $pain lte 20>>
-	당신은 <<beasttypePost "을">> 손으로 후려친다.
+		당신은 <<beasttypePost "을">> _hand으로 후려친다.
 	<<elseif $pain lte 60>>
-	당신은 고통을 이겨내고 <<beasttypePost "을">> 손으로 후려친다.
+		당신은 고통을 이겨내고 <<beasttypePost "을">> _hand으로 후려친다.
 	<<else>>
-	고통과 공포 속에, 당신은 <<beasttypePost "을">> 향해 손을 마구잡이로 휘두른다.
+		고통과 공포 속에, 당신은 <<beasttypePost "을">> 향해 _hand을 마구잡이로 휘두른다.
 	<</if>>
 <<else>>
 	<<if $pain lte 20>>
-당신은 <<hePost "을">> 손으로 때린다.
+		당신은 <<hePost "을">> _hand으로 때린다.
 	<<elseif $pain lte 60>>
-당신은 고통을 이겨내고 <<someonePost "을">> 손으로 때린다.
+		당신은 고통을 이겨내고 <<someone_ul $_target>> _hand으로 때린다.
 	<<else>>
-고통과 공포 속에, 당신은 자기방어를 위해 손을 마구잡이로 휘두른다.
+		고통과 공포 속에, 당신은 자기방어를 위해 _hand을 마구잡이로 휘두른다.
 	<</if>>
 <</if>>
 <</widget>>
@@ -521,12 +682,12 @@
 <<widget "actionsclitstroke">>
 <<if $consensual is 1>>
 	<<if $arousal lte ($arousalmax / 5) * 3>>
-당신은 <<handtext>> <<theirPost "의">> 클리토리스를 손가락 사이에 넣고 쓰다듬는다.
+당신은 <<handtext>> <<their_yi _args[0]>> 클리토리스를 손가락 사이에 넣고 쓰다듬는다.
 	<<else>>
-적극적으로, 또 <<handtext>> 당신은 <<theirPost "의">> 클리토리스를 손가락 사이에 넣고 애무한다.
+적극적으로, <<handtext>> 당신은 <<their_yi _args[0]>> 클리토리스를 손가락 사이에 넣고 애무한다.
 	<</if>>
 <<else>>
-진정시킬 수 있길 바라며, 당신은 <<handtext>> <<theirPost "의">> 클리토리스를 손가락 사이에 넣고 쓰다듬는다.
+진정시킬 수 있길 바라며, 당신은 <<handtext>> <<their_yi _args[0]>> 클리토리스를 손가락 사이에 넣고 쓰다듬는다.
 <</if>>
 <</widget>>
 
@@ -540,28 +701,37 @@
 	당신은 필사적으로 <<beasttypePost "을">> 걷어차 떼어 놓으려 한다.
 	<</if>>
 <<else>>
-	<<if $pain lte 20>>
-반항하며, 당신은 있는 힘껏 걷어찬다.
-	<<elseif $pain lte 60>>
-다치긴 했으나, 당신은 있는 힘껏 걷어찬다.
+	<<if $leftarm is "grappled" or $rightarm is "grappled">>
+		당신은 공격자의 손아귀에서 몸부림치며, 몸을 비틀어 빠져나오려 시도하며 정강이를 발로 찬다.
 	<<else>>
-당신은 필사적으로 걷어찬다.
+		<<if $pain lte 20>>
+			반항하며, 당신은 있는 힘껏 걷어찬다.
+		<<elseif $pain lte 60>>
+			다치긴 했으나, 당신은 있는 힘껏 걷어찬다.
+		<<else>>
+			당신은 필사적으로 걷어찬다.
+		<</if>>
 	<</if>>
 <</if>>
 <</widget>>
 
 <<widget "actionsfeetrub">>
 <<if $enemytype is "beast">>
-당신은 발가락 사이에서 <<theirPost "의">> 자지를 애무한다.
+	당신은 발가락 사이에서 <<their_yi _args[0]>> 자지를 애무한다.
 <<else>>
+	<<if _args[0] isnot undefined>>
+		<<set $_target to _args[0]>>
+	<<else>>
+		<<set $_target to 0>>
+	<</if>>
 	<<if $consensual is 1>>
 		<<if $arousal lte ($arousalmax / 5) * 3>>
-	당신은 발가락 사이에서 <<someonesPost "의">> 자지를 애무한다.
+			당신은 발가락 사이에서 <<someones_yi $_target>> 자지를 애무한다.
 		<<else>>
-	당신은 적극적으로 <<someonesPost "의">> 자지를 발가락으로 쓰다듬는다.
+			당신은 적극적으로 <<someones_yi $_target>> 자지를 발가락으로 쓰다듬는다.
 		<</if>>
 	<<else>>
-당신은 발가락으로 <<someonesPost "의">> 자지를 쓰다듬는다.
+		당신은 발가락으로 <<someones_yi $_target>> 자지를 쓰다듬는다.
 	<</if>>
 <</if>>
 <</widget>>
@@ -578,12 +748,12 @@
 <<else>>
 	<<if $consensual is 1>>
 		<<if $arousal lte ($arousalmax / 5) * 3>>
-	당신은 <<theirPost "의">> 자지를 두 발로 단단히 붙잡고는 발가락으로 귀두를 <<feettext>> 쓰다듬고 애무한다.
+	당신은 <<their_yi _args[0]>> 자지를 두 발로 단단히 붙잡고는 발가락으로 귀두를 <<feettext>> 쓰다듬고 애무한다.
 		<<else>>
-	당신은 <<feettext>> <<theirPost "의">> 자지를 두 발로 잡고 문지른다.
+	당신은 <<feettext>> <<their_yi _args[0]>> 자지를 두 발로 잡고 문지른다.
 		<</if>>
 	<<else>>
-	당신은 <<feettext>> <<theirPost "의">> 자지를 발로 붙잡고, 발가락 사이로 귀두를 문지른다.
+	당신은 <<feettext>> <<their_yi _args[0]>> 자지를 발로 붙잡고, 발가락 사이로 귀두를 문지른다.
 	<</if>>
 <</if>>
 <</widget>>
@@ -591,49 +761,69 @@
 <<widget "actionsfeetpussy">>
 <<if $consensual is 1>>
 	<<if $arousal lte ($arousalmax / 5) * 3>>
-	당신은 <<feettext>> <<theirPost "의">> 음순을 발가락으로 애무한다.
+	당신은 <<feettext>> <<their_yi _args[0]>> 음순을 발가락으로 애무한다.
 	<<else>>
-	당신은 <<feettext>> <<theirPost "의">> 음순을 발가락으로 쓰다듬는다.
+	당신은 <<feettext>> <<their_yi _args[0]>> 음순을 발가락으로 쓰다듬는다.
 	<</if>>
 <<else>>
-당신은 <<feettext>> <<theirPost "의">> 골반에 발을 대고 누르며 발가락으로 <<theirPost "의">> 보지를 애무한다.
+당신은 <<feettext>> <<their_yi _args[0]>> 골반에 발을 대고 누르며 발가락으로 <<their_yi _args[0]>> 보지를 애무한다.
 <</if>>
 <</widget>>
 
 <<widget "actionskiss">>
 <<if $enemytype is "beast">>
-당신은 <<beasttypePost "의">> 머리에 키스한다.
+	당신은 <<beasttypePost "의">> 머리에 키스한다.
 <<else>>
+	<<if _args[0] isnot undefined>>
+		<<set $_target to _args[0]>>
+	<<else>>
+		<<set $_target to 0>>
+	<</if>>
 	<<if $consensual is 1>>
 		<<if $arousal lte ($arousalmax / 5) * 3>>
-	당신은 <<someonesPost "의">> 살갗을 입술로 문지른다.
+	당신은 <<someones_yi $_target>> 살갗을 입술로 문지른다.
 		<<else>>
-	당신은 <<someonesPost "의">> 살갗에 혀를 먼저 댄 뒤 키스한다.
+	당신은 <<someones_yi $_target>> 살갗에 혀를 먼저 댄 뒤 키스한다.
 		<</if>>
 	<<else>>
-	당신은 <<someonesPost "의">> 살갗에 대고 입술을 누른다.
+	당신은 <<someones_yi $_target>> 살갗에 대고 입술을 누른다.
 	<</if>>
 <</if>>
 <</widget>>
 
 <<widget "actionsplead">>
 
-	<<if $loveInterest.primary isnot "None" and (random(0,100) gte 50 or $loveInterest.secondary is "None")>>
-		<<set _loveInterest to $loveInterest.primary>>
-	<<elseif $loveInterest.secondary isnot "None">>
-		<<set _loveInterest to $loveInterest.secondary>>
-	<</if>>
+	<<checkforloveinterests>>
 
-	<<if $enemytype is "beast">>
+	<<if $robinRentEvent is 1 and ["Robin","pay","still"].includes($combatPhase)>>
+		당신은 <<voice "plead">>.
+		<<switch random(1,5)>>
+			<<case 1>>
+				"로빈은 안돼요! 멈춰요!"
+			<<case 2>>
+				"로빈을 보내줘요, 제발!"
+			<<case 3>>
+				"안돼요! <<nnpc_him_ul "Robin">> 보내줘요!"
+			<<case 4>>
+				"제발요, 베일리, 하지 말아요!"
+			<<case 5>>
+				<<if $loveInterest.primary is "Robin" or $loveInterest.secondary is "Robin">>
+					"<<nnpc_him_ul "Robin">> 내게서 데려가지 말아요!"
+				<<else>>
+					"<<nnpc_him_ul "Robin">> 상처입히지 말아요!"
+				<</if>>
+		<</switch>>
+
+	<<elseif $enemytype is "beast">>
 
 		<<if _loveInterest is "Eden" and $location is "forest" and random(0,100) lte 15>>
 			당신은 <<voice "plead">>. "부탁해..." 당신은 에덴의 오두막집 쪽을 바라본다.
-		<<if $npc is "Black Wolf">>
+		<<if $npc.includes("Black Wolf")>>
 			<br>
 			검은 늑대는 의미를 알아챈듯 낮게 으르렁거린다.
 		<</if>>
 
-		<<elseif $vaginastate is "imminent">>
+		<<elseif $vaginastate is "imminent" or $vaginastate is "doubleimminent">>
 			<<if $player.virginity.vaginal is true>>
 				<<if $awarelevel gte 1>>
 					당신은 <<voice "plead">>. "싫어! <<beasttypePost "에게">> 처녀를 잃고 싶진 않아!"
@@ -666,7 +856,7 @@
 				당신은 <<voice "plead">>. "제발 넣지 말아줘!"
 			<</if>>
 
-		<<elseif $anusstate is "imminent">>
+		<<elseif $anusstate is "imminent" or $anusstate is "doubleimminent">>
 			<<if $player.virginity.anal is true>>
 				<<if $awarelevel gte 1>>
 					당신은 <<voice "plead">>. "왜 거길 찌르는 거야? 뭘 원하는 건데?"
@@ -677,7 +867,7 @@
 				당신은 <<voice "plead">>. "안돼, 거긴 안돼! 싫어!"
 			<</if>>
 
-		<<elseif $vaginastate is "penetrated">>
+		<<elseif $vaginastate is "penetrated" or $vaginastate is "doublepenetrated">>
 			<<if $arousal lte $arousalmax / 5>>
 				당신은 <<voice "plead">>. "빼줘, 빼줘!"
 			<<elseif $arousal lte ($arousalmax / 5) * 4>>
@@ -704,7 +894,7 @@
 				당신은 <<voice "plead">>. "제-제발... 누-누가 좀 도와줘..."
 			<</if>>
 
-		<<elseif $anusstate is "penetrated">>
+		<<elseif $anusstate is "penetrated" or $anusstate is "doublepenetrated">>
 			<<if $arousal lte $arousalmax / 5>>
 				당신은 <<voice "plead">>. "빼줘, 빼줘!"
 			<<elseif $arousal lte ($arousalmax / 5) * 4>>
@@ -852,7 +1042,7 @@
 			<<switch _loveInterest>>
 			<<case "Robin">>
 				<<set $speechnamedrop to 1>>
-				<<if $npc is "Robin">>
+				<<if $npc.includes("Robin")>>
 					당신은 말한다. "로빈, 제발 멈춰줘!"
 					<<set $speechnamedrop to 0>>
 				<<elseif $vaginastate is "imminent" or $penisstate is "imminent" or $penisstate is "otheranusimminent">>
@@ -910,7 +1100,7 @@
 				<</if>>
 			<<case "Kylar">>
 				<<set $speechnamedrop to 1>>
-				<<if $npc is "Kylar">>
+				<<if $npc.includes("Kylar")>>
 					당신은 말한다. "카일라... 날 사랑하는줄 알았는데..."
 					<<set $speechnamedrop to 0>>
 				<<elseif $vaginastate is "imminent" or $penisstate is "imminent" or $penisstate is "otheranusimminent">>
@@ -971,7 +1161,7 @@
 				<</if>>
 			<<case "Whitney">>
 				<<set $speechnamedrop to 1>>
-				<<if $npc is "Whitney">>
+				<<if $npc.includes("Whitney")>>
 					당신은 말한다. "상냥하게 해줘, 휘트니..."
 					<<set $speechnamedrop to 0>>
 				<<elseif $vaginastate is "imminent" or $penisstate is "imminent" or $penisstate is "otheranusimminent">>
@@ -1032,7 +1222,7 @@
 				<</if>>
 			<<case "Eden">>
 				<<set $speechnamedrop to 1>>
-				<<if $npc is "Eden">>
+				<<if $npc.includes("Eden")>>
 					당신은 말한다. "너...너무 거칠게는 안돼요, 에덴..."
 					<<set $speechnamedrop to 0>>
 				<<elseif $vaginastate is "imminent" or $penisstate is "imminent" or $penisstate is "otheranusimminent">>
@@ -1090,7 +1280,7 @@
 				<</if>>
 			<<case "Black Wolf">>
 				<<set $speechnamedrop to 1>>
-				<<if $npc is "Black Wolf">>
+				<<if $npc.includes("Black Wolf")>>
 					당신은 말한다. "상냥하게 부탁해..."
 					<<set $speechnamedrop to 0>>
 				<<elseif $vaginastate is "imminent" or $penisstate is "imminent" or $penisstate is "otheranusimminent">>
@@ -1149,7 +1339,7 @@
 				<<famebestiality $enemyno>>
 			<<case "Avery">>
 				<<set $speechnamedrop to 1>>
-				<<if $npc is "Avery">>
+				<<if $npc.includes("Avery")>>
 					당신은 말한다. "지금까지 데이트했던 이유가 모두 이걸 위한 거였나요...?"
 					<<set $speechnamedrop to 0>>
 				<<elseif $vaginastate is "imminent" or $penisstate is "imminent" or $penisstate is "otheranusimminent">>
@@ -1205,9 +1395,10 @@
 						당신은 <<voice "plead">>. "당신은... 에이버리보다 무서워..."
 					<</if>>
 				<</if>>
+				
 			<<case "Great Hawk">>
 				<<set $speechnamedrop to 1>>
-				<<if $npc is "Great Hawk">>
+				<<if $npc.includes("Great Hawk")>>
 					당신은 말한다. "다-당신은 저를 돌봐줄 거죠, 그렇죠?"
 					<<set $speechnamedrop to 0>>
 				<<elseif $vaginastate is "imminent" or $penisstate is "imminent" or $penisstate is "otheranusimminent">>
@@ -1264,9 +1455,10 @@
 					<</if>>
 				<</if>>
 				<<famebestiality $enemyno>>
+
 			<<case "Alex">>
 				<<set $speechnamedrop to 1>>
-				<<if $npc is "Alex">>
+				<<if $npc.includes("Alex")>>
 					당신은 말한다. "알렉스, 진정해!"
 					<<set $speechnamedrop to 0>>
 				<<elseif $vaginastate is "imminent" or $penisstate is "imminent" or $penisstate is "otheranusimminent">>
@@ -1322,9 +1514,135 @@
 						당신은 <<voice "plead">>. "알렉스, 도-도와줘. 제발."
 					<</if>>
 				<</if>>
+
+			<<case "Sydney">>
+				<<NPCStatusCheck "Sydney">>
+				<<set $speechnamedrop to 1>>
+				<<if $npc.includes("Sydney")>>
+					<<if _sydneyStatus.includes("corrupt")>>
+						당신은 말한다. "나는... 너는 욕정이 죄라고 말했었는데..."
+					<<else>>
+						당신은 말한다. "미안해, 나는 순결한 채 있을 거야! 제발 그만해!"
+					<</if>>
+					<<set $speechnamedrop to 0>>
+				<<elseif $vaginastate is "imminent" or $penisstate is "imminent" or $penisstate is "otheranusimminent">>
+					<<if $templePromised is "Sydney">>
+						<<if (($player.virginity.vaginal is true or $player.virginity.temple is true) and $vaginastate is imminent) or (($player.virginity.penile is true and $player.virginity.temple is true) and ($penisstate is "imminent" or $penisstate is "otheranusimminent"))>>
+							<<if $awarelevel gte 1>>
+								당신은 <<voice "plead">>. "제발, 그곳만은! 나는 시드니에게 얽매여 있어, 너는 안 돼!"
+							<<else>>
+								당신은 <<voice "plead">>. "나는 시드니에게 얽매여 있어! 제발 순결을 뺏지 말아줘!"
+							<</if>>
+						<<else>>
+							당신은 <<voice "plead">>. "안 돼, 거기는 시드니만을 위한 것이야!"
+						<</if>>
+					<<else>>
+						<<if $player.virginity.vaginal is true>>
+							<<if $awarelevel gte 1>>
+								당신은 <<voice "plead">>. "제발, 그것만은! 시드니와 함께 하기 위해서는 순결이 필요해, 너는 안 돼!"
+							<<else>>
+								당신은 <<voice "plead">>. "나는 시드니를 사랑해! <<nnpc_himPost "Sydney">>에게서 내 순결을 뺏지 말아줘!"
+							<</if>>
+						<<else>>
+							당신은 <<voice "plead">>. "안 돼! 나는 시드니하고만 하고 싶어!"
+						<</if>>
+					<</if>>
+				<<elseif $vaginastate is "penetrated" or $penisstate is "penetrated" or $penisstate is "otheranus">>
+					<<if $templePromised is "Sydney">>
+						<<if $arousal lte $arousalmax / 5>>
+							당신은 <<voice "plead">>. "무슨 짓을 한 거야..."
+						<<elseif $arousal lte ($arousalmax / 5) * 4>>
+							당신은 <<voice "plead">>. "미안해, 시드니, 정말 미안해..."
+						<<else>>
+							당신은 <<voice "plead">>. "시-시드니... 상대가 너였어야 하는데..."
+						<</if>>
+					<<else>>
+						<<if $arousal lte $arousalmax / 5>>
+							당신은 <<voice "plead">>. "제발 뽑아, 나를 더럽히지 말아줘!"
+						<<elseif $arousal lte ($arousalmax / 5) * 4>>
+							당신은 <<voice "plead">>. "미안해, 시드니..."
+						<<else>>
+							당신은 <<voice "plead">>. "시-시드니... 상대가 너였어야 하는데..."
+						<</if>>
+					<</if>>
+				<<elseif $anusstate is "penetrated">>
+					<<if $templePromised is "Sydney">>
+						<<if $arousal lte $arousalmax / 5>>
+							당신은 <<voice "plead">>. "뽑아! 거긴 시드니를 위한 곳이야!"
+						<<elseif $arousal lte ($arousalmax / 5) * 4>>
+							당신은 <<voice "plead">>. "사원에서는 신경 안 쓸지도 모르지만, 시드니는 신경 쓸 거라고!"
+						<<else>>
+							당신은 <<voice "plead">>. "시-시드니... 상대가 너였어야 하는데..."
+						<</if>>
+					<<else>>
+						<<if $arousal lte $arousalmax / 5>>
+							당신은 <<voice "plead">>. "뽑아! 나는 시드니하고만 하고 싶어!"
+						<<elseif $arousal lte ($arousalmax / 5) * 4>>
+							당신은 <<voice "plead">>. "나는 시드니하고만 함께 하고 싶어..."
+						<<else>>
+							당신은 <<voice "plead">>. "시-시드니... 상대가 너였어야 하는데..."
+						<</if>>
+					<</if>>
+				<<elseif $exposed gte 2>>
+					<<if $templePromised is "Sydney">>
+						<<if $rng lte 33>>
+							당신은 <<voice "plead">>. "보지 마! 시드니만이 이런 나를 볼 수 있어!"
+						<<elseif $rng lte 66>>
+							당신은 <<voice "plead">>. "나는 시드니에게 얽매여 있어! 제발 나를 내버려둬!"
+						<<else>>
+							당신은 <<voice "plead">>. "그만둬... 나는 시드니와 같이 있어야 하는데..."
+						<</if>>
+					<<else>>
+						<<if $rng lte 33>>
+							당신은 <<voice "plead">>. "보지 마! 나는 시드니만이 이런 나를 보기를 원해!"
+						<<elseif $rng lte 66>>
+							당신은 <<voice "plead">>. "나는 시드니와 같이 있고 싶어! 제발 나를 내버려둬..."
+						<<else>>
+							당신은 <<voice "plead">>. "그만둬... 나는 시드니와 같이 있어야 하는데..."
+						<</if>>
+					<</if>>
+				<<else>>
+					<<if $templePromised is "Sydney">>
+						<<if $pain lte 20>>
+							<<if $rng lte 35>>
+								<<if $awarelevel gte 1>>
+									당신은 <<voice "plead">>. "시드니와 나는 하나야! 제발 그걸 망치지 말아줘!"
+								<<else>>
+									당신은 <<voice "plead">>. "나는 시드니에게 얽매여 있어! 내게서 그것을 빼앗지 마!"
+								<</if>>
+							<<elseif $rng lte 70>>
+								당신은 <<voice "plead">>. "시드니만이 나를 위한 사람이야, 그러니 제발 떠나줘."
+							<<else>>
+								당신은 <<voice "plead">>. "시드니가 나를 안아 주기를 원해..."
+							<</if>>
+						<<elseif $pain lte 60>>
+							당신은 <<voice "plead">>. "사원은 나와 시드니의 결합을 허가했어, 그러니 나를 내버려 둬!"
+						<<else>>
+							당신은 <<voice "plead">>. "시-시드니... 나는 구원자가 필요해..."
+						<</if>>
+					<<else>>
+						<<if $pain lte 20>>
+							<<if $rng lte 35>>
+								<<if $awarelevel gte 1>>
+									당신은 <<voice "plead">>. "시드니가 내가 원하는 사람이야! 제발 나를 내버려둬!"
+								<<else>>
+									당신은 <<voice "plead">>. "나는 시드니와 같이 있고 싶어! 제발 그만해!"
+								<</if>>
+							<<elseif $rng lte 70>>
+								당신은 <<voice "plead">>. "시드니만이 나를 위한 사람이야, 그러니 제발 떠나줘."
+							<<else>>
+								당신은 <<voice "plead">>. "시드니가 나를 안아 주기를 원해..."
+							<</if>>
+						<<elseif $pain lte 60>>
+							당신은 <<voice "plead">>. "시드니가 내가 같이 있기를 원하는 사람이야, 그러니 나를 내버려 둬!"
+						<<else>>
+							당신은 <<voice "plead">>. "시-시드니... 나는 구원자가 필요해..."
+						<</if>>
+					<</if>>
+				<</if>>
 			<<default>>
 			<</switch>>
-		<<elseif $npc is "Robin">>
+		<<elseif $npc.includes("Robin")>>
 			당신은 <<voice "plead">>. "너... 너도 아니야..."
 		<<elseif $vaginastate is "imminent">>
 			<<if $player.virginity.vaginal is true>>
@@ -1448,8 +1766,54 @@
 <</if>>
 <</silently>><<print _text_output>><</widget>>
 
+<<widget "checkforloveinterests">>
+<<if $loveInterest.primary isnot "None" and (random(0,100) gte 50 or $loveInterest.secondary is "None")>>
+	<<set _loveInterest to $loveInterest.primary>>
+<<elseif $loveInterest.secondary isnot "None">>
+	<<set _loveInterest to $loveInterest.secondary>>
+<</if>>
+<</widget>>
+
 <<widget "actionsmoan">>
-<<if $enemytype is "beast">>
+<<checkforloveinterests>>
+<<if $npc.includes(_loveInterest) and random(0,100) lte 45>>
+	<<switch _loveInterest>>
+		<<case "Robin">> 
+			<<if $NPCName[$NPCNameList.indexOf("Robin")].dom gte 70>>
+				당신은 <<voice "moan">>. "너는 어떻게 나를 흥분시키는지 너무 잘 아는 것 같아."
+			<<else>>
+				당신은 <<voice "moan">>. "녹아버릴 것 같아, 네가 나를 너무나도 행복하게 해줘."
+			<</if>>
+		<<case "Sydney">> 
+			<<if !_sydneyChastity>>
+				<<if _sydneyStatus.includes("corrupt")>>
+					당신은 <<voice "moan">>. "너는 세상에사 가장 기분좋은 죄악이야."
+				<<else>>
+					당신은 <<voice "moan">>. "언제까지나, 하나야."
+				<</if>>
+			<<else>>
+				당신은 <<voice "moan">>. "너는 나를 너무나도 음탕하게 해줘."
+			<</if>>
+		<<case "Whitney">> 
+			당신은 <<voice "moan">>. "나를 써줘, 휘트니. 나는 네 거야."
+		<<case "Black Wolf">> 
+			<<if $wolfpackleader is 1>>
+				당신은 <<voice "moan">>. "착한 <<nnpc_gendery_iya "Black Wolf">>. 계속해줘."
+			<<else>>
+				당신은 <<voice "moan">>. "새끼들을 만들자, 우두머리!"
+			<</if>>
+		<<case "Great Hawk">> 
+			당신은 <<voice "moan">>. "너는 두려운 존재가 아니야. 너는 내가 필요한 모든 것이야."
+		<<case "Eden">> 
+			당신은 <<voice "moan">>. "나는 당신에게, 그리고 당신에게만 속해 있어요."
+		<<case "Avery">> 
+			당신은 <<voice "moan">>. "당신은 어떤 지불금보다도 가치가 있어요."
+		<<case "Alex">> 
+			당신은 <<voice "moan">>. "당신보다 더 좋은 파트너는 없을 거야."
+		<<case "Kylar">> 
+			당신은 <<voice "moan">>. "내가 필요로 하는 단 한 사람은 너야, 카일라."
+	<</switch>>
+<<elseif $enemytype is "beast">>
 	<<if $vaginastate is "imminent">>
 		<<if $player.virginity.vaginal is true>>
 			<<if $awarelevel gte 1>>
@@ -1659,18 +2023,18 @@
 	<<if $vaginastate is "imminent">>
 		<<if $player.virginity.vaginal is true>>
 			<<if $awarelevel gte 1>>
-				당신은 <<voice "moan">>. "부디 내 보지를 상냥하게 해줘, 내 처음이야."
+				당신은 <<voice "moan">>. "부디 내 보지에 상냥하게 해줘, 이번이 처음이니까."
 			<<else>>
 				당신은 <<voice "moan">>. "거기 찌르는거 기분 좋아!"
 			<</if>>
 		<<else>>
-			당신은 <<voice "moan">>. "제발 짖굳게 굴지마, 네 덕분에 내 보지가 견딜 수 없어!"
+			당신은 <<voice "moan">>. "제발 짓궃게 굴지마, 네 덕분에 내 보지가 견딜 수 없어!"
 		<</if>>
 
 	<<elseif $penisstate is "imminent">>
 		<<if $player.virginity.penile is true>>
 			<<if $awarelevel gte 1>>
-				당신은 <<voice "moan">>. "부디 내 자지를 상냥하게 해줘, 내 처음이야."
+				당신은 <<voice "moan">>. "부디 내 자지에 상냥하게 해줘, 이번이 처음이니까."
 			<<else>>
 				당신은 <<voice "moan">>. "내 고추가 거기 찌를때마다 기분이 좋아!"
 			<</if>>
@@ -1809,22 +2173,36 @@
 
 <<widget "actionsdemand">>
 
-<<if $loveInterest.primary isnot "None" and (random(0,100) gte 50 or $loveInterest.secondary is "None")>>
-	<<set _loveInterest to $loveInterest.primary>>
-<<elseif $loveInterest.secondary isnot "None">>
-	<<set _loveInterest to $loveInterest.secondary>>
-<</if>>
+<<checkforloveinterests>>
+<<if $robinRentEvent is 1 and ["Robin","pay","still"].includes($combatPhase)>>
+	당신은 <<voice "demand">>.
+	<<switch random(1,5)>>
+		<<case 1>>
+			"로빈을 지금 당장 보내줘!"
+		<<case 2>>
+			"<<nnpc_him_ul "Robin">> 보내줘, 베일리!"
+		<<case 3>>
+			"당신이 <<nnpc_him_ul "Robin">> 데려가도록 하지 않을 거야!"
+		<<case 4>>
+			"내게서 떨어져! 로빈을 도와줄 수 있게 해 줘!"
+		<<case 5>>
+			<<if $loveInterest.primary is "Robin" or $loveInterest.secondary is "Robin">>
+				"<<nnpc_him_ul "Robin">> 앞으로도 만질 생각은 하지도 마!"
+			<<else>>
+				"<<nnpc_him_ul "Robin">> 상처입히게 할 생각은 하지도 마!"
+			<</if>>
+	<</switch>>
 
-<<if $enemytype is "beast">>
+<<elseif $enemytype is "beast">>
 
 	<<if _loveInterest is "Eden" and $location is "forest" and random(0,100) lte 15>>
 		<<set $rng to random(1, 100)>>
 		<<if $rng lte 50>>
-			당신은 <<voice "demand">>. "난 널 산 체로 가죽을 벗겨줄 사람을 알고 있어!"
+			당신은 <<voice "demand">>. "난 널 산 채로 가죽을 벗겨줄 사람을 알고 있어!"
 		<<else>>
 			당신은 <<voice "demand">>. "에덴이 네 가죽을 가저갈거야, 이 빌어먹을 <<beasttypePost '아'>>."
 		<</if>>
-	<<if $npc is "Black Wolf">>
+	<<if $npc.includes("Black Wolf")>>
 		<br>
 		네 말에 검은 늑대가 특히 동요하는 것 같다.
 	<</if>>
@@ -1920,7 +2298,7 @@
 		<<elseif $speechcycle is 4>>
 			당신은 <<voice "demand">>. "네 혀는 끈적끈적하고 끔찍해."
 		<<elseif $speechcycle is 5>>
-			당신은 <<voice "demand">>. "내 뒤에서 그 혀 치워."
+			당신은 <<voice "demand">>. "그 혀를 내 보지에서 당장 떼어내."
 		<<else>>
 			당신은 <<voice "demand">>. "감히 거기 핥기만 해봐."
 		<</if>>
@@ -1952,7 +2330,7 @@
 		<<elseif $speechcycle is 4>>
 			당신은 <<voice "demand">>. "네 혀는 끈적끈적하고 끔찍해."
 		<<elseif $speechcycle is 5>>
-			당신은 <<voice "demand">>. "내 뒤에서 그 혀 치워."
+			당신은 <<voice "demand">>. "그 혀를 내 자지에서 당장 떼어내."
 		<<else>>
 			당신은 <<voice "demand">>. "감히 거기 핥기만 해봐."
 		<</if>>
@@ -2045,7 +2423,7 @@
 	<</if>>
 <<else>>
 
-	<<if $npc is "Bailey">>
+	<<if $npc.includes("Bailey")>>
 		<<if $rng lte 15>>
 			<<if $awarelevel gte 1>>
 				당신은 <<voice "demand">>. "네가 우릴 창녀처럼 경매에 내도록 허락할 것 같아?!"
@@ -2082,7 +2460,7 @@
 
 			<<case "Robin">>
 				<<set $speechnamedrop to 1>>
-				<<if $npc is "Robin">>
+				<<if $npc.includes("Robin")>>
 					당신은 말한다. "로빈, 멈춰! 이건 싫어!"
 					<<set $speechnamedrop to 0>>
 				<<elseif $vaginastate is "imminent" or $penisstate is "imminent" or $penisstate is "otheranusimminent">>
@@ -2141,7 +2519,7 @@
 
 			<<case "Kylar">>
 				<<set $speechnamedrop to 1>>
-				<<if $npc is "Kylar">>
+				<<if $npc.includes("Kylar")>>
 					당신은 말한다. "난 지금 네 지랄에 장단 맞춰주고 싶지 않아 카일라."
 					<<set $speechnamedrop to 0>>
 				<<elseif $vaginastate is "imminent">>
@@ -2213,7 +2591,7 @@
 
 			<<case "Whitney">>
 				<<set $speechnamedrop to 1>>
-				<<if $npc is "Whitney">>
+				<<if $npc.includes("Whitney")>>
 					당신은 말한다. "네가 원할 때마다 날 따먹을 순 없어, 휘트니!"
 					<<set $speechnamedrop to 0>>
 				<<elseif $vaginastate is "imminent" or $penisstate is "imminent" or $penisstate is "otheranusimminent">>
@@ -2275,7 +2653,7 @@
 
 			<<case "Eden">>
 				<<set $speechnamedrop to 1>>
-				<<if $npc is "Eden">>
+				<<if $npc.includes("Eden")>>
 					당신은 말한다. "오늘은 당신의 사냥감이 아니니까, 내버려둬요."
 					<<set $speechnamedrop to 0>>
 				<<elseif $vaginastate is "imminent" or $penisstate is "imminent" or $penisstate is "otheranusimminent">>
@@ -2323,7 +2701,7 @@
 						<<elseif $rng lte 70>>
 							당신은 <<voice "demand">>. "너 이거 정말 못하네. 널 에덴으로 생각하는 거도 힘들어."
 						<<else>>
-							당신은 <<voice "demand">>. "에덴이 너희 사람들에 대해서 말하는게 옳았어! 동물들 뿐이야!"
+							당신은 <<voice "demand">>. "에덴이 너희 사람들에 대해서 말하는게 옳았어! 짐승들 뿐이야!"
 						<</if>>
 					<<elseif $arousal lte ($arousalmax / 5) * 3>>
 						당신은 <<voice "demand">>. "네가 내 몸을 가졌다고 하더라도, 내 마음은 에덴과 같이 숲에 있어!"
@@ -2334,7 +2712,7 @@
 
 			<<case "Black Wolf">>
 				<<set $speechnamedrop to 1>>
-				<<if $npc is "Black Wolf">>
+				<<if $npc.includes("Black Wolf")>>
 					당신은 말한다. "앉아. 앉아!"
 					<<set $speechnamedrop to 0>>
 				<<elseif $vaginastate is "imminent" or $penisstate is "imminent" or $penisstate is "otheranusimminent">>
@@ -2394,7 +2772,7 @@
 
 			<<case "Avery">>
 				<<set $speechnamedrop to 1>>
-				<<if $npc is "Avery">>
+				<<if $npc.includes("Avery")>>
 					당신은 말한다. "넌 나한테 이런 장난 하기엔 아직 충분한 돈을 지불하지 않았어!"
 					<<set $speechnamedrop to 0>>
 				<<elseif $vaginastate is "imminent" or $penisstate is "imminent" or $penisstate is "otheranusimminent">>
@@ -2450,9 +2828,10 @@
 						당신은 <<voice "demand">>. "적어도... 에이버리는 먼저 날 데리고 데이트 해줬어...!"
 					<</if>>
 				<</if>>
+
 			<<case "Great Hawk">>
 				<<set $speechnamedrop to 1>>
-				<<if $npc is "Great Hawk">>
+				<<if $npc.includes("Great Hawk")>>
 					당신은 말한다. "이제 쪼지 마!"
 					<<set $speechnamedrop to 0>>
 				<<elseif $vaginastate is "imminent" or $penisstate is "imminent" or $penisstate is "otheranusimminent">>
@@ -2509,9 +2888,10 @@
 					<</if>>
 				<</if>>
 				<<famebestiality $enemyno>>
+
 			<<case "Alex">>
 				<<set $speechnamedrop to 1>>
-				<<if $npc is "Alex">>
+				<<if $npc.includes("Alex")>>
 					당신은 말한다. "알렉스, 이 바보! 진정해."
 					<<set $speechnamedrop to 0>>
 				<<elseif $vaginastate is "imminent" or $penisstate is "imminent" or $penisstate is "otheranusimminent">>
@@ -2567,10 +2947,136 @@
 						당신은 <<voice "demand">>. "나-나는 알렉스를 생각하고 있어서 느끼고 있을 뿐이라고!"
 					<</if>>
 				<</if>>
+
+			<<case "Sydney">>
+				<<NPCStatusCheck "Sydney">>
+				<<set $speechnamedrop to 1>>
+				<<if $npc.includes("Sydney")>>
+					<<if _sydneyStatus.includes("corrupt")>>
+						당신은 말한다. "나는 네가 순수했을 때가 그리워. 최소한 너는 이런 불쾌한 짓을 하진 않았어."
+					<<else>>
+						당신은 말한다. "무슨 처벌이 이래? 내게서 떨어져!"
+					<</if>>
+					<<set $speechnamedrop to 0>>
+				<<elseif $vaginastate is "imminent" or $penisstate is "imminent" or $penisstate is "otheranusimminent">>
+					<<if $templePromised is "Sydney">>
+						<<if (($player.virginity.vaginal is true or $player.virginity.temple is true) and $vaginastate is imminent) or (($player.virginity.penile is true and $player.virginity.temple is true) and ($penisstate is "imminent" or $penisstate is "otheranusimminent"))>>
+							<<if $awarelevel gte 1>>
+								당신은 <<voice "demand">>. "나는 시드니에게 얽매여 있어, 네가 아니야! 내게서 떨어져!"
+							<<else>>
+								당신은 <<voice "demand">>. "안 돼! 나와 시드니는 하나로 얽매여 있다고!"
+							<</if>>
+						<<else>>
+							당신은 <<voice "demand">>. "시드니만이 나를 더럽힐 수 있어!"
+						<</if>>
+					<<else>>
+						<<if $player.virginity.vaginal is true>>
+							<<if $awarelevel gte 1>>
+								당신은 <<voice "demand">>. "나는 시드니를 사랑해, 네가 야니야! 내게서 떨어져!"
+							<<else>>
+								당신은 <<voice "demand">>. "안 돼! 나와 시드니만이 같이 할 거야!"
+							<</if>>
+						<<else>>
+							당신은 <<voice "demand">>. "시드니만이 나를 만족시켜 줄 수 있어!"
+						<</if>>
+					<</if>>
+				<<elseif $vaginastate is "penetrated" or $penisstate is "penetrated" or $penisstate is "otheranus">>
+					<<if $templePromised is "Sydney">>
+						<<if $arousal lte $arousalmax / 5>>
+							당신은 <<voice "demand">>. "이건 아무 의미 없어! 시드니와 나는 아직 하나야!"
+						<<elseif $arousal lte ($arousalmax / 5) * 4>>
+							당신은 <<voice "demand">>. "시드니와 나는 얽매여 있어, 그리고 너는 거기에 ''절대'' 속해 있지 않아!"
+						<<else>>
+							당신은 <<voice "demand">>. "너는... 우리의 유대를 끊을 수 없어...!"
+						<</if>>
+					<<else>>
+						<<if $arousal lte $arousalmax / 5>>
+							당신은 <<voice "demand">>. "이건 아무 의미 없어! 시드니와 나는 아직 함께야!"
+						<<elseif $arousal lte ($arousalmax / 5) * 4>>
+							당신은 <<voice "demand">>. "시드니와 나는 함께야, 그리고 너는 거기에 ''절대'' 속해 있지 않아!"
+						<<else>>
+							당신은 <<voice "demand">>. "너는... 우리의 사랑을 끊을 수 없어...!"
+						<</if>>
+					<</if>>
+				<<elseif $anusstate is "penetrated">>
+					<<if $templePromised is "Sydney">>
+						<<if $arousal lte $arousalmax / 5>>
+							당신은 <<voice "demand">>. "사원에서는 신경쓰지 않지만, 나는 신경써! 물러나!"
+						<<elseif $arousal lte ($arousalmax / 5) * 4>>
+							당신은 <<voice "demand">>. "내 모든 곳은 시드니 것이야, 그곳까지도!"
+						<<else>>
+							당신은 <<voice "demand">>. "너는... 우리의 유대를 끊을 수 없어...!"
+						<</if>>
+					<<else>>
+						<<if $arousal lte $arousalmax / 5>>
+							당신은 <<voice "demand">>. "사원에서는 신경쓰지 않지만, 나는 신경써! 물러나!"
+						<<elseif $arousal lte ($arousalmax / 5) * 4>>
+							당신은 <<voice "demand">>. "나는 시드니를 위해 모든 곳을 남겨뒀어, 그곳까지도!"
+						<<else>>
+							당신은 <<voice "demand">>. "너는... 우리의 사랑을 끊을 수 없어...!"
+						<</if>>
+					<</if>>
+				<<elseif $exposed gte 2>>
+					<<if $templePromised is "Sydney">>
+						<<if $rng lte 33>>
+							당신은 <<voice "demand">>. "내 모두는 시드니를 위한 거야! 꺼져!"
+						<<elseif $rng lte 66>>
+							당신은 <<voice "demand">>. "사원은 시드니와 나를 받아줬어, 그리고 너는 거기에 ''절대'' 속해 있지 않아!"
+						<<else>>
+							당신은 <<voice "demand">>. "봤어? 이건 시드니의 것이야, 네가 아니라."
+						<</if>>
+					<<else>>
+						<<if $rng lte 33>>
+							당신은 <<voice "demand">>. "내 모두는 시드니를 위한 거야! 꺼져!"
+						<<elseif $rng lte 66>>
+							당신은 <<voice "demand">>. "시드니가 내가 사랑하는 사람이야! 이건 <<nnpc_himPost "Sydney">>만을 위한 거라고!"
+						<<else>>
+							당신은 <<voice "demand">>. "봤어? 나는 이걸 시드니를 위해 남겨뒀어, 네가 아니라."
+						<</if>>
+					<</if>>
+				<<else>>
+					<<if $templePromised is "Sydney">>
+						<<if $arousal lte $arousalmax / 5>>
+							<<if $rng lte 35>>
+								<<if $awarelevel gte 1>>
+									당신은 <<voice "demand">>. "천벌받을 죄인 같으니."
+								<<else>>
+									당신은 <<voice "demand">>. "추잡한 죄인 같으니."
+								<</if>>
+							<<elseif $rng lte 70>>
+								당신은 <<voice "demand">>. "나는 시드니와의 약속을 깨지 않을 거야!"
+							<<else>>
+								당신은 <<voice "demand">>. "나를 쳐다보지도 마. 네 시선이 나를 부정하게 느끼게 하니까."
+							<</if>>
+						<<elseif $arousal lte ($arousalmax / 5) * 3>>
+							당신은 <<voice "demand">>. "너는 이런 짓을 내게 해서 지옥불에 타게 될 거야! 사원에서 보증해 줄 걸!"
+						<<else>>
+							당신은 <<voice "demand">>. "시드니에게 했던 내 약속... 너는 부수지 못할 거야...!"
+						<</if>>
+					<<else>>
+						<<if $arousal lte $arousalmax / 5>>
+							<<if $rng lte 35>>
+								<<if $awarelevel gte 1>>
+									당신은 <<voice "demand">>. "가련하고, 천벌받을 자 같으니."
+								<<else>>
+									당신은 <<voice "demand">>. "가련하고, 비열한 자 같으니."
+								<</if>>
+							<<elseif $rng lte 70>>
+								당신은 <<voice "demand">>. "나는 시드니의 믿음을 배신하지 않을 거야!"
+							<<else>>
+								당신은 <<voice "demand">>. "나를 쳐다보지도 마. 너는 시드니가 아니니까."
+							<</if>>
+						<<elseif $arousal lte ($arousalmax / 5) * 3>>
+							당신은 <<voice "demand">>. "너는 이런 짓을 내게 한 죗갑을 받게 될 거야! 사원에서 보증해 줄 걸!"
+						<<else>>
+							당신은 <<voice "demand">>. "우리 사랑... 너는 내게서 시드니를 빼앗지 못할 거야...!"
+						<</if>>
+					<</if>>
+				<</if>>
 			<<default>>
 		<</switch>>
 
-	<<elseif $npc is "Robin">>
+	<<elseif $npc.includes("Robin")>>
 		당신은 <<voice "demand">>. "로빈, 침착해!"
 
 	<<elseif $vaginastate is "imminent">>
@@ -2696,7 +3202,6 @@
 <</widget>>
 
 <<widget "actionsmock">>
-
 	<<if $mockaction is "penis">>
 		<<if $vaginause is "penis">>
 			<<if $vaginastate is "penetrated">>
@@ -3352,43 +3857,34 @@
 			<</if>>
 		<</if>>
 	<</if>>
-	당신은 <<if $consensual is 1>>짖굳은<<else>>놀리는<</if>> 말투로 말한다.
-	<<if $enemyno is 1>>
-		<<if $mockaction is $NPCList[0].insecurity>>
-			<<if $consensual is 1>>
-				<span class="teal">당신이 말할 수록 <<HePost "의">> 호홉이 빨라진다.</span>
-			<<else>>
-				<span class="teal"><<HePost "이">> 당신의 말에 움찔한다.</span>
-				<<gcombatcontrol>>
-			<</if>>
+	당신은 <<if $consensual is 1>>짖궂은<<else>>놀리는<</if>> 말투로 말한다.
+	<<personselect $mouthtarget>>
+	<<if $mockaction is $NPCList[$mouthtarget].insecurity>>
+		<<if $consensual is 1>>
+			<span class="teal">당신이 말할 수록 <<HePost $mouthtarget "의">> 호흡이 빨라진다.</span>
 		<<else>>
-			<span class="pink"><<HePost "은">> 당신의 말에 아무런 반응이 없다.</span>
+			<span class="teal"><<HePost $mouthtarget "이">> 당신의 말에 움찔한다.</span>
+			<<gcombatcontrol>>
 		<</if>>
 	<<else>>
-		<<for _j = $enemyno-1; _j gte _end; _j-->>
-			<<if $mockaction is $NPCList[_j].insecurity>>
-				<<if $consensual is 1>>
-					<span class="teal"><<personselect _j>>당신이 말할 수록 <<personPost "의">> 호홉이 빨라진다.</span>
-				<<else>>
-					<span class="teal"><<personselect _j>><<personPost "이">> 당신의 말에 움찔한다.</span>
-					<<gcombatcontrol>>
-				<</if>>
-				<<set _insec to 1>>
-				<<break>>
-			<</if>>
-		<</for>>
-		<<if _insec is 0>><span class="pink">당신의 말에 아무런 반응이 없다.</span><</if>>
-		<<set _insec to 0>>
+		<span class="pink"><<He_nun $mouthtarget>> 당신의 말에 아무런 반응이 없다.</span>
 	<</if>>
-
 <</widget>>
 
 <<widget "actionspeniskiss">>
-당신은 <<oraltext>> <<theirPost "의">> 자지의 끝에 키스한다.
+당신은 <<oraltext>> <<their_yi _args[0]>> 자지 끝에 키스한다.
+<<if $NPCList[$mouthtarget].type is "plant">>
+	<span class="pink">당신은 당신의 혀로 달콤한 꿀을 깨끗이 핥는다.</span>
+	<<nectarfed 8>>
+<</if>>
 <</widget>>
 
 <<widget "actionspenislick">>
-당신은 <<oraltext>> <<theirPost "의">> 자지를 핥는다.
+당신은 <<oraltext>> <<their_yi _args[0]>> 자지를 핥는다.
+<<if $NPCList[$mouthtarget].type is "plant">>
+	<span class="pink">당신은 당신의 혀로 달콤한 꿀을 깨끗이 핥는다.</span>
+	<<nectarfed 8>>
+<</if>>
 <</widget>>
 
 <<widget "actionspenissuck">>
@@ -3409,6 +3905,10 @@
 		당신은 <<oraltext>> 입을 파고 드는 자지를 빤다.
 	<</if>>
 <</if>>
+<<if $NPCList[$mouthtarget].type is "plant">>
+	<span class="pink">달콤한 꿀이 당신의 입으로 뚝뚝 떨어진다.</span>
+	<<nectarfed 12>>
+<</if>>
 <</widget>>
 
 <<widget "actionspussylick">>
@@ -3418,6 +3918,10 @@
 	<<theowner_ga>> 당신에게 대고 비벼대는 동안, 당신은 <<oraltext>> 입에 눌러대는 보지를 핥는다.
 <<else>>
 	당신은 <<oraltext>> 입에 눌러대는 보지를 핥는다.
+<</if>>
+<<if $NPCList[$mouthtarget].type is "plant">>
+	<span class="pink">당신은 당신의 혀로 달콤한 꿀을 깨끗이 핥는다.</span>
+	<<nectarfed 8>>
 <</if>>
 <</widget>>
 
@@ -3445,32 +3949,42 @@
 <</widget>>
 
 <<widget "actionskissback">>
+<<personselect $mouthtarget>>
 <<if $mouthstate is "kissentrance">>
-	당신은 부드럽게 상대에게 입술로 가볍게 맞닿는다.
-	<<for _j = 0; _j lt $enemyno; _j++>>
-		<<if $NPCList[_j].mouth is "kissentrance">>
-			<<if $npc isnot 0>>
-				<<takeKissVirginityNamed $npc true>>
-			<<else>>
-				<<takeKissVirginity $NPCList[_j].fullDescription>>
-			<</if>>
+	당신은 부드럽게 당신의 입술을 <<hersPost>>에 대고 문지른다.
+	<<if $player.virginity.kiss is true>>
+		<<set $speechkissvirgin to 1>>
+	<</if>>
+	<<if $NPCList[$mouthtarget].mouth is "kissentrance">>
+		<<if $npcrow.includes($mouthtarget)>>
+			<<takeKissVirginityNamed `$npc[$npcrow.indexOf($mouthtarget)]` true>>
+		<<else>>
+			<<takeKissVirginity $NPCList[$mouthtarget].fullDescription>>
 		<</if>>
-	<</for>>
+	<</if>>
 <<elseif $mouthstate is "kissimminent">>
 	<<if $arousal lte $arousalmax / 5>>
-		당신은 상대에게 부드럽게 키스한다.
+		당신은 <<himPost>>에게 부드럽게 키스를 돌려준다.
 	<<elseif $arousal lte ($arousalmax / 5) * 4>>
-		당신은 상대에게 키스하고, 상대의 입술과 당신의 입술이 헤어진다.
+		당신은 <<his_yi>> 양 입술을 당신의 입술로 열고, <<himPost>>에게 키스를 돌려준다.
 	<<else>>
-		당신은 상대에게 키스하고, 상대의 입술과 당신의 혀가 헤어진다.
+		당신은 <<his_yi>> 양 입술을 당신의 혀로 열고, <<himPost>>에게 키스를 돌려준다.
+	<</if>>
+	<<if $NPCList[$mouthtarget].type is "plant">>
+		<span class="pink">달콤한 꿀이 <<his_yi>> 혀에서 뚝뚝 떨어져 당신의 입을 채운다.</span>
+		<<nectarfed 20>>
 	<</if>>
 <<elseif $mouthstate is "kiss">>
-	당신은 상대에게 키스하고, 상대의 혀와 당신의 혀로 애무한다.
+	당신은 <<himPost>>에게 키스하고, <<his_yi>> 혀를 당신의 혀로 애무한다.
+	<<if $NPCList[$mouthtarget].type is "plant">>
+		<span class="pink">달콤한 꿀이 <<his_yi>> 혀에서 뚝뚝 떨어져 당신의 입을 채운다.</span>
+		<<nectarfed 20>>
+	<</if>>
 <</if>>
 <</widget>>
 
 <<widget "actionshandbite">>
-<<if $wolfgirl gte 2 or $cat gte 2>>
+<<if $transformationParts.traits.fangs isnot "disabled">>
 	<<set _handbiterng to random(1, 5)>>
 	<<switch _handbiterng>>
 		<<case 1>>
@@ -3524,25 +4038,29 @@
 <<widget "actionsthighrub">>
 <<if $enemytype is "beast">>
 	<<if $enemyarousal gte ($enemyarousalmax / 5) * 4>>
-		<<beasttypePost "이">> 당신의 넓적다리에 맹렬하게 비비는 동안, 당신은 <<thightext>> 넓적다리에 끼워 자지를 문지른다. 당신은 그것이 우연히 <<genitalsPost "에">> 닿아 충격을 받을 때마다, 몸이 팍 떠오른다.
+		<<beasttypePost "이">> 당신의 넓적다리에 맹렬하게 비비는 동안, 당신은 <<thightext>> 자지를 넓적다리에 끼워 문지른다. 당신은 그것이 우연히 <<genitalsPost "에">> 닿아 충격을 받을 때마다, 몸이 팍 떠오른다.
 	<<elseif $enemyarousal gte ($enemyarousalmax / 5) * 2>>
-		<<beasttypePost "이">> 당신의 흥분하고 열중하는 동안, 당신은 <<thightext>> 넓적다리에 끼워 자지를 문지른다. 당신은 그것이 우연히 <<genitalsPost "에">> 닿아 충격을 받을 때마다, 몸이 팍 떠오른다.
+		<<beasttypePost "이">> 당신의 흥분하고 열중하는 동안, 당신은 <<thightext>> 자지를 넓적다리에 끼워 문지른다. 당신은 그것이 우연히 <<genitalsPost "에">> 닿아 충격을 받을 때마다, 몸이 팍 떠오른다.
 	<<else>>
-		당신은 <<thightext>> 넓적다리에 끼워 자지를 문지른다. 당신은 그것이 우연히 <<genitalsPost "에">> 닿아 충격을 받을 때마다, 몸이 팍 떠오른다.
+		당신은 <<thightext>> 자지를 넓적다리에 끼워 문지른다. 당신은 그것이 우연히 <<genitalsPost "에">> 닿아 충격을 받을 때마다, 몸이 팍 떠오른다.
 	<</if>>
 <<else>>
 	<<if $enemyarousal gte ($enemyarousalmax / 5) * 4>>
-		<<theownerPost "이">> 당신의 넓적다리에 맹렬하게 비비는 동안, 당신은 <<thightext>> 넓적다리에 끼워 자지를 문지른다. 당신은 그것이 우연히 <<genitalsPost "에">> 닿아 충격을 받을 때마다, 몸이 팍 떠오른다.
+		<<theownerPost "이">> 당신의 넓적다리에 맹렬하게 비비는 동안, 당신은 <<thightext>> 자지를 넓적다리에 끼워 문지른다. 당신은 그것이 우연히 <<genitalsPost "에">> 닿아 충격을 받을 때마다, 몸이 팍 떠오른다.
 	<<elseif $enemyarousal gte ($enemyarousalmax / 5) * 2>>
-		<<theownerPost "이">> 당신의 넓적다리에 맹렬하게 비비는 동안, 당신은 <<thightext>> 넓적다리에 끼워 자지를 문지른다. 당신은 그것이 우연히 <<genitalsPost "에">> 닿아 충격을 받을 때마다, 몸이 팍 떠오른다.
+		<<theownerPost "이">> 당신의 넓적다리에 맹렬하게 비비는 동안, 당신은 <<thightext>> 자지를 넓적다리에 끼워 문지른다. 당신은 그것이 우연히 <<genitalsPost "에">> 닿아 충격을 받을 때마다, 몸이 팍 떠오른다.
 	<<else>>
-		당신은 <<thightext>> 넓적다리에 끼워 자지를 문지른다. 당신은 그것이 우연히 <<genitalsPost "에">> 닿아 충격을 받을 때마다, 몸이 팍 떠오른다.
+		당신은 <<thightext>> 자지를 넓적다리에 끼워 문지른다. 당신은 그것이 우연히 <<genitalsPost "에">> 닿아 충격을 받을 때마다, 몸이 팍 떠오른다.
 	<</if>>
 <</if>>
 <</widget>>
 
 <<widget "actionspenistip">>
-	당신은 <<vaginaltext>> <<theirPost "의">> 자지 끝에  <<pussyPost "으로">> 키스한다.
+	당신은 <<vaginaltext>> <<their_yi _args[0]>> 자지 끝에  <<pussyPost "으로">> 키스한다.
+<</widget>>
+
+<<widget "actionspenisdoubletip">>
+	당신은 <<vaginaltext>> <<their_yi>> 자지들 끝에  <<pussyPost "으로">> 키스한다.
 <</widget>>
 
 <<widget "actionspenisrub">>
@@ -3563,7 +4081,7 @@
 	<<if $enemyarousal gte ($enemyarousalmax / 5) * 4>>
 		<<set _otheraction to "_beasttype_un 당신의 _pussy에 잔인하게 넣었다 뺐다 하면서 박는다.">>
 	<<elseif $enemyarousal gte ($enemyarousalmax / 5) * 2>>
-		<<set _otheraction to "_beasttype_un 당신의 _pussy에 가차 없이 박는다.">>
+		<<set _otheraction to "_beasttype_un 당신의 _pussy에 가차없이 박는다.">>
 	<<else>>
 		<<set _otheraction to "_beasttype_un 당신의 _pussy에 리드미컬하게 박는다.">>
 	<</if>>
@@ -3589,9 +4107,9 @@
 		<<set _youraction to "당신은 _vaginaltext 움직임에 맞춰 누른다.">>
 	<<else>>
 		<<if $consensual is 0>>
-			<<set _youraction to "당신은 _vaginaltext 같이 누른다, 당신은 어딘가 불편함을 줄이려 노력한다.">>
+			<<set _youraction to "당신은 _vaginaltext 같이 누르며, 당신의 불편함을 줄이려 노력한다.">>
 		<<else>>
-			<<set _youraction to "당신은 _vaginaltext 같이 누른다, 당신은 즐기려고 노력한다.">>
+			<<set _youraction to "당신은 _vaginaltext 같이 누르며, 즐기려고 노력한다.">>
 		<</if>>
 	<</if>>
 <<elseif $vaginalskill lt 800 or not _isverylewd>>
@@ -3599,27 +4117,24 @@
 		<<set _enjoying to either("즐긴다", "음미한다", "기뻐한다", "느낀다")>>
 		<<set _youraction to "본능에 이끌려, 당신은 _vaginaltext 골반을 앞뒤로 흔들며, 절정이 다가오기까지의 매 순간을 _enjoying.">>
 	<<elseif $arousal gte ($arousalmax / 5) * 2>>
-		<<set _youraction to "당신은 _vaginaltext 움직임에 맞춰 성교한다.">>
+		<<set _youraction to "당신은 _vaginaltext 움직임에 맞춰 허리를 흔든다.">>
 	<<else>>
-		<<set _youraction to "당신은 _vaginaltext 움직임에 따라서 성교한다.">>
+		<<set _youraction to "당신은 _vaginaltext 움직임에 따라서 허리를 흔든다.">>
 	<</if>>
 <<else>>
-	<<set _penis to "자지">>
-	<<for _j = $enemyno-1; _j gte _end; _j-->>
-		<<if $NPCList[_j].penis is "vagina" and $NPCList[_j].location.genitals is "genitals">>
-			<<trPenisdesc $NPCList[_j].penisdesc>><<set _penis to _trResult>>
-			<<break>>
-		<</if>>
-	<</for>>
+	<<set _penis_ga to "자지가">><<set _penis_ro to "자지로">>
+	<<if $NPCList[$vaginatarget].penis is "vagina" and $NPCList[$vaginatarget].location.genitals is "genitals">>
+		<<trPenisdesc $NPCList[$vaginatarget].penisdesc "이">><<set _penis_ga to _trResult>><<trPenisdesc $NPCList[$vaginatarget].penisdesc "으로">><<set _penis_ro to _trResult>>
+	<</if>>
 
 	<<if $arousal gte ($arousalmax / 5) * 4>>
 		<<set _eagerclimax to either("절정을 느끼고 싶어 한다", "절정을 기대한다", "절정을 갈망한다", "절정을 간절히 바란다", "절정을 원한다")>>
-		<<set _youraction to "욕정이 당신을 장악하고, _vaginaltext 골반을 이리저리 흔든다. 절정에 가까워 질 때까지, 자지를 세게 쥐어 짠다. 당신은 안에 있는 당신은 _penis로 _eagerclimax.">>
+		<<set _youraction to "욕정이 당신을 장악하고, _vaginaltext 골반을 이리저리 흔들어 절정에 가까워 질 때까지 자지를 세게 쥐어 짠다. 당신은 당신 안에 있는 _penis_ro _eagerclimax.">>
 	<<elseif $arousal gte ($arousalmax / 5) * 2>>
-		<<set _youraction to "욕정이 당신을 장악하고, _vaginaltext 골반을 이리저리 흔든다. _penis가 당신의 안으로 들어갈 때 마다 쥐어짠다.">>
+		<<set _youraction to "당신은 _vaginaltext 당신의 골반을 이리저리 흔들며, _penis_ga 당신의 안으로 들어올 때 마다 쥐어짠다.">>
 	<<else>>
 		<<set _eagerfor to either("갈망한다", "굶주리고 있다", "갈망한다", "열망한다", "열중한다", "갈구한다")>>
-		<<set _youraction to "당신은 _vaginaltext 리듬에 맞춰 같이 성교한다, 당신이 알고 있는 기쁨이 오기를 _eagerfor.">>
+		<<set _youraction to "당신은 _vaginaltext 리듬에 맞춰 같이 허리를 흔들며, 당신이 알고 있는 기쁨이 오기를 _eagerfor.">>
 	<</if>>
 <</if>>
 <</silently>>
@@ -3646,7 +4161,7 @@ _otheraction _youraction
 		<<if $enemyarousal gte ($enemyarousalmax / 5) * 4>>
 			<<set _otheraction to "_beasttype_un 당신의 _pussy에 잔인하게 넣었다 뺐다 하면서 박는다.">>
 		<<elseif $enemyarousal gte ($enemyarousalmax / 5) * 2>>
-			<<set _otheraction to "_beasttype_un 당신의 _pussy에 가차 없이 박는다.">>
+			<<set _otheraction to "_beasttype_un 당신의 _pussy에 가차없이 박는다.">>
 		<<else>>
 			<<set _otheraction to "_beasttype_un 당신의 _pussy에 리드미컬하게 박는다.">>
 		<</if>>
@@ -3726,6 +4241,208 @@ _otheraction _youraction
 <</if>>
 <</widget>>
 
+<<widget "actionspenisdoubleride">>
+	<!-- double vaginal -->
+	<<silently>>
+	<<pussyPost>><<set _pussy to _trResult>>
+	<<pussy_nun>><<set _pussy_nun to _trResult>>
+	<</silently>>
+	<<set _otheraction to "">>
+
+	<<set _npcA to (_n is $vaginatarget ? $vaginatarget : $vaginadoubletarget)>>
+	<<set _npcB to (_n is $vaginatarget ? $vaginadoubletarget : $vaginatarget)>>
+	/* State 1 is out of sync, state 2 is in sync */
+	<<set _dvp to ($NPCList[_npcB].penis isnot "vaginadouble" or $NPCList[_npcA].penis isnot "vaginadouble" ? 1 : 2)>>
+
+	<<if _dvp is 2>>
+		<<if $enemytype is "beast">> <!-- future proofing for beasts, text has not been updated -->
+			<<beasttype>>
+			<<set _beasttype_un to _trResult>>
+			<<if $enemyarousal gte ($enemyarousalmax / 5) * 4>>
+				<<set _otheraction to "_beasttype_un 당신의 _pussy에 잔인하게 넣었다 뺐다 하면서 박는다.">>
+			<<elseif $enemyarousal gte ($enemyarousalmax / 5) * 2>>
+				<<set _otheraction to "_beasttype_un 당신의 _pussy에 가차없이 박는다.">>
+			<<else>>
+				<<set _otheraction to "_beasttype_un 당신의 _pussy에 리드미컬하게 박는다.">>
+			<</if>>
+		<<else>>
+			<<if $enemyarousal gte ($enemyarousalmax / 5) * 4>>
+				<<set _otheraction to "당신의 _pussy_nun 두 자지에게 무자비하게 따먹힌다.">>
+			<<elseif $enemyarousal gte ($enemyarousalmax / 5) * 2>>
+				<<set _otheraction to "당신의 _pussy_nun 두 자지로 무자비하게 박힌다.">>
+			<<else>>
+				<<set _otheraction to "당신의 _pussy_nun 두 자지의 반복되는 삽입에 굴복한다.">>
+			<</if>>
+		<</if>>
+		<<silently>>
+		<<vaginaltext>>
+		<<set _vaginaltext to _text_output>>
+		<</silently>>
+		<<set _youraction to "">>
+		<<set _islewd to ($promiscuity gte 55 and $enemytype is "man") or ($deviancy gte 55 and $enemytype isnot "man")>>
+		<<set _isverylewd to ($promiscuity gte 75 and $enemytype is "man") or ($deviancy gte 75 and $enemytype isnot "man")>>
+		<<if $consensual is 0 or $vaginalskill lt 600 or not _islewd>>
+			<<if $arousal gte ($arousalmax / 5) * 4>>
+				<<set _youraction to "본능에 이끌려, 당신은 _vaginaltext 절정이 다가오기까지 그들의 두 자지에 대고 같이 누른다.">>
+			<<elseif $arousal gte ($arousalmax / 5) * 2>>
+				<<set _youraction to "당신은 _vaginaltext 두 자지의 움직임에 맞춰 누른다.">>
+			<<else>>
+				<<if $consensual is 0>>
+					<<set _youraction to "당신은 _vaginaltext 두 자지에 대고 같이 누르며, 당신의 불편함을 줄이려 노력한다.">>
+				<<else>>
+					<<set _youraction to "당신은 _vaginaltext 두 자지에 대고 같이 누르며, 즐기려고 노력한다.">>
+				<</if>>
+			<</if>>
+		<<elseif $vaginalskill lt 800 or not _isverylewd>>
+			<<if $arousal gte ($arousalmax / 5) * 4>>
+				<<set _enjoying to either("즐긴다", "음미한다", "기뻐한다", "느낀다")>>
+				<<set _youraction to "본능에 이끌려, 당신은 _vaginaltext 골반을 두 자지에 대고 앞뒤로 흔들며, 절정이 다가오기까지의 매 순간을 _enjoying.">>
+			<<elseif $arousal gte ($arousalmax / 5) * 2>>
+				<<set _youraction to "당신은 _vaginaltext 두 자지의 움직임에 맞춰 허리를 흔든다.">>
+			<<else>>
+				<<set _youraction to "당신은 _vaginaltext 두 자지의 움직임에 따라서 허리를 흔든다.">>
+			<</if>>
+		<<else>>
+			<<set _penis_ga to "자지가">><<set _penis_ro to "자지로">><<set _penis_wa to "자지와">>
+			<<if $NPCList[$vaginatarget].penis is "vagina" and $NPCList[$vaginatarget].location.genitals is "genitals">>
+				<<trPenisdesc $NPCList[$vaginatarget].penisdesc "이">><<set _penis_ga to _trResult>><<trPenisdesc $NPCList[$vaginatarget].penisdesc "으로">><<set _penis_ro to _trResult>><<trPenisdesc $NPCList[$vaginatarget].penisdesc "과">><<set _penis_wa to _trResult>>
+			<</if>>
+			<<set _penisB_ga to "자지가">>
+			<<if $NPCList[$vaginadoubletarget].penis is "vagina" and $NPCList[$vaginadoubletarget].location.genitals is "genitals">>
+				<<trPenisdesc $NPCList[$vaginadoubletarget].penisdesc "이">><<set _penisB_ga to _trResult>>
+			<</if>>
+
+			<<if $arousal gte ($arousalmax / 5) * 4>>
+				<<set _eagerclimax to either("절정을 느끼고 싶어 한다", "절정을 기대한다", "절정을 갈망한다", "절정을 간절히 바란다", "절정을 원한다")>>
+				<<set _youraction to "욕정이 당신을 장악하고, _vaginaltext 골반을 이리저리 흔들며 절정에 가까워 질 때까지, 두 자지를 세게 쥐어 짠다. 당신은 당신 안에 있는 두 자지로 _eagerclimax.">>
+			<<elseif $arousal gte ($arousalmax / 5) * 2>>
+				<<set _youraction to "당신은 _vaginaltext 당신의 골반을 이리저리 흔들며, <<combatperson_yi $vaginatarget>> _penis_wa <<combatperson_yi $vaginadoubletarget>> _penisB_ga 당신의 안으로 들어올 때 마다 쥐어짠다.">>
+			<<else>>
+				<<set _eagerfor to either("갈망한다", "굶주리고 있다", "갈망한다", "열망한다", "열중한다", "갈구한다")>>
+				<<set _youraction to "당신은 _vaginaltext 리듬에 맞춰 같이 허리를 흔들며, 당신이 알고 있는 기쁨이 오기를 _eagerfor.">>
+			<</if>>
+		<</if>>
+		_otheraction _youraction
+	<<else>>
+		<<actionspenisride>>
+	<</if>>
+<</widget>>
+
+<<widget "actionspenisdoubleedging">>
+	<!-- double vaginal -->
+
+	<<set _dvp to 1>>
+	<<set _npcA to $vaginatarget>>
+	<<set _npcB to $vaginadoubletarget>>
+	/* State 1 is out of sync, state 2 is in sync */
+	<<set _dvp to ($NPCList[_npcB].penis isnot "vaginadouble" or $NPCList[_npcA].penis isnot "vaginadouble" ? 1 : 2)>>
+
+	<<if _dvp is 2>>
+		<<if $vaginastate is "doubleimminent">>
+			<<set _otheraction to "">>
+			<<if $arousal gte ($arousalmax / 5) * 4>>
+				<<set _youraction to "반쯤은 본능에 이끌려, 당신은 <<vaginaltext>> 항문을 그들의 자지에 비벼 흥분을 제어하려다 당신도 오르가즘에 도달하려 한다.">>
+			<<elseif $arousal gte ($arousalmax / 5) * 2>>
+				<<set _youraction to "당신은 <<vaginaltext>> 항문을 그들의 자지에 비벼 흥분을 제어하려고 한다.">>
+			<<else>>
+				<<set _youraction to "당신은 <<vaginaltext>> 항문을 그들의 자지에 비벼 흥분을 제어하려고 하며, 당신의 불쾌감을 완화시키려 한다.">>
+			<</if>>
+		<<else>>
+			<<silently>>
+			<<pussyPost>><<set _pussy to _trResult>>
+			<<pussy_nun>><<set _pussy_nun to _trResult>>
+			<</silently>>
+			<<set _otheraction to "">>
+
+			<<if $enemyarousal gte ($enemyarousalmax / 5) * 4>>
+				<<set _otheraction to "당신의 _pussy_nun 두 자지에게 무자비하게 따먹힌다.">>
+			<<elseif $enemyarousal gte ($enemyarousalmax / 5) * 2>>
+				<<set _otheraction to "당신의 _pussy_nun 두 자지로 무자비하게 박힌다.">>
+			<<else>>
+				<<set _otheraction to "당신의 _pussy_nun 두 자지의 반복되는 삽입에 굴복한다.">>
+			<</if>>
+
+			<<if $arousal gte ($arousalmax / 5) * 4>>
+				<<set _youraction to "반쯤은 본능에 이끌려, 당신은 <<vaginaltext>> <<pussy_rul>> 움직여 녀석의 흥분을 제어하려다 당신도 오르가즘에 도달하려 한다.">>
+			<<elseif $arousal gte ($arousalmax / 5) * 2>>
+				<<set _youraction to "당신은 <<vaginaltext>> <<pussy_rul>> 움직여 녀석의 흥분을 제어하려고 한다.">>
+			<<else>>
+				<<set _youraction to "당신은 <<vaginaltext>> <<pussy_rul>> 움직여 녀석의 흥분을 제어하며, 당신의 불쾌감을 완화시키려 한다.">>
+			<</if>>
+		<</if>>
+		_otheraction _youraction
+	<<else>>
+		<<actionspenisedging>>
+	<</if>>
+<</widget>>
+
+<<widget "actionspenisdoubletake">>
+	<!-- double vaginal -->
+	<<set _dvp to "f">>
+	<<set _npcA to (_n is $vaginatarget ? $vaginatarget : $vaginadoubletarget)>>
+	<<set _npcB to (_n is $vaginatarget ? $vaginadoubletarget : $vaginatarget)>>
+	/* State 1 is out of sync, state 2 is in sync */
+	<<set _dvp to ($NPCList[_npcA].penis isnot "vaginadouble" and $NPCList[_npcB].penis isnot "vaginadouble" ? 1 : 2)>>
+	
+	<<if $enemytype is "beast">> <!-- future proofing for beasts, text has not been updated -->
+		<<if $enemyarousal gte ($enemyarousalmax / 5) * 4>>
+			<<if $arousal gte ($arousalmax / 5) * 4>>
+				<<beasttypePost "은">> 잔인하게 당신의 <<pussyPost "에">> 넣었다 뺐다 한다.
+			<<elseif $arousal gte ($arousalmax / 5) * 2>>
+				<<beasttypePost "은">> 잔인하게 당신의 <<pussyPost "에">> 넣었다 뺐다 한다.
+			<<else>>
+				<<beasttypePost "은">> 잔인하게 당신의 <<pussyPost "에">> 넣었다 뺐다 한다.
+			<</if>>
+		<<elseif $enemyarousal gte ($enemyarousalmax / 5) * 2>>
+			<<if $arousal gte ($arousalmax / 5) * 4>>
+				<<beasttypePost "은">> 가차없이 당신의 <<pussyPost "에">> 박는다.
+			<<elseif $arousal gte ($arousalmax / 5) * 2>>
+				<<beasttypePost "은">> 가차없이 당신의 <<pussyPost "에">> 박는다.
+			<<else>>
+				<<beasttypePost "은">> 가차없이 당신의 <<pussyPost "에">> 박는다.
+			<</if>>
+		<<else>>
+			<<if $arousal gte ($arousalmax / 5) * 4>>
+				<<beasttypePost "은">> 리드미컬하게 당신의 <<pussyPost "을">> 따먹는다.
+			<<elseif $arousal gte ($arousalmax / 5) * 2>>
+				<<beasttypePost "은">> 리드미컬하게 당신의 <<pussyPost "을">> 따먹는다.
+			<<else>>
+				<<beasttypePost "은">> 리드미컬하게 당신의 <<pussyPost "을">> 따먹는다.
+			<</if>>
+		<</if>>
+	<<else>>
+		<<if _dvp is 2>>
+			<<if $enemyarousal gte ($enemyarousalmax / 5) * 4>>
+				<<if $arousal gte ($arousalmax / 5) * 4>>
+					당신의 <<pussy_nun>> 두 자지에게 무자비하게 따먹힌다.
+				<<elseif $arousal gte ($arousalmax / 5) * 2>>
+					당신의 <<pussy_nun>> 두 자지에게 무자비하게 따먹힌다.
+				<<else>>
+					당신의 <<pussy_nun>> 두 자지에게 무자비하게 따먹힌다.
+				<</if>>
+			<<elseif $enemyarousal gte ($enemyarousalmax / 5) * 2>>
+				<<if $arousal gte ($arousalmax / 5) * 4>>
+					당신의 <<pussy_nun>> 두 자지로 무자비하게 박힌다.
+				<<elseif $arousal gte ($arousalmax / 5) * 2>>
+					당신의 <<pussy_nun>> 두 자지로 무자비하게 박힌다.
+				<<else>>
+					당신의 <<pussy_nun>> 두 자지로 무자비하게 박힌다.
+				<</if>>
+			<<else>>
+				<<if $arousal gte ($arousalmax / 5) * 4>>
+					당신의 <<pussy_nun>> 두 자지의 반복되는 삽입에 굴복한다.
+				<<elseif $arousal gte ($arousalmax / 5) * 2>>
+					당신의 <<pussy_nun>> 두 자지의 반복되는 삽입에 굴복한다.
+				<<else>>
+					당신의 <<pussy_nun>> 두 자지의 반복되는 삽입에 굴복한다.
+				<</if>>
+			<</if>>
+		<<else>>
+			<<actionspenistake>>
+		<</if>>
+	<</if>>
+<</widget>>
+
 <<widget "actionstribtake">>
 <<if $enemytype is "beast">>
 	<<if $enemyarousal gte ($enemyarousalmax / 5) * 4>>
@@ -3738,11 +4455,11 @@ _otheraction _youraction
 		<</if>>
 	<<elseif $enemyarousal gte ($enemyarousalmax / 5) * 2>>
 		<<if $arousal gte ($arousalmax / 5) * 4>>
-			<<beasttypePost "은">> 끊임없이 당신의 <<pussyPost "에">> 처댄다.
+			<<beasttypePost "은">> 끊임없이 당신의 <<pussyPost "에">> 쳐댄다
 		<<elseif $arousal gte ($arousalmax / 5) * 2>>
-			<<beasttypePost "은">> 끊임없이 당신의 <<pussyPost "에">> 처댄다.
+			<<beasttypePost "은">> 끊임없이 당신의 <<pussyPost "에">> 쳐댄다
 		<<else>>
-			<<beasttypePost "은">> 끊임없이 당신의 <<pussyPost "에">> 처댄다.
+			<<beasttypePost "은">> 끊임없이 당신의 <<pussyPost "에">> 쳐댄다
 		<</if>>
 	<<else>>
 		<<if $arousal gte ($arousalmax / 5) * 4>>
@@ -3810,21 +4527,105 @@ _otheraction _youraction
 <</if>>
 <</widget>>
 
+<<widget "actionsfencingtake">>
+<<if $enemytype is "beast">>
+<<if $enemyarousal gte ($enemyarousalmax / 5) * 4>>
+		<<if $arousal gte ($arousalmax / 5) * 4>>
+			<<beasttype_un>> 맹렬하게 당신의 <<penisPost>>에 대고 비벼댄다.
+		<<elseif $arousal gte ($arousalmax / 5) * 2>>
+			<<beasttype_un>> 맹렬하게 당신의 <<penisPost>>에 대고 비벼댄다.
+		<<else>>
+			<<beasttype_un>> 맹렬하게 당신의 <<penisPost>>에 대고 비벼댄다.
+		<</if>>
+	<<elseif $enemyarousal gte ($enemyarousalmax / 5) * 2>>
+		<<if $arousal gte ($arousalmax / 5) * 4>>
+			<<beasttype_un>> 가차없이 당신의 <<penisPost>>에 대고 비벼댄다.
+		<<elseif $arousal gte ($arousalmax / 5) * 2>>
+			<<beasttype_un>> 가차없이 당신의 <<penisPost>>에 대고 비벼댄다.
+		<<else>>
+			<<beasttype_un>> 가차없이 당신의 <<penisPost>>에 대고 비벼댄다.
+		<</if>>
+	<<else>>
+		<<if $arousal gte ($arousalmax / 5) * 4>>
+			<<beasttype_un>> 리드미컬하게 당신의 <<penisPost>>에 대고 비벼댄다.
+		<<elseif $arousal gte ($arousalmax / 5) * 2>>
+			<<beasttype_un>> 리드미컬하게 당신의 <<penisPost>>에 대고 비벼댄다.
+		<<else>>
+			<<beasttype_un>> 리드미컬하게 당신의 <<penisPost>>에 대고 비벼댄다.
+		<</if>>
+	<</if>>
+<<else>>
+<<if $enemyarousal gte ($enemyarousalmax / 5) * 4>>
+		<<if $arousal gte ($arousalmax / 5) * 4>>
+			당신의 <<penis_nun>> 무자비하게 비벼진다.
+		<<elseif $arousal gte ($arousalmax / 5) * 2>>
+			당신의 <<penis_nun>> 무자비하게 비벼진다.
+		<<else>>
+			당신의 <<penis_nun>> 무자비하게 비벼진다.
+		<</if>>
+	<<elseif $enemyarousal gte ($enemyarousalmax / 5) * 2>>
+		<<if $arousal gte ($arousalmax / 5) * 4>>
+			당신의 <<penis_nun>> 가차없이 비벼진다.
+		<<elseif $arousal gte ($arousalmax / 5) * 2>>
+			당신의 <<penis_nun>> 가차없이 비벼진다.
+		<<else>>
+			당신의 <<penis_nun>> 가차없이 비벼진다.
+		<</if>>
+	<<else>>
+		<<if $arousal gte ($arousalmax / 5) * 4>>
+			당신의 <<penis_nun>> 반복적인 압력으로 짓눌러지고 찌그러진다.
+		<<elseif $arousal gte ($arousalmax / 5) * 2>>
+			당신의 <<penis_nun>> 반복적인 압력으로 짓눌러지고 찌그러진다.
+		<<else>>
+			당신의 <<penis_nun>> 반복적인 압력으로 짓눌러지고 찌그러진다.
+		<</if>>
+	<</if>>
+<</if>>
+<</widget>>
+
+<<widget "actionsfencingcooperate">>
+<<if $enemyarousal gte ($enemyarousalmax / 5) * 4>>
+	<<if $arousal gte ($arousalmax / 5) * 4>>
+		본능에 이끌려, 당신은 <<peniletext>> 절정에 다다를 때까지 그 자지를 마주 비벼댄다.
+	<<elseif $arousal gte ($arousalmax / 5) * 2>>
+		당신은 <<peniletext>> 당신의 <<penis_rul>> 누르고 있는 번들번들한 자지에 대고 찔러댄다.
+	<<else>>
+		당신은 <<peniletext>> 당신의 <<penis_rul>> 누르고 있는 번들번들한 자지에 대고 허리를 흔든다.
+	<</if>>
+<<elseif $enemyarousal gte ($enemyarousalmax / 5) * 2>>
+	<<if $arousal gte ($arousalmax / 5) * 4>>
+		본능에 이끌려, 당신은 <<peniletext>> 절정에 다다를 때까지 그 자지를 같이 비벼댄다.
+	<<elseif $arousal gte ($arousalmax / 5) * 2>>
+		당신은 <<peniletext>> 당신의 <<penis_rul>> 누르고 있는 쿠퍼액이 뚝뚝 떨어지는 자지에 대고 찔러댄다.
+	<<else>>
+		당신은 <<peniletext>> 당신의 <<penis_rul>> 누르고 있는 쿠퍼액이 뚝뚝 떨어지는 자지에 대고 허리를 흔든다.
+	<</if>>
+<<else>>
+	<<if $arousal gte ($arousalmax / 5) * 4>>
+		당신은 <<peniletext>> 그 자지에 대고 비벼대면서 몸을 떨고 있다.
+	<<elseif $arousal gte ($arousalmax / 5) * 2>>
+		당신은 <<peniletext>> 그 자지에 대고 찔러댄다.
+	<<else>>
+		당신은 <<peniletext>> 그 자지에 대고 마주 누른다.
+	<</if>>
+<</if>>
+<<set $penisstate to "otherpenis">>
+<</widget>>
+
 <<widget "actionsclitrub">>
-당신은 <<peniletext>> 당신의 자지를 <<theirPost "의">> 클리토리스에 대고 비빈다.
+당신은 <<peniletext>> 당신의 자지를 <<their_yi _args[0]>> 클리토리스에 대고 비빈다.
 <</widget>>
 
 <<widget "actionspussyrub">>
-당신은 <<peniletext>> 당신의 자지를 <<theirPost "의">> 보지에 대고 비빈다.
+당신은 <<peniletext>> 당신의 자지를 <<their_yi _args[0]>> 보지에 대고 비빈다.
 <</widget>>
 
 <<widget "actionspussytease">>
-당신은 <<peniletext>> 당신의 자지를 <<theirPost "의">> 음순에 대고 비빈다.
+당신은 <<peniletext>> 당신의 자지를 <<their_yi _args[0]>> 음순에 대고 비빈다.
 <</widget>>
 
 <<widget "actionspussythrust">><<silently>>
-<<theirPost "의">>
-<<hisPost "의">>
+<<hisselect_yi _args[0]>>
 <<set _their to _trResult>>
 <<hisPost "의">>
 <<set _her to _trResult>>
@@ -3834,7 +4635,7 @@ _otheraction _youraction
 <<if $enemyarousal gte ($enemyarousalmax / 5) * 4>>
 	<<set _otheraction to "당신의 _penis_nun 무자비하게 _their 보지로 따먹힌다.">>
 <<elseif $enemyarousal gte ($enemyarousalmax / 5) * 2>>
-	<<set _otheraction to "당신의 _penis_nun 굶주린 _their 보지에 집어삼켜진다.">>
+	<<set _otheraction to "당신의 _penis_nun _their 보지에 게걸스럽게 집어삼켜진다.">>
 <<else>>
 	<<set _otheraction to "당신의 _penis_nun 리드미컬하게 _their 보지에 삼켜지고, 다시 뱉어진다.">>
 <</if>>
@@ -3862,7 +4663,7 @@ _otheraction _youraction
 	<</if>>
 <<else>>
 	<<if $arousal gte ($arousalmax / 5) * 4>>
-	   <<if $penissize gte 2>>
+	   <<if $player.penissize gte 2>>
 			<<set _hammering to either("맹렬하게 안에 박는다", "박는다", "친다", "두드린다", "깊고 세게 안으로 넣는다", "깊게 파고든다", "세게 넣는다")>>
 			<<set _youraction to "본능에 이끌려, 당신은 _skillfully 속도를 유지하고, 당신의 _penis_ro 절정이 가까워질 떄까지 _their 보지를 _hammering.">>
 	   <<else>>
@@ -3883,15 +4684,14 @@ _otheraction _youraction
 <<if $penisstate is "imminent">>
 	<<set _otheraction to "">>
 	<<if $arousal gte ($arousalmax / 5) * 4>>
-		<<set _youraction to "반쯤은 본능에 이끌려, 당신은 <<peniletext>> <<penis_rul>> 그들의 보지에 비벼 흥분을 제어하려다 당신도 오르가즘에 도달하려 한다.">>
+		<<set _youraction to "반쯤은 본능에 이끌려, 당신은 <<peniletext>> <<penis_rul>> 그 보지에 비벼 흥분을 제어하려다 당신도 오르가즘에 도달하려 한다.">>
 	<<elseif $arousal gte ($arousalmax / 5) * 2>>
-		<<set _youraction to "당신은 <<peniletext>> <<penis_rul>> 그들의 보지에 비벼 흥분을 제어하려고 한다.">>
+		<<set _youraction to "당신은 <<peniletext>> <<penis_rul>> 그 보지에 비벼 흥분을 제어하려고 한다.">>
 	<<else>>
-		<<set _youraction to "당신은 <<peniletext>> <<penis_rul>> 그들의 보지에 비벼 흥분을 제어하려고 하며, 당신의 불쾌감을 완화시키려 한다.">>
+		<<set _youraction to "당신은 <<peniletext>> <<penis_rul>> 그 보지에 비벼 흥분을 제어하려고 하며, 당신의 불쾌감을 완화시키려 한다.">>
 	<</if>>
 <<else>>
-	<<theirPost "의">>
-	<<hisPost "의">>
+	<<hisselect_yi _args[0]>>
 	<<set _their to _trResult>>
 	<<hisPost "의">>
 	<<set _her to _trResult>>
@@ -3901,81 +4701,83 @@ _otheraction _youraction
 	<<if $enemyarousal gte ($enemyarousalmax / 5) * 4>>
 		<<set _otheraction to "당신의 _penis_nun 무자비하게 _their 보지로 따먹힌다.">>
 	<<elseif $enemyarousal gte ($enemyarousalmax / 5) * 2>>
-		<<set _otheraction to "당신의 _penis_nun 굶주린 _their 보지에게 집어삼켜진다.">>
+		<<set _otheraction to "당신의 _penis_nun _their 보지에 게걸스럽게 집어삼켜진다.">>
 	<<else>>
-		<<set _otheraction to "당신의 _penis_nun 리드미컬하게 _their 보지에게 삼켜지고, 다시 뱉어진다.">>
+		<<set _otheraction to "당신의 _penis_nun 리드미컬하게 _their 보지에 삼켜지고, 다시 뱉어진다.">>
 	<</if>>
 	<<if $arousal gte ($arousalmax / 5) * 4>>
-		<<set _youraction to "반쯤은 본능에 이끌려, 당신은 <<peniletext>> <<penis_rul>> 움직여 녀석의 흥분을 제어하려다 당신도 오르가즘에 도달하려 한다.">>
+		<<set _youraction to "반쯤은 본능에 이끌려, 당신은 <<peniletext>> <<penis_rul>> 움직여 _her 흥분을 제어하려다 당신도 오르가즘에 도달하려 한다.">>
 	<<elseif $arousal gte ($arousalmax / 5) * 2>>
-		<<set _youraction to "당신은 <<peniletext>> <<penis_rul>> 움직여 녀석의 흥분을 제어하려고 한다.">>
+		<<set _youraction to "당신은 <<peniletext>> <<penis_rul>> 움직여 _her 흥분을 제어하려고 한다.">>
 	<<else>>
-		<<set _youraction to "당신은 <<peniletext>> <<penis_rul>> 움직여 녀석의 흥분을 제어하며, 당신의 불쾌감을 완화시키려 한다.">>
+		<<set _youraction to "당신은 <<peniletext>> <<penis_rul>> 움직여 _her 흥분을 제어하며, 당신의 불쾌감을 완화시키려 한다.">>
 	<</if>>
 <</if>><</silently>>
 _otheraction _youraction
 <</widget>>
 
 <<widget "actionspussytake">>
+<<if $tentaclePenis>><<trCreature "tentacle" $tentaclePenis>><</if>><<set $_pussyDesc to (_args[0] is "tentacles" ? _trResult : "보지")>>
+
 <<if $enemyarousal gte ($enemyarousalmax / 5) * 4>>
 	<<if $arousal gte ($arousalmax / 5) * 4>>
-		당신의 <<penisPost "은">> <<theirPost "의">> 보지에 무지비하게 따먹힌다.
+		당신의 <<penisPost "은">> <<their_yi _args[0]>> $_pussyDesc에 무자비하게 따먹힌다.
 	<<elseif $arousal gte ($arousalmax / 5) * 2>>
-		당신의 <<penisPost "은">> <<theirPost "의">> 보지에 무지비하게 따먹힌다.
+		당신의 <<penisPost "은">> <<their_yi _args[0]>> $_pussyDesc에 무자비하게 따먹힌다.
 	<<else>>
-		당신의 <<penisPost "은">> <<theirPost "의">> 보지에 무지비하게 따먹힌다.
+		당신의 <<penisPost "은">> <<their_yi _args[0]>> $_pussyDesc에 무자비하게 따먹힌다.
 	<</if>>
 <<elseif $enemyarousal gte ($enemyarousalmax / 5) * 2>>
 	<<if $arousal gte ($arousalmax / 5) * 4>>
-		당신의 <<penisPost "은">> 굶주린 <<theirPost "의">> 보지에게 집어삼켜진다.
+		당신의 <<penisPost "은">> <<their_yi _args[0]>> $_pussyDesc에 보지에 게걸스럽게 집어삼켜진다.
 	<<elseif $arousal gte ($arousalmax / 5) * 2>>
-		당신의 <<penisPost "은">> 굶주린 <<theirPost "의">> 보지에게 집어삼켜진다.
+		당신의 <<penisPost "은">> <<their_yi _args[0]>> $_pussyDesc에 보지에 게걸스럽게 집어삼켜진다.
 	<<else>>
-		당신의 <<penisPost "은">> 굶주린 <<theirPost "의">> 보지에게 집어삼켜진다.
+		당신의 <<penisPost "은">> <<their_yi _args[0]>> $_pussyDesc에 보지에 게걸스럽게 집어삼켜진다.
 	<</if>>
 <<else>>
 	<<if $arousal gte ($arousalmax / 5) * 4>>
-		당신의 <<penisPost "은">> 리드미컬하게 <<theirPost "의">> 보지에게 삼켜지고, 다시 뱉어진다.
+		당신의 <<penisPost "은">> 리드미컬하게 <<their_yi _args[0]>> $_pussyDesc에 삼켜지고, 다시 뱉어진다.
 	<<elseif $arousal gte ($arousalmax / 5) * 2>>
-		당신의 <<penisPost "은">> 리드미컬하게 <<theirPost "의">> 보지에게 삼켜지고, 다시 뱉어진다.
+		당신의 <<penisPost "은">> 리드미컬하게 <<their_yi _args[0]>> $_pussyDesc에 삼켜지고, 다시 뱉어진다.
 	<<else>>
-		당신의 <<penisPost "은">> 리드미컬하게 <<theirPost "의">> 보지에게 삼켜지고, 다시 뱉어진다.
+		당신의 <<penisPost "은">> 리드미컬하게 <<their_yi _args[0]>> $_pussyDesc에 삼켜지고, 다시 뱉어진다.
 	<</if>>
 <</if>>
 <</widget>>
 
 <<widget "actionsotheranusrub">>
-당신은 <<peniletext>> <<penisPost "으로">> <<theirPost "의">> 엉덩이를 문질렀다.
+당신은 <<peniletext>> <<penisPost "으로">> <<their_yi _args[0]>> 항문을 문지른다.
 <</widget>>
 
 <<widget "actionsotheranustease">>
-당신은 <<peniletext>> <<theirPost "의">> 항문을 <<penisPost "으로">> 장난한다.
+당신은 <<peniletext>> <<their_yi _args[0]>> 항문을 <<penisPost "으로">> 희롱한다.
 <</widget>>
 
 <<widget "actionsotheranusthrust">>
 <<if $enemyarousal gte ($enemyarousalmax / 5) * 4>>
 	<<if $arousal gte ($arousalmax / 5) * 4>>
-		당신의 <<penisPost "은">> <<theirPost "의">> 엉덩이로 무지비하게 따먹힌다. 본능에 이끌려, 당신은 <<peniletext>> 절정에 달할때까지 박는다.
+		당신의 <<penisPost "은">> <<their_yi _args[0]>> 항문으로 무자비하게 따먹힌다. 본능에 이끌려, 당신은 <<peniletext>> 절정에 달할때까지 박는다.
 	<<elseif $arousal gte ($arousalmax / 5) * 2>>
-		당신의 <<penisPost "은">> <<theirPost "의">> 엉덩이로 무지비하게 따먹힌다. 당신은 <<peniletext>> 움직임에 맞춰서 같이 박는다.
+		당신의 <<penisPost "은">> <<their_yi _args[0]>> 항문으로 무자비하게 따먹힌다. 당신은 <<peniletext>> 움직임에 맞춰서 같이 박는다.
 	<<else>>
-		당신의 <<penisPost "은">> <<theirPost "의">> 엉덩이로 무지비하게 따먹힌다. 당신은 <<peniletext>> 뭔가 불편함을 줄이려 하면서 박는다.
+		당신의 <<penisPost "은">> <<their_yi _args[0]>> 항문으로 무자비하게 따먹힌다. 당신은 <<peniletext>> 뭔가 불편함을 줄이려 하면서 박는다.
 	<</if>>
 <<elseif $enemyarousal gte ($enemyarousalmax / 5) * 2>>
 	<<if $arousal gte ($arousalmax / 5) * 4>>
-		당신의 <<penisPost "은">> 굶주린 <<theirPost "의">> 엉덩이로 집어삼켜진다. 본능에 이끌려, 당신은 <<peniletext>> 절정에 달할때까지 박는다.
+		당신의 <<penisPost "은">> <<their_yi _args[0]>> 항문에 게걸스럽게 집어삼켜진다. 본능에 이끌려, 당신은 <<peniletext>> 절정에 달할때까지 박는다.
 	<<elseif $arousal gte ($arousalmax / 5) * 2>>
-		당신의 <<penisPost "은">> 굶주린 <<theirPost "의">> 엉덩이로 집어삼켜진다. 당신은 <<peniletext>> 움직임에 맞춰서 같이 박는다.
+		당신의 <<penisPost "은">> <<their_yi _args[0]>> 항문에 게걸스럽게 집어삼켜진다. 당신은 <<peniletext>> 움직임에 맞춰서 같이 박는다.
 	<<else>>
-		당신의 <<penisPost "은">> 굶주린 <<theirPost "의">> 엉덩이로 집어삼켜진다. 당신은 <<peniletext>> 뭔가 불편함을 줄이려 하면서 박는다.
+		당신의 <<penisPost "은">> <<their_yi _args[0]>> 항문에 게걸스럽게 집어삼켜진다. 당신은 <<peniletext>> 뭔가 불편함을 줄이려 하면서 박는다.
 	<</if>>
 <<else>>
 	<<if $arousal gte ($arousalmax / 5) * 4>>
-		당신의 <<penisPost "은">> 리드미컬하게 <<theirPost "의">> 엉덩이로 삼켜지고, 다시 뱉어진다. 본능에 이끌려, 당신은 <<peniletext>> 절정에 달할때까지 박는다.
+		당신의 <<penisPost "은">> 리드미컬하게 <<their_yi _args[0]>> 항문에 삼켜지고, 다시 뱉어진다. 본능에 이끌려, 당신은 <<peniletext>> 절정에 달할때까지 박는다.
 	<<elseif $arousal gte ($arousalmax / 5) * 2>>
-		당신의 <<penisPost "은">> 리드미컬하게 <<theirPost "의">> 엉덩이로 삼켜지고, 다시 뱉어진다. 당신은 <<peniletext>> 움직임에 맞춰서 같이 박는다.
+		당신의 <<penisPost "은">> 리드미컬하게 <<their_yi _args[0]>> 항문에 삼켜지고, 다시 뱉어진다. 당신은 <<peniletext>> 움직임에 맞춰서 같이 박는다.
 	<<else>>
-		당신의 <<penisPost "은">> 리드미컬하게 <<theirPost "의">> 엉덩이로 삼켜지고, 다시 뱉어진다. 당신은 <<peniletext>> 뭔가 불편함을 줄이려 하면서 박는다.
+		당신의 <<penisPost "은">> 리드미컬하게 <<their_yi _args[0]>> 항문에 삼켜지고, 다시 뱉어진다. 당신은 <<peniletext>> 뭔가 불편함을 줄이려 하면서 박는다.
 	<</if>>
 <</if>>
 <</widget>>
@@ -3983,19 +4785,19 @@ _otheraction _youraction
 <<widget "actionsotheranusedging">>
 <<if $penisstate is "imminent">>
 	<<if $arousal gte ($arousalmax / 5) * 4>>
-		반쯤은 본능에 이끌려, 당신은 <<peniletext>> <<penis_rul>> 그들의 항문에 비벼 흥분을 제어하려다 당신도 오르가즘에 도달하려 한다.
+		반쯤은 본능에 이끌려, 당신은 <<peniletext>> <<penis_rul>> 그 항문에 비벼 흥분을 제어하려다 당신도 오르가즘에 도달하려 한다.
 	<<elseif $arousal gte ($arousalmax / 5) * 2>>
-		당신은 <<peniletext>> <<penis_rul>> 그들의 항문에 비벼 흥분을 제어하려고 한다.
+		당신은 <<peniletext>> <<penis_rul>> 그 항문에 비벼 흥분을 제어하려고 한다.
 	<<else>>
-		당신은 <<peniletext>> <<penis_rul>> 그들의 항문에 비벼 흥분을 제어하려고 하며, 당신의 불쾌감을 완화시키려 한다.
+		당신은 <<peniletext>> <<penis_rul>> 그 항문에 비벼 흥분을 제어하려고 하며, 당신의 불쾌감을 완화시키려 한다.
 	<</if>>
 <<else>>
 	<<if $enemyarousal gte ($enemyarousalmax / 5) * 4>>
-		당신의 <<penis_nun>> 무자비하게 <<theirPost "의">> 항문으로 따먹힌다.
+		당신의 <<penisPost "은">> <<their_yi _args[0]>> 항문으로 무자비하게 따먹힌다.
 	<<elseif $enemyarousal gte ($enemyarousalmax / 5) * 2>>
-		당신의 <<penis_nun>> 굶주린 <<theirPost "의">> 항문에 집어삼켜진다.
+		당신의 <<penisPost "은">> <<their_yi _args[0]>> 항문에 게걸스럽게 집어삼켜진다.
 	<<else>>
-			당신의 <<penis_nun>> 리드미컬하게 <<theirPost "의">> 보지에 삼켜지고, 다시 뱉어진다.
+			당신의 <<penisPost "은">> 리드미컬하게 <<their_yi _args[0]>> 항문에 삼켜지고, 다시 뱉어진다.
 	<</if>>
 	<<if $arousal gte ($arousalmax / 5) * 4>>
 		반쯤은 본능에 이끌려, 당신은 <<peniletext>> <<penis_rul>> 움직여 녀석의 흥분을 제어하려다 당신도 오르가즘에 도달하려 한다.
@@ -4010,33 +4812,48 @@ _otheraction _youraction
 <<widget "actionsotheranustake">>
 <<if $enemyarousal gte ($enemyarousalmax / 5) * 4>>
 	<<if $arousal gte ($arousalmax / 5) * 4>>
-		당신의 <<penisPost "은">> <<theirPost "의">> 엉덩이로 무지비하게 따먹힌다.
+		당신의 <<penisPost "은">> <<their_yi _args[0]>> 항문으로 무자비하게 따먹힌다.
 	<<elseif $arousal gte ($arousalmax / 5) * 2>>
-		당신의 <<penisPost "은">> <<theirPost "의">> 엉덩이로 무지비하게 따먹힌다.
+		당신의 <<penisPost "은">> <<their_yi _args[0]>> 항문으로 무자비하게 따먹힌다.
 	<<else>>
-		당신의 <<penisPost "은">> <<theirPost "의">> 엉덩이로 무지비하게 따먹힌다.
+		당신의 <<penisPost "은">> <<their_yi _args[0]>> 항문으로 무자비하게 따먹힌다.
 	<</if>>
 <<elseif $enemyarousal gte ($enemyarousalmax / 5) * 2>>
 	<<if $arousal gte ($arousalmax / 5) * 4>>
-		당신의 <<penisPost "은">> 굶주린 <<theirPost "의">> 엉덩이로 집어삼켜진다.
+		당신의 <<penisPost "은">> <<their_yi _args[0]>> 항문에 게걸스럽게 집어삼켜진다.
 	<<elseif $arousal gte ($arousalmax / 5) * 2>>
-		당신의 <<penisPost "은">> 굶주린 <<theirPost "의">> 엉덩이로 집어삼켜진다.
+		당신의 <<penisPost "은">> <<their_yi _args[0]>> 항문에 게걸스럽게 집어삼켜진다.
 	<<else>>
-		당신의 <<penisPost "은">> 굶주린 <<theirPost "의">> 엉덩이로 집어삼켜진다.
+		당신의 <<penisPost "은">> <<their_yi _args[0]>> 항문에 게걸스럽게 집어삼켜진다.
 	<</if>>
 <<else>>
 	<<if $arousal gte ($arousalmax / 5) * 4>>
-		당신의 <<penisPost "은">> 리드미컬하게 <<theirPost "의">> 엉덩이로 삼켜지고, 다시 뱉어진다.
+		당신의 <<penisPost "은">> 리드미컬하게 <<their_yi _args[0]>> 항문에 삼켜지고, 다시 뱉어진다.
 	<<elseif $arousal gte ($arousalmax / 5) * 2>>
-		당신의 <<penisPost "은">> 리드미컬하게 <<theirPost "의">> 엉덩이로 삼켜지고, 다시 뱉어진다.
+		당신의 <<penisPost "은">> 리드미컬하게 <<their_yi _args[0]>> 항문에 삼켜지고, 다시 뱉어진다.
 	<<else>>
-		당신의 <<penisPost "은">> 리드미컬하게 <<theirPost "의">> 엉덩이로 삼켜지고, 다시 뱉어진다.
+		당신의 <<penisPost "은">> 리드미컬하게 <<their_yi _args[0]>> 항문에 삼켜지고, 다시 뱉어진다.
 	<</if>>
 <</if>>
 <</widget>>
 
+<<widget "actionsStrokerCooperate">>
+	<<set $_stroker to ($NPCList[$penistarget].lefthand is "penisstroker" ? $NPCList[$penistarget].lefttool : $NPCList[$penistarget].righttool)>>
+	<<if $arousal gte ($arousalmax / 5) * 4>>
+		본능에 이끌려, 당신은 <<peniletext>> 절정에 달할 때까지 <<handtoolPost $_stroker>> 안에 박아댄다.
+	<<elseif $arousal gte ($arousalmax / 5) * 2>>
+		당신은 <<peniletext>> 당신의 <<penis_rul>> <<handtoolPost $_stroker>> 안에 박아댄다.
+	<<else>>
+		당신은 <<peniletext>> 당신의 <<penisPost>> 위의 <<handtoolPost $_stroker>>에 허리를 흔든다.
+	<</if>>
+<</widget>>
+<<widget "actionsStrokerRest">>
+	<<set $_stroker to ($NPCList[$penistarget].lefthand is "penisstroker" ? $NPCList[$penistarget].lefttool : $NPCList[$penistarget].righttool)>>
+	당신의 <<penis_nun>> <<handtool_ro $_stroker>> 범해지고 있다.
+<</widget>>
+
 <<widget "actionsanusrub">>
-	당신은 <<analtext>> 허리를 움직여, <<theirPost "의">> 자지에 당신의 <<bottomPost "을">> 문지른다.
+	당신은 <<analtext>> 허리를 움직여, <<their_yi _args[0]>> 자지에 당신의 <<bottomPost "을">> 문지른다.
 <</widget>>
 
 <<widget "actionsanusthrust">>
@@ -4098,18 +4915,18 @@ _otheraction _youraction
 <<widget "actionsanusedging">>
 <<if $anusaction is "imminent">>
 	<<if $arousal gte ($arousalmax / 5) * 4>>
-		반쯤은 본능에 이끌려, 당신은 <<analtext>> 항문을 그들의 자지에 비벼 흥분을 제어하려다 당신도 오르가즘에 도달하려 한다.
+		반쯤은 본능에 이끌려, 당신은 <<analtext>> 항문을 그 자지에 비벼 흥분을 제어하려다 당신도 오르가즘에 도달하려 한다.
 	<<elseif $arousal gte ($arousalmax / 5) * 2>>
-		당신은 <<analtext>> 항문을 그들의 자지에 비벼 흥분을 제어하려고 한다.
+		당신은 <<analtext>> 항문을 그 자지에 비벼 흥분을 제어하려고 한다.
 	<<else>>
-		당신은 <<analtext>> 항문을 그들의 자지에 비벼 흥분을 제어하려고 하며, 당신의 불쾌감을 완화시키려 한다.
+		당신은 <<analtext>> 항문을 그 자지에 비벼 흥분을 제어하려고 하며, 당신의 불쾌감을 완화시키려 한다.
 	<</if>>
 <<else>>
 	<<if $enemytype is "beast">>
 		<<if $enemyarousal gte ($enemyarousalmax / 5) * 4>>
 			<<beasttype_un>> 당신의 항문에 잔인하게 넣었다 뺐다 하면서 박는다.
 		<<elseif $enemyarousal gte ($enemyarousalmax / 5) * 2>>
-			<<beasttype_un>> 당신의 항문에 가차 없이 박는다.
+			<<beasttype_un>> 당신의 항문에 가차없이 박는다.
 		<<else>>
 			<<beasttype_un>> 당신의 항문에 리드미컬하게 박는다.
 		<</if>>
@@ -4188,6 +5005,286 @@ _otheraction _youraction
 <</if>>
 <</widget>>
 
+<<widget "actionsanusdoublethrust">>
+		<<set _dap to 0>>
+		/* State 1 is out of sync, state 2 in in sync */
+		<<if $NPCList[$anustarget].penis isnot "anusdouble" or $NPCList[$anusdoubletarget].penis isnot "anusdouble">>
+			<<set _dap to 1>>
+		<<else>>
+			<<set _dap to 2>>
+		<</if>>
+	<<if $enemytype is "beast">>
+		/* Beasts are only encountered individually. This is futureproofing */
+		<<if $enemyarousal gte ($enemyarousalmax / 5) * 4>>
+			<<if $arousal gte ($arousalmax / 5) * 4>>
+				<<beasttypePost "은">> 당신의 항문에 넣었다 뺐다 하면서 박는다. 본능에 이끌려, 당신은 <<analtext>> 절정에 달할 때까지 같이 누른다.
+			<<elseif $arousal gte ($arousalmax / 5) * 2>>
+				<<beasttypePost "은">> 당신의 항문에 넣었다 뺐다 하면서 박는다. 당신은 <<analtext>> 녀석에 움직임에 따라 같이 누른다.
+			<<else>>
+				<<beasttypePost "은">> 당신의 항문에 넣었다 뺐다 하면서 박는다. 당신은 <<analtext>> 뭔가 불편함을 줄이려, 같이 움직인다.
+			<</if>>
+		<<elseif $enemyarousal gte ($enemyarousalmax / 5) * 2>>
+			<<if $arousal gte ($arousalmax / 5) * 4>>
+				<<beasttypePost "은">> 당신의 항문에 끊임없이 박는다. 본능에 이끌려, 당신은 <<analtext>> 절정에 달할 때까지 같이 누른다.
+			<<elseif $arousal gte ($arousalmax / 5) * 2>>
+				<<beasttypePost "은">> 당신의 항문에 끊임없이 박는다. 당신은 <<analtext>> 녀석에 움직임에 따라 같이 누른다.
+			<<else>>
+				<<beasttypePost "은">> 당신의 항문에 끊임없이 박는다. 당신은 <<analtext>> 뭔가 불편함을 줄이려, 같이 움직인다.
+			<</if>>
+		<<else>>
+			<<if $arousal gte ($arousalmax / 5) * 4>>
+				<<beasttypePost "은">> 당신의 항문에 교미한다. 본능에 이끌려, 당신은 <<analtext>> 절정에 달할 때까지 같이 누른다.
+			<<elseif $arousal gte ($arousalmax / 5) * 2>>
+				<<beasttypePost "은">> 당신의 항문에 교미한다. 당신은 <<analtext>> 녀석에 움직임에 따라 같이 누른다.
+			<<else>>
+				<<beasttypePost "은">> 당신의 항문에 교미한다. 당신은 <<analtext>> 뭔가 불편함을 줄이려, 같이 움직인다.
+			<</if>>
+		<</if>>
+	<<else>>
+		<<if _dap is 2>>
+			<<if $enemyarousal gte ($enemyarousalmax / 5) * 4>>
+				<<if $arousal gte ($arousalmax / 5) * 4>>
+					당신의 항문은 두 자지에게 무자비하게 따먹힌다. 본능에 이끌려, 당신은 <<analtext>> 절정에 달할 때까지 같이 누른다.
+				<<elseif $arousal gte ($arousalmax / 5) * 2>>
+					당신의 항문은 두 자지에게 무자비하게 따먹힌다. 당신은 <<analtext>> 움직임에 따라 같이 누른다.
+				<<else>>
+					당신의 항문은 두 자지에게 무자비하게 따먹힌다. 당신은 <<analtext>> 뭔가 불편함을 줄이려 같이 누른다.
+				<</if>>
+			<<elseif $enemyarousal gte ($enemyarousalmax / 5) * 2>>
+				<<if $arousal gte ($arousalmax / 5) * 4>>
+					당신의 항문은 두 자지에게 가차없이 박힌다. 본능에 이끌려, 당신은 <<analtext>> 절정에 달할 때까지 같이 누른다.
+				<<elseif $arousal gte ($arousalmax / 5) * 2>>
+					당신의 항문은 두 자지에게 가차없이 박힌다. 당신은 <<analtext>> 움직임에 따라 같이 누른다.
+				<<else>>
+					당신의 항문은 두 자지에게 가차없이 박힌다. 당신은 <<analtext>> 뭔가 불편함을 줄이려 같이 누른다.
+				<</if>>
+			<<else>>
+				<<if $arousal gte ($arousalmax / 5) * 4>>
+					당신의 항문은 두 자지의 반복된 삽입에 굴복한다. 본능에 이끌려, 당신은 <<analtext>> 절정에 달할 때까지 같이 누른다.
+				<<elseif $arousal gte ($arousalmax / 5) * 2>>
+					당신의 항문은 두 자지의 반복된 삽입에 굴복한다. 당신은 <<analtext>> 움직임에 따라 같이 누른다.
+				<<else>>
+					당신의 항문은 두 자지의 반복된 삽입에 굴복한다. 당신은 <<analtext>> 뭔가 불편함을 줄이려 같이 누른다.
+				<</if>>
+			<</if>>
+		<<else>>
+			<<if $enemyarousal gte ($enemyarousalmax / 5) * 4>>
+				<<if $arousal gte ($arousalmax / 5) * 4>>
+					당신의 항문은 무자비하게 따먹힌다. 본능에 이끌려, 당신은 <<analtext>> 절정에 달할 때까지 같이 누른다.
+				<<elseif $arousal gte ($arousalmax / 5) * 2>>
+					당신의 항문은 무자비하게 따먹힌다. 당신은 <<analtext>> 움직임에 따라 같이 누른다.
+				<<else>>
+					당신의 항문은 무자비하게 따먹힌다. 당신은 <<analtext>> 뭔가 불편함을 줄이려 같이 누른다.
+				<</if>>
+			<<elseif $enemyarousal gte ($enemyarousalmax / 5) * 2>>
+				<<if $arousal gte ($arousalmax / 5) * 4>>
+					당신의 항문은 끊임없이 박힌다. 본능에 이끌려, 당신은 <<analtext>> 절정에 달할 때까지 같이 누른다.
+				<<elseif $arousal gte ($arousalmax / 5) * 2>>
+					당신의 항문은 끊임없이 박힌다. 당신은 <<analtext>> 움직임에 따라 같이 누른다.
+				<<else>>
+					당신의 항문은 끊임없이 박힌다. 당신은 <<analtext>> 뭔가 불편함을 줄이려 같이 누른다.
+				<</if>>
+			<<else>>
+				<<if $arousal gte ($arousalmax / 5) * 4>>
+					당신의 항문은 반복된 삽입에 굴복한다. 본능에 이끌려, 당신은 <<analtext>> 절정에 달할 때까지 같이 누른다.
+				<<elseif $arousal gte ($arousalmax / 5) * 2>>
+					당신의 항문은 반복된 삽입에 굴복한다. 당신은 <<analtext>> 움직임에 따라 같이 누른다.
+				<<else>>
+					당신의 항문은 반복된 삽입에 굴복한다. 당신은 <<analtext>> 뭔가 불편함을 줄이려 같이 누른다.
+				<</if>>
+			<</if>>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "actionsanusdoubleedging">>
+	<<set _dap to 0>>
+	/* State 1 is out of sync, state 2 in in sync */
+	<<if $NPCList[$anustarget].penis isnot "anusdouble" or $NPCList[$anusdoubletarget].penis isnot "anusdouble">>
+		<<set _dap to 1>>
+	<<else>>
+		<<set _dap to 2>>
+	<</if>>
+	<<if $anusaction is "doubleimminent">>
+		<<if $arousal gte ($arousalmax / 5) * 4>>
+			반쯤은 본능에 이끌려, 당신은 <<analtext>> 항문을 그들의 자지에 비벼 흥분을 제어하려다 당신도 오르가즘에 도달하려 한다.
+		<<elseif $arousal gte ($arousalmax / 5) * 2>>
+			당신은 <<analtext>> 항문을 그들의 자지에 비벼 흥분을 제어하려고 한다.
+		<<else>>
+			당신은 <<analtext>> 항문을 그들의 자지에 비벼 흥분을 제어하려고 하며, 당신의 불쾌감을 완화시키려 한다.
+		<</if>>
+	<<else>>
+		<<if _dap is 2>>
+			<<if $enemytype is "beast">>
+				/* Beasts are only encountered individually. This is futureproofing */
+				<<if $enemyarousal gte ($enemyarousalmax / 5) * 4>>
+					<<beasttype_un>> 당신의 항문에 잔인하게 넣었다 뺐다 하면서 박는다.
+				<<elseif $enemyarousal gte ($enemyarousalmax / 5) * 2>>
+					<<beasttype_un>> 당신의 항문에 가차없이 박는다.
+				<<else>>
+					<<beasttype_un>> 당신의 항문에 리드미컬하게 박는다.
+				<</if>>
+			<<else>>
+				<<if $enemyarousal gte ($enemyarousalmax / 5) * 4>>
+					당신의 항문은 두 자지에게 무자비하게 따먹힌다.
+				<<elseif $enemyarousal gte ($enemyarousalmax / 5) * 2>>
+					당신의 항문은 두 자지에게 가차없이 박힌다.
+				<<else>>
+					당신의 항문은 두 자지의 반복된 삽입에 굴복한다.
+				<</if>>
+			<</if>>
+		<<else>>
+			<<if $enemytype is "beast">>
+				/* Beasts are only encountered individually. This is futureproofing */
+				<<if $enemyarousal gte ($enemyarousalmax / 5) * 4>>
+					<<beasttype_un>> 당신의 항문에 잔인하게 넣었다 뺐다 하면서 박는다.
+				<<elseif $enemyarousal gte ($enemyarousalmax / 5) * 2>>
+					<<beasttype_un>> 당신의 항문에 가차없이 박는다.
+				<<else>>
+					<<beasttype_un>> 당신의 항문에 리드미컬하게 박는다.
+				<</if>>
+			<<else>>
+				<<if $enemyarousal gte ($enemyarousalmax / 5) * 4>>
+					당신의 항문은 무자비하게 따먹힌다.
+				<<elseif $enemyarousal gte ($enemyarousalmax / 5) * 2>>
+					당신의 항문은 가차없이 박힌다.
+				<<else>>
+					당신의 항문은 반복된 삽입에 굴복한다.
+				<</if>>
+			<</if>>
+		<</if>>
+		<<if $arousal gte ($arousalmax / 5) * 4>>
+			반쯤은 본능에 이끌려, 당신은 <<analtext>> 항문을 움직여 그들의 흥분을 제어하려다 당신도 오르가즘에 도달하려 한다.
+		<<elseif $arousal gte ($arousalmax / 5) * 2>>
+			당신은 <<analtext>> 항문을 움직여 두 자지로 인한 그들의 흥분을 제어하려고 한다.
+		<<else>>
+			당신은 <<analtext>> 항문을 움직여 두 자지로 인한 그들의 흥분을 제어하며, 당신의 불쾌감을 완화시키려 한다.
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "actionsanusdoubletake">>
+		<<set _dap to 0>>
+		/* State 1 is out of sync, state 2 is in sync */
+		<<if $NPCList[$anustarget].penis isnot "anusdouble" or $NPCList[$anusdoubletarget].penis isnot "anusdouble">>
+			<<set _dap to 1>>
+		<<else>>
+			<<set _dap to 2>>
+		<</if>>
+	
+	<<if _dap is 2>>
+		/* Beasts are only encountered individually. This is futureproofing */
+		<<if $enemytype is "beast">>
+			<<if $enemyarousal gte ($enemyarousalmax / 5) * 4>>
+				<<if $arousal gte ($arousalmax / 5) * 4>>
+					<<beasttype_un>> 당신의 항문에 잔인하게 넣었다 뺐다 하면서 박는다.
+				<<elseif $arousal gte ($arousalmax / 5) * 2>>
+					<<beasttype_un>> 당신의 항문에 잔인하게 넣었다 뺐다 하면서 박는다.
+				<<else>>
+					<<beasttype_un>> 당신의 항문에 잔인하게 넣었다 뺐다 하면서 박는다.
+				<</if>>
+			<<elseif $enemyarousal gte ($enemyarousalmax / 5) * 2>>
+				<<if $arousal gte ($arousalmax / 5) * 4>>
+					<<beasttype_un>> 당신의 항문에 가차없이 박는다.
+				<<elseif $arousal gte ($arousalmax / 5) * 2>>
+					<<beasttype_un>> 당신의 항문에 가차없이 박는다.
+				<<else>>
+					<<beasttype_un>> 당신의 항문에 가차없이 박는다.
+				<</if>>
+			<<else>>
+				<<if $arousal gte ($arousalmax / 5) * 4>>
+					<<beasttype_un>> 당신의 항문에 리드미컬하게 박는다.
+				<<elseif $arousal gte ($arousalmax / 5) * 2>>
+					<<beasttype_un>> 당신의 항문에 리드미컬하게 박는다.
+				<<else>>
+					<<beasttype_un>> 당신의 항문에 리드미컬하게 박는다.
+				<</if>>
+			<</if>>
+		<<else>>
+			<<if $enemyarousal gte ($enemyarousalmax / 5) * 4>>
+				<<if $arousal gte ($arousalmax / 5) * 4>>
+					당신의 항문은 두 자지에게 무자비하게 유린당한다.
+				<<elseif $arousal gte ($arousalmax / 5) * 2>>
+					당신의 항문은 두 자지에게 무자비하게 따먹힌다.
+				<<else>>
+					당신의 항문은 두 자지에게 무자비하게 따먹힌다.
+				<</if>>
+			<<elseif $enemyarousal gte ($enemyarousalmax / 5) * 2>>
+				<<if $arousal gte ($arousalmax / 5) * 4>>
+					당신의 항문은 두 자지에게 가차없이 박힌다.
+				<<elseif $arousal gte ($arousalmax / 5) * 2>>
+					당신의 항문은 두 자지에게 가차없이 박힌다.
+				<<else>>
+					당신의 항문은 두 자지에게 가차없이 박힌다.
+				<</if>>
+			<<else>>
+				<<if $arousal gte ($arousalmax / 5) * 4>>
+					당신의 항문은 두 자지의 반복된 삽입에 굴복한다.
+				<<elseif $arousal gte ($arousalmax / 5) * 2>>
+					당신의 항문은 두 자지의 반복된 삽입에 굴복한다.
+				<<else>>
+					당신의 항문은 두 자지의 반복된 삽입에 굴복한다.
+				<</if>>
+			<</if>>
+		<</if>>
+	<<else>>
+		<<if $enemytype is "beast">>
+			/* Beasts are only encountered individually. This is futureproofing */
+			<<if $enemyarousal gte ($enemyarousalmax / 5) * 4>>
+				<<if $arousal gte ($arousalmax / 5) * 4>>
+					<<beasttype_un>> 당신의 항문에 잔인하게 넣었다 뺐다 하면서 박는다.
+				<<elseif $arousal gte ($arousalmax / 5) * 2>>
+					<<beasttype_un>> 당신의 항문에 잔인하게 넣었다 뺐다 하면서 박는다.
+				<<else>>
+					<<beasttype_un>> 당신의 항문에 잔인하게 넣었다 뺐다 하면서 박는다.
+				<</if>>
+			<<elseif $enemyarousal gte ($enemyarousalmax / 5) * 2>>
+				<<if $arousal gte ($arousalmax / 5) * 4>>
+					<<beasttype_un>> 당신의 항문에 가차없이 박는다.
+				<<elseif $arousal gte ($arousalmax / 5) * 2>>
+					<<beasttype_un>> 당신의 항문에 가차없이 박는다.
+				<<else>>
+					<<beasttype_un>> 당신의 항문에 가차없이 박는다.
+				<</if>>
+			<<else>>
+				<<if $arousal gte ($arousalmax / 5) * 4>>
+					<<beasttype_un>> 당신의 항문에 리드미컬하게 박는다.
+				<<elseif $arousal gte ($arousalmax / 5) * 2>>
+					<<beasttype_un>> 당신의 항문에 리드미컬하게 박는다.
+				<<else>>
+					<<beasttype_un>> 당신의 항문에 리드미컬하게 박는다.
+				<</if>>
+			<</if>>
+		<<else>>
+			<<if $enemyarousal gte ($enemyarousalmax / 5) * 4>>
+				<<if $arousal gte ($arousalmax / 5) * 4>>
+					당신의 항문은 무자비하게 따먹힌다.
+				<<elseif $arousal gte ($arousalmax / 5) * 2>>
+					당신의 항문은 무자비하게 따먹힌다.
+				<<else>>
+					당신의 항문은 무자비하게 따먹힌다.
+				<</if>>
+			<<elseif $enemyarousal gte ($enemyarousalmax / 5) * 2>>
+				<<if $arousal gte ($arousalmax / 5) * 4>>
+					당신의 항문은 가차없이 박힌다.
+				<<elseif $arousal gte ($arousalmax / 5) * 2>>
+					당신의 항문은 가차없이 박힌다.
+				<<else>>
+					당신의 항문은 가차없이 박힌다.
+				<</if>>
+			<<else>>
+				<<if $arousal gte ($arousalmax / 5) * 4>>
+					당신의 항문은 반복된 삽입에 굴복한다.
+				<<elseif $arousal gte ($arousalmax / 5) * 2>>
+					당신의 항문은 반복된 삽입에 굴복한다.
+				<<else>>
+					당신의 항문은 반복된 삽입에 굴복한다.
+				<</if>>
+			<</if>>
+		<</if>>
+	<</if>>
+<</widget>>
+
 <<widget "actionsshaftrub">>
 <<if $enemytype is "beast">>
 	<<if $enemyarousal gte ($enemyarousalmax / 5) * 4>>
@@ -4200,12 +5297,12 @@ _otheraction _youraction
 <<else>>
 	<<if $consensual is 1>>
 		<<if $arousal lte ($arousalmax / 5) * 3>>
-			당신은 <<theirPost "의">> 자지를 손으로 꽉 잡고 <<handtext>> 기둥을 쓰다듬고 봉사한다.
+			당신은 <<their_yi _args[0]>> 자지를 손으로 꽉 잡고 <<handtext>> 기둥을 쓰다듬으며 애무한다.
 		<<else>>
-			당신은 <<theirPost "의">> 기둥을 손으로 꽉 잡고 <<handtext>> 문지른다.
+			당신은 <<their_yi _args[0]>> 자지를 손으로 꽉 잡고 <<handtext>> 문지른다.
 		<</if>>
 	<<else>>
-		당신은 <<theirPost "의">> 기둥을 손으로 차지하고, 손가락으로 <<handtext>> 봉사한다.
+		당신은 <<their_yi _args[0]>> 자지를 손으로 잡고, 손가락으로 <<handtext>> 애무한다.
 	<</if>>
 <</if>>
 <</widget>>
@@ -4213,79 +5310,395 @@ _otheraction _youraction
 <<widget "actionsvaginaescape">>
 <<if $enemytype is "beast">>
 	<<if $enemyanger lte 20>>
-		<span class="blue">당신은 골반을 움직여, 짐승의 탐색으로부터 당신을 관통하기 전에 <<pussyPost "을">> 때어 놓는다.</span> 하지만 녀석은 포기하지 않는다
+		<span class="blue">당신은 골반을 움직여, 짐승의 탐색으로부터 당신을 관통하기 전에 <<pussyPost "을">> 떼어놓는다.</span> 하지만 녀석은 포기하지 않는다
 	<<elseif $enemyanger lte 100>>
-		<span class="blue">당신은 골반을 움직여, 짐승의 끊임없는 탐색으로부터 당신을 관통하기 전에 <<pussyPost "을">> 때어 놓는다.</span> 녀석은 불만스러워하며 으르렁 거린다.
+		<span class="blue">당신은 골반을 움직여, 짐승의 끊임없는 탐색으로부터 당신을 관통하기 전에 <<pussyPost "을">> 떼어놓는다.</span> 녀석은 불만스러워하며 으르렁 거린다.
 	<<else>>
-		<span class="blue">당신은 골반을 움직여, 짐승의 야만적인 탐색으로부터 당신을 관통하기 전에 <<pussyPost "을">> 때어 놓는다.</span> 녀석은 번식을 방해한 시도에 격분하며, 몹시 화를 내며 다시 교미를 시도한다.
+		<span class="blue">당신은 골반을 움직여, 짐승의 야만적인 탐색으로부터 당신을 관통하기 전에 <<pussyPost "을">> 떼어놓는다.</span> 녀석은 번식을 방해한 시도에 격분하며, 몹시 화를 내며 다시 교미를 시도한다.
 	<</if>>
 <<else>>
 	<<if $pain lte 20>>
-		<span class="blue">당신은 골반을 움직여, <<theirPost "의">> 자지로부터 <<pussyPost "을">> 때어 놓는다.</span>
+		<span class="blue">당신은 골반을 움직여, <<their_yi _args[0]>> 자지로부터 <<pussyPost "을">> 떼어놓는다.</span>
 	<<elseif $pain lte 60>>
-		<span class="blue">당신은 골반을 움직여, <<theirPost "의">> 자지로부터 <<pussyPost "을">> 때어 놓는다.</span>
+		<span class="blue">당신은 골반을 움직여, <<their_yi _args[0]>> 자지로부터 <<pussyPost "을">> 떼어놓는다.</span>
 	<<else>>
-		<span class="blue">당신은 필사적으로 골반을 움직여, <<theirPost "의">> 자지로부터 <<pussyPost "을">> 때어 놓는다.</span>
+		<span class="blue">당신은 필사적으로 골반을 움직여, <<their_yi _args[0]>> 자지로부터 <<pussyPost "을">> 떼어놓는다.</span>
 	<</if>>
 <</if>>
+<</widget>>
+
+<<widget "actionsvaginadoubleescape">>
+	<<set $_penises to "자지들">>
+	<<if npcHasStrapon($vaginatarget) and npcHasStrapon($vaginadoubletarget)>>
+		<<set $_penises to "페니스 밴드 자지들">>
+	<<elseif npcHasStrapon($vaginatarget) and !npcHasStrapon($vaginadoubletarget) or !npcHasStrapon($vaginatarget) and npcHasStrapon($vaginadoubletarget)>>
+		<<set $_penises to "자지들">>
+	<</if>>
+	<<if $pain lte 20>>
+		<span class="blue">당신은 골반을 움직여, 그들의 $_penises로부터 <<pussyPost "을">> 떼어놓는다.</span>
+	<<elseif $pain lte 60>>
+		<span class="blue">당신은 골반을 움직여, 그들의 $_penises로부터 <<pussyPost "을">> 떼어놓는다.</span>
+	<<else>>
+		<span class="blue">당신은 필사적으로 골반을 움직여, 그들의 $_penises로부터 <<pussyPost "을">> 떼어놓는다.</span>
+	<</if>>
 <</widget>>
 
 <<widget "actionstribescape">>
 <<if $enemytype is "beast">>
 	<<if $enemyanger lte 20>>
-		<span class="blue">당신은 골반을 움직여, 당신의 <<pussyPost "을">> 짐승에게서 때어놓는다.</span> 그러나 녀석은 포기하지 않는다.
+		<span class="blue">당신은 골반을 움직여, 당신의 <<pussyPost "을">> 짐승에게서 떼어놓는다.</span> 그러나 녀석은 포기하지 않는다.
 	<<elseif $enemyanger lte 100>>
-		<span class="blue">당신은 골반을 움직여, 당신의 <<pussyPost "을">> 짐승에게서 때어놓는다.</span> 녀석은 불쾌해하며 으르렁거린다.
+		<span class="blue">당신은 골반을 움직여, 당신의 <<pussyPost "을">> 짐승에게서 떼어놓는다.</span> 녀석은 불쾌해하며 으르렁거린다.
 	<<else>>
-		<span class="blue">당신은 골반을 움직여, 당신의 <<pussyPost "을">> 짐승에게서 때어놓는다.</span> 녀석은 당신의 거절에 격분하며, 얻었던 것을 되찾으려 지독하게 다시 시도한다.
+		<span class="blue">당신은 골반을 움직여, 당신의 <<pussyPost "을">> 짐승에게서 떼어놓는다.</span> 녀석은 당신의 거절에 격분하며, 얻었던 것을 되찾으려 필사적으로 다시 시도한다.
 	<</if>>
 <<else>>
 	<<if $pain lte 20>>
-		<span class="blue">당신은 골반을 움직여, 당신의 <<pussyPost "을">> 때어놓는다.</span>
+		<span class="blue">당신은 골반을 움직여, 당신의 <<pussyPost "을">> 떼어놓는다.</span>
 	<<elseif $pain lte 60>>
-		<span class="blue">당신은 골반을 움직여, 당신의 <<pussyPost "을">> 때어놓는다.</span>
+		<span class="blue">당신은 골반을 움직여, 당신의 <<pussyPost "을">> 떼어놓는다.</span>
 	<<else>>
 		<span class="blue">당신은 필사적으로 골반을 움직여, 당신의 <<pussyPost "을">> 움직인다.</span>
 	<</if>>
 <</if>>
 <</widget>>
 
+<<widget "actionsfencingescape">>
+<<if $enemytype is "beast">>
+	<<if $enemyanger lte 20>>
+		<span class="blue">당신은 골반을 움직여, 당신의 <<penis_rul>> 짐승의 것에서 떼어놓는다.</span> 하지만 녀석은 포기하지 않는다
+	<<elseif $enemyanger lte 100>>
+		<span class="blue">당신은 골반을 움직여, 당신의 <<penis_rul>> 짐승의 것에서 떼어놓는다.</span> 녀석은 불만스러워하며 으르렁 거린다.
+	<<else>>
+		<span class="blue">당신은 골반을 움직여, 당신의 <<penis_rul>> 짐승의 것에서 떼어놓는다.</span> 녀석은 당신의 거절에 격분하며, 얻었던 것을 되찾으려 필사적으로 다시 시도한다.
+	<</if>>
+<<else>>
+	<<if $pain lte 20>>
+		<span class="blue">당신은 골반을 움직여, 당신의 <<penis_rul>> 떼어놓는다.</span>
+	<<elseif $pain lte 60>>
+		<span class="blue">당신은 골반을 움직여, 당신의 <<penis_rul>> 떼어놓는다.</span>
+	<<else>>
+		<span class="blue">당신은 필사적으로 골반을 움직여, 당신의 <<penis_rul>> 떼어놓는다.</span>
+	<</if>>
+<</if>>
+<</widget>>
+
 <<widget "actionspenisescape">>
 <<if $pain lte 20>>
-	<span class="blue">당신은 골반을 움직여, <<theirPost "의">> 보지로부터 <<penisPost "을">> 때어 놓는다.</span>
+	<span class="blue">당신은 골반을 움직여, <<their_yi _args[0]>> 보지로부터 <<penisPost "을">> 떼어놓는다.</span>
 <<elseif $pain lte 60>>
-	<span class="blue">당신은 골반을 움직여, <<theirPost "의">> 보지로부터 <<penisPost "을">> 때어 놓는다.</span>
+	<span class="blue">당신은 골반을 움직여, <<their_yi _args[0]>> 보지로부터 <<penisPost "을">> 떼어놓는다.</span>
 <<else>>
-	<span class="blue">당신은 필사적으로 골반을 움직여, <<theirPost "의">> 자지로부터 <<penisPost "을">> 때어 놓는다.</span>
+	<span class="blue">당신은 필사적으로 골반을 움직여, <<their_yi _args[0]>> 자지로부터 <<penisPost "을">> 떼어놓는다.</span>
 <</if>>
 <</widget>>
 
 <<widget "actionsotheranusescape">>
 <<if $pain lte 20>>
-	<span class="blue">당신은 골반을 움직여, <<theirPost "의">> 엉덩이로부터 <<penisPost "을">> 때어 놓는다.</span>
+	<span class="blue">당신은 골반을 움직여, <<their_yi _args[0]>> 항문으로부터 <<penisPost "을">> 떼어놓는다.</span>
 <<elseif $pain lte 60>>
-	<span class="blue">당신은 골반을 움직여, <<theirPost "의">> 엉덩이로부터 <<penisPost "을">> 때어 놓는다.</span>
+	<span class="blue">당신은 골반을 움직여, <<their_yi _args[0]>> 항문으로부터 <<penisPost "을">> 떼어놓는다.</span>
 <<else>>
-	<span class="blue">당신은 필사적으로 골반을 움직여, <<theirPost "의">> 엉덩이로부터 <<penisPost "을">> 때어 놓는다.</span>
+	<span class="blue">당신은 필사적으로 골반을 움직여, <<their_yi _args[0]>> 항문으로부터 <<penisPost "을">> 떼어놓는다.</span>
 <</if>>
 <</widget>>
 
 <<widget "actionsanusescape">>
 <<if $enemytype is "beast">>
 	<<if $enemyanger lte 20>>
-		<span class="blue">당신은 골반을 움직여, 짐승의 탐색으로부터 당신을 관통하기 전에 <<bottomPost "을">> 때어 놓는다.</span> 하지만 녀석은 포기하지 않는다
+		<span class="blue">당신은 골반을 움직여, 짐승의 탐색으로부터 당신을 관통하기 전에 <<bottomPost "을">> 떼어놓는다.</span> 하지만 녀석은 포기하지 않는다
 	<<elseif $enemyanger lte 100>>
-		<span class="blue">당신은 골반을 움직여, 짐승의 끊임없는 탐색으로부터 당신을 관통하기 전에 <<bottomPost "을">> 때어 놓는다.</span> 녀석은 불만스러워하며 으르렁 거린다.
+		<span class="blue">당신은 골반을 움직여, 짐승의 끊임없는 탐색으로부터 당신을 관통하기 전에 <<bottomPost "을">> 떼어놓는다.</span> 녀석은 불만스러워하며 으르렁 거린다.
 	<<else>>
-		<span class="blue">당신은 골반을 움직여, 짐승의 야만적인 탐색으로부터 당신을 관통하기 전에 <<bottomPost "을">> 때어 놓는다.</span> 녀석은 번식을 방해한 시도에 격분하며, 몹시 화를 내며 다시 교미를 시도한다.
+		<span class="blue">당신은 골반을 움직여, 짐승의 야만적인 탐색으로부터 당신을 관통하기 전에 <<bottomPost "을">> 떼어놓는다.</span> 녀석은 번식을 방해한 시도에 격분하며, 몹시 화를 내며 다시 교미를 시도한다.
 	<</if>>
 <<else>>
 	<<if $pain lte 20>>
-		<span class="blue">당신은 골반을 움직여, <<theirPost "의">> 자지로부터 <<bottomPost "을">> 때어 놓는다.</span>
+		<span class="blue">당신은 골반을 움직여, <<their_yi _args[0]>> 자지로부터 <<bottomPost "을">> 떼어놓는다.</span>
 	<<elseif $pain lte 60>>
-		<span class="blue">당신은 골반을 움직여, <<theirPost "의">> 자지로부터 <<bottomPost "을">> 때어 놓는다.</span>
+		<span class="blue">당신은 골반을 움직여, <<their_yi _args[0]>> 자지로부터 <<bottomPost "을">> 떼어놓는다.</span>
 	<<else>>
-		<span class="blue">당신은 필사적으로 골반을 움직여, <<theirPost "의">> 자지로부터 <<bottomPost "을">> 때어 놓는다.</span>
+		<span class="blue">당신은 필사적으로 골반을 움직여, <<their_yi _args[0]>> 자지로부터 <<bottomPost "을">> 떼어놓는다.</span>
 	<</if>>
 <</if>>
+<</widget>>
+
+<<widget "actionsanusdoubleescape">>
+	<<set $_penises to "자지들">>
+	<<if npcHasStrapon($anustarget) and npcHasStrapon($anusdoubletarget)>>
+		<<set $_penises to "페니스 밴드 자지들">>
+	<<elseif npcHasStrapon($anustarget) and !npcHasStrapon($anusdoubletarget) or !npcHasStrapon($anustarget) and npcHasStrapon($anusdoubletarget)>>
+		<<set $_penises to "자지들">>
+	<</if>>
+	<<if $pain lte 20>>
+		<span class="blue">당신은 골반을 움직여, <<their_yi>> $_penises로부터 <<bottomPost "을">> 떼어놓는다.</span>
+	<<elseif $pain lte 60>>
+		<span class="blue">당신은 골반을 움직여, <<their_yi>> $_penises로부터 <<bottomPost "을">> 떼어놓는다.</span>
+	<<else>>
+		<span class="blue">당신은 필사적으로 골반을 움직여, <<their_yi>> $_penises로부터 <<bottomPost "을">> 떼어놓는다.</span>
+	<</if>>
+<</widget>>
+
+<<widget "actionsconfront">>
+<<if $angel gte 6 and random(1, 2) is 2>>
+    <<set _rng to random(1, 3)>>
+    <<switch _rng>>
+        <<case 1>>
+			"제발 당신 자신을 타락시키지 말아요," 당신은 말한다. "천사들이 보고 있어요."
+        <<case 2>>
+			"나는 당신이 나를 아프게 한다 해도 당신을 용서할 거에요," 당신은 말한다. "하지만 악마들은 그렇지 않아요."
+        <<case 3>>
+			당신은 조용히 기도를 중얼거린다.
+    <</switch>>
+<<elseif $fallenangel gte 2 and random(1, 2) is 2>>
+    <<set _rng to random(1, 3)>>
+    <<switch _rng>>
+        <<case 1>>
+			"당신도 나를 아프게 할 거겠지," 당신은 웃는다. "그렇지 않아?"
+        <<case 2>>
+			"나-나를 만지지 마," 당신은 말한다. "지금은 안돼. 다시는 안돼."
+        <<case 3>>
+			"나-나를 아프게 하지 마," 당신은 말한다. "제발 안돼."
+    <</switch>>
+<<elseif $demon gte 6 and random(1, 2) is 2>>
+    <<set _rng to random(1, 3)>>
+    <<switch _rng>>
+        <<case 1>>
+			"당신도 나를 '잡아먹을' 건가?" 당신은 히죽 웃으며 묻는다. "맛있겠는걸."
+        <<case 2>>
+			"눈을 떼지 못하시겠지," 당신은 말한다. "걱정 마. 거기에 익숙해졌으니까."
+        <<case 3>>
+			"해 보지 그래," 당신은 말한다. "나는 배고프거든."
+    <</switch>>
+<<elseif $wolfgirl gte 6 and random(1, 2) is 2>>
+    <<set _rng to random(1, 3)>>
+    <<switch _rng>>
+        <<case 1>>
+			"가까이 와 봐," 당신은 말한다. "와 보라고." 당신은 당신의 노출된 송곳니 위로 혀를 빠르게 움직인다.
+        <<case 2>>
+			당신은 으르렁거린다.
+        <<case 3>>
+			"나는 혼자일 지도 모르지만," 당신은 말한다. "하지만 외로운 늑대라도 여전히 위험하다고."
+    <</switch>>
+<<elseif $cat gte 6 and random(1, 2) is 2>>
+    <<set _rng to random(1, 3)>>
+    <<switch _rng>>
+        <<case 1>>
+			"나는 무력하지 않아," 당신은 말한다. "한번 해 봐." 당신은 당신의 노출된 송곳니 위로 혀를 빠르게 움직인다.
+        <<case 2>>
+			당신은 쉬익 하는 소리를 낸다.
+        <<case 3>>
+			"가까이 와 봐," 당신은 말한다. "이 발톱을 사용하고 싶어 근질거리던 참이니까."
+    <</switch>>
+<<elseif $cow gte 6 and random(1, 2) is 2>>
+    <<set _rng to random(1, 3)>>
+    <<switch _rng>>
+        <<case 1>>
+			"나는 무력하지 않아," 당신은 말한다. "떨어져, 그렇지 않으면 너를 들이받겠어."
+        <<case 2>>
+			"내가 상품이라는 것은 알아," 당신은 말한다. "하지만 무언가 시도한다면 후회하게 될거야."
+        <<case 3>>
+			"항상 내 모유를 원하지," 당신은 혀를 찬다. "하지만 너는 그걸 얻지는 못할 걸."
+    <</switch>>
+<<elseif $harpy gte 6 and random(1, 2) is 2>>
+    <<set _rng to random(1, 3)>>
+    <<switch _rng>>
+        <<case 1>>
+			당신은 끼익 하는 소리를 낸다.
+        <<case 2>>
+			"아무 짓도 시도하지 마," 당신은 말한다. "내 짝이 기뻐하지 않을 테고, 나는 너를 기억할 거니까."
+        <<case 3>>
+			"너무 가까이 오면 너를 쪼아버릴 거야," 당신은 말한다. "내가 하지 못할거라고는 생각하지 말라고."
+    <</switch>>
+<<elseif $anxiety gte 1 and $controlled is 0>>
+	<<set _rng to random(1, 3)>>
+	<<switch _rng>>
+		<<case 1>>
+			당신은 무언가 말하려 하지만, 공포가 당신의 목소리를 장악한다.
+		<<case 2>>
+			당신은 말을 찾을 수가 없다. 당신 가슴의 심장이 천둥처럼 고동친다.
+		<<case 3>>
+			공포가 당신의 생각을 갉아먹는다.
+	<</switch>>
+	<<gstress>><<stress 6>>
+<<else>>
+    <<set _rng to random(1, 5)>>
+    <<if $submissive gte 1150>>
+        <<switch _rng>>
+            <<case 1>>
+				"뒤-뒤로 물러나요," 당신은 말한다. "나-나는 나 자신을 방어할 수 있어요."
+            <<case 2>>
+				"제발 가까이 오지 말아줘요," 당신은 말한다.
+            <<case 3>>
+				"나를 아프게 하지 말아요," 당신은 말한다. "제발 안돼요."
+            <<case 4>>
+				"나를 만지면 골치 아플 거에요," 당신은 말한다.
+            <<case 5>>
+				"아무 것도 시도하지 말아요," 당신은 말한다. "사-사람들이 내가 여기 있다는 걸 알아요."
+        <</switch>>
+    <<elseif $submissive lte 850>>
+        <<switch _rng>>
+            <<case 1>>
+				"씨발 물러나 있어," 당신은 말한다. "그렇지 않으면 내가 후회하게 해 줄 거야."
+            <<case 2>>
+				"나를 만지면 네 엉덩이를 차 줄 거야," 당신은 말한다.
+            <<case 3>>
+				"뭘 쳐다봐?" 당신은 묻는다.
+            <<case 4>>
+				"계속 걸어가," 당신은 말한다. "그렇지 않으면 네 얼굴을 박살내 줄 거야."
+            <<case 5>>
+				"뭔가 할 생각도 하지 마," 당신은 말한다. "너보다 더 한 인간쓰레기도 처리한 적 있으니까."
+        <</switch>>
+    <<else>>
+        <<switch _rng>>
+            <<case 1>>
+				"가까이 오지 마," 당신은 말한다. "그렇지 않으면 후회할 거야."
+            <<case 2>>
+				"만지지 마," 당신은 말한다. "그렇지 않으면 고생할 거야."
+            <<case 3>>
+				"아무것도 시도하지 마," 당신은 말한다.
+            <<case 4>>
+				"나는 내 자신을 어떻게 돌보는지 알고 있어," 당신은 말한다. "감히 무언가 할 생각 말라고."
+            <<case 5>>
+				"계속 가," 당신은 말한다. "나는 무력하지 않아."
+        <</switch>>
+    <</if>>
+<</if>>
+<</widget>>
+
+<<widget "actionsconfrontNNPC">>
+	<<if ($loveInterest.primary is $NPCList[0].fullDescription or $loveInterest.secondary is $NPCList[0].fullDescription) and random(1)>>
+		<<if $submissive gte 1150>>
+			"거-거기 있는 사람, <<trNamedNPC $NPCList[0].fullDescription>>_trResult?" 당신은 묻는다.
+		<<elseif $submissive lte 850>>
+			"뭘 원해, <<trNamedNPC $NPCList[0].fullDescription>>_trResult?" 당신은 따진다.
+		<<else>>
+			"<<trNamedNPC $NPCList[0].fullDescription>>_trResult?" 당신은 말한다.
+		<</if>>
+	<<else>>
+		<<switch $NPCList[0].fullDescription>>
+			<<case "Whitney">>
+				<<if $whitneyromance is 1>>
+					<<if $submissive gte 1150>>
+						<<switch random(1, 3)>>
+							<<case 3>>
+								당신은 침을 꿀꺽 삼킨다. "나를 괴롭히지 않을 거지, 그렇지?"
+							<<case 2>>
+								"네 <<girlfriend_rul>> 괴롭히지는 않겠지," 당신은 더듬거린다. "그-그렇지?"
+							<<case 1>>
+								"부드럽게 해 줘, 휘트니..." 당신은 애원한다.
+						<</switch>>
+					<<elseif $submissive lte 850>>
+						<<switch random(1, 3)>>
+							<<case 3>>
+								"우리가 데이트한다고 나를 깔아뭉갤 수 있다고 생각하는 건 아니겠지," 당신은 말한다.
+							<<case 2>>
+								"나는 누구의 소유물도 아냐," 당신은 말한다. "특히 네 것은 아니지."
+							<<case 1>>
+								"네가 잡담이나 하자고 여기까지 온 것이 아니라는 것은 알아," 당신은 말한다.
+						<</switch>>
+					<<else>>
+						<<switch random(1, 3)>>
+							<<case 3>>
+								"네 <<girlfriend_rul>> 괴롭히지는 않겠지," 당신은 말한다.
+							<<case 2>>
+								"네가 뭘 원하는지 알겠어," 당신은 한숨을 쉰다.
+							<<case 1>>
+								"나는 장난감이 아니야," 당신은 말한다.
+						<</switch>>
+					<</if>>
+				<<else>>
+					<<if $submissive gte 1150>>
+						<<switch random(1, 3)>>
+							<<case 3>>
+								당신은 고개를 숙인다. "그냥... 너무 거칠지 않게 해 줘."
+							<<case 2>>
+								"제발," 당신은 말한다. "나를 내버려 둬!"
+							<<case 1>>
+								"나는 괴롭힘 당하지 않을 거야," 당신은 중얼거린다.
+						<</switch>>
+					<<elseif $submissive lte 850>>
+						<<switch random(1, 3)>>
+							<<case 3>>
+								"조심하라고," 당신은 경고한다. "이 주위에는 너를 도와줄 선생이 없어."
+							<<case 2>>
+								"왜 네 패배자 친구들에게로 기어 돌아가지 않지?" 당신은 말한다.
+							<<case 1>>
+								"무언가 시도한다면 네 엉덩이를 차 주지," 당신은 말한다.
+						<</switch>>
+					<<else>>
+						<<switch random(1, 3)>>
+							<<case 3>>
+								"네가 나를 괴롭히게 두지 않을 거야," 당신은 말한다.
+							<<case 2>>
+								"무엇을 입증하려고 하는 거지?" 당신은 말한다.
+							<<case 1>>
+								"하기만 해 봐," 당신은 말한다.
+						<</switch>>
+					<</if>>
+				<</if>>
+			<<case "Eden">>
+				<<if $syndromeeden is 1>>
+					<<if $submissive gte 1150>>
+						<<switch random(1, 3)>>
+							<<case 3>>
+								당신은 고개를 숙인다. "저한테 화났어요...?"
+							<<case 2>>
+								"에덴, 겁주지 말아요," 당신은 훌쩍인다.
+							<<case 1>>
+								당신은 침을 꿀꺽 삼킨다. "왜-왜 저를 마치 사냥감 보듯이 보고 있는 거죠?"
+						<</switch>>
+					<<elseif $submissive lte 850>>
+						<<switch random(1, 3)>>
+							<<case 3>>
+								"여기서 도대체 뭘 하고 있는 거에요?" 당신은 따진다.
+							<<case 2>>
+								"집에 가고 싶어지면 집에 갈 거에요," 당신은 말한다.
+							<<case 1>>
+								"내가 고깃덩이인 것 처럼 그만 쳐다봐요," 당신은 따진다.
+						<</switch>>
+					<<else>>
+						<<switch random(1, 3)>>
+							<<case 3>>
+								"집에서 멀리 나왔네요," 당신은 말한다.
+							<<case 2>>
+								"여기서 무엇을 하고 있는 거에요?" 당신은 묻는다.
+							<<case 1>>
+								"얼마나 오랫동안 저를 따라온 거에요?" 당신은 묻는다.
+						<</switch>>
+					<</if>>
+				<<else>>
+					<<if $submissive gte 1150>>
+						<<switch random(1, 3)>>
+							<<case 3>>
+								"가버려요!" 당신은 울부짖는다. "당신은 무서워요!"
+							<<case 2>>
+								"제발 쏘지 말아요!" 당신은 울부짖는다.
+							<<case 1>>
+								"저는 동물이 아니에요!" 당신은 울부짖는다.
+						<</switch>>
+					<<elseif $submissive lte 850>>
+						<<switch random(1, 3)>>
+							<<case 3>>
+								"저는 누군가의 사냥감이 아니에요," 당신은 으르렁거린다.
+							<<case 2>>
+								"당신의 지저분한 낡은 오두막으로 돌아가 버려요," 당신은 고함친다.
+							<<case 1>>
+								"더 가까이 오기만 하면," 당신은 말한다. "그 총을 <<if $analdisable is "f">>당신의 항문에<<else>>당신의 목구멍 속에<</if>> 쑤셔넣을 거에요."
+						<</switch>>
+					<<else>>
+						<<switch random(1, 3)>>
+							<<case 3>>
+								"그 총 내려놓아요," 당신은 말한다.
+							<<case 2>>
+								"돌아가서 사슴이나 쫓아요," 당신은 말한다.
+							<<case 1>>
+								"저는 무력한 동물이 아니에요," 당신은 말한다.
+						<</switch>>
+					<</if>>
+				<</if>>
+			<<default>>
+				<<actionsconfront>>
+		<</switch>>
+	<</if>>
 <</widget>>

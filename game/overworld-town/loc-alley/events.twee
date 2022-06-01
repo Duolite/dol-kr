@@ -39,22 +39,22 @@
 
 	아무도 당신을 돕지 않는다.
 	<<set $alarm to 0>>
-	<<if $drugged gte 1>>약에 취해서, 당신은 납득이 가지 않을 정도로 울고 있다.<</if>>
+	<<if $drugged gte 1>>약에 취한 상태로는, 당신의 비명소리는 별로 설득력 있게 들리지 않는다.<</if>>
 	<br><br>
 	<<if $enemyarousal gte $enemyarousalmax>>
-		<span id="next"><<link [[다음으로->Industrial Ejaculation]]>><</link>></span><<nexttext>>
+		<span id="next"><<link [[다음->Industrial Ejaculation]]>><</link>></span><<nexttext>>
 	<<elseif $enemyhealth lte 0>>
-		<span id="next"><<link [[다음으로->Industrial Escape]]>><</link>></span><<nexttext>>
+		<span id="next"><<link [[다음->Industrial Escape]]>><</link>></span><<nexttext>>
 	<<else>>
-		<span id="next"><<link [[다음으로->Molestation Industrial]]>><</link>></span><<nexttext>>
+		<span id="next"><<link [[다음->Molestation Industrial]]>><</link>></span><<nexttext>>
 	<</if>>
 
 <<elseif $enemyarousal gte $enemyarousalmax>>
-	<span id="next"><<link [[다음으로->Industrial Ejaculation]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음->Industrial Ejaculation]]>><</link>></span><<nexttext>>
 <<elseif $enemyhealth lte 0>>
-	<span id="next"><<link [[다음으로->Industrial Escape]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음->Industrial Escape]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link [[다음으로->Molestation Industrial]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음->Molestation Industrial]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: Industrial Ejaculation
@@ -111,22 +111,22 @@
 
 	아무도 당신을 돕지 않는다.
 	<<set $alarm to 0>>
-	<<if $drugged gte 1>>약에 취해서, 당신은 납득이 가지 않을 정도로 울고 있다.<</if>>
+	<<if $drugged gte 1>>약에 취한 상태로는, 당신의 비명소리는 별로 설득력 있게 들리지 않는다.<</if>>
 	<br><br>
 	<<if $enemyarousal gte $enemyarousalmax>>
-		<span id="next"><<link [[다음으로->Alley Ejaculation]]>><</link>></span><<nexttext>>
+		<span id="next"><<link [[다음->Alley Ejaculation]]>><</link>></span><<nexttext>>
 	<<elseif $enemyhealth lte 0>>
-		<span id="next"><<link [[다음으로->Alley Escape]]>><</link>></span><<nexttext>>
+		<span id="next"><<link [[다음->Alley Escape]]>><</link>></span><<nexttext>>
 	<<else>>
-		<span id="next"><<link [[다음으로->Molestation alley]]>><</link>></span><<nexttext>>
+		<span id="next"><<link [[다음->Molestation alley]]>><</link>></span><<nexttext>>
 	<</if>>
 
 <<elseif $enemyarousal gte $enemyarousalmax>>
-	<span id="next"><<link [[다음으로->Alley Ejaculation]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음->Alley Ejaculation]]>><</link>></span><<nexttext>>
 <<elseif $enemyhealth lte 0>>
-	<span id="next"><<link [[다음으로->Alley Escape]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음->Alley Escape]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link [[다음으로->Molestation alley]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음->Molestation alley]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: Molestation Commercial
@@ -148,22 +148,22 @@
 
 	아무도 당신을 돕지 않는다.
 	<<set $alarm to 0>>
-	<<if $drugged gte 1>>약에 취해서, 당신은 납득이 가지 않을 정도로 울고 있다.<</if>>
+	<<if $drugged gte 1>>약에 취한 상태로는, 당신의 비명소리는 별로 설득력 있게 들리지 않는다.<</if>>
 	<br><br>
 	<<if $enemyarousal gte $enemyarousalmax>>
-		<span id="next"><<link [[다음으로->Commercial Ejaculation]]>><</link>></span><<nexttext>>
+		<span id="next"><<link [[다음->Commercial Ejaculation]]>><</link>></span><<nexttext>>
 	<<elseif $enemyhealth lte 0>>
-		<span id="next"><<link [[다음으로->Commercial Escape]]>><</link>></span><<nexttext>>
+		<span id="next"><<link [[다음->Commercial Escape]]>><</link>></span><<nexttext>>
 	<<else>>
-		<span id="next"><<link [[다음으로->Molestation Commercial]]>><</link>></span><<nexttext>>
+		<span id="next"><<link [[다음->Molestation Commercial]]>><</link>></span><<nexttext>>
 	<</if>>
 
 <<elseif $enemyarousal gte $enemyarousalmax>>
-	<span id="next"><<link [[다음으로->Commercial Ejaculation]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음->Commercial Ejaculation]]>><</link>></span><<nexttext>>
 <<elseif $enemyhealth lte 0>>
-	<span id="next"><<link [[다음으로->Commercial Escape]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음->Commercial Escape]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link [[다음으로->Molestation Commercial]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음->Molestation Commercial]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: Commercial Ejaculation
@@ -209,7 +209,7 @@
 	<<molested>>
 	<<strangeman2init>>
 <</if>>
-<<if $phase is 1>><<set $rescue to 1>><</if>>
+<<if $phase is 1>><<enable_rescue>><</if>>
 <<effects>>
 <<effectsman>><<man>>
 <<stateman>>
@@ -217,26 +217,26 @@
 <<actionsman>>
 <<if $alarm is 1>>
 	<<if $rescue is 1>>
-		<span id="next"><<link [[다음으로->Residential Alarm]]>><</link>></span><<nexttext>>
+		<span id="next"><<link [[다음->Residential Alarm]]>><</link>></span><<nexttext>>
 	<<else>>
 		아무도 당신을 돕지 않는다.
 		<<set $alarm to 0>>
-		<<if $drugged gte 1>>약에 취해서, 당신은 납득이 가지 않을 정도로 울고 있다.<</if>>
+		<<if $drugged gte 1>>약에 취한 상태로는, 당신의 비명소리는 별로 설득력 있게 들리지 않는다.<</if>>
 		<br><br>
 		<<if $enemyarousal gte $enemyarousalmax>>
-			<span id="next"><<link [[다음으로->Residential Ejaculation]]>><</link>></span><<nexttext>>
+			<span id="next"><<link [[다음->Residential Ejaculation]]>><</link>></span><<nexttext>>
 		<<elseif $enemyhealth lte 0>>
-			<span id="next"><<link [[다음으로->Residential Escape]]>><</link>></span><<nexttext>>
+			<span id="next"><<link [[다음->Residential Escape]]>><</link>></span><<nexttext>>
 		<<else>>
-			<span id="next"><<link [[다음으로->Molestation Residential]]>><</link>></span><<nexttext>>
+			<span id="next"><<link [[다음->Molestation Residential]]>><</link>></span><<nexttext>>
 		<</if>>
 	<</if>>
 <<elseif $enemyarousal gte $enemyarousalmax>>
-	<span id="next"><<link [[다음으로->Residential Ejaculation]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음->Residential Ejaculation]]>><</link>></span><<nexttext>>
 <<elseif $enemyhealth lte 0>>
-	<span id="next"><<link [[다음으로->Residential Escape]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음->Residential Escape]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link [[다음으로->Molestation Residential]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음->Molestation Residential]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: Residential Alarm
@@ -278,7 +278,7 @@
 <<if $phase is 0>>
 	<<HePost "은">>는 고통으로 움찔하며, 당신이 도망칠 기회를 준다. 당신이 뚜껑을 힘껏 밀자 틈이 생긴다. 하지만 <<HePost "은">> 당신이 탈출하기 전에 회복했고, 당신을 다시 아래로 끌어당긴다.
 	<br><br>
-	<<link [[다음으로|Molestation Residential]]>><<set $phase to 1>><</link>>
+	<<link [[다음|Molestation Residential]]>><<set $phase to 1>><</link>>
 	<<set $enemyhealth to $enemyhealthmax>>
 <<else>>
 	<<HePost "은">> 고통으로 다시 움찔한다. 쓰레기통이 이미 열린 상태에서, 당신은 밖으로 기어 나와 탈출할 수 있다. <<tearful>> 당신은 코너를 돌아 도망친다.
@@ -296,7 +296,7 @@
 <<else>>
 	당신은 울타리를 넘어 고아원 뒤뜰로 들어간다.
 	<br><br>
-	<<link [[다음으로|Garden]]>><</link>>
+	<<link [[다음|Garden]]>><</link>>
 	<br>
 <</if>>
 
@@ -391,13 +391,13 @@
 <br><br>
 <<actionsman>>
 <<if $enemyanger lte 0>>
-	<span id="next"><<link [[다음으로->Chute Done]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음->Chute Done]]>><</link>></span><<nexttext>>
 <<elseif $enemyarousal gte $enemyarousalmax>>
-	<span id="next"><<link [[다음으로->Chute Ejaculation]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음->Chute Ejaculation]]>><</link>></span><<nexttext>>
 <<elseif $enemyhealth lte 0>>
-	<span id="next"><<link [[다음으로->Chute Escape]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음->Chute Escape]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link [[다음으로->Molestation Chute]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음->Molestation Chute]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: Cement Mixer
@@ -473,7 +473,7 @@
 			<<link [[아래로 활공|Commercial alleyways]]>><<set $eventskip to 1>><</link>><<flight_text>><<lharass>>
 			<br>
 		<</if>>
-		<<link [[쇼핑 센터 (0:02)->Shopping Centre Top]]>><<pass 2>><</link>>
+		<<shoppingcentreicon>><<link [[쇼핑 센터 (0:02)->Shopping Centre Top]]>><<pass 2>><</link>>
 		<br><br>
 	<<else>>
 		<br><br>
@@ -483,7 +483,7 @@
 			<<link [[아래로 활공|Commercial alleyways]]>><<set $eventskip to 1>><</link>><<flight_text>><<lharass>>
 			<br>
 		<</if>>
-		<<link [[쇼핑 센터 (0:02)->Shopping Centre Top]]>><<pass 2>><</link>>
+		<<shoppingcentreicon>><<link [[쇼핑 센터 (0:02)->Shopping Centre Top]]>><<pass 2>><</link>>
 		<br><br>
 	<</if>>
 <</if>>
@@ -531,90 +531,114 @@
 	<br><br>
 <</if>>
 <<if $timer is 1 and $combat is 0>>
-	당신은 청소년들이 골목에서 멀어지는 소리를 들었다. 당신은 그들이 정말 사라졌는지 살짝 엿본다. 당신이 떠나자 <<beasttypePost "은">> 풀이 죽어 보인다.
-	<br><br>
-	<<endevent>>
-	<<residentialeventend>>
-	<br><br>
-<<elseif $timer is 1 and $combat is 1>>
-	당신은 청소년들이 골목에서 멀어지는 소리를 들었습니다. 당신은 살짝 엿보려 하지만 <<beasttypePost "이">> 당신을 땅바닥에 쓰러뜨린다.
-	<br><br>
-	<<set $rescue to 0>>
-	<<link [[다음으로|Residential Dog]]>><</link>><<nexttext>>
+	당신은 청소년들이 골목에서 멀어지는 소리를 들었다.
+	<<if $combat is 0>>
+		당신은 그들이 정말 사라졌는지 살짝 엿본다. 당신이 떠나자 <<beasttypePost "은">> 풀이 죽어 보인다.
+		<br><br>
+		<<endevent>>
+		<<residentialeventend>>
+	<<else>>
+		당신은 살짝 엿보려 하지만 <<beasttypePost "이">> 당신을 땅바닥에 쓰러뜨린다.
+		<br><br>
+		<<set $rescue to 0>>
+		<<link [[다음|Residential Dog]]>><</link>><<nexttext>>
+	<</if>>
 	<br><br>
 <<elseif $noise gte 3>>
 	시끄러운 소음에 질린 두 사람은 자리를 떴다.
 	<br><br>
-	<<link [[다음으로|Residential Dog Alarm]]>><</link>><<nexttext>>
-<<elseif $phase is 1>>
-	<<bHePost "이">> 계속 짖는다. 당신은 이 상황이 계속된다면 청소년들이 찾아볼까 봐 두려워 한다.
-	<br><br>
-	<<link [[닥치라고 조용히 말한다|Residential Dog]]>><<set $noise += 1>><</link>>
-	<br>
-	<!-- Modified for Beast People -->
-		<<link [[개의 머리를 쓰다듬는다->Residential Dog]]>><<set $phase to 2>><</link>>
-		<br><br>
-<<elseif $phase is 2>>
-	<<bHePost "은">> 당신의 손길에 조용해지고, 빙글빙글 돌다가 당신에게 곧바로 다가온다. 당신은 <<bHePost "의">> 생식기가 쓸 준비가 되었고 기다리고 있다는 것을 알아챈다. <<bHePost "은">> 당신을 기대하며 바라보고 있다. 
-	<br><br>
-	<<link [[그냥 머리를 계속 쓰다듬는다->Residential Dog]]>><<set $noise += 1>><<set $phase to 3>><</link>>
-	<br>
-	<span class="sub"><<link [[생식기를 손으로 만진다|Residential Dog]]>><<handskilluse>><<handstat>><<set $phase to 4>><</link>></span>
-	<br><br>
-<<elseif $phase is 3>>
-	당신은 <<bHePost "의">> 머리를 계속 쓰다듬어 보지만, <<bHePost "은">> 만족하지 못한 듯 다시 짖기 시작한다.
-	<br><br>
-	<<link [[그냥 머리를 계속 쓰다듬는다->Residential Dog]]>><<set $noise += 1>><<set $phase to 3>><</link>>
-	<br>
-	<<link [[생식기를 손으로 만진다|Residential Dog]]>><<set $phase to 4>><<handskilluse>><<handstat>><</link>>
-	<br><br>
-<<elseif $phase is 4>>
-	<<set $molestationstart to 1>><<set $phase to 5>>
-	당신은 생식기를 손으로 만진다. <<bHePost "이">> 당신의 손가락에 박기 시작한다.
-	<br><br>
-	<<link [[다음으로|Residential Dog]]>><</link>><<nexttext>>
-	<br><br>
-<<elseif $phase is 5>>
-	<<if $molestationstart is 1>>
-		<<set $molestationstart to 0>>
-		<<controlloss>>
-		<<violence 1>>
-		<<neutral 1>>
-		<<molested>>
-		<<beastCombatInit>>
-		<<npchand>>
-	<</if>>
-	<<if $timer gte 1>><<set $rescue to 1>><</if>>
-	<<effectsman>>
-	<br>
-	<<beast $enemyno>>
-	<br><br>
-	<<stateman>>
-	<br><br>
-	<<actionsman>>
-	<<if $alarm is 1>>
-		<<if $rescue is 1>>
-			<span id="next"><<link [[다음으로->Residential Dog Alarm]]>><</link>></span><<nexttext>>
-		<<else>>
-			아무도 당신을 돕지 않는다.
-			<<set $alarm to 0>>
-			<<if $drugged gte 1>>약에 취해서, 당신은 납득이 가지 않을 정도로 울고 있다.<</if>>
+	<<link [[다음|Residential Dog Alarm]]>><</link>><<nexttext>>
+<<else>>
+	<<switch $phase>>
+		<<case 1>>
+			<<bHePost "이">> 계속 짖는다. 당신은 이 상황이 계속된다면 청소년들이 찾아볼까 봐 두려워 한다.
 			<br><br>
-			<<if $enemyarousal gte $enemyarousalmax>>
-				<span id="next"><<link [[다음으로->Residential Dog Ejaculation]]>><</link>></span><<nexttext>>
-			<<elseif $enemyhealth lte 0>>
-				<span id="next"><<link [[다음으로->Residential Dog Escape]]>><</link>></span><<nexttext>>
-			<<else>>
-				<span id="next"><<link [[다음으로->Residential Dog]]>><</link>></span><<nexttext>>
+			<<link [[닥치라고 조용히 말한다|Residential Dog]]>><<set $noise += 1>><</link>>
+			<br>
+			<!-- Modified for Beast People -->
+			<<link [[개의 머리를 쓰다듬는다|Residential Dog]]>><<set $phase to 2>><</link>>
+			<br><br>
+		<<case 2>>
+			<<bHePost "은">> 당신의 손길에 조용해지고, 빙글빙글 돌다가 당신에게 곧바로 다가온다. 당신은 <<bHePost "의">> 생식기가 쓸 준비가 되었고 기다리고 있다는 것을 알아챈다. <<bHePost "은">> 당신을 기대하며 바라보고 있다. 
+			<br><br>
+			<<link [[그냥 머리를 계속 쓰다듬는다|Residential Dog]]>><<set $noise += 1>><<set $phase to 3>><</link>>
+			<br>
+			<span class="sub"><<link [[생식기를 손으로 만진다|Residential Dog]]>><<handskilluse>><<handstat>><<set $phase to 4>><</link>></span>
+			<br><br>
+		<<case 3>>
+			당신은 <<bHePost "의">> 머리를 계속 쓰다듬어 보지만, <<bHePost "은">> 만족하지 못한 듯 다시 짖기 시작한다.
+			<br><br>
+			<<link [[그냥 머리를 계속 쓰다듬는다|Residential Dog]]>><<set $noise += 1>><<set $phase to 3>><</link>>
+			<br>
+			<<link [[생식기를 손으로 만진다|Residential Dog]]>><<set $phase to 4>><<handskilluse>><<handstat>><</link>>
+			<br><br>
+		<<case 4>>
+			<<set $molestationstart to 1>><<set $phase to 6>>
+			당신은 생식기를 손으로 만진다. <<bHePost "이">> 당신의 손가락에 박기 시작한다.
+			<br><br>
+			<<link [[다음|Residential Dog]]>><</link>><<nexttext>>
+			<br><br>
+		<<case 5>>
+			<<set $phase to 6>>
+			<<beasttype_un>>, 아직 흥분해서, 당신의 몸 위로 펄쩍 뛰어든다.
+			당신의 구속구 때문에 당신은 똑바로 서지 못한다. 당신은 얼굴을 대고 엎어진다. <<gpain>>
+			<br><br>
+			당신이 자세를 바로잡자, 당신은 <<beasttype_i>> 당신 뒤에서 올라타려고 준비하는 것을 알아차린다.
+			<br><br>
+			<<if $deviancy gte 35>>
+				<<trBeasttypeFun $NPCList[0].type "을">><<link [[$NPCList[0].type + " 자극한다"|Residential Dog]]>><<set $sexstart to 1>><<deviancy3>><</link>><<deviant3>>
+				<br>
 			<</if>>
-		<</if>>
-	<<elseif $enemyarousal gte $enemyarousalmax>>
-		<span id="next"><<link [[다음으로->Residential Dog Ejaculation]]>><</link>></span><<nexttext>>
-	<<elseif $enemyhealth lte 0>>
-		<span id="next"><<link [[다음으로->Residential Dog Escape]]>><</link>></span><<nexttext>>
-	<<else>>
-		<span id="next"><<link [[다음으로->Residential Dog]]>><</link>></span><<nexttext>>
-	<</if>>
+			<<link [[견딘다|Residential Dog]]>><<set $molestationstart to 1>><</link>>
+		<<case 6>>
+			<<if $sexstart is 1>>
+				<<set $sexstart to 0>>
+				<<consensual>>
+				<<set $consensual to 1>>
+				<<neutral 1>>
+				<<beastCombatInit>>
+				<<npc_attempt_sex>>
+			<<elseif $molestationstart is 1>>
+				<<set $molestationstart to 0>>
+				<<controlloss>>
+				<<violence 1>>
+				<<neutral 1>>
+				<<molested>>
+				<<beastCombatInit>>
+				<<npchand>>
+			<</if>>
+			<<if $timer gte 1>><<enable_rescue>><</if>>
+			<<effectsman>>
+			<br>
+			<<beast $enemyno>>
+			<br><br>
+			<<stateman>>
+			<br><br>
+			<<actionsman>>
+			<<if $alarm is 1>>
+				<<if $rescue is 1>>
+					<span id="next"><<link [[다음->Residential Dog Alarm]]>><</link>></span><<nexttext>>
+				<<else>>
+					아무도 당신을 돕지 않는다.
+					<<set $alarm to 0>>
+					<<if $drugged gte 1>>약에 취한 상태로는, 당신의 비명소리는 별로 설득력 있게 들리지 않는다.<</if>>
+					<br><br>
+					<<if $enemyarousal gte $enemyarousalmax>>
+						<span id="next"><<link [[다음->Residential Dog Ejaculation]]>><</link>></span><<nexttext>>
+					<<elseif $enemyhealth lte 0>>
+						<span id="next"><<link [[다음->Residential Dog Escape]]>><</link>></span><<nexttext>>
+					<<else>>
+						<span id="next"><<link [[다음->Residential Dog]]>><</link>></span><<nexttext>>
+					<</if>>
+				<</if>>
+			<<elseif $enemyarousal gte $enemyarousalmax>>
+				<span id="next"><<link [[다음->Residential Dog Ejaculation]]>><</link>></span><<nexttext>>
+			<<elseif $enemyhealth lte 0>>
+				<span id="next"><<link [[다음->Residential Dog Escape]]>><</link>></span><<nexttext>>
+			<<else>>
+				<span id="next"><<link [[다음->Residential Dog]]>><</link>></span><<nexttext>>
+			<</if>>
+	<</switch>>
 <</if>>
 
 :: Residential Dog Alarm
@@ -635,14 +659,14 @@
 	그들은 당신의 약점을 이용한다.
 	<br><br>
 
-	<<link [[다음으로|Residential Pair]]>><<set $molestationstart to 1>><</link>>
+	<<link [[다음|Residential Pair]]>><<set $molestationstart to 1>><</link>>
 	<br>
 <<else>>
 	곤경에 처한 당신을 보고, <<person1>><<personPost "과">> <<person2>><<personPost "이">> 당신이 일어설 수 있도록 도와준다.
 	<br><br>
 	<<set $rescued += 1>>
 	<<clothesontowel>>
-	<<person1>><<personPost "은">> 걱정스러워 보인다. "괜찮아?" <<tearful>> 당신은 고개를 끄덕이고 헤어지기 전에 구조해준 사람들에게 감사를 표한다.
+	<<person1>><<personPost "은">> 걱정스러워 보인다. "괜찮아?" <<tearful>> 당신은 고개를 끄덕이고, 헤어지기 전에 구조해준 사람들에게 감사를 표한다.
 	<br><br>
 	<<residentialeventend>>
 <</if>>
@@ -702,22 +726,22 @@
 	<<else>>
 		아무도 당신을 돕지 않는다.
 		<<set $alarm to 0>>
-		<<if $drugged gte 1>>약에 취해서, 당신은 납득이 가지 않을 정도로 울고 있다.<</if>>
+		<<if $drugged gte 1>>약에 취한 상태로는, 당신의 비명소리는 별로 설득력 있게 들리지 않는다.<</if>>
 		<br><br>
 		<<if $enemyarousal gte $enemyarousalmax>>
-			<span id="next"><<link [[다음으로->Residential Pair Ejaculation]]>><</link>></span><<nexttext>>
+			<span id="next"><<link [[다음->Residential Pair Ejaculation]]>><</link>></span><<nexttext>>
 		<<elseif $enemyhealth lte 0>>
-			<span id="next"><<link [[다음으로->Residential Pair Escape]]>><</link>></span><<nexttext>>
+			<span id="next"><<link [[다음->Residential Pair Escape]]>><</link>></span><<nexttext>>
 		<<else>>
-			<span id="next"><<link [[다음으로->Residential Pair]]>><</link>></span><<nexttext>>
+			<span id="next"><<link [[다음->Residential Pair]]>><</link>></span><<nexttext>>
 		<</if>>
 	<</if>>
 <<elseif $enemyarousal gte $enemyarousalmax>>
-	<span id="next"><<link [[다음으로->Residential Pair Ejaculation]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음->Residential Pair Ejaculation]]>><</link>></span><<nexttext>>
 <<elseif $enemyhealth lte 0>>
-	<span id="next"><<link [[다음으로->Residential Pair Escape]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음->Residential Pair Escape]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link [[다음으로->Residential Pair]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음->Residential Pair]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: Residential Pair Ejaculation
@@ -860,7 +884,7 @@
 	<<link [[탈출한다|Residential Fence Garden Escape]]>><</link>>
 	<br>
 	<<if $submissive gte 1500>>
-		<<link [[애원한다|Residential Fence Garden Beg]]>><</link>><<submissivetext>>
+		<<link [[애원한다|Residential Fence Garden Beg]]>><<sub 1>><</link>><<submissivetext>>
 		<br>
 	<</if>>
 <<else>>

@@ -115,7 +115,7 @@
 		<br><br>
 		"네," <<person_i>> 말한다. "저는 좋아할 거예요."
 		<br><br>
-		<<link [[그대로 따른다|Asylum Hypnosis Oral]]>><<set $sexstart to 1>><<npcincr Harper dom 5>><<control 25>><<stress -12>><<awareness -10>><<suspicion -5>><</link>><<ggcontrol>><<llsuspicion>><<llawareness>><<lstress>>
+		<<link [[그대로 따른다|Asylum Hypnosis Oral]]>><<hypnotised 1>><<set $sexstart to 1>><<npcincr Harper dom 5>><<control 25>><<stress -12>><<awareness -10>><<suspicion -5>><</link>><<ggcontrol>><<llsuspicion>><<llawareness>><<lstress>>
 		<br>
 		<<link [[거부한다|Asylum Hypnosis Resist]]>><<stress 6>><<suspicion 5>><<npcincr Harper dom -5>><</link>><<ggsuspicion>><<ggstress>>
 		<br>
@@ -130,7 +130,7 @@
 		<br><br>
 		하퍼 선생님이 말한다. "좋아, 이제 옷을 벗어보렴. 같이 산책을 나갈 거란다."
 		<br><br>
-		<<link [[그대로 따른다|Asylum Hypnosis Exhibitionism]]>><<npcincr Harper dom 5>><<control 25>><<stress -12>><<awareness -10>><<suspicion -5>><</link>><<ggcontrol>><<llsuspicion>><<llawareness>><<lstress>>
+		<<link [[그대로 따른다|Asylum Hypnosis Exhibitionism]]>><<hypnotised 1>><<npcincr Harper dom 5>><<control 25>><<stress -12>><<awareness -10>><<suspicion -5>><</link>><<ggcontrol>><<llsuspicion>><<llawareness>><<lstress>>
 		<br>
 		<<link [[거부한다|Asylum Hypnosis Resist]]>><<stress 6>><<suspicion 5>><<npcincr Harper dom -5>><</link>><<ggsuspicion>><<ggstress>>
 		<br>
@@ -155,18 +155,29 @@
 		이런 과정이 수 분간 이어진다. 하퍼 선생님은 당신의 정신이 흐트러지는 순간들을 집어내어, 그때마다 다시 집중하도록 돌려놓는다. 당신은 최면 상태가 되어 의식에 뭔가 변화가 생기는 걸 느낀다.
 		<br><br>
 		<<beastNEWinit 1 dog>>
-		<<if $monster is 1>>
-			하퍼 선생님이 말한다. "좋아, 이제 <<bhim_ul>> 데려오세요." 잡역부 몇 명이 방으로 들어온다. 그중 한 명은 <<beasttypePost "의">> 목줄을 붙잡고 있고, 그건 숨을 심하게 헐떡거린다. <<bHis_yi>> 벌거벗은 몸이 적나라하게 드러나 있다. <<bHe_nun>> 당신에게 다가가려고 안간힘을 쓴다. 하퍼 선생님이 당신을 돌아본다. "가까운 농장에서 <<bhim_ul>> 데려왔지." 하퍼가 말한다. "이 녀석은 행실이 바르지 않아. 어쩌면 '개인적인' 관심을 받길 바라는 걸지도 모르지. 보다 구체적으로 말하면 너처럼 성욕에 달아오른 걸레한테서 말이야. 이제 너는 이 녀석과 교미하고 싶어서 견딜 수 없을 거야." 당신은 짖고 싶은 충동을 느낀다.
-			<br><br>
-		<<else>>
-			하퍼 선생님이 말한다. "좋아, 이제 그걸 데려오세요." 잡역부 몇 명이 방으로 들어온다. 그중 한 명은 개의 목줄을 붙잡고 있고, 그 개는 당신에게 다가가려고 안간힘을 쓴다. 하퍼 선생님이 당신을 돌아본다. "이제 너는 성욕에 달아오른 걸레가 될 거야. 이 개와 교미하고 싶어서 견딜 수가 없지." 당신은 짖고 싶은 충동을 느낀다.
-			<br><br>
-		<</if>>
+		<<if $monster is 1 or $bestialitydisable is "f">>
+			<<if $monster is 1>>
+				하퍼 선생님이 말한다. "좋아, 이제 <<bhim_ul>> 데려오세요." 잡역부 몇 명이 방으로 들어온다. 그중 한 명은 <<beasttypePost "의">> 목줄을 붙잡고 있고, 그건 숨을 심하게 헐떡거린다. <<bHis_yi>> 벌거벗은 몸이 적나라하게 드러나 있다. <<bHe_nun>> 당신에게 다가가려고 안간힘을 쓴다. 하퍼 선생님이 당신을 돌아본다. "가까운 농장에서 <<bhim_ul>> 데려왔지." 하퍼가 말한다. "이 녀석은 행실이 바르지 않아. 어쩌면 '개인적인' 관심을 받길 바라는 걸지도 모르지. 보다 구체적으로 말하면 너처럼 성욕에 달아오른 걸레한테서 말이야. 이제 너는 이 녀석과 교미하고 싶어서 견딜 수 없을 거야." 당신은 짖고 싶은 충동을 느낀다.
+				<br><br>
+			<<else>>
+				하퍼 선생님이 말한다. "좋아, 이제 그걸 데려오세요." 잡역부 몇 명이 방으로 들어온다. 그중 한 명은 개의 목줄을 붙잡고 있고, 그 개는 당신에게 다가가려고 안간힘을 쓴다. 하퍼 선생님이 당신을 돌아본다. "이제 너는 성욕에 달아오른 걸레가 될 거야. 이 개와 교미하고 싶어서 견딜 수가 없지." 당신은 짖고 싶은 충동을 느낀다.
+				<br><br>
+			<</if>>
 
-		<<link [[개가 된 것처럼 행동한다|Asylum Hypnosis Dog]]>><<set $sexstart to 1>><<npcincr Harper dom 5>><<control 25>><<stress -12>><<awareness -10>><<suspicion -5>><</link>><<ggcontrol>><<llsuspicion>><<llawareness>><<lstress>>
-		<br>
-		<<link [[거부한다|Asylum Hypnosis Dog Resist]]>><<stress 6>><<suspicion 5>><<npcincr Harper dom -5>><</link>><<ggsuspicion>><<ggstress>>
-		<br>
+			<<link [[몸을 내민다|Asylum Hypnosis Dog]]>><<hypnotised 1>><<set $sexstart to 1>><<npcincr Harper dom 5>><<control 25>><<stress -12>><<awareness -10>><<suspicion -5>><</link>><<ggcontrol>><<llsuspicion>><<llawareness>><<lstress>>
+			<br>
+			<<link [[거부한다|Asylum Hypnosis Dog Resist]]>><<stress 6>><<suspicion 5>><<npcincr Harper dom -5>><</link>><<ggsuspicion>><<ggstress>>
+			<br>
+		<<else>>
+			<<endevent>>
+			<<npc Harper>><<person1>>
+			하퍼 선생님이 말한다. "좋아, 이제 옷을 벗어보렴. 같이 산책을 나갈 거란다."
+			<br><br>
+			<<link [[그대로 따른다|Asylum Hypnosis Exhibitionism]]>><<hypnotised 1>><<npcincr Harper dom 5>><<control 25>><<stress -12>><<awareness -10>><<suspicion -5>><</link>><<ggcontrol>><<llsuspicion>><<llawareness>><<lstress>>
+			<br>
+			<<link [[거부한다|Asylum Hypnosis Resist]]>><<stress 6>><<suspicion 5>><<npcincr Harper dom -5>><</link>><<ggsuspicion>><<ggstress>>
+			<br>
+		<</if>>
 	<<else>>
 		<<npc Harper>><<person1>><<generate2>><<generate3>>
 		당신은 하퍼 선생님의 사무실에 들어왔다. <<He_nun>> <<his_yi>> 책상 뒤편에서 당신을 기다리고 있었다. 하얀 코트를 입은 <<person2>><<person_gwa>> <<person3>><<person_i>> <<his_yi>> 앞에 앉아 있다. 그들은 당신을 돌아본다.
@@ -182,12 +193,12 @@
 <</widget>>
 
 <<widget "asylumassessment">>
-You enter the Doctor's office.<<npc Harper>><<person1>>
+당신은 진찰실로 들어간다.<<npc Harper>><<person1>>
 <<if $innocencestate is 1>>
 <<npcincr Harper love 5>><<npcincr Harper dom 5>><<set $asyluminnocence to 1>>
 
 <<He_nun>> <<his_yi>> 서류철을 내려놓고 미소짓는다. "치료가 끝났단다." 하퍼 선생님이 말한다. "이제 사회의 일원으로써 제 기능을 할 준비가 되었구나. 집으로 특별한 알약들을 보내 줄 거란다."
-<<set $asylumpills to 1>><<set $asylummedicated to 0>>
+<<set $sexStats.pills["pills"]["asylum\'s prescription"].owned to 14>><<set $asylummedicated to 0>>
 <<He_nun>> 자리에서 일어나 창문에 커튼을 친다. "일어서렴."
 <br><br>
 
@@ -257,7 +268,7 @@ You enter the Doctor's office.<<npc Harper>><<person1>>
 <<link [[키카드를 훔친다|Asylum Keycard]]>><</link>><<skulduggerydifficulty>> <i>의심을 적게 받을수록 쉬워집니다.</i>
 <br>
 <</if>>
-<<link [[사실이 아니라고 주장한다|Asylum Tentacles Meek]]>><<awareness +1>><<stress 3>><</link>><<gawareness>><<gstress>>
+<<link [[사실이라고 주장한다|Asylum Tentacles Meek]]>><<awareness 1>><<stress 3>><</link>><<gawareness>><<gstress>>
 <br>
 <<link [[그럴지도 모른다고 대답한다|Asylum Tentacles Sub]]>><<trauma -6>><<suspicion -5>><<awareness -10>><</link>><<llsuspicion>><<llawareness>><<ltrauma>>
 <br>
@@ -267,50 +278,50 @@ You enter the Doctor's office.<<npc Harper>><<person1>>
 	<!-- Modified for monster people -->
 	하퍼 선생님이 당신을 책상 너머로 쳐다본다.
 	<<if $bestialitydisable is "f">>
-		"동물들에게 공격당했다고 잠꼬대를 하더구나. 성적으로 말이야." <<he_ga>> 말한다. "하지만 동물들은 그런 행동을 하지 않는단다. 너는 무고한 동물들을 학대해온 거야. 그렇지 않니?"
+		"짐승들에게 공격당했다고 잠꼬대를 하더구나. 성적으로 말이야." <<he_ga>> 말한다. "하지만 짐승들은 그런 행동을 하지 않는단다. 너는 무고한 짐승들을 학대해온 거야. 그렇지 않니?"
 	<<else>>
-		"동물을 닮은 사람들에게 공격당했다고 잠꼬대를 하더구나. 성적으로 말이야." <<he_ga>> 말한다. "하지만 그런 건 세상에 존재하지 않는단다. 너는 동물들이 인간의 모습을 띄고 있다고 자기암시를 걸었지만, 실제로는 네 쾌락을 위해 무고한 동물들을 성적으로 학대하고 있었던 거야. 그렇지 않니?"
+		"짐승을 닮은 사람들에게 공격당했다고 잠꼬대를 하더구나. 성적으로 말이야." <<he_ga>> 말한다. "하지만 그런 건 세상에 존재하지 않는단다. 너는 짐승들이 인간의 모습을 띄고 있다고 자기암시를 걸었지만, 실제로는 네 쾌락을 위해 무고한 짐승들을 성적으로 학대하고 있었던 거야. 그렇지 않니?"
 	<</if>>
 <br><br>
 
-<<if $asylumdistracted is 1>>
-<<link [[공격한다|Asylum Fight]]>><<suspicion 15>><<trauma -6>><<stress -6>><<set $fightstart to 1>><</link>><<gggsuspicion>><<gggsuspicion>><<ltrauma>><<lstress>>
-<br>
-<<else>>
-<<link [[공격한다|Asylum Punish]]>><<suspicion 15>><<trauma -6>><<stress -6>><</link>><<gggsuspicion>><<ltrauma>><<lstress>>
-<br>
-<</if>>
-<<if $asylumkeycard isnot 1 and $leftarm isnot "bound" and $rightarm isnot "bound">>
-<<set $skulduggerydifficulty to 900 + (20 * $suspicion)>>
-<<link [[키카드를 훔친다|Asylum Keycard]]>><</link>><<skulduggerydifficulty>> <i>의심을 적게 받을수록 쉬워집니다.</i>
-<br>
-<</if>>
-<<link [[사실이 아니라고 주장한다|Asylum Beast Meek]]>><<awareness -1>><<stress 3>><</link>><<lawareness>><<gstress>>
-<br>
-<<link [[그럴지도 모른다고 대답한다|Asylum Beast Sub]]>><<trauma -6>><<suspicion -5>><<awareness -10>><</link>><<llsuspicion>><<llawareness>><<ltrauma>>
-<br>
+	<<if $asylumdistracted is 1>>
+		<<link [[공격한다|Asylum Fight]]>><<suspicion 15>><<trauma -6>><<stress -6>><<set $fightstart to 1>><</link>><<gggsuspicion>><<gggsuspicion>><<ltrauma>><<lstress>>
+		<br>
+	<<else>>
+		<<link [[공격한다|Asylum Punish]]>><<suspicion 15>><<trauma -6>><<stress -6>><</link>><<gggsuspicion>><<ltrauma>><<lstress>>
+		<br>
+	<</if>>
+	<<if $asylumkeycard isnot 1 and $leftarm isnot "bound" and $rightarm isnot "bound">>
+		<<set $skulduggerydifficulty to 900 + (20 * $suspicion)>>
+		<<link [[키카드를 훔친다|Asylum Keycard]]>><</link>><<skulduggerydifficulty>> <i>의심을 적게 받을수록 쉬워집니다.</i>
+		<br>
+	<</if>>
+	<<link [[사실이 아니라고 주장한다|Asylum Beast Meek]]>><<awareness -1>><<stress 3>><</link>><<lawareness>><<gstress>>
+	<br>
+	<<link [[그럴지도 모른다고 대답한다|Asylum Beast Sub]]>><<trauma -6>><<suspicion -5>><<awareness -10>><</link>><<llsuspicion>><<llawareness>><<ltrauma>>
+	<br>
 
 <<elseif $asylumassessmentprogress lte 3>>
-<<set $asylumassessmentprogress += 1>>
-하퍼 선생님이 당신을 책상 너머로 쳐다본다. "몸에 음란한 글자들이 적혀 있더구나." <<he_ga>> 말한다. "네가 직접 한 거지?"
-<br><br>
+	<<set $asylumassessmentprogress += 1>>
+	하퍼 선생님이 당신을 책상 너머로 쳐다본다. "몸에 음란한 글자들이 적혀 있더구나." <<he_ga>> 말한다. "네가 직접 한 거지?"
+	<br><br>
 
-<<if $asylumdistracted is 1>>
-<<link [[공격한다|Asylum Fight]]>><<suspicion 15>><<trauma -6>><<stress -6>><<set $fightstart to 1>><</link>><<gggsuspicion>><<gggsuspicion>><<ltrauma>><<lstress>>
-<br>
-<<else>>
-<<link [[공격한다|Asylum Punish]]>><<suspicion 15>><<trauma -6>><<stress -6>><</link>><<gggsuspicion>><<ltrauma>><<lstress>>
-<br>
-<</if>>
-<<if $asylumkeycard isnot 1 and $leftarm isnot "bound" and $rightarm isnot "bound">>
-<<set $skulduggerydifficulty to 900 + (20 * $suspicion)>>
-<<link [[키카드를 훔친다|Asylum Keycard]]>><</link>><<skulduggerydifficulty>> <i>의심을 적게 받을수록 쉬워집니다.</i>
-<br>
-<</if>>
-<<link [[사실이 아니라고 주장한다|Asylum Hurt Meek]]>><<awareness -1>><<stress 3>><</link>><<lawareness>><<gstress>>
-<br>
-<<link [[그럴지도 모른다고 대답한다|Asylum Hurt Sub]]>><<trauma -6>><<suspicion -5>><<awareness -10>><</link>><<llsuspicion>><<llawareness>><<ltrauma>>
-<br>
+	<<if $asylumdistracted is 1>>
+		<<link [[공격한다|Asylum Fight]]>><<suspicion 15>><<trauma -6>><<stress -6>><<set $fightstart to 1>><</link>><<gggsuspicion>><<gggsuspicion>><<ltrauma>><<lstress>>
+		<br>
+	<<else>>
+		<<link [[공격한다|Asylum Punish]]>><<suspicion 15>><<trauma -6>><<stress -6>><</link>><<gggsuspicion>><<ltrauma>><<lstress>>
+		<br>
+	<</if>>
+	<<if $asylumkeycard isnot 1 and $leftarm isnot "bound" and $rightarm isnot "bound">>
+		<<set $skulduggerydifficulty to 900 + (20 * $suspicion)>>
+		<<link [[키카드를 훔친다|Asylum Keycard]]>><</link>><<skulduggerydifficulty>> <i>의심을 적게 받을수록 쉬워집니다.</i>
+		<br>
+	<</if>>
+	<<link [[사실이 아니라고 주장한다|Asylum Hurt Meek]]>><<awareness -1>><<stress 3>><</link>><<lawareness>><<gstress>>
+	<br>
+	<<link [[그럴지도 모른다고 대답한다|Asylum Hurt Sub]]>><<trauma -6>><<suspicion -5>><<awareness -10>><</link>><<llsuspicion>><<llawareness>><<ltrauma>>
+	<br>
 
 <<else>>
 <<set $asylumassessmentprogress to 0>>
@@ -417,14 +428,14 @@ You enter the Doctor's office.<<npc Harper>><<person1>>
 <</widget>>
 
 <<widget "asylumoptions">>
-<<if $leftarm is "bound" or $rightarm is "bound" and $asylumbound lte 0>>
-	<<HePost "은">> 당신의 구속구를 바라본다. "풀어줘도 괜찮을 것 같군." <<hePost "은">> 쭈그려 앉아 구속구를 풀어준다. 구속구를 완전히 풀기 직전, <<hePost "이">> 말한다. <<unbind>><<exposure>> <<HePost "은">> 수건 몇 개로 당신을 감싸 준다.
-	<<towelup>><<exposure>>
+<<if ($leftarm is "bound" or $rightarm is "bound") and $asylumbound lte 0>>
+	<<HePost "은">> 당신의 구속구를 바라본다. "풀어줘도 괜찮을 것 같군." <<hePost "은">> 쭈그려 앉아 구속구를 풀어주면서, 그것을 완전히 풀기 직전에, <<hePost "이">> 말한다.<<unbind>><<exposure>> <<HePost "은">> 환자복으로 당신을 감싸 준다.
+	<<unbind>><<upperwear 87>><<exposure>>
 	<br><br>
 <</if>>
 <<if $exposed gte 1>>
-	<<HePost "은">> 당신을 보려고 몇 걸음 물러난다. <<covered>> "그렇게 입고선 의사 선생님을 볼 수 없다." <<hePost "이">> 말한다. <<HePost "은">> 수건 몇 개로 당신을 감싸 준다.
-	<<towelup>>
+	<<HePost "은">> 당신을 보려고 몇 걸음 물러난다. <<covered>> "그렇게 입고선 의사 선생님을 볼 수 없다." <<hePost "이">> 말한다. <<HePost "은">> 환자복으로 당신을 감싸 준다.
+	<<unbind>><<upperwear 87>><<exposure>>
 	<br><br>
 <</if>>
 <</widget>>
@@ -446,7 +457,7 @@ You enter the Doctor's office.<<npc Harper>><<person1>>
 		<<link [[거절한다|Asylum Exposure Refuse]]>><</link>>
 		<br>
 	<<elseif $rng gte 81 and (random(1,100) lte $suspicion)>>
-		<<generate1>><<generate2>><<person1>>
+		<<generateDoctor 1>><<generate2>><<person1>>
 		잡역부 복장을 한 <<personPost "이">> 당신에게 다가온다.
 		"의사 선생님께서 시간이 나서 추가적인 치료를 하신다고 하신다." <<hePost "이">> 말한다. "따라와."<br>
 		<<person2>><<personPost "이">> 당신 뒤에 선다.
@@ -456,7 +467,7 @@ You enter the Doctor's office.<<npc Harper>><<person1>>
 		<<link [[따라가지 않는다|Asylum Fake Treatment Refuse]]>><</link>><<physiquedifficulty 1 $physiquemax>>
 		<br>
 	<<elseif $rng gte 61>>
-		<<generate1>><<person1>>당신은 환자로 보이는 <<personPost "을">> 마주쳤다. <<HePost "은">> 당신을 보고 미소짓는다.
+		<<generate1>><<person1>><<npcClothesType $NPCList[0] "patient">>당신은 환자로 보이는 <<personPost "을">> 마주쳤다. <<HePost "은">> 당신을 보고 미소짓는다.
 		<br><br>
 
 		<<link [[추파를 던진다|Asylum Flirt]]>><<asylumstatus 1>><<pass 2>><</link>><<promiscuous1>><<gcool>>
@@ -489,6 +500,23 @@ You enter the Doctor's office.<<npc Harper>><<person1>>
 <</widget>>
 
 <<widget "passoutasylum">>
-<<passout>>
-[[모든 게 깜깜해진다...->Passout Asylum]]
+
+/*ToDo: Pregnancy, remove $pregnancyTesting to properly enable*/
+<<if $sexStats.vagina.pregnancy.waterBreaking is true and $pregnancyTesting>>
+	<<pregnancyWatersBrokenPassout "asylum">>
+<<else>>
+	<<passout>>
+	<<link [[모든 게 깜깜해진다...->Passout Asylum]]>><</link>>
+<</if>>
+<</widget>>
+
+<<widget "asylumescape">>
+<<set $asylumescaped to 1>>
+<<if $location is "tentworld">>
+	<<set $asylumtentacleescape to 1>>
+<</if>>
+
+<<if $NPCName[$NPCNameList.indexOf("Robin")].init is 1>>
+	<<set $robinReunionScene to "asylum">>
+<</if>>
 <</widget>>

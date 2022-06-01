@@ -8,13 +8,21 @@ You are in the strip club on Connudatus Street. <<if $daystate isnot "day" and $
 <<if $stress gte $stressmax>>
 	<<passoutshop>>
 <<else>>
-
+<<if $arousal gte $arousalmax>>
+	<<orgasmLocation "stripClub">>
+<</if>>
 <<if $hour is 6>>
 
 	It's closing time. Security is herding everyone outside. <<if $exposed gte 1>>One hands you some towels.<<towelup>><</if>>
 	<br><br>
 
-	[[Leave|Connudatus Street]]
+	<<if $brothel_rivalry isnot undefined and $brothel_rivalry_timer lte 0>>
+		<<link [[Leave|Strip Club Goon]]>><</link>>
+		<br>
+	<<else>>
+		<<link [[Leave|Connudatus Street]]>><</link>>
+		<br>
+	<</if>>
 
 <<elseif $daystate isnot "night" and $daystate isnot "dusk">>
 	You are alone in the empty club.
@@ -28,7 +36,7 @@ You are in the strip club on Connudatus Street. <<if $daystate isnot "day" and $
 		<br>
 	<</if>>
 
-	[[Leave|Connudatus Street]]
+	<<link [[Leave|Connudatus Street]]>><</link>>
 	<br>
 
 <<else>>
@@ -93,13 +101,16 @@ You are in the strip club on Connudatus Street. <<if $daystate isnot "day" and $
 <br>
 
 <<if $stripclubfailed is 1>>
-[[Leave|Strip Club Proposition]]
+<<link [[Leave|Strip Club Proposition]]>><</link>>
+<br>
+<<elseif $brothel_rivalry isnot undefined and $brothel_rivalry_timer lte 0>>
+<<link [[Leave|Strip Club Goon]]>><</link>>
 <br>
 <<elseif $stripclubintro isnot 1>>
-[[Leave|Connudatus Street]]
+<<link [[Leave|Connudatus Street]]>><</link>>
 <br>
 <<elseif $exposed lte 0 or $daystate isnot "night" and $daystate isnot "dusk">>
-[[Leave|Connudatus Street]]
+<<link [[Leave|Connudatus Street]]>><</link>>
 <br>
 <<elseif $exposed gte 2 and $exhibitionism gte 55>>
 	<<link [[Leave|Strip Club Leave Naked]]>><</link>><<if $ex_day isnot 1>><<exhibitionist4>><</if>>
@@ -113,6 +124,33 @@ You are in the strip club on Connudatus Street. <<if $daystate isnot "day" and $
 
 <</if>>
 <</if>>
+
+
+:: Strip Club Dressing Room
+
+<<effects>><<set $outside to 0>><<set $location to "strip_club">>
+
+You are in the strip club's dressing room. <<if $daystate isnot "day" and $daystate isnot "dawn">>There are a few mirrors, currently occupied by staff fixing their hair and makeup.<</if>>
+<br><br>
+
+
+<<wardrobeicon>><<link [[Wardrobe|Strip Club Wardrobe]]>><</link>>
+<br>
+<<mirroricon>><<link [[Mirror|Strip Club Mirror]]>><</link>>
+<br><br>
+
+<<link [[Return to the club (0:01)|Strip Club]]>><<pass 1>><</link>>
+<br>
+
+:: Strip Club Mirror
+<<effects>>
+
+<<link [[Step away|Strip Club Dressing Room]]>><<unset $mirrorMenu>><<unset $bodywritingSet>><</link>>
+<br>
+
+<<mirror>>
+<br><br>
+
 
 :: Strip Club Leave Naked
 <<effects>>
@@ -227,7 +265,7 @@ You wash until you're squeaky clean.<<wash>>
 A sign reads: "Open from <<ampm 18 00>>"
 <br><br>
 
-	<<if $skulduggery gte $lock>>
+	<<if currentSkillValue('skulduggery') gte $lock>>
 	<span class="green">The lock looks easy to pick.</span>
 	<br><br>
 
@@ -250,7 +288,7 @@ A sign reads: "Open from <<ampm 18 00>>"
 <<npc Darryl>><<person1>>
 You are led to the back of the club, then up a flight of stairs. A wooden door sits open at the top. The bouncer knocks twice and motions you through.
 <br><br>
-You enter what looks like a personal office. Shelves overflowing with books line the walls. There's a desk on the far side of the room. More books lay open on top of one another, a few lie on the ground at its base. Instead of a wall, one side of the room has a large window overlooking the club below. A <<if $pronoun is "m">>man<<else>>woman<</if>> stands facing away from you, looking for something on one of the shelves.
+You enter what looks like a personal office. Shelves overflowing with books line the walls. There's a desk on the far side of the room. More books lay open on top of one another, a few lie on the ground at its base. Instead of a wall, one side of the room has a large window overlooking the club below. A <<personsimple>> stands facing away from you, looking for something on one of the shelves.
 <br><br>
 
 	<<if $pronoun is "m">>
@@ -293,7 +331,7 @@ Darryl looks up from <<his>> desk as you enter, <<his>> fringe and glasses obscu
 <br><br>
 <</if>>
 
-<<if $phase is 1>><<set $stripclubdancingintro to 1>>
+<<if $phase is 1>><<set $stripclubdancingintro to 1>><<set $wardrobes.stripClub.unlocked to true>>
 "You want to dance? Good! You probably saw some stages were empty. You can dress how you want, but you should dress appropriately if you want decent tips. We operate a strict no-touching policy in the main room. If anyone gives you trouble, don't hesitate to call security. We take the safety of our staff very seriously."
 <br><br>
 
@@ -467,6 +505,7 @@ Some patrons eye you up, but they're mostly distracted by the dancers. <<tiprece
 <br><br>
 
 <<link [[Next|Strip Club]]>><<endevent>><<pass 30>><</link>>
+
 
 <<elseif $rng gte 11>>
 
@@ -697,7 +736,7 @@ You look to security, but they are busy dealing with a brawl on the other side o
 	You still hear the sound of fighting on the other side of the counter.
 	<br><br>
 <<else>>
-	<<set $rescue to 1>>
+	<<enable_rescue>>
 	You can't see with the counter in the way, but you think the brawl has been stopped.
 	<br><br>
 <</if>>
@@ -771,7 +810,7 @@ You manage to knock <<him>> prone. <<He>> struggles to stand up, but it gives yo
 <<set $outside to 0>><<set $location to "strip_club">><<effects>>
 <<towelup>>
 <<if $phase is 0>><<npcincr Darryl dom -5>>
-"It was nothing." You say, doing your best to suppress the tremor in your voice. Darryl responds, "It wasn't nothing, you saved me!" <<He>> stands closer to you, <<his>> voice dropping to a whisper. "I just froze up, it was so horrible..." <<He>> trails off as you put your arms around <<him>>. <<He>> leans against you and quietly sobs.
+"It was nothing." you say, doing your best to suppress the tremor in your voice. Darryl responds, "It wasn't nothing, you saved me!" <<He>> stands closer to you, <<his>> voice dropping to a whisper. "I just froze up, it was so horrible..." <<He>> trails off as you put your arms around <<him>>. <<He>> leans against you and quietly sobs.
 <br><br>
 
 You guide <<him>> to <<his>> office and you spend the rest of your shift comforting <<him>> and chatting.
@@ -803,7 +842,7 @@ You read the paper, it has the address of a building on Harvest Street followed 
 <<set $brothelknown to 1>><<set $stripclubfailed to 0>>
 <<endevent>>
 
-[[Next|Connudatus Street]]
+<<link [[Next|Connudatus Street]]>><</link>>
 <br>
 
 :: Strip Club Exposed
@@ -836,11 +875,11 @@ Staying low, you dart across the pavement towards the alley.
 	<<generate1>><<person>>
 
 	<<if $exposed gte 2>>
-		You make it over, but then hear a <<if $pronoun is "m">>man's<<else>>woman's<</if>> voice.
+		You make it over, but then hear a <<personsimple>>'s voice.
 		<br><br>
 		"I just saw a naked <<girl>> run into that alley."
 	<<else>>
-		You make it over, but then hear a <<if $pronoun is "m">>man's<<else>>woman's<</if>> voice.
+		You make it over, but then hear a <<personsimple>>'s voice.
 		<br><br>
 		"I just saw a <<girl>> run into that alley. <<pShe>> was only wearing underwear or something."
 	<</if>>
@@ -928,7 +967,7 @@ The <<person>> leads you down the alley, and holds your arms against the wall.
 	<<neutral 1>>
 
 	<<maninit>>
-	<<set $enemytrust += 100>><<set $rescue to 1>>
+	<<set $enemytrust += 100>><<enable_rescue>>
 <</if>>
 <<effects>>
 <<effectsman>><<man>>
@@ -1005,3 +1044,136 @@ The bouncers lead you into the safety of the club.
 <<link [[Next|Strip Club]]>><<endevent>><</link>>
 <br>
 
+:: Strip Club Goon
+<<effects>>
+<<set $brothel_rivalry_timer to 7>>
+
+<<generate1>><<person1>>
+You leave the club, but don't get far. You're accosted by a <<person>>, who steps out of an alley.
+<br><br>
+
+<<if $rng gte 67>>
+	"Don't piss yourself," <<he>> says. "Briar sent me. <<nnpc_He "Briar">> wants the details."
+<<elseif $rng gte 33>>
+	"Easy there," <<he>> says. "Briar sent me. Says you had an arrangement."
+<<else>>
+	"Just here for information," <<he>> says. "Briar's information."
+<</if>>
+<br><br>
+<<He>> wants information on Darryl's security and clientele.
+<br><br>
+
+<<link [[Give accurate information|Strip Club Goon Accurate]]>><<npcincr Briar love 1>><</link>><<glove "Briar">>
+<br>
+<<set $skulduggerydifficulty to 500>>
+<<link [[Exaggerate Darryl's power|Strip Club Goon Exaggerate]]>><<set $skulduggerydifficulty to 500>><</link>><<skulduggerydifficulty>>
+<br>
+<<set $skulduggerydifficulty to 200>>
+<<link [[Underplay Darryl's power|Strip Club Goon Underplay]]>><<set $skulduggerydifficulty to 200>><</link>><<skulduggerydifficulty>>
+<br>
+
+:: Strip Club Goon Accurate
+<<effects>>
+
+You give the <<person>> an accurate rundown. How many security, how many clientele, how wealthy they are, and altogether how much control Darryl seems to have. As best you can determine, at least.
+<<set $brothel_rivalry += 1>>
+<br><br>
+
+The <<person>> seems satisfied. "Thanks. Briar will be pleased." <<He>> slips into an alley.
+<br><br>
+
+<<link [[Next|Connudatus Street]]>><<set $eventskip to 1>><<endevent>><</link>>
+<br>
+
+:: Strip Club Goon Exaggerate
+<<effects>>
+
+
+You give the <<person>> a rundown, but exaggerate the number of security, and the wealth of the clientele.
+<br><br>
+
+<<skulduggerycheck>>
+<<if $skulduggerysuccess is 1>>
+
+	<span class="green"><<He>> seems to buy it.</span>
+	<<if $rng gte 81>>
+		"The prince? I'll let Briar know."
+	<<elseif $rng gte 61>>
+		"A shiekh? I wouldn't have guessed."
+	<<elseif $rng gte 41>>
+		"Ex-military you say? And I'm the one who has to tell Briar. Fuck."
+	<<elseif $rng gte 21>>
+		"Security sounds nasty. Better for Briar to know before... nevermind."
+	<<else>>
+		"I suppose the nights are busy here. I'll inform Briar."
+	<</if>>
+	<<He>> slips into an alley.
+	<<glove "Briar">>
+	<<npcincr Briar love 1>>
+	<<set $brothel_rivalry -= 2>>
+	<br><br>
+
+	<<skulduggeryuse>>
+
+	<<link [[Next|Connudatus Street]]>><<set $eventskip to 1>><<endevent>><</link>>
+	<br>
+
+<<else>>
+
+	<<He>> smirks. <span class="red">You don't think <<he>> buys it.</span>
+	"I'll let Briar know," <<he>> says, before slipping into an alley.<<llove "Briar">>
+	<br><br>
+	<<npcincr Briar love -1>>
+	<<set $brothel_rivalry += 2>>
+	<<skulduggeryuse>>
+
+	<<link [[Next|Connudatus Street]]>><<set $eventskip to 1>><<endevent>><</link>>
+	<br>
+
+<</if>>
+
+:: Strip Club Goon Underplay
+<<effects>>
+
+
+You give the <<person>> a rundown of Darryl's clientele and security, but play down the numbers.
+<br><br>
+
+<<skulduggerycheck>>
+<<if $skulduggerysuccess is 1>>
+	<span class="green"><<He>> seems to buy it.</span>
+	<<if $rng gte 81>>
+		"Interesting. Briar will be happy to hear it."
+	<<elseif $rng gte 61>>
+		"So few? I wonder if... nevermind."
+	<<elseif $rng gte 41>>
+		"It's a wonder they haven't been robbed. Perhaps that will change."
+	<<elseif $rng gte 21>>
+		"I think Briar will be glad to know."
+	<<else>>
+		"Briar's more dominant than I thought."
+	<</if>>
+	<<He>> slips into an alley.
+	<<glove "Briar">>
+	<<npcincr Briar love 1>>
+	<<set $brothel_rivalry -= 1>>
+	<br><br>
+
+	<<skulduggeryuse>>
+
+	<<link [[Next|Connudatus Street]]>><<set $eventskip to 1>><<endevent>><</link>>
+	<br>
+
+<<else>>
+
+	<<He>> smirks. <span class="red">You don't think <<he>> buys it.</span>
+	"I'll let Briar know," <<he>> says, before slipping into an alley.<<llove "Briar">>
+	<br><br>
+	<<npcincr Briar love 1>>
+	<<set $brothel_rivalry += 2>>
+	<<skulduggeryuse>>
+
+	<<link [[Next|Connudatus Street]]>><<set $eventskip to 1>><<endevent>><</link>>
+	<br>
+
+<</if>>

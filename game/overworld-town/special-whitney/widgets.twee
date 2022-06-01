@@ -2,9 +2,9 @@
 <<widget "whitneyoptions">>
 <<if $location is "park" and $daystate isnot "day">>
 	<<if $NPCName[$NPCNameList.indexOf("Whitney")].love gte 15>>
-		"I'm leaving," <<he>> says suddenly. "Don't stay out in this weather." <<He>> leaves the park without another word.
+		"나 간다," <<he_ga>> 갑자기 말했다. "이런 날씨에 밖에서 돌아다니지 마." <<He_nun>> 다른 말은 하지 않고 공원에서 떠났다.
 	<<else>>
-		<<He>> walks away, leaving the park without a word.
+		<<He_nun>> 아무 말도 하지 않고 공원에서 떠난다.
 	<</if>>
 <br><br>
 <<whitneyexit>>
@@ -12,65 +12,185 @@
 	<<if $whitney_text_trigger is true>>
 		<<unset $whitney_text_trigger>>
 		<<if $whitney_text is 1>>
-			"Again? Piss off already, would you?" <<He>> looks away.
+			"또? 꺼지라고 했을 텐데, 못 들었나?" <<He_nun>> 고개를 돌린다.
 		<<elseif $whitney_text is 2>>
-			"You're getting on my nerves, <<bitch>>." <<He>> looks away.
+			"너 점점 내 신경을 긁고 있어, <<bitch_ya>>." <<He_nun>> 고개를 돌린다.
 		<<else>>
 			<<if $whitneyromance is 1 or $NPCName[$NPCNameList.indexOf("Whitney")].dom gte 10>>
-				"What's my favorite slut doing here?"
+				"내가 제일 좋아하는 <<slut_i>> 여기서 뭘 하고 있을까?"
 			<<elseif $NPCName[$NPCNameList.indexOf("Whitney")].state is "rescued">>
-				<<He>> looks at you, but quickly looks away.
+				<<He_nun>> 당신을 보지만, 이내 빠르게 고개를 돌린다.
 			<<else>>
-				<<He>> looks annoyed.
+				<<He_nun>> 화난 것 같다.
 			<</if>>
 		<</if>>
 	<<else>>
 		<<if _whitney_attention is 1>>
 			<<if $NPCName[$NPCNameList.indexOf("Whitney")].lust gte 50>>
-				<span class="green">Whatever was on <<his>> mind is long gone. <<His>> eyes are glued to you.</span>
+				<span class="green"><<his_yi>> 마음 속에 있던 것은 이미 사라진 지 오래다. <<His_yi>> 눈은 당신에게 붙어있다.</span>
 			<<elseif $NPCName[$NPCNameList.indexOf("Whitney")].lust gte 20>>
-				<span class="blue">You seem to have <<his>> attention, but not all of it.</span>
+				<span class="blue">당신은 <<his_yi>> 관심을 받고 있는 것 같지만, 심하지는 않은 것 같다.</span>
 			<<else>>
-				<span class="pink">Whitney tries to ignore you.</span>
+				<span class="pink">휘트니는 당신을 무시하려고 한다.</span>
 			<</if>>
 		<<elseif $location is "park" and $rng gte 50>>
-			<<He>> stares at the fountain.
+			<<He_nun>> 분수를 응시하고 있다.
 		<<else>>
-			<<He>> takes a drag of <<his>> cigarette.
+			<<He_nun>> <<his_yi>> 담배를 한 모금 들이킨다.
 		<</if>>
 	<</if>>
 	<br><br>
 	<<if _whitney_attention is 1>>
 		<<if $promiscuity gte 15>>
-			<<link [[Take it further (0:15)|Whitney Flirt 2]]>><<pass 15>><<npcincr Whitney lust 1>><<npcincr Whitney dom 1>><</link>><<glust>><<gdom>><<promiscuous2>><br>
+			<<link [[계속 한다 (0:15)|Whitney Flirt 2]]>><<pass 15>><<npcincr Whitney lust 1>><<npcincr Whitney dom 1>><</link>><<glust>><<gdom>><<promiscuous2>><br>
 		<<else>>
-			You aren't promiscuous enough to take it further.<br>
+			당신은 계속 할 수 있을 정도로 음란하지 않다.<br>
 		<</if>>
 	<</if>>
-	<<if $whitneyromance is 1 and $whitneyFlirt is undefined>>
-		<<link [[Flirt (0:15)|Whitney Flirt]]>><<set $whitneyFlirt to 1>><<pass 15>><<npcincr Whitney love 1>><<npcincr Whitney lust 1>><</link>><<promiscuous1>><<glove>><<glust>><br>
+    <<if $milkshake gte 1>>
+        <<if $whitneyromance is 1>>
+			<<link [[밀크쉐이크를 권한다 (0:20)|Whitney Milkshake]]>><<npcincr Whitney love 1>><<set $milkshake -= 1>><</link>><<glove>>
+			<br>
+		<<else>>
+			<<link [[밀크쉐이크를 권한다 (0:20)|Whitney Milkshake Fail]]>><<npcincr Whitney love 1>><<set $milkshake -= 1>><</link>><<glove>>
+			<br>
+		<</if>>
 	<</if>>
-	<<link [[Chat (0:15)|Whitney Chat]]>><<pass 15>><<if $whitneyromance is 1>><<stress -3>><<else>><<stress 6>><</if>><<if $whitneyChat is undefined>><<set $whitneyChat to 1>><<npcincr Whitney love 1>><</if>><</link>><<if $whitneyChat is undefined>><<glove>><</if>><<if $whitneyromance is 1>><<lstress>><<else>><<gstress>><</if>><br>
+		<<if $whitneyromance is 1 and $whitneyFlirt is undefined>>
+		<<link [[추파를 던진다 (0:15)|Whitney Flirt]]>><<set $whitneyFlirt to 1>><<pass 15>><<npcincr Whitney love 1>><<npcincr Whitney lust 1>><</link>><<promiscuous1>><<glove>><<glust>>
+		<br>
+	<</if>>
+	<<if $whitneyChat is undefined>>
+		<<if $whitneyromance is 1>>
+			<<link [[잡담한다 (0:15)|Whitney Chat]]>><<pass 15>><<stress -3>><<set $whitneyChat to 1>><<npcincr Whitney love 1>><</link>><<glove>><<lstress>>
+		<<else>>
+			<<link [[잡담한다 (0:15)|Whitney Chat]]>><<pass 15>><<stress 6>><<set $whitneyChat to 1>><<npcincr Whitney love 1>><</link>><<glove>><<gstress>>
+		<</if>>
+	<<else>>
+		<<if $whitneyromance is 1>>
+			<<link [[잡담한다 (0:15)|Whitney Chat]]>><<pass 15>><<stress -3>><</link>><<lstress>>
+		<<else>>
+			<<link [[잡담한다 (0:15)|Whitney Chat]]>><<pass 15>><<stress 6>><</link>><<gstress>>
+		<</if>>
+	<</if>>
+	<br>
 	<<if $whitneyAsk is undefined and $location is "park">>
-		<<link [[Ask if something's wrong|Whitney Ask]]>><<set $whitneyAsk to 1>><</link>><br>
+		<<link [[무언가 잘못됐는지 물어본다|Whitney Ask]]>><<set $whitneyAsk to 1>><</link>><br>
 	<</if>>
 	<<whitneyoptionsleave>>
 <</if>>
 <</widget>>
 
 <<widget "whitneyoptionsleave">>
-<<if $bus is "park">>
-	<<link [[Leave|Park]]>><<endevent>><<set $eventskip to 1>><</link>>
+<<if $bus is "park" or $location is "park">>
+	<<link [[떠난다|Park]]>><<endevent>><<set $eventskip to 1>><</link>>
 	<br>
 <</if>>
 <</widget>>
 
 <<widget "whitneyexit">>
-<<if $bus is "park">>
+<<if $bus is "park" or $location is "park">>
 	<<set $whitney_park to 0>><<unset $whitney_text>><<unset $whitney_text_trigger>>
-	<<link [[Next|Park]]>><<endevent>><<set $eventskip to 1>><</link>>
+	<<link [[다음|Park]]>><<endevent>><<set $eventskip to 1>><</link>>
 	<br>
 <</if>>
+<</widget>>
+
+<<widget "whitneyRescueEnd">>
+	<<endevent>>
+	<<if $whitneyRescueSpecial>>
+		<<switch $whitneyRescueSpecial>>
+			<<case "scienceDissection">>
+				You hasten back to Sirris' classroom and deliver your cargo, safe and sound.
+				<<if $schoolstate is "first">>
+					The rest of the class is busy dissecting frogs. Lacking a partner, you get one all to yourself.
+					<br><br>
+
+					<<gscience>><<scienceskill>>
+					<br><br>
+
+					<<link [[다음|Science Lesson]]>><</link>>
+					<br>
+				<<else>>
+					Class is already over by the time you get back. Sirris stands by the door.
+					<br><br>
+
+					"You didn't get lost, did you?" <<nnpc_He "Sirris">> takes the box with a smile. "It's no big deal. You just run off to class, okay?"
+					<br><br>
+
+					<<link [[다음|Hallways]]>><</link>>
+					<br>
+				<</if>>
+			<<case "mathsNote">>
+				You hurry back to the classroom. Whitney doesn't follow.
+				<br><br>
+
+				<<if $schoolstate is "second">>
+					<<link [[다음|Maths Lesson]]>><</link>>
+					<br>
+				<<else>>
+					By the time you get back, class is already over. River stands by the door.
+					<br><br>
+
+					"You took your time, didn't you?" <<nnpc_He "River">> scrutinises you for a moment, before sighing. "What's done is done, I suppose. Hurry off to class."
+					<br><br>
+
+					<<link [[다음|Hallways]]>><</link>>
+					<br>
+				<</if>>
+			<<case "mathsSent">>
+				You hasten back to your spot by the door before River notices your absence.
+				<<if $schoolstate is "second">>
+					You arrive just as <<nnpc_he "River">> emerges.
+					<br><br>
+
+					<<nnpc_He "River">> gives you a suspicious look, but doesn't press the matter. "It seems I made a mistake. Come back in."
+					<br><br>
+
+					<<link [[다음|Maths Lesson]]>><</link>>
+					<br>
+				<<else>>
+					By the time you get back, class is already over. River stands by the door.
+					<br><br>
+
+					"Where on earth did you run off to? You weren't even in trouble." <<nnpc_He "River">> sighs and shakes <<nnpc_his "River">> head. "No matter. Go to class, and don't let it happen again."
+					<br><br>
+
+					<<link [[다음|Hallways]]>><</link>>
+					<br>
+				<</if>>
+			<<default>>
+				/* failsafe - should be inaccessible */
+				You feel like you were doing something important, but you forgot what it was. You decide to aimlessly wander through the hallways instead.
+				<br><br>
+
+				<<link [[다음|Hallways]]>><</link>>
+				<br>
+		<</switch>>
+	<<else>>
+		<<switch $whitneyRescueExit>>
+			<<case "canteen">>
+				<<link [[다음|Canteen]]>><</link>>
+				<br>
+			<<case "playground">>
+				<<if $bus is "schoolfrontplayground">>
+					<<link [[다음|School Front Playground]]>><<set $eventskip to 1>><</link>>
+					<br>
+				<<else>>
+					<<link [[다음|School Rear Playground]]>><<set $eventskip to 1>><</link>>
+					<br>
+				<</if>>
+			<<default>>
+				<<link [[다음|Hallways]]>><<set $eventskip to 1>><</link>>
+				<br>
+		<</switch>>
+	<</if>>
+	<<unset $whitneyRescueAlone>>
+	<<unset $whitneyRescueExit>>
+	<<unset $whitneyRescueSafe>>
+	<<unset $whitneyRescueSlime>>
+	<<unset $whitneyRescueSpecial>>
+	<<unset $whitneyRescueUniform>>
 <</widget>>
 
 <<widget "dismissWhitney">>
@@ -82,14 +202,14 @@
 	<<else>>
 		<<set $loveInterest.primary to "None">>
 	<</if>>
-	<span class = "red">Whitney is no longer your love interest.</span>
+	<span class = "red">휘트니는 더 이상 당신의 애인이 아니다.</span>
 <<elseif $loveInterest.secondary is "Whitney">>
 	<<set $loveInterest.secondary to "None">>
-	<span class = "red">Whitney is no longer your love interest.</span>
+	<span class = "red">휘트니는 더 이상 당신의 애인이 아니다.</span>
 <<elseif $whitneyromance is 1>>
-	<span class = "red">Whitney can no longer be claimed as your love interest.</span>
+	<span class = "red">휘트니는 더 이상 당신의 애인이라고 주장할 수 없다.</span>
 <<else>>
-	<span class = "red">Whitney has been taken away.</span>
+	<span class = "red">휘트니는 납치됐다.</span>
 <</if>>
 <br><br>
 <</widget>>

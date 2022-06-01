@@ -371,7 +371,7 @@
 	<</if>>
 	<<if !_disabled.includes($transformationParts.angel.wings)>>
 		<img class="layer-backhair anim-idle-2f" @src="'img/sex/doggy/active/transformations/angel/backwings/'+$transformationParts.angel.wings+'.png'">
-		<img class="layer-parasite anim-idle-2f" @src="'img/sex/doggy/active/transformations/angel/frontwings/'+$transformationParts.angel.wings+'.png'">
+		<img class="layer-sexlashes anim-idle-2f" @src="'img/sex/doggy/active/transformations/angel/frontwings/'+$transformationParts.angel.wings+'.png'">
 	<</if>>
 <</widget>>
 
@@ -382,9 +382,10 @@
 	<</if>>
 	<<if !_disabled.includes($transformationParts.angel.wings)>>
 		<img @class="'layer-backhair anim-doggy-4f-'+_animspeed" @src="'img/sex/doggy/active/transformations/angel/backwings/'+$transformationParts.angel.wings+'.png'">
-		<img @class="'layer-parasite anim-doggy-4f-'+_animspeed" @src="'img/sex/doggy/active/transformations/angel/frontwings/'+$transformationParts.angel.wings+'.png'">
+		<img @class="'layer-sexlashes anim-doggy-4f-'+_animspeed" @src="'img/sex/doggy/active/transformations/angel/frontwings/'+$transformationParts.angel.wings+'.png'">
 	<</if>>
 <</widget>>
+
 
 <<widget "img_tf_angel_miss_idle">>
 	<<if !_disabled.includes($transformationParts.angel.halo)>>
@@ -503,7 +504,7 @@
 
 <<widget "icon">>
 <<if $images is 1>>
-	<img id="icon" @src="'img/misc/icon/' + $args[0] + '.png'">
+	<img id="icon" @src="'img/misc/icon/' + _args[0] + '.png'">
 <</if>>
 <</widget>>
 
@@ -582,6 +583,18 @@
 <<widget "elkicon">>
 	<<if $images is 1>>
 		<img id="icon" src="img/misc/icon/elk.png">
+	<</if>>
+<</widget>>
+
+<<widget "adultshopicon">>
+	<<if $images is 1>>
+		<img id="icon" src="img/misc/icon/adultshop.gif">
+	<</if>>
+<</widget>>
+
+<<widget "landfillicon">>
+	<<if $images is 1>>
+		<img id="icon" src="img/misc/icon/landfillicon.png">
 	<</if>>
 <</widget>>
 
@@ -835,6 +848,12 @@
 	<</if>>
 <</widget>>
 
+<<widget "toyshopicon">>
+	<<if $images is 1>>
+		<img id="icon" src="img/misc/icon/toyshop2.png">
+	<</if>>
+<</widget>>
+
 <<widget "closedstoreicon">>
 	<<if $images is 1>>
 		<img id="icon" src="img/misc/icon/closedstore.png">
@@ -874,6 +893,30 @@
 <<widget "swimicon">>
 	<<if $images is 1>>
 		<img id="icon" src="img/misc/icon/swim.png">
+	<</if>>
+<</widget>>
+
+<<widget "swimbackicon">>
+	<<if $images is 1>>
+		<img id="icon" src="img/misc/icon/swimback.png">
+	<</if>>
+<</widget>>
+
+<<widget "playgroundicon">>
+	<<if $images is 1>>
+		<img id="icon" src="img/misc/icon/playground.png">
+	<</if>>
+<</widget>>
+
+<<widget "entranceicon">>
+	<<if $images is 1>>
+		<img id="icon" src="img/misc/icon/entrance.png">
+	<</if>>
+<</widget>>
+
+<<widget "exiticon">>
+	<<if $images is 1>>
+		<img id="icon" src="img/misc/icon/exit.png">
 	<</if>>
 <</widget>>
 
@@ -919,41 +962,283 @@
 	<</if>>
 <</widget>>
 
+<<widget "sneakicon">>
+	<<if $images is 1>>
+		<img id="icon" src="img/misc/icon/sneak.png">
+	<</if>>
+<</widget>>
+
+<<widget "mirroricon">>
+	<<if $images is 1>>
+		<img id="icon" src="img/misc/icon/mirror.png">
+	<</if>>
+<</widget>>
+
+<<widget "homemirroricon">>
+	<<if $images is 1>>
+		<img id="icon" src="img/misc/icon/mirrorhome.png">
+	<</if>>
+<</widget>>
+
+<<widget "bloodmirroricon">>
+	<<if $images is 1>>
+		<img id="icon" src="img/misc/icon/mirrorblood.gif">
+	<</if>>
+<</widget>>
+
+<<widget "cowicon">>
+	<<if $images is 1>>
+		<img id="icon" src="img/misc/icon/cow.png">
+	<</if>>
+<</widget>>
+
+<<widget "dogicon">>
+	<<if $images is 1>>
+		<img id="icon" src="img/misc/icon/dog.png">
+	<</if>>
+<</widget>>
+
+<<widget "horseicon">>
+	<<if $images is 1>>
+		<img id="icon" src="img/misc/icon/horse.png">
+	<</if>>
+<</widget>>
+
+<<widget "pigicon">>
+	<<if $images is 1>>
+		<img id="icon" src="img/misc/icon/pig.png">
+	<</if>>
+<</widget>>
+
+<<widget "chickenicon">>
+	<<if $images is 1>>
+		<img id="icon" src="img/misc/icon/chicken.png">
+	<</if>>
+<</widget>>
+
+<<widget "domushouseicon">>
+	<<if $images is 1>>
+		<img id="icon" src="img/misc/icon/domus_house.png">
+	<</if>>
+<</widget>>
+
+<<widget "danubehouseicon">>
+	<<if $images is 1>>
+		<img id="icon" src="img/misc/icon/danube_house.png">
+	<</if>>
+<</widget>>
+
+<<widget "cellicon">>
+	<<if $images is 1>>
+		<img id="icon" src="img/misc/icon/cell.png">
+	<</if>>
+<</widget>>
+
+<<widget "stairsicon">>
+	<<if $images is 1>>
+		<img id="icon" src="img/misc/icon/stairs.png">
+	<</if>>
+<</widget>>
+
+<<widget "stairschristmasicon">>
+	<<if $images is 1>>
+		<img id="icon" src="img/misc/icon/stairs_christmas.png">
+	<</if>>
+<</widget>>
+
+<<widget "doubledoorsicon">>
+	<<if $images is 1>>
+		<img id="icon" src="img/misc/icon/double_doors.png">
+	<</if>>
+<</widget>>
+
+<<widget "shoppingcentreicon">>
+	<<if $images is 1>>
+		<img id="icon" src="img/misc/icon/shopping_centre.png">
+	<</if>>
+<</widget>>
+
+<<widget "beachicon">>
+	<<if $images is 1>>
+		<img id="icon" src="img/misc/icon/beach.gif">
+	<</if>>
+<</widget>>
+
+<<widget "plaqueicon">>
+	<<if $images is 1>>
+		<img id="icon" src="img/misc/icon/plaque.png">
+	<</if>>
+<</widget>>
+
+<<widget "prisonrunicon">>
+	<<if $images is 1>>
+		<img id="icon" src="img/misc/icon/prison_run.png">
+	<</if>>
+<</widget>>
+
+<<widget "prisonlifticon">>
+	<<if $images is 1>>
+		<img id="icon" src="img/misc/icon/prison_lift.png">
+	<</if>>
+<</widget>>
+
+<<widget "prisoncanteenicon">>
+	<<if $images is 1>>
+		<img id="icon" src="img/misc/icon/prison_canteen.png">
+	<</if>>
+<</widget>>
+
+<<widget "prisonmedicalicon">>
+	<<if $images is 1>>
+		<img id="icon" src="img/misc/icon/prison_medical.png">
+	<</if>>
+<</widget>>
+
+<<widget "prisonlaundryicon">>
+	<<if $images is 1>>
+		<img id="icon" src="img/misc/icon/prison_laundry.png">
+	<</if>>
+<</widget>>
+
+<<widget "prisondooricon">>
+	<<if $images is 1>>
+		<img id="icon" src="img/misc/icon/prison_door.png">
+	<</if>>
+<</widget>>
+
+<<widget "hospitalicon">>
+	<<if $images is 1>>
+		<img id="icon" src="img/misc/icon/hospital.png">
+	<</if>>
+<</widget>>
+
+<<widget "photographystudioicon">>
+	<<if $images is 1>>
+		<img id="icon" src="img/misc/icon/camera.png">
+	<</if>>
+<</widget>>
+
+<<widget "officeicon">>
+	<<if $images is 1>>
+		<img id="icon" src="img/misc/icon/office.png">
+	<</if>>
+<</widget>>
+
+<<widget "pilloryicon">>
+	<<if $images is 1>>
+		<img id="icon" src="img/misc/icon/watch_pillory.png">
+	<</if>>
+<</widget>>
+
+<<widget "cafeicon">>
+	<<if $images is 1>>
+		<img id="icon" src="img/misc/icon/cafe.png">
+	<</if>>
+<</widget>>
+
+<<widget "docksicon">>
+	<<if $images is 1>>
+		<img id="icon" src="img/misc/icon/docks.png">
+	<</if>>
+<</widget>>
+
+<<widget "landfillicon">>
+	<<if $images is 1>>
+		<img id="icon" src="img/misc/icon/landfill.png">
+	<</if>>
+<</widget>>
+
+<<widget "scarleticon">>
+	<<if $images is 1>>
+		<img id="icon" src="img/misc/icon/scarlet.png">
+	<</if>>
+<</widget>>
+
+<<widget "oliveicon">>
+	<<if $images is 1>>
+		<img id="icon" src="img/misc/icon/olive.png">
+	<</if>>
+<</widget>>
+
+<<widget "milkshakeicon">>
+	<<if $images is 1>>
+		<img id="icon" src="img/misc/icon/food_milkshake.png">
+	<</if>>
+<</widget>>
+
+<<widget "lockpickicon">>
+	<<if $images is 1>>
+		<img id="icon" src="img/misc/icon/lockpick.png">
+	<</if>>
+<</widget>>
+
+<<widget "infirmaryicon">>
+	<<if $images is 1>>
+		<img id="icon" src="img/misc/icon/infirmary.png">
+	<</if>>
+<</widget>>
+
+<<widget "sextoysicon">>
+	<<if $images is 1>>
+		<img id="icon" src="img/misc/icon/sexToys/bulletvibe.png">
+	<</if>>
+<</widget>>
+
+<<widget "busstationicon">>
+	<<if $images is 1>>
+		<img id="icon" src="img/misc/icon/busstation.png">
+	<</if>>
+<</widget>>
+
+<<widget "factoryicon">>
+	<<if $images is 1>>
+		<img id="icon" src="img/misc/icon/factory.gif">
+	<</if>>
+<</widget>>
+
 <<widget "ind">>
 	<<if $images is 1>>
 		<img id="icon" src="img/misc/icon/indent.png">
 	<</if>>
 <</widget>>
 
+<<widget "main_hall_icon">>
+<<if $christmas is 1>>
+	<<stairschristmasicon>>
+<<else>>
+	<<stairsicon>>
+<</if>>
+<</widget>>
+
 <<widget "clothingicon">>
 	<<if $images is 1>>
-		<<if $args[0].iconFile>>
-			<<if typeof($args[0].iconFile) === 'string'>>
-				<<set $clothesiconFile = "img/misc/icon/clothes/" + $args[0].iconFile>>
+		<<set $_item to setup.clothes[_args[1]][clothesIndex(_args[1],_args[0])]>>
+		<<if $_item.iconFile>>
+			<<if typeof($_item.iconFile) === 'string'>>
+				<<set $clothesiconFile = "img/misc/icon/clothes/" + $_item.iconFile>>
 			<<else>>
-				<<set $clothesiconFile = "img/misc/icon/clothes/" + $args[0].name_cap + ".png">>
+				<<set $clothesiconFile = "img/misc/icon/clothes/" + $_item.name_cap + ".png">>
 			<</if>>
-			<<if $args[0].colour is 0 or $args[0].colour_options.length lt 2>>
+			<<if _args[0].colour is 0 or $_item.colour_options.length lt 2>>
 				<img id="icon" alt="" @src="$clothesiconFile">
 			<<else>>
-				<img id="icon" alt="" @class="'icon-'+ $args[0].colour.replace(/ /g, '-')" @src="$clothesiconFile" @style="($args[0].colour is 'custom'? $args[0].colourCustom : '')">
+				<img id="icon" alt="" @class="'icon-'+ _args[0].colour.replace(/ /g, '-')" @src="$clothesiconFile" @style="(_args[0].colour is 'custom'? _args[0].colourCustom : '')">
 			<</if>>
 		<</if>>
-		<<if $args[0].accIcon isnot 0 and $args[0].accessory isnot 0>>
-			<<if typeof($args[0].accIcon) === 'string'>>
-				<<set $clothesiconFile = "img/misc/icon/clothes/" + $args[0].accIcon>>
+		<<if $_item.accIcon isnot 0 and $_item.accessory isnot 0>>
+			<<if typeof($_item.accIcon) === 'string'>>
+				<<set $clothesiconFile = "img/misc/icon/clothes/" + $_item.accIcon>>
 			<<else>>
-				<<set $clothesiconFile = "img/misc/icon/clothes/" + $args[0].name_cap + "_acc.png">>
+				<<set $clothesiconFile = "img/misc/icon/clothes/" + $_item.name_cap + "_acc.png">>
 			<</if>>
 			<span id = "spanIcon">
-			<<if $args[0].accessory_colour is 0 or $args[0].accessory_colour_options.length lt 2>>
+			<<if _args[0].accessory_colour is 0 or $_item.accessory_colour_options.length lt 2>>
 				<img id="accIcon" alt="" @src="$clothesiconFile">
 			<<else>>
-				<img id="accIcon" @class="'icon-'+ $args[0].accessory_colour.replace(/ /g, '-')" alt="" @src="$clothesiconFile" @style="($args[0].accessory_colour is 'custom'? $args[0].accessory_colourCustom : '')">
+				<img id="accIcon" @class="'icon-'+ _args[0].accessory_colour.replace(/ /g, '-')" alt="" @src="$clothesiconFile" @style="(_args[0].accessory_colour is 'custom'? _args[0].accessory_colourCustom : '')">
 			<</if>>
 			</span>
 		<</if>>
-
 	<</if>>
 <</widget>>
 
@@ -974,23 +1259,25 @@
 <</widget>>
 
 <<widget "g_science_star">>
-<<if $images is 1>>
-	<<if $science_star + 1 is 3>>
-		<img id="icon" src="img/ui/gold_star.png">
-	<<elseif $science_star + 1 is 2>>
-		<img id="icon" src="img/ui/silver_star.png">
-	<<elseif $science_star + 1 is 1>>
-		<img id="icon" src="img/ui/bronze_star.png">
+	<<if $statdisable is "f">>
+		<<if $images is 1>>
+			<<if $science_star + 1 is 3>>
+				<img id="icon" src="img/ui/gold_star.png">
+			<<elseif $science_star + 1 is 2>>
+				<img id="icon" src="img/ui/silver_star.png">
+			<<elseif $science_star + 1 is 1>>
+				<img id="icon" src="img/ui/bronze_star.png">
+			<</if>>
+		<<else>>
+			<<if $science_star + 1 is 3>>
+				<span class="gold">Gold Star</span>
+			<<elseif $science_star + 1 is 2>>
+				<span class="platinum">Silver Star</span>
+			<<elseif $science_star + 1 is 1>>
+				<span class="brown">Bronze Star</span>
+			<</if>>
+		<</if>>
 	<</if>>
-<<else>>
-	<<if $science_star + 1 is 3>>
-		<span class="gold">Gold Star</span>
-	<<elseif $science_star + 1 is 2>>
-		<span class="platinum">Silver Star</span>
-	<<elseif $science_star + 1 is 1>>
-		<span class="brown">Bronze Star</span>
-	<</if>>
-<</if>>
 <</widget>>
 
 <<widget "maths_star">>
@@ -1010,23 +1297,25 @@
 <</widget>>
 
 <<widget "g_maths_star">>
-<<if $images is 1>>
-	<<if $maths_star + 1 is 3>>
-		<img id="icon" src="img/ui/gold_star.png">
-	<<elseif $maths_star + 1 is 2>>
-		<img id="icon" src="img/ui/silver_star.png">
-	<<elseif $maths_star + 1 is 1>>
-		<img id="icon" src="img/ui/bronze_star.png">
+	<<if $statdisable is "f">>
+		<<if $images is 1>>
+			<<if $maths_star + 1 is 3>>
+				<img id="icon" src="img/ui/gold_star.png">
+			<<elseif $maths_star + 1 is 2>>
+				<img id="icon" src="img/ui/silver_star.png">
+			<<elseif $maths_star + 1 is 1>>
+				<img id="icon" src="img/ui/bronze_star.png">
+			<</if>>
+		<<else>>
+			<<if $maths_star + 1 is 3>>
+				<span class="gold">Gold Star</span>
+			<<elseif $maths_star + 1 is 2>>
+				<span class="platinum">Silver Star</span>
+			<<elseif $maths_star + 1 is 1>>
+				<span class="brown">Bronze Star</span>
+			<</if>>
+		<</if>>
 	<</if>>
-<<else>>
-	<<if $maths_star + 1 is 3>>
-		<span class="gold">Gold Star</span>
-	<<elseif $maths_star + 1 is 2>>
-		<span class="platinum">Silver Star</span>
-	<<elseif $maths_star + 1 is 1>>
-		<span class="brown">Bronze Star</span>
-	<</if>>
-<</if>>
 <</widget>>
 
 <<widget "english_star">>
@@ -1046,23 +1335,25 @@
 <</widget>>
 
 <<widget "g_english_star">>
-<<if $images is 1>>
-	<<if $english_star + 1 is 3>>
-		<img id="icon" src="img/ui/gold_star.png">
-	<<elseif $english_star + 1 is 2>>
-		<img id="icon" src="img/ui/silver_star.png">
-	<<elseif $english_star + 1 is 1>>
-		<img id="icon" src="img/ui/bronze_star.png">
+	<<if $statdisable is "f">>
+		<<if $images is 1>>
+			<<if $english_star + 1 is 3>>
+				<img id="icon" src="img/ui/gold_star.png">
+			<<elseif $english_star + 1 is 2>>
+				<img id="icon" src="img/ui/silver_star.png">
+			<<elseif $english_star + 1 is 1>>
+				<img id="icon" src="img/ui/bronze_star.png">
+			<</if>>
+		<<else>>
+			<<if $english_star + 1 is 3>>
+				<span class="gold">Gold Star</span>
+			<<elseif $english_star + 1 is 2>>
+				<span class="platinum">Silver Star</span>
+			<<elseif $english_star + 1 is 1>>
+				<span class="brown">Bronze Star</span>
+			<</if>>
+		<</if>>
 	<</if>>
-<<else>>
-	<<if $english_star + 1 is 3>>
-		<span class="gold">Gold Star</span>
-	<<elseif $english_star + 1 is 2>>
-		<span class="platinum">Silver Star</span>
-	<<elseif $english_star + 1 is 1>>
-		<span class="brown">Bronze Star</span>
-	<</if>>
-<</if>>
 <</widget>>
 
 <<widget "history_star">>
@@ -1082,21 +1373,23 @@
 <</widget>>
 
 <<widget "g_history_star">>
-<<if $images is 1>>
-	<<if $history_star + 1 is 3>>
-		<img id="icon" src="img/ui/gold_star.png">
-	<<elseif $history_star + 1 is 2>>
-		<img id="icon" src="img/ui/silver_star.png">
-	<<elseif $history_star + 1 is 1>>
-		<img id="icon" src="img/ui/bronze_star.png">
+	<<if $statdisable is "f">>
+		<<if $images is 1>>
+			<<if $history_star + 1 is 3>>
+				<img id="icon" src="img/ui/gold_star.png">
+			<<elseif $history_star + 1 is 2>>
+				<img id="icon" src="img/ui/silver_star.png">
+			<<elseif $history_star + 1 is 1>>
+				<img id="icon" src="img/ui/bronze_star.png">
+			<</if>>
+		<<else>>
+			<<if $history_star + 1 is 3>>
+				<span class="gold">Gold Star</span>
+			<<elseif $history_star + 1 is 2>>
+				<span class="platinum">Silver Star</span>
+			<<elseif $history_star + 1 is 1>>
+				<span class="brown">Bronze Star</span>
+			<</if>>
+		<</if>>
 	<</if>>
-<<else>>
-	<<if $history_star + 1 is 3>>
-		<span class="gold">Gold Star</span>
-	<<elseif $history_star + 1 is 2>>
-		<span class="platinum">Silver Star</span>
-	<<elseif $history_star + 1 is 1>>
-		<span class="brown">Bronze Star</span>
-	<</if>>
-<</if>>
 <</widget>>

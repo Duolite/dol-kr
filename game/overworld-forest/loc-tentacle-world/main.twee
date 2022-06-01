@@ -1,7 +1,12 @@
 :: Widgets Tentacle World [widget]
 <<widget "passouttentacleworld">>
+/*ToDo: Pregnancy, remove $pregnancyTesting to properly enable*/
+<<if $sexStats.vagina.pregnancy.waterBreaking is true and $pregnancyTesting>>
+	<<pregnancyWatersBrokenPassout "tentacleworld">>
+<<else>>
 	<<passout>>
-	[[모든 것이 암흑 속으로 사라져간다...->Passout Tentacle World]]
+	<<link [[모든 게 깜깜해진다...->Passout Tentacle World]]>><</link>>
+<</if>>
 <</widget>>
 
 <<widget "tentacleworldintro">>
@@ -45,7 +50,7 @@
 		<br><br>
 	<<elseif $tentaclewolf is 1>>
 		<<set $tentaclewolf to 2>>
-		익숙한 소리가 더욱 커졌다. 울부짖는 소리 같다. <<tentacledirection>>에서 들려온다.
+		익숙한 소리가 더욱 커졌다. 울부짖는 소리 같다. <<tentacledirection>> 방향에서 들려온다.
 		<<lstress>><<larousal>><<stress -6>><<arousal -6>>
 		<br><br>
 	<</if>>
@@ -83,7 +88,7 @@
 <</widget>>
 
 :: Tentacle World Intro
-<<set $outside to 0>><<set $location to "tentworld">><<effects>><<set $phase to 0>>
+<<location "tentworld">><<effects>><<set $phase to 0>>
 <<tentacleworldintro>>
 
 당신이 문을 열자 기괴한 풍경이 눈에 들어온다. 거대한 촉수가 하늘을 향해 몸부림친다. <span class="red">이 곳에서 오르가즘을 느끼는 것은 위험할 것이다.</span>
@@ -93,16 +98,16 @@
 <br>
 
 :: Passout Tentacle World
-<<set $outside to 0>><<set $location to "tentworld">><<effects>>
+<<location "tentworld">><<effects>>
 <<strip>>
- 당신은 깨어나자마자 공포감과 함께 자신이 발가벗은 채로 대량의 촉수들과 있는 것을 깨닫는다. 그것들은 당신을 땅으로부터 몇 피트 떨어진 높이에서 붙잡고있고,
- 당신의 팔과 다리, 몸통은 부드러우면서도 단단히 고정되어 있다. 당신은 도망치려고 안간힘을 쓰면서 팔과 다리를 움직여 촉수의 힘을 흐트러뜨린다.
- 그러나, 모든 움직임이 태연한 촉수에 의해 쉽게 제압되어 실패한다. 몸부림이 영향을 주지 않자 당신의 절망감도 높아진다.
+당신은 깨어나자마자 공포감과 함께 자신이 발가벗은 채로 대량의 촉수들과 있는 것을 깨닫는다. 그것들은 당신을 땅으로부터 몇 피트 떨어진 높이에서 붙잡고있고,
+당신의 팔과 다리, 몸통은 부드러우면서도 단단히 고정되어 있다. 당신은 도망치려고 안간힘을 쓰면서 팔과 다리를 움직여 촉수의 힘을 흐트러뜨린다.
+그러나, 모든 움직임이 태연한 촉수에 의해 쉽게 제압되어 실패한다. 몸부림이 영향을 주지 않자 당신의 절망감도 높아진다.
 <br><br>
 
-하지만, 머스크향의 공기를 계속 들이마시면서 절망감만 높아지고 있는 것은 아니다. 포획자가 당신의 팔, 엉덩이, 종아리를 밀어내고 꿈틀거리며 살을 자극하자, 당신은 당신의 몸이 흥분해 붉게 물드는 것을 발견한다. 
-당신의 <<genitals_ga>> 반응한다. 
-땀이 당신의 피부를 타고 흐른다. 당신의 <<nipples_ga>> 서는 것을 느낀다. 이전의 절정에 만족하지 못한 당신의 몸은 만져지기를 바란다. 장난스럽게 다뤄지자 당신은 기쁘게 받아들인다.
+하지만, 머스크향의 공기를 계속 들이마시면서 절망감만 높아지고 있는 것은 아니다. 포획자가 당신의 팔, 엉덩이, 종아리를 밀어내고 꿈틀거리며 살을 자극하자,
+당신은 당신의 몸이 흥분해 붉게 물드는 것을 발견한다. 당신의 <<genitals_ga>> 반응한다. 땀이 당신의 피부를 타고
+흐른다. 당신의 <<nipples_ga>> 서는 것을 느낀다. 이전의 절정에 만족하지 못한 당신의 몸은 만져지기를 바란다. 장난스럽게 다뤄지자 당신은 기쁘게 받아들인다.
 <br><br>
 
 당신의 <<genitals_nun 1>> 자극받지 않았다. 당신의 엉덩이도 공격받지 않았다. 대신, 촉수들은 당신을 결박하는 데만 관심이 있는 것 같다. 당신이 미칠 것 같은 순간, 기쁨이 밀물처럼 밀려온다.
@@ -128,7 +133,7 @@
 <br>
 
 :: Passout Tentacle World 2
-<<set $outside to 0>><<set $location to "tentworld">><<effects>>
+<<location "tentworld">><<effects>>
 
 하지만 아직 끝나지 않았다. 당신이 정신을 차리기도 전에 두 개의 장난스러운 촉수가 당신의 <<nipples_rul>> 찾아 격렬하게 문지르기 시작한다.
 당신은 갑작스러운 쾌락에 비명을 지르고 가슴을 내려다보며 눈을 뜬다. 
@@ -137,7 +142,7 @@
 <br><br>
 
 그러나 당신이 절정에 도달하기 전에 세 번째 촉수가 당신의 하반신 사이를 미끄러져 엉덩이에 공격적으로 문지른다.
-당신은 <<nipples_gwa>> 항문의 쾌락이 쓰나미처럼 자신은 덮치는 것을 느끼면서 더욱 더 비명을 내지른다. 
+당신은 <<nipples_wa>> 항문의 쾌락이 쓰나미처럼 자신은 덮치는 것을 느끼면서 더욱 더 비명을 내지른다. 
 절정이 당신을 향해 빠르게 다가오자, 당신은 비명에 가까운 신음을 지르기 위해 입을 벌린다.
 <br><br>
 
@@ -146,24 +151,24 @@
 <<orgasmstat>><<set $orgasmcount += 1>>
 <br><br>
 
-결국, 강력한 감정이 사라지기 시작합니다. 촉수가 여전히 당신의 몸을 놀리고 있음에도 불구하고, 당신은 이 새로운 클라이맥스의 효과가 점점 줄어들고 있음을 느낀다. 
-끊임없는 쾌락의 안개 속에 오랫동안 젖어 있던 당신의 마음이 맑아지기 시작합니다.
+마침내, 강력한 감정이 사라지기 시작한다. 촉수가 여전히 당신의 몸을 놀리고 있음에도 불구하고, 당신은 이 새로운 절정의 효과가 점점 줄어들고 있음을 느낀다. 
+끊임없는 쾌락의 안개 속에 오랫동안 젖어 있던 당신의 마음이 맑아지기 시작한다.
 <br><br>
 
 <<link [[다음|Passout Tentacle World 3]]>><</link>>
 <br>
 
 :: Passout Tentacle World 3
-<<set $outside to 0>><<set $location to "tentworld">><<effects>>
+<<location "tentworld">><<effects>>
 
-촉수가 잽싸게 움직여 당신의 <<if $penisexist is 1>>자지를<<else>>클리토리스를<</if>> 강하게 누르자, 당신의 머리에 저릿한 자극이 가해진다. 
+촉수가 잽싸게 움직여 당신의 <<print ($player.penisExist ? "자지를" : "클리토리스를")>> 강하게 누르자, 당신의 머리에 저릿한 자극이 가해진다.
 촉수가 당신의 항문과 젖꼭지를 괴롭히면서, 지금까지는 공격당하지 않았던 당신의 가장 민감한 곳을 공격한다. 당신의 몸이 과한 쾌감에 떨리는 것이 느껴진다. 
 당신은 갑자기 절정했고, 멈출 수 없는 쾌락에 대한 준비가 안 된 상태다.
 당신의 안에서 터져나오는 쾌감에 당신은 경련을 일으키며 손 끝을 오므라뜨리고 발을 내지른다.
 <<orgasmstat>><<set $orgasmcount += 1>>
 <br><br>
 
-이 쾌감이 다 가시기도 전에, 당신의 <<genitals_ga 1>> 네 번째 절정에 이르게하는 충격이 가해진다.
+이 쾌감이 다 가시기도 전에, 당신의 <<genitalsPost 1>>에 네 번째 절정에 이르게하는 충격이 가해진다.
 당신의 멘탈을 부수려는 따끔거림에 비명을 지른다.
 <<orgasmstat>><<set $orgasmcount += 1>>
 <br><br>
@@ -203,11 +208,11 @@
 
 :: Tentacle Plains
 
-<<set $outside to 0>><<set $location to "tentworld">><<effects>>
+<<location "tentworld">><<effects>>
 <<if $tentacleorgasmignore is undefined>><<set $tentacleorgasmignore to 0>><</if>>
 당신은 촉수 평원에 있다. 땅에서 자라난 덩굴 같은 것이 당신의 <<genitals_rul>> 노리고, 허벅지나 그들이 닿을 수 있는 모든 것들을 어루만진다. 
 달달한 향기가 코 끝을 자극한다.
-<<set $drugged += 10>><<ggarousal>><<arousal 1200>>
+<<drugs 10>><<ggarousal>><<arousal 1200>>
 <br><br>
 <<if $phase is 1>>
 	당신은 북쪽으로 걷는다.
@@ -315,14 +320,14 @@
 		<br>
 	<</if>>
 		<<if $cat gte 6>>
-		<<link [[덤벼들다|Tentacle Plains Cat]]>><<transform cat 1>><</link>><<cat>>
+		<<link [[덤벼든다|Tentacle Plains Cat]]>><<transform cat 1>><</link>><<cat>>
 		<br>
 	<</if>>
 	<<if $cow gte 6 and $breastfeedingdisable is "f">>
 		<<link [[촉수가 젖을 짜내게 한다|Tentacle Cow Breasts]]>><<transform cow 1>><</link>><<cow>>
 		<br>
 	<</if>>
-	<<if $cow gte 6 and $penisexist is 1 and !$worn.genitals.type.includes("chastity")>>
+	<<if $cow gte 6 and $player.penisExist and !$worn.genitals.type.includes("chastity")>>
 		<<link [[촉수가 자지를 짜내게 한다|Tentacle Cow Penis]]>><<transform cow 1>><</link>><<cow>>
 		<br>
 	<</if>>
@@ -344,7 +349,7 @@
 
 :: Tentacle Plains Despair
 
-<<set $outside to 0>><<set $location to "tentworld">><<effects>>
+<<location "tentworld">><<effects>>
 <<if $tentaclefallenangel is undefined>>
 	<<set $tentaclefallenangel to 0>>
 	당신은 불공평한 상황에 울부짖는다. 지난 며칠간의 회상들이 머리 속을 울리며 당신을 분노와 두려움으로 가득 차게 한다. 왜 이런 일을 겪어야 하는 거지? 세상은 당신의 순수함을 빼앗고, 당신을 이곳에 버렸다. 당신은 발끝에 있는 촉수에게 증오에 찬 발길질을 한다. 당신의 분노가 안에서 올라오던 음란한 열기를 분산시킨다.
@@ -389,7 +394,7 @@
 
 :: Tentacle Plains Resist
 
-<<set $outside to 0>><<set $location to "tentworld">><<effects>>
+<<location "tentworld">><<effects>>
 <<if $tentacleangel is undefined>>
 	<<set $tentacleangel to 0>>
 	당신은 무릎을 꿇고 당신을 이곳에 오게 한 선택들을 반성한다. 당신의 둘러싼 공간에 완전히 혐오감을 느끼자, 당신은 계속 할 수 있는 의지력을 얻게 된다. 공포는 당신을 붙잡아두지 못한다.
@@ -406,14 +411,14 @@
 	<br>
 <<elseif $tentacleangel is 1>>
 	<<set $tentacleangel to 2>>
-	마음 속 깊은 곳에서 어렴풋하게 합창단의 한 음이 들린다. 당신의 머리 위 후광이 밝아지고, 음란한 온기가 가라앉는다. <span class="gold">이곳을 당신을 붙잡아 둘 수 없다.</span>
+	마음 속 깊은 곳에서 어렴풋하게 합창단의 한 음이 들린다. 당신의 머리 위 후광이 밝아지고, 음란한 온기가 가라앉는다. <span class="gold">이곳이 당신을 붙잡아 둘 수 없다.</span>
 	<<lllarousal>><<arousal -2400>>
 	<br><br>
 	<<link [[다음|Tentacle Plains]]>><</link>>
 	<br>
 <<elseif $tentacleangel is 2>>
 	<<set $tentacleangel to 3>>
-	당신은 빛의 상징이다. 발을 움켜쥐고 있던 촉수가 당신의 뒤로 물러난다. 당신은 황무지에 있다. 그것들은 빛나는 존재를 받을 자격이 없다. 당신은 계속해서 당신에게 되뇌인다. <span class="gold">이곳을 당신을 붙잡아 둘 수 없다.</span>
+	당신은 빛의 상징이다. 발을 움켜쥐고 있던 촉수가 당신의 뒤로 물러난다. 당신은 황무지에 있다. 그것들은 빛나는 존재를 받을 자격이 없다. 당신은 계속해서 당신에게 되뇌인다. <span class="gold">이곳이 당신을 붙잡아 둘 수 없다.</span>
 	<<lllarousal>><<arousal -2400>>
 	<br><br>
 	<<link [[다음|Tentacle Plains]]>><</link>>
@@ -421,20 +426,23 @@
 <<else>>
 	당신의 후광에서 나오는 빛이 눈부시다. 당신은 이곳의 위에 있다. 당신은 이보다 더 높은 곳에 있다. 너는 큰소리로 기도문을 외워. 땅이 당신의 발에서 떨어진다. 더이상 촉수가 보이지 않는다. 당신의 후광에서 나오는 빛은 모두를 아우른다. 당신은 점점 더 높이 솟아오르는 것을 느끼고 어두운 하늘은 당신의 등정에 아무런 저항도 주지않는다. 당신은 올라가고, 또 다시 올라간다.
 	<br><br>
+	<<if $tentacleEntrance is "asylum">>
+		<<asylumescape>>
+	<</if>>
 	<<endevent>><<tentacleworldend>>
-	<<set $forest to random(50, 100)>><<set $asylumtentacleescape to 1>><<set $asylumescaped to 1>>
+	<<set $forest to random(50, 100)>>
 	<<link [[다음|Mirror]]>><<set $location to "home">><</link>>
 	<br>
 <</if>>
 
 :: Tentacle Wolf Escape
 
-<<set $outside to 0>><<set $location to "tentworld">><<effects>>
+<<location "tentworld">><<effects>>
 당신은 문을 향해 미친 듯이 돌진하면서 모든 근육을 한계까지 밀어붙인다. 검은 늑대가 돌아서서 당신을 본다. 검은 늑대는 당신이 다가오자 기쁨에 울부짖는다. 촉수들이 당신에게 주의를 집중한다. 무리에서 떨어져나왔던 촉수가 당신의 다리를 붙잡고, 발이 걸려 넘어진다.
 <br><br>
 당신은 몸을 비틀어 촉수를 물어뜯고 송곳니로 뚫는다. 그것은 금방 움츠러들곤 도망갔다. 당신은 일어나 다시 문으로 향한다.
 <br><br>
-문이 손에 닿는 거리까지 다가간다. 촉수가 당신을 쫓아오고, 마지막 한 발짝을 위해 당신은 땅을 박찼다. 당신의 팔이나 다리를 잡을수도 있었지만, 검은 늑대는 당신의 목덜미를 <<npc "Black Wolf">><<if $monster isnot 1>> 손을 <</if>> 잡아당겨 문 밖으로 끌어냈다.
+문이 손에 닿는 거리까지 다가간다. 촉수가 당신을 쫓아오고, 마지막 한 발짝을 위해 당신은 땅을 박찼다. 당신의 팔이나 다리를 잡을수도 있었지만, 검은 늑대는 당신의 목덜미를<<npc "Black Wolf">><<if $monster isnot 1>> 입으로 물고<</if>> 잡아당겨 문 밖으로 끌어냈다.
 <br><br>
 
 당신은 앞으로 구르며 남은 촉수를 걷어찬다. 문이 쾅 닫히고 사라진다. 당신은 깊은 숲 속에 있다. 정신병원이 당신 앞에 아무일도 없던 듯 존재한다. 검은 늑대가 당신의 얼굴을 핥는다.
@@ -445,21 +453,24 @@
 <</if>>
 <<lstress>><<ltrauma>><<stress -6>><<trauma -6>>
 <br><br>
+<<if $tentacleEntrance is "asylum">>
+	<<asylumescape>>
+<</if>>
 <<endevent>><<tentacleworldend>>
-<<set $forest to random(50, 100)>><<set $asylumtentacleescape to 1>><<set $asylumescaped to 1>>
+<<set $forest to random(50, 100)>>
 <<link [[다음 (0:30)|Wolf Cave Clearing]]>><<pass 30>><</link>>
 <br>
 
 :: Tentacle Plains Howl
 
-<<set $outside to 0>><<set $location to "tentworld">><<effects>>
-당신은 고개를 뒤로 젖히고 황량한 하늘을 향해 울부짖는다. 더 크게 울부짖자, <<tentacledirection>>에서 더 활기찬 울부짖음이 들려오며 당신의 영혼이 고취감을 느낀다. 당신은 확실한 이유는 모르지만 탈출이 목전에 와 있는 것처럼 느껴지면서 그 생각 덕에 계속 걸어나간다.
+<<location "tentworld">><<effects>>
+당신은 고개를 뒤로 젖히고 황량한 하늘을 향해 울부짖는다. 더 크게 울부짖자, <<tentacledirection>> 방향에서 더 활기찬 울부짖음이 들려오며 당신의 영혼이 고취감을 느낀다. 당신은 확실한 이유는 모르지만 탈출이 목전에 와 있는 것처럼 느껴지면서 그 생각 덕에 계속 걸어나간다.
 <br><br>
 <<link [[다음|Tentacle Plains]]>><</link>>
 <br>
 
 :: Tentacle Plains Cat
-<<set $outside to 0>><<set $location to "tentworld">><<effects>>
+<<location "tentworld">><<effects>>
 <<if $tentaclecat is undefined>>
 	<<set $tentaclecat to 1>>
 	당신의 눈이 초점을 맞춘다. 꿈틀거리고 미끌미끌한 작은 것들이 너무나도 많이 있다. 작은 촉수 하나가 당신의 발을 스치면서 당신의 시선을 사로잡는다. 당신이 그것을 할퀴려고 하자, 뒤로 물러난다.
@@ -483,15 +494,15 @@
 	<br>
 <<else>>
 	<<unset $tentaclecat>>
-	당신은 더 큰 촉수를 잡고 물면서 땅바닥에서 씨름한다. 그것은 빠르게 당신에게서 물러납니다.
-	<<set $tentacleorgasmignore += 1>><span class = green>근처에 더 이상 촉수가 없다. 당신의 오르가즘은 그렇게 위험하지 않을 것이다.</span>
+	당신은 더 큰 촉수를 잡고 물면서 땅바닥에서 씨름한다. 그것은 빠르게 당신에게서 물러난다.
+	<<set $tentacleorgasmignore += 1>><span class = green>근처에 더 이상 촉수가 없다. 당신의 다음 번 오르가즘은 그렇게 위험하지 않을 것이다.</span>
 	<br><br>
 	<<link [[다음|Tentacle Plains]]>><</link>>
 	<br>
 <</if>>
 
 :: Tentacle Cow Breasts
-<<set $outside to 0>><<set $location to "tentworld">><<effects>>
+<<location "tentworld">><<effects>>
 <<if $tentaclecow is undefined>>
 	<<set $tentaclecow to 1>>
 	당신은 촉수를 만족시킬 방법을 알고 있다고 생각한다.
@@ -505,20 +516,20 @@
 	<<else>>
 		당신이
 	<</if>>
-	당신의 <<worn_upper_name_gwa>><<if $worn.under_upper.name isnot "naked">> <<worn_under_upper_name_ul>><<underupperstrip>><</if>>.<<upperstrip>> 벗게 한다.
+	당신의 <<if $worn.under_upper.name isnot "naked">><<worn_upper_name_gwa>> <<worn_under_upper_name_ul>><<underupperstrip>><<else>><<worn_upper_name_ul>><</if>> 벗게 한다.<<upperstrip>>
 <<else>>
-	<<if $worn.under_upper.name isnot "naked">>
+	<<if !$worn.under_upper.type.includes("naked")>>
 		<<if $leftarm is "bound" or $rightarm is "bound">>
 			촉수 한 쌍이
 		<<else>>
 			당신이
 		<</if>>
-		당신의 <<worn_upper_name_ul>><<underupperstrip>> 벗게 한다.
+		당신의 <<worn_under_upper_name_ul>> 벗게 한다.<<underupperstrip>>
 	<</if>>
 <</if>>
 당신은 제자리에서 흔들거리면서 <<breastsPost "에">> 시선을 집중시킨다. 그들이 즉각 반응한다. 촉수가 가슴에 붙어서 빨기 시작한다.
 <br><br>
-우유가 유두에서 새어 나오고 몸이 흔들린다. 당신의 체액을 촉수들이 빨아올린다. 당신은 여전히 엎드려 있고, <<breastsPost "에">> 촉수들이 매달려있다. <<arousal 1000>><<ggarousal>>
+모유가 유두에서 새어 나오고 몸이 흔들린다. 당신의 체액을 촉수들이 빨아올린다. 당신은 여전히 엎드려 있고, <<breastsPost "에">> 촉수들이 매달려있다. <<arousal 1000>><<ggarousal>>
 <br><br>
 <<if $lactating is 1>>
 	<<set _tentacles_milk to ($milk_amount / 2)>>
@@ -527,12 +538,12 @@
 
 	<<if _tentacles_milk gte 50>>
 		<<set $tentacleorgasmignore += 1>>
-		그들이 가득 만족하고는 당신을 풀어주고 흩어진다. <span class = "green">그들은 만족했다. 당신의 오르가즘은 그렇게 위험하지 않을 것이다.</span>
+		배가 차서, 촉수들은 당신을 풀어주고 흩어진다. <span class = "green">그들은 만족했다. 당신의 다음 번 오르가즘은 그렇게 위험하지 않을 것이다.</span>
 	<<else>>
-		촉수들이 계속해서 당신을 빨고 핥는다. <span class = "red">그들은 우유의 양에 만족하지 못했다.</span> 결국, 그들이 빨아내는 곳들이 아파오며 당신은 그들을 떼어낸다. <<pain 10>><<gpain>>
+		촉수들이 계속해서 당신을 빨고 핥는다. <span class = "red">그들은 모유의 양에 만족하지 못했다.</span> 결국, 그들이 빨아내는 곳들이 아파오며 당신은 그들을 떼어낸다. <<pain 10>><<gpain>>
 	<</if>>
 <<else>>
-	당신은 우유를 전혀 생산하지 못했다. <span class = "red">촉수들이 만족하지 못한다.</span>
+	당신은 모유를 전혀 생산하지 못했다. <span class = "red">촉수들이 만족하지 못한다.</span>
 <</if>>
 <<purity -5>>
 <<clotheson>>
@@ -543,14 +554,14 @@
 <br>
 
 :: Tentacle Cow Penis
-<<set $outside to 0>><<set $location to "tentworld">><<effects>>
+<<location "tentworld">><<effects>>
 <<if $tentaclecow is undefined>>
 	<<set $tentaclecow to 1>>
 	당신은 촉수를 만족시킬 방법을 알고 있다고 생각한다.
 <<else>>
 	당신은 촉수들의 갈증을 해소할 준비를 한다.
 <</if>>
-You drop to all fours, and they begin slithering up your legs.
+당신이 네 발로 엎드리자, 촉수들이 당신의 다리를 미끄러지듯 타고 올라온다.
 <<if $worn.lower.name isnot "naked">>
 	<<if $feetuse is "bound">>
 		촉수 한 쌍이
@@ -568,7 +579,7 @@ You drop to all fours, and they begin slithering up your legs.
 		당신의 <<worn_lower_name_ul>><<underlowerstrip>> 벗게 한다.
 	<</if>>
 <</if>>
-<<set $penisuse to "tentacle">>
+<<set $penisuse to "tentacle">><<set $tentaclePenis to "tentacle">>
 <<set _tentacles_semen to ($semen_amount / 2)>>
 당신은 제자리에서 <<bottomPost "을">> 흔들거리면서 <<penisPost "에">>시선을 집중시킨다. 그들이 즉각 반응한다. 촉수가 자지에 붙어서 빨기 시작한다.
 <br><br>
@@ -584,7 +595,7 @@ You drop to all fours, and they begin slithering up your legs.
 
 <<if _tentacles_semen gte 100>>
 	<<set $tentacleorgasmignore += 1>>
-	그들이 가득 만족하고는 당신을 풀어주고 흩어진다. <span class = "green">그들은 만족했다. 당신의 오르가즘은 그렇게 위험하지 않을 것이다.</span>
+	배가 차서, 촉수들은 당신을 풀어주고 흩어진다. <span class = "green">그들은 만족했다. 당신의 다음 번 오르가즘은 그렇게 위험하지 않을 것이다.</span>
 <<else>>
 	촉수들이 계속해서 당신을 빨고 핥는다. <span class = "red">그들은 정액의 양에 만족하지 못했다.</span> 결국, 그들이 빨아내는 곳들이 아파오며 당신은 그들을 떼어낸다. <<pain 10>><<gpain>>
 <</if>>
@@ -598,7 +609,7 @@ You drop to all fours, and they begin slithering up your legs.
 
 :: Tentacle Plains Admire
 
-<<set $outside to 0>><<set $location to "tentworld">><<effects>>
+<<location "tentworld">><<effects>>
 <<if $tentacleadmire is undefined>>
 	<<set $tentacleadmire to 0>>
 	당신의 눈이 끝없는 지평선을 훑어보자, 모든 것이 천천히 흘러가는 것처럼 느껴진다. 촉수의 부드러운 흔들림이 당신을 최면에 걸리게 한다. 머지않아 당신도 제자리에서 흔들리게 된다. 발에 있는 촉수가 당신을 간지럽힌다.
@@ -617,12 +628,12 @@ You drop to all fours, and they begin slithering up your legs.
 	<br>
 <<elseif $tentacleadmire is 1>>
 	<<set $tentacleadmire to 2>>
-	당신은 쾌락에 의해 몸이 달아오르는 동안 죄책감이나 자기혐오를 느끼지 않는다. 모든 촉수가 당신에게 닿기 위해 자극적으로 움직이는 것처럼 보인다. 당신은 더이상 참을 수 없어져 무릎을 꿇고 자신을 둘러싼 수많은 촉수들에게 몸을 드러낸다. 그들은 당신의 제의에 답하듯 당신의 팔, 다리, 꼬리를 잡아당깁니다.
+	당신은 쾌락에 의해 몸이 달아오르는 동안 죄책감이나 자기혐오를 느끼지 않는다. 모든 촉수가 당신에게 닿기 위해 자극적으로 움직이는 것처럼 보인다. 당신은 더이상 참을 수 없어져 무릎을 꿇고 자신을 둘러싼 수많은 촉수들에게 몸을 드러낸다. 그들은 당신의 제의에 답하듯 당신의 팔, 다리, 꼬리를 잡아당긴다.
 	<<gcontrol>><<control 25>><<ltrauma>><<lstress>><<ggarousal>>
 	<br><br>
 	<<trauma -6>><<stress -6>><<arousal 1200>>
 	<<if $leftarm is "bound" or $rightarm is "bound" or $feetuse is "bound">>
-		A pair of tentacles reach your <<if $leftarm is "bound" or $rightarm is "bound">>arms<</if>><<if ($leftarm is "bound" or $rightarm is "bound") and $feetuse is "bound">> and <</if>><<if $feetuse is "bound">>legs<</if>> and squirt a viscous liquid onto your bindings, slowly dissolving them.<<unbind>>
+		촉수 둘이 당신의 <<if $leftarm is "bound" or $rightarm is "bound">>팔<</if>><<if ($leftarm is "bound" or $rightarm is "bound") and $feetuse is "bound">>과 <</if>><<if $feetuse is "bound">>다리<</if>>에 있는 구속구에 끈적이는 액체를 쏘아, 천천히 그것을 녹인다.<<unbind>>
 		<br><br>
 	<</if>>
 	<<link [[다음|Tentacle Plains Admire Sex]]>><<set $sexstart to 1>><</link>>
@@ -636,7 +647,7 @@ You drop to all fours, and they begin slithering up your legs.
 
 :: Tentacle Plains Admire Sex
 
-<<set $outside to 0>><<set $location to "tentworld">>
+<<location "tentworld">>
 
 <<if $sexstart is 1>><<set $sexstart to 0>>
 	<<set $combat to 1>>
@@ -647,7 +658,7 @@ You drop to all fours, and they begin slithering up your legs.
 	<<set $tentacles[0].shaft to "waist">>
 <</if>>
 <<statetentacles>>
-You count $tentacles.active tentacles surrounding you.
+
 <<effects>>
 <<effectstentacles>>
 <<tentacles>>
@@ -661,7 +672,7 @@ You count $tentacles.active tentacles surrounding you.
 :: Tentacle Plains Admire Sex Finish
 
 <<effects>>
-당신의 몸이 따뜻하고 꿈틀거리는 덩어리들에 완전히 덮히자, 당신은 주변의 땅을 다시 한 번 살펴본다. 이 뒤틀린 세상은 옳은 것들의 왜곡이다. 당신이 아는 세상에 대한 역겨운 조롱이다. 더럽고, 타락하고, 악랄한 것이 꼭 당신같다.
+당신의 몸이 따뜻하고 꿈틀거리는 덩어리들에 완전히 덮이자, 당신은 주변의 땅을 다시 한 번 살펴본다. 이 뒤틀린 세상은 옳은 것들의 왜곡이다. 당신이 아는 세상에 대한 역겨운 조롱이다. 더럽고, 타락하고, 악랄한 것이 꼭 당신같다.
 <br><br>
 <<set $eventskip to 1>>
 <<clotheson>>
@@ -671,18 +682,21 @@ You count $tentacles.active tentacles surrounding you.
 
 :: Tentacle Escape
 
-<<set $outside to 0>><<set $location to "tentworld">><<effects>>
+<<location "tentworld">><<effects>>
 
 당신은 문으로 나간다. 당신의 뒤로 문이 단단히 닫힌다. 당신은 숲 속에 있다.
 <br><br>
+<<if $tentacleEntrance is "asylum">>
+	<<asylumescape>>
+<</if>>
 <<endevent>><<tentacleworldend>>
-<<set $forest to random(50, 100)>><<set $asylumtentacleescape to 1>><<set $asylumescaped to 1>>
+<<set $forest to random(50, 100)>>
 <<link [[다음|Forest]]>><</link>>
 <br>
 
 :: Tentacle Return
 
-<<set $outside to 0>><<set $location to "tentworld">><<effects>>
+<<location "tentworld">><<effects>>
 당신은 문을 통해 정신병원으로 돌아간다. 당신의 뒤로 문이 단단히 닫힌다.
 <br><br>
 <<endevent>><<npc Harper>><<person1>><<tentacleworldend>>
@@ -691,7 +705,7 @@ You count $tentacles.active tentacles surrounding you.
 
 :: Tentacle Rape
 
-<<set $outside to 0>><<set $location to "tentworld">>
+<<location "tentworld">>
 
 <<if $molestationstart is 1>>
 	<<set $molestationstart to 0>>
@@ -704,7 +718,7 @@ You count $tentacles.active tentacles surrounding you.
 <</if>>
 
 <<statetentacles>>
-You count $tentacles.active tentacles surrounding you.
+
 
 <<effects>>
 <<effectstentacles>>
@@ -720,7 +734,7 @@ You count $tentacles.active tentacles surrounding you.
 :: Tentacle Rape Finish
 
 <<effects>>
-촉수가 너에게 흥미를 잃었다. <<tearful>> you struggle to your feet.
+촉수가 너에게 흥미를 잃었다. <<tearful>> 당신은 두 발로 일어서려고 몸부림친다.
 <br><br>
 <<set $eventskip to 1>>
 <<clotheson>>
@@ -731,7 +745,7 @@ You count $tentacles.active tentacles surrounding you.
 
 :: Tentacle Plains Spray
 
-<<set $outside to 0>><<set $location to "tentworld">><<effects>>
+<<location "tentworld">><<effects>>
 그 빛은 당신의 손길에 고동치다 희미해진다. 덩굴들이 떨어진다. 당신의 후추 스프레이가 따뜻하다.
 <br><br>
 <span class="gold">당신은 후추 스프레이 보충제를 얻었다.</span>
@@ -759,15 +773,15 @@ You count $tentacles.active tentacles surrounding you.
 	당신은 초록색 문이 보인다.
 	<<if _tent_portal_north is 0>>
 	<<elseif _tent_portal_north gte 1>>
-		남쪽으로 <<print _tent_portal_north + "0">> 분쯤 가야한다.
+		남쪽으로 <<trNumberHanja _tent_portal_north*10>> 분쯤 가야한다.
 	<<elseif _tent_portal_north lt 0>>
-		북쪽으로 <<print (_tent_portal_north * -1) + "0">> 분쯤 가야한다.
+		북쪽으로 <<trNumberHanja _tent_portal_north*-10>> 분쯤 가야한다.
 	<</if>>
 	<<if _tent_portal_east is 0>>
 	<<elseif _tent_portal_east gte 1>>
-		서쪽으로 <<print _tent_portal_east + "0">> 분쯤 가야한다.
+		서쪽으로 <<trNumberHanja _tent_portal_east*10>> 분쯤 가야한다.
 	<<elseif _tent_portal_east lt 0>>
-		동쪽으로 <<print (_tent_portal_east * -1) + "0">> 분쯤 가야한다.
+		동쪽으로 <<trNumberHanja _tent_portal_east*-10>> 분쯤 가야한다.
 	<</if>>
 	<br>
 <</if>>
@@ -780,15 +794,15 @@ You count $tentacles.active tentacles surrounding you.
 	<</if>>
 	<<if $tentnorth is 0>>
 	<<elseif $tentnorth gte 1>>
-		남쪽으로 <<print $tentnorth + "0">> 분쯤 가야한다.
+		남쪽으로 <<trNumberHanja $tentnorth*10>> 분쯤 가야한다.
 	<<elseif $tentnorth lt 0>>
-		북쪽으로 <<print ($tentnorth * -1) + "0">> 분쯤 가야한다.
+		북쪽으로 <<trNumberHanja $tentnorth*-10>> 분쯤 가야한다.
 	<</if>>
 	<<if $tenteast is 0>>
 	<<elseif $tenteast gte 1>>
-		서쪽으로 <<print $tenteast + "0">> 분쯤 가야한다.
+		서쪽으로 <<trNumberHanja $tenteast*10>> 분쯤 가야한다.
 	<<elseif $tenteast lt 0>>
-		동쪽으로 <<print ($tenteast * -1) + "0">> 분쯤 가야한다.
+		동쪽으로 <<trNumberHanja $tenteast*-10>> 분쯤 가야한다.
 	<</if>>
 	<br>
 <</if>>
@@ -797,15 +811,15 @@ You count $tentacles.active tentacles surrounding you.
 	당신은 이상한 물건을 발견한다.
 	<<if _tent_spray_north is 0>>
 	<<elseif _tent_spray_north gte 1>>
-		남쪽으로 <<print _tent_spray_north + "0">> 분쯤 가야한다..
+		남쪽으로 <<trNumberHanja _tent_spray_north*10>> 분쯤 가야한다.
 	<<elseif _tent_spray_north lt 0>>
-		북쪽으로 <<print (_tent_spray_north * -1) + "0">> 분쯤 가야한다.
+		북쪽으로 <<trNumberHanja _tent_spray_north*-10>> 분쯤 가야한다.
 	<</if>>
 	<<if _tent_spray_east is 0>>
 	<<elseif _tent_spray_east gte 1>>
-		서쪽으로 <<print _tent_spray_east + "0">> 분쯤 가야한다.
+		서쪽으로 <<trNumberHanja _tent_spray_east*10>> 분쯤 가야한다.
 	<<elseif _tent_spray_east lt 0>>
-		동쪽으로 <<print (_tent_spray_east * -1) + "0">> 분쯤 가야한다.
+		동쪽으로 <<trNumberHanja _tent_spray_east*-10>> 분쯤 가야한다.
 	<</if>>
 	<br>
 <</if>>

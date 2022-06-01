@@ -43,47 +43,87 @@
 			<<case 1 2 3>>
 				<<He_nun>> 가버리며 신음소리를 낸다; 애액이 당신의 발을 뒤덮는다.
 				<br><br>
-				<<feetejacstat>><<ejacstat>><<set $hygiene += 500>><<set $feetsemen += 1>>
+				<<feetejacstat>><<ejacstat>><<set $hygiene += 500>><<set $player.bodyliquid.feet.semen += 1>>
 			<<case 4 5 6>>
 				<<He_nun>> 조용히 당신의 발에 사정하고, 애액으로 미끌거리게 한다.
 				<br><br>
-				<<feetejacstat>><<ejacstat>><<set $hygiene += 500>><<set $feetsemen += 1>>
+				<<feetejacstat>><<ejacstat>><<set $hygiene += 500>><<set $player.bodyliquid.feet.semen += 1>>
 			<<case 7>>
 				<<He_nun>> 끄응 하는 소리를 내며 <<his_yi>> 보지를 당신의 발에 비벼대며 가버렸고, 당신의 발과 다리에 애액을 왕창 튀긴다.
 				<br><br>
-				<<feetejacstat>><<ejacstat>><<set $hygiene += 500>><<set $feetsemen += 1>>
-				<<thighejacstat>><<ejacstat>><<set $hygiene += 500>><<set $thighsemen += 1>>
+				<<feetejacstat>><<ejacstat>><<set $hygiene += 500>><<set $player.bodyliquid.feet.semen += 1>>
+				<<thighejacstat>><<set $hygiene += 500>><<set $player.bodyliquid.thigh.semen += 1>>
 			<</switch>>
 		<<elseif $NPCList[0].vagina is "leftarm" or $NPCList[0].vagina is "rightarm">>
 			<<switch random(1, 5)>>
 			<<case 1 2>>
 				<<He_nun>> 당신이 <<his_yi>> 보지로 가버리게 하자 크게 숨을 내쉬며, <<he_ga>> 경련하면서 <<his_yi>> 넓적다리가 당신의 손에서 떨린다.
 				<br><br>
-				<<handejacstat>><<ejacstat>><<set $hygiene += 500>><<set $leftarmgoo += 1>>
+				<<handejacstat>><<ejacstat>><<set $hygiene += 500>><<set $player.bodyliquid.leftarm.goo += 1>>
 			<<case 3 4>>
 				<<He_nun>> 조용히 가버렸고, 보지가 당신의 손에서 통제할 수 없을 정도로 씰룩거린다.
 				<br><br>
-				<<handejacstat>><<ejacstat>><<set $hygiene += 500>><<set $leftarmgoo += 1>>
+				<<handejacstat>><<ejacstat>><<set $hygiene += 500>><<set $player.bodyliquid.leftarm.goo += 1>>
 			<<case 5>>
 				<<He_nun>> 괴성을 지르며 당신의 손을 잡고 <<his_yi>> 보지에 당신의 손가락을 찔러댄다. 당신의 손가락은 애액으로 흠뻑 젖는다.
 				<br><br>
-				<<handejacstat>><<ejacstat>><<set $hygiene += 500>><<set $leftarmgoo += 1>>
+				<<handejacstat>><<ejacstat>><<set $hygiene += 500>><<set $player.bodyliquid.leftarm.goo += 1>>
 			<</switch>>
+		<<elseif $NPCList[_nn].vagina is "leftDildo">>
+			<<switch random(1, 5)>>
+				<<case 1 2>>
+					<<He_nun>> <<his_yi>> 몸을 경련하며 ?orgasmMoans, <<his_yi>> 넓적다리는 당신의 <<sextoyPost $currentSexToyLeft.name "name">> 옆에서 떨린다.
+				<<case 3 4>>
+					<<His_yi>> 홍조가 깊어지고 <<his_yi>> 입이 딱 벌어지며  <<he_nun>> <<sextoy_ro $currentSexToyLeft.name>> 가버린다.
+				<<case 5>>
+					<<He_nun>> 당신의 <<sextoy_ga $currentSexToyLeft.name>> <<him_ul>> 절정에 이르게 하자 당신의 팔을 잡으며 ?orgasmMoans. <<His_yi>> 애액이 당신의 <<sextoy_rul $currentSexToyLeft.name>> 적신다.
+			<</switch>>
+			<<handejacstat>><<ejacstat>><<set $hygiene += 500>><<set $player.bodyliquid.leftarm.goo += 1>>
+		<<elseif $NPCList[_nn].vagina is "rightDildo">>
+			<<switch random(1, 5)>>
+				<<case 1 2>>
+					<<He_nun>> <<his_yi>> 몸을 경련하며 ?orgasmMoans, <<his_yi>> 넓적다리는 당신의 <<sextoyPost $currentSexToyRight.name "name">> 옆에서 떨린다.
+				<<case 3 4>>
+					<<His_yi>> 홍조가 깊어지고 <<his_yi>> 입이 딱 벌어지며  <<he_nun>> <<sextoy_ro $currentSexToyRight.name>> 가버린다.
+				<<case 5>>
+					<<He_nun>> 당신의 <<sextoy_ga $currentSexToyRight.name>> <<him_ul>> 절정에 이르게 하자 당신의 팔을 잡으며 ?orgasmMoans. <<His_yi>> 애액이 당신의 <<sextoy_rul $currentSexToyRight.name>> 적신다.
+			<</switch>>
+			<<handejacstat>><<ejacstat>><<set $hygiene += 500>><<set $player.bodyliquid.rightarm.goo += 1>>
+		<<elseif $NPCList[_nn].vagina is "leftDildoAnus">>
+			<<switch random(1, 5)>>
+				<<case 1 2>>
+					<<He_nun>> <<his_yi>> 몸을 경련하며 ?orgasmMoans, <<his_yi>> 넓적다리는 당신의 <<sextoyPost $currentSexToyLeft.name "name">> 옆에서 떨린다.
+				<<case 3 4>>
+					<<His_yi>> 홍조가 깊어지고 <<his_yi>> 입이 딱 벌어지며  <<he_nun>> <<sextoy_ro $currentSexToyLeft.name>> 가버린다.
+				<<case 5>>
+					<<He_nun>> 당신의 <<sextoy_ga $currentSexToyLeft.name>> <<him_ul>> 절정에 이르게 하자 당신의 팔을 잡으며 ?orgasmMoans.
+			<</switch>>
+			<<handejacstat>><<ejacstat>><<set $hygiene += 500>>
+		<<elseif $NPCList[_nn].vagina is "rightDildoAnus">>
+			<<switch random(1, 5)>>
+				<<case 1 2>>
+					<<He_nun>> <<his_yi>> 몸을 경련하며 ?orgasmMoans, <<his_yi>> 넓적다리는 당신의 <<sextoyPost $currentSexToyRight.name "name">> 옆에서 떨린다.
+				<<case 3 4>>
+					<<His_yi>> 홍조가 깊어지고 <<his_yi>> 입이 딱 벌어지며  <<he_nun>> <<sextoy_ro $currentSexToyRight.name>> 가버린다.
+				<<case 5>>
+					<<He_nun>> 당신의 <<sextoy_ga $currentSexToyRight.name>> <<him_ul>> 절정에 이르게 하자 당신의 팔을 잡으며 ?orgasmMoans.
+			<</switch>>
+			<<handejacstat>><<ejacstat>><<set $hygiene += 500>>
 		<<elseif $NPCList[0].vagina is "vagina">>
 			<<switch random(1, 5)>>
 			<<case 1 2>>
 				<<He_nun>> <<his_yi>> 젖은 보지를 당신의 것에 비벼대며, 신음하며 가버린다. "그거 정말 좋았어."
 				<br><br>
-				<<thighejacstat>><<ejacstat>><<set $hygiene += 500>><<set $thighgoo += 1>>
+				<<thighejacstat>><<ejacstat>><<set $hygiene += 500>><<set $player.bodyliquid.thigh.goo += 1>>
 			<<case 3 4>>
 				<<He_nun>> 당신의 <<pussy_rul>> <<his_yi>> 것에 세게 비벼대며 신음한다.
 				<br><br>
-				<<vaginalentranceejacstat>><<ejacstat>><<set $hygiene += 500>><<set $vaginaoutsidegoo += 1>>
+				<<vaginalentranceejacstat>><<ejacstat>><<set $hygiene += 500>><<set $player.bodyliquid.vaginaoutside.goo += 1>>
 			<<case 5>>
 				<<He_nun>> 괴성을 지르고, <<his_yi>> 사타구니를 벽에 짓이긴다. 애액이 <<his_yi>> 보지에서 흘러나와, 당신의 노출된 다리를 흠뻑 적신다. <<He_nun>> 킥킥댄다, "내가 너무 지저분하게 만든 게 아니었으면 좋겠는데."
 				<br><br>
-				<<vaginalentranceejacstat>><<ejacstat>><<set $hygiene += 500>><<set $vaginaoutsidegoo += 1>>
-				<<thighejacstat>><<ejacstat>><<set $hygiene += 500>><<set $thighgoo += 1>>
+				<<vaginalentranceejacstat>><<ejacstat>><<set $hygiene += 500>><<set $player.bodyliquid.vaginaoutside.goo += 1>>
+				<<thighejacstat>><<set $hygiene += 500>><<set $player.bodyliquid.thigh.goo += 1>>
 			<</switch>>
 		<<elseif $NPCList[0].vagina is "othermouth">>
 			<<He_nun>> 가버리며 흥분감에 몸을 떨었고, <<his_yi>> 얼굴을 구멍에서 뗀다.
@@ -96,30 +136,30 @@
 			<<case 1 2>>
 				<<He_nun>> 신음하며 <<his_yi>> 사타구니를 당신의 얼굴에 비빈다; <<he_ga>> 당신의 입으로 가버리며 당신은 벽이 떨리는 것을 느낀다.
 				<br><br>
-				<<faceejacstat>><<ejacstat>><<set $hygiene += 500>><<set $facegoo += 1>>
+				<<faceejacstat>><<ejacstat>><<set $hygiene += 500>><<set $player.bodyliquid.face.goo += 1>>
 			<<case 3 4>>
 				<<He_nun>> 당신의 얼굴 위에 사정하며, 마무리로 <<his_yi>> 클리토리스를 당신의 코에 비벼댄다. 당신은 애액이 당신의 코와 입을 타고 흘러내리는 것을 느낀다.
 				<br><br>
-				<<faceejacstat>><<ejacstat>><<set $hygiene += 500>><<set $facegoo += 1>>
+				<<faceejacstat>><<ejacstat>><<set $hygiene += 500>><<set $player.bodyliquid.face.goo += 1>>
 			<<case 5>>
 				<<He_nun>> <<his_yi>> 클리토리스를 빠르게 비벼댔고, 구멍을 통해 당신의 얼굴에 애액을 내뿜는다. 당신은 애액이 당신의 얼굴과 목을 타고 흘러내리는 것을 느낀다.
 				<br><br>
-				<<faceejacstat>><<ejacstat>><<set $hygiene += 1000>><<set $facegoo += 2>>
+				<<faceejacstat>><<ejacstat>><<set $hygiene += 1000>><<set $player.bodyliquid.face.goo += 2>>
 			<</switch>>
 		<<elseif $NPCList[0].vagina is "mouth">>
 			<<switch random(1, 5)>>
 			<<case 1 2>>
 				<<He_nun>> 신음하며 <<his_yi>> 사타구니를 당신의 혀에 거칠게 비벼댄다; 당신은 <<he_ga>> 당신의 봉사 중인 입 안에서 가버리며 벽이 떨리는 것을 느낀다.
 				<br><br>
-				<<faceejacstat>><<ejacstat>><<set $hygiene += 500>><<set $facegoo += 1>>
+				<<faceejacstat>><<ejacstat>><<set $hygiene += 500>><<set $player.bodyliquid.face.goo += 1>>
 			<<case 3 4>>
 				<<He_nun>> 당신의 입 안에 사정하며, 마무리로 <<his_yi>> 보지를 벽에 비벼댄다. 당신은 애액이 당신의 목구멍을 타고 흘러내리는 것을 느낀다.
 				<br><br>
-				<<faceejacstat>><<ejacstat>><<set $hygiene += 500>><<set $facegoo += 1>>
+				<<faceejacstat>><<ejacstat>><<set $hygiene += 500>><<set $player.bodyliquid.face.goo += 1>>
 			<<case 5>>
 				<<He_nun>> <<his_yi>> 클리토리스를 빠르게 비벼댔고, 당신의 열린 입 안에 애액을 내뿜는다. 당신은 애액이 당신의 목구멍을 타고 흘러내리며 턱을 타고 뚝뚝 떨어지는 것을 느낀다.
 				<br><br>
-				<<faceejacstat>><<ejacstat>><<set $hygiene += 1000>><<set $facegoo += 2>>
+				<<faceejacstat>><<ejacstat>><<set $hygiene += 1000>><<set $player.bodyliquid.face.goo += 2>>
 			<</switch>>
 		<!-- following appear to be Male PC to Female Antagonist only? -->
 		<<elseif $NPCList[0].vagina is "otheranus">>
@@ -129,7 +169,11 @@
 			<<He_nun>> <<his_yi>> 보지에 당신의 자지를 세게 집어넣으며 쾌감에 몸을 떤다.
 			<br><br>
 		<<elseif $NPCList[0].vagina is "penisimminent" or $NPCList[0].vagina is "penisentrance">>
-			<<He_nun>> 신음하며 당신의 고동치는 자지에 대고 가버린다.
+			<<if !playerHasStrapon()>>
+				<<He_nun>> 신음하며 당신의 고동치는 자지에 대고 가버린다.
+			<<else>>
+				<<He_nun>> 신음하며 당신의 <<worn_under_lower_name>> 위에 사정한다.
+			<</if>>
 			<br><br>
 		<<elseif $NPCList[0].vagina is "otheranusfrot" or $NPCList[0].vagina is "otheranusentrance">>
 			<<He_nun>> <<his_yi>> 엉덩이를 당신의 자지에 돌려대며 가버린다.
@@ -146,7 +190,7 @@
 			<<case 1 2>>
 				<<He_nun>> 신음하며 <<his_yi>> 클리토리스를 비벼대었고, 구멍을 통해 당신의 얼굴에 애액을 뿌려댄다.
 				<br><br>
-				<<faceejacstat>><<ejacstat>><<set $hygiene += 500>><<set $facegoo += 1>>
+				<<faceejacstat>><<ejacstat>><<set $hygiene += 500>><<set $player.bodyliquid.face.goo += 1>>
 			<<case 3>>
 				<<He_nun>> 신음하며 <<his_yi>> 넓적다리 위에 사정한다.
 				<br><br>
@@ -158,37 +202,37 @@
 			<<case 1 2>>
 				<<He_nun>> 신음하며 <<his_yi>> 클리토리스를 당신의 구속된 얼굴에 거칠게 비벼댄다; 당신은 <<he_ga>> 당신의 입 앞에서 가버리며 벽이 떨리는 것을 느낀다.
 				<br><br>
-				<<faceejacstat>><<ejacstat>><<set $hygiene += 500>><<set $facegoo += 1>>
+				<<faceejacstat>><<ejacstat>><<set $hygiene += 500>><<set $player.bodyliquid.face.goo += 1>>
 			<<case 3 4>>
 				<<He_nun>> 당신의 얼굴 위에 사정하며, 마무리로 <<his_yi>> 클리토리스를 당신의 코에 비벼댄다. 당신은 찐득찐득한 것이 당신의 코와 입을 타고 흘러내리는 것을 느낀다.
 				<br><br>
-				<<faceejacstat>><<ejacstat>><<set $hygiene += 500>><<set $facegoo += 1>>
+				<<faceejacstat>><<ejacstat>><<set $hygiene += 500>><<set $player.bodyliquid.face.goo += 1>>
 			<<case 5>>
 				<<He_nun>> <<his_yi>> 클리토리스를 빠르게 비벼댔고, 구멍을 통해 당신의 얼굴에 애액을 내뿜는다. 당신은 뒤로 물러나려는 헛된 시도를 하지만 구속구가 당신을 움직이지 못하게 한다; 당신은 애액이 당신의 얼굴과 목을 타고 흘러내리는 것을 느낀다.
 				<br><br>
-			<<faceejacstat>><<ejacstat>><<set $hygiene += 1000>><<set $facegoo += 2>>
+			<<faceejacstat>><<ejacstat>><<set $hygiene += 1000>><<set $player.bodyliquid.face.goo += 2>>
 			<</switch>>
 		<<elseif $NPCList[0].vagina is "mouth">>
 			<<switch random(1, 5)>>
 			<<case 1 2>>
 				<<He_nun>> 신음하며 <<his_yi>> 사타구니를 당신의 혀에 거칠게 비벼댄다; 당신은 <<he_ga>> 당신의 봉사 중인 입 안에서 가버리며 벽이 떨리는 것을 느낀다.
 				<br><br>
-				<<faceejacstat>><<ejacstat>><<set $hygiene += 500>><<set $facegoo += 1>>
+				<<faceejacstat>><<ejacstat>><<set $hygiene += 500>><<set $player.bodyliquid.face.goo += 1>>
 			<<case 3 4>>
 				<<He_nun>> 당신의 입 안에 사정하며, 마무리로 <<his_yi>> 보지를 벽에 비벼댄다. 당신은 애액이 당신의 목구멍을 타고 흘러내리는 것을 느낀다.
 				<br><br>
-				<<faceejacstat>><<ejacstat>><<set $hygiene += 500>><<set $facegoo += 1>>
+				<<faceejacstat>><<ejacstat>><<set $hygiene += 500>><<set $player.bodyliquid.face.goo += 1>>
 			<<case 5>>
 				<<He_nun>> <<his_yi>> 클리토리스를 빠르게 비벼댔고, 당신의 열린 입 안에 애액을 내뿜는다. 당신은 뒤로 물러나려는 헛된 시도를 하지만 구속구가 당신을 움직이지 못하게 한다; 당신은 애액이 당신의 목구멍을 타고 흘러내리며 턱을 타고 뚝뚝 떨어지는 것을 느낀다. "네가 목이 말랐었기를 바라, 조그만 <<slut_a>>."
 				<br><br>
-				<<faceejacstat>><<ejacstat>><<set $hygiene += 1000>><<set $facegoo += 2>>
+				<<faceejacstat>><<ejacstat>><<set $hygiene += 1000>><<set $player.bodyliquid.face.goo += 2>>
 			<</switch>>
 		<<else>>
 			<<switch random(1, 3)>>
 			<<case 1 2>>
 				<<He_nun>> 신음하며 <<his_yi>> 클리토리스를 비벼대, 구멍을 통해 당신의 구속된 얼굴에 애액을 뿌려댄다. 찐득찐득한 것이 당신의 얼굴과 벽을 타고 뚝뚝 떨어진다.
 				<br><br>
-				<<faceejacstat>><<ejacstat>><<set $hygiene += 500>><<set $facegoo += 1>>
+				<<faceejacstat>><<ejacstat>><<set $hygiene += 500>><<set $player.bodyliquid.face.goo += 1>>
 			<<case 3>>
 				<<He_nun>> 신음하며 <<his_yi>> 넓적다리 위에 사정한다. <<He_nun>> 벽의 구멍을 통해 손을 뻗어, <span class="purple"> <<his_yi>> 손가락을 당신의 목구멍 안으로 밀어넣는다.</span> 당신이 구역질하며 캑캑거리자 <<he_ga>> 비웃는다. "역겨운 조그만 돼지새끼 같으니라고."
 				<br><br>
@@ -259,156 +303,159 @@
 			<<case 1 2 3>>
 				<<He_nun>> 가버리며 몸을 떨었고,<<his_yi>> <<penisdesc_rul $NPCList[0].penisdesc>> 빼내 당신의 넓적다리 뒤에 사정한다. 당신은 <<him_i>> <<his_yi>> 자지를 당신의 엉덩이에 깨끗이 닦는 것을 느낀다.
 				<br><br>
-				<<thighejacstat>><<ejacstat>><<set $hygiene += 500>><<set $thighsemen += 1>>
+				<<thighejacstat>><<ejacstat>><<set $hygiene += 500>><<set $player.bodyliquid.thigh.semen += 1>>
 			<<case 4 5 6>>
 				<<He_nun>> <<his_yi>> 사타구니를 당신의 엉덩이에 세게 부딪혀대며 가버렸고, 당신의 배와 벽 위에 사정한다.
 				<br><br>
-				<<tummyejacstat>><<ejacstat>><<set $hygiene += 500>><<set $tummysemen += 1>>
+				<<tummyejacstat>><<ejacstat>><<set $hygiene += 500>><<set $player.bodyliquid.tummy.semen += 1>>
 			<<case 7>>
 				<<He_nun>> 가버리며 신음하였고, 엄청난 양을 사정해 당신의 넓적다리와 배를 뒤덮는다; 정액이 당신의 다리를 타고 뚝뚝 떨어져, 바닥에 웅덩이를 만든다.
 				<br><br>
-				<<thighejacstat>><<ejacstat>><<set $hygiene += 500>><<set $thighsemen += 1>>
-				<<tummyejacstat>><<ejacstat>><<set $hygiene += 500>><<set $tummysemen += 1>>
+				<<thighejacstat>><<ejacstat>><<set $hygiene += 500>><<set $player.bodyliquid.thigh.semen += 1>>
+				<<tummyejacstat>><<set $hygiene += 500>><<set $player.bodyliquid.tummy.semen += 1>>
 			<</switch>>
 		<<elseif $NPCList[0].penis is "vaginaentrance">>
 			<<switch random(1, 7)>>
 			<<case 1 2 3>>
 				<<He_nun>> 신음하며 당신의 <<pussyPost>> 위에 사정한다. 정액이 당신의 외음부를 뒤덮고 다리 주위에 웅덩이를 만든다.
 				<br><br>
-				<<vaginalentranceejacstat>><<ejacstat>><<set $hygiene += 500>><<set $vaginaoutsidesemen += 1>>
+				<<vaginalentranceejacstat>><<ejacstat>><<set $hygiene += 500>><<set $player.bodyliquid.vaginaoutside.semen += 1>>
 			<<case 4 5 6>>
 				<<He_nun>> <<his_yi>> 자지를 비벼대며 말 한마디 없이 당신의 <<pussyPost>> 위에 사정하였고, 정액 줄기를 내뿜어 당신의 보지를 타고 흘러내리게 한다; 당신은 <<he_ga>> <<his_yi>> 자지를 당신의 엉덩이 위에 탁탁 털어 말리는 것을 느낀다.
 				<br><br>
-				<<vaginalentranceejacstat>><<ejacstat>><<set $hygiene += 500>><<set $vaginaoutsidesemen += 1>>
+				<<vaginalentranceejacstat>><<ejacstat>><<set $hygiene += 500>><<set $player.bodyliquid.vaginaoutside.semen += 1>>
 			<<case 7>>
 				<<He_nun>> 신음하며 <<his_yi>> 자지를 비벼대며 가 버렸고, 두꺼운 정액 줄기를 당신의 <<pussy_wa>> 엉덩이 위에 내뿜는다.
 				<br><br>
-				<<vaginalentranceejacstat>><<ejacstat>><<set $hygiene += 500>><<set $vaginaoutsidesemen += 1>>
-				<<bottomejacstat>><<ejacstat>><<set $hygiene += 500>><<set $bottomsemen += 1>>
+				<<vaginalentranceejacstat>><<ejacstat>><<set $hygiene += 500>><<set $player.bodyliquid.vaginaoutside.semen += 1>>
+				<<bottomejacstat>><<set $hygiene += 500>><<set $player.bodyliquid.bottom.semen += 1>>
 			<</switch>>
 		<<elseif $NPCList[0].penis is "vaginaimminent">>
 			<<switch random(1, 7)>>
 			<<case 1 2 3>>
 				<<He_nun>> 당신의 <<pussyPost>>에 삽입하기 전에 가버렸고, 밖에 사정한다. 정액이 당신의 외음부와 배를 뒤덮는다.
 				<br><br>
-				<<vaginalentranceejacstat>><<ejacstat>><<set $hygiene += 500>><<set $vaginaoutsidesemen += 1>>
+				<<vaginalentranceejacstat>><<ejacstat>><<set $hygiene += 500>><<set $player.bodyliquid.vaginaoutside.semen += 1>>
 			<<case 4 5 6>>
 				<<He_nun>> 삽입하기 전에 당신의 <<pussyPost>> 위에 사정했고, 따뜻한 정액 줄기를 내뿜어 당신의 보지를 타고 흘러내리게 한다; <<he_nun>> 불만에 차 끄응 소리를 낸다.
 				<br><br>
-				<<vaginalentranceejacstat>><<ejacstat>><<set $hygiene += 500>><<set $vaginaoutsidesemen += 1>>
+				<<vaginalentranceejacstat>><<ejacstat>><<set $hygiene += 500>><<set $player.bodyliquid.vaginaoutside.semen += 1>>
 			<<case 7>>
 				<<He_nun>> 신음하며 <<his_yi>> 자지를 비벼대며 가버렸고, 두꺼운 정액 줄기를 당신의 <<pussy_wa>> 엉덩이에 내뿜는다.
 				<br><br>
-				<<vaginalentranceejacstat>><<ejacstat>><<set $hygiene += 500>><<set $vaginaoutsidesemen += 1>>
-				<<bottomejacstat>><<ejacstat>><<set $hygiene += 500>><<set $bottomsemen += 1>>
+				<<vaginalentranceejacstat>><<ejacstat>><<set $hygiene += 500>><<set $player.bodyliquid.vaginaoutside.semen += 1>>
+				<<bottomejacstat>><<set $hygiene += 500>><<set $player.bodyliquid.bottom.semen += 1>>
 			<</switch>>
 		<<elseif $NPCList[0].penis is "vagina">><<creampie "self" "vagina">>
 			<<switch random(1, 7)>>
 			<<case 1 2 3>>
 				<<He_nun>> 당신의 <<pussyPost>> 안에 깊이 박아대었고, <<his_yi>> 자지를 당신의 자궁에 깊이 고정하며 사정한다. 정액이 당신의 <<pussyPost>> 안으로 튀어 들어가자 당신은 <<himPost>>에게서 몸을 뒤로 뺀다.
 				<br><br>
-				<<vaginalejacstat>><<ejacstat>><<set $hygiene += 500>><<set $vaginasemen += 1>>
+				<<vaginalejacstat>><<ejacstat>><<set $hygiene += 500>><<set $player.bodyliquid.vagina.semen += 1>>
+				<<recordVaginalSperm "pc" $NPCList[0].fullDescription "human">>
 			<<case 4 5 6>>
 				<<He_nun>> 조용히 <<his_yi>> 자지를 당신의 안에 박아대며 사정한다. 정액이 당신의 <<pussy_rul>> 채우자 당신은 벽에서 몸을 뒤로 뺀다.
 				<br><br>
-				<<vaginalejacstat>><<ejacstat>><<set $hygiene += 500>><<set $vaginasemen += 1>>
+				<<vaginalejacstat>><<ejacstat>><<set $hygiene += 500>><<set $player.bodyliquid.vagina.semen += 1>>
+				<<recordVaginalSperm "pc" $NPCList[0].fullDescription "human">>
 			<<case 7>>
 				<<He_nun>> 경련하면서 당신의 보지를 비벼대며 가버렸고, 당신의 <<clit_ul>> 깨부수듯 쳐대며 두꺼운 정액 물결을 당신의 <<pussyPost>> 안에 내뿜는다. 정액이 당신의 보지에서 삐져나와 다리를 타고 흘러내려, 당신의 무릎 주위에 웅덩이를 만든다. "얼굴도 모르는 젖은 보지에다 박아대는 게 좋다니까."
 				<br><br>
-				<<vaginalentranceejacstat>><<ejacstat>><<set $hygiene += 500>><<set $vaginaoutsidesemen += 1>>
-				<<thighejacstat>><<ejacstat>><<set $hygiene += 500>><<set $thighsemen += 1>>
+				<<vaginalentranceejacstat>><<ejacstat>><<set $hygiene += 500>><<set $player.bodyliquid.vaginaoutside.semen += 1>>
+				<<vaginalejacstat>><<set $hygiene += 500>><<set $player.bodyliquid.vagina.semen += 1>>
+				<<thighejacstat>><<set $hygiene += 500>><<set $player.bodyliquid.thigh.semen += 1>>
 			<</switch>>
 		<<elseif $NPCList[0].penis is "cheeks">>
 			<<switch random(1, 7)>>
 			<<case 1 2 3>>
 				<<He_nun>> 가버리면서 몸을 떨며, <<his_yi>> 자지를 엉덩이살 사이에서 떼어내 당신의 엉덩이 위에 사정한다.
 				<br><br>
-				<<bottomejacstat>><<ejacstat>><<set $hygiene += 500>><<set $bottomsemen += 1>>
+				<<bottomejacstat>><<ejacstat>><<set $hygiene += 500>><<set $player.bodyliquid.bottom.semen += 1>>
 			<<case 4 5 6>>
 				<<He_nun>> 벽에 강하게 부딪혀대며, 당신의 엉덩이골 사이로 사정한다.
 				<br><br>
-				<<bottomejacstat>><<ejacstat>><<set $hygiene += 500>><<set $bottomsemen += 1>>
+				<<bottomejacstat>><<ejacstat>><<set $hygiene += 500>><<set $player.bodyliquid.bottom.semen += 1>>
 			<<case 7>>
 				<<He_nun>> 가버리며 끄응 하는 소리를 내었다. 당신은 따뜻한 정액의 홍수가 당신의 엉덩이와 사타구니를 타고 뚝뚝 떨어지는 것을 느낀다.
 				<br><br>
-				<<bottomejacstat>><<ejacstat>><<set $hygiene += 1000>><<set $bottomsemen += 2>>
+				<<bottomejacstat>><<ejacstat>><<set $hygiene += 1000>><<set $player.bodyliquid.bottom.semen += 2>>
 			<</switch>>
 		<<elseif $NPCList[0].penis is "anusentrance">>
 			<<switch random(1, 7)>>
 			<<case 1 2 3>>
 				<<He_nun>> <<his_yi>> 자지를 비벼대어 당신의 <<bottomPost>> 위에 사정한다. 정액이 당신의 엉덩이와 엉덩이골을 타고 뚝뚝 떨어진다.
 				<br><br>
-				<<bottomejacstat>><<ejacstat>><<set $hygiene += 500>><<set $bottomsemen += 1>>
+				<<bottomejacstat>><<ejacstat>><<set $hygiene += 500>><<set $player.bodyliquid.bottom.semen += 1>>
 			<<case 4 5 6>>
 				<<He_nun>> <<his_yi>> 자지를 조용히 비비며 당신의 엉덩이 위에 사정한다. 당신은 정액이 당신의 엉덩이골을 타고 뚝뚝 떨어지는 것을 느낀다.
 				<br><br>
-				<<bottomejacstat>><<ejacstat>><<set $hygiene += 500>><<set $bottomsemen += 1>>
+				<<bottomejacstat>><<ejacstat>><<set $hygiene += 500>><<set $player.bodyliquid.bottom.semen += 1>>
 			<<case 7>>
 				<<He_nun>> 신음소리를 내며 <<his_yi>> 자지를 비벼대며 가버렸다; 당신은 축축한 정액이 튀어 당신의 엉덩이를 뒤덮고 사타구니를 타고 뚝뚝 떨어지는 것을 느낀다.
 				<br><br>
-				<<bottomejacstat>><<ejacstat>><<set $hygiene += 1000>><<set $bottomsemen += 2>>
+				<<bottomejacstat>><<ejacstat>><<set $hygiene += 1000>><<set $player.bodyliquid.bottom.semen += 2>>
 			<</switch>>
 		<<elseif $NPCList[0].penis is "anusimminent">>
 			<<switch random(1, 7)>>
 			<<case 1 2 3>>
 				<<He_nun>> 당신의 흔들거리는 엉덩이에 삽입하기 전에 가버렸고, 밖에 사정한다. 당신은 따뜻한 정액이 당신의 엉덩이를 뒤덮고 갈라진 틈으로 뚝뚝 흘러내리는 것을 느낀다.
 				<br><br>
-				<<bottomejacstat>><<ejacstat>><<set $hygiene += 500>><<set $bottomsemen += 1>>
+				<<bottomejacstat>><<ejacstat>><<set $hygiene += 500>><<set $player.bodyliquid.bottom.semen += 1>>
 			<<case 4 5 6>>
 				<<He_nun>> <<his_yi>> 자지를 비벼대어 삽입하기 전에 당신의 엉덩이 위에 사정했고, 정액 줄기를 내뿜어 갈라진 틈으로 흘러내리게 한다; <<he_nun>> 실망한 듯, 끄응 하는 소리를 낸다.
 				<br><br>
-				<<bottomejacstat>><<ejacstat>><<set $hygiene += 500>><<set $bottomsemen += 1>>
+				<<bottomejacstat>><<ejacstat>><<set $hygiene += 500>><<set $player.bodyliquid.bottom.semen += 1>>
 			<<case 7>>
 				<<He_nun>> 신음하며 <<his_yi>> 자지를 비벼대며 가버렸고, 당신은 정액이 당신의 엉덩이와 사타구니에 흘러내리는 것을 느낀다.
 				<br><br>
-				<<bottomejacstat>><<ejacstat>><<set $hygiene += 1000>><<set $bottomsemen += 2>>
+				<<bottomejacstat>><<ejacstat>><<set $hygiene += 1000>><<set $player.bodyliquid.bottom.semen += 2>>
 			<</switch>>
 		<<elseif $NPCList[0].penis is "anus">><<creampie "self" "anus">>
 			<<switch random(1, 7)>>
 			<<case 1 2 3>>
 				<<He_nun>> 신음하면서, 당신의 항문에 박아대며 가버렸다. 정액이 당신의 똥구멍 안으로 흘러내리자 당신은 신음소리를 낸다.
 				<br><br>
-				<<analejacstat>><<ejacstat>><<set $hygiene += 500>><<set $anussemen += 1>>
+				<<analejacstat>><<ejacstat>><<set $hygiene += 500>><<set $player.bodyliquid.anus.semen += 1>>
 			<<case 4 5 6>>
 				<<He_nun>> 당신의 <<bottomPost>> 안에 세게 밀어넣으며 가버렸고, 당신도 그에 따라 당신의 <<bottom_ul>> 벽에 짓누른다. 정액이 당신을 채우자 당신은 쾌감에 신음한다.
 				<br><br>
-				<<analejacstat>><<ejacstat>><<set $hygiene += 500>><<set $anussemen += 1>>
+				<<analejacstat>><<ejacstat>><<set $hygiene += 500>><<set $player.bodyliquid.anus.semen += 1>>
 			<<case 7>>
 				<<He_nun>> 경련하며 마지막으로 푹 찔러넣어, 당신의 항문 안에 사정한다. 두꺼운 정액 물결이 당신의 안으로 퍼부어진다. <span class="blue">당신의 항문에서 정액이 역류하자 당신은 헉 하는 소리를 낸다;</span> 정액이 당신의 항문에서 삐져나와 다리 아래로 흘러내린다. "네 얼굴을 볼 수 없지만, 네가 항문을 범해지는 것을 좋아한다고 장담할 수 있어."
 				<br><br>
-				<<analejacstat>><<ejacstat>><<set $hygiene += 500>><<set $anussemen += 1>>
-				<<thighejacstat>><<ejacstat>><<set $hygiene += 500>><<set $thighsemen += 1>>
+				<<analejacstat>><<ejacstat>><<set $hygiene += 500>><<set $player.bodyliquid.anus.semen += 1>>
+				<<thighejacstat>><<set $hygiene += 500>><<set $player.bodyliquid.thigh.semen += 1>>
 			<</switch>>
 		<<elseif $NPCList[0].penis is "chest">>
 			<<switch random(1, 7)>>
 			<<case 1 2 3>>
 				<<He_nun>> 신음하며 가버렸고, 당신의 <<breastsPost>> 위에 사정한다.
 				<br><br>
-				<<chestejacstat>><<ejacstat>><<set $hygiene += 500>><<set $chestsemen += 1>>
+				<<chestejacstat>><<ejacstat>><<set $hygiene += 500>><<set $player.bodyliquid.chest.semen += 1>>
 			<<case 4 5 6>>
 				<<He_nun>> 당신의 <<breastsPost>> 사이로 <<his_yi>> 자지 끝을 비비며 말없이 그 위에 사정한다. 당신의 <<breasts_nun>> 정액이 당신의 몸을 타고 흘러내리면서 시원함을 느낀다.
 				<br><br>
-				<<chestejacstat>><<ejacstat>><<set $hygiene += 500>><<set $chestsemen += 1>>
+				<<chestejacstat>><<ejacstat>><<set $hygiene += 500>><<set $player.bodyliquid.chest.semen += 1>>
 			<<case 7>>
 				<<He_nun>> 당신의 <<breasts_rul>> 찔러대며, 끄응 하는 소리를 내며 가버린다; 정액이 <<breastsPost>> 사이에서 벽 위로 쏘아진다.
 				<br><br>
-				<<chestejacstat>><<ejacstat>><<set $hygiene += 500>><<set $chestsemen += 1>>
+				<<chestejacstat>><<ejacstat>><<set $hygiene += 500>><<set $player.bodyliquid.chest.semen += 1>>
 			<</switch>>
 		<<elseif $NPCList[0].penis is "mouthentrance">>
 			<<switch random(1, 7)>>
 			<<case 1 2 3>>
 				<<He_nun>> 신음하면서, <<his_yi>> 자지를 비비며 당신의 얼굴 위에 사정한다.
 				<br><br>
-				<<faceejacstat>><<ejacstat>><<set $hygiene += 500>><<set $facesemen += 1>>
+				<<faceejacstat>><<ejacstat>><<set $hygiene += 500>><<set $player.bodyliquid.face.semen += 1>>
 			<<case 4 5 6>>
 				<<He_nun>> <<his_yi>> 자지를 비비며 당신의 얼굴 위에 사정한다. 따뜻한 정액이 당신의 이마와 코를 타고 뚝뚝 떨어져 내린다.
 				<br><br>
-				<<faceejacstat>><<ejacstat>><<set $hygiene += 500>><<set $facesemen += 1>>
+				<<faceejacstat>><<ejacstat>><<set $hygiene += 500>><<set $player.bodyliquid.face.semen += 1>>
 			<<case 7>>
 				<<He_nun>> <<his_yi>> 자지를 꽉 잡고, 구멍을 통해 당신의 입을 정확히 겨냥하여 비벼댄다. <span class="pink">두꺼운 정액 줄기가 당신의 입술을 밀고 지나쳐 입 안으로 들어가자 당신은 캑캑거리며 토한다.</span>
 				<br><br>
-				<<faceejacstat>><<ejacstat>><<set $hygiene += 500>><<set $facesemen += 1>>
-				<<oralejacstat>><<ejacstat>><<set $hunger -= 200>><<set $thirst -= 200>><<set $mouthsemen += 1>>
+				<<faceejacstat>><<ejacstat>><<set $hygiene += 500>><<set $player.bodyliquid.face.semen += 1>>
+				<<oralejacstat>><<set $hunger -= 200>><<set $thirst -= 200>><<set $player.bodyliquid.mouth.semen += 1>>
 				<br><br>
 			<</switch>>
 		<<elseif $NPCList[0].penis is "mouthimminent">>
@@ -416,31 +463,31 @@
 			<<case 1 2 3>>
 				<<He_nun>> 당신이 <<his_yi>> 자지 끝을 입술에 살짝 스치게 하자 헉 하는 소리를 내며, 당신의 입술 위에 사정한다.
 				<br><br>
-				<<faceejacstat>><<ejacstat>><<set $hygiene += 500>><<set $facesemen += 1>>
+				<<faceejacstat>><<ejacstat>><<set $hygiene += 500>><<set $player.bodyliquid.face.semen += 1>>
 			<<case 4 5 6>>
 				<<He_nun>> <<his_yi>> 자지로 당신의 얼굴을 쓸어대었고, 그 결과로 일찍 사정했다. 정액이 당신의 입술과 뺨을 타고 뚝뚝 떨어진다; <<he_nun>> 불만스러운 소리를 낸다.
 				<br><br>
-				<<oralejacstat>><<ejacstat>><<set $hunger -= 200>><<set $thirst -= 200>><<set $mouthsemen += 1>>
+				<<oralejacstat>><<ejacstat>><<set $hunger -= 200>><<set $thirst -= 200>><<set $player.bodyliquid.mouth.semen += 1>>
 			<<case 7>>
 				<<He_nun>> 당신의 입에 넣기 전에 가버렸다. 두꺼운 정액 줄기가 당신의 뺨과 턱을 뒤덮고, 기다리고 있던 입 안으로 들어온다. <<He_nun>> 불만스러운 소리를 낸다.
 				<br><br>
-				<<faceejacstat>><<ejacstat>><<set $hygiene += 500>><<set $facesemen += 1>>
-				<<oralejacstat>><<ejacstat>><<set $hunger -= 200>><<set $thirst -= 200>><<set $mouthsemen += 1>>
+				<<faceejacstat>><<ejacstat>><<set $hygiene += 500>><<set $player.bodyliquid.face.semen += 1>>
+				<<oralejacstat>><<set $hunger -= 200>><<set $thirst -= 200>><<set $player.bodyliquid.mouth.semen += 1>>
 			<</switch>>
 		<<elseif $NPCList[0].penis is "mouth">><<creampie "self" "mouth">>
 			<<switch random(1, 7)>>
 			<<case 1 2 3>>
 				<<He_nun>> 갑자기 <<his_yi>> 자지를 당신의 목구멍 안으로 밀어넣으며 가버린다. 당신은 정액이 당신의 목구멍을 타고 내려가, 강제로 삼키며 숨이 막혀 헉헉댄다.
 				<br><br>
-				<<oralejacstat>><<ejacstat>><<set $hunger -= 200>><<set $thirst -= 200>><<set $mouthsemen += 1>>
+				<<oralejacstat>><<ejacstat>><<set $hunger -= 200>><<set $thirst -= 200>><<set $player.bodyliquid.mouth.semen += 1>>
 			<<case 4 5 6>>
 				<<He_nun>> <<his_yi>> 양손을 벽에 대고 <<his_yi>> 자지를 당신의 입 안에 짓눌렀고, 신음하며 사정한다. 당신은 정액이 당신의 입을 채우고 당신의 턱을 타고 뚝뚝 떨어지자 숨이 막혀 헉헉댄다.
 				<br><br>
-			<<oralejacstat>><<ejacstat>><<set $hunger -= 200>><<set $thirst -= 200>><<set $mouthsemen += 1>>
+			<<oralejacstat>><<ejacstat>><<set $hunger -= 200>><<set $thirst -= 200>><<set $player.bodyliquid.mouth.semen += 1>>
 			<<case 7>>
 				<<He_nun>> 난폭하게 <<his_yi>> 자지를 당신의 입에 찔러대며 가버렸고, 벽 전체를 진동시킨다. <<he_ga>> 마구 움직이자 <span class="pink">정액이 당신의 목구멍을 타고 흘러내리고,</span> 당신의 입을 채우며 당신의 얼굴을 뒤덮는다.
-				<<faceejacstat>><<ejacstat>><<set $hygiene += 500>><<set $facesemen += 1>>
-				<<oralejacstat>><<ejacstat>><<set $hunger -= 200>><<set $thirst -= 200>><<set $mouthsemen += 1>>
+				<<faceejacstat>><<ejacstat>><<set $hygiene += 500>><<set $player.bodyliquid.face.semen += 1>>
+				<<oralejacstat>><<set $hunger -= 200>><<set $thirst -= 200>><<set $player.bodyliquid.mouth.semen += 1>>
 				<br><br>
 			<</switch>>
 		<<elseif $NPCList[0].penis is "feet">>
@@ -448,55 +495,55 @@
 			<<case 1 2 3>>
 				<<He_nun>> 가버리며 신음소리를 내었다; 정액이 당신의 발을 뒤덮는다.
 				<br><br>
-				<<feetejacstat>><<ejacstat>><<set $hygiene += 500>><<set $feetsemen += 1>>
+				<<feetejacstat>><<ejacstat>><<set $hygiene += 500>><<set $player.bodyliquid.feet.semen += 1>>
 			<<case 4 5 6>>
 				<<He_nun>> 조용히 당신의 발에 사정했고, 정액으로 미끌거리게 만든다.
 				<br><br>
-				<<feetejacstat>><<ejacstat>><<set $hygiene += 500>><<set $feetsemen += 1>>
+				<<feetejacstat>><<ejacstat>><<set $hygiene += 500>><<set $player.bodyliquid.feet.semen += 1>>
 			<<case 7>>
 				<<He_nun>> 끄응 하는 소리를 내며 <<his_yi>> 자지를 당신의 발 사이에 찔러대며 가버렸고, 그 과정에서 정액을 당신의 발과 다리에 왕창 튀기고, 당신의 무릎 주위에 웅덩이를 만든다.
 				<br><br>
-				<<feetejacstat>><<ejacstat>><<set $hygiene += 500>><<set $feetsemen += 1>>
-				<<thighejacstat>><<ejacstat>><<set $hygiene += 500>><<set $thighsemen += 1>>
+				<<feetejacstat>><<ejacstat>><<set $hygiene += 500>><<set $player.bodyliquid.feet.semen += 1>>
+				<<thighejacstat>><<set $hygiene += 500>><<set $player.bodyliquid.thigh.semen += 1>>
 			<</switch>>
 		<<elseif $NPCList[0].penis is "leftarm">>
 			<<switch random(1, 7)>>
 			<<case 1 2 3>>
 				<<He_nun>> 가버리며 신음소리를 내었고, 당신의 손 안에서 미끄러지는 자지가 뜨거워지며 정액으로 손을 뒤덮는다.
 				<br><br>
-				<<handejacstat>><<ejacstat>><<set $hygiene += 500>><<set $leftarmsemen += 1>>
+				<<handejacstat>><<ejacstat>><<set $hygiene += 500>><<set $player.bodyliquid.leftarm.semen += 1>>
 			<<case 4 5 6>>
 				<<He_nun>> 조용히 당신의 손 위에 사정한다. 정액이 당신의 손가락을 타고 뚝뚝 흘러내린다. "다음 번에는 네 입에다 박아보고 싶어..."
 				<br><br>
-				<<handejacstat>><<ejacstat>><<set $hygiene += 500>><<set $leftarmsemen += 1>>
+				<<handejacstat>><<ejacstat>><<set $hygiene += 500>><<set $player.bodyliquid.leftarm.semen += 1>>
 			<<case 7>>
 				<<He_nun>> 경련하며 신음하였고, 두꺼운 정액 줄기를 쏘아 당신의 <<breastsPost>> 위에 왕창 튀긴다.
 				<br><br>
-				<<handejacstat>><<ejacstat>><<set $hygiene += 500>><<set $leftarmsemen += 1>>
-				<<chestejacstat>><<ejacstat>><<set $hygiene += 500>><<set $chestsemen += 1>>
+				<<handejacstat>><<ejacstat>><<set $hygiene += 500>><<set $player.bodyliquid.leftarm.semen += 1>>
+				<<chestejacstat>><<set $hygiene += 500>><<set $player.bodyliquid.chest.semen += 1>>
 			<</switch>>
 		<<elseif $NPCList[0].penis is "rightarm">>
 			<<switch random(1, 7)>>
 			<<case 1 2 3>>
 				<<He_nun>> 가버리며 신음소리를 내었고, 당신의 손 안에서 미끄러지는 자지가 뜨거워지며 정액으로 손을 뒤덮는다.
 				<br><br>
-				<<handejacstat>><<ejacstat>><<set $hygiene += 500>><<set $rightarmsemen += 1>>
+				<<handejacstat>><<ejacstat>><<set $hygiene += 500>><<set $player.bodyliquid.rightarm.semen += 1>>
 			<<case 4 5 6>>
 				<<He_nun>> 조용히 당신의 손 위에 사정한다. 정액이 당신의 손가락을 타고 뚝뚝 흘러내린다. "다음 번에는 네 입에다 박아보고 싶어..."
 				<br><br>
-				<<handejacstat>><<ejacstat>><<set $hygiene += 500>><<set $rightarmsemen += 1>>
+				<<handejacstat>><<ejacstat>><<set $hygiene += 500>><<set $player.bodyliquid.rightarm.semen += 1>>
 			<<case 7>>
 				<<He_nun>> 경련하며 신음하였고, 두꺼운 정액 줄기를 쏘아 당신의 <<breastsPost>> 위에 왕창 튀긴다.
 				<br><br>
-				<<handejacstat>><<ejacstat>><<set $hygiene += 500>><<set $rightarmsemen += 1>>
-				<<chestejacstat>><<ejacstat>><<set $hygiene += 500>><<set $chestsemen += 1>>
+				<<handejacstat>><<ejacstat>><<set $hygiene += 500>><<set $player.bodyliquid.rightarm.semen += 1>>
+				<<chestejacstat>><<set $hygiene += 500>><<set $player.bodyliquid.chest.semen += 1>>
 			<</switch>>
 		<<elseif $NPCList[0].penis is 0>>
 			<<switch random(1, 3)>>
 			<<case 1 2>>
 				<<He_nun>> 신음소리를 내며 <<his_yi>> 자지를 비벼댔고, 구멍을 통해 당신의 얼굴에 정액을 흩뿌린다.
 				<br><br>
-				<<faceejacstat>><<ejacstat>><<set $hygiene += 500>><<set $facegoo += 1>>
+				<<faceejacstat>><<ejacstat>><<set $hygiene += 500>><<set $player.bodyliquid.face.goo += 1>>
 			<<case 3>>
 				<<He_nun>> 신음하며 바닥 위에 사정한다.
 				<br><br>
@@ -506,7 +553,7 @@
 			<<case 1 2 3>>
 				<<He_nun>> 당신이 <<his_yi>> 항문에 박아대자 신음소리를 낸다.
 				<br><br>
-				<<bottomejacstat>><<ejacstat>><<set $hygiene += 500>><<set $bottomsemen += 1>>
+				<<bottomejacstat>><<ejacstat>><<set $hygiene += 500>><<set $player.bodyliquid.bottom.semen += 1>>
 			<<case 4 5>>
 				<<He_nun>> 당신이 <<his_yi>> 항문에 박아대자 신음소리를 내었고, 바닥에 사정한다.
 				<br><br>
@@ -552,8 +599,8 @@
 			<<case 4>>
 				<<He_nun>> <<his_yi>> <<penisdesc_rul $NPCList[0].penisdesc>> 꽉 잡고, 당신의 입을 겨냥하고 앞뒤로 비벼댄다. <span class="pink">두꺼운 정액 줄기가 당신의 악문 입술을 밀고 지나쳐 들어와 당신은 캑캑거리며 토한다.</span> "삼키는 법을 배워라, <<bitch_ya>>."
 				<br><br>
-				<<faceejacstat>><<ejacstat>><<set $hygiene += 500>><<set $facesemen += 1>>
-				<<oralejacstat>><<ejacstat>><<set $hunger -= 200>><<set $thirst -= 200>><<set $mouthsemen += 1>>
+				<<faceejacstat>><<ejacstat>><<set $hygiene += 500>><<set $player.bodyliquid.face.semen += 1>>
+				<<oralejacstat>><<set $hunger -= 200>><<set $thirst -= 200>><<set $player.bodyliquid.mouth.semen += 1>>
 			<<case 1>>
 				<<He_nun>> 신음하며 <<his_yi>> <<trPenisdesc $NPCList[0].penisdesc>>_trResult에서 한심한 양의 정액 방울을 당신의 빰에 묻혀놓는다. 당신은 나오려는 웃음을 어떻게든 참아낸다.
 				<br><br>
@@ -562,11 +609,11 @@
 				<<case 1 2 3>>
 					<<He_nun>> 신음하면서, <<his_yi>> <<penisdesc_rul $NPCList[0].penisdesc>> 비비며 당신의 얼굴 위에 사정한다. "네가 이런 식으로 사용되는 것을 엄청 부끄럽게 생각할 거라고 봐."
 					<br><br>
-					<<faceejacstat>><<ejacstat>><<set $hygiene += 500>><<set $facesemen += 1>>
+					<<faceejacstat>><<ejacstat>><<set $hygiene += 500>><<set $player.bodyliquid.face.semen += 1>>
 				<<case 4 5 6>>
 					<<He_nun>> <<his_yi>> <<penisdesc_rul $NPCList[0].penisdesc>> 비비며 당신의 얼굴 위에 사정한다. 따뜻한 정액이 당신의 이마와 코를 타고 뚝뚝 떨어져 내린다. "네가 이런 식으로 사용되는 것을 즐기고 있다고 장담하지."
 					<br><br>
-					<<faceejacstat>><<ejacstat>><<set $hygiene += 500>><<set $facesemen += 1>>
+					<<faceejacstat>><<ejacstat>><<set $hygiene += 500>><<set $player.bodyliquid.face.semen += 1>>
 				<<default>>
 					<<He_nun>> 신음하며 당신의 입술 위에 사정한다. <<He_nun>> 벽을 통해서, <span class="purple"> <<his_yi>> 손가락을 당신의 목구멍 안으로 밀어넣는다.</span> 당신이 숨이 막혀 캑캑거리자 <<he_ga>> 웃는다. "다음 번에는 네 목구멍에 박아주지, <<bitch_ya>>; 연습해 두는 게 좋을 걸."
 					<<gstress>><<gtrauma>><<gpain>><<violence 3>><<bruise neck>><<hitstat>>
@@ -578,8 +625,8 @@
 			<<case 4>>
 				<<He_nun>> 당신의 입에 넣기 전에 가버렸다. 두꺼운 정액 줄기가 <<his_yi>> <<trPenisdesc $NPCList[0].penisdesc>>_trResult에서 쏘아져 당신의 뺨과 턱을 뒤덮고, 기다리고 있던 입 안으로 들어온다. <<He_nun>> 불만스러운 소리를 낸다.
 				<br><br>
-				<<faceejacstat>><<ejacstat>><<set $hygiene += 500>><<set $facesemen += 1>>
-				<<oralejacstat>><<ejacstat>><<set $hunger -= 200>><<set $thirst -= 200>><<set $mouthsemen += 1>>
+				<<faceejacstat>><<ejacstat>><<set $hygiene += 500>><<set $player.bodyliquid.face.semen += 1>>
+				<<oralejacstat>><<set $hunger -= 200>><<set $thirst -= 200>><<set $player.bodyliquid.mouth.semen += 1>>
 			<<case 1>>
 				<<He_nun>> 당신의 입에 넣기 전에 가버렸다. 정액 몇 방울이 <<his_yi>> <<trPenisdesc $NPCList[0].penisdesc>>_trResult에서 흘러나와 당신의 아랫입술 위에 묻는다. 당신은 <<him_i>> 불만에 차서, 쿵쿵거리며 떠나는 소리를 듣는다.
 				<br><br>
@@ -588,11 +635,11 @@
 				<<case 1 2 3>>
 					<<He_nun>> 당신이 <<his_yi>> 자지 끝을 입술에 살짝 스치게 하자 헉 하는 소리를 내며, 당신의 입술 위에 사정한다.
 					<br><br>
-					<<faceejacstat>><<ejacstat>><<set $hygiene += 500>><<set $facesemen += 1>>
+					<<faceejacstat>><<ejacstat>><<set $hygiene += 500>><<set $player.bodyliquid.face.semen += 1>>
 				<<case 4 5 6>>
 					<<He_nun>> <<his_yi>> <<penisdesc_ro $NPCList[0].penisdesc>> 당신의 얼굴을 쓸어대었고, 그 결과로 일찍 사정했다. 정액이 당신의 입술과 뺨을 타고 뚝뚝 떨어진다; 불만스러워하며, <<he_nun>> 정액을 당신의 턱에서 닦아내어 당신의 입 안에 쑤셔넣는다.
 					<br><br>
-					<<oralejacstat>><<ejacstat>><<set $hunger -= 200>><<set $thirst -= 200>><<set $mouthsemen += 1>>
+					<<oralejacstat>><<ejacstat>><<set $hunger -= 200>><<set $thirst -= 200>><<set $player.bodyliquid.mouth.semen += 1>>
 				<<default>>
 					<<He_nun>> 신음하며 당신의 입술 위에 사정한다. <<He_nun>> 벽을 통해서, <span class="purple"> <<his_yi>> 손가락을 당신의 목구멍 안으로 밀어넣는다.</span> 당신이 숨이 막혀 캑캑거리자 <<he_ga>> 웃는다. "다음 번에는 네 목구멍에 박아주지, <<bitch_ya>>; 연습해 두는 게 좋을 걸."
 					<<gstress>><<gtrauma>><<gpain>><<violence 3>><<bruise neck>><<hitstat>>
@@ -603,7 +650,7 @@
 			<<switch $NPCList[0].penissize>>
 			<<case 4>>
 				<<He_nun>> 목구멍 안으로 찔러넣어, <<his_yi>> <<penisdesc_ro $NPCList[0].penisdesc>> 당신의 숨을 막으면서 사정하며 벽 전체를 흔들리게 한다. <span class="pink">정액이 당신의 입을 채우고 목구멍 안으로 흘러내리며 당신은 흐느낀다.</span> "네가 묶인 채로 얼굴에 박히는 것을 즐긴다는 걸 확신해."
-				<<oralejacstat>><<ejacstat>><<set $hunger -= 200>><<set $thirst -= 200>><<set $mouthsemen += 1>>
+				<<oralejacstat>><<ejacstat>><<set $hunger -= 200>><<set $thirst -= 200>><<set $player.bodyliquid.mouth.semen += 1>>
 				<<gstress>><<gtrauma>><<gpain>><<violence 3>><<bruise neck>><<hitstat>>
 				<br><br>
 			<<case 1>>
@@ -613,15 +660,15 @@
 				<<case 1 2 3>>
 					<<He_nun>> 갑자기 <<his_yi>> <<penisdesc_rul $NPCList[0].penisdesc>> 당신의 목구멍 안으로 밀어넣으며 가버린다. 당신은 원하지 않는 정액이 당신의 목구멍을 타고 내려가, 강제로 삼키며 숨이 막혀 캑캑거린다.
 					<br><br>
-					<<oralejacstat>><<ejacstat>><<set $hunger -= 200>><<set $thirst -= 200>><<set $mouthsemen += 1>>
+					<<oralejacstat>><<ejacstat>><<set $hunger -= 200>><<set $thirst -= 200>><<set $player.bodyliquid.mouth.semen += 1>>
 				<<case 4 5 6>>
 					<<He_nun>> <<his_yi>> 양손을 벽에 대고 <<his_yi>> <<penisdesc_rul $NPCList[0].penisdesc>> 당신의 입 안에 짓눌렀고, 신음하며 사정한다. 당신은 정액이 당신의 입을 채우고 당신의 턱을 타고 뚝뚝 떨어지자 숨이 막혀 헉헉댄다.
 					<br><br>
-					<<oralejacstat>><<ejacstat>><<set $hunger -= 200>><<set $thirst -= 200>><<set $mouthsemen += 1>>
+					<<oralejacstat>><<ejacstat>><<set $hunger -= 200>><<set $thirst -= 200>><<set $player.bodyliquid.mouth.semen += 1>>
 				<<case 7>>
 					<<He_nun>> <<his_yi>> <<trPenisdesc $NPCList[0].penisdesc>>_trResult 밑동부분을 꽉 쥐며 신음소리를 내었고, 정액을 당신의 목구멍 뒤로 쏘아내린다. 당신은 원하지 않는 정액이 당신의 목구멍을 타고 내려가, 강제로 삼키며 숨이 막혀 캑캑거린다.
 					<br><br>
-					<<oralejacstat>><<ejacstat>><<set $hunger -= 200>><<set $thirst -= 200>><<set $mouthsemen += 1>>
+					<<oralejacstat>><<ejacstat>><<set $hunger -= 200>><<set $thirst -= 200>><<set $player.bodyliquid.mouth.semen += 1>>
 				<</switch>>
 			<</switch>>
 		<<elseif $NPCList[0].penis is 0>>
@@ -629,7 +676,7 @@
 			<<case 1 2>>
 				<<He_nun>> 신음소리를 내며 <<his_yi>> <<penisdesc_rul $NPCList[0].penisdesc>> 비벼댔고, 구멍을 통해 당신의 얼굴에 정액을 흩뿌린다.
 				<br><br>
-				<<faceejacstat>><<ejacstat>><<set $hygiene += 500>><<set $facegoo += 1>>
+				<<faceejacstat>><<ejacstat>><<set $hygiene += 500>><<set $player.bodyliquid.face.goo += 1>>
 			<<case 3>>
 				<<He_nun>> 신음하며 바닥 위에 사정한다. <<He_nun>> 벽을 통해서, <span class="purple"> <<his_yi>> 손가락을 당신의 목구멍 안으로 밀어넣는다.</span> 당신이 숨이 막혀 캑캑거리자 <<he_ga>> 웃는다. "다음 번에는 네 목구멍에 박아주지, <<bitch_ya>>; 연습해 두는 게 좋을 걸."
 				<<gstress>><<gtrauma>><<gpain>><<violence 3>><<bruise neck>><<hitstat>>

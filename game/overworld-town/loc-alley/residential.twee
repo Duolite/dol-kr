@@ -1,6 +1,6 @@
 :: Residential alleyways
 
-<<set $outside to 1>><<set $location to "alley">><<effects>><<set $bus to "residential">>
+<<set $outside to 1>><<set $location to "alley">><<effects>><<set $bus to "residential">><<getTarget true>>
 당신은 주거 지역의 골목길에 있다.
 <<if $daystate is "day">>
 	주변에 사람들이 많이 있다.
@@ -20,11 +20,11 @@
 <<if $arousal gte $arousalmax>>
 	<<orgasmstreet>>
 <</if>>
-<<if $stress gte $stressmax>>
+<<if $stress gte $stressmax and !$possessed>>
 	<<passoutalley>>
 <<else>>
 	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
-	<<if $danger gte (9900 - $allure) and $eventskip is 0>>
+	<<if ($danger gte (9900 - $allure) or $eventforced) and $eventskip is 0>>
 		<<eventsstreet>>
 	<<else>>
 		<<if $map.top is true>>
@@ -100,8 +100,10 @@
 	<<link [[쓰다듬는다|Residential Pet]]>><<stress -6>><</link>><<lstress>>
 	<br>
 	<!-- Modified for Monster People -->
+	<<if $monster is 1 or $bestialitydisable is "f">>
 		<<link [[흥분하게 만든다|Residential Tease]]>><</link>><<deviant1>>
 		<br>
+	<</if>>
 <<elseif $rng gte 51>>
 	산들바람과 멀리서 들리는 경적 소리 외에는 아무 대답이 없다.
 	<br><br>
@@ -113,9 +115,10 @@
 	<br><br>
 	<<link [[쓰다듬는다|Residential Big Pet]]>><<stress 6>><<trauma -6>><</link>><<gstress>><<ltrauma>>
 	<br>
-	<!-- Modified for Monster People -->
+	<<if $monster is 1 or $bestialitydisable is "f">><!-- Modified for Monster People -->
 		<<link [[흥분하게 만든다|Residential Big Tease]]>><</link>><<deviant1>>
 		<br>
+	<</if>>
 <<else>>
 	위층 방에서 불이 켜진다. 커튼 뒤에서 실루엣이 나타나고, 창문이 열린다. <<generate1>><<person1>><<personPost "이">> 몸을 내민다. "멍청한 고양이가," <<hePost "이">> 소리친다. "좀 닥치라고." <<HePost "은">> 당신에게 뭔가를 던졌고, 당신은 쉬익 하는 소리와 함께 피한다. "드디어," <<hePost "은">> 창문을 닫으며 한숨을 쉰다.
 	<br><br>
@@ -161,8 +164,8 @@ and leaping onto a nearby wall. <<bHe>> disappears behind it.
 
 <<set $outside to 1>><<set $location to "town">><<effects>>
 <<if $monster is 1>>
-	You reach towards <<bhis>> head. <<bHe>> easily towers over you, so <<bhe>> hunches over you to give you a chance of reaching <<bhim>>. <<bHe>> doesn't move as you stroke <<bhis>> head, but you hear a low rumble coming from <<bhis>> mouth.
-	"Thank you," <<he>> purrs. <<He>> licks your hand, turns, and bounds into the night.
+	You reach towards <<bhis>> head. <<bHe>> easily towers over you, so <<bhe>> hunches over you to give you a chance of reaching <<bhim>>. <<bHe>> doesn't move as you stroke <<bhis>> head, but you hear a low rumble from <<bhis>> throat.
+	"Thank you," <<bhe>> purrs. <<bHe>> licks your hand, turns, and bounds into the night.
 <<else>>
 	당신은 <<bhisPost "의">> 머리로 손을 뻗습니다. 당신이 <<bHePost "을">> 만지는 동안 움직이진 않지만, 목에서 낮은 울음소리가 울린다. <<bHePost "은">> 당신의 손을 핥고, 돌아서서는 밤 속으로 뛰어들어 갔다.
 <</if>>
@@ -194,7 +197,7 @@ and leaping onto a nearby wall. <<bHe>> disappears behind it.
 
 <<set $outside to 1>><<set $location to "town">><<effects>>
 
-당신은 <<beasttypePost "의">> 머리를 밀어낸다. <<bHe "은">> 더 세게 으르렁거리며 당신의 손 앞에 있는 공기를 살짝 물지만, 돌아서 어둠 속으로 뛰어들어 갔다.
+당신은 <<beasttypePost "의">> 머리를 밀어낸다. <<bHePost "은">> 더 세게 으르렁거리며 당신의 손 앞에 있는 공기를 살짝 물지만, 돌아서 어둠 속으로 뛰어들어 갔다.
 <br><br>
 
 <<link [[다음으로|Residential alleyways]]>><</link>>
@@ -208,7 +211,7 @@ and leaping onto a nearby wall. <<bHe>> disappears behind it.
 <<neutral 1>>
 	<<beastCombatInit>>
 
-당신은 <<beasttypePost "의">> 얼굴에서 손을 떼고 늘어졌다. <<if $monster is 1>>'Good enough for me," <<bhe>> states firmly.<</if>> <<bHe "이">> 하고 싶은 대로 놔둔다. <<bHe "은">> 당신을 덮친다.
+You let go of the <<beasttype>>'s face and stretch. <<if $monster is 1>>"Good enough for me," <<bhe>> states firmly.<</if>> It's all the prompting <<bhe>> needs. <<bHe>> pounces on you.
 <<deviancy2>>
 <</if>>
 

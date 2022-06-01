@@ -7,7 +7,7 @@
 "여기서 보니 반갑구나." <<he_ga>> 말했다. "그럼 난 마저 한 바퀴 더 돌러 가볼게." <<He_nun>> 당신이 가까이 가기도 전에 헤엄쳐 가버린다.
 <br><br>
 
-<<link [[그를 잡는다 (0:05)|Lake Mason Swim]]>><<tiredness 1>><</link>><<swimmingdifficulty 1 300>><<gtiredness>>
+<<link [[잡으려고 시도한다 (0:05)|Lake Mason Swim]]>><<tiredness 1>><</link>><<swimmingdifficulty 1 300>><<gtiredness>>
 <br>
 <<link [[떠난다|Lake Depths]]>><<endevent>><</link>>
 <br>
@@ -36,7 +36,7 @@
 	<<link [[태연하게 행동한다|Lake Mason Nonchalant]]>><</link>>
 	<br>
 
-<<elseif $swimmingskill gte random(1, 300)>>
+<<elseif currentSkillValue('swimmingskill') gte random(1, 300)>>
 	<<set $mason_count to 1>>
 	당신은 <<him_ul>> 따라 수영한다. 그러나 <<he_nun>> 너무 빠르다. <<him_gwa>> 경기하는 건 고사하고 따라잡기라도 하려면 수영을 더 연습해야할 것이다.
 	<br><br>
@@ -44,7 +44,7 @@
 	당신은 <<him_ul>> 막아보지만, <<he_nun>> 예상치 못한 방향으로 헤엄쳐 도망간다. <<he_nun>> 당신을 피하는 것 같다.
 	<br><br>
 
-	<span class="green">당신은 좋은 생각이 떠올랐다.</span> 메이슨이 지나가는 길의 물 밑으로 잠수해서 숨을 참는다. 당신은 흐릿한 물 속에서 <<his_ga>> 다가오길 기다리며 물 밖으로 나가려 준비한다. <<he_ga>> 당신과 부딪힐 뻔 한다.
+	<span class="green">당신은 좋은 생각이 떠올랐다.</span> 메이슨이 지나가는 길의 물 밑으로 잠수해서 숨을 참는다. 당신은 흐릿한 물 속에서 <<he_ga>> 다가오길 기다리며 물 밖으로 나가려 준비한다. <<he_ga>> 당신과 부딪힐 뻔 한다.
 	<br><br>
 
 	"여, 여기서 학생을 보게 될 줄은 몰랐는데.." <<he_ga>> 눈가에 묻은 물을 닦아내며 말한다. <<he_ga>> <<his_yi>> 팔을 물 밑에서 이상한 자세로 잡았다. 팔이 어색하게 <<his_yi>> 몸에 가까이 붙어있다. "네가 학교 밖에서 연습하는 걸 보니 기쁘긴 하네."
@@ -90,7 +90,7 @@
 <</if>>
 <br><br>
 
-<<He_nun>> 잠시 혼란스러워 한다. "이- 이해해줘 고맙구나." 여전히 <<himself>> 물 밑에서 몸을 가리면서 <<he_ga>> 말한다. "내가 돌던 곳으로 돌아가야겠다. 계속 연습하렴, 너는 가능성이 충분하구나."
+<<He_nun>> 잠시 혼란스러워 한다. "이- 이해해줘 고맙구나." 여전히 물 밑에서 <<himself_yi>> 몸을 가리면서 <<he_ga>> 말한다. "내가 돌던 곳으로 돌아가야겠다. 계속 연습하렴, 너는 가능성이 충분하구나."
 <br><br>
 
 <<link [[다음|Lake Depths]]>><<endevent>><</link>>
@@ -130,7 +130,7 @@
 :: Lake Mason Nonchalant
 <<effects>>
 
-You ignore <<his>> bashfulness.
+당신은 <<he_ga>> 부끄러워 하는 것을 무시한다.
 <<if $exposed gte 2>>
 	<<if $submissive gte 1150>>
 		"저도에요." 당신이 말한다. "지금 아무것도 안 입고 있어요."
@@ -160,13 +160,13 @@ You ignore <<his>> bashfulness.
 
 <<npc Mason>><<person1>>
 
-당신은 메이슨을 향해 헤엄쳐 간다. <<He_nun>> 도망치지 않고 당신이 다가오자 제자리에서 천천히 발을 움직인다. <<He_nun>> <<his_yi>> 탄탄한 그의 몸을 물 밑에서 감춘다.
+당신은 메이슨을 향해 헤엄쳐 간다. <<He_nun>> 도망치지 않고 당신이 다가오자 제자리에서 천천히 발을 움직인다. <<He_nun>> <<his_yi>> 탄탄한 몸을 물 밑에서 감춘다.
 <br><br>
 
-"무, 무슨 일이니?" <<he_ga>> 물었다. 그는 <<his_ga>> 돌던 곳으로 돌아가고 싶어한다. 
+"무, 무슨 일이니?" <<he_nun>> <<he_ga>> 돌던 곳으로 돌아가고 싶어하며 묻는다.
 <br><br>
 
-<<link [[인사한다|Lake Mason Greet]]>><<stress -6>><</link>><<lstress>>
+<<link [[그냥 인사한다|Lake Mason Greet]]>><<stress -6>><</link>><<lstress>>
 <br>
 <<if $mason_count lte 1>>
 	<<link [[잡담을 나누자고 한다|Lake Mason Ask]]>><<npcincr Mason love 1>><</link>><<glove>>
@@ -220,20 +220,20 @@ You ignore <<his>> bashfulness.
 
 	<<if $pronoun is "f">>
 		<<if $NPCList[0].penis isnot "none">>
-			당신의 시선이 <<his_yi>> <span class="lewd"><<print $NPCList[0].breastsdesc_wa>> <<print $NPCList[0].penisdesc_ro>> 이끌린다.</span> 당신은 몸의 윤곽을 드러내는 <<his_yi>> 딱 붙는 수영복에는 익숙했지만, 물 속에서 노출된 모습을 보는 것에는 또 다른 느낌을 받는다.
+			당신의 시선이 <<his_yi>> <span class="lewd"><<breastsdesc_wa $NPCList[0].breastsdesc>> <<penisdesc_ro $NPCList[0].penisdesc>> 이끌린다.</span> 당신은 몸의 윤곽을 드러내는 <<his_yi>> 딱 붙는 수영복에는 익숙했지만, 물 속에서 노출된 모습을 보는 것에는 또 다른 느낌을 받는다.
 		<<else>>
-			당신의 시선이 <<his_yi>> <span class="lewd"><<print $NPCList[0].breastsdesc_ro>> 이끌린다.</span> 당신은 몸의 윤곽을 드러내는 <<his_yi>> 딱 붙는 수영복에는 익숙했지만, 물 속에서 노출된 모습을 보는 것에는 또 다른 느낌을 받는다.
+			당신의 시선이 <<his_yi>> <span class="lewd"><<breastsdesc_ro $NPCList[0].breastsdesc>> 이끌린다.</span> 당신은 몸의 윤곽을 드러내는 <<his_yi>> 딱 붙는 수영복에는 익숙했지만, 물 속에서 노출된 모습을 보는 것에는 또 다른 느낌을 받는다.
 		<</if>>
 	<<else>>
 		<<if $NPCList[0].penis isnot "none">>
-			당신의 시선이 <<his_yi>> <span class="lewd"><<print $NPCList[0].penisdescPost "에">> 닿았다.</span> 당신은 몸의 윤곽을 드러내는 <<his_yi>> 딱 붙는 수영복에는 익숙했지만, 물 속에서 노출된 모습을 보는 것에는 또 다른 느낌을 받는다.
+			당신의 시선이 <<his_yi>> <span class="lewd"><<trPenisdesc $NPCList[0].penisdesc "에">>_trResult 닿았다.</span> 당신은 몸의 윤곽을 드러내는 <<his_yi>> 딱 붙는 수영복에는 익숙했지만, 물 속에서 노출된 모습을 보는 것에는 또 다른 느낌을 받는다.
 		<<else>>
 			당신의 시선이 <<his_yi>> <span class="lewd"> 음부에 닿았다.</span> 당신은 몸의 윤곽을 드러내는 <<his_yi>> 딱 붙는 수영복에는 익숙했지만, 물 속에서 노출된 모습을 보는 것에는 또 다른 느낌을 받는다.
 		<</if>>
 	<</if>>
 	<br><br>
 
-	<<He_nun>> <<himself>> 당신이 바깥으로 나올 때마다 몸을 가린다. "네- 네가 만족했길 바라는구나." <<he_ga>> 말한다. "이제 내가 편안하게 한 바퀴 돌게 내버려두렴." <<He_nun>> 뒤돌아서 헤엄쳐 가버린다.
+	<<He_nun>> 당신이 바깥으로 나올 때마다 <<himself_yi>> 몸을 가린다. "네- 네가 만족했길 바라는구나." <<he_ga>> 말한다. "이제 내가 편안하게 한 바퀴 돌게 내버려두렴." <<He_nun>> 뒤돌아서 헤엄쳐 가버린다.
 	<br><br>
 
 	<<link [[다음|Lake Depths]]>><<endevent>><</link>>
@@ -353,7 +353,7 @@ You ignore <<his>> bashfulness.
 :: Mason Beside Pond Naked
 <<effects>>
 
-<<flaunting>> 당신은 연못가에 앉는다. <<he_ga>> 당신의 기척을 느끼자, <<his_yi>> 눈을 떴다. 그러나 금방 당신의 <<lewdness>> 때문에 <<he_ga>> 눈을 감는다. 
+<<flaunting>> 당신은 연못가에 앉는다. <<he_ga>> 당신의 기척을 느끼자, <<his_yi>> 눈을 떴다. 그러나 금방 당신의 <<lewdnessPost>> 때문에 <<he_ga>> 눈을 감는다. 
 <<if $exposed gte 2>>
 	<<if $ex_mason isnot 1>>
 		<<exhibitionism5>>
@@ -389,7 +389,7 @@ You ignore <<his>> bashfulness.
 :: Mason In Pond Naked
 <<effects>><<water>>
 
-<<flaunting>> 당신은 메이슨 맞은편 연못으로 들어간다. <<he_ga>> 물이 튀기는 소리에, <<his_yi>> 눈을 떴다. 그러나 금방 당신의 <<lewdness>> 때문에 <<he_ga>> 눈을 감는다. 
+<<flaunting>> 당신은 메이슨 맞은편 연못으로 들어간다. <<he_ga>> 물이 튀기는 소리에, <<his_yi>> 눈을 떴다. 그러나 금방 당신의 <<lewdnessPost>> 때문에 <<he_ga>> 눈을 감는다. 
 <<if $exposed gte 2>>
 	<<if $ex_mason isnot 1>>
 		<<exhibitionism5>>
@@ -441,6 +441,7 @@ You ignore <<his>> bashfulness.
 <br><br>
 <<if $swimmingskill lte 999 and random(1, 3) is 3>>
 	<<He_nun>> <<his_yi>> 수영 기술에 대해 설명한다. <<swimmingskilluse>>
+	<br><br>
 <</if>>
 
 <<mason_actions>>
@@ -462,7 +463,7 @@ You ignore <<his>> bashfulness.
 :: Mason Walk
 <<effects>>
 <<dry>><<towelup>><<set $foresthunt to 0>>
-메이슨은 당신에게 물기를 말릴 수건을 몇 장 건네주고, <<himself>> 몸에 감싼다. 같이 걸어서
+메이슨은 당신에게 물기를 말릴 수건을 몇 장 건네주고, <<himself_yi>> 몸에 감싼다. 같이 걸어서
 <<if $masonDressed is true>>
 	옷을 숨겨 놓은 곳으로 간다. 옷을 갈아입고서
 	<<unset $masonDressed>>
@@ -470,7 +471,7 @@ You ignore <<his>> bashfulness.
 어둑해진 숲을 지나 도시로 향한다.
 <br><br>
 
-당신은 다누베 거리에 아무런 사고 없이 무사히 도착했다. 메이슨이 고아원 앞까지 바래다주고 손을 흔들며 떠난다.
+당신은 다뉴브 거리에 아무런 사고 없이 무사히 도착했다. 메이슨이 고아원 앞까지 바래다주고 손을 흔들며 떠난다.
 <br><br>
 
 <<link [[Next|Domus Street]]>><<set $eventskip to 1>><<endevent>><</link>>
@@ -488,7 +489,7 @@ You ignore <<his>> bashfulness.
 <</if>>
 <br><br>
 
-메이슨을 내키지는 않아 보이지만 고개를 끄덕인다. "네가 그렇다면야, 조심히 들어가라." <<He_nun>> <<himself>> <<he_ga>> 숲으로 걸어가며 수건으로 몸을 말린다.
+메이슨을 내키지는 않아 보이지만 고개를 끄덕인다. "네가 그렇다면야, 조심히 들어가라." <<He_nun>> 수건으로 <<himself_yi>> 몸을 말리며 숲으로 걸어간다.
 <br><br>
 
 <<link [[다음|Lake Waterfall]]>><<endevent>><</link>>
@@ -498,7 +499,7 @@ You ignore <<his>> bashfulness.
 <<widget "mason_actions">>
 <<if $mason_pond is undefined and $NPCName[$NPCNameList.indexOf("Mason")].love gte 30>>
 	<<set $mason_pond to 1>>
-	"이 주변은 지하에 물이 많이 흐른단다." 메이슨이 말한다. "도무스 거리 아래 쪽에 개울리 있는데, 난 항상 거기에 집을 갖고 싶었어. 나만의 샘을 만들 수 있을 것 같아서."
+	"이 주변은 지하에 물이 많이 흐른단다." 메이슨이 말한다. "도무스 거리 아래 쪽에 개울이 있는데, 난 항상 거기에 집을 갖고 싶었어. 나만의 샘을 만들 수 있을 것 같아서."
 	<br><br>
 	<<he_ga>> 물을 튀기며 앉고서, 당신을 쳐다본다. "너 도무스거리에 살지 않니?" <<he_ga>> 물었다. <<He_nun>> 물 속에 몸을 담궜다. "비싸겠지. 그리고 넌 네 고아원장님께도 허락을 받아야 할거야. 그냥 상상해보는 것도 재밌네."
 	<br><br>
@@ -507,8 +508,7 @@ You ignore <<his>> bashfulness.
 	어렴풋하던 태양빛의 끝자락이 잎사귀 사이에서 희미하게 사라진다. 메이슨이 일어났다. "여기 너무 오래 있으면 감기에 걸릴 거야." <<he_ga>> 말한다. "어두워지면 숲은 위험할 수 있으니 내가 데려다주마."
 	<br><br>
 
-	<<for _e to 0; _e lt $clothing_number; _e++>>
-	<<activeclothes>>
+	<<for _active_clothes range Object.keys($store)>>
 		<<for _i to 0; _i lt $store[_active_clothes].length; _i++>>
 			<<if $store[_active_clothes][_i].location is "lakeshore">>
 				<<set _temp_clothes_present to 1>>
@@ -518,7 +518,7 @@ You ignore <<his>> bashfulness.
 	<</for>>
 
 	<<if _temp_clothes_present is 1>>
-		<<link [[옷을 갈아입고 메이슨과 집으로 간다] (0:40)|Mason Walk]]>><<pass 40>><<storeon "lakeshore">><<set $masonDressed to true>><</link>>
+		<<link [[옷을 갈아입고, 메이슨과 집으로 간다 (0:40)|Mason Walk]]>><<pass 40>><<storeon "lakeshore">><<set $masonDressed to true>><</link>>
 		<br>
 	<</if>>
 
@@ -545,7 +545,7 @@ You ignore <<his>> bashfulness.
 <<elseif $NPCName[$NPCNameList.indexOf("Mason")].love gte -10>>
 	"이봐." <<he_ga>> 말한다.
 <<elseif $NPCName[$NPCNameList.indexOf("Mason")].love gte -30>>
-	"무슨 일이니." <<he>> asks.
+	"무슨 일이니?" <<he_ga>> 묻는다.
 <<else>>
 	"제발 날 방해하지 마렴." <<he_ga>> 말한다.
 <</if>>
@@ -553,13 +553,13 @@ You ignore <<his>> bashfulness.
 
 <<widget "mason_greet_lust">>
 <<if $NPCName[$NPCNameList.indexOf("Mason")].lust gte 30>>
-	"제, 제발 옷 좀 입으렴.." <<he_ga>> 말한다. 메이슨이 뭔가 감추듯 움직인다.
+	"제, 제발 옷 좀 입으렴." <<he_ga>> 말한다. 메이슨이 뭔가 감추듯 움직인다.
 <<elseif $NPCName[$NPCNameList.indexOf("Mason")].lust gte 10>>
 	"옷을 챙겨입는게 어떠니?" <<he_ga>> 말한다. "우리가 잡히면 사람들이 오해할지도 몰라."
 <<elseif $NPCName[$NPCNameList.indexOf("Mason")].lust gte -10>>
 	"넌 옷을 잘 챙겨입어야겠구나." <<he_ga>> 말한다.
 <<elseif $NPCName[$NPCNameList.indexOf("Mason")].lust gte -30>>
-	"선생님에게 널 소개할 올바른 방법이 아니지 않니?." <<he>> 물었다.
+	"선생님에게 널 소개할 올바른 방법이 아니지 않니?." <<he_ga>> 묻는다.
 <<else>>
 	<<he_ga>> 체념하곤 한숨을 쉰다.
 <</if>>

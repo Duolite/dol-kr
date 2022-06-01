@@ -16,7 +16,7 @@
 <br>
 <label>
 	<<print '<<radiobutton "$assertiveaction" "trauma" '+($assertiveaction is "trauma" ? "checked" : "")+'>>'>>
-	<span class="green">짖궂어요</span> (트라우마 감소)
+	<span class="green">짓궂어요</span> (트라우마 감소)
 </label>
 <br>
 <label>
@@ -65,6 +65,19 @@
 <</if>>
 <br>
 
+<<if $gamemode isnot "hard">>
+	<<if $lewd_unlock is true>>
+		<label><<print '<<checkbox "$uncomfortable.lewd" false true ' + ($uncomfortable.lewd ? "checked" : "") + '>>'>> 당신은 당신이 행한 모든 음란한 행동을 되돌아보는 것이 불편하다. <i>체크표시를 끄면, 노출증, 음란도, 이상성욕 수치가 떨어지지 않습니다. 대신 통제력을 유지하기가 어려워질 수 있습니다.</i></label>
+	<<else>>
+		당신은 당신이 행한 모든 음란한 행동을 되돌아보는 것이 불편하다.
+		<br>
+		<span class="black"><i>3 레벨 이상의 노출증, 음란도, 혹은 이상성욕 필요.</i></span>
+	<</if>>
+	<br>
+<</if>>
+
+<br>
+
 <div id="loveInterest">
 	<<loveInterest>>
 </div>
@@ -94,8 +107,9 @@
 		<<set _titles to ["왼손","오른손","발","입","자지","보지","항문"]>>
 		<<set _dataName to ["leftaction","rightaction","feetaction","mouthaction","penisaction","vaginaaction","anusaction"]>>
 		<<set _data to ["_leftHand","_rightHand","_feet","_mouth","_penis","_vagina","_anus"]>>
+		<<set _defaultActions = DefaultActions.load(DefaultActions.create())>>
 
-		<<trListboxItemsFromArray "_options">><<listbox "_defaultActions" autoselect>>
+		<<trListboxItemsFromArray "_options">><<listbox "_defaultoption" autoselect>>
 			<<optionsfrom _trListboxItems>>
 		<</listbox>>
 		<<combatDefaults>>
@@ -111,8 +125,8 @@
 <</widget>>
 
 <<widget "othersFeelings">>
-<<set _currentOptions to $args[0]>>
-<<set _stringDefault to "$actionDefaults."+_options[_currentOptions]>>
+<<set _currentOptions to _args[0]>>
+<<set _stringDefault to "_defaultActions.consensual."+_options[_currentOptions]>>
 
 <<switch _options[_currentOptions]>>
 	<<case "Everyone">><span class="red">"모두"는 "관련 설정 덮어쓰기" 링크를 누를 경우에만 기본값으로 적용됩니다. 그 경우 모든 등장인물에 대한 기본값이 덮어씌워집니다.</span>
@@ -157,24 +171,27 @@ __합의된 경우:__
 	<<sexDefaults false>>
 <</if>>
 <<for _i to 0; _i lt _titles.length; _i++>>
-	<<if (_titles[_i] is "자지" and $penisexist is 0) or (_titles[_i] is "보지" and $vaginaexist is 0)>>
+	<<if (_titles[_i] is "자지" and !$player.penisExist) or (_titles[_i] is "보지" and !$player.vaginaExist)>>
 		<<continue>>
 	<</if>>
+	<!-- This creates the consensual list of items. -->
 	<span class="listMargin">
 		<<print _titles[_i]>>:
-		<<print '<<listbox "'+_stringDefault+".consensual."+_dataName[_i]+'['+_currentActionSet+']" autoselect>><<optionsfrom '+_data[_i]+'>><</listbox>>'>>
+		<<print '<<listbox "'+_stringDefault+'.'+_dataName[_i]+'['+_currentActionSet+']" autoselect>><<optionsfrom '+_data[_i]+'>><</listbox>>'>>
 	</span>
 	<br>
 <</for>>
 <<if _options[_currentOptions] is "Tentacles">>
-	<label>현재의 촉수에 무언가 하고 있다면 자동으로 다른 촉수를 잡는다 <<print '<<checkbox "$actionDefaults.Tentacles.consensual.regrab" false true ' + ($actionDefaults.Tentacles.consensual.regrab is true ? "checked" : "") + '>>'>></label>
+	<label>현재의 촉수에 무언가 하고 있다면 자동으로 다른 촉수를 잡는다 <<print '<<checkbox "_defaultActions.consensual.Tentacles.regrab[0]" false true ' + (_defaultActions.consensual.Tentacles.regrab[0] is true ? "checked" : "") + '>>'>></label>
 	<br>
 <</if>>
-<<if $actionDefaults[_options[_currentOptions]].consensual.askActions isnot undefined>>
+<<if _defaultActions.consensual[_options[_currentOptions]].askActions isnot undefined>>
 	<label>기본 옵션으로 입의 행동을 "부탁한다" 로 할 때
-	<<print '<<listbox "'+_stringDefault+'.consensual.askActions['+_currentActionSet+']" autoselect>><<optionsfrom _askActions>><</listbox>>'>></label>
+	<<print '<<listbox "'+_stringDefault+'.askActions['+_currentActionSet+']" autoselect>><<optionsfrom _askActions>><</listbox>>'>></label>
 	<br>
 <</if>>
+
+<<set _stringDefault to "_defaultActions.rape."+_options[_currentOptions]>>
 
 <<if _options[_currentOptions] isnot "Robin">>
 	<<if _options[_currentOptions] is "Tentacles">>
@@ -187,22 +204,22 @@ __합의된 경우:__
 	<br><br>
 
 	<<for _i to 0; _i lt _titles.length; _i++>>
-		<<if (_titles[_i] is "자지" and $penisexist is 0) or (_titles[_i] is "보지" and $vaginaexist is 0)>>
+		<<if (_titles[_i] is "자지" and !$player.penisExist) or (_titles[_i] is "보지" and !$player.vaginaExist)>>
 			<<continue>>
 		<</if>>
 		<span class="listMargin">
 			<<print _titles[_i]>>:
-			<<print '<<listbox "'+_stringDefault+".rape."+_dataName[_i]+'['+_currentActionSet+']" autoselect>><<optionsfrom '+_data[_i]+'>><</listbox>>'>>
+			<<print '<<listbox "'+_stringDefault+"."+_dataName[_i]+'['+_currentActionSet+']" autoselect>><<optionsfrom '+_data[_i]+'>><</listbox>>'>>
 		</span>
 		<br>
 	<</for>>
 	<<if _options[_currentOptions] is "Tentacles">>
-		<label>현재의 촉수에 무언가 하고 있다면 자동으로 다른 촉수를 잡는다 <<print '<<checkbox "$actionDefaults.Tentacles.rape.regrab" false true ' + ($actionDefaults.Tentacles.rape.regrab is true ? "checked" : "") + '>>'>></label>
+		<label>현재의 촉수에 무언가 하고 있다면 자동으로 다른 촉수를 잡는다 <<print '<<checkbox "_defaultActions.rape.Tentacles.regrab[0]" false true ' + (_defaultActions.rape.Tentacles.regrab[0] is true ? "checked" : "") + '>>'>></label>
 		<br>
 	<</if>>
-	<<if $actionDefaults[_options[_currentOptions]].rape.askActions isnot undefined>>
+	<<if _defaultActions.rape[_options[_currentOptions]].askActions isnot undefined>>
 		<label>기본 옵션으로 입의 행동을 "부탁한다" 로 할 때
-		<<print '<<listbox "'+_stringDefault+'.rape.askActions['+_currentActionSet+']" autoselect>><<optionsfrom _askActions>><</listbox>>'>></label>
+		<<print '<<listbox "'+_stringDefault+'.askActions['+_currentActionSet+']" autoselect>><<optionsfrom _askActions>><</listbox>>'>></label>
 		<br>
 	<</if>>
 <</if>>
@@ -243,163 +260,28 @@ __합의된 경우:__
 <</widget>>
 
 <<widget "setupDefaults">>
-<<set _defaultItem to ["rest","rest","rest","rest","rest","rest","rest","rest","rest","rest","rest","rest","rest","rest","rest"]>>
-<<set _defaultObject to {
-	rape:{
-		leftaction:clone(_defaultItem),
-		rightaction:clone(_defaultItem),
-		feetaction:clone(_defaultItem),
-		mouthaction:clone(_defaultItem),
-		penisaction:clone(_defaultItem),
-		vaginaaction:clone(_defaultItem),
-		anusaction:clone(_defaultItem)
-	},
-	consensual:{
-		leftaction:clone(_defaultItem),
-		rightaction:clone(_defaultItem),
-		feetaction:clone(_defaultItem),
-		mouthaction:clone(_defaultItem),
-		penisaction:clone(_defaultItem),
-		vaginaaction:clone(_defaultItem),
-		anusaction:clone(_defaultItem)
-	}
-}>>
-<<if $actionDefaults is undefined>>
-	<<set $actionDefaults to {
-		"Everyone":clone(_defaultObject),
-		"Strangers":clone(_defaultObject),
-		"Acquaintances":clone(_defaultObject),
-		"Animals":clone(_defaultObject),
-		"Robin":clone(_defaultObject),
-		"Bailey":clone(_defaultObject),
-		"Whitney":clone(_defaultObject),
-		"Kylar":clone(_defaultObject),
-		"Eden":clone(_defaultObject),
-		"Avery":clone(_defaultObject),
-		"Leighton":clone(_defaultObject)
-	}>>
-<</if>>
-<<if $maxDefaultActionSets is undefined>>
-	<<set $maxDefaultActionSets to 2>>
-<</if>>
-<<if $actionDefaults.Alternative is undefined>>
-	<<set $actionDefaults.Alternative to clone(_defaultObject)>>
-<</if>>
-<<if $actionDefaults.Submissive is undefined>>
-	<<set $actionDefaults.Submissive to clone(_defaultObject)>>
-
-	<<set $actionDefaults.Submissive.rape.leftaction[0] to "leftchest">>
-	<<set $actionDefaults.Submissive.rape.rightaction[0] to "rightchest">>
-	<<set $actionDefaults.Submissive.rape.mouthaction[0] to "plead">>
-	<<set $actionDefaults.Submissive.rape.mouthaction[1] to "suck">>
-	<<set $actionDefaults.Submissive.rape.mouthaction[2] to "kiss">>
-	<<set $actionDefaults.Submissive.rape.mouthaction[3] to "breastsuck">>
-	<<set $actionDefaults.Submissive.rape.penisaction[0] to "tease">>
-	<<set $actionDefaults.Submissive.rape.penisaction[1] to "협조한다">>
-	<<set $actionDefaults.Submissive.rape.vaginaaction[0] to "penistease">>
-	<<set $actionDefaults.Submissive.rape.vaginaaction[1] to "협조한다">>
-	<<set $actionDefaults.Submissive.rape.anusaction[0] to "penistease">>
-	<<set $actionDefaults.Submissive.rape.anusaction[1] to "협조한다">>
-	<<set $actionDefaults.Submissive.rape.feetaction[0] to "grabrub">>
-	<<set $actionDefaults.Submissive.rape.feetaction[1] to "vaginagrabrub">>
-
-	<<set $actionDefaults.Submissive.consensual.leftaction[0] to "leftchest">>
-	<<set $actionDefaults.Submissive.consensual.rightaction[0] to "rightchest">>
-	<<set $actionDefaults.Submissive.consensual.mouthaction[0] to "kiss">>
-	<<set $actionDefaults.Submissive.consensual.mouthaction[1] to "suck">>
-	<<set $actionDefaults.Submissive.consensual.mouthaction[2] to "breastsuck">>
-	<<set $actionDefaults.Submissive.consensual.mouthaction[3] to "breastlick">>
-	<<set $actionDefaults.Submissive.consensual.penisaction[0] to "tease">>
-	<<set $actionDefaults.Submissive.consensual.penisaction[1] to "협조한다">>
-	<<set $actionDefaults.Submissive.consensual.vaginaaction[0] to "penistease">>
-	<<set $actionDefaults.Submissive.consensual.vaginaaction[1] to "협조한다">>
-	<<set $actionDefaults.Submissive.consensual.anusaction[0] to "penistease">>
-	<<set $actionDefaults.Submissive.consensual.anusaction[1] to "협조한다">>
-<</if>>
-
-<<if $actionDefaults.Defiant is undefined>>
-	<<set $actionDefaults.Defiant to clone(_defaultObject)>>
-
-	<<set $actionDefaults.Defiant.rape.leftaction[0] to "lefthit">>
-	<<set $actionDefaults.Defiant.rape.leftaction[1] to "leftstruggle">>
-	<<set $actionDefaults.Defiant.rape.rightaction[0] to "penwhack">>
-	<<set $actionDefaults.Defiant.rape.rightaction[1] to "righthit">>
-	<<set $actionDefaults.Defiant.rape.rightaction[2] to "rightstruggle">>
-	<<set $actionDefaults.Defiant.rape.feetaction[0] to "kick">>
-	<<set $actionDefaults.Defiant.rape.mouthaction[0] to "pullaway">>
-	<<set $actionDefaults.Defiant.rape.mouthaction[1] to "bite">>
-	<<set $actionDefaults.Defiant.rape.mouthaction[2] to "breastbite">>
-	<<set $actionDefaults.Defiant.rape.mouthaction[3] to "headbutt">>
-	<<set $actionDefaults.Defiant.rape.penisaction[0] to "escape">>
-	<<set $actionDefaults.Defiant.rape.penisaction[1] to "otheranusescape">>
-	<<set $actionDefaults.Defiant.rape.penisaction[2] to "othermouthescape">>
-	<<set $actionDefaults.Defiant.rape.vaginaaction[0] to "escape">>
-	<<set $actionDefaults.Defiant.rape.vaginaaction[1] to "othermouthescape">>
-	<<set $actionDefaults.Defiant.rape.anusaction[0] to "escape">>
-	<<set $actionDefaults.Defiant.rape.anusaction[1] to "othermouthescape">>
-
-	<<set $actionDefaults.Defiant.consensual.rightaction[0] to "penwhack">>
-	<<set $actionDefaults.Defiant.consensual.mouthaction[0] to "breastpull">>
-	<<set $actionDefaults.Defiant.consensual.mouthaction[1] to "breastclosed">>
-	<<set $actionDefaults.Defiant.consensual.penisaction[0] to "escape">>
-	<<set $actionDefaults.Defiant.consensual.penisaction[1] to "otheranusescape">>
-	<<set $actionDefaults.Defiant.consensual.penisaction[2] to "othermouthescape">>
-	<<set $actionDefaults.Defiant.consensual.vaginaaction[0] to "escape">>
-	<<set $actionDefaults.Defiant.consensual.vaginaaction[1] to "othermouthescape">>
-	<<set $actionDefaults.Defiant.consensual.anusaction[0] to "escape">>
-	<<set $actionDefaults.Defiant.consensual.anusaction[1] to "othermouthescape">>
-<</if>>
-<<if $actionDefaults.Tentacles is undefined>>
-	<<set $actionDefaults.Tentacles to clone(_defaultObject)>>
-	<<set $actionDefaults.Tentacles.rape.regrab to false>>
-	<<set $actionDefaults.Tentacles.consensual.regrab to false>>
-<</if>>
-<<if $actionDefaults.Everyone.consensual.askActions is undefined>>
-	<<set $actionDefaults.Everyone.rape.askActions to clone(_defaultItem)>>
-	<<set $actionDefaults.Everyone.consensual.askActions to clone(_defaultItem)>>
-	<<set $actionDefaults.Strangers.rape.askActions to clone(_defaultItem)>>
-	<<set $actionDefaults.Strangers.consensual.askActions to clone(_defaultItem)>>
-	<<set $actionDefaults.Acquaintances.rape.askActions to clone(_defaultItem)>>
-	<<set $actionDefaults.Acquaintances.consensual.askActions to clone(_defaultItem)>>
-	<<set $actionDefaults.Animals.rape.askActions to clone(_defaultItem)>>
-	<<set $actionDefaults.Animals.consensual.askActions to clone(_defaultItem)>>
-	<<set $actionDefaults.Robin.rape.askActions to clone(_defaultItem)>>
-	<<set $actionDefaults.Robin.consensual.askActions to clone(_defaultItem)>>
-	<<set $actionDefaults.Bailey.rape.askActions to clone(_defaultItem)>>
-	<<set $actionDefaults.Bailey.consensual.askActions to clone(_defaultItem)>>
-	<<set $actionDefaults.Whitney.rape.askActions to clone(_defaultItem)>>
-	<<set $actionDefaults.Whitney.consensual.askActions to clone(_defaultItem)>>
-	<<set $actionDefaults.Kylar.rape.askActions to clone(_defaultItem)>>
-	<<set $actionDefaults.Kylar.consensual.askActions to clone(_defaultItem)>>
-	<<set $actionDefaults.Eden.rape.askActions to clone(_defaultItem)>>
-	<<set $actionDefaults.Eden.consensual.askActions to clone(_defaultItem)>>
-	<<set $actionDefaults.Avery.rape.askActions to clone(_defaultItem)>>
-	<<set $actionDefaults.Avery.consensual.askActions to clone(_defaultItem)>>
-	<<set $actionDefaults.Leighton.rape.askActions to clone(_defaultItem)>>
-	<<set $actionDefaults.Leighton.consensual.askActions to clone(_defaultItem)>>
-<</if>>
-<<if $actionDefaults.Defiant.consensual.askActions is undefined>>
-	<<set $actionDefaults.Submissive.rape.askActions to clone(_defaultItem)>>
-	<<set $actionDefaults.Submissive.consensual.askActions to clone(_defaultItem)>>
-	<<set $actionDefaults.Defiant.rape.askActions to clone(_defaultItem)>>
-	<<set $actionDefaults.Defiant.consensual.askActions to clone(_defaultItem)>>
-	<<set $actionDefaults.Alternative.rape.askActions to clone(_defaultItem)>>
-	<<set $actionDefaults.Alternative.consensual.askActions to clone(_defaultItem)>>
-<</if>>
+	<!-- Use default action sets to create array for each default action. -->
+	<<if $maxDefaultActionSets === undefined>>
+		<<set $maxDefaultActionSets = 2>>
+	<</if>>
+	<<set $actionDefaults = DefaultActions.check(DefaultActions.setup())>>
 <</widget>>
 
+<!-- _args[0] As Boolean: false is consensual, true is non-consensual. -->
 <<widget "sexDefaults">>
 <<set _leftHand to {
-	"쉰다":"rest",
-	"쓰다듬는다":"leftchest",
+	"쉰다": "rest",
+	"쓰다듬는다": "leftchest",
+	"등 뒤로 둔다": "behind",
+	"손을 원래대로 돌려놓는다": "stopbehind"
 }>>
 
-<<if $args[0] is true>>
+<<if _args[0] is true>>
 	<<set _leftHand["때린다"] to "lefthit">>
-	<<set _leftHand["그들의 손을 당신의 목에서 밀쳐낸다"] to "stopchokenoncon">>
+	<<set _leftHand["상대의 손을 당신의 목에서 밀쳐낸다"] to "stopchokenoncon">>
 <<else>>
-	<<set _leftHand["그들의 손을 당신의 목에 누른다"] to "keepchoke">>
-	<<set _leftHand["그들의 손을 당신의 목에서 떼어낸다"] to "stopchoke">>
+	<<set _leftHand["상대의 손을 당신의 목에 누른다"] to "keepchoke">>
+	<<set _leftHand["상대의 손을 당신의 목에서 떼어낸다"] to "stopchoke">>
 <</if>>
 <<set _leftHand["얼굴을 가린다"] to "leftcoverface">>
 <<set _leftHand["필기도구를 친다"] to "penwhack">>
@@ -408,9 +290,9 @@ __합의된 경우:__
 <</if>>
 <<set _leftHand["몸부림친다"] to "leftstruggle">>
 
-<<set _leftHand["자지를 훑는다"] to "leftstroke">>
+<<set _leftHand["자지를 쓰다듬는다"] to "leftstroke">>
 
-<<if $promiscuity gt 34 or $deviancy gt 34 or $args[0] is true>>
+<<if $promiscuity gt 34 or $deviancy gt 34 or _args[0] is true>>
 	<<set _leftHand["자지를 잡는다"] to "leftgrab">>
 	<<set _leftHand["자지를 애무한다"] to "leftwork">>
 
@@ -421,14 +303,16 @@ __합의된 경우:__
 <<set _rightHand to {
 	"쉰다":"rest",
 	"쓰다듬는다":"rightchest",
+	"등 뒤로 둔다": "behind",
+	"손을 원래대로 돌려놓는다": "stopbehind"
 }>>
 
-<<if $args[0] is true>>
+<<if _args[0] is true>>
 	<<set _rightHand["때린다"] to "righthit">>
-	<<set _rightHand["그들의 손을 당신의 목에서 밀쳐낸다"] to "stopchokenoncon">>
+	<<set _rightHand["상대의 손을 당신의 목에서 밀쳐낸다"] to "stopchokenoncon">>
 <<else>>
-	<<set _rightHand["그들의 손을 당신의 목에 누른다"] to "keepchoke">>
-	<<set _rightHand["그들의 손을 당신의 목에서 떼어낸다"] to "stopchoke">>
+	<<set _rightHand["상대의 손을 당신의 목에 누른다"] to "keepchoke">>
+	<<set _rightHand["상대의 손을 당신의 목에서 떼어낸다"] to "stopchoke">>
 <</if>>
 <<set _rightHand["얼굴을 가린다"] to "rightcoverface">>
 <<set _rightHand["필기도구를 친다"] to "penwhack">>
@@ -437,9 +321,9 @@ __합의된 경우:__
 <</if>>
 <<set _rightHand["몸부림친다"] to "rightstruggle">>
 
-<<set _rightHand["자지를 훑는다"] to "rightstroke">>
+<<set _rightHand["자지를 쓰다듬는다"] to "rightstroke">>
 
-<<if $promiscuity gt 34 or $deviancy gt 34 or $args[0] is true>>
+<<if $promiscuity gt 34 or $deviancy gt 34 or _args[0] is true>>
 	<<set _rightHand["자지를 잡는다"] to "rightgrab">>
 	<<set _rightHand["자지를 애무한다"] to "rightwork">>
 
@@ -450,10 +334,10 @@ __합의된 경우:__
 <<set _feet to {
 	"쉰다":"rest",
 }>>
-<<if $args[0] is true>>
+<<if _args[0] is true>>
 	<<set _feet["찬다"] to "kick">>
 <</if>>
-<<if $promiscuity gt 34 or $deviancy gt 34 or $args[0] is true>>
+<<if $promiscuity gt 34 or $deviancy gt 34 or _args[0] is true>>
 	<<set _feet["자지를 잡는다"] to "grab">>
 	<<set _feet["자지를 문지른다"] to "grabrub">>
 
@@ -463,9 +347,10 @@ __합의된 경우:__
 
 <<set _mouth to {
 	"쉰다":"rest",
+	"키스한다":"kiss",
 }>>
 
-<<if $args[0] is true>>
+<<if _args[0] is true>>
 	<<set _mouth["비명지른다"] to "scream">>
 	<<set _mouth["애원한다"] to "plead">>
 <</if>>
@@ -473,34 +358,34 @@ __합의된 경우:__
 <<if $submissive gte 1150>>
 	<<set _mouth["신음한다"] to "moan">>
 <</if>>
-<<if $angel gte 6 and $angelforgive isnot 1 and $args[0] is true>>
+<<if $angel gte 6 and $angelforgive isnot 1 and _args[0] is true>>
 	<<set _mouth["용서한다"] to "forgive">>
 <</if>>
-<<if $submissive lte 850 and $args[0] is true>>
+<<if $submissive lte 850 and _args[0] is true>>
 	<<set _mouth["요구한다"] to "demand">>
 <</if>>
 
-<<if $promiscuity gt 54 or $deviancy gt 54 or $args[0] is true>>
+<<if $promiscuity gt 54 or $deviancy gt 54 or _args[0] is true>>
 	<<set _mouth["입을 자지로 옮긴다"] to "mouth">>
 <</if>>
-<<if $promiscuity gt 34 or $deviancy gt 34 or $args[0] is true>>
+<<if $promiscuity gt 34 or $deviancy gt 34 or _args[0] is true>>
 	<<set _mouth["가슴 사이에 자지를 끼운다"] to "grasp">>
 <</if>>
 <<set _mouth["밀어낸다"] to "pullaway">>
-<<if $promiscuity gt 74 or $deviancy gt 74 or $args[0] is true>>
+<<if $promiscuity gt 74 or $deviancy gt 74 or _args[0] is true>>
 	<<set _mouth["자지를 입에 넣는다"] to "swallow">>
 <</if>>
 <<set _mouth["자지를 빤다"] to "suck">>
-<<if $args[0] is true>>
+<<if _args[0] is true>>
 	<<set _mouth["자지를 깨문다"] to "bite">>
 <</if>>
 
-<<if $promiscuity gt 54 or $deviancy gt 54 or $args[0] is true>>
+<<if $promiscuity gt 54 or $deviancy gt 54 or _args[0] is true>>
 	<<set _mouth["입을 보지로 옮긴다"] to "othervagina">>
 <</if>>
 <<set _mouth["보지를 핥는다"] to "vaginalick">>
 
-<<if $promiscuity gt 34 or $args[0] is true>>
+<<if $promiscuity gt 34 or _args[0] is true>>
 	<<set _mouth["입을 가슴으로 옮긴다"] to "movetochest">>
 <</if>>
 
@@ -508,36 +393,34 @@ __합의된 경우:__
 <<set _mouth["가슴을 밀어낸다"] to "breastpull">>
 
 <<set _mouth["가슴을 빤다"] to "breastsuck">>
-<<if $args[0] is true>>
+<<if _args[0] is true>>
 	<<set _mouth["가슴을 깨문다"] to "breastbite">>
 <</if>>
 <<set _mouth["입을 다물고 있는다"] to "breastclosed">>
 
-<<if $args[0] is true>>
+<<if _args[0] is true>>
 	<<set _mouth["가슴을 깨문다"] to "breastbite">>
 <</if>>
 
 <<set _mouth["부탁한다"] to "ask">>
 
 <<set _askActions to {"아무 말도 않음":"rest"}>>
-<<if $args[0] is false>>
+<<if _args[0] is false>>
 	<<set _askActions["그만하고 싶다고"] to "finish">>
-	<<if $vaginaexist is 1>>
+	<<if $player.vaginaExist>>
 		<<set _askActions["보지에 아무것도 넣고 싶지 않다고"] to "novaginal">>
 	<</if>>
-	<<if $penisexist is 1>>
+	<<if $player.penisExist>>
 		<<set _mouth["자지를 안에 넣고 싶지 않다고"] to "nopenile">>
 	<</if>>
-	<<if $vaginaexist is 1>>
-		<<set _askActions["항문에 아무것도 넣고 싶지 않다고"] to "noanal">>
-	<</if>>
+	<<set _askActions["항문에 아무것도 넣고 싶지 않다고"] to "noanal">>
 	<<if $asphyxiaLvl gte 1>>
 		<<set _askActions["목을 조르지 말라고"] to "nochoke">>
 	<</if>>
 <</if>>
 <<set _askActions["웃옷을 벗기지 말라고"] to "noupper">>
 
-<<if $asphyxiaLvl gte 1 and $args[0] is false and
+<<if $asphyxiaLvl gte 1 and _args[0] is false and
 ($choketrait or ($chokeorgasm gte 1 and $submissive gt 850) or ($awarelevel gte 2 and $submissive gte 1150))>>
 	<<set _askActions["목을 졸라 달라고"] to "askchoke">>
 <</if>>
@@ -547,48 +430,48 @@ __합의된 경우:__
 	"쉰다":"rest",
 }>>
 
-<<if $promiscuity gt 74 or $deviancy gt 74 or $args[0] is true>>
+<<if $promiscuity gt 74 or $deviancy gt 74 or _args[0] is true>>
 	<<set _penis["보지에 대고 누른다"] to "penistovagina">>
 
 	<<set _penis["보지에 박는다"] to "penisvaginafuck">>
 <</if>>
-<<if $promiscuity gt 54 or $deviancy gt 54 or $args[0] is true>>
+<<if $promiscuity gt 54 or $deviancy gt 54 or _args[0] is true>>
 	<<set _penis["클리토리스에 비빈다"] to "bay">>
 <</if>>
 <<set _penis["보지를 애태운다"] to "tease">>
 <<set _penis["보지를 밀어낸다"] to "escape">>
 
 /*After bay*/
-<<if $promiscuity gt 54 or $deviancy gt 54 or $args[0] is true>>
+<<if $promiscuity gt 54 or $deviancy gt 54 or _args[0] is true>>
 	<<set _penis["보지를 문지른다"] to "rub">>
 <</if>>
 
 /*After penisvaginafuck*/
-<<set _penis["보지를 받아들인다"] to "take">>
-<<set _penis["보지에 협조한다"] to "협조한다">>
-<<if ($promiscuity gt 54 or $deviancy gt 54 or $args[0] is true) and $penileskill gte 800>>
+<<set _penis["상대가 하는대로 둔다"] to "take">>
+<<set _penis["보지에 협조한다"] to "cooperate">>
+<<if ($promiscuity gt 54 or $deviancy gt 54 or _args[0] is true) and $penileskill gte 800>>
    <<set _penis["보지 테두리를 따라 애태운다"] to "vaginaEdging">>
 <</if>>
-<<if $promiscuity gt 74 or $deviancy gt 74 or $args[0] is true>>
+<<if $promiscuity gt 74 or $deviancy gt 74 or _args[0] is true>>
 	<<set _penis["엉덩이에 대고 누른다"] to "penistoanus">>
 
 	<<set _penis["엉덩이에 박는다"] to "penisanusfuck">>
 <</if>>
-<<if $promiscuity gt 54 or $deviancy gt 54 or $args[0] is true>>
+<<if $promiscuity gt 54 or $deviancy gt 54 or _args[0] is true>>
 	<<set _penis["엉덩이에 비빈다"] to "otheranusbay">>
 <</if>>
 <<set _penis["엉덩이를 애태운다"] to "otheranustease">>
 <<set _penis["엉덩이를 밀어낸다"] to "otheranusescape">>
 
 /*After otheranusbay*/
-<<if $promiscuity gt 54 or $deviancy gt 54 or $args[0] is true>>
+<<if $promiscuity gt 54 or $deviancy gt 54 or _args[0] is true>>
 	<<set _penis["엉덩이에 문지른다"] to "otheranusrub">>
 <</if>>
 
 /*After penisanusfuck*/
-<<set _penis["엉덩이를 받아들인다"] to "otheranustake">>
+<<set _penis["상대가 하는대로 둔다"] to "otheranustake">>
 <<set _penis["엉덩이에 협조한다"] to "otheranuscooperate">>
-<<if ($promiscuity gt 54 or $deviancy gt 54 or $args[0] is true) and $penileskill gte 800>>
+<<if ($promiscuity gt 54 or $deviancy gt 54 or _args[0] is true) and $penileskill gte 800>>
    <<set _penis["항문 테두리를 따라 애태운다"] to "otheranusEdging">>
 <</if>>
 <<set _penis["넓적다리로 입을 누른다"] to "thighbay">>
@@ -604,30 +487,30 @@ __합의된 경우:__
 	"대신 엉덩이를 권한다":"penisanus",
 }>>
 
-<<if $promiscuity gt 74 or $deviancy gt 74 or $args[0] is true>>
+<<if $promiscuity gt 74 or $deviancy gt 74 or _args[0] is true>>
 	<<set _vagina["자지에 올라탄다"] to "vaginatopenis">>
 
 	<<set _vagina["자지를 받아들인다"] to "vaginapenisfuck">>
 <</if>>
-<<if $promiscuity gt 54 or $deviancy gt 54 or $args[0] is true>>
+<<if $promiscuity gt 54 or $deviancy gt 54 or _args[0] is true>>
 	<<set _vagina["넓적다리로 자지를 떼어놓는다"] to "penisthighs">>
 <</if>>
-<<if $promiscuity gte 75 or $deviancy gte 75 or $args[0] is true>>
+<<if $promiscuity gte 75 or $deviancy gte 75 or _args[0] is true>>
 	<<set _vagina["보지로 상대의 보지를 누른다"] to "vaginatovagina">>
 <</if>>
 <<set _vagina["자지를 밀어낸다"] to "escape">>
 <<set _vagina["끝쪽을 애태운다"] to "penistease">>
 
 /*After penisthighs*/
-<<if $promiscuity gt 54 or $deviancy gt 54 or $args[0] is true>>
+<<if $promiscuity gt 54 or $deviancy gt 54 or _args[0] is true>>
 	<<set _vagina["자지를 문지른다"] to "rub">>
 <</if>>
 
 /*After vaginapenisfuck*/
-<<set _vagina["받아들인다"] to "take">>
-<<set _vagina["협조한다"] to "협조한다">>
-<<if ($promiscuity gt 54 or $deviancy gt 54 or $args[0] is true) and $vaginalskill gte 800>>
-   <<set _vagina["보지 테두리로 자지를 애태운다"] to "penisEdging">>
+<<set _vagina["상대가 하는대로 둔다"] to "take">>
+<<set _vagina["협조한다"] to "cooperate">>
+<<if ($promiscuity gt 54 or $deviancy gt 54 or _args[0] is true) and $vaginalskill gte 800>>
+   <<set _vagina["보지 테두리로 애태운다"] to "penisEdging">>
 <</if>>
 <<set _vagina["넓적다리로 입을 누른다"] to "thighbay">>
 <<set _vagina["얼굴에 문지른다"] to "othermouthtease">>
@@ -640,16 +523,16 @@ __합의된 경우:__
 <<set _anus to {
 	"쉰다":"rest",
 }>>
-<<if $vaginaexist is 1>>
+<<if $player.vaginaExist>>
 	<<set _anus["대신 보지를 권한다"] to "penispussy">>
 <</if>>
 
-<<if $promiscuity gt 74 or $deviancy gt 74 or $args[0] is true>>
+<<if $promiscuity gt 74 or $deviancy gt 74 or _args[0] is true>>
 	<<set _anus["자지에 올라탄다"] to "anustopenis">>
 
 	<<set _anus["자지를 받아들인다"] to "anuspenisfuck">>
 <</if>>
-<<if $promiscuity gt 54 or $deviancy gt 54 or $args[0] is true>>
+<<if $promiscuity gt 54 or $deviancy gt 54 or _args[0] is true>>
 	<<set _anus["엉덩이로 자지를 떼어놓는다"] to "penischeeks">>
 <</if>>
 <<set _anus["끝쪽을 애태운다"] to "penistease">>
@@ -657,14 +540,14 @@ __합의된 경우:__
 <<set _anus["자지를 밀어낸다"] to "escape">>
 
 /*After penischeeks*/
-<<if $promiscuity gt 54 or $deviancy gt 54 or $args[0] is true>>
+<<if $promiscuity gt 54 or $deviancy gt 54 or _args[0] is true>>
 	<<set _anus["자지를 문지른다"] to "rub">>
 <</if>>
 
 /*After anuspenisfuck*/
-<<set _anus["받아들인다"] to "take">>
-<<set _anus["협조한다"] to "협조한다">>
-<<if ($promiscuity gt 54 or $deviancy gt 54 or $args[0] is true) and $analskill gte 800>>
+<<set _anus["상대가 하는대로 둔다"] to "take">>
+<<set _anus["협조한다"] to "cooperate">>
+<<if ($promiscuity gt 54 or $deviancy gt 54 or _args[0] is true) and $analskill gte 800>>
    <<set _anus["항문 테두리로 애태운다"] to "penisEdging">>
 <</if>>
 <<set _anus["엉덩이로 입을 누른다"] to "bottombay">>
@@ -674,6 +557,14 @@ __합의된 경우:__
 <<set _anus["입을 밀어낸다"] to "othermouthescape">>
 
 <<set _anus["입에 협조한다"] to "othermouthcooperate">>
+
+<<set _anus["상대의 손에 당신의 엉덩이살을 문지른다"] to "bottomhandbay">>
+<<set _anus["상대의 손에 당신의 항문을 문지른다"] to "handtease">>
+
+<<set _anus["상대의 손가락에 문지른다"] to "handrub">>
+<<set _anus["상대의 손에서 떨어진다"] to "handescape">>
+
+<<set _anus["상대의 손가락에 협조한다"] to "handcooperate">>
 
 <</widget>>
 
@@ -687,8 +578,8 @@ __합의된 경우:__
 	<<set _leftHand["보지로 유도한다"] to "showvagina">>
 	<<set _leftHand["항문으로 유도한다"] to "showbottom">>
 <</if>>
-<<if $args[0] is true>>
-	<<set _leftHand["때린다"] to "lefthit">>
+<<if _args[0] is true>>
+	<<set _leftHand["때린다"] to "lefthittentacle">>
 <</if>>
 <<set _leftHand["짠다"] to "leftrub">>
 
@@ -701,8 +592,8 @@ __합의된 경우:__
 	<<set _rightHand["보지로 유도한다"] to "showvagina">>
 	<<set _rightHand["항문으로 유도한다"] to "showbottom">>
 <</if>>
-<<if $args[0] is true>>
-	<<set _rightHand["때린다"] to "righthit">>
+<<if _args[0] is true>>
+	<<set _rightHand["때린다"] to "righthittentacle">>
 <</if>>
 <<set _rightHand["짠다"] to "rightrub">>
 
@@ -715,7 +606,7 @@ __합의된 경우:__
 	<<set _feet["보지로 유도한다"] to "showvagina">>
 	<<set _feet["항문으로 유도한다"] to "showbottom">>
 <</if>>
-<<if $args[0] is true>>
+<<if _args[0] is true>>
 	<<set _feet["찬다"] to "feethit">>
 <</if>>
 <<set _feet["짠다"] to "feetrub">>
@@ -725,10 +616,10 @@ __합의된 경우:__
 	"핥는다":"mouthlick",
 	"밀어낸다":"mouthpullaway",
 	"키스한다":"mouthkiss",
-	"받아들인다":"take",
+	"상대가 하는대로 둔다":"take",
 	"협조한다":"mouthcooperate"
 }>>
-<<if $args[0] is true>>
+<<if _args[0] is true>>
 	<<set _mouth["깨문다"] to "mouthbite">>
 <</if>>
 
@@ -736,7 +627,7 @@ __합의된 경우:__
 	"쉰다":"rest",
 	"문지른다":"penisrub",
 	"밀어낸다":"penispullaway",
-	"받아들인다":"take",
+	"상대가 하는대로 둔다":"take",
 	"협조한다":"peniscooperate"
 }>>
 
@@ -744,7 +635,7 @@ __합의된 경우:__
 	"쉰다":"rest",
 	"문지른다":"vaginarub",
 	"밀어낸다":"vaginapullaway",
-	"받아들인다":"take",
+	"상대가 하는대로 둔다":"take",
 	"협조한다":"vaginacooperate"
 }>>
 
@@ -752,7 +643,7 @@ __합의된 경우:__
 	"쉰다":"rest",
 	"문지른다":"anusrub",
 	"밀어낸다":"anuspullaway",
-	"받아들인다":"take",
+	"상대가 하는대로 둔다":"take",
 	"협조한다":"anuscooperate"
 }>>
 <</widget>>
@@ -760,7 +651,7 @@ __합의된 경우:__
 <<widget "loveInterest">>
 	누구를 기본 연애 상대로 하고 싶은가요?
 		<br>
-		<<set _npc = ["None","Robin","Whitney","Kylar","Eden","Avery","Black Wolf","Great Hawk","Alex"]>>
+		<<set _npc = ["None","Robin","Whitney","Kylar","Sydney","Eden","Avery","Black Wolf","Great Hawk","Alex"]>>
 			<<set _potentialLoveInterests = ["None"]>>
 			<<if $robinromance is 1>>
 				<<run _potentialLoveInterests.push("Robin")>>
@@ -770,6 +661,9 @@ __합의된 경우:__
 			<</if>>
 			<<if $kylarenglish gte 1 and $NPCName[$NPCNameList.indexOf("Kylar")].state isnot "prison">>
 				<<run _potentialLoveInterests.push("Kylar")>>
+			<</if>>
+			<<if $sydneyromance is 1>>
+				<<run _potentialLoveInterests.push("Sydney")>>
 			<</if>>
 			<<if $syndromeeden is 1>>
 				<<run _potentialLoveInterests.push("Eden")>>
@@ -812,11 +706,11 @@ __합의된 경우:__
 					<<set $loveInterest.secondary to "None">>
 				<</if>>
 			<</if>>
-			
+
 <</widget>>
 
 <<widget "attitudesControl">>
-<<set $attitudesControl[$args[0]] to $args[1]>>
+<<set $attitudesControl[_args[0]] to _args[1]>>
 <<set $attitudesControl.showGoldLink to true>>
 <</widget>>
 

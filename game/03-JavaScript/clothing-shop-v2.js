@@ -51,7 +51,7 @@ window.getTrueWarmth = function (item) {
 		// outfitPrimary looks like this {'lower': 'item_name', 'head': 'item_name'}
 		warmth += Object.keys(item.outfitPrimary) // loop through secondary items list
 		.filter(x => item.outfitPrimary[x] != "broken") // filter out broken pieces
-		.map(x => setup.clothes[x].find(z => z.name == item.outfitPrimary[x])) // find items in setup.clothes
+		.map(x => setup.clothes[x].find(z => z.name == item.outfitPrimary[x] && z.modder === item.modder)) // find items in setup.clothes
 		.reduce((sum, x) => sum + (x.warmth || 0), 0); // calculate sum of their warmth field
 	}
 
@@ -62,7 +62,7 @@ window.getTrueWarmth = function (item) {
 		// outfitSecondary looks like this ['upper', 'item_name', 'head', 'item_name']
 		item.outfitSecondary.forEach((x, i) => {
 			if (i % 2 == 0 && item.outfitSecondary[i + 1] != "broken") {
-				warmth += setup.clothes[x].find(z => z.name == item.outfitSecondary[i + 1]).warmth || 0;
+				warmth += setup.clothes[x].find(z => z.name == item.outfitSecondary[i + 1] && z.modder === item.modder).warmth || 0;
 			}
 		});
 	}
@@ -146,7 +146,7 @@ window.getCustomColourStyle = function (type, valueOnly = false) {
 window.saveCustomColourPreset = function (slot = "primary") {
 	let setName = prompt("Enter new colour preset name", "New preset");
 	if (setName != null) {
-		if (Object.keys(V.customColors.presets).contains(setName)) {
+		if (Object.keys(V.customColors.presets).includes(setName)) {
 			alert('Preset "' + setName + '" already exists!');
 			return;
 		}
@@ -223,10 +223,10 @@ window.applyClothingShopFilters = function (items) {
 	// (example) turns f.gender object {female: true, neutral: true, male: false} into ["f", "n"], ready to compare with gender in items
 	let allowedGenders = Object.keys(f.gender).filter(x => f.gender[x]).map(x => x.first());
 
-	return items.filter(x => allowedGenders.contains(x.gender)
+	return items.filter(x => allowedGenders.includes(x.gender)
 		&& x.reveal >= f.reveal.from && x.reveal < f.reveal.to
 		&& x.warmth >= f.warmth.from && x.warmth < f.warmth.to
-		&& (f.traits.length == 0 || f.traits.containsAny(x.type))
+		&& (f.traits.length == 0 || f.traits.includesAny(x.type))
 	);
 }
 
@@ -283,4 +283,19 @@ window.getWarmthWithOtherClothing = function(slot, clothingId) {
 		newWarmth -= worn[slot].warmth;
 
 	return newWarmth;
+}
+
+window.allClothesSetup = function(){
+	let clothes = []
+	Object.keys(setup.clothes).forEach(slot => {
+		if(['all','over_head','over_upper','over_lower'].includes(slot)) return;
+		let items = clone(setup.clothes[slot]);
+		items.forEach(item => item.realSlot = slot);
+		clothes = clothes.concat(items);
+	})
+	setup.clothes.all = clothes;
+}
+
+window.shopSearchReplacer = function(name){
+	return name.replace(/[^a-zA-Z0-9' -]+/g,"");
 }

@@ -4,6 +4,11 @@
 <<exposure>>
 <<set $face to 0>>
 
+/*ToDo: Pregnancy, remove to properly enable*/
+<<if $pregnancyTesting is undefined>>
+	<<set $condomUse to false>>
+<</if>>
+
 <<if $enemyno gte 2>>
 	<<set $pronoun to "n">>
 <<else>>
@@ -25,10 +30,12 @@
 <</if>>
 
 <<if $images is 1>>
-	<<timed 100ms>>
-	<<combatimg>>
-	<br>
-	<</timed>>
+	<<if $position isnot "stalk">>
+		<<timed 100ms>>
+		<<combatimg>>
+		<br>
+		<</timed>>
+	<</if>>
 <</if>>
 
 <<if $traumafocus gte 1 and $traumafocusintro isnot 1>>
@@ -41,6 +48,7 @@
 	<<set $traumafocus to 0>><<set $trauma -= 1000>><<set $dissociation to 1>>
 	<span class="green">당신은 정신이 돌아왔다.</span>
 	<<ltrauma>>
+	<br>
 	<span class="red">현실의 무게가 당신을 짓눌러 왔다.</span>
 	<br><br>
 <</if>>
@@ -52,17 +60,22 @@
 <<actioncarry>>
 <<actioncarrydrop>>
 
-<<if $trance lte 0 and $dissociation lte 1 and $panicparalysis is 0 and $panicviolence is 0
-and $orgasmdown lte 0 and ($pain lt 100 or $willpowerpain is undefined)>>
+<<combatstate>>
+<<carryblock>>
 
-	<<if $images is 1 and $consensual is 1 and $position_lock isnot 1>>
-		<<if $position is "doggy">>
-			| <label>몸을 돌린다 <<radiobutton "$bodyaction" "missionary">></label>
-		<<elseif $position is "missionary">>
-			| <label>몸을 돌린다 <<radiobutton "$bodyaction" "doggy">></label>
+<<if $trance lte 0 and $panicparalysis is 0 and ($panicviolence is 0 or $position is "stalk")>>
+	<<if $dissociation lte 1 and $orgasmdown lte 0 and ($pain lt 100 or $willpowerpain is undefined) and !$possessed>>
+		<<if $images is 1 and $consensual is 1 and $position_lock isnot 1>>
+			<<if $position is "doggy">>
+				| <label>몸을 돌린다 <<radiobutton "$bodyaction" "missionary">></label>
+			<<elseif $position is "missionary">>
+				| <label>몸을 돌린다 <<radiobutton "$bodyaction" "doggy">></label>
+			<</if>>
+			<<if $position isnot "stalk">>
+				| <label>가만히 있는다 <<radiobutton "$bodyaction" "rest" checked>></label>
+				<br>
+			<</if>>
 		<</if>>
-		| <label>가만히 있는다 <<radiobutton "$bodyaction" "rest" checked>></label>
-		<br>
 	<</if>>
 
 	<<if $combatControls isnot "disabled">>
@@ -71,8 +84,6 @@ and $orgasmdown lte 0 and ($pain lt 100 or $willpowerpain is undefined)>>
 	<br>
 <</if>>
 
-<<combatstate>>
-<<carryblock>>
 <br><br>
 
 <<set $face to 0>>
@@ -81,13 +92,26 @@ and $orgasmdown lte 0 and ($pain lt 100 or $willpowerpain is undefined)>>
 
 /*Due to how combat is setup, this is the best location for it*/
 <<setupMidOrgasm>>
+
+/* Above comment does not refer to this debug section */
 <<if $debug is 1>>
 	__Debug__
 	<br>
-	<<for _i to 0; _i lt $enemyno; _i++>>
-		<<print _i>> $NPCList[_i].fullDescription: 머리 위치: $NPCList[_i].location.head --- 생식기 위치: $NPCList[_i].location.genitals
+	Enemy Health: $enemyhealth -- Enemy Health Max: $enemyhealthmax 
+	<br>
+	Enemy number: $enemyno -- Enemy max number: $enemynomax
+	<br><br>
+	<<for _i to 0; _i lt $enemynomax; _i++>>
+		#<<print _i>>: <<trNPCdesc $NPCList[_i].fullDescription>>_trResult
+		<br> 
+		머리 위치: $NPCList[_i].location.head -- 생식기 위치: $NPCList[_i].location.genitals
 		<br>
-		자지 $NPCList[_i].penis --- 보지: $NPCList[_i].vagina --- 입: $NPCList[_i].mouth --- 항문: $NPCList[_i].anus
+		활성 상태: $NPCList[_i].active -- 자세: $NPCList[_i].stance -- 체력: $NPCList[_i].health
+		<br>
+		자지: $NPCList[_i].penis -- 보지: $NPCList[_i].vagina -- 입: $NPCList[_i].mouth -- 항문: $NPCList[_i].anus 
+		/* Note: Anus is literally not a real var for npcs yet. Don't think anything is wrong when you see it isn't printing a logical value. A rework is required first. */
+		<br>
+		왼손: $NPCList[_i].lefthand -- 오른손: $NPCList[_i].righthand
 		<br><br>
 	<</for>>
 <</if>>

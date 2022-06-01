@@ -1,7 +1,7 @@
 :: Wolf Street
 
-<<set $outside to 1>><<set $location to "town">><<effects>><<set $bus to "wolf">>
-당신은 울프 가에 있다. 근처의 숲이 여기서 도시와 만나고, 그 지점에는 교회가 있다.
+<<set $outside to 1>><<set $location to "town">><<effects>><<set $bus to "wolf">><<getTarget true>>
+당신은 울프 가에 있다. 근처의 숲이 여기서 도시와 만나고, 그 지점에는 사원이 있다.
 <<if $daystate is "day">>
 	<<if $weather is "rain">>
 		바람에 나뭇가지들이 흔들린다.
@@ -25,11 +25,11 @@
 <<if $arousal gte $arousalmax>>
 	<<orgasmstreet>>
 <</if>>
-<<if $stress gte $stressmax>>
+<<if $stress gte $stressmax and !$possessed>>
 	<<passoutstreet>>
 <<else>>
 	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
-	<<if $danger gte (9900 - $allure) and $eventskip is 0>>
+	<<if ($danger gte (9900 - $allure) or $eventforced) and $eventskip is 0>>
 		<<eventsstreet>>
 	<<else>>
 		<<if $map.top is true>>
@@ -38,7 +38,7 @@
 		<</if>>
 		주요 장소
 		<br>
-		<<wolficon>><<link [[교회 (0:01)|Temple]]>><<pass 1>><</link>>
+		<<wolficon>><<link [[사원 (0:01)|Temple]]>><<pass 1>><</link>>
 		<br>
 			<<if $soup_kitchen_known is 1 and $exposed lte 0>>
 				<<if $hour gte 18 and $hour lte 20>>

@@ -1,6 +1,6 @@
 :: Store Actions [widget]
 <<widget "storeactions">>
-<<set _temp_strip to $args[0]>>
+<<set _temp_strip to _args[0]>>
 <<exposure>>
 <<outfitChecks>>
 <<otherOutfitChecks>>
@@ -8,7 +8,7 @@
 	<<if $worn.upper.name isnot "naked" and $worn.lower.name isnot "naked">>
 		당신은 <<trClothes "over_upper" $worn.over_upper.name "name" "을">>_trResult 벗었다.
 	<<elseif _temp_strip is "wolfcave">>
-		당신은 <<trClothes "over_upper" $worn.over_upper.name "name" "을">>_trResult 벗었다. 동물들이긴 하지만, 그들 앞에서 벗는 것은 당신의 등골을 오싹하게 만든다.
+		당신은 <<trClothes "over_upper" $worn.over_upper.name "name" "을">>_trResult 벗었다. 짐승들이긴 하지만, 그들 앞에서 벗는 것은 당신의 등골을 오싹하게 만든다.
 		<br>
 	<<elseif $location is "pool">>
 	<<elseif $location is "tower">>
@@ -24,7 +24,7 @@
 	<<if $worn.upper.name isnot "naked">>
 		당신은 <<trClothes "over_upper" $worn.over_upper.name "name" "을">>_trResult 벗었다.
 	<<elseif _temp_strip is "wolfcave">>
-		당신은 <<trClothes "over_upper" $worn.over_upper.name "name" "을">>_trResult 벗었다. 동물들이긴 하지만, 그들 앞에서 벗는 것은 당신의 <<nipples_rul>> 세우고, 당신의 새롭게 드러난 피부를 얼얼하게 만든다.
+		당신은 <<trClothes "over_upper" $worn.over_upper.name "name" "을">>_trResult 벗었다. 짐승들이긴 하지만, 그들 앞에서 벗는 것은 당신의 <<nipples_rul>> 세우고, 당신의 새롭게 드러난 피부를 얼얼하게 만든다.
 		<br>
 	<<elseif $location is "pool">>
 	<<elseif $location is "tower">>
@@ -40,7 +40,7 @@
 	<<if $worn.lower.name isnot "naked">>
 		당신은 <<trClothes "over_lower" $worn.over_lower.name "name" "을">>_trResult 벗었다.
 	<<elseif _temp_strip is "wolfcave">>
-		당신은 <<trClothes "over_lower" $worn.over_lower.name "name" "을">>_trResult 벗었다. 동물들이긴 하지만, 그들 앞에서 벗는 것은 당신에게 기분 좋은 떨림을 준다.
+		당신은 <<trClothes "over_lower" $worn.over_lower.name "name" "을">>_trResult 벗었다. 짐승들이긴 하지만, 그들 앞에서 벗는 것은 당신에게 기분 좋은 떨림을 준다.
 		<br>
 	<<elseif $location is "pool">>
 	<<elseif $location is "tower">>
@@ -54,7 +54,7 @@
 
 <<if $action_unclad_outfit is 1>><<set $action_unclad_outfit to 0>>
 	<<if _temp_strip is "wolfcave">>
-		당신은 <<trClothes "upper" $worn.upper.name "name" "을">>_trResult 벗었다. 동물들이긴 하지만, 그들 앞에서 벗는 것은 당신의 등골을 오싹하게 만든다.
+		당신은 <<trClothes "upper" $worn.upper.name "name" "을">>_trResult 벗었다. 짐승들이긴 하지만, 그들 앞에서 벗는 것은 당신의 등골을 오싹하게 만든다.
 		<br>
 	<<elseif $location is "pool">>
 	<<elseif $location is "tower">>
@@ -68,7 +68,7 @@
 
 <<if $action_unclad_upper is 1>><<set $action_unclad_upper to 0>>
 	<<if _temp_strip is "wolfcave">>
-		당신은 <<trClothes "upper" $worn.upper.name "name" "을">>_trResult 벗었다. 동물들이긴 하지만, 그들 앞에서 벗는 것은 당신의 <<nipples_rul>> 세우고, 당신의 새롭게 드러난 피부를 얼얼하게 만든다.
+		당신은 <<trClothes "upper" $worn.upper.name "name" "을">>_trResult 벗었다. 짐승들이긴 하지만, 그들 앞에서 벗는 것은 당신의 <<nipples_rul>> 세우고, 당신의 새롭게 드러난 피부를 얼얼하게 만든다.
 		<br>
 	<<elseif $location is "pool">>
 	<<elseif $location is "tower">>
@@ -82,7 +82,7 @@
 
 <<if $action_unclad_lower is 1>><<set $action_unclad_lower to 0>>
 	<<if _temp_strip is "wolfcave">>
-		당신은 <<trClothes "lower" $worn.lower.name "name" "을">>_trResult 벗었다. 동물들이긴 하지만, 그들 앞에서 벗는 것은 당신에게 기분 좋은 떨림을 준다.
+		당신은 <<trClothes "lower" $worn.lower.name "name" "을">>_trResult 벗었다. 짐승들이긴 하지만, 그들 앞에서 벗는 것은 당신에게 기분 좋은 떨림을 준다.
 		<br>
 	<<elseif $location is "pool">>
 	<<elseif $location is "tower">>
@@ -96,7 +96,7 @@
 
 <<if $action_unclad_under_outfit is 1>><<set $action_unclad_under_outfit to 0>>
 	<<if _temp_strip is "wolfcave">>
-		당신은 <<trClothes "under_upper" $worn.under_upper.name "name" "을">>_trResult 벗었다. 동물들이긴 하지만, 그들 앞에서 벗는 것은 당신의 등골을 오싹하게 만든다.
+		당신은 <<trClothes "under_upper" $worn.under_upper.name "name" "을">>_trResult 벗었다. 짐승들이긴 하지만, 그들 앞에서 벗는 것은 당신의 등골을 오싹하게 만든다.
 		<br>
 	<<elseif $location is "pool">>
 	<<elseif $location is "tower">>
@@ -110,7 +110,7 @@
 
 <<if $action_unclad_under_upper is 1>><<set $action_unclad_under_upper to 0>>
 	<<if _temp_strip is "wolfcave">>
-		당신은 <<trClothes "under_upper" $worn.under_upper.name "name" "을">>_trResult 벗었다. 동물들이긴 하지만, 그들 앞에서 벗는 것은 피부와 <<genitalsPost 1 "을">> 얼얼하게 만든다.
+		당신은 <<trClothes "under_upper" $worn.under_upper.name "name" "을">>_trResult 벗었다. 짐승들이긴 하지만, 그들 앞에서 벗는 것은 피부와 <<genitalsPost 1 "을">> 얼얼하게 만든다.
 		<br>
 	<<elseif $location is "pool">>
 	<<elseif $location is "tower">>
@@ -124,7 +124,7 @@
 
 <<if $action_unclad_under_lower is 1>><<set $action_unclad_under_lower to 0>>
 	<<if _temp_strip is "wolfcave">>
-		당신은 <<trClothes "under_lower" $worn.under_lower.name "name" "을">>_trResult 벗었다. 동물들이긴 하지만, 그들 앞에서 벗는 것은 피부와 <<genitalsPost 1 "을">> 얼얼하게 만든다.
+		당신은 <<trClothes "under_lower" $worn.under_lower.name "name" "을">>_trResult 벗었다. 짐승들이긴 하지만, 그들 앞에서 벗는 것은 피부와 <<genitalsPost 1 "을">> 얼얼하게 만든다.
 		<br>
 	<<elseif $location is "pool">>
 	<<elseif $location is "tower">>
@@ -234,8 +234,7 @@
 	<<handsundress _temp_strip>>
 <</if>>
 
-<<for _e to 0; _e lt $clothing_number; _e++>>
-<<activeclothes>>
+<<for _active_clothes range Object.keys($store)>>
 	<<for _i to 0; _i lt $store[_active_clothes].length; _i++>>
 		<<if $store[_active_clothes][_i].location is _temp_strip>>
 		<<set _temp_clothes_present to 1>>
@@ -257,9 +256,9 @@
 
 <!-- set up the checks -->
 <<set _over_upper_protected to $worn.over_upper.exposed lt 2 or $player.gender_appearance_without_overwear isnot "f";
-	_over_lower_protected to $worn.over_lower.exposed lt 2 and !$worn.over_lower.skirt;
+	_over_lower_protected to $worn.over_lower.exposed lt 2 and !setup.clothes.over_lower[clothesIndex('over_lower', $worn.over_lower)].skirt;
 	_upper_protected to $worn.upper.exposed lt 2 or $player.gender_appearance_without_overwear isnot "f";
-	_lower_protected to $worn.lower.exposed lt 2 and !$worn.lower.skirt;
+	_lower_protected to $worn.lower.exposed lt 2 and !setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt;
 	_under_upper_protected to !$worn.under_upper.exposed or $player.gender_appearance_without_overwear isnot "f";
 	_under_lower_protected to !$worn.under_lower.exposed;
 >>
@@ -383,20 +382,4 @@
 
 <<exposure>>
 
-<</widget>>
-
-<<widget "activeclothes">>/*For use at the start of a loop with _e as the variable. Sets _active_clothes to each category of clothing in turn to simulate the functionality of an array.*/
-<<if _e is 0>><<set _active_clothes to "over_upper">><</if>>
-<<if _e is 1>><<set _active_clothes to "over_lower">><</if>>
-<<if _e is 2>><<set _active_clothes to "upper">><</if>>
-<<if _e is 3>><<set _active_clothes to "lower">><</if>>
-<<if _e is 4>><<set _active_clothes to "under_upper">><</if>>
-<<if _e is 5>><<set _active_clothes to "under_lower">><</if>>
-<<if _e is 6>><<set _active_clothes to "head">><</if>>
-<<if _e is 7>><<set _active_clothes to "face">><</if>>
-<<if _e is 8>><<set _active_clothes to "neck">><</if>>
-<<if _e is 9>><<set _active_clothes to "hands">><</if>>
-<<if _e is 10>><<set _active_clothes to "legs">><</if>>
-<<if _e is 11>><<set _active_clothes to "feet">><</if>>
-<<if _e is 12>><<set _active_clothes to "over_head">><</if>>
 <</widget>>

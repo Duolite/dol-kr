@@ -78,7 +78,7 @@ You don't have a lot of time to shout before it's too late.
 	<br><br>
 <</if>>
 <<if $daystate is "night">>
-	<<link [[Rest till morning|Farm Abduction wake 4]]>><<set $saveDetails.auto.count++>><<endevent>><</link>>
+	<<link [[Rest till morning|Farm Abduction wake 4]]>><<if $ironmanmode isnot true>><<set $saveDetails.auto.count++>><</if>><<endevent>><</link>>
 	<br>
 <</if>>
 <!--Might be best to change this later-->
@@ -86,10 +86,8 @@ You don't have a lot of time to shout before it's too late.
 
 :: Farm Abduction wake 4
 <<set $location to "alex_cottage">><<set $outside to 0>><<effects>>
-<<run Save.autosave.save(null, {"saveId":$saveId, "saveName":$saveName})>>
-<<if _preventUpdate is undefined>>
-	<<run setSaveDetail("autosave",{"saveId":$saveId,"saveName":$saveName})>>
-<</if>>
+
+<<set _autosavehere to true>>
 <<set _hour to clone($hour)>>
 <<for _i to 0; _i lt 12; _i++>>
 	<<set _hour++>>
@@ -183,12 +181,17 @@ You are alone in a tent, tied to a chain buried in the earth. You hear snoring o
 <br><br>
 
 <<if $stress gte $stressmax>>
-	It's too much for you. You pass out.
-	<br><br>
-
-	<<passout>>
-	<<link [[Next|Moor Abduction Remy Wake]]>><<end_moor_captive>><<pass 60>><</link>>
-	<br>
+	/*ToDo: Pregnancy, remove $pregnancyTesting to properly enable*/
+	<<if $sexStats.vagina.pregnancy.waterBreaking is true and $pregnancyTesting>>
+		<<pregnancyWatersBrokenPassout "remyAbduction">>
+	<<else>>
+		It's too much for you. You pass out.
+		<br><br>
+			
+		<<passout>>
+		<<link [[Next|Moor Abduction Remy Wake]]>><<end_moor_captive>><<pass 60>><</link>>
+		<br>
+	<</if>>
 <<elseif $daystate isnot "night">>
 	You hear activity outside. A <<generate1>><<person1>><<person>> steps into the tent, and crouches behind your chain. <<He>> fiddles with your bindings while the others lift cages from beneath the tarpaulin.
 	<br><br>
@@ -255,12 +258,17 @@ You're marched across the moor, enduring the ogling stares of your captors.
 	<<moor_binding_text>>
 	<br><br>
 	<<if $stress gte $stressmax>>
-		It's too much for you. Your vision fades.
-		<br><br>
-
-		<<passout>>
-		<<link [[Next|Moor Abduction Remy Wake]]>><<end_moor_captive>><<pass 60>><</link>>
-		<br>
+		/*ToDo: Pregnancy, remove $pregnancyTesting to properly enable*/
+		<<if $sexStats.vagina.pregnancy.waterBreaking is true and $pregnancyTesting>>
+			<<pregnancyWatersBrokenPassout "remyAbduction">>
+		<<else>>
+			It's too much for you. Your vision fades.
+			<br><br>
+			
+			<<passout>>
+			<<link [[Next|Moor Abduction Remy Wake]]>><<end_moor_captive>><<pass 60>><</link>>
+			<br>
+		<</if>>
 	<<elseif $daystate is "night">>
 		"Set camp," the cry goes up. "We're not traveling in the dark."
 		<br><br>
@@ -398,7 +406,7 @@ You're marched across the moor, enduring the ogling stares of your captors.
 
 		<<link [[Drink|Moor Abduction Drink]]>><</link>>
 		<br>
-		<<if $skulduggery gte 100>>
+		<<if currentSkillValue('skulduggery') gte 100>>
 			<<link [[Sniff it first|Moor Abduction Sniff]]>><</link>>
 			<br>
 		<</if>>
@@ -436,7 +444,7 @@ You're dragged away from the entrance by a <<person1>><<person>>, and into a sma
 
 <<generate2>><<generate3>>
 You awaken on a wooden floor, a cold heavy weight around your neck. Three figures loom over you.
-<<neckwear 1>>
+<<leash 21>>
 <br><br>
 <<person2>>"You weren't lying," a <<person>> says. "Good stock. Would make a fine breeder."
 <br><br>
@@ -601,7 +609,7 @@ They finish setting up the tents, and load the cages into the smallest. A <<gene
 <<seductioncheck>>
 <br><br>
 <<if $seductionskill lt 1000>>
-	<span class="gold">You feel more confident in your powers of seduction.</span>
+	<span class="gold">당신은 유혹하는 데 좀 더 자신감이 붙었다.</span>
 	<br><br>
 <</if>>
 <<seductionskilluse>>
@@ -879,12 +887,12 @@ You let the <<person>> pour the canteen into your mouth.
 <<if $rng gte 91>>
 	It's sweet, and thick. The <<person>> grins.
 	<br><br>
-	You pull away as you feel a fell heat build within. The world spins, and you find yourself lying on the earth. Your <<genitals>> ache, and yearn.<<gggarousal>><<arousal 1800>><<set $drugged += 240>>
+	You pull away as you feel a fell heat build within. The world spins, and you find yourself lying on the earth. Your <<genitals>> ache, and yearn.<<gggarousal>><<arousal 1800>><<drugs 240>>
 	<br><br>
 	Rough hands grasp your shoulders, sending shivers down your body. You're pulled ot your feet. "We've a way to go yet," the <<person>> says. "You should be ready by the time we arrive."
 	<br><br>
 <<elseif $rng gte 51>>
-	It's booze, and pretty strong. You almost gag. The <<person>> chuckles.<<lstress>><<stress -6>><<set $drunk += 120>>
+	It's booze, and pretty strong. You almost gag. The <<person>> chuckles.<<lstress>><<stress -6>><<alcohol 120>>
 	<br><br>
 <<else>>
 	It's just refreshing water.<<lstress>><<stress -6>>
@@ -904,7 +912,7 @@ You let the <<person>> pour the canteen into your mouth.
 You sniff the proffered canteen.
 <<if $rng gte 91>>
 
-Whatever's inside is incredibly sweet. It makes you feel lightheated.
+Whatever's inside is incredibly sweet. It makes you feel lightheaded.
 <br><br>
 
 <<link [[Drink|Moor Abduction Drink 2]]>><<set $phase to 0>><</link>>
@@ -932,12 +940,12 @@ You let the <<person>> pour the canteen into your mouth.
 <<if $phase is 0>>
 	It's sweet, and thick. The <<person>> grins.
 	<br><br>
-	You pull away as you feel a fell heat build within. The world spins, and you find yourself lying on the earth. Your <<genitals>> ache, and yearn.<<gggarousal>><<arousal 1800>><<set $drugged += 240>>
+	You pull away as you feel a fell heat build within. The world spins, and you find yourself lying on the earth. Your <<genitals>> ache, and yearn.<<gggarousal>><<arousal 1800>><<drugs 240>>
 	<br><br>
 	Rough hands grasp your shoulders, sending shivers down your body. You're pulled ot your feet. "We've a way to go yet," the <<person>> says. "You should be ready by the time we arrive."
 	<br><br>
 <<elseif $phase is 1>>
-	It's booze, and pretty strong. You almost gag. The <<person>> chuckles.<<lstress>><<stress -6>><<set $drunk += 120>>
+	It's booze, and pretty strong. You almost gag. The <<person>> chuckles.<<lstress>><<stress -6>><<alcohol 120>>
 	<br><br>
 <<else>>
 	It's just refreshing water.<<lstress>><<stress -6>>
@@ -1038,7 +1046,7 @@ You tear free of the rope, and rise to your feet. Most of the thugs must be asle
 You turn back to the tarpaulin, and peek beneath. Stacks of cages, most shut and locked. There's movement within.
 <br><br>
 
-<<if $skulduggery gte $lock>>
+<<if currentSkillValue('skulduggery') gte $lock>>
 	<span class="green">The locks look easy to pick.</span>
 	<br><br>
 	<<link [[Open the cages (0:20)|Moor Abduction Lock]]>><<pass 20>><<stress 6>><</link>><<gstress>>
@@ -1103,12 +1111,7 @@ You wait until the guard, a <<person>>, takes a long swig from a bottle, then sl
 	<</if>>
 	<br><br>
 
-	<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
-		<<skulduggeryskilluse>>
-	<<else>>
-		<span class="blue">That was too easy. You didn't learn anything.</span>
-		<br><br>
-	<</if>>
+	<<skulduggeryuse>>
 	<<earnFeat "Slippery">>
 	<<link [[Next|Moor]]>><<endevent>><<end_moor_captive>><<set $eventskip to 1>><</link>>
 	<br>
@@ -1119,12 +1122,7 @@ You wait until the guard, a <<person>>, takes a long swig from a bottle, then sl
 	<br><br>
 	The <<person>> is on you before you can recover. "Naughty <<girl>>," <<he>> says, grasping your arms. "Almost gave me the slip." <<His>> eyes wander over your body.
 	<br><br>
-	<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
-		<<skulduggeryskilluse>>
-	<<else>>
-		<span class="blue">That was too easy. You didn't learn anything.</span>
-		<br><br>
-	<</if>>
+	<<skulduggeryuse>>
 
 	<<link [[Next|Moor Abduction Rape]]>><<set $molestationstart to 1>><</link>>
 	<br>
@@ -1145,7 +1143,7 @@ You wait until the guard, a <<person>>, takes a long swig from a bottle, then sl
 
 	<<maninit>>
 
-	<<set $rescue to 1>>
+	<<enable_rescue>>
 <</if>>
 
 <<effects>>
@@ -1309,12 +1307,7 @@ You work against your bindings, hoping nobody notices.
 	<span class="green">No one notices your fidgeting.</span>
 	<br><br>
 
-	<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
-		<<skulduggeryskilluse>>
-	<<else>>
-		<span class="blue">That was too easy. You didn't learn anything.</span>
-		<br><br>
-	<</if>>
+	<<skulduggeryuse>>
 
 
 <<else>>
@@ -1327,12 +1320,7 @@ You work against your bindings, hoping nobody notices.
 		<br><br>
 	<</if>>
 
-	<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
-		<<skulduggeryskilluse>>
-	<<else>>
-		<span class="blue">That was too easy. You didn't learn anything.</span>
-		<br><br>
-	<</if>>
+	<<skulduggeryuse>>
 
 
 <</if>>

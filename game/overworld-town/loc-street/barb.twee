@@ -1,6 +1,6 @@
 :: Barb Street
 
-<<set $outside to 1>><<set $location to "town">><<effects>><<set $bus to "barb">>
+<<set $outside to 1>><<set $location to "town">><<effects>><<set $bus to "barb">><<getTarget true>>
 당신은 바브 가에 있다. 사방에는 높다란 은빛 건물들이 늘어서있다. 바닷소리가 들려온다. 경찰서가 여기 위치해있다. 댄스 교습소도 여기 있다.
 <<if $daystate is "day">>
 	<<if $weather is "rain">>
@@ -38,11 +38,11 @@
 <<if $exposed gte 1>>
 	<<exhibitionism "street">>
 <</if>>
-<<if $stress gte $stressmax>>
+<<if $stress gte $stressmax and !$possessed>>
 	<<passoutstreet>>
 <<else>>
 	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
-	<<if $danger gte (9900 - $allure) and $eventskip is 0>>
+	<<if ($danger gte (9900 - $allure) or $eventforced) and $eventskip is 0>>
 		<<eventsstreet>>
 	<<else>>
 		<<if $map.top is true>>
@@ -64,13 +64,13 @@
 		<<if $exposed lte 0>>
 			<<policeicon>><<link [[경찰서 (0:02)|Police Station]]>><<pass 2>><</link>>
 			<br>
-			<<if $dorenintro gte 1>>
-				<<dorenflaticon>><<link [[도렌의 아파트 (0:02)|Doren Entrance]]>><<pass 2>><</link>>
-				<br>
-			<</if>>
 		<</if>>
 		<<if $phase is 10>>
 			<<policeicon>><<link [[경찰서 옆문으로 몰래 들어간다 (0:05)|Police Back Office]]>><<pass 5>><<set $phase is 0>><</link>>
+			<br>
+		<</if>>
+		<<if $dorenintro gte 1 and $exposed lte 0>>
+			<<dorenflaticon>><<link [[도렌의 아파트 (0:02)|Doren Entrance]]>><<pass 2>><</link>>
 			<br>
 		<</if>>
 		<<if $exposed gte 1 and $daystate isnot "night">>

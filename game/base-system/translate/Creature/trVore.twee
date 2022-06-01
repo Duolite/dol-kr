@@ -1,4 +1,4 @@
 :: Widgets trVore [widget nobr]
 /* 모든 기능 trCreature 로 이관 */
 
-<<widget "trVore">><<trCreature "vore" $args[0] $args[1] $args[2]>><</widget>>
+<<widget "trVore">><<trCreature "vore" _args[0] _args[1] _args[2] _args[3]>><</widget>>

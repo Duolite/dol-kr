@@ -18,12 +18,7 @@
 		<<set $antiquemoney += 120>><<museumAntiqueStatus "antiquecutlass" "found">>
 	<</if>>
 	<br><br>
-	<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
-		<<skulduggeryskilluse>>
-	<<else>>
-		<span class="blue">That was too easy. You didn't learn anything.</span>
-		<br><br>
-	<</if>>
+	<<skulduggeryuse>>
 
 
 	<<endevent>>
@@ -37,12 +32,7 @@
 	The chest is too heavy to carry with you, so you leave it in the water.
 	<br><br>
 
-	<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
-		<<skulduggeryskilluse>>
-	<<else>>
-		<span class="blue">That was too easy. You didn't learn anything.</span>
-		<br><br>
-	<</if>>
+	<<skulduggeryuse>>
 
 	<<link [[Next|Beach Cave]]>><<set $eventskip to 1>><</link>>
 	<br>
@@ -70,13 +60,7 @@
 		<<set $antiquemoney += 10>><<museumAntiqueStatus "antiquerustedcutlass" "found">>
 	<</if>>
 	<br><br>
-	<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
-		<<skulduggeryskilluse>>
-	<<else>>
-		<span class="blue">That was too easy. You didn't learn anything.</span>
-		<br><br>
-	<</if>>
-
+	<<skulduggeryuse>>
 
 	<<endevent>>
 	<<beach_cave_caught>>
@@ -89,12 +73,7 @@
 	The chest is too heavy to carry with you, so you leave it in the water.
 	<br><br>
 
-	<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
-		<<skulduggeryskilluse>>
-	<<else>>
-		<span class="blue">That was too easy. You didn't learn anything.</span>
-		<br><br>
-	<</if>>
+	<<skulduggeryuse>>
 
 	<<link [[Next|Beach Cave]]>><<set $eventskip to 1>><</link>>
 	<br>
@@ -201,7 +180,7 @@ You dive beneath the water, and follow the cave.
 
 <<covered>>
 <<if $submissive gte 1150>>
-	"Pl-please d-don't stare," you say.
+	"P-please d-don't stare," you say.
 <<elseif $submissive lte 850>>
 	"Keep your eyes off," you say.
 <<else>>
@@ -234,10 +213,10 @@ Your voice echoes through the cave. The eyes wink and shut.
 
 
 <<if $struggle.done gte $struggle.number>>
-	<<link [[Next|Beach Cave Struggle End]]>><</link>>
+	<span id="next"><<link [[Next|Beach Cave Struggle End]]>><</link>></span>
 	<br>
 <<else>>
-	<<link [[Next|Beach Cave Struggle]]>><</link>>
+	<span id="next"><<link [[Next|Beach Cave Struggle]]>><</link>></span>
 	<br>
 <</if>>
 
@@ -271,7 +250,7 @@ Your voice echoes through the cave. The eyes wink and shut.
 :: Beach Cave Tentacle
 <<effects>>
 
-<<if $breastsize gte 3>>
+<<if $player.breastsize gte 3>>
 	The tentacle circles your <<breasts>>, squeezing them together and sliding over your nipples.
 <<else>>
 	The tentacle squeezes your chest, sliding over your <<breasts>>.
@@ -517,7 +496,7 @@ The presence draws closer.
 
 <<else>>
 	<<set $pursuit to 0>>
-	You shove the assailants away from you, clearing some space.
+	You shove the <<group>> away from you, clearing some space.
 	<<if $cave lt 50>>
 		<<tearful>> you dive beneath the water. You hear their muffled shouts as they feel around for you. But the water is too violent, and too dark. You slip away.
 	<<else>>
@@ -570,7 +549,7 @@ The presence draws closer.
 <</if>>
 
 <<statetentacles>>
-You count $tentacles.active tentacles surrounding you.
+
 
 <<effects>>
 <<effectstentacles>>

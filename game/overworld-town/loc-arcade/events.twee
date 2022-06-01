@@ -55,9 +55,9 @@
 		<br><br>
 		<<arcadeEndLink>>
 	<<elseif _chance gte 25>>
-		You begin to play against the <<person>>, but quickly find yourself falling behind. You wonder if there is a way to tilt the odds back in your favor.
+		You begin to play against the <<person>>, but quickly find yourself falling behind. You wonder if there is a way to tilt the odds back in your favour.
 		<br><br>
-		<<if ($worn.under_upper.name isnot "naked" or $worn.under_upper.name isnot "naked") and $exhibitionism gte 15>>
+		<<if ($worn.under_upper.name isnot "naked" or !$worn.under_upper.type.includes("naked")) and $exhibitionism gte 15>>
 			<<link [[Tease|Arcade fighting cabinet Rigging]]>><<set $phase to 1>><</link>><<exhibitionist2>>
 			<br>
 		<<elseif $exhibitionism gte 55>>
@@ -83,7 +83,7 @@
 <<set $outside to 0>><<set $location to "arcade">><<effects>>
 <<set $rng to random(0,100)>>
 <<if $phase is 1>>
-	<<if ($rng gte 50 and $worn.under_upper.name isnot "naked") or $worn.under_lower.name is "naked">>
+	<<if ($rng gte 50 and !$worn.under_upper.type.includes("naked")) or $worn.under_lower.name is "naked">>
 		You shift your <<allTops>> down slightly, revealing more of your $worn.under_upper.name to the <<person>>. <<He>> occasionally glances at you during the match, allowing you to easily beat <<him>>.
 	<<elseif $worn.under_lower.name isnot "naked">>
 		You shift your <<allBottoms>> down slightly, revealing more of your $worn.under_lower.name to the <<person>>. <<He>> frequently sneaks peeks, giving you an easy win.
@@ -136,7 +136,7 @@
 :: Arcade Classmate Braggart
 <<set $outside to 0>><<set $location to "arcade">><<effects>>
 <<if $phase is 1>>
-	You take a step back from the cabinet, never taking your hands off the controls. In one smooth motion, you lash out with your foot and plant a kick in the <<person>> stomach. <<He>> doubles over as you finish the level. The bystanders that were close to you laugh. <<status 1>><<gcool>>
+	You take a step back from the cabinet, never taking your hands off the controls. In one smooth motion, you lash out with your foot and plant a kick in the <<persons>> stomach. <<He>> doubles over as you finish the level. The bystanders that were close to you laugh. <<status 1>><<gcool>>
 <<elseif $phase is 2>>
 	You step away from the cabinet before your turn ends, allowing the <<person>> to take your place. "Good. Now stop wasting our time," <<he>> says as <<he>> inserts <<his>> own coin.
 <<elseif $phase is 3>>
@@ -149,7 +149,7 @@
 	<<elseif $rng gte 100 - Math.floor($handskill / 10)>>
 		You somehow end up winning the final stage, drawing some cheers from the crowd.
 		<br><br>
-		"You just got lucky, thats all." <<He>> whispers to you as you walk away.
+		"You just got lucky, that's all." <<He>> whispers to you as you walk away.
 	<<else>>
 		You end up losing at the final stage, drawing cheers from the crowd. The <<person>> laughs the loudest at you as you walk away. <<status -5>><<lcool>>
 	<</if>>

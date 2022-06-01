@@ -11,7 +11,7 @@
 <<set $estate.cards.wren_exposed_text to 0>>
 <<set $estate.cards.pc_exposed_text to 0>>
 <<set $estate.cards.pc_exposed_walk to 0>>
-<<set $estate.entrance to $args[0]>>
+<<set $estate.entrance to _args[0]>>
 <<set $estate.chaos to 0>>
 <</widget>>
 
@@ -21,29 +21,29 @@
 <</widget>>
 
 <<widget "estate_chaos_bar">>
-Chaos:
+혼란:
 <<statbarinverted $estate.chaos 100>>
 <div style="clear:both;"></div>
 <</widget>>
 
 <<widget "estate_chaos">>
-<<if $args[0]>>
-	<<set $estate.chaos += $args[0]>>
+<<if _args[0]>>
+	<<set $estate.chaos += _args[0]>>
 <</if>>
 <</widget>>
 
 <<widget "estate_stone_links">>
 <<if !$estate.vials>>
-	<<link [[Approach the shelf|Estate Stone Shelf]]>><</link>>
+	<<link [[선반에 다가간다|Estate Stone Shelf]]>><</link>>
 	<br>
 <</if>>
 <<if $exposed gte 1 or $estate.vials is "shattered">>
-	<<link [[Approach the Carriage|Estate Stone Carriage]]>><</link>>
+	<<link [[마차에 다가간다|Estate Stone Carriage]]>><</link>>
 	<br>
 <<elseif $estate.carriage_attempt isnot true>>
-	<<link [[Approach the Carriage|Estate Stone Carriage Stop]]>><<set $estate.carriage_attempt to true>><</link>>
+	<<link [[마차에 다가간다|Estate Stone Carriage Stop]]>><<set $estate.carriage_attempt to true>><</link>>
 	<br>
 <</if>>
-<<link [[Leave (0:03)|Estate Stone Leave]]>><<pass 3>><<endevent>><</link>>
+<<link [[떠난다 (0:03)|Estate Stone Leave]]>><<pass 3>><<endevent>><</link>>
 <br>
 <</widget>>

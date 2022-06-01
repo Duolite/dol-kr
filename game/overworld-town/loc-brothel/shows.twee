@@ -2,8 +2,8 @@
 
 <<set $outside to 0>><<set $location to "brothel">><<effects>>
 <<npc Briar>><<person1>>
-<<if $brothelshow is "flirt">>
-	<<set $brothelshow to "none">><<set $brothelshowdone to 1>>
+<<if $brothelshowdata.type is "flirt">>
+	<<startbrothelshow "flirt">>
 	Briar turns to you. "We're all set and ready. Just waiting for the star. Look out for the blue cap." You walk onto the stage. A single white light turns on above you, and the din of the dark room falls quiet. You can't see beyond the edge of the stage, but you can feel the eyes on you.
 	<br><br>
 	<<endevent>><<generate1>><<person1>>
@@ -16,9 +16,9 @@
 	<br>
 	<<link [[Point at a customer|Brothel Show Flirt]]>><<set $phase to 1>><</link>>
 	<br>
-<<elseif $brothelshow is "gangbang">>
+<<elseif $brothelshowdata.type is "gangbang">>
 	<<if $worn.upper.type.includes("school") and $worn.lower.type.includes("school")>>
-		<<set $brothelshow to "none">><<set $brothelshowdone to 1>>
+		<<startbrothelshow "gangbang">>
 		Briar turns and beholds you. "Cute. We're all set and ready. There's no script. Try to antagonise the audience a bit." You walk onto the stage. A single white light turns on above you, and the din of the dark room falls quiet. You can't see beyond the edge of the stage, but you can feel the eyes on you.
 		<br><br>
 		"Ladies and gentlemen!" Briar's voice rings throughout the room. "Today we'll witness the tale of the school <<girl>> who wandered into the wrong part of town." Cheers and whistles erupt from the audience. "<<pShes>> at the top of <<pher>> class, but has no experience outside <<pher>> little bubble. What will become of <<phim>>, I wonder?"
@@ -33,20 +33,62 @@
 		<br><br>
 		<<link [[Next|Brothel]]>><<endevent>><</link>>
 	<</if>>
-<<elseif $brothelshow is "pig">>
-	<<set $brothelshow to "none">><<set $brothelshowdone to 1>>
-	Briar turns to you. "We're all set and ready. Just waiting for the star." The cage beside <<him>> shakes. "The beast is a bit worked up, but I'm sure you can handle it." You walk onto the stage. A single white light turns on above you, and the din of the dark room falls quiet. You can't see beyond the edge of the stage, but you can feel the eyes on you.
-	<br><br>
+<<elseif $brothelshowdata.type is "pig">>
+	<<startbrothelshow "pig">>
 	<<endevent>>
-	<<beastNEWinit 1 pig>>
-	"Ladies and gentlemen!" Briar's voice rings throughout the room. "We have a special treat for you today. The tale of a <<girl>> lost in the woods, attacked by a ravenous beast!" You hear the cage open, and the <<beasttype>> walks onto the stage. A leash is attached to <<bhis>> neck and trails behind the set. It has slack enough to reach you. The audience cheers it on.
-	<<deviancy5>>
-	<br><br>
 
-	<<link [[Next|Brothel Show Pig]]>><<set $sexstart to 1>><</link>>
-	<br>
-<<elseif $brothelshow is "swarm">>
-	<<set $brothelshow to "none">><<set $brothelshowdone to 1>>
+	/* guarantees pig will be generated as a monster - regardless of monsterchance - if monsterpeople are possible and beasts are disabled; otherwise generated as usual */
+	<<if $bestialitydisable is "t" and $monsterchance gte 1 and ($hallucinations gte 1 or $monsterhallucinations is "f")>>
+		<<if $malechance gte random(1, 100)>>
+			<<if $cbchance gte random(1, 100)>>
+				<<beastNEWinit 1 pig m vagina monster>>
+			<<else>>
+				<<beastNEWinit 1 pig m penis monster>>
+			<</if>>
+		<<else>>
+			<<if $dgchance gte random(1, 100)>>
+				<<beastNEWinit 1 pig f penis monster>>
+			<<else>>
+				<<beastNEWinit 1 pig f vagina monster>>
+			<</if>>
+		<</if>>
+	<<else>>
+		<<beastNEWinit 1 pig>>
+	<</if>>
+
+	/* defaults to gangbang show if the player changed their beast settings, or has lost hallucinations since accepting the job */
+	<<if $bestialitydisable is "f" or $monster is 1>>
+		Briar turns to you. "We're all set and ready. Just waiting for the star." The cage beside <<nnpc_him "Briar">> shakes. "The beast is a bit worked up, but I'm sure you can handle it." You walk onto the stage. A single white light turns on above you, and the din of the dark room falls quiet. You can't see beyond the edge of the stage, but you can feel the eyes on you.
+		<br><br>
+
+		"Ladies and gentlemen!" Briar's voice rings throughout the room. "We have a special treat for you today. The tale of a <<girl>> lost in the woods, attacked by a ravenous beast!" You hear the cage open, and the <<beasttype>> walks onto the stage. A leash is attached to <<bhis>> neck and trails behind the set. It has slack enough to reach you. The audience cheers it on.
+		<<deviancy5>>
+		<br><br>
+
+		<<link [[Next|Brothel Show Pig]]>><<set $sexstart to 1>><</link>>
+		<br>
+	<<else>>
+		"What do you mean, booked? The whole pen?! What kind of pervert..." <<nnpc_He "Briar">> trails off into a series of expletives, before finally dismissing the worker. "Unbelievable."
+		<br><br>
+
+		<<nnpc_He "Briar">> storms onstage without so much as a glance at you. From backstage, you hear <<nnpc_his "Briar">> voice, followed by disappointed murmuring. Shortly after, Briar returns, flanked by a group of bemused stagehands. <<nnpc_He "Briar">> holds what appears to be an old school uniform.
+		<br><br>
+
+		"Change of plans." <<nnpc_He "Briar">> shoves the uniform into your arms. "Get changed and get your ass onstage. Now."
+		<br><br>
+
+		<<nnpc_His "Briar">> tone precludes argument. You do as you're told.
+		<br><br>
+
+		<<undress "brothelimprov">>
+		<<set $uppertemp to "init">><<upperwear 5>><<set $worn.upper.colour to either("black", "blue", "brown", "green", "pink", "purple", "red", "tangerine")>><<set $worn.upper.integrity /= 2>>
+		<<set $lowertemp to "init">><<if $player.gender_appearance is "m">><<lowerwear 60>><<else>><<lowerwear 61>><</if>><<set $worn.lower.colour to either("black", "blue", "brown", "green", "pink", "purple", "red", "tangerine")>><<set $worn.lower.integrity /= 2>>
+
+		<<link [[Next|Brothel Show Pig Improv]]>><</link>>
+		<br>
+	<</if>>
+<<elseif $brothelshowdata.type is "swarm">>
+	<<startbrothelshow "swarm">>
 	Briar turns to you. "We're all set and ready. Just waiting for the star."
 	<br><br>
 	<<generate2>><<generate3>>
@@ -73,8 +115,8 @@
 	<br><br>
 	<<endevent>>
 	<<link [[Next|Brothel Show Swarm]]>><<set $sexstart to 1>><<set $rng to random(1,100)>><</link>>
-<<elseif $brothelshow is "machine">>
-	<<set $brothelshow to "none">><<set $brothelshowdone to 1>>
+<<elseif $brothelshowdata.type is "machine">>
+	<<startbrothelshow "machine">>
 	<<endevent>><<generate1>><<generate2>><<person1>>
 	Briar turns to you. "We're all set and ready. Just waiting for the star. Remember, the audience want to see penetration." You walk onto the stage, and stand beside the waiting table. There are fewer in the audience than usual. Briar mentioned this being a private show. A single white light turns on above you, plunging the audience into darkness.
 	<br><br>
@@ -83,8 +125,8 @@
 
 	<<link [[Next|Brothel Show Machine Intro]]>><</link>>
 	<br>
-<<elseif $brothelshow is "horse">>
-	<<set $brothelshow to "none">><<set $brothelshowdone to 1>>
+<<elseif $brothelshowdata.type is "horse">>
+	<<startbrothelshow "horse">>
 	<<endevent>><<loadNPC 0 "saddled_steed">><<person1>>
 	Briar turns to you. "We're all set and ready, including your friend here."
 	<br><br>
@@ -93,7 +135,7 @@
 	<<else>>
 		Your $farm.steed steed produces an eager neigh.
 	<</if>>
-	You take <<bhim>> by the reins, and walk onto the bright stage. There's a table in the middle, covered with pick cushions. You can't see the audience in the dark, but you can hear their astonished and eager murmurings. It sounds packed.
+	You take <<bhim>> by the reins, and walk onto the bright stage. There's a table in the middle, covered with pink cushions. You can't see the audience in the dark, but you can hear their astonished and eager murmurings. It sounds packed.
 	<br><br>
 
 	"Ladies and gentlemen!" Briar announces to the audience. "Today we have a special treat. A young rider, fresh from winning a coveted trophy. It's only fitting that <<pshe>> reward the beast that gave <<phim>> victory."
@@ -170,7 +212,17 @@
 <</if>>
 
 :: Brothel Show Gangbang Sex Finish
-
+	/* Check variables before combat is reset */
+	<<set _extremeshow to "f">>
+	<<if $anusstate is "doublepenetrated" and $vaginastate isnot "penetrated" and $NPCList[$anustarget].penis is "anusdouble" and $NPCList[$anusdoubletarget].penis is "anusdouble">>
+		<<set _extremeshow to "da">>
+	<<elseif $anusstate is "doublepenetrated" and $vaginastate is "penetrated" and $NPCList[$anustarget].penis is "anusdouble" and $NPCList[$anusdoubletarget].penis is "anusdouble">>
+		<<set _extremeshow to "t">>
+	<<elseif $vaginastate is "doublepenetrated" and $anusstate isnot "penetrated" and $NPCList[$vaginatarget].penis is "vaginadouble" and $NPCList[$vaginadoubletarget].penis is "vaginadouble">>
+		<<set _extremeshow to "dv">>
+	<<elseif $vaginastate is "doublepenetrated" and $anusstate is "penetrated" and $NPCList[$vaginatarget].penis is "vaginadouble" and $NPCList[$vaginadoubletarget].penis is "vaginadouble">>
+		<<set _extremeshow to "t">>
+	<</if>>
 <<effects>>
 <<if $finish is 1>>
 	The <<person1>><<person>> steadies you while the others give you space. <<endevent>><<npc Briar>><<person1>>"Why are you stopping?" Briar storms onto the stage. <<He>> glares at you, then seems to remember where <<he>> is. <<He>> smiles at the audience. "Apologies my friends, but that will be all for today." <<He>> ushers you and the others off the stage.
@@ -191,13 +243,33 @@
 	<<clotheson>>
 	<<endcombat>>
 	<<npc Briar>><<person1>>Briar waits for you behind the stage. "Nice work," <<he>> says.
-	<<if $phaselast is 0>>
+	<<if $brothel_pig_improv is true>>
+		"For a rush job, at least."
+	<<elseif $phaselast is 0>>
 		"Everyone likes to see a stuck-up <<girl>> get ruined like that."
 	<<else>>
 		"I almost believed your performance myself."
 	<</if>>
-	<<He>> hands you the <<moneyGain 1000>> <<he>> promised.<<glove>>
-	<<npcincr Briar love 1>>
+	/* Double anal/vaginal/oral */
+	<<if _extremeshow is "da">>
+		<br>
+		<<He>> pauses, licking <<his>> lips thoughtfully. "Double anal, now that's real talent. The audience loved it. Keep up the great work; your elastic ass will make us both a lot of money."
+		<<He>> hands you the <<moneyGain 1000>> <<he>> promised, along with a bonus <<moneyGain 200>>.<<gglove>>
+		<<npcincr Briar love 2>>
+	<<elseif _extremeshow is "dv">>
+		<br>
+		<<He>> pauses, licking <<his>> lips thoughtfully. "Double pussy, now that's real talent. The audience loved it. Keep up the great work; your elastic cunt will make us both a lot of money."
+		<<He>> hands you the <<moneyGain 1000>> <<he>> promised, along with a bonus <<moneyGain 200>>.<<gglove>>
+		<<npcincr Briar love 2>>
+	<<elseif _extremeshow is "t">>
+		<br>
+		<<He>> beams. "Triple penetration, that's super starlet material. You had the crowd begging for more. Keep up the great work; your elastic fuck holes will make us both a lot of money."
+		<<He>> hands you the <<moneyGain 1000>> <<he>> promised, along with a bonus <<moneyGain 300>>.<<gglove>>
+		<<npcincr Briar love 2>>
+	<<else>>
+		<<He>> hands you the <<moneyGain 1000>> <<he>> promised.<<glove>>
+		<<npcincr Briar love 1>>
+	<</if>>
 	<br><br>
 <<elseif $enemyhealth lte 0>>
 	You knock the actors away from you and escape from the stage.
@@ -209,6 +281,10 @@
 	<br><br>
 <</if>>
 <<endevent>>
+<<if $brothel_pig_improv is true>>
+	<<unset $brothel_pig_improv>>
+	<<storeon "brothelimprov">>
+<</if>>
 You return to the dressing room.
 <br><br>
 <<link [[Next|Brothel Dressing Room]]>><</link>>
@@ -375,7 +451,7 @@ The <<beasttype>> trots behind the stage as Briar storms onto it.<<endevent>><<n
 <br><br>
 
 <<elseif $enemyarousal gte $enemyarousalmax>>
-<<famebestiality 20>>
+<<famebestiality 20 vid>>
 <<beastejaculation>>
 
 Someone behind the stage tugs on the leash and the <<beasttype>> walks off. <<tearful>> you climb to your feet, bow, and follow.
@@ -409,6 +485,18 @@ You return to the dressing room.
 
 <<link [[Next|Brothel Dressing Room]]>><</link>>
 
+:: Brothel Show Pig Improv
+<<set $outside to 0>><<set $location to "brothel">><<effects>>
+<<set $brothel_pig_improv to true>>
+
+"Our sincerest apologies for the delay," Briar announces to the audience. "In place of our scheduled performance, we'll witness the tale of the school <<girl>> who wandered into the wrong part of town." Cheers and whistles erupt from the audience. "<<pShes>> at the top of <<pher>> class, but has no experience outside <<pher>> little bubble. What will become of <<phim>>, I wonder?"
+<<endevent>><<generate1>><<generate2>><<generate3>><<generate4>><<person1>>Four of Briar's other employees climb on beside you. They face each other and feign talking, pretending not to notice you and waiting for your lead.
+<br><br>
+<<link [[Stuck-up|Brothel Show Gangbang]]>><<set $phase to 0>><</link>>
+<br>
+<<link [[Lost and scared|Brothel Show Gangbang]]>><<set $phase to 1>><</link>>
+<br>
+
 :: Brothel Show Swarm
 <<if $sexstart is 1>>
 	<<set $cumbucket to 0>>
@@ -434,7 +522,7 @@ You return to the dressing room.
 	<<if $timer gte 17>>
 		You see Briar pushing through the audience.
 	<<elseif $timer gte 10>>
-		You see Briar pushing through the audience, occasoinally stopping to address the crowd.
+		You see Briar pushing through the audience, occasionally stopping to address the crowd.
 	<<elseif $timer gte 6>>
 		Briar seems to be asking for tips for you.
 	<<elseif $timer gte 3>>
@@ -472,6 +560,10 @@ You return to the dressing room.
 	<<set $cumbucket to 0>>
 	<<set $timer to 6>>
 	<<fertilise>>
+	<<set _rng to random(5,10)>>
+	<<for _i to 0; _i lt _rng; _i++>>
+		<<recordVaginalSperm "pc" "Cum bucket" "human">>
+	<</for>>
 <</if>>
 
 <<if $face isnot "covered">>
@@ -487,7 +579,7 @@ You return to the dressing room.
 <<if $timer lte 0>>
 	<span id="next"><<link [[Next|Brothel Show Swarm Finish]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link "Next">><<script>>state.display(state.active.title, null)<</script>><</link>></span><<nexttext>>
+	<span id="next"><<link [[Next|Brothel Show Swarm]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: Brothel Show Swarm Finish
@@ -529,6 +621,10 @@ The machine can't strip you, so Briar's employees rush forward to help.
 A red light glows from the front as it scans you. It moves its phallus in front of your <<genitals>>.
 <br><br>
 
+<<saveNPC 0 "brothel_machine_0">>
+<<saveNPC 1 "brothel_machine_1">>
+<<endevent>>
+
 <<strip>>
 <<link [[Next|Brothel Show Machine]]>><<set $sexstart to 1>><</link>>
 <br>
@@ -541,11 +637,11 @@ A red light glows from the front as it scans you. It moves its phallus in front 
 	<<neutral 1>>
 
 	<<set $machine_health to 10>><<set $machine_ammo to 8>>
-	<<if $vaginaexist is 1 and $analdisable is "f">>
+	<<if $player.vaginaExist and $analdisable is "f">>
 		<<machine_init vaginal anal>>
 		<<set $machine.vaginal.armed to 1>>
 		<<set $machine.anal.armed to 1>>
-	<<elseif $vaginaexist is 1>>
+	<<elseif $player.vaginaExist>>
 		<<machine_init vaginal>>
 		<<set $machine.vaginal.armed to 1>>
 	<<else>>
@@ -574,14 +670,19 @@ A red light glows from the front as it scans you. It moves its phallus in front 
 <<machine_actions>>
 
 <<if $machine.number lte 0 or $finish is 1>>
-	<<link [[Next|Brothel Show Machine End]]>><</link>>
+	<span id="next"><<link [[Next|Brothel Show Machine End]]>><</link>></span><<nexttext>>
 <<else>>
-	<<link [[Next|Brothel Show Machine]]>><</link>>
+	<span id="next"><<link [[Next|Brothel Show Machine]]>><</link>></span><<nexttext>>
 <</if>>
 
 
 :: Brothel Show Machine End
 <<effects>>
+
+<<loadNPC 0 "brothel_machine_0">>
+<<loadNPC 1 "brothel_machine_1">>
+<<clearNPC "brothel_machine_0">>
+<<clearNPC "brothel_machine_1">>
 
 <<if $anusfucked is 1 or $vaginafucked is 1 or $penisfucked is 1>>
 	The audience applaud again as the machine powers down.
@@ -605,7 +706,7 @@ A red light glows from the front as it scans you. It moves its phallus in front 
 	<<machine_end>>
 
 	<<npc Briar>><<person1>>
-	Briar climbs off the stage. "disappointing," <<he>> says. "The damage isn't severe, but that isn't what our audience paid for. Try to give a proper show next time."
+	Briar climbs off the stage. "Disappointing," <<he>> says. "The damage isn't severe, but that isn't what our audience paid for. Try to give a proper show next time."
 	<br><br>
 <</if>>
 
@@ -625,7 +726,7 @@ You return to the dressing room.
 Now closer to the audience, you can make out some of the comments.
 <br>
 <<if random(1, 2) is 2>>
-	"There's no way <<pshes>> gonna do it.""
+	"There's no way <<pshes>> gonna do it."
 <<else>>
 	"I can't believe it."
 <</if>>
@@ -660,7 +761,7 @@ Now closer to the audience, you can make out some of the comments.
 	<<if $NPCList[0].penis isnot "none">>
 		"Do you think <<pshe>>'ll cry when it goes in?"
 	<<else>>
-		"<<pshes>> gonna be crushed by the weight."
+		"<<pShes>> gonna be crushed by the weight."
 	<</if>>
 <</if>>
 <br>
@@ -684,6 +785,8 @@ The $farm.steed steed mounts you, and the audiences' excitement reaches a fevere
 	<<consensual>>
 	<<set $consensual to 1>>
 	<<neutral 1>>
+	<<beastCombatInit>>
+	<<farm_trust horses>>
 
 	<<set $NPCList[0].stance to "top">>
 	<<if $NPCList[0].penis isnot "none">>
@@ -691,14 +794,15 @@ The $farm.steed steed mounts you, and the audiences' excitement reaches a fevere
 	<<else>>
 		<<set $position to "missionary">>
 	<</if>>
-	<<farm_trust horses>>
-	<<beastCombatInit>>
+	<<set $position_lock to 1>>
 <</if>>
 
 <<effects>>
 <<effectsman>>
-<<audience>>
+<br>
 <<beast $enemyno>>
+<br><br>
+<<audience>>
 <br><br>
 
 <<stateman>>
@@ -719,7 +823,7 @@ The $farm.steed steed mounts you, and the audiences' excitement reaches a fevere
 <<effects>>
 
 <<if $enemyarousal gte $enemyarousalmax>>
-	<<famebestiality 30>>
+	<<famebestiality 30 pic>>
 	<<beastejaculation>>
 
 	The crowd erupts once again. The <<beasttype>> steps away from you, satisfied but agitated by the sudden noise. You hold <<bhis>> reins as you turn to face the crowd, still wet with lewd fluids, and bow.
@@ -731,7 +835,7 @@ The $farm.steed steed mounts you, and the audiences' excitement reaches a fevere
 	<<npc Briar>><<generate2>><<person1>>Briar waits for you behind the stage. "Nice work," <<he>> says as a <<person2>><<person>> takes the reins from your hand. Briar hands you <<moneyGain 2000>>.<<glove>>
 	<<npcincr Briar love 1>>
 	<br><br>
-	
+
 
 <<elseif $enemyhealth lte 0>>
 
@@ -739,7 +843,7 @@ The $farm.steed steed mounts you, and the audiences' excitement reaches a fevere
 	The <<beasttype>> runs away from you in fright. The audience cheers and you follow <<bhim>> off the stage.
 	<br><br>
 
-	The steed stands in the corner, cowed but restless, as one of Briar's goons tries to calm <<bhim>>. 
+	The steed stands in the corner, cowed but restless, as one of Briar's goons tries to calm <<bhim>>.
 	<br><br>
 
 

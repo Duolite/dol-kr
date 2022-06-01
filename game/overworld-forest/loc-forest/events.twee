@@ -1,5 +1,5 @@
 :: Forest Clearing
-<<set $outside to 1>><<set $location to "forest">><<effects>>
+<<location "forest">><<effects>>
 
 <<if $foresthunt gte 1>>
 <<set $foresthunt += 1>>
@@ -21,7 +21,7 @@
 <br>
 
 :: Forest Mushrooms
-<<set $outside to 0>><<set $location to "forest">><<effects>>
+<<location "forest">><<effects>>
 
 당신은 버섯 중 하나를 먹는다. 쓴 맛이 나지만, 원기가 솟아오른다.
 <br><br>
@@ -29,7 +29,7 @@
 <<link [[다음|Forest]]>><<set $eventskip to 1>><</link>>
 
 :: Forest Mushrooms2
-<<set $outside to 0>><<set $location to "forest">><<effects>>
+<<location "forest">><<effects>>
 
 당신은 버섯 중 하나를 먹는다. 달콤한 맛이 난다. 당신은 조금 진정됨과 동시에 이상한 열이 오르는 것을 느낀다.
 <br><br>
@@ -83,18 +83,45 @@
 
 :: Forest Wolf Molestation
 <<if $molestationstart is 1>>
-<<set $molestationstart to 0>>
-<<controlloss>>
-<<violence 1>>
-<<neutral 1>>
-<<molested>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
 	<<beastCombatInit>>
 
-<<set $enemyhealth to 600>><<set $enemyhealthmax to 600>><<set $enemytrust -= 40>>
+	<<set $enemyhealth to 600>><<set $enemyhealthmax to 600>><<set $enemytrust -= 40>>
 <</if>>
 
 <<effects>>
 <<effectsman>>
+
+<<if $alarm is 1 and $forest lte 20 and $gwylan_aborted isnot 2>>
+	<<set $gwylan_aborted to 2>>
+	<<if $forest_shop_intro isnot 1 and $gwylan_rescue isnot 1>>
+		You see a mousy <<nnpc_gendery "Gwylan">> burst through the treeline, alarmed by your shout. <<nnpc_He "Gwylan">> takes one look at the wolf, <span class="red">then turns and runs away.</span>
+		<br><br>
+	<<else>>
+		You see Gwylan burst through the treeline, alarmed by your shout. <<nnpc_He "Gwylan">> takes one look at the wolf, <span class="red">then turns and runs away.</span>
+	<br><br>
+	<</if>>
+<<elseif $alarm is 1 and $forest gte 21>>
+	<<if ($loveInterest.primary is "Eden" or $loveInterest.secondary is "Eden")>>
+		<<if $gwylan_rescue is 1>>
+			<span class="red">You're too deep into the forest for Gwylan to hear you, and Eden must not be in the area.</span>
+		<<else>>
+			<span class="red">You're too far from the town for anyone to hear you, and Eden must not be in the area.</span>
+		<</if>>
+	<<else>>
+		<<if $gwylan_rescue is 1>>
+			<span class="red">You're too deep into the forest for Gwylan to hear you.</span>
+		<<else>>
+			<span class="red">You're too far from the town for anyone to hear you.</span>
+		<</if>>
+	<</if>>
+	<br><br>
+<</if>>
+
 <br>
 <<beast $enemyno>>
 <br><br>
@@ -112,7 +139,7 @@
 <</if>>
 
 :: Forest Wolf Molestation Finish
-<<set $outside to 1>><<set $location to "forest">><<effects>>
+<<location "forest">><<effects>>
 
 <<if $enemyarousal gte $enemyarousalmax>>
 
@@ -136,7 +163,7 @@
 	<<if $monster is 1>>
 		"You. With me," <<bhe>> barks. You're not sure if you have any choice. With a display of force, <<bhe>> hauls you over one shoulder.
 	<<else>>
-			<<bHePost "은">> 당신의 목덜미를 잡는다.
+		<<bHePost "은">> 당신의 목덜미를 잡는다.
 	<</if>>
 	<<bHePost "은">> 당신을 어딘가로 데려가고 싶어 한다.
 <br><br>
@@ -149,9 +176,9 @@
 <<elseif $enemyhealth lte 0>><<set $foresthunt to 0>>
 
 <<if $monster is 1>>
-	Despite <<bhis>> show of force, you manage to overcome it. You wrestle free from the Black Wolf's grasp. "Trouble," <<bhe>> growls. "Weren't easy prey."<<bHe>> flees into the forest, tail between <<bhis>> legs. You feel proud, realizing it was no easy feat defeating something nearly twice your size.
+	Despite <<bhis>> show of force, you manage to overcome it. You wrestle free from the Black Wolf's grasp. "Trouble," <<bhe>> growls. "Weren't easy prey." <<bHe>> flees into the forest, tail between <<bhis>> legs. You feel proud, realising it was no easy feat defeating something nearly twice your size.
 <<else>>
-	녀석의 힘에도 불구하고, 당신은 <<bhePost "을">> 가까스로 물리친다. <<bHePost "은">> 다리 사이에 꼬리를 넣고 숲 속으로 도망갑니다.
+	녀석의 힘에도 불구하고, 당신은 <<bhePost "을">> 가까스로 물리친다. <<bHePost "은">> 다리 사이에 꼬리를 넣고 숲 속으로 도망간다.
 <</if>>
 <br><br>
 
@@ -174,7 +201,7 @@
 <<else>>
 	The wolf effortlessly bounds through the forest, and before long arrives at a cave, which <<bhe>> enters without slowing. <<bHe>> dumps you on the cold stone.
 <</if>>
-Six pair of eyes stare at you through the dim light. The pack advances on you.
+Six pairs of eyes stare at you through the dim light. The pack advances on you.
 <br><br>
 <<endevent>>
 <<beastNEWinit 6 wolf>>
@@ -194,102 +221,153 @@ Six pair of eyes stare at you through the dim light. The pack advances on you.
 <</if>>
 <<effects>>
 <<effectsman>><<man>>
+
+<<if $alarm is 1 and $forest lte 20 and $gwylan_aborted isnot 1>>
+	<<set $gwylan_aborted to 1>>
+	<<if $forest_shop_intro isnot 1 and $gwylan_rescue isnot 1>>
+		You see a mousy <<nnpc_gendery "Gwylan">> burst through the treeline, alarmed by your shout. <<nnpc_He "Gwylan">> takes one look at the assailant, <span class="red">then turns and runs away.</span>
+		<br><br>
+	<<else>>
+		You see Gwylan burst through the treeline, alarmed by your shout. <<nnpc_He "Gwylan">> takes one look at the assailant, <span class="red">then turns and runs away.</span>
+	<br><br>
+	<</if>>
+<<elseif $alarm is 1 and $forest gte 21>>
+	<<if $gwylan_rescue is 1>>
+		<span class="red">You're too deep into the forest for Gwylan to hear you.</span>
+	<<else>>
+		<span class="red">You're too far from the town for anyone to hear you.</span>
+	<</if>>
+	<br><br>
+<</if>>
+
 <<stateman>>
 <br><br>
 <<actionsman>>
-<<if $enemyhealth lte 0>>
-	<span id="next"><<link [[다음|Forest Hunter Molestation Finish]]>><</link>></span><<nexttext>>
-<<elseif $enemyarousal gte $enemyarousalmax>>
+<<if $enemyhealth lte 0 or $enemyarousal gte $enemyarousalmax>>
 	<span id="next"><<link [[다음|Forest Hunter Molestation Finish]]>><</link>></span><<nexttext>>
 <<else>>
 	<span id="next"><<link [[다음|Forest Hunter Molestation]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: Forest Hunter Molestation Finish
-<<set $outside to 1>><<set $location to "forest">><<effects>>
+<<location "forest">><<effects>>
 
 <<if $enemyarousal gte $enemyarousalmax>>
 
-<<ejaculation>>
+	<<ejaculation>>
 	<<if $hunterintro is 1>>
-	"너를 다시 잡을 수 있을 줄 알았어. 자, 집에 가자." <<hePost "은">> <<hisPost "의">> 가방에서 밧줄을 길게 뽑는다. <<hePost "은">> 당신을 묶을 것이다!
+		에덴은 <<if $enemyanger gte ($enemyangermax / 5) * 2>>당신을 노려보며 으르렁거린다,<<else>>히죽거리며 말한다,<</if>> "너를 다시 잡을 수 있을 줄 알았어. 자, 집에 데려가 주지."
 	<<else>>
 		<<if $enemyanger gte 20>>
-		"넌 건방지구나. 맘에 들어." 사냥꾼은 <<hisPost "의">> 가방에서 밧줄을 길게 뽑는다. 당신은 꼼짝 못하게 될 것이다!
+		그 사냥꾼은 히죽거린다. "너는 참 기운찬 녀석이야. 나는 그게 좋아."
 		<<else>>
-		"넌 착하구나. 그렇지? 너는 나와 함께 가는게 좋을거야. 여기에 혼자 두는 건 좋지 않아." 사냥꾼은 <<hisPost "의">> 가방에서 밧줄을 길게 뽑는다. 당신은 꼼짝 못하게 될 것이다!
+		그 사냥꾼은 미소짓는다. "너는 점잖은 녀석이야, 그렇지 않아? 너를 나와 함께 데려가는 게 좋을 것 같아, 너를 여기 밖에 홀로 두고 갈 수 없어."
 		<</if>>
 	<</if>>
+	<<HePost "은">> <<hisPost "의">> 가방에서 밧줄을 길게 뽑는다. <<hePost "은">> 당신을 묶을 것이다!
 
-<br><br>
+	<br><br>
 
-<<link [[저항하지 않는다|Forest Hunter Intro]]>>/*'*/<<endcombat>><</link>>
-<br>
-<<link [[Resist|Forest Hunter Resist Molestation]]>><<set $enemyanger += 200>><<set $molestationstart to 1>><</link>>
-<br>
+	<<link [[저항하지 않는다|Forest Hunter Intro]]>>/*'*/<<endcombat>><</link>>
+	<br>
+	<<link [[저항한다|Forest Hunter Resist Molestation]]>><<set $enemyanger += 200>><<set $molestationstart to 1>><</link>>
+	<br>
 <<elseif $enemyhealth lte 0>><<set $foresthunt to 0>>
 
-<<hisPost "의">> 힘에도 불구하고, 당신은 간신히 사냥꾼을 동요시킵니다. 당신은 노리고 있던 기회를 얻는다. <<tearful>> 당신은 숲 속으로 탈출한다.
-<br><br>
+	<<hisPost "의">> 힘에도 불구하고, 당신은 간신히 사냥꾼을 동요시킨다. 당신은 노리고 있던 기회를 얻는다. <<tearful>> 당신은 숲 속으로 탈출한다.
+	<br><br>
 
-<<clotheson>>
-<<endcombat>>
+	<<clotheson>>
+	<<endcombat>>
 
-<<link [[다음|Forest]]>><<set $stress -= 1000>><<set $eventskip to 1>><</link>>
-<br>
+	<<link [[다음|Forest]]>><<set $stress -= 1000>><<set $eventskip to 1>><</link>>
+	<br>
 <</if>>
 
 :: Forest Hunter Intro
-<<neckwear 1>><<set $forestleashed to 1>>
+<<leash 21>>
 
-<<set $outside to 0>><<set $location to "forest">><<effects>>
+<<location "cabin">><<effects>>
+
+<<if $upperoff isnot 0>>
+	<<upperruined>>
+<</if>>
+<<if $loweroff isnot 0>>
+	<<lowerruined>>
+<</if>>
+<<if $underloweroff isnot 0>>
+	<<underlowerruined>>
+<</if>>
+<<if $underupperoff isnot 0>>
+	<<underupperruined>>
+<</if>>
 
 <<npc Eden>><<initnpc Eden>><<person1>>
 
-사냥꾼은 당신의 팔과 다리를 능숙하게 묶은 다음 당신을 <<hisPost "의">> 어깨 위로 들어 올려 숲으로 대려간다.
+<<if $hunterintro is 1>>Eden<<else>>The hunter<</if>> deftly ties your arms and legs together, then hoists you over <<his>> shoulder, before carrying you into the forest.
 <br><br>
 
-당신은 곧 오두막에 도착한다. 내부는 멋진 싱글룸이다. <<hePost "은">> 당신을 바닥에 떨어뜨리고 목에 목줄(collar)을 채운다. It shuts with a click. <<He>> stands over you, and attaches a leash to your collar.
+<<if $hunterintro is 1>>
+	당신은 곧 오두막에 도착하고, 에덴은 당신을 안으로 들고 간다.
+<<else>>
+	당신은 곧 오두막에 도착한다. 안에는 검소한 방 하나가 있다.
+<</if>>
+<<He_nun>> 당신을 딱딱한 바닥에 떨어뜨리고 목에 개목걸이를 채운다. 그것은 찰칵 소리와 함께 잠긴다. <<He_nun>> 당신 위에 서서, 목줄을 개목걸이에 연결한다. <<He_nun>> 그러더니 밧줄을 풀어, 당신의 팔과 다리를 풀어준다.
 <br><br>
 
 <<if $hunterintro isnot 1>><<set $hunterintro to 1>>
-"You're lucky I found you," <<he>> says. "The woods are dangerous, you'd have gotten hurt. My name is Eden." <<He>> pauses, as if unsure about something. <<He>> seems different to when <<he>> captured you, softer, despite you now being bound and collared at <<his>> feet.
-<br><br>
+	"내가 너를 찾아서 다행이야," <<he_ga>> 말한다. "숲은 위험해, 너는 다칠 수도 있었어. 내 이름은 에덴이야." <<He_nun>> 마치 무언가 불확실하다는 듯이, 잠시 말을 멈춘다. 당신이 지금 <<his_yi>> 발 밑에서 묶여서 개목걸이를 차고 있음에도 불구하고, <<He_nun>> <<he_ga>> 당신을 잡았을 때와는 다르게, 더 부드럽게, 보인다.
+	<br><br>
 
-<<He>> continues. "I've become self-sufficient out here. But it's lonely, sometimes. If I protect and provide for you, will you give me comfort and company?" You don't know if you really have a choice.
-<br><br>
+	<<He_ga>> 계속 말한다. "나는 여기에서 자급자족하고 있지. 하지만 가끔, 외로울 때가 있어. 만약 내가 너를 보호해주고 부양해 준다면, 너는 내게 위로와 말상대가 되어 주겠어?" 당신은 정말로 당신에게 선택의 여지가 있는지 확신하지 못한다.
+	<br><br>
 
-<<link [[Nod|Forest Hunter Nod]]>><</link>>
-<br>
-<<link [[Refuse|Forest Hunter Refuse]]>><</link>>
-<br>
+	<<link [[끄덕인다|Forest Hunter Nod]]>><</link>>
+	<br>
+	<<link [[거절한다|Forest Hunter Refuse]]>><</link>>
+	<br>
 <<else>>
-"집에 온 걸 환영해. 이제, 벌 받을 시간이야." <<HePost "은">> 무릎 위에 당신을 엎드리게 한다.
-<br><br>
+	"집에 온 걸 환영해. 이제, 벌 받을 시간이야." <<HePost "은">> 무릎 위에 당신을 엎드리게 한다.
+	<br><br>
 
-<<link [[다음|Forest Hunter Punishment]]>><<set $molestationstart to 1>><</link>>
-<br>
+	<<link [[다음|Forest Hunter Punishment]]>><<set $molestationstart to 1>><</link>>
+	<br>
 <</if>>
 
 :: Forest Hunter Resist Molestation
+
 <<if $molestationstart is 1>>
-<<set $molestationstart to 0>>
-<<set $enemyarousal to 0>>
+	<<set $molestationstart to 0>>
+	<<set $enemyarousal to 0>>
 <</if>>
 
 <<effects>>
 
 <<effectsman>><<man>>
 
+<<if $alarm is 1 and $forest lte 20 and $gwylan_aborted isnot 1>>
+	<<set $gwylan_aborted to 1>>
+	<<if $forest_shop_intro isnot 1 and $gwylan_rescue isnot 1>>
+		You see a mousy <<nnpc_gendery "Gwylan">> burst through the treeline, alarmed by your shout. <<nnpc_He "Gwylan">> takes one look at the assailant, <span class="red">then turns and runs away.</span>
+		<br><br>
+	<<else>>
+		You see Gwylan burst through the treeline, alarmed by your shout. <<nnpc_He "Gwylan">> takes one look at the assailant, <span class="red">then turns and runs away.</span>
+	<br><br>
+	<</if>>
+<<elseif $alarm is 1 and $forest gte 21>>
+	<<if $gwylan_rescue is 1>>
+		<span class="red">You're too deep into the forest for Gwylan to hear you.</span>
+	<<else>>
+		<span class="red">You're too far from the town for anyone to hear you.</span>
+	<</if>>
+	<br><br>
+<</if>>
+
 <<stateman>>
 <br><br>
 <<actionsman>>
 
-<<if $enemyhealth lte 0>>
-	<span id="next"><<link [[다음|Forest Hunter Resist Molestation Finish]]>><</link>></span><<nexttext>>
-<<elseif $enemyarousal gte $enemyarousalmax>>
-	<span id="next"><<link [[다음|Forest Hunter Resist Molestation Finish]]>><</link>></span><<nexttext>>
-<<elseif $pain gte 100 and $willpowerpain is 0>>
+<<if $enemyhealth lte 0 or $enemyarousal gte $enemyarousalmax or ($pain gte 100 and $willpowerpain is 0)>>
 	<span id="next"><<link [[다음|Forest Hunter Resist Molestation Finish]]>><</link>></span><<nexttext>>
 <<else>>
 	<span id="next"><<link [[다음|Forest Hunter Resist Molestation]]>><</link>></span><<nexttext>>
@@ -297,7 +375,7 @@ Six pair of eyes stare at you through the dim light. The pack advances on you.
 
 :: Forest Hunter Resist Molestation Finish
 
-<<set $outside to 1>><<set $location to "forest">><<effects>>
+<<location "forest">><<effects>>
 <<if $enemyarousal gte $enemyarousalmax>>
 	<<ejaculation>>
 	사냥꾼은 헐떡인다. 빨리 사정할 것으로는 생각되지 않는다. <<hePost "이">> 제어할 수 있는 범주를 뛰어넘은 것처럼 보이고, 당신은 노리고 있던 기회를 얻는다. <<tearful>> 당신은 숲 속으로 탈출한다.
@@ -308,46 +386,62 @@ Six pair of eyes stare at you through the dim light. The pack advances on you.
 	<br>
 <<elseif $enemyhealth lte 0>>
 	<<set $foresthunt to 0>>
-	<<hisPost "의">> 힘에도 불구하고, 당신은 간신히 사냥꾼을 동요시킵니다. 당신은 노리고 있던 기회를 얻는다. <<tearful>> 당신은 숲 속으로 탈출한다.
+	<<hisPost "의">> 힘에도 불구하고, 당신은 간신히 사냥꾼을 동요시킨다. 당신은 노리고 있던 기회를 얻는다. <<tearful>> 당신은 숲 속으로 탈출한다.
 	<br><br>
 	<<clotheson>>
 	<<endcombat>>
 	<<link [[다음|Forest]]>><<set $stress -= 1000>><<set $eventskip to 1>><<set $eventskip to 1>><</link>>
 	<br>
 <<else>>
-	<<his>> 폭행에 당신은 구타당하고 상처를 입습니다. <<hePost "이">> 바닥에서 <<hisPost "의">> 로프를 찾아낼 때, 당신은 무력해진다.
+	<<his_yi>> 폭행에 당신은 구타당하고 상처를 입는다. <<hePost "이">> 바닥에서 <<hisPost "의">> 로프를 찾아낼 때, 당신은 무력해진다.
 	<br><br>
-	<<if $upperoff isnot 0>>
-		<<upperruined>>
-	<</if>>
-	<<if $loweroff isnot 0>>
-		<<lowerruined>>
-	<</if>>
-	<<if $underloweroff isnot 0>>
-		<<underlowerruined>>
-	<</if>>
-	<<if $underupperoff isnot 0>>
-		<<underupperruined>>
-	<</if>>
 	<<link [[다음|Forest Hunter Intro]]>><<endcombat>><</link>>
 	<br>
 <</if>>
 
 :: Forest Wolf Molestation Resist
+
 <<if $molestationstart is 1>>
-<<set $molestationstart to 0>>
-<<controlloss>>
-<<violence 1>>
-<<neutral 1>>
-<<molested>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
 	<<npc "Black Wolf">>
 	<<beastCombatInit>>
 
-/*<<beastNNPCinit>>*/<<set $enemyhealth to 600>><<set $enemyhealthmax to 600>><<set $enemytrust -= 40>><<set $enemyanger += 200>>
+	/*<<beastNNPCinit>>*/<<set $enemyhealth to 600>><<set $enemyhealthmax to 600>><<set $enemytrust -= 40>><<set $enemyanger += 200>>
 <</if>>
 
 <<effects>>
 <<effectsman>>
+
+<<if $alarm is 1 and $forest lte 20 and $gwylan_aborted isnot 2>>
+	<<set $gwylan_aborted to 2>>
+	<<if $forest_shop_intro isnot 1 and $gwylan_rescue isnot 1>>
+		You see a mousy <<nnpc_gendery "Gwylan">> burst through the treeline, alarmed by your shout. <<nnpc_He "Gwylan">> takes one look at the wolf, <span class="red">then turns and runs away.</span>
+		<br><br>
+	<<else>>
+		You see Gwylan burst through the treeline, alarmed by your shout. <<nnpc_He "Gwylan">> takes one look at the wolf, <span class="red">then turns and runs away.</span>
+	<br><br>
+	<</if>>
+<<elseif $alarm is 1 and $forest gte 21>>
+	<<if ($loveInterest.primary is "Eden" or $loveInterest.secondary is "Eden")>>
+		<<if $gwylan_rescue is 1>>
+			<span class="red">You're too deep into the forest for Gwylan to hear you, and Eden must not be in the area.</span>
+		<<else>>
+			<span class="red">You're too far from the town for anyone to hear you, and Eden must not be in the area.</span>
+		<</if>>
+	<<else>>
+		<<if $gwylan_rescue is 1>>
+			<span class="red">You're too deep into the forest for Gwylan to hear you.</span>
+		<<else>>
+			<span class="red">You're too far from the town for anyone to hear you.</span>
+		<</if>>
+	<</if>>
+	<br><br>
+<</if>>
+
 <br>
 <<beast $enemyno>>
 <br><br>
@@ -368,7 +462,7 @@ Six pair of eyes stare at you through the dim light. The pack advances on you.
 
 :: Forest Wolf Molestation Resist Finish
 
-<<set $outside to 1>><<set $location to "forest">><<effects>>
+<<location "forest">><<effects>>
 <<if $enemyarousal gte $enemyarousalmax>>
 	<<beastejaculation>>
 	두 번째에는 짐승이 너무 많아 벅찼고, 당신은 의식을 잃고 잠에 빠져들었다.
@@ -424,9 +518,9 @@ Six pair of eyes stare at you through the dim light. The pack advances on you.
 
 :: Forest Avoid
 
-<<set $outside to 0>><<set $location to "forest">><<effects>>
+<<location "forest">><<effects>>
 <<if $phase is 0>>
-	당신은 오솔길을 따라 숲 속으로 들어갑니다. 당신은 두 사람을 피해 가나, 당신의 여정은 조금 느려진다.
+	당신은 오솔길을 따라 숲 속으로 들어간다. 당신은 두 사람을 피해 가나, 당신의 여정은 조금 느려진다.
 	<br><br>
 <<elseif $phase is 1>>
 	<<generate1>><<generate2>>A <<person1>><<person>> and <<person2>><<person>> come into view. They eye you up as they walk past.
@@ -457,18 +551,36 @@ Six pair of eyes stare at you through the dim light. The pack advances on you.
 	<<molested>>
 
 	<<generate1>><<generate2>><<maninit>>
-	<<person1>><<personPost "과">> <<person2>><<personPost "이">> 시야에 들어온다. <<person1>> 그들이 지나갈 때, 그들은 손을 뻗어 당신을 붙잡습니다!
+	<<person1>><<personPost "과">> <<person2>><<personPost "이">> 시야에 들어온다. <<person1>> 그들이 지나갈 때, 그들은 손을 뻗어 당신을 붙잡는다!
 	<br><br>
-	<<if $loveInterest>>
-		<<if ($loveInterest.primary is "Eden" or $loveInterest.secondary is "Eden") and $location is "forest" and random(1, 2) is 2>>
-			<<set $rescue to 1>>
-		<</if>>
+	<<if ($loveInterest.primary is "Eden" or $loveInterest.secondary is "Eden") and (random(1, 2) is 2 or $eden_rescue isnot 1) and $forest lte 20>>
+		<<set $rescue to 2>>
+	<<elseif (($loveInterest.primary is "Eden" or $loveInterest.secondary is "Eden") and (random(1, 2) is 2 or $eden_rescue isnot 1)) or $forest lte 20>>
+		<<enable_rescue>>
 	<</if>>
 <</if>>
 
 <<effects>>
 
 <<effectsman>><<man>>
+
+<<if $alarm is 1 and $rescue is 0>>
+	<<set $alarm to 0>>
+	<<if ($loveInterest.primary is "Eden" or $loveInterest.secondary is "Eden")>>
+		<<if $gwylan_rescue is 1>>
+			<span class="red">You're too deep into the forest for Gwylan to hear you, and Eden must not be in the area.</span>
+		<<else>>
+			<span class="red">You're too far from the town for anyone to hear you, and Eden must not be in the area.</span>
+		<</if>>
+	<<else>>
+		<<if $gwylan_rescue is 1>>
+			<span class="red">You're too deep into the forest for Gwylan to hear you.</span>
+		<<else>>
+			<span class="red">You're too far from the town for anyone to hear you.</span>
+		<</if>>
+	<</if>>
+	<br><br>
+<</if>>
 
 <<stateman>>
 <br><br>
@@ -478,6 +590,8 @@ Six pair of eyes stare at you through the dim light. The pack advances on you.
 	<span id="next"><<link [[다음|Forest Molestation Finish]]>><</link>></span><<nexttext>>
 <<elseif $enemyarousal gte $enemyarousalmax>>
 	<span id="next"><<link [[다음|Forest Molestation Finish]]>><</link>></span><<nexttext>>
+<<elseif $rescue is 2 and $alarm is 1>>
+	<span id="next"><<link [[다음|Forest Coop Rescue]]>><<set $phase to 0>><</link>></span><<nexttext>>
 <<elseif $rescue is 1 and $alarm is 1>>
 	<span id="next"><<link [[다음|Forest Molestation Finish]]>><</link>></span><<nexttext>>
 <<else>>
@@ -485,12 +599,12 @@ Six pair of eyes stare at you through the dim light. The pack advances on you.
 <</if>>
 
 :: Forest Molestation Finish
-<<set $outside to 1>><<set $location to "forest">><<effects>>
+<<location "forest">><<effects>>
 
 <<if $enemyarousal gte $enemyarousalmax>>
 	<<ejaculation>>
 
-	끝났을 때, 그들은 인정사정없이 당신을 도랑에 버립니다.
+	끝났을 때, 그들은 인정사정없이 당신을 도랑에 버린다.
 	<br><br>
 
 	<<tearful>> 당신은 발버둥친다.
@@ -510,41 +624,127 @@ Six pair of eyes stare at you through the dim light. The pack advances on you.
 
 	<<link [[다음|Forest]]>><<set $eventskip to 1>><</link>>
 	<br>
-<<elseif $rescue is 1 and $alarm is 1>>
-	You hear a gun fire close by, and a bullet lands at the pair's feet. They back off in fear and flee into the forest.
-	<br><br>
-	Eden emerges and helps you collect yourself.
+<<elseif $rescue is 1 and $forest lte 20>>
+	The <<person1>><<person>> charges you, but is interrupted when a flying ?gwylanItem smacks <<him>> in the face. The <<person2>><<person>> looks over, only for a ?gwylanItem to fly into <<his>> face as well.
+
+	<<if $forest_shop_intro isnot 1 and $gwylan_rescue isnot 1>>
+		"Hey!" a <<nnpc_gendery "Gwylan">> shouts from beyond the treeline. "Get away from <<phim>>. I have more." As if to demonstrate, <<nnpc_he "Gwylan">> throws a ?gwylanItem, hitting the <<person1>><<person>> in the face again. The pair glance at each other, then turn and run.
+		<br><br>
+
+		"I hope they weren't customers," the <<nnpc_gendery "Gwylan">> mutters. "Well, I wouldn't want their money anyway." <<nnpc_He "Gwylan">> steps out from the treeline, walking toward you. "You okay? Good thing I was in the area."
+		<br><br>
+
+		<<nnpc_He "Gwylan">> looks about your age, with mousy hair and freckles. "I'm older than I look," <<nnpc_he "Gwylan">> says, as if reading your mind. "I'm Gwylan. Nice to meet you."
+		<br><br>
+
+		"I have a shop right by the outskirts of the forest," <<nnpc_he "Gwylan">> says. "You can't miss it. I sell-" <<nnpc_he "Gwylan">> pauses. "My grand<<if $pronoun is "m">>father<<else>>mother<</if>> sells-" another pause. "I sell knick-knacks there. Things you won't find in normal shops. Even I don't know what I have in stock!" <<nnpc_He "Gwylan">> sounds proud.
+
+	<<else>>
+		"Hey!" Gwylan shouts from beyond the treeline. "Get away from <<phim>>. I have more." As if to demonstrate, <<nnpc_he "Gwylan">> throws a ?gwylanItem, hitting the <<person1>><<person>> in the face again. The pair glance at each other, then turn and run.
+		<br><br>
+
+		"I hope they weren't customers," Gwylan mutters. "Well, I wouldn't want their money anyway." <<nnpc_He "Gwylan">> steps out from the treeline, walking toward you. "You okay? Good thing I was in the area."
+		<<if $gwylan_aborted is 1>>
+			<<if $gwylan_eden_coop gte 1>>
+				<<nnpc_He "Gwylan">> can't meet your gaze. "Sorry for not saving you before, but I'm not messing with Eden. <<nnpc_He "Eden">> still scares me." <<nnpc_He "Gwylan">> frowns. "Why were you two fighting anyway? Did you fall out?"
+
+			<<else>>
+				<<nnpc_He "Gwylan">> can't meet your gaze. "Sorry for not saving you before, but I'm not messing with the <<nnpc_title "Eden">>. <<nnpc_Hes "Eden">> the scariest thing in the forest."
+			<</if>>
+
+		<<elseif $gwylan_aborted is 2>>
+			<<nnpc_He "Gwylan">> can't meet your gaze. "Sorry for not saving you before, but I'm not messing with the alpha. I don't want the entire pack breaking my door down."
+		<</if>>
+	<</if>>
 	<br><br>
 
-	<<clotheson>>
-	<<endcombat>>
-	"Are you okay?" Eden asks.
+	<<if $gwylan_eden_coop gte 1 and $gwylan_aborted isnot 1>>
+		<<nnpc_He "Gwylan">> looks around for a moment, as if waiting for something. "Strange," <<nnpc_he "Gwylan">> says to <<nnpc_himself "Gwylan">>. "Usually the <<nnpc_title "Eden">> is here too. Must be busy."
 	<br><br>
-	<<link [[Go back to the cabin (0:30)|Forest Cabin Return]]>><<pass 30>><</link>>
-	<br>
-	<<link [[Say goodbye|Forest]]>><<endevent>><</link>>
-	<br>
+	<</if>>
+
+	<<if $gwylan_rescue isnot 1>>
+		<<set $gwylan_rescue to 1>>
+		<<nnpc_He "Gwylan">> starts to walk away, but stops and turns around. "By the way," <<nnpc_he "Gwylan">> says. "I was able to save you because you're close enough to my shop. <span class="gold">If you go any further than the start of the lake, I won't be able to hear you.</span> Keep it in mind."
+		<br><br>
+	<</if>>
+	<<nnpc_He "Gwylan">> gathers <<nnpc_his "Gwylan">> items, then walks off in the direction of <<nnpc_his "Gwylan">> shop.
+	<br><br>
+
+	<<clotheson>><<set $gwylan_aborted to 0>>
+	<<endcombat>>
+
+	<<link [[다음|Forest]]>><<set $eventskip to 1>><</link>>
+
+<<elseif $rescue is 1 and $forest gte 21>>
+	You hear a gun fire close by, and a bullet lands at the pair's feet. They back off in fear and flee into the forest.
+	<br><br>
+
+	<<if $edenCagedEscape>>
+		<<clotheson>>
+		<<endcombat>>
+
+		<<edenCagedSave>>
+	<<else>>
+		Eden emerges and helps you collect yourself. "Damn hikers," <<nnpc_he "Eden">> mutters. "Are you okay?"
+		<br><br>
+
+		<<clotheson>>
+		<<endcombat>>
+		<<if $gwylan_eden_coop gte 1>>
+			Eden glances around for a moment. "We must be in too deep for that shopkeep," <<nnpc_he "Eden">> says.
+			<br><br>
+		<</if>>
+
+		<<if $eden_rescue isnot 1>>
+			<<set $eden_rescue to 1>>
+			Eden pats you on the shoulder. "I was able to hear you because I happened to be in the area," <<nnpc_he "Eden">> says. "<span class="gold">I might not always be around, but I should be able to save you anywhere in the forest.</span> Give me a shout if you're in trouble."
+			<br><br>
+		<</if>>
+
+		<<link [[Go back to the cabin (0:30)|Forest Cabin Return]]>><<pass 30>><</link>>
+		<br>
+		<<link [[Say goodbye|Forest]]>><<endevent>><</link>>
+	<</if>>
 <</if>>
 
 :: Forest Wolf
 <<if $molestationstart is 1>>
-<<set $molestationstart to 0>>
-<<controlloss>>
-<<violence 1>>
-<<neutral 1>>
-<<molested>>
+	<<set $molestationstart to 0>>
+	<<controlloss>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
 	<<beastCombatInit>>
-
-<<set $enemytrust -= 40>>
-	<<if $loveInterest>>
-		<<if ($loveInterest.primary is "Eden" or $loveInterest.secondary is "Eden") and $location is "forest" and random(1, 2) is 2>>
-			<<set $rescue to 1>>
-		<</if>>
+	<<if ($loveInterest.primary is "Eden" or $loveInterest.secondary is "Eden") and (random(1, 2) is 2 or $eden_rescue isnot 1) and $forest lte 20>>
+		<<set $rescue to 2>>
+	<<elseif (($loveInterest.primary is "Eden" or $loveInterest.secondary is "Eden") and (random(1, 2) is 2 or $eden_rescue isnot 1)) or $forest lte 20>>
+		<<enable_rescue>>
 	<</if>>
+	<<set $enemytrust -= 40>>
 <</if>>
 
 <<effects>>
 <<effectsman>>
+
+<<if $alarm is 1 and $rescue is 0>>
+	<<set $alarm to 0>>
+	<<if ($loveInterest.primary is "Eden" or $loveInterest.secondary is "Eden")>>
+		<<if $gwylan_rescue is 1>>
+			<span class="red">You're too deep into the forest for Gwylan to hear you, and Eden must not be in the area.</span>
+		<<else>>
+			<span class="red">You're too far from the town for anyone to hear you, and Eden must not be in the area.</span>
+		<</if>>
+	<<else>>
+		<<if $gwylan_rescue is 1>>
+			<span class="red">You're too deep into the forest for Gwylan to hear you.</span>
+		<<else>>
+			<span class="red">You're too far from the town for anyone to hear you.</span>
+		<</if>>
+	<</if>>
+	<br><br>
+<</if>>
+
 <br>
 <<beast $enemyno>>
 <br><br>
@@ -557,13 +757,16 @@ Six pair of eyes stare at you through the dim light. The pack advances on you.
 	<span id="next"><<link [[다음|Forest Wolf Finish]]>><</link>></span><<nexttext>>
 <<elseif $enemyhealth lte 0>>
 	<span id="next"><<link [[다음|Forest Wolf Finish]]>><</link>></span><<nexttext>>
-<<elseif $rescue is 1 and $alarm is 1>>
+<<elseif $rescue is 2 and $alarm is 1>>
+	<span id="next"><<link [[다음|Forest Coop Rescue]]>><<set $phase to 1>><</link>></span><<nexttext>>
+<<elseif $alarm is 1 and $rescue is 1>>
 	<span id="next"><<link [[다음|Forest Wolf Finish]]>><</link>></span><<nexttext>>
 <<else>>
 	<span id="next"><<link [[다음|Forest Wolf]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: Forest Wolf2
+
 <<if $molestationstart is 1>>
 	<<set $molestationstart to 0>>
 	<<controlloss>>
@@ -574,14 +777,33 @@ Six pair of eyes stare at you through the dim light. The pack advances on you.
 
 	<<beastTrainGenerate>><<set $enemytrust -= 40>>
 	<<if $loveInterest>>
-		<<if ($loveInterest.primary is "Eden" or $loveInterest.secondary is "Eden") and $location is "forest" and random(1, 2) is 2>>
-			<<set $rescue to 1>>
+		<<if ($loveInterest.primary is "Eden" or $loveInterest.secondary is "Eden") and (random(1, 2) is 2 or $eden_rescue isnot 1)>>
+			<<enable_rescue>>
 		<</if>>
 	<</if>>
 <</if>>
 
 <<effects>>
 <<effectsman>>
+
+<<if $alarm is 1 and $rescue is 0>>
+	<<set $alarm to 0>>
+	<<if ($loveInterest.primary is "Eden" or $loveInterest.secondary is "Eden")>>
+		<<if $gwylan_rescue is 1>>
+			<span class="red">You're too deep into the forest for Gwylan to hear you, and Eden must not be in the area.</span>
+		<<else>>
+			<span class="red">You're too far from the town for anyone to hear you, and Eden must not be in the area.</span>
+		<</if>>
+	<<else>>
+		<<if $gwylan_rescue is 1>>
+			<span class="red">You're too deep into the forest for Gwylan to hear you.</span>
+		<<else>>
+			<span class="red">You're too far from the town for anyone to hear you.</span>
+		<</if>>
+	<</if>>
+	<br><br>
+<</if>>
+
 <br>
 <<beast $enemyno>>
 <br><br>
@@ -601,12 +823,13 @@ Six pair of eyes stare at you through the dim light. The pack advances on you.
 <</if>>
 
 :: Forest Wolf Finish
-<<set $outside to 1>><<set $location to "forest">><<effects>>
+
+<<location "forest">><<effects>>
 
 <<if $enemyarousal gte $enemyarousalmax>>
 	<<beastejaculation>>
 
-	<<beasttypePost "은">> 흡족해하며 앓는 소리를 낸다. 그리고 나무 사이에 당신을 눕힌 뒤에 떠납니다.
+	<<beasttypePost "은">> 흡족해하며 앓는 소리를 낸다. 그리고 나무 사이에 당신을 눕힌 뒤에 떠난다.
 	<br><br>
 
 	<<tearful>> 당신은 일어선다.
@@ -629,106 +852,196 @@ Six pair of eyes stare at you through the dim light. The pack advances on you.
 
 	<<link [[다음|Forest]]>><<set $eventskip to 1>><</link>>
 	<br>
-<<elseif $rescue is 1 and $alarm is 1>>
-	You hear a gun fire close by, and a bullet lands near the <<beasttype>>. It backs off in fear and flees into the forest.
-	<br><br>
-	Eden emerges and helps you collect yourself.
+<<elseif $rescue is 1 and $forest lte 20>>
+	The <<beasttype>> growls, but is hit in the face by a flying ?gwylanItem. <<bHe>> yelps and looks around, alarmed.
+	<<if $monster is 1>>
+		"Human attack! Where human?!"
+	<</if>>
 	<br><br>
 
-	<<clotheson>>
-	<<endcombat>>
-	"Are you okay?" Eden asks.
+	<<if $forest_shop_intro isnot 1 and $gwylan_rescue isnot 1>>
+		"Hey!" a <<nnpc_gendery "Gwylan">> shouts from beyond the treeline. "Shoo!" <<nnpc_He "Gwylan">> throws a ?gwylanItem,  hitting the <<beasttype>> in the side. <<bHe>> scurries away, <<bhis>> tail between <<bhis>> legs.
+		<br><br>
+
+		"I swear they get more aggressive every day," the <<nnpc_gendery "Gwylan">> mutters. <<nnpc_He "Gwylan">> steps out from the treeline, and walks toward you. "You okay? Good thing I was in the area."
+		<br><br>
+
+		<<nnpc_He "Gwylan">> looks about your age, with mousy hair and freckles. "I'm older than I look," <<nnpc_he "Gwylan">> says, as if reading your mind. "I'm Gwylan. Nice to meet you!"
+		<br><br>
+
+		"I have a shop right by the outskirts of the forest," <<nnpc_he "Gwylan">> says. "You can't miss it. I sell-" <<nnpc_he "Gwylan">> pauses. "My grand<<if $pronoun is "m">>father<<else>>mother<</if>> sells-" another pause. "I sell knick-knacks there. Things you won't find in normal shops. Even I don't know what I have in stock!" <<nnpc_He "Gwylan">> sounds proud.
+
+	<<else>>
+		"Hey!" Gwylan shouts from beyond the treeline. "Shoo!" <<nnpc_He "Gwylan">> throws a ?gwylanItem,  hitting the <<beasttype>> in the side. <<bHe>> scurries away, <<bhis>> tail between <<bhis>> legs.
+			<br><br>
+
+		"I swear they get more aggressive every day," Gwylan mutters. <<nnpc_He "Gwylan">> steps out from the treeline, and walks toward you. "You okay? Good thing I was in the area."
+		<<if $gwylan_aborted is 1>>
+			<<if $gwylan_eden_coop gte 1>>
+				<<nnpc_He "Gwylan">> can't meet your gaze. "Sorry for not saving you before, but I'm not messing with Eden. <<nnpc_He "Eden">> still scares me." <<nnpc_He "Gwylan">> frowns. "Why were you two fighting anyway? Did you fall out?"
+
+			<<else>>
+				<<nnpc_He "Gwylan">> can't meet your gaze. "Sorry for not saving you before, but I'm not messing with the <<nnpc_title "Eden">>. <<nnpc_Hes "Eden">> the scariest thing in the forest."
+			<</if>>
+
+		<<elseif $gwylan_aborted is 2>>
+			<<nnpc_He "Gwylan">> can't meet your gaze. "Sorry for not saving you before, but I'm not messing with the alpha. I don't want the whole pack breaking my door down."
+		<</if>>
+	<</if>>
 	<br><br>
-	<<link [[Go back to the cabin (0:30)|Forest Cabin Return]]>><<pass 30>><</link>>
-	<br>
-	<<link [[Say goodbye|Forest]]>><<endevent>><</link>>
-	<br>
+
+	<<if $gwylan_eden_coop gte 1 and $gwylan_aborted isnot 1>>
+		<<nnpc_He "Gwylan">> glances around. "Strange," <<nnpc_he "Gwylan">> says to <<nnpc_himself "Gwylan">>. "I thought the <<nnpc_title "Eden">> would be here too. Must be busy. Ah well."
+	<br><br>
+	<</if>>
+
+	<<if $gwylan_rescue isnot 1>>
+		<<set $gwylan_rescue to 1>>
+		<<nnpc_He "Gwylan">> starts to walk away, but stops and turns around. "By the way," <<nnpc_he "Gwylan">> says. "I was able to save you because you're close enough to my shop. <span class="gold">If you go any further than the start of the lake, I won't be able to hear you.</span> Keep it in mind."
+		<br><br>
+	<</if>>
+	<<nnpc_He "Gwylan">> gathers <<nnpc_his "Gwylan">> items, then walks off in the direction of <<nnpc_his "Gwylan">> shop.
+	<br><br>
+
+	<<clotheson>><<set $gwylan_aborted to 0>>
+	<<endcombat>>
+
+	<<link [[다음|Forest]]>><<set $eventskip to 1>><</link>>
+
+<<elseif $rescue is 1 and $forest gte 21>>
+	You hear a gun fire close by, and a bullet lands near the <<beasttype>>. <<bHe>> backs off in fear and flees into the forest.
+	<br><br>
+
+	<<if $edenCagedEscape>>
+		<<clotheson>>
+		<<endcombat>>
+
+		<<edenCagedSave>>
+	<<else>>
+		Eden emerges and helps you collect yourself. "Damn wolves," <<nnpc_he "Eden">> mutters. "Are you okay?"
+		<br><br>
+
+		<<clotheson>>
+		<<endcombat>>
+		<<if $gwylan_eden_coop gte 1>>
+			Eden glances around for a moment. "We must be in too deep for that shopkeep," <<nnpc_he "Eden">> says.
+			<br><br>
+		<</if>>
+
+		<<if $eden_rescue isnot 1>>
+			<<set $eden_rescue to 1>>
+			Eden pats you on the shoulder. "I was able to hear you because I happened to be in the area," <<nnpc_he "Eden">> says. "<span class="gold">I might not always be around, but I should be able to save you anywhere in the forest.</span> Give me a shout if you're in trouble."
+			<br><br>
+		<</if>>
+
+		<<link [[Go back to the cabin (0:30)|Forest Cabin Return]]>><<pass 30>><</link>>
+		<br>
+		<<link [[Say goodbye|Forest]]>><<endevent>><</link>>
+	<</if>>
 <</if>>
 
 :: Forest Wolf2 Finish
-<<set $outside to 1>><<set $location to "forest">><<effects>>
+<<effects>>
 
-<<if $enemyarousal gte $enemyarousalmax>>
-	<<beastejaculation>>
-	<<if $combatTrain.length gt 0>>
-		Satisfied, the <<beasttype>> leaves you be. Another takes its place.
-		<<combatTrainAdvance>>
-		<br><br>
-		[[다음|Forest Wolf2]]
-	<<else>>
-		Satisfied, the <<beasttype>> leaves you be.
-		<br><br>
-		[[다음|Forest Wolf2 End]]
-	<</if>>
-<<elseif $enemyhealth lte 0>>
+<<if $enemyhealth lte 0>>
 	<<beastwound>>
 	<<if $combatTrain.length gt 0>>
-		The <<beasttype>> recoils in pain and fear, but another takes its place.
+		The <<beasttype>> recoils in pain and fear, but the other is eager for a go.
 		<<combatTrainAdvance>>
 		<br><br>
-		[[다음|Forest Wolf2]]
+		<<link [[다음|Forest Wolf Sex2]]>><</link>>
 	<<else>>
 		The <<beasttype>> recoils in pain and fear.
 		<<combatTrainAdvance>>
 		<br><br>
-		[[다음|Forest Wolf2 End]]
+		<<link [[다음|Forest Wolf2 Finish]]>><<set $finish to 1>><</link>>
+	<</if>>
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<<beastejaculation>>
+	<<if $combatTrain.length gt 0>>
+		Satisfied, the <<beasttype>> moves and another <<print $combatTrain.beastTypes[1]>> takes its turn.
+		<<wolfpacktrust>>
+		<<combatTrainAdvance>>
+		<br><br>
+		<<link [[다음|Forest Wolf2]]>><</link>>
+	<<else>>
+		Satisfied, the <<beasttype>> moves away from you.
+		<<wolfpacktrust>>
+		<<combatTrainAdvance>>
+		<br><br>
+		<<link [[다음|Forest Wolf2 Finish]]>><<set $finish to 1>><</link>>
 	<</if>>
 <<elseif $rescue is 1 and $alarm is 1>>
-	You hear a gun fire nearby, and a bullet lands near the <<beasttype>>. It backs off in fear and flees into the forest, the other following close behind.
+	You hear a gun fire close by, and a bullet lands near the <<beasttype>>. <<bHe>> backs off in fear and flees into the forest, the other following close behind.
 	<br><br>
-	Eden emerges and helps you collect yourself.
+
+	<<if $edenCagedEscape>>
+		<<clotheson>>
+		<<endcombat>>
+
+		<<edenCagedSave>>
+	<<else>>
+		Eden emerges and helps you collect yourself. "Damn wolves," <<nnpc_he "Eden">> mutters. "Are you okay?"
+		<br><br>
+
+		<<clotheson>>
+		<<endcombat>>
+		<<if $gwylan_eden_coop gte 1>>
+			Eden glances around for a moment. "We must be in too deep for that shopkeep," <<nnpc_he "Eden">> says.
+			<br><br>
+		<</if>>
+
+		<<if $eden_rescue isnot 1>>
+			<<set $eden_rescue to 1>>
+			Eden pats you on the shoulder. "I was able to save you because I happened to be in the area," <<nnpc_he "Eden">> says. "<span class="gold">I might not always be around, but I should be able to save you anywhere in the forest.</span> Give me a holler if you're in trouble."
+			<br><br>
+		<</if>>
+
+		<<link [[Go back to the cabin (0:30)|Forest Cabin Return]]>><<pass 30>><</link>>
+		<br>
+		<<link [[Say goodbye|Forest]]>><<endevent>><</link>>
+	<</if>>
+<<elseif $finish is 1>>
+	<<if $enemywounded is 1 and $enemyejaculated is 0>>
+		<<beasttypePost "은">> 낑낑거리다 숲 속으로 도망친다.
+	<<elseif $enemywounded is 0 and $enemyejaculated is 1>>
+		<<beasttypePost "은">> 당신을 풀밭 위에 눕혀두고 떠난다.
+	<<elseif $enemywounded gte 2 and $enemyejaculated is 0>>
+		<<beastspluralPost "은">> 당신의 가치에 비해 당신은 훨씬 골칫거리라고 느끼면서, 숲 속으로 도망친다.
+	<<elseif $enemywounded is 0 and $enemyejaculated gte 2>>
+		<<beastspluralPost "은">> 풀밭 위에서 기진맥진한 채로 몸을 떠는 당신을 두고 떠난다.
+	<<elseif $enemywounded gte 1 and $enemyejaculated gte 1>>
+		<<beastspluralPost "은">> 풀밭 위에서 기진맥진한 채로 몸을 떠는 당신을 두고 떠난다.
+	<</if>>
+	<br><br>
+
+	<<tearful>> 당신은 스스로 정신을 다잡는다.
 	<br><br>
 
 	<<clotheson>>
 	<<endcombat>>
-	"Are you okay?" Eden asks.
-	<br><br>
-	<<link [[Go back to the cabin (0:30)|Forest Cabin Return]]>><<pass 30>><</link>>
-	<br>
-	<<link [[Say goodbye|Forest]]>><<endevent>><</link>>
+
+	<<link [[다음|Forest]]>><<set $eventskip to 1>><</link>>
 	<br>
 <</if>>
-
-:: Forest Wolf2 End
-<<set $outside to 1>><<set $location to "forest">><<effects>>
-
-<<if $enemywounded is 1 and $enemyejaculated is 0>>
-	<<beasttypePost "은">> 낑낑거리다 숲 속으로 도망친다.
-<<elseif $enemywounded is 0 and $enemyejaculated is 1>>
-	<<beasttypePost "은">> 당신을 풀밭 위에 눕혀두고 떠난다.
-<<elseif $enemywounded gte 2 and $enemyejaculated is 0>>
-	<<beasttypePost "은">> 당신의 몸에 비해 당신은 훨씬 골칫거리라고 느끼면서, 숲 속으로 도망칩니다.
-<<elseif $enemywounded is 0 and $enemyejaculated gte 2>>
-	<<beastspluralPost "은">> 떠나고 당신은 풀 밭 위에서 흥분으로 몸을 떨며 시간을 보낸다.
-<<elseif $enemywounded gte 1 and $enemyejaculated gte 1>>
-	<<beastspluralPost "은">> 떠나고 당신은 풀 밭 위에서 흥분으로 몸을 떨며 시간을 보낸다. 하나는 절뚝거리면서 느려리게 간다.
-<</if>>
-<br><br>
-
-<<tearful>> 당신은 일어선다.
-<br><br>
-
-<<clotheson>>
-<<endcombat>>
-
-<<link [[다음|Forest]]>><<set $eventskip to 1>><</link>>
 
 :: Forest Swim
 
-<<set $outside to 1>><<set $location to "forest">><<water>><<effects>>
+<<location "forest">><<water>><<effects>>
 <<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
 <<if $danger gte (9900 - ($allure * $forestmod)) and $eventskip is 0>>
 	<!-- Modified for monster people -->
 	<<beastNEWinit 1 lizard>>
-	물 속의 거대한 <<beasttypePost "이">> 물 속에서 튀어나왔다!
-	<br><br>
-	<<link [[다음|Forest Swim Molestation]]>><<set $molestationstart to 1>><</link>>
-
-	<!-- A large lizard rears out of the water and grabs you in its maw! You manage to struggle free, but not unscathed.<<beastescape>> -->
-	<!-- <br><br> -->
-	<!-- <<link [[다음|Forest Swim]]>><<set $eventskip to 1>><</link>> -->
-	<!-- <br> -->
-
+	<<if $monster is 1 or $bestialitydisable is "f">>
+		물 속의 거대한 <<beasttypePost "이">> 물 속에서 튀어나왔다!
+		<br><br>
+		<<link [[다음|Forest Swim Molestation]]>><<set $molestationstart to 1>><</link>>
+	<<else>>
+		커다란 도마뱀 하나가 물 속에서 튀어나와 입으로 당신을 잡는다! 당신은 어떻게든 몸부림쳐서 풀어내는데 성공하지만, 상처가 없지는 않다.<<beastescape>>
+		<br><br>
+		<<link [[다음|Forest Swim]]>><<set $eventskip to 1>><</link>>
+		<br>
+	<</if>>
 <<else>>
 	<<swimmingdifficulty 1 600 true>>
 	<<if $swimmingSuccess>>
@@ -737,35 +1050,65 @@ Six pair of eyes stare at you through the dim light. The pack advances on you.
 		그럼에도 불구하고, 당신은 <span class="green">성공적으로</span> 수영해 강을 가로지른다.
 		<br><br>
 		<<set $rng to random(1, 100)>>
-		<<if $rng gte 71 and $parasitedisable is "f" and !$parasite.bottom.name>>
-			<<if $worn.lower.type.includes("naked") or $worn.lower.skirt is 1>>
-				둑을 올라갈 때 당신은 당신의 <<bottomPost "에">> 바늘로 찌르는 듯한 통각을 느낀다. 뒤돌아보니, 낯설고 매끄러워 보이는 생명체가 그곳에 있는 것을 발견한다. 그것은 당신의 피부를 빨고, 따뜻하게 만든다.
-				<<garousal>><<arousal 600>>
+		<<if $wraith and $wraith.hunt and ($moonstate is "evening" and $hour gte 21 or $moonstate is "morning" and $hour lt 6) and $danger gte (7900 - ($allure * $forestmod))>>
+			둑을 올라갈 때 당신은 당신의 발이 무언가에 걸린 것을 느낀다.
+			<<if $slimedisable is "f">>
+				당신은 아래를 쳐다보고 창백한 하얀 슬라임이 당신에게 붙어 있는 것을 보았고, 강에서 더 많이 나오는 것을 알아차린다. <<rainWraith true>>
 				<br><br>
-
-				당신은 잡아당기지만 그것은 꿈쩍도 하지 않는다. 제거하는 데에는 도움이 필요하다.
-				<<parasite bottom urchin>>
+				강 저 아래에서, 당신은 창백한 로브를 입은 형체가 걸어 다가오는 것을 본다. 그것은 손을 들었고, 슬라임들이 당신에게 달려든다!
 				<br><br>
+				<<link [[다음|Forest Pale Slime Struggle]]>><<set $struggle_start to 1>><<set $phase to 1>><</link>>
+			<<else>>
+				그것은 격렬하게 당신의 다리를 잡아당겨, 당신을 강으로 도로 집어넣으려 하고 있다! 당신은 어떻게든 그것을 밀어낸다. 당신은 뒤를 쳐다보고 창백한 형체가 나무 뒤로 사라지는 것을 본다. <<trauma 12>><<pain 6>><<stress 12>><<gtrauma>><<gpain>><<gstress>>
+				<br><br>
+				<<link [[다음|Forest]]>><<set $eventskip to 1>><</link>>
 			<</if>>
+		<<else>>
+			<<if $rng gte 71 and $parasitedisable is "f" and !$parasite.bottom.name>>
+				<<if $worn.lower.type.includes("naked") or setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1>>
+					둑을 올라갈 때 당신은 당신의 <<bottomPost "에">> 바늘로 찌르는 듯한 아픔을 느낀다. 뒤돌아보니, 낯설고 매끄러워 보이는 생명체가 그곳에 있는 것을 발견한다. 그것은 당신의 피부를 빨고, 따뜻하게 만든다.
+					<<garousal>><<arousal 600>>
+					<br><br>
+					당신은 잡아당기지만 그것은 꿈쩍도 하지 않는다. 제거하는 데에는 도움이 필요하다.
+					<<parasite bottom urchin>>
+					<br><br>
+				<</if>>
+			<</if>>
+			<<link [[다음|Forest]]>><<set $eventskip to 1>><</link>>
 		<</if>>
-		<<link [[다음|Forest]]>><<set $eventskip to 1>><</link>>
+		<br>
 	<<else>>
 		세찬 물이 당신을 당신을 덮친다.
 		<<set $stripintegrity to 20>><<set $stripobject to "jutting rock">><<stripobject>>
 		물은 굉장히 잔인하고, 당신은 강을 지나는데 <span class="red">실패한다</span>. 당신은 하류로 쓸려 들어가 깊은 숲 속으로 간다.
 		<br><br>
 		<<set $rng to random(1, 100)>>
-		<<if $rng gte 71 and $parasitedisable is "f" and !$parasite.bottom.name>>
-			<<if $worn.lower.type.includes("naked") or $worn.lower.skirt is 1>>
-				둑을 올라갈 때 당신은 당신의 <<bottomPost "에">> 바늘로 찌르는 듯한 통각을 느낀다. 뒤돌아보니, 낯설고 매끄러워 보이는 생명체가 그곳에 있는 것을 발견한다. 그것은 당신의 피부를 빨고, 따뜻하게 만든다.
-				<<garousal>><<arousal 600>>
+		<<if $wraith and $wraith.hunt and ($moonstate is "evening" and $hour gte 21 or $moonstate is "morning" and $hour lt 6)>>
+			둑을 올라갈 때 당신은 당신의 발이 무언가에 걸린 것을 느낀다.
+			<<if $slimedisable is "f">>
+				당신은 아래를 쳐다보고 창백한 하얀 슬라임이 당신에게 붙어 있는 것을 보았고, 강에서 더 많이 나오는 것을 알아차린다. <<rainWraith true>>
 				<br><br>
-				당신은 잡아당기지만 그것은 꿈쩍도 하지 않는다. 제거하는 데에는 도움이 필요하다.
-				<<parasite bottom urchin>>
+				강 저 아래에서, 당신은 창백한 로브를 입은 형체가 걸어 다가오는 것을 본다. 그것은 손을 들었고, 슬라임들이 당신에게 달려든다!
 				<br><br>
+				<<link [[다음|Forest Pale Slime Struggle]]>><<set $forest += 20>><<set $struggle_start to 1>><<set $phase to 2>><</link>>
+			<<else>>
+				그것은 격렬하게 당신의 다리를 잡아당겨, 당신을 강으로 도로 집어넣으려 하고 있다! 당신은 어떻게든 그것을 밀어낸다. 당신은 뒤를 쳐다보고 창백한 형체가 나무 뒤로 사라지는 것을 본다. <<trauma 12>><<pain 6>><<stress 12>><<gtrauma>><<gpain>><<gstress>>
+				<br><br>
+				<<link [[다음|Forest]]>><<set $forest += 20>><</link>>
 			<</if>>
+		<<else>>
+			<<if $rng gte 71 and $parasitedisable is "f" and !$parasite.bottom.name>>
+				<<if $worn.lower.type.includes("naked") or setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1>>
+					둑을 올라갈 때 당신은 당신의 <<bottomPost "에">> 바늘로 찌르는 듯한 아픔을 느낀다. 뒤돌아보니, 낯설고 매끄러워 보이는 생명체가 그곳에 있는 것을 발견한다. 그것은 당신의 피부를 빨고, 따뜻하게 만든다.
+					<<garousal>><<arousal 600>>
+					<br><br>
+					당신은 잡아당기지만 그것은 꿈쩍도 하지 않는다. 제거하는 데에는 도움이 필요하다.
+					<<parasite bottom urchin>>
+					<br><br>
+				<</if>>
+			<</if>>
+			<<link [[다음|Forest]]>><<set $forest += 20>><</link>>
 		<</if>>
-		<<link [[다음|Forest]]>><<set $forest += 20>><</link>>
 		<br>
 	<</if>>
 <</if>>
@@ -780,14 +1123,33 @@ Six pair of eyes stare at you through the dim light. The pack advances on you.
 	<<neutral 1>>
 	<<molested>>
 	<<beastCombatInit>>
-	<<if $loveInterest>>
-		<<if ($loveInterest.primary is "Eden" or $loveInterest.secondary is "Eden") and $location is "forest" and random(1, 2) is 2>>
-			<<set $rescue to 1>>
-		<</if>>
+	<<if ($loveInterest.primary is "Eden" or $loveInterest.secondary is "Eden") and (random(1, 2) is 2 or $eden_rescue isnot 1) and $forest lte 20>>
+		<<set $rescue to 2>>
+	<<elseif (($loveInterest.primary is "Eden" or $loveInterest.secondary is "Eden") and (random(1, 2) is 2 or $eden_rescue isnot 1)) or $forest lte 20>>
+		<<enable_rescue>>
 	<</if>>
 <</if>>
 <<effects>>
 <<effectsman>>
+
+<<if $alarm is 1 and $rescue is 0>>
+	<<set $alarm to 0>>
+	<<if ($loveInterest.primary is "Eden" or $loveInterest.secondary is "Eden")>>
+		<<if $gwylan_rescue is 1>>
+			<span class="red">You're too deep into the forest for Gwylan to hear you, and Eden must not be in the area.</span>
+		<<else>>
+			<span class="red">You're too far from the town for anyone to hear you, and Eden must not be in the area.</span>
+		<</if>>
+	<<else>>
+		<<if $gwylan_rescue is 1>>
+			<span class="red">You're too deep into the forest for Gwylan to hear you.</span>
+		<<else>>
+			<span class="red">You're too far from the town for anyone to hear you.</span>
+		<</if>>
+	<</if>>
+	<br><br>
+<</if>>
+
 <br>
 <<beast $enemyno>>
 <br><br>
@@ -798,6 +1160,8 @@ Six pair of eyes stare at you through the dim light. The pack advances on you.
 	<span id="next"><<link [[다음|Forest Swim Molestation Finish]]>><</link>></span><<nexttext>>
 <<elseif $enemyhealth lte 0>>
 	<span id="next"><<link [[다음|Forest Swim Molestation Finish]]>><</link>></span><<nexttext>>
+<<elseif $rescue is 2 and $alarm is 1>>
+	<span id="next"><<link [[다음|Forest Coop Rescue]]>><<set $phase to 4>><</link>></span><<nexttext>>
 <<elseif $rescue is 1 and $alarm is 1>>
 	<span id="next"><<link [[다음|Forest Swim Molestation Finish]]>><</link>></span><<nexttext>>
 <<else>>
@@ -805,55 +1169,123 @@ Six pair of eyes stare at you through the dim light. The pack advances on you.
 <</if>>
 
 :: Forest Swim Molestation Finish
-<<set $outside to 1>><<set $location to "forest">><<effects>>
+<<location "forest">><<effects>>
 
 <<if $enemyarousal gte $enemyarousalmax>>
 
-<<beastejaculation>>
+	<<beastejaculation>>
 
-도마뱀은 만족감에 쉬익거리는 소리를 내고는 흐르는 물속으로 뛰어든다.
-<br><br>
+	도마뱀은 만족감에 쉬익거리는 소리를 내고는 흐르는 물속으로 뛰어든다.
+	<br><br>
 
-<<tearful>> 당신은 스스로 정신을 다잡는다.
-<br><br>
+	<<tearful>> 당신은 스스로 정신을 다잡는다.
+	<br><br>
 
-<<clotheson>>
-<<endcombat>>
+	<<clotheson>>
+	<<endcombat>>
 
-<<link [[다음|Forest Swim]]>><<set $eventskip to 1>><</link>>
-<br>
+	<<link [[다음|Forest Swim]]>><<set $eventskip to 1>><</link>>
+	<br>
 <<elseif $enemyhealth lte 0>>
 
-도마뱀은 고통에 쉬익거리는 소리를 내다 흐르는 물속으로 뛰어든다.
-<br><br>
+	도마뱀은 고통에 쉬익거리는 소리를 내다 흐르는 물속으로 뛰어든다.
+	<br><br>
 
-<<tearful>> 당신은 스스로 정신을 다잡는다.
-<br><br>
+	<<tearful>> 당신은 스스로 정신을 다잡는다.
+	<br><br>
 
-<<clotheson>>
-<<endcombat>>
+	<<clotheson>>
+	<<endcombat>>
 
-<<link [[다음|Forest Swim]]>><<set $eventskip to 1>><</link>>
-<br>
-<<elseif $rescue is 1 and $alarm is 1>>
+	<<link [[다음|Forest Swim]]>><<set $eventskip to 1>><</link>>
+	<br>
+<<elseif $rescue is 1 and $forest lte 20>>
+	The <<beasttype>> hisses, but is hit in the face by a flying ?gwylanItem. <<bHe>> looks around, alarmed.
+	<br><br>
 
-You hear a gun fire close by, and a bullet splashes by the <<beasttype>>. It backs off in fear and flees into the water.
-<br><br>
-Eden emerges and helps you collect yourself.
-<br><br>
+	<<if $forest_shop_intro isnot 1 and $gwylan_rescue isnot 1>>
+		"Hey!" a <<nnpc_gendery "Gwylan">> shouts from beyond the treeline. "Shoo!" <<nnpc_He "Gwylan">> throws a ?gwylanItem,  hitting the <<beasttype>> in the side. <<bHe>> dives back into the churning water.
+		<br><br>
 
-<<clotheson>>
-<<endcombat>>
-"Are you okay?" Eden asks.
-<br><br>
-<<link [[Go back to the cabin (0:30)|Forest Cabin Return]]>><<pass 30>><</link>>
-<br>
-<<link [[Say goodbye|Forest]]>><<endevent>><</link>>
-<br>
+		"The rivers keep getting more dangerous," the <<nnpc_gendery "Gwylan">> mutters. <<nnpc_He "Gwylan">> steps out from the treeline, and walks toward you. "You okay? Good thing I was in the area." <<nnpc_He "Gwylan">> grasps your arm and pulls you out of the water.
+		<br><br>
+
+		<<nnpc_He "Gwylan">> looks about your age, with mousy hair and freckles. "I'm older than I look," <<nnpc_he "Gwylan">> says, as if reading your mind. "I'm Gwylan. Nice to meet you!"
+		<br><br>
+
+		"I have a shop right by the outskirts of the forest," <<nnpc_he "Gwylan">> says. "You can't miss it. I sell-" <<nnpc_he "Gwylan">> pauses. "My grand<<if $pronoun is "m">>father<<else>>mother<</if>> sells-" another pause. "I sell knick-knacks there. Things you won't find in normal shops. Even I don't know what I have in stock!" <<nnpc_He "Gwylan">> sounds proud.
+
+	<<else>>
+		"Hey!" Gwylan shouts from beyond the treeline. "Shoo!" <<nnpc_He "Gwylan">> throws a ?gwylanItem,  hitting the <<beasttype>> in the side. <<bHe>> dives back into the churning water.
+			<br><br>
+
+		"The rivers keep getting more dangerous," the <<nnpc_gendery "Gwylan">> mutters. <<nnpc_He "Gwylan">> steps out from the treeline, and walks toward you. "You okay? Good thing I was in the area." <<nnpc_He "Gwylan">> grasps your arm and pulls you out of the water.
+		<<if $gwylan_aborted is 1>>
+			<<if $gwylan_eden_coop gte 1>>
+				<<nnpc_He "Gwylan">> can't meet your gaze. "Sorry for not saving you before, but I'm not messing with Eden. <<nnpc_He "Eden">> still scares me." <<nnpc_He "Gwylan">> frowns. "Why were you two fighting anyway? Did you fall out?"
+
+			<<else>>
+				<<nnpc_He "Gwylan">> can't meet your gaze. "Sorry for not saving you before, but I'm not messing with the <<nnpc_title "Eden">>. <<nnpc_Hes "Eden">> the scariest thing in the forest."
+			<</if>>
+
+		<<elseif $gwylan_aborted is 2>>
+			<<nnpc_He "Gwylan">> can't meet your gaze. "Sorry for not saving you before, but I'm not messing with the alpha. I don't want the entire pack breaking my door down."
+		<</if>>
+	<</if>>
+	<br><br>
+
+	<<if $gwylan_eden_coop gte 1 and $gwylan_aborted isnot 1>>
+		<<nnpc_He "Gwylan">> looks around for a moment. "Strange," <<nnpc_he "Gwylan">> says to <<nnpc_himself "Gwylan">>. "I thought the <<nnpc_title "Eden">> would be here. Must be busy. Ah well."
+	<br><br>
+	<</if>>
+
+	<<if $gwylan_rescue isnot 1>>
+		<<set $gwylan_rescue to 1>>
+		<<nnpc_He "Gwylan">> starts to walk away, but stops and turns around. "By the way," <<nnpc_he "Gwylan">> says. "I was able to save you because you're close enough to my shop. <span class="gold">If you go any further than the start of the lake, I won't be able to hear you.</span> Keep it in mind."
+		<br><br>
+	<</if>>
+	<<nnpc_He "Gwylan">> gathers <<nnpc_his "Gwylan">> items, then walks off in the direction of <<nnpc_his "Gwylan">> shop.
+	<br><br>
+
+	<<clotheson>><<set $gwylan_aborted to 0>>
+	<<endcombat>>
+
+	<<link [[다음|Forest]]>><<set $eventskip to 1>><</link>>
+
+<<elseif $rescue is 1 and $forest gte 21>>
+	You hear a gun fire close by, and a bullet lands near the <<beasttype>>. <<bHe>> backs off in fear and flees into the forest.
+	<br><br>
+
+	<<if $edenCagedEscape>>
+		<<clotheson>>
+		<<endcombat>>
+
+		<<edenCagedSave>>
+	<<else>>
+		Eden emerges and hauls you out of the water. "Damn lizards," <<nnpc_he "Eden">> mutters. "Are you okay?"
+		<br><br>
+
+		<<clotheson>>
+		<<endcombat>>
+		<<if $gwylan_eden_coop gte 1>>
+			Eden glances around for a moment. "We must be in too deep for that shopkeep," <<nnpc_he "Eden">> says.
+			<br><br>
+		<</if>>
+
+		<<if $eden_rescue isnot 1>>
+			<<set $eden_rescue to 1>>
+			Eden pats you on the shoulder. "I was able to hear you because I happened to be in the area," <<nnpc_he "Eden">> says. "<span class="gold">I might not always be around, but I should be able to save you anywhere in the forest.</span> Give me a shout if you're in trouble."
+			<br><br>
+		<</if>>
+
+		<<link [[Go back to the cabin (0:30)|Forest Cabin Return]]>><<pass 30>><</link>>
+		<br>
+		<<link [[Say goodbye|Forest]]>><<endevent>><</link>>
+	<</if>>
 <</if>>
 
 :: Forest Tentacles
-<<set $outside to 1>><<set $location to "forest">>
+<<location "forest">>
 
 <<if $molestationstart is 1>>
 <<set $molestationstart to 0>>
@@ -861,7 +1293,7 @@ Eden emerges and helps you collect yourself.
 	<<set $enemytype to "tentacles">>
 	<<molested>>
 	<<controlloss>>
-	<<tentaclestart 10 15>>
+	<<tentaclestart 10 15 "root" "vine" true>>
 <<elseif $molestationstart is 2>><<set $molestationstart to 0>>
 	<<set $combat to 1>>
 	<<set $enemytype to "tentacles">>
@@ -872,10 +1304,9 @@ Eden emerges and helps you collect yourself.
 	<<deviancy5>>
 
 	<<set _randomtentacles to 6+random(1, 10)>>
-	<<tentaclestart _randomtentacles 15>>
+	<<tentaclestart _randomtentacles 15 "root" "vine" true>>
 <</if>>
 <<statetentacles>>
-당신은 둘러싼 $tentacles.active 촉수들이 얼마나 되는지 세어본다.
 
 <<effects>>
 <<effectstentacles>>
@@ -901,7 +1332,7 @@ Eden emerges and helps you collect yourself.
 
 :: Forest Snake
 
-<<set $outside to 1>><<set $location to "forest">><<effects>>
+<<location "forest">><<effects>>
 <<if $molestationstart is 1>>
 	<<set $molestationstart to 0>>
 	<<set $combat to 1>>
@@ -927,7 +1358,7 @@ Eden emerges and helps you collect yourself.
 <<elseif $vorestage lte 0>>
 	<span id="next"><<link [[다음|Forest Snake Finish]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link "Next">><<script>>state.display(state.active.title, null)<</script>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Forest Snake]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: Forest Snake Finish
@@ -960,14 +1391,14 @@ Eden emerges and helps you collect yourself.
 
 :: Forest Snake Swarm
 
-<<set $outside to 1>><<set $location to "forest">><<effects>><<set $bus to "danube">>
+<<location "forest">><<effects>>
 <<if $molestationstart is 1>>
 	<<set $molestationstart to 0>>
 	<<molested>>
 	<<controlloss>>
 	<<set $combat to 1>>
 	<<set $enemytype to "swarm">>
-	<<swarminit "snakes" "swarms" "slithering" "slither" "keep back" 10 0>>
+	<<swarminit "snakes" "swarm" "slithering" "slither" "keep back" 10 0>>
 	<<set $timer to 20>>
 <</if>>
 <<swarmeffects>>
@@ -976,12 +1407,12 @@ Eden emerges and helps you collect yourself.
 <<if $timer lte 0>>
 	<span id="next"><<link [[다음|Forest Snake Swarm Finish]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link "Next">><<script>>state.display(state.active.title, null)<</script>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Forest Snake Swarm]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: Forest Snake Swarm Finish
 
-<<set $outside to 1>><<set $location to "forest">><<effects>>
+<<location "forest">><<effects>>
 The snakes slither off of you, escaping through nooks and crannies all around the pit.
 <br><br>
 <<endcombat>>
@@ -997,7 +1428,7 @@ The snakes slither off of you, escaping through nooks and crannies all around th
 	<<violence 1>>
 	<<neutral 1>>
 	<<molested>>
-	<<beastNEWinit 1 bear>>
+	
 	<<beastCombatInit>><<set $enemytrust -= 40>><<set $enemyanger += 40>><<set $enemyhealthmax to 400>><<set $enemyhealth to 400>><<set $enemyarousalmax to 1000>>
 	You continue on your path. You don't get far before hearing a roar behind you.
 	<<if $monster is 1>>
@@ -1005,13 +1436,33 @@ The snakes slither off of you, escaping through nooks and crannies all around th
 	<</if>>
 	<br><br>
 	<<if $loveInterest>>
-		<<if ($loveInterest.primary is "Eden" or $loveInterest.secondary is "Eden") and $location is "forest" and random(1, 2) is 2>>
-			<<set $rescue to 1>>
+		<<if ($loveInterest.primary is "Eden" or $loveInterest.secondary is "Eden") and (random(1, 2) is 2 or $eden_rescue isnot 1)>>
+			<<enable_rescue>>
 		<</if>>
 	<</if>>
 <</if>>
+
 <<effects>>
 <<effectsman>>
+
+<<if $alarm is 1 and $rescue is 0>>
+	<<set $alarm to 0>>
+	<<if ($loveInterest.primary is "Eden" or $loveInterest.secondary is "Eden")>>
+		<<if $gwylan_rescue is 1>>
+			<span class="red">You're too deep into the forest for Gwylan to hear you, and Eden must not be in the area.</span>
+		<<else>>
+			<span class="red">You're too far from the town for anyone to hear you, and Eden must not be in the area.</span>
+		<</if>>
+	<<else>>
+		<<if $gwylan_rescue is 1>>
+			<span class="red">You're too deep into the forest for Gwylan to hear you.</span>
+		<<else>>
+			<span class="red">You're too far from the town for anyone to hear you.</span>
+		<</if>>
+	<</if>>
+	<br><br>
+<</if>>
+
 <br>
 <<beast $enemyno>>
 <br><br>
@@ -1022,7 +1473,7 @@ The snakes slither off of you, escaping through nooks and crannies all around th
 	<span id="next"><<link [[다음|Forest Bear Molestation Finish]]>><</link>></span><<nexttext>>
 <<elseif $enemyhealth lte 0>>
 	<span id="next"><<link [[다음|Forest Bear Molestation Finish]]>><</link>></span><<nexttext>>
-<<elseif $rescue is 1 and $alarm is 1>>
+<<elseif $alarm is 1 and $rescue is 1>>
 	<span id="next"><<link [[다음|Forest Bear Molestation Finish]]>><</link>></span><<nexttext>>
 <<else>>
 	<span id="next"><<link [[다음|Forest Bear Molestation]]>><</link>></span><<nexttext>>
@@ -1030,61 +1481,77 @@ The snakes slither off of you, escaping through nooks and crannies all around th
 
 :: Forest Bear Molestation Finish
 
-<<set $outside to 1>><<set $location to "forest">><<effects>>
+<<location "forest">><<effects>>
 
 <<if $enemyarousal gte $enemyarousalmax>>
 
-<<beastejaculation>>
+	<<beastejaculation>>
 
-만족스러워하는 <<beasttypePost "은">> 거처로 돌아간다.
-<<if $monster is 1>>
-	"Next time I might take you with me, squishy," <<bhe>> coos.
-<</if>>
-<br><br>
+	만족스러워하는 <<beasttypePost "은">> 거처로 돌아간다.
+	<<if $monster is 1>>
+		"Next time I might take you with me, squishy," <<bhe>> coos.
+	<</if>>
+	<br><br>
 
-<<tearful>> 당신은 제 길로 걸어간다.
-<br><br>
+	<<tearful>> 당신은 제 길로 걸어간다.
+	<br><br>
 
-<<clotheson>>
-<<endcombat>>
+	<<clotheson>>
+	<<endcombat>>
 
-<<link [[다음|Forest]]>><<set $eventskip to 1>><</link>>
-<br>
+	<<link [[다음|Forest]]>><<set $eventskip to 1>><</link>>
+	<br>
 <<elseif $enemyhealth lte 0>>
 
-You scare the mighty <<beasttype>>. <<bHe>> flees deeper into the forest.
-<<if $monster is 1>>
-	"Not so tiny! Not so squishy!" <<bhe>> yells as <<bhe>> runs.
-<</if>>
-<br><br>
+	You scare the mighty <<beasttype>>. <<bHe>> flees deeper into the forest.
+	<<if $monster is 1>>
+		"Not so tiny! Not so squishy!" <<bhe>> yells as <<bhe>> runs.
+	<</if>>
+	<br><br>
 
-<<tearful>> you continue on your way.
-<br><br>
+	<<tearful>> you continue on your way.
+	<br><br>
 
-<<clotheson>>
-<<endcombat>>
+	<<clotheson>>
+	<<endcombat>>
 
-<<link [[다음|Forest]]>><<set $eventskip to 1>><</link>>
-<br>
+	<<link [[다음|Forest]]>><<set $eventskip to 1>><</link>>
+	<br>
 <<elseif $rescue is 1 and $alarm is 1>>
-You hear a gun fire close by, and a bullet lands near the <<beasttype>>. It backs off in fear and flees into the forest.
-<br><br>
-Eden emerges and helps you collect yourself.
-<br><br>
+	You hear a gun fire close by, and a bullet lands near the <<beasttype>>. <<bHe>> backs off in fear and flees into the forest.
+	<br><br>
 
-<<clotheson>>
-<<endcombat>>
-"Are you okay?" Eden asks.
-<br><br>
-<<link [[Go back to the cabin (0:30)|Forest Cabin Return]]>><<pass 30>><</link>>
-<br>
-<<link [[Say goodbye|Forest]]>><<endevent>><</link>>
-<br>
+	<<if $edenCagedEscape>>
+		<<clotheson>>
+		<<endcombat>>
+
+		<<edenCagedSave>>
+	<<else>>
+		Eden emerges and helps you collect yourself. "Damn bears," <<nnpc_he "Eden">> mutters. "Are you okay?"
+		<br><br>
+
+		<<clotheson>>
+		<<endcombat>>
+		<<if $gwylan_eden_coop gte 1>>
+			Eden glances around for a moment. "We must be in too deep for that shopkeep," <<nnpc_he "Eden">> says.
+			<br><br>
+		<</if>>
+
+		<<if $eden_rescue isnot 1>>
+			<<set $eden_rescue to 1>>
+			Eden pats you on the shoulder. "I was able to hear you because I happened to be in the area," <<nnpc_he "Eden">> says. "<span class="gold">I might not always be around, but I should be able to save you anywhere in the forest.</span> Give me a shout if you're in trouble."
+			<br><br>
+		<</if>>
+
+		<<link [[Go back to the cabin (0:30)|Forest Cabin Return]]>><<pass 30>><</link>>
+		<br>
+		<<link [[Say goodbye|Forest]]>><<endevent>><</link>>
+	<</if>>
 <</if>>
 
 :: Forest Wolf Mate
-<<set $outside to 1>><<set $location to "forest">><<effects>>
-<<beastNEWinit 1 wolf>>
+<<location "forest">><<effects>>
+
 
 당신은 땅에 대고 짝짓기 자세를 취한다.
 <<deviancy2>>
@@ -1100,8 +1567,8 @@ Eden emerges and helps you collect yourself.
 <br>
 
 :: Forest Wolf Mate2
-<<set $outside to 1>><<set $location to "forest">><<effects>>
-<<beastNEWinit 2 wolf>>
+<<location "forest">><<effects>>
+
 
 당신은 땅에 대고 짝짓기 자세를 취한다.
 <<deviancy3>>
@@ -1122,7 +1589,7 @@ Eden emerges and helps you collect yourself.
 <br>
 
 :: Forest Howl
-<<set $outside to 1>><<set $location to "forest">><<effects>>
+<<location "forest">><<effects>>
 
 <<if $syndromewolves gte 1>>
 
@@ -1131,7 +1598,7 @@ Eden emerges and helps you collect yourself.
 	<<if $monster is 1>>
 		"<<pPackbrother>>. Good to see." <br><br>
 	<</if>>
-
+	<<if $monster is 1 or $bestialitydisable is "f">>
 	<<if $phase is 1>>
 		<<if $deviancy gte 35>>
 			<<link [[Mate|Forest Wolf Sex2]]>><<set $phase to 2>><<set $sexstart to 1>><</link>><<deviant3>>
@@ -1142,6 +1609,7 @@ Eden emerges and helps you collect yourself.
 			<<link [[Mate|Forest Wolf Sex]]>><<set $phase to 2>><<set $sexstart to 1>><</link>><<deviant2>>
 		<br>
 		<</if>>
+	<</if>>
 	<</if>>
 <<link [[Pat and depart|Forest Pat]]>><<trauma -6>><<stress -12>><</link>><<ltrauma>><<lstress>>
 <br>
@@ -1157,6 +1625,7 @@ You throw your head back and howl into the canopy. The <<if $phase is 1>>wolves 
 <</if>>
 
 :: Forest Wolf Sex2
+
 <<if $monster is 1 and $phase is 2>>
 	"<<pPackbrotherPost>><<pheatPost "이야">>? 도와줄게!"
 <</if>>
@@ -1169,10 +1638,34 @@ You throw your head back and howl into the canopy. The <<if $phase is 1>>wolves 
 
 	<<beastTrainGenerate>>
 	<<set $NPCList[0].stance to "top">><<set $enemytrust -= 20>><<deviancy3>>
-<</if>>
 
+	<<if $loveInterest>>
+		<<if ($loveInterest.primary is "Eden" or $loveInterest.secondary is "Eden") and (random(1, 2) is 2 or $eden_rescue isnot 1)>>
+			<<enable_rescue>>
+		<</if>>
+	<</if>>
+<</if>>
 <<effects>>
 <<effectsman>>
+
+<<if $alarm is 1 and $rescue is 0>>
+	<<set $alarm to 0>>
+	<<if ($loveInterest.primary is "Eden" or $loveInterest.secondary is "Eden")>>
+		<<if $gwylan_rescue is 1>>
+			<span class="red">You're too deep into the forest for Gwylan to hear you, and Eden must not be in the area.</span>
+		<<else>>
+			<span class="red">You're too far from the town for anyone to hear you, and Eden must not be in the area.</span>
+		<</if>>
+	<<else>>
+		<<if $gwylan_rescue is 1>>
+			<span class="red">You're too deep into the forest for Gwylan to hear you.</span>
+		<<else>>
+			<span class="red">You're too far from the town for anyone to hear you.</span>
+		<</if>>
+	<</if>>
+	<br><br>
+<</if>>
+
 <br>
 <<beast $enemyno>>
 <br><br>
@@ -1187,11 +1680,14 @@ You throw your head back and howl into the canopy. The <<if $phase is 1>>wolves 
 	<span id="next"><<link [[다음|Forest Wolf Sex2 Finish]]>><</link>></span><<nexttext>>
 <<elseif $enemyhealth lte 0>>
 	<span id="next"><<link [[다음|Forest Wolf Sex2 Finish]]>><</link>></span><<nexttext>>
+<<elseif $rescue is 1 and $alarm is 1>>
+	<span id="next"><<link [[다음|Forest Wolf Sex2 Finish]]>><</link>></span><<nexttext>>
 <<else>>
 	<span id="next"><<link [[다음|Forest Wolf Sex2]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: Forest Wolf Sex
+
 <<if $monster is 1 and $phase is 2>>
 	"<<pPackbrotherPost>><<pheatPost "이야">>? 도와줄게!"
 <</if>>
@@ -1201,6 +1697,11 @@ You throw your head back and howl into the canopy. The <<if $phase is 1>>wolves 
 	<<set $consensual to 1>>
 	<<neutral 1>>
 	<<beastCombatInit>>
+	<<if ($loveInterest.primary is "Eden" or $loveInterest.secondary is "Eden") and (random(1, 2) is 2 or $eden_rescue isnot 1) and $forest lte 20>>
+		<<set $rescue to 2>>
+	<<elseif (($loveInterest.primary is "Eden" or $loveInterest.secondary is "Eden") and (random(1, 2) is 2 or $eden_rescue isnot 1)) or $forest lte 20>>
+		<<enable_rescue>>
+	<</if>>
 
 	<<set $NPCList[0].stance to "top">><<set $enemytrust -= 20>><<deviancy2>>
 <</if>>
@@ -1211,6 +1712,24 @@ You throw your head back and howl into the canopy. The <<if $phase is 1>>wolves 
 <<beast $enemyno>>
 <br><br>
 
+<<if $alarm is 1 and $rescue is 0>>
+	<<set $alarm to 0>>
+	<<if ($loveInterest.primary is "Eden" or $loveInterest.secondary is "Eden")>>
+		<<if $gwylan_rescue is 1>>
+			<span class="red">You're too deep into the forest for Gwylan to hear you, and Eden must not be in the area.</span>
+		<<else>>
+			<span class="red">You're too far from the town for anyone to hear you, and Eden must not be in the area.</span>
+		<</if>>
+	<<else>>
+		<<if $gwylan_rescue is 1>>
+			<span class="red">You're too deep into the forest for Gwylan to hear you.</span>
+		<<else>>
+			<span class="red">You're too far from the town for anyone to hear you.</span>
+		<</if>>
+	<</if>>
+	<br><br>
+<</if>>
+
 <<stateman>>
 <br><br>
 <<actionsman>>
@@ -1221,18 +1740,23 @@ You throw your head back and howl into the canopy. The <<if $phase is 1>>wolves 
 	<span id="next"><<link [[다음|Forest Wolf Sex Finish]]>><</link>></span><<nexttext>>
 <<elseif $enemyhealth lte 0>>
 	<span id="next"><<link [[다음|Forest Wolf Sex Finish]]>><</link>></span><<nexttext>>
+<<elseif $rescue is 2 and $alarm is 1>>
+	<span id="next"><<link [[다음|Forest Coop Rescue]]>><<set $phase to 1>><</link>></span><<nexttext>>
+<<elseif $alarm is 1 and $rescue is 1>>
+	<span id="next"><<link [[다음|Forest Wolf Sex Finish]]>><</link>></span><<nexttext>>
 <<else>>
 	<span id="next"><<link [[다음|Forest Wolf Sex]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: Forest Pat
-<<set $outside to 1>><<set $location to "forest">><<effects>>
+<<location "forest">><<effects>>
 
 <<if $phase is 1>>
 	You pat and stroke the <<beastsplural>>' heads. They rub against your hand, but don't stay long.
 	<br><br>
 	<<if $monster is 1>>
 		"Stay safe, <<ppackbrother>>."
+		<br><br>
 	<</if>>
 
 	<<link [[다음|Forest]]>><<endevent>><<set $eventskip to 1>><</link>>
@@ -1242,6 +1766,7 @@ You throw your head back and howl into the canopy. The <<if $phase is 1>>wolves 
 	<br><br>
 	<<if $monster is 1>>
 		"Stay safe, <<ppackbrother>>."
+		<br><br>
 	<</if>>
 
 	<<link [[다음|Forest]]>><<endevent>><<set $eventskip to 1>><</link>>
@@ -1249,7 +1774,8 @@ You throw your head back and howl into the canopy. The <<if $phase is 1>>wolves 
 <</if>>
 
 :: Forest Wolf Sex Finish
-<<set $outside to 1>><<set $location to "forest">><<effects>>
+
+<<location "forest">><<effects>>
 
 <<if $enemyarousal gte $enemyarousalmax>>
 	<<beastejaculation>>
@@ -1284,6 +1810,92 @@ You throw your head back and howl into the canopy. The <<if $phase is 1>>wolves 
 
 	<<link [[다음|Forest]]>><<set $eventskip to 1>><</link>>
 	<br>
+<<elseif $rescue is 1 and $forest lte 20>>
+	The <<beasttype>> growls, but is hit in the face by a flying ?gwylanItem. <<bHe>> yelps and looks around, alarmed.
+	<<if $monster is 1>>
+		"Human attack! Where human?!"
+	<</if>>
+	<br><br>
+
+	<<if $forest_shop_intro isnot 1 and $gwylan_rescue isnot 1>>
+		"Hey!" a <<nnpc_gendery "Gwylan">> shouts from beyond the treeline. "Shoo!" <<nnpc_He "Gwylan">> throws a ?gwylanItem,  hitting the <<beasttype>> in the side. <<bHe>> scurries away, <<bhis>> tail between <<bhis>> legs.
+		<br><br>
+
+		"I swear they get more aggressive every day," the <<nnpc_gendery "Gwylan">> mutters. <<nnpc_He "Gwylan">> steps out from the treeline, walking toward you. "You okay? Good thing I was in the area!"
+		<br><br>
+
+		<<nnpc_He "Gwylan">> looks about your age, with mousy hair and freckles. "I'm older than I look," <<nnpc_he "Gwylan">> says, as if reading your mind. "I'm Gwylan. Nice to meet you!"
+		<br><br>
+
+		"I have a shop right by the outskirts of the forest," <<nnpc_he "Gwylan">> says. "You can't miss it. I sell-" <<nnpc_he "Gwylan">> pauses. "My grand<<if $pronoun is "m">>father<<else>>mother<</if>> sells-" another pause. "I sell knick-knacks there. Things you won't find in normal shops. Even I don't know what I have in stock!" <<nnpc_He "Gwylan">> sounds proud.
+
+	<<else>>
+		"Hey!" Gwylan shouts from beyond the treeline. "Shoo!" <<nnpc_He "Gwylan">> throws a ?gwylanItem,  hitting the <<beasttype>> in the side. <<bHe>> scurries away, <<bhis>> tail between <<bhis>> legs.
+		<br><br>
+
+		"I swear they get more aggressive every day," Gwylan mutters. <<nnpc_He "Gwylan">> steps out from the treeline, walking toward you. "You okay? Good thing I was in the area!"
+		<<if $gwylan_aborted is 1>>
+			<<if $gwylan_eden_coop gte 1>>
+				<<nnpc_He "Gwylan">> can't meet your gaze. "Sorry for not saving you before, but I'm not messing with Eden. <<nnpc_He "Eden">> still scares me." <<nnpc_He "Gwylan">> frowns. "Why were you two fighting anyway? Did you fall out?"
+
+			<<else>>
+				<<nnpc_He "Gwylan">> can't meet your gaze. "Sorry for not saving you before, but I'm not messing with the <<nnpc_title "Eden">>. <<nnpc_Hes "Eden">> the scariest thing in the forest."
+			<</if>>
+
+		<<elseif $gwylan_aborted is 2>>
+			<<nnpc_He "Gwylan">> can't meet your gaze. "Sorry for not saving you before, but I'm not messing with the alpha. I don't want the entire pack breaking my door down."
+		<</if>>
+	<</if>>
+	<br><br>
+
+	<<if $gwylan_eden_coop gte 1 and $gwylan_aborted isnot 1>>
+		<<nnpc_He "Gwylan">> looks around for a moment. "Strange," <<nnpc_he "Gwylan">> says to <<nnpc_himself "Gwylan">>. "I thought the <<nnpc_title "Eden">> would be here. Must be busy. Ah well."
+		<br><br>
+	<</if>>
+
+	<<if $gwylan_rescue isnot 1>>
+		<<set $gwylan_rescue to 1>>
+		<<nnpc_He "Gwylan">> starts to walk away, but stops and turns around. "By the way," <<nnpc_he "Gwylan">> says. "I was able to save you because you're close enough to my shop. <span class="gold">If you go any further than the start of the lake, I won't be able to hear you.</span> Keep it in mind."
+		<br><br>
+	<</if>>
+	<<nnpc_He "Gwylan">> gathers <<nnpc_his "Gwylan">> items, then walks off in the direction of <<nnpc_his "Gwylan">> shop.
+	<br><br>
+
+	<<clotheson>><<set $gwylan_aborted to 0>>
+	<<endcombat>>
+
+	<<link [[다음|Forest]]>><<set $eventskip to 1>><</link>>
+
+<<elseif $rescue is 1 and $forest gte 21>>
+	You hear a gun fire close by, and a bullet lands near the <<beasttype>>. <<bHe>> backs off in fear and flees into the forest.
+	<br><br>
+
+	<<if $edenCagedEscape>>
+		<<clotheson>>
+		<<endcombat>>
+
+		<<edenCagedSave>>
+	<<else>>
+		Eden emerges and helps you collect yourself. "Damn wolves," <<nnpc_he "Eden">> mutters. "Are you okay?"
+		<br><br>
+
+		<<clotheson>>
+		<<endcombat>>
+		<<if $gwylan_eden_coop gte 1>>
+			Eden glances around for a moment. "We must be in too deep for that shopkeep," <<nnpc_he "Eden">> says.
+			<br><br>
+		<</if>>
+
+		<<if $eden_rescue isnot 1>>
+			<<set $eden_rescue to 1>>
+			Eden pats you on the shoulder. "I was able to hear you because I happened to be in the area," <<nnpc_he "Eden">> says. "<span class="gold">I might not always be around, but I should be able to save you anywhere in the forest.</span> Give me a shout if you're in trouble."
+			<br><br>
+		<</if>>
+
+		<<link [[Go back to the cabin (0:30)|Forest Cabin Return]]>><<pass 30>><</link>>
+		<br>
+		<<link [[Say goodbye|Forest]]>><<endevent>><</link>>
+	<</if>>
 <<else>>
 	The <<beasttype>> turns away from you and slinks between the trees.
 	<br><br>
@@ -1304,7 +1916,7 @@ You throw your head back and howl into the canopy. The <<if $phase is 1>>wolves 
 		The <<beasttype>> recoils in pain and fear, but the other is eager for a go.
 		<<combatTrainAdvance>>
 		<br><br>
-		[[다음|Forest Wolf Sex2]]
+		<<link [[다음|Forest Wolf Sex2]]>><</link>>
 	<<else>>
 		The <<beasttype>> recoils in pain and fear.
 		<<combatTrainAdvance>>
@@ -1318,7 +1930,7 @@ You throw your head back and howl into the canopy. The <<if $phase is 1>>wolves 
 		<<wolfpacktrust>>
 		<<combatTrainAdvance>>
 		<br><br>
-		[[다음|Forest Wolf Sex2]]
+		<<link [[다음|Forest Wolf Sex2]]>><</link>>
 	<<else>>
 		Satisfied, the <<beasttype>> moves away from you.
 		<<wolfpacktrust>>
@@ -1326,21 +1938,51 @@ You throw your head back and howl into the canopy. The <<if $phase is 1>>wolves 
 		<br><br>
 		<<link [[다음|Forest Wolf Sex2 Finish]]>><<set $finish to 1>><</link>>
 	<</if>>
+<<elseif $rescue is 1 and $alarm is 1>>
+	You hear a gun fire close by, and a bullet lands near the <<beasttype>>. <<bHe>> backs off in fear and flees into the forest, the other following close behind.
+	<br><br>
+
+	<<if $edenCagedEscape>>
+		<<clotheson>>
+		<<endcombat>>
+
+		<<edenCagedSave>>
+	<<else>>
+		Eden emerges and helps you collect yourself. "Damn wolves," <<nnpc_he "Eden">> mutters. "Are you okay?"
+		<br><br>
+
+		<<clotheson>>
+		<<endcombat>>
+		<<if $gwylan_eden_coop gte 1>>
+			Eden glances around for a moment. "We must be in too deep for that shopkeep," <<nnpc_he "Eden">> says.
+			<br><br>
+		<</if>>
+
+		<<if $eden_rescue isnot 1>>
+			<<set $eden_rescue to 1>>
+			Eden pats you on the shoulder. "I was able to hear you because I happened to be in the area," <<nnpc_he "Eden">> says. "<span class="gold">I might not always be around, but I should be able to save you anywhere in the forest.</span> Give me a shout if you're in trouble."
+			<br><br>
+		<</if>>
+
+		<<link [[Go back to the cabin (0:30)|Forest Cabin Return]]>><<pass 30>><</link>>
+		<br>
+		<<link [[Say goodbye|Forest]]>><<endevent>><</link>>
+	<</if>>
 <<elseif $finish is 1>>
 	<<if $consensual is 1>>
 		The <<beastsplural>> slink away between the trees.
 		<br><br>
 	<<else>>
 		<<if $enemywounded is 1 and $enemyejaculated is 0>>
-			The <<beasttype>> whimpers and flees into the darkness between the trees.
+			<<beasttypePost "은">> 낑낑거리다 숲 속으로 도망친다.
 		<<elseif $enemywounded is 0 and $enemyejaculated is 1>>
 			The <<beasttype>> leaves you lying on the grass.
 		<<elseif $enemywounded gte 2 and $enemyejaculated is 0>>
-			Feeling that you're more trouble than you're worth, the <<beastsplural>> flee between the trees.
+			<<beastspluralPost "은">> 당신의 가치에 비해 당신은 훨씬 골칫거리라고 느끼면서, 숲 속으로 도망친다.
 		<<elseif $enemywounded is 0 and $enemyejaculated gte 2>>
-			The <<beastsplural>> leave you spent and shivering on the grass.
+			<<beastspluralPost "은">> 풀밭 위에서 기진맥진한 채로 몸을 떠는 당신을 두고 떠난다.
 		<<elseif $enemywounded gte 1 and $enemyejaculated gte 1>>
-			The <<beastsplural>> leave you spent and shivering on the grass.
+			<<beastspluralPost "은">> 풀밭 위에서 기진맥진한 채로 몸을 떠는 당신을 두고 떠난다.
 		<</if>>
 		<br><br>
 	<</if>>
@@ -1356,7 +1998,7 @@ You throw your head back and howl into the canopy. The <<if $phase is 1>>wolves 
 <</if>>
 
 :: Forest Cutter Exhibitionism
-<<set $outside to 1>><<set $location to "forest">><<effects>>
+<<location "forest">><<effects>>
 
 <<flaunting>> 당신은 은신처를 떠나 <<person>> 에게로 걸어간다. 당신의 <<lewdness>>은 자랑스럽게 전시된다. <<He>> drops <<his>> axe and jaw when <<he>> sees you, then rubs <<his>> eyes. "I've been hitting those shrooms too hard," <<he>> mutters.
 
@@ -1376,9 +2018,9 @@ You throw your head back and howl into the canopy. The <<if $phase is 1>>wolves 
 <</if>>
 
 :: Forest Cutter
-<<set $outside to 1>><<set $location to "forest">><<effects>>
+<<location "forest">><<effects>>
 
-The <<person>> embeds <<his>> axe in the tree and leans against it. "What brings you out here?" <<he>> says.
+The <<person>> embeds <<his>> axe in the tree and leans against it. "What brings you out here?" <<he>> asks.
 <br><br>
 
 <<link [[Chat (0:30)|Forest Cutter Chat]]>><<stress -6>><<trauma -3>><<pass 30>><</link>><<ltrauma>><<lstress>>
@@ -1389,7 +2031,7 @@ The <<person>> embeds <<his>> axe in the tree and leans against it. "What brings
 <</if>>
 
 :: Forest Cutter Chat
-<<set $outside to 1>><<set $location to "forest">><<effects>>
+<<location "forest">><<effects>>
 
 You stay and chat with the <<person>>. <<He>> seems happy for the company.
 <br><br>
@@ -1421,12 +2063,12 @@ After a while <<he>> looks at the sky. "I need to get back to work," <<he>> says
 <br>
 
 :: Forest Cutter Seduce
-<<set $outside to 1>><<set $location to "forest">><<effects>>
+<<location "forest">><<effects>>
 
 <<set $seductiondifficulty to 6000>>
 <<seductioncheck>>
 <br><br>
-<<if $seductionskill lt 1000>><span class="gold">You feel more confident in your powers of seduction.</span><</if>><<seductionskilluse>>
+<<if $seductionskill lt 1000>><span class="gold">당신은 유혹하는 데 좀 더 자신감이 붙었다.</span><</if>><<seductionskilluse>>
 <br><br>
 
 You sit on the grass and look up at <<him>>. "I'm just looking for some company," you say, patting the grass next to you.<<promiscuity2>>
@@ -1449,7 +2091,7 @@ You sit on the grass and look up at <<him>>. "I'm just looking for some company,
 <</if>>
 
 :: Forest Cutter Flaunt
-<<set $outside to 1>><<set $location to "forest">><<effects>>
+<<location "forest">><<effects>>
 
 You give <<him>> a slow twirl while walking towards <<him>>, making sure <<he>> gets to see you from other angles. <<He>> looks away, <<his>> face turning red. "Don't be shy," you purr. "You can look all you want." You're close to <<him>> now, so close <<he>> has to look up to avoid seeing you. <<He>> turns around.
 
@@ -1463,26 +2105,45 @@ You give <<him>> a slow twirl while walking towards <<him>>, making sure <<he>> 
 <br>
 
 :: Forest Cutter Sex
+
 <<if $sexstart is 1>>
-<<set $sexstart to 0>>
-<<consensual>>
-<<set $consensual to 1>>
-<<neutral 1>>
-<<if $loveInterest>>
-	<<if ($loveInterest.primary is "Eden" or $loveInterest.secondary is "Eden") and $location is "forest" and random(1, 2) is 2>>
-		<<set $rescue to 1>>
+	<<set $sexstart to 0>>
+	<<consensual>>
+	<<set $consensual to 1>>
+	<<neutral 1>>
+	<<if $loveInterest>>
+		<<if $loveInterest.primary is "Eden" or $loveInterest.secondary is "Eden">>
+			<<enable_rescue>>
+		<</if>>
 	<</if>>
-<</if>>
 
-<<maninit>>
-<<set $enemytrust += 50>>
-
-<br><br>
+	<<maninit>>
+	<<set $enemytrust += 50>>
+	<br><br>
 
 <</if>>
 
 <<effects>>
-<<effectsman>><<man>>
+<<effectsman>>
+<<man>>
+
+<<if $alarm is 1 and $rescue is 0>>
+	<<set $alarm to 0>>
+	<<if ($loveInterest.primary is "Eden" or $loveInterest.secondary is "Eden")>>
+		<<if $gwylan_rescue is 1>>
+			<span class="red">You're too deep into the forest for Gwylan to hear you, and Eden must not be in the area.</span>
+		<<else>>
+			<span class="red">You're too far from the town for anyone to hear you, and Eden must not be in the area.</span>
+		<</if>>
+	<<else>>
+		<<if $gwylan_rescue is 1>>
+			<span class="red">You're too deep into the forest for Gwylan to hear you.</span>
+		<<else>>
+			<span class="red">You're too far from the town for anyone to hear you.</span>
+		<</if>>
+	<</if>>
+	<br><br>
+<</if>>
 
 <<stateman>>
 <br><br>
@@ -1501,52 +2162,67 @@ You give <<him>> a slow twirl while walking towards <<him>>, making sure <<he>> 
 <</if>>
 
 :: Forest Cutter Sex Finish
-<<set $outside to 1>><<set $location to "forest">><<effects>>
+<<location "forest">><<effects>>
 
 <<if $enemyarousal gte $enemyarousalmax>>
-<<ejaculation>>
+	<<ejaculation>>
 
-<<He>> falls asleep on the grass. <<tearful>> you climb to your feet.
-<br><br>
+	<<He>> falls asleep on the grass. <<tearful>> you climb to your feet.
+	<br><br>
 
-<<clotheson>>
-<<endcombat>>
-<<link [[다음|Forest]]>><<set $eventskip to 1>><</link>>
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[다음|Forest]]>><<set $eventskip to 1>><</link>>
 <<elseif $enemyhealth lte 0>>
 
-You knock the <<person>> back. <<He>> trips over a stump. <<tearful>> you escape into the forest.
-<br><br>
+	You knock the <<person>> back. <<He>> trips over a stump. <<tearful>> you escape into the forest.
+	<br><br>
 
-<<clotheson>>
-<<endcombat>>
-<<link [[다음|Forest]]>><<set $eventskip to 1>><</link>>
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[다음|Forest]]>><<set $eventskip to 1>><</link>>
 <<elseif $rescue is 1 and $alarm is 1>>
-You hear a gun fire close by, and a bullet lands near the <<person>>. <<He>> backs off in fear and flees into the forest.
-<br><br>
-Eden emerges and helps you collect yourself.
-<br><br>
+	You hear a gun fire close by, and a bullet lands near the <<person>>. "The maniac," <<he>> whispers. <<He>> backs off in fear and flees into the forest.
+	<br><br>
 
-<<clotheson>>
-<<endcombat>>
-"Are you okay?" Eden asks.
-<br><br>
-<<link [[Go back to the cabin (0:30)|Forest Cabin Return]]>><<pass 30>><</link>>
-<br>
-<<link [[Say goodbye|Forest]]>><<endevent>><</link>>
-<br>
+	<<if $edenCagedEscape>>
+		<<clotheson>>
+		<<endcombat>>
+
+		<<edenCagedSave>>
+	<<else>>
+		Eden emerges and helps you collect yourself. "Damn bastard," <<nnpc_he "Eden">> mutters. "Are you okay?"
+		<br><br>
+
+		<<clotheson>>
+		<<endcombat>>
+		<<if $gwylan_eden_coop gte 1>>
+			Eden glances around for a moment. "We must be in too deep for that shopkeep," <<nnpc_he "Eden">> says.
+			<br><br>
+		<</if>>
+
+		<<if $eden_rescue isnot 1>>
+			<<set $eden_rescue to 1>>
+			Eden pats you on the shoulder. "I was able to hear you because I happened to be in the area," <<nnpc_he "Eden">> says. "<span class="gold">I might not always be around, but I should be able to save you anywhere in the forest.</span> Give me a shout if you're in trouble."
+			<br><br>
+		<</if>>
+
+		<<link [[Go back to the cabin (0:30)|Forest Cabin Return]]>><<pass 30>><</link>>
+		<br>
+		<<link [[Say goodbye|Forest]]>><<endevent>><</link>>
+	<</if>>
 <<else>>
 
-<<He>> climbs to <<his>> feet. "I should get back to work," <<he>> says. "People would get the wrong idea if they saw us."
-<br><br>
+	<<He>> climbs to <<his>> feet. "I should get back to work," <<he>> says. "People would get the wrong idea if they saw us."
+	<br><br>
 
-<<clotheson>>
-<<endcombat>>
-<<link [[다음|Forest]]>><<set $eventskip to 1>><</link>>
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[다음|Forest]]>><<set $eventskip to 1>><</link>>
 <</if>>
-<br><br>
 
 :: Forest Deer
-<<set $outside to 1>><<set $location to "forest">><<effects>>
+<<location "forest">><<effects>>
 
 <<if $rng gte 51>>
 You creep forward. The deer remains still. You step within arm's reach, and hold out your hand. It sniffs you, then goes back to grazing.
@@ -1565,7 +2241,7 @@ You creep forward. Unfortunately, the deer turns and runs in the other direction
 <</if>>
 
 :: Forest Slime Pair Submit willingly
-<<set $outside to 1>><<set $location to "forest">><<effects>>
+<<location "forest">><<effects>>
 <<generate1>><<generate2>>
 You stop in the middle of the trail, and wait. A <<person1>><<person>> and <<person2>><<person>> walk into view. They slow down when they see the strange <<girl>> stood still, staring at them.
 <br>
@@ -1577,7 +2253,7 @@ You stop in the middle of the trail, and wait. A <<person1>><<person>> and <<per
 <<if $worn.lower.name isnot "naked">>
 	<<set $worn.lower.vagina_exposed to 1>><<set $worn.lower.anus_exposed to 1>><<set $worn.lower.exposed to 2>>
 	<<if $worn.under_lower.name is "naked">>
-		<<if $worn.lower.skirt is 1>><<set $worn.lower.skirt_down to 0>>
+		<<if setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1>><<set $worn.lower.skirt_down to 0>>
 			You lift up your $worn.lower.name, <span class="lewd">exposing your <<undies>>.</span>
 		<<else>><<set $worn.lower.state to "thighs">>
 			You pull down your $worn.lower.name, <span class="lewd">exposing your <<undies>>.</span>
@@ -1590,7 +2266,7 @@ You stop in the middle of the trail, and wait. A <<person1>><<person>> and <<per
 	<<if $worn.lower.name is "naked">>
 		You pull down your $worn.under_lower.name, <span class="lewd">exposing your <<genitals>>.</span>
 	<<else>>
-		<<if $worn.lower.skirt is 1>><<set $worn.lower.skirt_down to 0>>
+		<<if setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1>><<set $worn.lower.skirt_down to 0>>
 			You lift up your $worn.lower.name with one hand while lowering you $worn.under_lower.name with the other <span class="lewd">exposing your <<genitals>>.</span>
 		<<else>><<set $worn.lower.state to "thighs">>
 			You pull down your $worn.lower.name and $worn.under_lower.name, <span class="lewd">exposing your <<genitals>>.</span>
@@ -1606,7 +2282,7 @@ The pair share a grin. "We'll be happy to oblige," <<he>> says, stepping closer.
 <br>
 
 :: Forest Slime Pair Obey
-<<set $outside to 1>><<set $location to "forest">><<effects>>
+<<location "forest">><<effects>>
 <<generate1>><<generate2>>
 You stop in the middle of the trail, and wait. A <<person1>><<person>> and <<person2>><<person>> walk into view. They slow down when they see the strange <<girl>> stood still, staring at them.
 <br><br>
@@ -1623,7 +2299,7 @@ The pair share a grin. "We'll be happy to oblige," <<he>> says, stepping closer.
 <br>
 
 :: Forest Slime Pair Defy
-<<set $outside to 1>><<set $location to "forest">><<effects>>
+<<location "forest">><<effects>>
 
 <<if $slimeDefyCooldown>>
 	You turn and run into the forest, making sure you get far away from the pair and whatever the slime wants you to do, and feel a jolt of pain as the slime punishes you for defiance. However, <span class="teal">it's still worn out from overpowering you earlier.</span> You feel it try, <span class="green">but fail,</span> to force your steps in the opposite direction.
@@ -1631,7 +2307,7 @@ The pair share a grin. "We'll be happy to oblige," <<he>> says, stepping closer.
 	<<endevent>>
 	<<link [[다음|Forest]]>><<set $eventskip to 1>><</link>>
 	<br>
-<<elseif $corruption_slime gte ($willpower / 10)>>
+<<elseif $corruption_slime gte (currentSkillValue('willpower') / 10)>>
 	<<if $promiscuity gte 55>>
 		<<set $slimeDefyCooldown to 4>>
 	<<else>>
@@ -1674,10 +2350,10 @@ The pair share a grin. "We'll be happy to oblige," <<he>> says, stepping closer.
 	<<molested>>
 	<<set $noFinish to 1>>
 	<<maninit>>
-	<<if $loveInterest>>
-		<<if ($loveInterest.primary is "Eden" or $loveInterest.secondary is "Eden") and $location is "forest" and random(1, 2) is 2>>
-			<<set $rescue to 1>>
-		<</if>>
+	<<if ($loveInterest.primary is "Eden" or $loveInterest.secondary is "Eden") and (random(1, 2) is 2 or $eden_rescue isnot 1) and $forest lte 20>>
+		<<set $rescue to 2>>
+	<<elseif (($loveInterest.primary is "Eden" or $loveInterest.secondary is "Eden") and (random(1, 2) is 2 or $eden_rescue isnot 1)) or $forest lte 20>>
+		<<enable_rescue>>
 	<</if>>
 <<elseif $sexstart is 1>>
 	<<set $sexstart to 0>>
@@ -1686,16 +2362,34 @@ The pair share a grin. "We'll be happy to oblige," <<he>> says, stepping closer.
 	<<neutral 1>>
 	<<set $noFinish to 1>>
 	<<maninit>>
-	<<if $loveInterest>>
-		<<if ($loveInterest.primary is "Eden" or $loveInterest.secondary is "Eden") and $location is "forest" and random(1, 2) is 2>>
-			<<set $rescue to 1>>
-		<</if>>
+	<<if ($loveInterest.primary is "Eden" or $loveInterest.secondary is "Eden") and (random(1, 2) is 2 or $eden_rescue isnot 1) and $forest lte 20>>
+		<<set $rescue to 2>>
+	<<elseif (($loveInterest.primary is "Eden" or $loveInterest.secondary is "Eden") and (random(1, 2) is 2 or $eden_rescue isnot 1)) or $forest lte 20>>
+		<<enable_rescue>>
 	<</if>>
 <</if>>
 
 <<effects>>
 
 <<effectsman>><<man>>
+
+<<if $alarm is 1 and $rescue is 0>>
+	<<set $alarm to 0>>
+	<<if ($loveInterest.primary is "Eden" or $loveInterest.secondary is "Eden")>>
+		<<if $gwylan_rescue is 1>>
+			<span class="red">You're too deep into the forest for Gwylan to hear you, and Eden must not be in the area.</span>
+		<<else>>
+			<span class="red">You're too far from the town for anyone to hear you, and Eden must not be in the area.</span>
+		<</if>>
+	<<else>>
+		<<if $gwylan_rescue is 1>>
+			<span class="red">You're too deep into the forest for Gwylan to hear you.</span>
+		<<else>>
+			<span class="red">You're too far from the town for anyone to hear you.</span>
+		<</if>>
+	<</if>>
+	<br><br>
+<</if>>
 
 <<stateman>>
 <br><br>
@@ -1705,65 +2399,146 @@ The pair share a grin. "We'll be happy to oblige," <<he>> says, stepping closer.
 	<span id="next"><<link [[다음|Forest Slime Rape Finish]]>><</link>></span><<nexttext>>
 <<elseif $enemyarousal gte $enemyarousalmax>>
 	<span id="next"><<link [[다음|Forest Slime Rape Finish]]>><</link>></span><<nexttext>>
+<<elseif $rescue is 2 and $alarm is 1>>
+	<span id="next"><<link [[다음|Forest Coop Rescue]]>><<set $phase to 2>><</link>></span><<nexttext>>
 <<elseif $rescue is 1 and $alarm is 1>>
-	<span id="next"><<link [[다음|Forest Slime Rape Finish]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Forest Slime Rape Finish]]>><<set $phase to 2>><</link>></span><<nexttext>>
 <<else>>
 	<span id="next"><<link [[다음|Forest Slime Rape]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: Forest Slime Rape Finish
+
 <<effects>>
 <<if $enemyarousal gte $enemyarousalmax>>
-<<ejaculation>>
+	<<ejaculation>>
 
-They step away from you, smiling. "They said there were fairies living in this forest," the <<person1>><<person>> says. "Didn't expect them to be sluts though." Laughing, they continue on their journey.
-<br><br>
+	They step away from you, smiling. "They said there were fairies living in this forest," the <<person1>><<person>> says. "Didn't expect them to be sluts though." Laughing, they continue on their journey.
+	<br><br>
 
-Your knees buckle as the slime's influence fades. <<tearful>> you steady yourself.
-<br><br>
+	Your knees buckle as the slime's influence fades. <<tearful>> you steady yourself.
+	<br><br>
 
-<<clotheson>>
-<<endcombat>>
+	<<clotheson>>
+	<<endcombat>>
 
-<<link [[다음|Forest]]>><<set $eventskip to 1>><</link>>
+	<<link [[다음|Forest]]>><<set $eventskip to 1>><</link>>
 
-<<elseif $rescue is 1 and $alarm is 1>>
-You hear a gun fire close by, and a bullet lands near the pair. They back off in fear and flee into the forest.
-<br><br>
-Eden emerges and helps you collect yourself.
-<br><br>
-You feel a jolt of pain as the slime punishes you for defiance.
-<<corruption -1>><<pain 8>><<stress 6>><<trauma 6>><<set $submissive -= 1>><<lcorruption>><<ggpain>><<ggtrauma>><<ggstress>>
-<br><br>
+<<elseif $rescue is 1 and $forest lte 20>>
+	The <<person1>><<person>> charges you, but a flying ?gwylanItem smacks <<him>> in the face. The <<person2>><<person>> looks over. A ?gwylanItem hits <<him>> as well.
 
-<<clotheson>>
-<<endcombat>>
-"Are you okay?" Eden asks.
-<br><br>
-<<link [[Go back to the cabin (0:30)|Forest Cabin Return]]>><<pass 30>><</link>>
-<br>
-<<link [[Say goodbye|Forest]]>><<endevent>><</link>>
-<br>
+	<<if $forest_shop_intro isnot 1 and $gwylan_rescue isnot 1>>
+		"Hey!" a <<nnpc_gendery "Gwylan">> shouts from beyond the treeline. "Get away from <<phim>>. I have more." As if to demonstrate, <<nnpc_he "Gwylan">> throws a ?gwylanItem, hitting the <<person1>><<person>> in the face again. The pair glance at each other, then turn and run.
+		<br><br>
 
+		"I hope they weren't customers," the <<nnpc_gendery "Gwylan">> mutters. "Well, I don't want their money anyway." <<nnpc_He "Gwylan">> steps out from the treeline, and walks toward you. "You okay? Good thing I was in the area."
+		<br><br>
+
+		<<nnpc_He "Gwylan">> looks about your age, with mousy hair and freckles. "I'm older than I look," <<nnpc_he "Gwylan">> says, as if reading your mind. "I'm Gwylan. Nice to meet you!"
+		<br><br>
+
+		"I have a shop right by the outskirts of the forest," <<nnpc_he "Gwylan">> says. "You can't miss it. I sell-" <<nnpc_he "Gwylan">> pauses. "My grand<<if $pronoun is "m">>father<<else>>mother<</if>> sells-" another pause. "I sell knick-knacks there. Things you won't find in normal shops. Even I don't know what I have in stock!" <<nnpc_He "Gwylan">> sounds proud.
+
+	<<else>>
+		"Hey!" a <<nnpc_gendery "Gwylan">> shouts from beyond the treeline. "Get away from <<phim>>. I have more." As if to demonstrate, <<nnpc_he "Gwylan">> throws a ?gwylanItem, hitting the <<person1>><<person>> in the face again. The pair glance at each other, then turn and run.
+		<br><br>
+
+		"I hope they weren't customers," the <<nnpc_gendery "Gwylan">> mutters. "Well, I don't want their money anyway." <<nnpc_He "Gwylan">> steps out from the treeline, and walks toward you. "You okay? Good thing I was in the area."
+		<<if $gwylan_aborted is 1>>
+			<<if $gwylan_eden_coop gte 1>>
+				<<nnpc_He "Gwylan">> can't meet your gaze. "Sorry for not saving you before, but I'm not messing with Eden. <<nnpc_He "Eden">> still scares me." <<nnpc_He "Gwylan">> frowns. "Why were you two fighting anyway? Did you fall out?"
+
+			<<else>>
+				<<nnpc_He "Gwylan">> can't meet your gaze. "Sorry for not saving you before, but I'm not messing with the <<nnpc_title "Eden">>. <<nnpc_Hes "Eden">> the scariest thing in the forest."
+			<</if>>
+
+		<<elseif $gwylan_aborted is 2>>
+			<<nnpc_He "Gwylan">> can't meet your gaze. "Sorry for not saving you before, but I'm not messing with the alpha. I don't want the entire pack breaking my door down."
+		<</if>>
+	<</if>>
+	<br><br>
+
+	<<if $gwylan_eden_coop gte 1 and $gwylan_aborted isnot 1>>
+		<<nnpc_He "Gwylan">> looks around for a moment. "Strange," <<nnpc_he "Gwylan">> says to <<nnpc_himself "Gwylan">>. "I thought the <<nnpc_title "Eden">> would be here. Must be busy. Ah well."
+		<br><br>
+	<</if>>
+
+	<<if $gwylan_rescue isnot 1>>
+		<<set $gwylan_rescue to 1>>
+		<<nnpc_He "Gwylan">> starts to walk away, but stops and turns around. "By the way," <<nnpc_he "Gwylan">> says. "I was able to save you because you're close enough to my shop. <span class="gold">If you go any further than the start of the lake, I won't be able to hear you.</span> Keep it in mind."
+		<br><br>
+	<</if>>
+
+	<<nnpc_He "Gwylan">> gathers <<nnpc_his "Gwylan">> items, then walks off in the direction of <<nnpc_his "Gwylan">> shop.
+	<br><br>
+
+	<<clotheson>><<set $gwylan_aborted to 0>>
+	<<endcombat>>
+
+	You feel a jolt of pain as the slime punishes you for defiance.
+	<<corruption -1>><<pain 8>><<stress 6>><<trauma 6>><<set $submissive -= 1>><<lcorruption>><<ggpain>><<ggtrauma>><<ggstress>>
+	<br><br>
+
+	<<link [[다음|Forest]]>><<set $eventskip to 1>><</link>>
+
+<<elseif $rescue is 1 and $forest gte 21>>
+	You hear a gun fire close by, and a bullet lands at the pair's feet. They back off in fear and flee into the forest.
+	<br><br>
+
+	<<if $edenCagedEscape>>
+		<<clotheson>>
+		<<endcombat>>
+
+		You feel a jolt of pain as the slime punishes you for defiance.
+		<<corruption -1>><<pain 8>><<stress 6>><<trauma 6>><<set $submissive -= 1>><<lcorruption>><<ggpain>><<ggtrauma>><<ggstress>>
+		<br><br>
+
+		<<edenCagedSave>>
+	<<else>>
+		Eden emerges and helps you collect yourself. "Damn hikers," <<nnpc_he "Eden">> mutters. "Are you okay?"
+		<br><br>
+
+		<<clotheson>>
+		<<endcombat>>
+
+		<br><br>
+
+		You feel a jolt of pain as the slime punishes you for defiance.
+		<<corruption -1>><<pain 8>><<stress 6>><<trauma 6>><<set $submissive -= 1>><<lcorruption>><<ggpain>><<ggtrauma>><<ggstress>>
+		<br><br>
+
+		<<if $gwylan_eden_coop gte 1>>
+			Eden glances around for a moment. "We must be in too deep for that shopkeep," <<nnpc_he "Eden">> says.
+			<br><br>
+		<</if>>
+
+		<<if $eden_rescue isnot 1>>
+			<<set $eden_rescue to 1>>
+			Eden pats you on the shoulder. "I was able to hear you because I happened to be in the area," <<nnpc_he "Eden">> says. "<span class="gold">I might not always be around, but I should be able to save you anywhere in the forest.</span> Give me a shout if you're in trouble."
+			<br><br>
+		<</if>>
+
+		<<link [[Go back to the cabin (0:30)|Forest Cabin Return]]>><<pass 30>><</link>>
+		<br>
+		<<link [[Say goodbye|Forest]]>><<endevent>><</link>>
+	<</if>>
 <<else>>
+	You shove the pair away from you. <<tearful>> you run.
+	<br><br>
 
-You shove the pair away from you. <<tearful>> you run.
-<br><br>
+	You feel a jolt of pain as the slime punishes you for defiance. It tries to steal control of your legs, but fails.
+	<<corruption -1>><<pain 8>><<stress 6>><<trauma 6>><<set $submissive -= 1>><<lcorruption>><<ggpain>><<ggtrauma>><<ggstress>>
+	<br><br>
 
-You feel a jolt of pain as the slime punishes you for defiance. It tries to steal control of your legs, but fails.
-<<corruption -1>><<pain 8>><<stress 6>><<trauma 6>><<set $submissive -= 1>><<lcorruption>><<ggpain>><<ggtrauma>><<ggstress>>
-<br><br>
+	<<clotheson>>
+	<<endcombat>>
 
-<<clotheson>>
-<<endcombat>>
-
-<<link [[다음|Forest]]>><<set $eventskip to 1>><</link>>
-
+	<<link [[다음|Forest]]>><<set $eventskip to 1>><</link>>
 <</if>>
 
 :: Forest Slime Wolf Submit willingly
-<<set $outside to 1>><<set $location to "forest">><<effects>>
-<<beastNEWinit 1 wolf>>
+<<location "forest">><<effects>>
+
 In one motion, you turn and drop to your hands and knees. You wiggle provocatively, and growl.
 <br>
 <<deviancy4>>
@@ -1775,8 +2550,8 @@ A <<beasttype>> steps out from the forest, sniffs you, then mounts.
 <br>
 
 :: Forest Slime Wolf Obey
-<<set $outside to 1>><<set $location to "forest">><<effects>>
-<<beastNEWinit 1 wolf>>
+<<location "forest">><<effects>>
+
 In one motion, you turn and drop to your hands and knees. You wiggle provocatively, and growl.
 <br><br>
 
@@ -1787,8 +2562,8 @@ A <<beasttype>> steps out from the forest, sniffs you, then mounts.
 <br>
 
 :: Forest Slime Wolf Defy
-<<set $outside to 1>><<set $location to "forest">><<effects>>
-<<beastNEWinit 1 wolf>>
+<<location "forest">><<effects>>
+
 
 <<if $slimeDefyCooldown>>
 	You turn and run into the forest. The slime tries to overpower your will, and feel a jolt of pain as the slime punishes you for defiance. However, <span class="teal">it's still worn out from overpowering you earlier.</span> You feel it try, <span class="green">but fail,</span> to force your steps in the opposite direction.
@@ -1797,7 +2572,7 @@ A <<beasttype>> steps out from the forest, sniffs you, then mounts.
 	<<endevent>>
 	<<link [[다음|Forest]]>><<set $eventskip to 1>><</link>>
 	<br>
-<<elseif $corruption_slime gte ($willpower / 10)>>
+<<elseif $corruption_slime gte (currentSkillValue('willpower') / 10)>>
 	<<if $deviancy gte 55>>
 		<<set $slimeDefyCooldown to 4>>
 	<<else>>
@@ -1824,6 +2599,7 @@ A <<beasttype>> steps out from the forest, sniffs you, then mounts.
 <</if>>
 
 :: Forest Slime Wolf Rape
+
 <<if $molestationstart is 1>>
 	<<set $molestationstart to 0>>
 	<<controlloss>>
@@ -1832,10 +2608,10 @@ A <<beasttype>> steps out from the forest, sniffs you, then mounts.
 	<<molested>>
 	<<beastCombatInit>>
 	<<set $noFinish to 1>>
-	<<if $loveInterest>>
-		<<if ($loveInterest.primary is "Eden" or $loveInterest.secondary is "Eden") and $location is "forest" and random(1, 2) is 2>>
-			<<set $rescue to 1>>
-		<</if>>
+	<<if ($loveInterest.primary is "Eden" or $loveInterest.secondary is "Eden") and (random(1, 2) is 2 or $eden_rescue isnot 1) and $forest lte 20>>
+		<<set $rescue to 2>>
+	<<elseif (($loveInterest.primary is "Eden" or $loveInterest.secondary is "Eden") and (random(1, 2) is 2 or $eden_rescue isnot 1)) or $forest lte 20>>
+		<<enable_rescue>>
 	<</if>>
 
 	<<set $NPCList[0].stance to "top">>
@@ -1846,10 +2622,10 @@ A <<beasttype>> steps out from the forest, sniffs you, then mounts.
 	<<neutral 1>>
 	<<beastCombatInit>>
 	<<set $noFinish to 1>>
-	<<if $loveInterest>>
-		<<if ($loveInterest.primary is "Eden" or $loveInterest.secondary is "Eden") and $location is "forest" and random(1, 2) is 2>>
-			<<set $rescue to 1>>
-		<</if>>
+	<<if ($loveInterest.primary is "Eden" or $loveInterest.secondary is "Eden") and (random(1, 2) is 2 or $eden_rescue isnot 1) and $forest lte 20>>
+		<<set $rescue to 2>>
+	<<elseif (($loveInterest.primary is "Eden" or $loveInterest.secondary is "Eden") and (random(1, 2) is 2 or $eden_rescue isnot 1)) or $forest lte 20>>
+		<<enable_rescue>>
 	<</if>>
 
 	<<set $NPCList[0].stance to "top">>
@@ -1857,6 +2633,25 @@ A <<beasttype>> steps out from the forest, sniffs you, then mounts.
 
 <<effects>>
 <<effectsman>>
+
+<<if $alarm is 1 and $rescue is 0>>
+	<<set $alarm to 0>>
+	<<if ($loveInterest.primary is "Eden" or $loveInterest.secondary is "Eden")>>
+		<<if $gwylan_rescue is 1>>
+			<span class="red">You're too deep into the forest for Gwylan to hear you, and Eden must not be in the area.</span>
+		<<else>>
+			<span class="red">You're too far from the town for anyone to hear you, and Eden must not be in the area.</span>
+		<</if>>
+	<<else>>
+		<<if $gwylan_rescue is 1>>
+			<span class="red">You're too deep into the forest for Gwylan to hear you.</span>
+		<<else>>
+			<span class="red">You're too far from the town for anyone to hear you.</span>
+		<</if>>
+	<</if>>
+	<br><br>
+<</if>>
+
 <br><br>
 <<beast $enemyno>>
 <br><br>
@@ -1869,10 +2664,12 @@ A <<beasttype>> steps out from the forest, sniffs you, then mounts.
 	<span id="next"><<link [[다음|Forest Slime Wolf Rape Finish]]>><</link>></span><<nexttext>>
 <<elseif $enemyarousal gte $enemyarousalmax>>
 	<span id="next"><<link [[다음|Forest Slime Wolf Rape Finish]]>><</link>></span><<nexttext>>
-<<elseif $rescue is 1 and $alarm is 1>>
+<<elseif $rescue is 2 and $alarm is 1>>
+	<span id="next"><<link [[다음|Forest Coop Rescue]]>><<set $phase to 3>><</link>></span><<nexttext>>
+<<elseif $alarm is 1 and $rescue is 1>>
 	<span id="next"><<link [[다음|Forest Slime Wolf Rape Finish]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link "Next">><<script>>state.display(state.active.title, null)<</script>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Forest Slime Wolf Rape]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: Forest Slime Wolf Rape Finish
@@ -1887,28 +2684,113 @@ A <<beasttype>> steps out from the forest, sniffs you, then mounts.
 	<<clotheson>>
 	<<endcombat>>
 	<<link [[다음|Forest]]>><<set $eventskip to 1>><</link>>
-<<elseif $rescue is 1 and $alarm is 1>>
-	You hear a gun fire close by, and a bullet lands near the <<beasttype>>. It backs off in fear and flees into the forest.
+
+<<elseif $rescue is 1 and $forest lte 20>>
+	The <<beasttype>> growls, but is hit in the face by a flying ?gwylanItem. <<bHe>> yelps and looks around, alarmed.
+	<<if $monster is 1>>
+		"Human attack! Where?!"
+	<</if>>
 	<br><br>
-	Eden emerges and helps you collect yourself.
+
+	<<if $forest_shop_intro isnot 1 and $gwylan_rescue isnot 1>>
+		"Hey!" a <<nnpc_gendery "Gwylan">> shouts from beyond the treeline. "Shoo!" <<nnpc_He "Gwylan">> throws a ?gwylanItem,  hitting the <<beasttype>> in the side. <<bHe>> scurries away, <<bhis>> tail between <<bhis>> legs.
+		<br><br>
+
+		"I swear they get more aggressive every day," the <<nnpc_gendery "Gwylan">> mutters. <<nnpc_He "Gwylan">> steps out from the treeline, walking toward you. "You okay? Good thing I was in the area!"
+		<br><br>
+
+		<<nnpc_He "Gwylan">> looks about your age, with mousy hair and freckles. "I'm older than I look," <<nnpc_he "Gwylan">> says, as if reading your mind. "I'm Gwylan. Nice to meet you!"
+		<br><br>
+
+		"I have a shop right by the outskirts of the forest," <<nnpc_he "Gwylan">> says. "You can't miss it. I sell-" <<nnpc_he "Gwylan">> pauses. "My grand<<if $pronoun is "m">>father<<else>>mother<</if>> sells-" another pause. "I sell knick-knacks there. Things you won't find in normal shops. Even I don't know what I have in stock!" <<nnpc_He "Gwylan">> sounds proud.
+
+	<<else>>
+		"Hey!" Gwylan shouts from beyond the treeline. "Shoo!" <<nnpc_He "Gwylan">> throws a ?gwylanItem,  hitting the <<beasttype>> in the side. <<bHe>> scurries away, <<bhis>> tail between <<bhis>> legs.
+		<br><br>
+
+		"I swear they get more aggressive every day," Gwylan mutters. <<nnpc_He "Gwylan">> steps out from the treeline, walking toward you. "You okay? Good thing I was in the area!"
+		<<if $gwylan_aborted is 1>>
+			<<if $gwylan_eden_coop gte 1>>
+				<<nnpc_He "Gwylan">> can't meet your gaze. "Sorry for not saving you before, but I'm not messing with Eden. <<nnpc_He "Eden">> still scares me." <<nnpc_He "Gwylan">> frowns. "Why were you two fighting anyway? Did you fall out?"
+
+			<<else>>
+				<<nnpc_He "Gwylan">> can't meet your gaze. "Sorry for not saving you before, but I'm not messing with the <<nnpc_title "Eden">>. <<nnpc_Hes "Eden">> the scariest thing in the forest."
+			<</if>>
+
+		<<elseif $gwylan_aborted is 2>>
+			<<nnpc_He "Gwylan">> can't meet your gaze. "Sorry for not saving you before, but I'm not messing with the alpha. I don't want the entire pack breaking my door down."
+		<</if>>
+	<</if>>
 	<br><br>
+
+	<<if $gwylan_eden_coop gte 1 and $gwylan_aborted isnot 1>>
+		<<nnpc_He "Gwylan">> looks around for a moment. "Strange," <<nnpc_he "Gwylan">> says to <<nnpc_himself "Gwylan">>. "I thought the <<nnpc_title "Eden">> would be here. Must be busy. Ah well."
+		<br><br>
+	<</if>>
+
+	<<if $gwylan_rescue isnot 1>>
+		<<set $gwylan_rescue to 1>>
+		<<nnpc_He "Gwylan">> starts to walk away, but stops and turns around. "By the way," <<nnpc_he "Gwylan">> says. "I was able to save you because you're close enough to my shop. <span class="gold">If you go any further than the start of the lake, I won't be able to hear you.</span> Keep it in mind."
+		<br><br>
+	<</if>>
+
+	<<nnpc_He "Gwylan">> gathers <<nnpc_his "Gwylan">> items, then walks off in the direction of <<nnpc_his "Gwylan">> shop.
 	You feel a jolt of pain as the slime punishes you for defiance.
 	<<corruption -1>><<pain 8>><<stress 6>><<trauma 6>><<set $submissive -= 1>><<lcorruption>><<ggpain>><<ggtrauma>><<ggstress>>
 	<br><br>
 
-	<<clotheson>>
+	<<clotheson>><<set $gwylan_aborted to 0>>
 	<<endcombat>>
-	"Are you okay?" Eden asks.
+
+	<<link [[다음|Forest]]>><<endevent>><</link>>
+
+<<elseif $rescue is 1 and $forest gte 21>>
+	You hear a gun fire close by, and a bullet lands at the pair's feet. They back off in fear and flee into the forest.
 	<br><br>
-	<<link [[Go back to the cabin (0:30)|Forest Cabin Return]]>><<pass 30>><</link>>
-	<br>
-	<<link [[Say goodbye|Forest]]>><<endevent>><</link>>
+
+	<<if $edenCagedEscape>>
+		<<clotheson>>
+		<<endcombat>>
+
+		You feel a jolt of pain as the slime punishes you for defiance.
+		<<corruption -1>><<pain 8>><<stress 6>><<trauma 6>><<set $submissive -= 1>><<lcorruption>><<ggpain>><<ggtrauma>><<ggstress>>
+		<br><br>
+
+		<<edenCagedSave>>
+	<<else>>
+		Eden emerges and helps you collect yourself. "Damn wolves," <<nnpc_he "Eden">> mutters. "Are you okay?"
+		<br><br>
+
+		<<clotheson>>
+		<<endcombat>>
+
+		You feel a jolt of pain as the slime punishes you for defiance.
+		<<corruption -1>><<pain 8>><<stress 6>><<trauma 6>><<set $submissive -= 1>><<lcorruption>><<ggpain>><<ggtrauma>><<ggstress>>
+		<br><br>
+
+		<<if $gwylan_eden_coop gte 1>>
+			Eden glances around for a moment. "We must be in too deep for that shopkeep," <<nnpc_he "Eden">> says.
+			<br><br>
+		<</if>>
+
+		<<if $eden_rescue isnot 1>>
+			<<set $eden_rescue to 1>>
+			Eden pats you on the shoulder. "I was able to hear you because I happened to be in the area," <<nnpc_he "Eden">> says. "<span class="gold">I might not always be around, but I should be able to save you anywhere in the forest.</span> Give me a shout if you're in trouble."
+			<br><br>
+		<</if>>
+
+		<<link [[Go back to the cabin (0:30)|Forest Cabin Return]]>><<pass 30>><</link>>
+		<br>
+		<<link [[Say goodbye|Forest]]>><<endevent>><</link>>
+	<</if>>
 <<else>>
 	The <<beasttype>> runs into the forest, whimpering.
 	<br><br>
+
 	<<tearful>> you try to stand, but a jolt of pain sends you sprawling. The slime punishes you for defiance.
 	<<corruption -1>><<pain 8>><<stress 6>><<trauma 6>><<set $submissive -= 1>><<lcorruption>><<ggpain>><<ggtrauma>><<ggstress>>
 	<br><br>
+
 	<<clotheson>>
 	<<endcombat>>
 	<<link [[다음|Forest]]>><<set $eventskip to 1>><</link>>
@@ -2018,13 +2900,13 @@ You lean against the tree, until the breeze changes direction and the haze lifts
 <<effects>>
 
 <<if $willpowerSuccess>>
-	You continue wakling. You're nagged by the fear that you're going the wrong way. It's hard to tell with the sky obscured by the canopy. <span class="green">You remain focused on your path,</span> and soon find the haze thinning. The dizziness subsides.<<willpower 1>><<gwillpower>>
+	You continue walking. You're nagged by the fear that you're going the wrong way. It's hard to tell with the sky obscured by the canopy. <span class="green">You remain focused on your path,</span> and soon find the haze thinning. The dizziness subsides.<<willpower 1>><<gwillpower>>
 	<br><br>
 
 	<<link [[다음|Forest]]>><<set $eventskip to 1>><</link>>
 	<br>
 <<else>>
-	You contine walking, but the dizziness does not subside. You're nagged by the fear that you're going the wrong way. It's hard to tell with the sky obscured by the canopy. <span class="red">You change direction,</span> hoping to escape the haze, but it doesn't help. You turn again, and again. The dizziness becomes more intense, and you find it harder to think. You're lost.<<ggwillpower>><<willpower 3>>
+	You continue walking, but the dizziness does not subside. You're nagged by the fear that you're going the wrong way. It's hard to tell with the sky obscured by the canopy. <span class="red">You change direction,</span> hoping to escape the haze, but it doesn't help. You turn again, and again. The dizziness becomes more intense, and you find it harder to think. You're lost.<<ggwillpower>><<willpower 3>>
 	<br><br>
 
 	You keep walking, the haze becomes sweeter, so much that you can taste it in the air.
@@ -2038,7 +2920,7 @@ You lean against the tree, until the breeze changes direction and the haze lifts
 <</if>>
 
 :: Forest Pitcher Slime Defy
-<<set $outside to 1>><<set $location to "forest">><<effects>>
+<<location "forest">><<effects>>
 
 <<if $slimeDefyCooldown>>
 	You continue walking, but defy the slime's instructions, and feel a jolt of pain as the slime punishes you for defiance. However, <span class="teal">it's still worn out from overpowering you earlier.</span> You're nagged by the fear that you're going the wrong way. It's hard to tell with the sky obscured by the canopy. <span class="green">You remain focused on your path,</span> and soon find the haze thinning. The dizziness subsides.<<willpower 1>><<gwillpower>>
@@ -2046,7 +2928,7 @@ You lean against the tree, until the breeze changes direction and the haze lifts
 
 	<<link [[다음|Forest]]>><<set $eventskip to 1>><</link>>
 	<br>
-<<elseif $corruption_slime gte ($willpower / 11)>><<set $slimeDefyCooldown to 4>>
+<<elseif $corruption_slime gte (currentSkillValue('willpower') / 11)>><<set $slimeDefyCooldown to 4>>
 	You try to walk against the slime's instruction, <span class = "red">but it overpowers your will</span> and the dizziness does not subside. You're nagged by the fear that you're going the wrong way. It's hard to tell with the sky obscured by the canopy. The dizziness becomes more intense, and you find it harder to think.<<willpower 3>><<gwillpower>>
 	<br><br>
 
@@ -2066,7 +2948,7 @@ You lean against the tree, until the breeze changes direction and the haze lifts
 <</if>>
 
 :: Forest Pitcher Slime Obey
-<<set $outside to 1>><<set $location to "forest">><<effects>>
+<<location "forest">><<effects>>
 While you follow the slimes instructions, the dizziness does not subside. It's hard to tell where the slime is taking you with the sky obscured by the canopy. The dizziness becomes more intense, and you find it harder to think.
 <br><br>
 
@@ -2087,9 +2969,9 @@ The dizziness becomes too intense. The world spins, and you fall. The vines spri
 <br><br>
 
 The fall jolts you to your senses. You land in a thick mucus that sticks to your skin, making it tingle.
-<<set $feetgoo += 1>>
-<<set $thighgoo += 1>>
-<<set $bottomgoo += 1>>
+<<set $player.bodyliquid.feet.goo += 1>>
+<<set $player.bodyliquid.thigh.goo += 1>>
+<<set $player.bodyliquid.bottom.goo += 1>>
 <br><br>
 <<if $parasite.left_ear.name isnot "slime" and $parasite.right_ear.name isnot "slime">>
 	<<link [[Try to escape|Forest Pitcher Struggle Start]]>><</link>><<willpowerdifficulty 1 700>>
@@ -2127,11 +3009,11 @@ The fall jolts you to your senses. You land in a thick mucus that sticks to your
 <<effects>>
 
 
-<<set $thighgoo += 1>>
-<<set $feetgoo += 1>>
-<<set $chestgoo += 1>>
-<<set $bottomgoo += 1>>
-<<set $tummygoo += 1>>
+<<set $player.bodyliquid.thigh.goo += 1>>
+<<set $player.bodyliquid.feet.goo += 1>>
+<<set $player.bodyliquid.chest.goo += 1>>
+<<set $player.bodyliquid.bottom.goo += 1>>
+<<set $player.bodyliquid.tummy.goo += 1>>
 
 <<if $physiqueSuccess>>
 	You feel around for a solid footing, then punch the wall of the plant. <span class="green">You feel it yield.</span> You punch again, and again. More mucus drips from above, but you continue your assault.
@@ -2170,8 +3052,8 @@ The fall jolts you to your senses. You land in a thick mucus that sticks to your
 :: Forest Pitcher Climb
 <<effects>>
 
-<<set $thighgoo += 1>>
-<<set $feetgoo += 1>>
+<<set $player.bodyliquid.thigh.goo += 1>>
+<<set $player.bodyliquid.feet.goo += 1>>
 
 <<if $athleticsSuccess>>
 
@@ -2195,7 +3077,7 @@ The fall jolts you to your senses. You land in a thick mucus that sticks to your
 :: Forest Pitcher Resist
 <<effects>>
 
-<<drench goo 2 outside>><<set $drugged += 180>>
+<<drench goo 2 outside>><<drugs 180>>
 
 Multiple tentacles wrap around your wrists and ankles as you lie, lightheaded, in the goo. You struggle, but can't put up much of a fight as you are lifted into the air.
 <br><br>
@@ -2216,7 +3098,7 @@ The tingling in your skin becomes too much to bare.
 
 You hang limp, but the vines don't cease their assault.
 
-<<if $breastsize gte 3>>
+<<if $player.breastsize gte 3>>
 	Two wrap around your <<breasts>>, squeezing them, while the tips of two of the thinner tendrils open. They latch onto your nipples, and suck.
 <<else>>
 	The tips of two of the thinner tendrils open. They latch onto your <<nipples>>, and suck.
@@ -2257,7 +3139,7 @@ The walls close in, squeezing you. You're pushed upwards by the pressure. You sl
 :: Forest Pitcher Endure
 <<effects>>
 
-<<drench goo 2 outside>><<set $drugged += 180>>
+<<drench goo 2 outside>><<drugs 180>>
 
 Any thought of danger passes as the warm slime envelops you.
 
@@ -2283,7 +3165,7 @@ The tingling in your skin becomes too much to bare.
 
 You hang limp, but the vines don't cease their assault.
 
-<<if $breastsize gte 3>>
+<<if $player.breastsize gte 3>>
 	Two wrap around your <<breasts>>, squeezing them, while the tips of two of the thinner tendrils open. They latch onto your nipples, and suck.
 <<else>>
 	The tips of two of the thinner tendrils open. They latch onto your <<nipples>>, and suck.
@@ -2366,10 +3248,10 @@ The instant you're finished, they approach you with a more relaxed pace.
 
 
 <<if $struggle.done gte $struggle.number>>
-	<<link [[다음|Forest Wasps End]]>><</link>>
+	<span id="next"><<link [[다음|Forest Wasps End]]>><</link>></span>
 	<br>
 <<else>>
-	<<link [[다음|Forest Wasps]]>><</link>>
+	<span id="next"><<link [[다음|Forest Wasps]]>><</link>></span>
 	<br>
 <</if>>
 
@@ -2460,7 +3342,7 @@ You search the short trees for saleable lemons.
 	<<earnFeat "In Red Light">>
 	<br><br>
 
-	You feel strangely heated.<<set $drugged += 60>><<arousal 600>><<garousal>>
+	You feel strangely heated.<<drugs 60>><<arousal 600>><<garousal>>
 	<br><br>
 
 	<<link [[다음|Forest]]>><<set $eventskip to 1>><</link>>
@@ -2519,10 +3401,10 @@ You climb the tree until you're level with the hive. You reach for the honeycomb
 
 
 <<if $struggle.done gte $struggle.number>>
-	<<link [[다음|Forest Honey Struggle End]]>><</link>>
+	<span id="next"><<link [[다음|Forest Honey Struggle End]]>><</link>></span>
 	<br>
 <<else>>
-	<<link [[다음|Forest Honey Struggle]]>><</link>>
+	<span id="next"><<link [[다음|Forest Honey Struggle]]>><</link>></span>
 	<br>
 <</if>>
 
@@ -2539,4 +3421,486 @@ You escape into the forest.
 <<link [[다음|Forest]]>><<set $eventskip to 1>><</link>>
 <br>
 
+:: Forest Coop Rescue
+<<effects>><<set $rescued++>>
+<<if $phase is 0 or $phase is 2>>
+	You hear a gun fire close by, and a bullet lands at the pair's feet. At the same time, a ?gwylanItem crashes into the <<person1>><<persons>> face. They back off in fear and flee into the forest.
+	<<elseif $phase is 1 or $phase is 3>>
+	You hear a gun fire close by, and a bullet lands near the <<beasttype>>. At the same time, a ?gwylanItem crashes into the <<beasttype>>'s side. <<bHe>> backs off in fear and flees into the forest.
+<<else>>
+	You hear a gun fire close by, and a bullet splashes by the <<beasttype>>. At the same time, a ?gwylanItem crashes into the <<beasttype>>'s side. <<bHe>> backs off in fear and flees into the water.
+<</if>>
+<br><br>
 
+<<if $edenCagedEscape>>
+	<<clotheson>>
+	<<endcombat>>
+
+	<<edenCagedCoopSave>>
+<<elseif $gwylan_eden_coop gte 4>>
+	<<set $gwylan_eden_coop++>>
+
+	"Nice aim," Eden says as <<nnpc_he "Eden">> emerges from the forest.
+	<br><br>
+
+	"Wish I could say the same," Gwylan replies, stepping through the treeline on the opposite side. "Unless you were aiming for the <<if $phase is 4>>water<<else>>dirt<</if>>." Eden snorts, and almost smiles.
+	<br><br>
+
+	<<if $gwylan_eden_coop is 5>>
+		You smile. Eden used to be so suspicious of Gwylan, and Gwylan used to be so scared of Eden. It's nice to see them getting along.
+		<<trauma -12>><<ltrauma>>
+		<br><br>
+	<</if>>
+
+	<<if $gwylan_aborted is 1>>
+		<<set $gwylan_aborted to 0>>
+		Gwylan frowns for a moment. "Hey, why were you attacking <<phim>> earlier? Did you fall out?"
+		<br><br>
+
+		Eden sighs, crossing <<nnpc_his "Eden">> arms. "<<pShe>> needed to learn to obey me." Gwylan doesn't seem happy with the answer, but doesn't push it.
+		<br><br>
+
+	<<elseif $gwylan_aborted is 2>>
+		<<set $gwylan_aborted to 0>>
+		<<nnpc_He "Gwylan">> can't meet your gaze. "Sorry for not saving you before, but I'm not messing with the alpha. I don't want the entire pack breaking my door down."
+		<br><br>
+
+		"Wait, you were attacked by the alpha? The black one?" Eden growls. "If that thing lays a single mangy paw on you, I'll hunt myself a nice black rug."
+		<br><br>
+	<</if>>
+
+	"Well, bye," Gwylan says,<<if $phase isnot 4>> gathering <<nnpc_his "Gwylan">> items and<</if>> walking off in the direction of <<nnpc_his "Gwylan">> shop. Eden stays, checking to make sure you're alright.
+	<<if $phase is 2 or $phase is 3>>
+		<br>
+		You feel a jolt of pain as the slime punishes you for defiance.
+		<<corruption -1>><<pain 8>><<stress 6>><<trauma 6>><<set $submissive -= 1>><<lcorruption>><<ggpain>><<ggtrauma>><<ggstress>>
+	<</if>>
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<link [[Go back to the cabin (0:30)|Forest Cabin Return]]>><<pass 30>><</link>>
+	<br>
+	<<link [[Say goodbye|Forest]]>><<endevent>><</link>>
+
+<<elseif $gwylan_eden_coop gte 1>>
+	<<set $gwylan_eden_coop++>>
+
+	Eden and Gwylan both emerge from opposite sides of the forest path. Eden eyes Gwylan suspiciously, but <<nnpc_he "Eden">> doesn't deem <<nnpc_him "Gwylan">> a threat.
+	<br><br>
+
+	"Good thing we were both in the area," Gwylan says, shifting from foot to foot. Eden doesn't respond.
+	<<if $gwylan_aborted is 1>>
+		<<set $gwylan_aborted to 0>>
+		Gwylan frowns. "Hey, why were you attacking <<phim>> earlier? Did you fall out?"
+		<br><br>
+
+		Eden sighs, crossing <<nnpc_his "Eden">> arms. "<<pShe>> needed to learn to obey me." Gwylan doesn't seem happy with the answer, but doesn't push it.
+
+	<<elseif $gwylan_aborted is 2>>
+		<<set $gwylan_aborted to 0>>
+		<<nnpc_He "Gwylan">> turns to you and rubs the back of <<nnpc_his "Gwylan">> neck. "Sorry for not saving you before, but I'm not messing with the alpha. I don't want the entire pack breaking my door down."
+		<br><br>
+
+		"Wait, you were attacked by the alpha? The black one?" Eden growls. "If that thing lays a single mangy paw on you, I'll hunt myself a nice black rug."
+	<</if>>
+	<br><br>
+
+	After a moment's silence, Gwylan<<if $phase isnot 4>> gathers <<nnpc_his "Gwylan">> items, then<</if>> turns and walks away in the direction of <<nnpc_his "Gwylan">> shop without another word. Eden stays, checking to make sure you're alright.
+
+	<<if $phase is 2 or $phase is 3>>
+		<br>
+		You feel a jolt of pain as the slime punishes you for defiance.
+		<<corruption -1>><<pain 8>><<stress 6>><<trauma 6>><<set $submissive -= 1>><<lcorruption>><<ggpain>><<ggtrauma>><<ggstress>>
+	<</if>>
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<link [[Go back to the cabin (0:30)|Forest Cabin Return]]>><<pass 30>><</link>>
+	<br>
+	<<link [[Say goodbye|Forest]]>><<endevent>><</link>>
+
+<<else>>
+	<<set $gwylan_aborted to 0>><<set $gwylan_eden_coop to 1>>
+
+	Eden emerges from the treeline. "You okay?" <<nnpc_he "Eden">> asks. "Good thing I was here to-"
+	<br><br>
+	<<if $forest_shop_intro isnot 1 and $gwylan_rescue isnot 1>>
+		<<nnpc_Hes "Eden">> cut off by a mousy <<nnpc_gendery "Gwylan">> bursting through the treeline. Eden unslings <<nnpc_his "Eden">> rifle and points at the <<nnpc_gendery "Gwylan">>.
+		<br><br>
+
+		"W-wait!" The <<nnpc_gendery "Gwylan">> raises <<nnpc_his "Gwylan">> arms, dropping a ?gwylanItem <<nnpc_he "Gwylan">> was carrying. "I'm on your side! I was coming to save <<phim>>."
+		<br><br>
+
+		Eden doesn't lower <<nnpc_his "Eden">> gun. "Why should I believe you?" <<nnpc_He "Eden">> rests <<nnpc_his "Eden">> finger on the trigger.
+		<<stress 3>><<gstress>>
+		<br><br>
+
+		"It's true, really!" Gwylan glances in your direction, then back to Eden. "I run a shop by the entrance to town, and I was taking stock when I heard <<phim>> scream. I wanted to save <<phim>>."
+		<br><br>
+
+		Eden frowns, then <span class="green">lowers <<nnpc_his "Eden">> gun</span>. "Fine. But don't try anything."
+		<br><br>
+
+		The <<nnpc_gendery "Gwylan">> sighs in relief, and lowers <<nnpc_his "Gwylan"> arms as well. <<nnpc_He "Gwylan">> turns to you. <<nnpc_He "Gwylan">> looks about your age, with mousy hair and freckles. "I'm older than I look," <<nnpc_he "Gwylan">> says, as if reading your mind. "I'm Gwylan. Nice to meet you!"
+		<br><br>
+
+		"I have a shop right by the outskirts of the forest," <<nnpc_he "Gwylan">> says. "You can't miss it. I sell-" <<nnpc_he "Gwylan">> pauses. "My grand<<if $pronoun is "m">>father<<else>>mother<</if>> sells-" another pause. "I sell knick-knacks there. Things you won't find in normal shops. Even I don't know what I have in stock!" <<nnpc_He "Gwylan">> sounds proud. Eden snorts.
+		<br><br>
+	<<else>>
+		<<nnpc_Hes "Eden">> cut off by Gwylan bursting through the treeline. Eden unslings <<nnpc_his "Eden">> rifle and points at the <<nnpc_gendery "Gwylan">>.
+
+		"W-wait!" Gwylan raises <<nnpc_his "Gwylan">> arms, dropping a ?gwylanItem <<nnpc_he "Gwylan">> was carrying. "I'm on your side! I was coming to save <<phim>>!"
+		<br><br>
+
+		Eden doesn't lower <<nnpc_his "Eden">> gun. "Why should I believe you?" <<nnpc_He "Eden">> rests <<nnpc_his "Eden">> finger on the trigger.
+		<<stress 3>><<gstress>>
+		<br><br>
+
+		"It's true, really!" Gwylan glances in your direction, then looks back at Eden. "I run a shop by the entrance to town, and was taking stock when I heard <<phim>> scream. <<if $gwylan_rescue is 1>>I've saved <<phim>> before, <<pshes>> my friend.<<else>><<pShes>> one of my customers. I wanted to save <<phim>>.<</if>>"
+		<br><br>
+
+		Eden looks at you for confirmation. You nod, and <span class="green"><<nnpc_he "Eden">> lowers <<nnpc_his "Eden">> gun</span>. "Fine. But don't try anything."
+		<br><br>
+
+		"I won't," Gwylan says. "I gotta get back to the shop anyway, now that I know <<pshes>> safe."
+		<br><br>
+	<</if>>
+
+	<<if $gwylan_rescue isnot 1>>
+		<<set $gwylan_rescue to 1>>
+		<<nnpc_He "Gwylan">> starts to walk off, but stops and turns around. "By the way," <<nnpc_he "Gwylan">> says. "I was able to hear you because you were close enough to my shop. <span class="gold">If you go any further than the start of the lake, I won't be able to hear you.</span> Keep it in mind."
+		<<if $eden_rescue isnot 1>>
+			<<set $eden_rescue to 1>>
+			<br><br>
+			"As for me," Eden says, "I happened to be in the area. <span class="gold">I might not always be around, but I should be able to save you anywhere in the forest.</span> Give me a shout if you're in danger. Even beyond the lake."
+		<</if>>
+
+	<<elseif $eden_rescue isnot 1>>
+		<<set $eden_rescue to 1>>
+		As Gwylan turns to set out, Eden pats you on the shoulder. "I was able to hear you because I happened to be in the area," <<nnpc_he "Eden">> says. "<span class="gold">I might not always be around, but I should be able to save you anywhere in the forest.</span> Give me a shout if you're in trouble."
+		<br><br>
+	<</if>>
+
+	With that said, Gwylan walks back in the direction of <<nnpc_his "Gwylan">> shop, <<nnpc_his "Gwylan">> thrown merchandise forgotten. Eden stays, and checks to make sure you're alright.
+
+	<<if $phase is 2 or $phase is 3>>
+		<br>
+		You feel a jolt of pain as the slime punishes you for defiance.
+		<<corruption -1>><<pain 8>><<stress 6>><<trauma 6>><<set $submissive -= 1>><<lcorruption>><<ggpain>><<ggtrauma>><<ggstress>>
+	<</if>>
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<link [[Go back to the cabin (0:30)|Forest Cabin Return]]>><<pass 30>><</link>>
+	<br>
+	<<link [[Say goodbye|Forest]]>><<endevent>><</link>>
+<</if>>
+
+:: Forest Pale Slime Struggle
+<<effects>>
+
+<<if $struggle_start is 1>>
+	<<struggle_init>>
+	<<set $struggle.creature to "pale slime">>
+	<<if $wraith.state is "haunt">>
+		<<struggle_creatures 3 2>>
+	<<else>>
+		<<struggle_creatures 2 1>>
+	<</if>>
+	<<set $combat to 1>>
+	<<controlloss>>
+	<<violence 1>>
+	<<molested>>
+	<<unset $struggle_start>>
+<</if>>
+
+<<struggle>>
+
+<<if $struggle.done gte $struggle.number>>
+	<span id="next"><<link [[다음|Forest Pale Slime Struggle End]]>><</link>></span>
+	<br>
+<<else>>
+	<span id="next"><<link [[다음|Forest Pale Slime Struggle]]>><</link>></span>
+	<br>
+<</if>>
+
+:: Forest Pale Slime Struggle End
+<<effects>>
+
+The slimes disappear into the river. <<tearful>> you look around frantically.
+<<if $phase is 1>>
+	The pale figure is nowhere to be found. You breathe a sigh of relief, but waste no time getting back on the move. <<endRainWraith true>>
+	<<set $wraith.hunt -= 3>>
+	<<if $wraith.hunt lte 0>>
+		You think you've lost it, but you stay on your guard.
+		<<set $wraith.hunt to 0>><<set $wraith.timer += 5>>
+	<<else>>
+		It's likely still coming for you, but you've put valuable distance between you and it.
+	<</if>>
+<<else>>
+	The pale figure is nowhere to be found. You're about to breathe a sigh of relief, but hear a laugh from the treeline. You break out into a run. <<endRainWraith>>
+<</if>>
+
+<<clotheson>>
+<<endcombat>>
+
+<<link [[다음|Forest]]>><<set $eventskip to 1>><</link>>
+<br>
+
+:: Forest Plant Sex
+<<if $sexstart is 1 or $molestationstart is 1>>
+	<<if $sexstart is 1>>
+		<<set $sexstart to 0>>
+		<<consensual>><<set $consensual to 1>>
+		<<neutral 1>>
+	<<elseif $molestationstart is 1>>
+		<<set $molestationstart to 0>>
+		<<controlloss>>
+		<<violence 1>>
+		<<neutral 1>>
+		<<molested>>
+	<</if>>
+	<<if $loveInterest>>
+		<<if $loveInterest.primary is "Eden" or $loveInterest.secondary is "Eden">>
+			<<enable_rescue>>
+		<</if>>
+	<</if>>
+	<<maninit "plant">><<npcexpose>>
+	<<set $enemyarousalmax to 800>>
+	<<if $phase is 2>>
+		<<set _randomtentacles to random(10, 12)>>
+	<<else>>
+		<<set _randomtentacles to random(6, 10)>>
+	<</if>>
+	<<makeAbomination _randomtentacles 8 "vine" "vine" true>>
+	<<if $phase is 1>>
+		<<if $player.penisExist>>
+			<<set $NPCList[0].mouth to "penisentrance">><<set $penisuse to "othermouth">><<set $penisstate to "othermouthentrance">><<set $penistarget to 0>>
+		<<else>>
+			<<set $NPCList[0].mouth to "vaginaentrance">><<set $vaginause to "othermouth">><<set $vaginastate to "othermouthentrance">><<set $vaginatarget to 0>>
+		<</if>>
+		<<set $NPCList[0].location.head to "genitals">>
+		<<set $tentacles[0].shaft to "leftarm">><<set $leftarm to "tentgrappled">><<set $leftarmstate to 0>><<set $lefttarget to "tentacles">>
+		<<set $tentacles[1].shaft to "rightarm">><<set $rightarm to "tentgrappled">><<set $leftarmstate to 0>><<set $righttarget to "tentacles">>
+	<<elseif $phase is 0 and !$consensual>>
+		<<npckiss>>
+	<</if>>
+<</if>>
+<<effects>>
+<<effectsabomination>><<abomination>>
+
+<<if $alarm is 1 and $rescue is 0>>
+	<<set $alarm to 0>>
+	<<if ($loveInterest.primary is "Eden" or $loveInterest.secondary is "Eden")>>
+		<<if $gwylan_rescue is 1>>
+			<span class="red">You're too deep into the forest for Gwylan to hear you, and Eden must not be in the area.</span>
+		<<else>>
+			<span class="red">You're too far from the town for anyone to hear you, and Eden must not be in the area.</span>
+		<</if>>
+	<<else>>
+		<<if $gwylan_rescue is 1>>
+			<span class="red">You're too deep into the forest for Gwylan to hear you.</span>
+		<<else>>
+			<span class="red">You're too far from the town for anyone to hear you.</span>
+		<</if>>
+	<</if>>
+	<br><br>
+<</if>>
+
+<<stateabomination>>
+<br><br>
+<<actionsabomination>>
+
+<<if $enemyhealth lte 0>>
+	<span id="next"><<link [[다음|Forest Plant Sex Finish]]>><</link>></span><<nexttext>>
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<span id="next"><<link [[다음|Forest Plant Sex Finish]]>><</link>></span><<nexttext>>
+<<elseif $alarm is 1 and $rescue is 1>>
+	<span id="next"><<link [[다음|Forest Plant Sex Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Forest Plant Sex]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Forest Plant Sex Finish
+<<location "forest">><<effects>>
+<<if $phase is 1>>
+	<<set _noCum to 1>>
+<</if>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	"That was fun!" the <<person>> chirps. "I wish more humans were like you."
+	<br><br>
+
+	<<He>> picks <<himself>> up off the ground and dusts off one of <<his>> vines. "If you're ever in the area, hit me up! I'd love to do this again!" <<He>> walks off, <<his>> vines shambling behind <<him>>.
+	<br><br>
+
+	<<tearful>> 당신은 스스로 정신을 다잡는다.
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[다음|Forest]]>><<set $eventskip to 1>><</link>>
+<<elseif $enemyhealth lte 0>>
+	The <<person>> backpedals from you, looking at you warily. "Yeesh, a bit uncalled for, wouldn't you say? I just wanted us to feel good." <<His>> vines all retract away from you.
+	<br><br>
+
+	<<He>> rubs one of <<his>> vines, frowning. "Well, if you're ever in the area, hit me up. Maybe we can pick up where we left off, if you're in a better mood!" <<He>> walks off, <<his>> vines trailing weakly behind <<him>>.
+	<br><br>
+
+	<<tearful>> 당신은 스스로 정신을 다잡는다.
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[다음|Forest]]>><<set $eventskip to 1>><</link>>
+<<elseif $alarm is 1 and $rescue is 1>>
+	You hear a gun fire close by, and a bullet lands at the <<persons>> feet. "Fuck," <<he>> hisses. "It's the <<nnpc_title "Eden">>. Fuck. Fuck shit fuck. Um." <<He>> grabs your face and gives you a syrupy kiss on each cheek, before pulling away from you. "See ya! I'm out!"
+	<<set $player.bodyliquid.face.goo += 1>>
+	<br><br>
+
+	<<if $edenCagedEscape>>
+		<<clotheson>>
+		<<endcombat>>
+
+		<<edenCagedSave>>
+	<<else>>
+		The <<person>> retracts <<his>> vines and retreats into the forest right as Eden emerges. <<nnpc_He "Eden">> helps you collect yourself. "Damn hikers," <<nnpc_he "Eden">> mutters. "Are you okay?"
+		<br><br>
+
+		<<clotheson>>
+		<<endcombat>>
+		<<if $gwylan_eden_coop gte 1>>
+			Eden glances around for a moment. "We must be in too deep for that shopkeep," <<nnpc_he "Eden">> says.
+			<br><br>
+		<</if>>
+
+		<<if $eden_rescue isnot 1>>
+			<<set $eden_rescue to 1>>
+			Eden pats you on the shoulder. "I was able to hear you because I happened to be in the area," <<nnpc_he "Eden">> says. "<span class="gold">I might not always be around, but I should be able to save you anywhere in the forest.</span> Give me a shout if you're in trouble."
+			<br><br>
+		<</if>>
+
+		<<link [[Go back to the cabin (0:30)|Forest Cabin Return]]>><<pass 30>><</link>>
+		<br>
+		<<link [[Say goodbye|Forest]]>><<endevent>><</link>>
+	<</if>>
+<</if>>
+
+:: Forest Plant Kiss
+<<location "forest">><<effects>>
+
+<<if $backgroundTraits.includes("plantlover") and $nectar_timer lte 14>>
+	You practically lurch forward and capture the <<persons>> lips with your own. <<He>> gasps into your own, and you thrust your tongue into <<his>> mouth, abandoning all self-control.
+	<span class="green">Sweet nectar fills your mouth.</span>
+	<<nectarfed 10>><<takeKissVirginity $NPCList[0].fullDescription "addiction">><<promiscuity1>>
+	<br><br>
+	The <<person>> comes back to <<his>> senses, and wraps <<his>> vines around you. With a gentle, almost teasing push, <<he>> sends you to the forest floor and lowers <<himself>> to lie on top of you.
+	"If I'd know you loved it so much," <<he>> whispers, "I'd have offered more than a kiss. Way more."
+	<br><br>
+	<<link [[다음|Forest Plant Sex]]>><<set $molestationstart to 1>><<set $phase to 0>><</link>>
+<<else>>
+	You lean forward and kiss the <<person "normal">>, and <<he>> smiles against your mouth. <span class="lewd"><<His>> lips are sticky, and taste very sweet.</span>
+	<<takeKissVirginity $NPCList[0].fullDescription "consensual">><<promiscuity1>>
+	<<if $rng gte 81>>
+		<<He>> suddenly thrusts <<his>> tongue into your mouth. Something drips into your mouth, and your taste buds are assaulted by a dizzyingly sweet flavor.
+		<<nectarfed 10>><br>
+		Your mind gets foggy, and you barely notice <<him>> pushing you to the ground. <span class="purple">The vines behind <<him>> writhe to life, slithering behind <<him>>.</span>
+		<br><br>
+
+		"Thanks for that," the <<person>> whispers, lowering <<himself>> to lie on top of you. "Now I think I'll take a bit more than a kiss."
+		<br><br>
+
+		<<link [[다음|Forest Plant Sex]]>><<set $molestationstart to 1>><<set $phase to 0>><</link>>
+	<<else>>
+		<<He>> holds the kiss for a few seconds, before nipping your upper lip and pulling away. You lick your lips. Syrupy nectar lingers around your mouth.
+		<br><br>
+
+		Behind <<him>>, <span class="purple">the vines writhe to life</span>, wriggling in contentment. "What did you think?" the <<person>> asks, winking. "Pretty great kiss, huh? Well, I thought so."
+		<br><br>
+
+		<<He>> turns to walk away. "Well, hope that brings you good luck! See you around, <<girl>>!"
+		<br><br>
+
+		<<if $deviancy gte 35>>
+			<<link [[Seduce|Forest Plant Seduce]]>><</link>><<deviant3>>
+			<br>
+			<<link [[Say goodbye|Forest]]>><<endevent>><<set $eventskip to 1>><</link>>
+		<<else>>
+			<<link [[다음|Forest]]>><<endevent>><<set $eventskip to 1>><</link>>
+		<</if>>
+	<</if>>
+<</if>>
+
+:: Forest Plant Seduce
+<<location "forest">><<effects>>
+
+"Leaving so soon?" you ask, batting your eyes. The <<person>> turns back. "I could give you so much more than just a kiss. <<if $tentacledisable is "f">>Show me what those vines can do<<else>>Come and get me<</if>>."
+<br><br>
+
+<<set $seductiondifficulty to 0>>
+<<seductioncheck>>
+<br><br>
+
+<<His>> eyes light up. "Oh, hell yeah!" <<He>> lunges for you and throws <<his>> arms around you, tackling you to the forest floor. <<His>> vines come to <<his>> side, writhing around you. "I love meeting humans who love nature."
+<br><br>
+
+<<if $seductionskill lt 1000>><span class="gold">당신은 유혹하는 데 좀 더 자신감이 붙었다... though you suspect <<he>> would've said yes no matter what.</span><br><br><</if>><<seductionskilluse>>
+
+<<link [[다음|Forest Plant Sex]]>><<set $sexstart to 1>><<set $phase to 0>><</link>>
+
+:: Forest Plant Kiss Refuse
+<<location "forest">><<effects>>
+
+<<if $rng gte 51>>
+	"Huh?" The <<persons "normal">> face scrunches up. "But why not?"
+	<br><br>
+
+	<<He>> thinks for a few seconds, before gasping. "Oh, I get it! You just want to skip the foreplay! I like your style."
+	<<stress 6>><<gstress>>
+	<br><br>
+
+	<span class="purple">The vines behind <<him>> writhe to life, slithering behind <<him>>.</span> The <<person>> licks <<his>> lips. "Don't worry. I won't keep you waiting."
+	<br><br>
+
+	<<link [[다음|Forest Plant Sex]]>><<set $molestationstart to 1>><<set $phase to 0>><</link>>
+<<else>>
+	"Huh?" The <<persons "normal">> face scrunches up. "But why not?"
+	<br><br>
+
+	<<He>> thinks for a few seconds, before shrugging. "Well, whatever. I'm sure someone in this forest is willing to smooch a cute <<personsimple>>." <span class="purple">The vines behind <<him>> writhe to life, slithering behind <<him>>.</span> "Later!"
+	<br><br>
+
+	<<link [[다음|Forest]]>><<endevent>><<set $eventskip to 1>><</link>>
+<</if>>
+
+:: Forest Plant Passout
+<<effects>><<location "forest">>
+<<set $forest += random(15,-15)>><<set $forest = Math.clamp($forest, 21, 100)>>
+<<generatePlant1>><<person1>>
+
+<<orgasm>>
+You wake up to a sudden rush of pleasure, and a wet sensation on your <<genitals 1>>. You try to sit up, only to find <span class="red">vines binding your arms to the ground</span>. You struggle for a moment, but they coil tighter.
+<br><br>
+
+"Oh, hi there!" You crane your neck, and see a <<person>> sitting between your legs, with <<plant_details>> braided into <<his>> hair.
+<<if $exposed lte 1>>
+	Your $worn.lower.name has been <<if $worn.lower.skirt is 1>>lifted up<<else>>pulled down<</if>>, <<if !$worn.under_lower.type.includes("naked")>> and your $worn.under_lower.name has been pulled aside,<</if>> <span class="pink">revealing your <<genitals>>.</span>
+<</if>>
+<<He>> licks <<his>> lips. "I found you conked out in the forest, so I dragged you somewhere safe and helped myself."
+<<if $worn.genitals.type.includes("chastity")>>
+	<<He>> pokes your $worn.genitals.name. "At least, as best I could through this thing. Who put this on you? How cruel.
+<<else>>
+	<<He>> grins. "It was just a taste, I wanted to wait until you woke up before really going at it.
+<</if>>
+Am I squeezing your arms too tight? Sorry if I am."
+<<if $worn.lower.skirt is 1>><<set $worn.lower.skirt_down to 0>><<else>><<set $worn.lower.state to "thighs">><</if>>
+<<set $worn.lower.vagina_exposed to 1>><<set $worn.lower.anus_exposed to 1>><<set $worn.lower.exposed to 2>>
+<<set $worn.under_lower.vagina_exposed to 1>><<set $worn.under_lower.anus_exposed to 1>><<set $worn.under_lower.exposed to 1>><<set $worn.under_lower.state to "thighs">>
+<br><br>
+
+You try to sit up again, but the vines pull you back down. "Ah bup bup," the <<person>> chides. "Just let me take care of you. Now, where was I...?" <<He>> moves <<his>> mouth back down to your <<genitals>>.
+<br><br>
+
+<<link [[다음|Forest Plant Sex]]>><<set $molestationstart to 1>><<set $phase to 1>><</link>>

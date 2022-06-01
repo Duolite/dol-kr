@@ -53,66 +53,66 @@ setup.colours = {
 		}
 	},
 
-    // Empty collections are populated later in this file
-    hair: [],
-    hair_map: {}, // Maps are auto-generated in the end of file
-    hair_default: { // Default canvas filter options
-        blendMode: 'hard-light',
-    },
-    eyes: [],
-    eyes_map: {},
-    eyes_default: {
-        blendMode: 'hard-light',
-    },
-    clothes: [],
-    clothes_map: {},
-    clothes_default: {
-        blendMode: "hard-light"
-    },
-    mascara: [],
-    mascara_map: {},
-    mascara_default: {
-        blendMode: "hard-light"
-    },
-    lipstick: [],
-    lipstick_map: {},
-    lipstick_default: {
-        blendMode: "hard-light"
-    },
-    eyeshadow: [],
-    eyeshadow_map: {},
-    eyeshadow_default: {
-        blendMode: "hard-light"
-    },
+	// Empty collections are populated later in this file
+	hair: [],
+	hair_map: {}, // Maps are auto-generated in the end of file
+	hair_default: { // Default canvas filter options
+		blendMode: 'hard-light',
+	},
+	eyes: [],
+	eyes_map: {},
+	eyes_default: {
+		blendMode: 'hard-light',
+	},
+	clothes: [],
+	clothes_map: {},
+	clothes_default: {
+		blendMode: "hard-light"
+	},
+	mascara: [],
+	mascara_map: {},
+	mascara_default: {
+		blendMode: "hard-light"
+	},
+	lipstick: [],
+	lipstick_map: {},
+	lipstick_default: {
+		blendMode: "hard-light"
+	},
+	eyeshadow: [],
+	eyeshadow_map: {},
+	eyeshadow_default: {
+		blendMode: "hard-light"
+	},
 
-    skin_gradients: {
-        light:     ['#ffffff', '#ffd2ac'],
-        medium:    ['#ffd2ac', '#8a614d'],
-        dark:      ['#8a614d', '#39241a'],
-        gyaru:     ['#ffffff', '#ffd2ac', '#8a614d', '#39241a'],
-        ylight:    ['#f0ffe6', '#f0e4bc'],
-        ymedium:   ['#f0e4bc', '#8e7f68'],
-        ydark:     ['#8e7f68', '#483f35'],
-        ygyaru:    ['#f0ffe6', '#f0e4bc', '#8e7f68', '#483f35']
-    },
-    /**
-     * Get canvas filter for skin of given type and tan progression (0..1)
-     */
-    getSkinFilter(type, tan) {
-        return {
-            blend: setup.colours.getSkinRgb(type, tan),
-            blendMode: "multiply"
-        }
-    },
-    getSkinRgb(type, tan) {
-        tan = Math.clamp(0, tan, 1);
-        let gradient = setup.colours.skin_gradients[type];
-        if (!gradient) {
-            Errors.report("Unknown skin gradient "+type);
-            return '#ffffff';
-        }
-        return Renderer.lintRgbStaged(tan, gradient).toHexString();
-    }
+	skin_gradients: {
+		light:     ['#ffffff', '#ffd2ac'],
+		medium:    ['#ffd2ac', '#8a614d'],
+		dark:      ['#8a614d', '#39241a'],
+		gyaru:     ['#ffffff', '#ffd2ac', '#8a614d', '#39241a'],
+		ylight:    ['#f0ffe6', '#f0e4bc'],
+		ymedium:   ['#f0e4bc', '#8e7f68'],
+		ydark:     ['#8e7f68', '#483f35'],
+		ygyaru:    ['#f0ffe6', '#f0e4bc', '#8e7f68', '#483f35']
+	},
+	/**
+	 * Get canvas filter for skin of given type and tan progression (0..1)
+	 */
+	getSkinFilter(type, tan) {
+		return {
+			blend: setup.colours.getSkinRgb(type, tan),
+			blendMode: "multiply"
+		}
+	},
+	getSkinRgb(type, tan) {
+		tan = Math.clamp(0, tan, 1);
+		let gradient = setup.colours.skin_gradients[type];
+		if (!gradient) {
+			Errors.report("Unknown skin gradient "+type);
+			return '#ffffff';
+		}
+		return Renderer.lintRgbStaged(tan, gradient).toHexString();
+	}
 };
 
 /**
@@ -126,6 +126,16 @@ setup.colours = {
  * - canvasfilter:object - Canvas model filter
  */
 setup.colours.hair = [{
+	"variable": "random",//Only used at the start for a randomised colour
+	"name": "random",
+	"name_cap": "Random",
+	"csstext": "Random",
+	"natural": true,
+	"dye": false,
+	"canvasfilter": {
+		"blend": "#f53d43"
+	}
+}, {
 	"variable": "red",
 	"name": "red",
 	"name_cap": "Red",
@@ -480,107 +490,188 @@ setup.colours.hair = [{
  * - canvasfilter:object - Canvas model filter
  */
 setup.colours.eyes = [{
-    variable: "purple",
-    name: "purple",
-    name_cap: "Purple",
-    csstext: "purple",
-    natural: true,
-    lens: true,
-    canvasfilter: {
-        blend: "#b016d8"
-    }
+	variable: "random",//Only used at the start for a randomised colour
+	name: "random",
+	name_cap: "Random",
+	csstext: "Random",
+	natural: true,
+	lens: false,
+	canvasfilter: {
+		blend: "#b016d8"
+	}
+},
+	{
+	variable: "purple",
+	name: "purple",
+	name_cap: "Purple",
+	csstext: "purple",
+	natural: true,
+	lens: true,
+	canvasfilter: {
+		blend: "#b016d8"
+	}
 }, {
-    variable: "dark blue",
-    name: "dark blue",
-    name_cap: "Dark Blue",
-    csstext: "blue",
-    natural: true,
-    lens: true,
-    canvasfilter: {
-        blend: "#3b6ba4"
-    }
+	variable: "dark blue",
+	name: "dark blue",
+	name_cap: "Dark Blue",
+	csstext: "blue",
+	natural: true,
+	lens: true,
+	canvasfilter: {
+		blend: "#3b6ba4"
+	}
 }, {
-    variable: "light blue",
-    name: "light blue",
-    name_cap: "Light Blue",
-    csstext: "lblue",
-    natural: true,
-    lens: true,
-    canvasfilter: {
-        blend: "#00D9F7",
-        brightness: +0.2
-    }
+	variable: "light blue",
+	name: "light blue",
+	name_cap: "Light Blue",
+	csstext: "lblue",
+	natural: true,
+	lens: true,
+	canvasfilter: {
+		blend: "#00D9F7",
+		brightness: +0.2
+	}
 }, {
-    variable: "amber",
-    name: "amber",
-    name_cap: "Amber",
-    csstext: "tangerine",
-    natural: true,
-    lens: true,
-    canvasfilter: {
-        blend: "#f6ca70"
-    }
+	variable: "amber",
+	name: "amber",
+	name_cap: "Amber",
+	csstext: "tangerine",
+	natural: true,
+	lens: true,
+	canvasfilter: {
+		blend: "#f6ca70"
+	}
 }, {
-    variable: "hazel",
-    name: "hazel",
-    name_cap: "Hazel",
-    csstext: "brown",
-    natural: true,
-    lens: true,
-    canvasfilter: {
-        blend: "#917742"
-    }
+	variable: "hazel",
+	name: "hazel",
+	name_cap: "Hazel",
+	csstext: "brown",
+	natural: true,
+	lens: true,
+	canvasfilter: {
+		blend: "#917742"
+	}
 }, {
-    variable: "green",
-    name: "green",
-    name_cap: "Green",
-    csstext: "green",
-    natural: true,
-    lens: true,
-    canvasfilter: {
-        blend: "#95b521"
-    }
+	variable: "green",
+	name: "green",
+	name_cap: "Green",
+	csstext: "green",
+	natural: true,
+	lens: true,
+	canvasfilter: {
+		blend: "#95b521"
+	}
+},{
+	variable: "lime green",
+	name: "lime green",
+	name_cap: "Lime Green",
+	csstext: "green",
+	natural: true,
+	lens: true,
+	canvasfilter: {
+		blend: "#3ae137",
+		brightness: +0.2
+	}
+},
+ {
+	variable: "light green",
+	name: "light green",
+	name_cap: "Light Green",
+	csstext: "green",
+	natural: true,
+	lens: true,
+	canvasfilter: {
+		blend: "#D5F075"
+	}
 }, {
-    variable: "light green",
-    name: "light green",
-    name_cap: "Light Green",
-    csstext: "green",
-    natural: true,
-    lens: true,
-    canvasfilter: {
-        blend: "#D5F075"
-    }
+	variable: "red",
+	name: "red",
+	name_cap: "Red",
+	csstext: "red",
+	natural: true,
+	lens: true,
+	canvasfilter: {
+		blend: "#f45b08"
+	}
 }, {
-    variable: "red",
-    name: "red",
-    name_cap: "Red",
-    csstext: "red",
-    natural: true,
-    lens: true,
-    canvasfilter: {
-        blend: "#f45b08"
-    }
+	variable: "pink",
+	name: "pink",
+	name_cap: "Pink",
+	csstext: "pink",
+	natural: true,
+	lens: true,
+	canvasfilter: {
+		blend: "#F76EF7",
+		brightness: +0.2
+	}
 }, {
-    variable: "pink",
-    name: "pink",
-    name_cap: "Pink",
-    csstext: "pink",
-    natural: true,
-    lens: true,
-    canvasfilter: {
-        blend: "#F76EF7",
-        brightness: +0.2
-    }
+	variable: "grey",
+	name: "grey",
+	name_cap: "Grey",
+	csstext: "grey",
+	natural: true,
+	lens: true,
+	canvasfilter: {
+		blend: "#a9a9a9"
+	}
+},{
+	variable: "light grey",
+	name: "light grey",
+	name_cap: "Light Grey",
+	csstext: "grey",
+	natural: true,
+	lens: true,
+	canvasfilter: {
+		blend: "#d1d1d1",
+		brightness: +0.2
+	}
+},
+{
+	variable: "colorWheelTemporary0",
+	name: "colorWheelTemporary0",
+	name_cap: "colorWheelTemporary0",
+	csstext: "colorWheelTemporary0",
+	natural: false,
+	lens: true,
+	canvasfilter: {
+		blend: "#d1d1d1",
+		brightness: +0.2
+	}
+},
+{
+	variable: "colorWheelTemporary1",
+	name: "colorWheelTemporary1",
+	name_cap: "colorWheelTemporary1",
+	csstext: "colorWheelTemporary1",
+	natural: false,
+	lens: true,
+	canvasfilter: {
+		blend: "#d1d1d1",
+		brightness: +0.2
+	}
+},
+ {
+	variable: "red possessed",
+	name: "red possessed",
+	name_cap: "Red Possessed",
+	csstext: "redPossessed",
+	natural: false,
+	lens: false,
+	canvasfilter: {
+		blend: "#f40101",
+		brightness: +0.2,
+		}
 }, {
-    variable: "grey",
-    name: "grey",
-    name_cap: "Grey",
-    csstext: "grey",
-    natural: true,
-    lens: true,
-    canvasfilter: {
-        blend: "#a9a9a9"
-    }
+	variable: "blue possessed",
+	name: "blue possessed",
+	name_cap: "Blue Possessed",
+	csstext: "bluePossessed",
+	natural: false,
+	lens: false,
+	canvasfilter: {
+		blend: "#0F52BA",
+		brightness: +0.4,
+	}
 }];
 
 /**
@@ -775,249 +866,252 @@ setup.colours.clothes = [{
  * - canvasfilter:object - Canvas model filter
  */
 setup.colours.lipstick = [
-    {
-        variable: "red",
-        name: "red",
-        name_cap: "Red",
-        csstext: "red",
-        canvasfilter: {
-            blend: "#EC3535"
-        }
-    }, {
-        variable: "blue",
-        name: "blue",
-        name_cap: "Blue",
-        csstext: "blue",
-        canvasfilter: {
-            blend: "#4372FF"
-        }
-    }, {
-        variable: "green",
-        name: "green",
-        name_cap: "Green",
-        csstext: "green",
-        canvasfilter: {
-            blend: "#195205"
-        }
-    }, {
-        variable: "purple",
-        name: "purple",
-        name_cap: "Purple",
-        csstext: "purple",
-        canvasfilter: {
-            blend: "#AA4BC8"
-        }
-    }, {
-        variable: "orange",
-        name: "orange",
-        name_cap: "Orange",
-        csstext: "orange",
-        canvasfilter: {
-            blend: "#f28500"
-        }
-    }, {
-        variable: "lime",
-        name: "lime",
-        name_cap: "Lime",
-        csstext: "lime",
-        canvasfilter: {
-            blend: "#38B20A"
-        }
-    }, {
-        variable: "pink",
-        name: "pink",
-        name_cap: "Pink",
-        csstext: "pink",
-        canvasfilter: {
-            blend: "#E40081"
-        }
-    }, {
-        variable: "light pink",
-        name: "light pink",
-        name_cap: "Light Pink",
-        csstext: "light-pink",
-        canvasfilter: {
-            blend: "#d67caf"
-        }
-    }, {
-        variable: "dark red",
-        name: "dark red",
-        name_cap: "Dark Red",
-        csstext: "red",
-        canvasfilter: {
-            blend: "#BD0000"
-        }
-    }, {
-        variable: "black",
-        name: "black",
-        name_cap: "Black",
-        csstext: "black",
-        canvasfilter: {
-            blend: "#292929"
-        }
-    }
+	{
+		variable: "red",
+		name: "red",
+		name_cap: "Red",
+		csstext: "red",
+		canvasfilter: {
+			blend: "#EC3535"
+		}
+	}, {
+		variable: "blue",
+		name: "blue",
+		name_cap: "Blue",
+		csstext: "blue",
+		canvasfilter: {
+			blend: "#4372FF"
+		}
+	}, {
+		variable: "green",
+		name: "green",
+		name_cap: "Green",
+		csstext: "green",
+		canvasfilter: {
+			blend: "#195205"
+		}
+	}, {
+		variable: "purple",
+		name: "purple",
+		name_cap: "Purple",
+		csstext: "purple",
+		canvasfilter: {
+			blend: "#AA4BC8"
+		}
+	}, {
+		variable: "orange",
+		name: "orange",
+		name_cap: "Orange",
+		csstext: "orange",
+		canvasfilter: {
+			blend: "#f28500"
+		}
+	}, {
+		variable: "lime",
+		name: "lime",
+		name_cap: "Lime",
+		csstext: "lime",
+		canvasfilter: {
+			blend: "#38B20A"
+		}
+	}, {
+		variable: "pink",
+		name: "pink",
+		name_cap: "Pink",
+		csstext: "pink",
+		canvasfilter: {
+			blend: "#E40081"
+		}
+	}, {
+		variable: "light pink",
+		name: "light pink",
+		name_cap: "Light Pink",
+		csstext: "light-pink",
+		canvasfilter: {
+			blend: "#d67caf"
+		}
+	}, {
+		variable: "dark red",
+		name: "dark red",
+		name_cap: "Dark Red",
+		csstext: "red",
+		canvasfilter: {
+			blend: "#BD0000"
+		}
+	}, {
+		variable: "black",
+		name: "black",
+		name_cap: "Black",
+		csstext: "black",
+		canvasfilter: {
+			blend: "#292929"
+		}
+	}
 ];
 setup.colours.eyeshadow = [
-    {
-        variable: "red",
-        name: "red",
-        name_cap: "Red",
-        csstext: "red",
-        canvasfilter: {
-            blend: "#EC3535"
-        }
-    }, {
-        variable: "pink",
-        name: "pink",
-        name_cap: "Pink",
-        csstext: "pink",
-        canvasfilter: {
-            blend: "#E40081"
-        }
-    }, {
-        variable: "light pink",
-        name: "light pink",
-        name_cap: "Light Pink",
-        csstext: "light-pink",
-        canvasfilter: {
-            blend: "#d67caf"
-        }
-    }, {
-        variable: "green",
-        name: "green",
-        name_cap: "Green",
-        csstext: "green",
-        canvasfilter: {
-            blend: "#38B20A"
-        }
-    }, {
-        variable: "light green",
-        name: "light green",
-        name_cap: "Light green",
-        csstext: "green",
-        canvasfilter: {
-            blend: "#7caf7c"
-        }
-    }, {
-        variable: "blue",
-        name: "blue",
-        name_cap: "Blue",
-        csstext: "blue",
-        canvasfilter: {
-            blend: "#4372FF"
-        }
-    }, {
-        variable: "light blue",
-        name: "light blue",
-        name_cap: "Light Blue",
-        csstext: "light-blue",
-        canvasfilter: {
-            blend: "#559BC0"
-        }
-    }, {
-        variable: "purple",
-        name: "purple",
-        name_cap: "Purple",
-        csstext: "purple",
-        canvasfilter: {
-            blend: "#AA4BC8"
-        }
-    }, {
-        variable: "orange",
-        name: "orange",
-        name_cap: "Orange",
-        csstext: "orange",
-        canvasfilter: {
-            blend: "#f28500"
-        }
-    }, {
-        variable: "yellow",
-        name: "yellow",
-        name_cap: "Yellow",
-        csstext: "yellow",
-        canvasfilter: {
-            blend: "#FFD700"
-        }
-    }, {
-        variable: "brown",
-        name: "brown",
-        name_cap: "Brown",
-        csstext: "brown",
-        canvasfilter: {
-            blend: "#4C2217"
-        }
-    }, {
-        variable: "light brown",
-        name: "light brown",
-        name_cap: "Light Brown",
-        csstext: "lightbrown",
-        canvasfilter: {
-            blend: "#C5793A"
-        }
-    }, {
-        variable: "dark brown",
-        name: "dark brown",
-        name_cap: "Dark Brown",
-        csstext: "brown",
-        canvasfilter: {
-            blend: "#4C2217"
-        }
-    }, {
-        variable: "black",
-        name: "black",
-        name_cap: "Black",
-        csstext: "black",
-        canvasfilter: {
-            blend: "#292929"
-        }
-    }, {
-        variable: "white",
-        name: "white",
-        name_cap: "White",
-        csstext: "",
-        canvasfilter: {
-            blend: "#EEEEEE"
-        }
-    }, {
-        variable: "silver",
-        name: "silver",
-        name_cap: "Silver",
-        csstext: "silver",
-        canvasfilter: {
-            blend: "#C0C0C0"
-        }
-    }
+	{
+		variable: "red",
+		name: "red",
+		name_cap: "Red",
+		csstext: "red",
+		canvasfilter: {
+			blend: "#EC3535"
+		}
+	}, {
+		variable: "pink",
+		name: "pink",
+		name_cap: "Pink",
+		csstext: "pink",
+		canvasfilter: {
+			blend: "#E40081"
+		}
+	}, {
+		variable: "light pink",
+		name: "light pink",
+		name_cap: "Light Pink",
+		csstext: "light-pink",
+		canvasfilter: {
+			blend: "#d67caf"
+		}
+	}, {
+		variable: "green",
+		name: "green",
+		name_cap: "Green",
+		csstext: "green",
+		canvasfilter: {
+			blend: "#38B20A"
+		}
+	}, {
+		variable: "light green",
+		name: "light green",
+		name_cap: "Light green",
+		csstext: "green",
+		canvasfilter: {
+			blend: "#7caf7c"
+		}
+	}, {
+		variable: "blue",
+		name: "blue",
+		name_cap: "Blue",
+		csstext: "blue",
+		canvasfilter: {
+			blend: "#4372FF"
+		}
+	}, {
+		variable: "light blue",
+		name: "light blue",
+		name_cap: "Light Blue",
+		csstext: "light-blue",
+		canvasfilter: {
+			blend: "#559BC0"
+		}
+	}, {
+		variable: "purple",
+		name: "purple",
+		name_cap: "Purple",
+		csstext: "purple",
+		canvasfilter: {
+			blend: "#AA4BC8"
+		}
+	}, {
+		variable: "orange",
+		name: "orange",
+		name_cap: "Orange",
+		csstext: "orange",
+		canvasfilter: {
+			blend: "#f28500"
+		}
+	}, {
+		variable: "yellow",
+		name: "yellow",
+		name_cap: "Yellow",
+		csstext: "yellow",
+		canvasfilter: {
+			blend: "#FFD700"
+		}
+	}, {
+		variable: "brown",
+		name: "brown",
+		name_cap: "Brown",
+		csstext: "brown",
+		canvasfilter: {
+			blend: "#4C2217"
+		}
+	}, {
+		variable: "light brown",
+		name: "light brown",
+		name_cap: "Light Brown",
+		csstext: "lightbrown",
+		canvasfilter: {
+			blend: "#C5793A"
+		}
+	}, {
+		variable: "dark brown",
+		name: "dark brown",
+		name_cap: "Dark Brown",
+		csstext: "brown",
+		canvasfilter: {
+			blend: "#4C2217"
+		}
+	}, {
+		variable: "black",
+		name: "black",
+		name_cap: "Black",
+		csstext: "black",
+		canvasfilter: {
+			blend: "#292929"
+		}
+	}, {
+		variable: "white",
+		name: "white",
+		name_cap: "White",
+		csstext: "",
+		canvasfilter: {
+			blend: "#EEEEEE"
+		}
+	}, {
+		variable: "silver",
+		name: "silver",
+		name_cap: "Silver",
+		csstext: "silver",
+		canvasfilter: {
+			blend: "#C0C0C0"
+		}
+	}
 ];
 setup.colours.mascara = [
-    {
-        variable: "black",
-        name: "black",
-        name_cap: "Black",
-        csstext: "black",
-        canvasfilter: {
-            blend: "#292929"
-        }
-    }
+	{
+		variable: "black",
+		name: "black",
+		name_cap: "Black",
+		csstext: "black",
+		canvasfilter: {
+			blend: "#292929"
+		}
+	}
 ];
 
 /*
  * Maps to easily access colour record by its variable code, ex. setup.colours.hair_map[$haircolour]
  */
 
-function buildColourMap(name) {
-    let array = setup.colours[name];
-    let map = setup.colours[name+"_map"];
-    let defaultFilter = setup.colours[name+"_default"];
-    for (let item of array) {
-        if (defaultFilter) Renderer.mergeLayerData(item.canvasfilter, defaultFilter);
-        let key = item.variable;
-        if (key in map) {
-            console.error("Duplicate "+name+" '"+key+"'");
-        }
-        map[key] = item;
-    }
-    return map;
+function buildColourMap(name, mode) {
+	let array = (mode == "custom_eyecolours" ? V.custom_eyecolours : setup.colours[name]);
+	const map = setup.colours[name+"_map"];
+	let defaultFilter = setup.colours[name+"_default"];
+	for (let item of array) {
+		if (defaultFilter) Renderer.mergeLayerData(item.canvasfilter, defaultFilter);
+		let key = item.variable;
+		if (key in map) {
+			if (mode != "custom_eyecolours")
+				console.error("Duplicate "+name+" '"+key+"'");
+		}
+		map[key] = item;
+	}
+	return map;
 }
+
+window.buildColourMap = buildColourMap
 
 buildColourMap("hair");
 buildColourMap("eyes");

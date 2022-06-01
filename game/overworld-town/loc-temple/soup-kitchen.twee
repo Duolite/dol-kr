@@ -6,7 +6,7 @@
 	You search for the grey building you were told about. You find it hidden among the trees in the shadow of the temple. You smell cooked vegetables as you approach. Inside is a large hall, with rows of tables running down the length. They seat people of all ages, including several families. No one looks your way as you enter.
 	<br><br>
 	<<npc River>><<person1>>
-	You approach the far end, where a <<if $pronoun is "m">>man<<else>>woman<</if>> in a hair net spoons soup into bowls. It's River. Several <<monks>> assist <<him>>.
+	You approach the far end, where a <<personsimple>> in a hair net spoons soup into bowls. It's River. Several <<monks>> assist <<him>>.
 	<br><br>
 	<<link [[Next|Soup Kitchen Intro]]>><</link>>
 	<br>
@@ -21,7 +21,7 @@
 	<br><br>
 	<<link [[Help River (1:00)|Soup Kitchen Work]]>><<pass 60>><<famegood 5>><<trauma -6>><<npcincr River love 1>><</link>><<glove>><<ltrauma>>
 	<br>
-	<<if $mathsproject is "ongoing" and $river_help is undefined>>
+	<<if $mathsproject is "ongoing" and $river_help isnot 1>>
 		<<link [[Ask River for help with maths competition|Soup Kitchen Maths]]>><</link>>
 		<br>
 	<</if>>
@@ -147,7 +147,7 @@ You ask River for help with the maths competition.
 <<if $NPCName[$NPCNameList.indexOf("River")].love gte 30>>
 	"It wouldn't be fair on the other students," River says, regarding you. "However, I could give you a more general lesson on some advanced concepts. Putting them to use in the context of the competition will be up to you."
 	<br><br>
-	<<link [[Accept lesson (1:00)|Soup Kitchen Lesson]]>><<set $river_help to 1>><<set $mathsinfo += 3>><<pass 60>><</link>> | <span class="green">+ + Mathematical Insight</span>
+	<<link [[Accept lesson (1:00)|Soup Kitchen Lesson]]>><<set $river_help to 1>><<set $mathsinfo += 3>><<pass 60>><</link>><<if $statdisable is "f">> | <span class="green">+ + Mathematical Insight</span><</if>>
 	<br>
 	<<link [[Not now|Soup Kitchen]]>><<endevent>><</link>>
 	<br>
@@ -222,7 +222,7 @@ You help River work the kitchen. You cut vegetables ready for cooking and clean 
 		<br><br>
 		You're on the way back, crate in hands, when you hear a voice around the corner of the building.
 		<br><br>
-		<<generate1>><<generate2>><<generate3>><<person1>>"You didn't think you'd get away, did you?" says a husky <<if $pronoun is "m">>man's<<else>>woman's<</if>> voice. "Cheating the boss like that, you'll be lucky if you don't end up in the pit."
+		<<generate1>><<generate2>><<generate3>><<person1>>"You didn't think you'd get away, did you?" says a husky <<personsimple>>'s voice. "Cheating the boss like that, you'll be lucky if you don't end up in the pit."
 		<br><br>
 		"I-It was an accident," a voice stammers in response. A third voice laughs.
 		<br><br>
@@ -253,7 +253,7 @@ You help River work the kitchen. You cut vegetables ready for cooking and clean 
 		<<link [[Next|Soup Kitchen]]>><</link>>
 		<br>
 	<<elseif $rng gte 21>>
-		<<generate1>><<person1>>A <<monk>> spills soup down <<his>> habit. "Clumsy," River mutters. "Go rinse yourself down in the back. You," River points at your chest. "Get <<him>> a spare set of clothes from the temple."
+		<<generate1>><<person1>>A <<monk>> spills soup down <<his>> habit. "Clumsy," River mutters. "Go rinse yourself down in the back. You." River points at your chest. "Get <<him>> a spare set of clothes from the temple."
 		<br><br>
 		You walk to the temple as instructed. You find a <<monk>> sweeping the floor near the entrance. You explain what happened, and <<he>> retrieves a fresh habit for <<his>> clumsy colleague.
 		<br><br>
@@ -295,7 +295,7 @@ You walk around the corner. A <<person1>><<person>> pins a <<person3>><<person>>
 	<<set $enemytrust -= 100>>
 	<<set $enemyanger += 200>>
 	<<npcidlegenitals>>
-	<<set $enemyno to 2>>
+	<<set $enemyno to 2>><<set $enemynomax to 2>>
 	<<set $enemyhealthmax -= $NPCList[2].health>>
 	<<set $enemyarousalmax -= 500>>
 	You launch your fist at the <<person>>. <<He>> holds <<his>> arms up to protect <<his>> face, freeing the <<person3>><<person>> and letting <<him>> slide to the ground.
@@ -364,7 +364,7 @@ You walk around the corner. A <<person1>><<person>> pins a <<person3>><<person>>
 :: Soup Kitchen Fight Thank
 
 <<set $outside to 0>><<set $location to "temple">><<effects>>
-<<npc River>><<person1>>You thank River and the monks as they lead you back inside.
+<<npc River>><<person1>>You thank River and the <<monks>> as they lead you back inside.
 <br><br>
 <<endevent>>
 <<link [[Next|Soup Kitchen]]>><</link>>
@@ -408,7 +408,7 @@ A few moments later a <<person3>><<person>> staggers through the door, looking d
 <br><br>
 <<endevent>>
 <<npc River>><<person1>>
-Another minute passes, and River returns as well. <<His>> hair net is gone, <<his>> shirt torn and <span class="red">blood trickles down <<his>> temple.</span> <<He>> washes <<his>> face in the sink. "Thank you for telling me," <<he>> says to while rubbing <<himself>> dry with a cloth. "Some people have no decency."
+Another minute passes, and River returns as well. <<His>> hair net is gone, <<his>> shirt torn and <span class="red">blood trickles down <<his>> temple.</span> <<He>> washes <<his>> face in the sink. "Thank you for telling me," <<he>> says to you while rubbing <<himself>> dry with a cloth. "Some people have no decency."
 <br><br>
 <<endevent>>
 <<link [[Next|Soup Kitchen]]>><</link>>

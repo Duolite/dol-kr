@@ -1,0 +1,16 @@
+:: Widgets trRole [widget nobr]
+<<widget "trRole">><<silently>>
+	<<if _args[0] isnot undefined>>
+		<<if setup.trRoleList is undefined>>
+			<<trinit_roleList>>
+		<</if>>
+		<<set $_found to setup.trRoleList[_args[0]]>>
+		<<if $_found isnot undefined>>
+			<<set _trResult to $_found.ko>>
+			<<trPost $_found.post _args[1] _args[2]>>
+		<<else>>
+			<<set _trResult to _args[0]>>
+			<<trPost 0 _args[1] _args[2]>>
+		<</if>>
+	<</if>>
+<</silently>><</widget>>

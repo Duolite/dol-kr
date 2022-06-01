@@ -7,18 +7,18 @@
 
 <<if $danceaction is "vippush">>
 	<<set $danceaction to 0>><<set $audienceexcitement -= 5>>
-	당신은 밀고 비틀며, <<person>>에게서 떨어진다. "난 거절 별로 안당하는데," <<HePost "이">> 경고한다.<<person1>>
+	당신은 밀고 비틀며, <<personPost>>에게서 떨어진다. "난 거절 별로 안당하는데," <<HePost "이">> 경고한다.<<person1>>
 <</if>>
 
 <<if $danceaction is "vipallow">>
 	<<set $danceaction to 0>><<set $audiencearousal += 5>><<set $audienceexcitement += 5>>
 	<<personPost "은">> 당신을 앉은 자세로 끌어당겨, 당신의 허리에 팔을 감는다.
-	<<if $worn.under_lower.type.includes("naked") and (($worn.over_lower.skirt is 1 and $worn.lower.skirt is 1) or ($worn.over_lower.skirt is 1 and $worn.lower.type.includes("naked")) or ($worn.lower.skirt is 1 and $worn.over_lower.type.includes("naked")))>>
+	<<if $worn.under_lower.type.includes("naked") and ((setup.clothes.over_lower[clothesIndex('over_lower', $worn.over_lower)].skirt is 1 and setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1) or (setup.clothes.over_lower[clothesIndex('over_lower', $worn.over_lower)].skirt is 1 and $worn.lower.type.includes("naked")) or (setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1 and $worn.over_lower.type.includes("naked")))>>
 		<<His>> 손이 스커트 안으로 들어가, 당신의 노출된 <<genitalsPost "을">> 찾아낸다.
 		<<if $worn.genitals.type.includes("chastity")>>
-			<<He>> grasps it, and tugs, to no avail. The pressure on your <<genitals 1>> makes you squirm. "You're such a tease," <<he>> says. "All these people slavering over you, but they haven't a chance." <<He>> steps aside to give the rest of the audience a better look, but doesn't stop fondling you. <<He>> leans close and whispers. "Maybe I should lift this cute skirt of yours. Then everyone will see."
-		<<elseif $penisexist is 1 and $vaginaexist is 1>>
-			<<HePost "은">> 놀라서 <<HePost "의">> 손을 때었으나, 곧 바로 회복하고, 다시 손을 뻗는다. 가벼운 터치만으로도 당신을 흠칫하게 만든다. "넌 정말 특별한 비밀을 가지고 있네," <<HePost "이">> 놀린다. <<HePost "은">> 관객들에게 더 잘 보이도록 한발 물러나지만, 당신을 애무하는 것을 그만두지 않는다. <<HePost "이">> 가까이에서 속삭인다. "이 치마를 들어올려볼까. 그러면 모든 사람들이 보겠지."
+			<<He_nun>> 그것을 잡고는, 세게 끌어당기지만, 소용없었다. 당신의 <<genitalsPost 1>>에 가해지는 압력 때문에 당신은 꿈틀댄다. "너는 정말 사람을 잘 애태우는구나," <<he_ga>> 말한다. "여기 있는 사람들이 모두 네게 군침을 흘리고 있지만, 아무래도 기회가 없겠네." <<He_nun>> 옆으로 물러나며 군중들에게 더 나은 시야를 제공하지만, 당신을 애무하는 손길은 멈추지 않는다. <<He_nun>> 가까이 기대며 속삭인다. "어쩌면 내가 네 이 귀여운 스커트를 들어올리는 게 좋을지도. 그러면 모두가 볼 수 있을 테니까."
+		<<elseif $player.penisExist and $player.vaginaExist>>
+			<<HePost "은">> 놀라서 <<HePost "의">> 손을 떼었으나, 곧 바로 회복하고, 다시 손을 뻗는다. 가벼운 터치만으로도 당신을 흠칫하게 만든다. "넌 정말 특별한 비밀을 가지고 있네," <<HePost "이">> 놀린다. <<HePost "은">> 관객들에게 더 잘 보이도록 한발 물러나지만, 당신을 애무하는 것을 그만두지 않는다. <<HePost "이">> 가까이에서 속삭인다. "이 치마를 들어올려볼까. 그러면 모든 사람들이 보겠지."
 			<<ggarousal>><<arousal 1200>>
 			<br><br>
 		<<else>>
@@ -31,19 +31,19 @@
 		<<ggarousal>><<arousal 1200>>
 		<br><br>
 	<<elseif !$worn.upper.type.includes("naked")>>
-		<<HePost "의">> 손가락이 당신의 가슴을 기어오르고, <<if $player.perceived_breastsize gte 2>>당신의 <<breastsPost "을">> 감싸쥔다<<else>>당신의 가슴에 올린다<</if>>. <<HePost "의">> 손가락이 당신의 가슴을 쓰는 것 만으로 <<trClothes "upper" $worn.upper.name "name" "을">>_trResult 통해서 당신을 흠칫하게 만든다. <<HePost "은">> 관객들에게 더 잘 보이도록 한발 물러나지만, 당신을 애무하는 것을 그만두지 않는다. "네 상의를 <<pullup>> 볼까." <<HePost "이">> 속삭인다. "모두에게 보여주자."
+		<<HePost "의">> 손가락이 당신의 가슴을 기어오르고, <<if $player.perceived_breastsize gte 2>>당신의 <<breastsPost "을">> 감싸쥔다.<<else>>당신의 <<breastsPost>>에 올린다.<</if>> <<HePost "의">> 손가락이 당신의 젖꼭지를 쓰는 것 만으로 <<trClothes "upper" $worn.upper.name "name" "을">>_trResult 통해서 당신을 흠칫하게 만든다. <<HePost "은">> 관객들에게 더 잘 보이도록 한발 물러나지만, 당신을 애무하는 것을 그만두지 않는다. "네 상의를 <<pullup>> 볼까." <<HePost "이">> 속삭인다. "모두에게 보여주자."
 		<<garousal>><<arousal 600>>
 		<br><br>
 	<<else>>
-		<<HePost "의">> 손가락이 당신의 가슴을 기어오르고, <<if $breastsize gte 2>>당신의 <<breastsPost "을">> 감싸쥔다<<else>>당신의 가슴에 올린다.<</if>> <<HePost "의">> 손가락이 당신의 가슴을 쓰는 것 만으로 당신을 흠칫하게 만든다. <<HePost "은">> 관객들에게 더 잘 보이도록 한발 물러나지만, 당신을 애무하는 것을 그만두지 않는다.
+		<<HePost "의">> 손가락이 당신의 벗은 가슴을 기어오르고, <<if $player.breastsize gte 2>>당신의 <<breastsPost "을">> 감싸쥔다.<<else>>당신의 <<breastsPost>>에 올린다.<</if>> <<HePost "의">> 손가락이 당신의 젖꼭지를 쓰는 것 만으로 당신을 흠칫하게 만든다. <<HePost "은">> 관객들에게 더 잘 보이도록 한발 물러나지만, 당신을 애무하는 것을 그만두지 않는다.
 		<<garousal>><<arousal 600>>
 		<br><br>
 	<</if>>
 	<<if $arousal gte $arousalmax>>
 		<<orgasm>>
-		<<if $worn.under_lower.type.includes("naked") and (($worn.over_lower.skirt is 1 and $worn.lower.skirt is 1) or ($worn.over_lower.skirt is 1 and $worn.lower.type.includes("naked")) or ($worn.lower.skirt is 1 and $worn.over_lower.type.includes("naked"))) and $penisexist is 1>>
+		<<if $worn.under_lower.type.includes("naked") and ((setup.clothes.over_lower[clothesIndex('over_lower', $worn.over_lower)].skirt is 1 and setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1) or (setup.clothes.over_lower[clothesIndex('over_lower', $worn.over_lower)].skirt is 1 and $worn.lower.type.includes("naked")) or (setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1 and $worn.over_lower.type.includes("naked"))) and $player.penisExist>>
 			<<if $femaleclimax is 1>>
-				Your lack of cum causes several to laugh at you. <<person2>>The <<person>> grins as <<he>> releases you. <<tearful>> you clamber to your feet.
+				당신이 정액을 쏟지 않자 몇몇 사람들이 당신을 비웃는다. <<person2>>그 <<person_un>> 당신을 놓아주며 웃는다. 당신은 <<tearful>> 무릎으로 기어간다.
 				<<set $audiencearousal += 15>><<set $audienceexcitement += 15>><<set $audiencemod += 4>><<set $dancespeech to "nocum">>
 			<<else>>
 				당신의 정액은 청중을 향해 호를 그린다. <<person1>><<personPost "은">><<HePost "의">>무릎을 꿇고 입으로 받으려 한다. <<person2>><<personPost "은">> 당신을 놓아주며 웃는다. 당신은 <<tearful>> 무릎으로 기어간다.
@@ -54,7 +54,7 @@
 			<<set $audiencearousal += 5>><<set $audienceexcitement += 5>><<set $audiencemod += 2>><<set $dancespeech to "cum">>
 		<</if>>
 	<<else>>
-		청중은 점점 더 흥분해 간다. 그들은 <<person>>에게 온갖 음탕한 행동을 제안하지만, <<HePost "은">> 잠시 뒤 당신을 놓아준다. 당신은 <<tearful>> 무릎으로 기어간다.
+		청중은 점점 더 흥분해 간다. 그들은 <<personPost>>에게 온갖 음탕한 행동을 제안하지만, <<HePost "은">> 잠시 뒤 당신을 놓아준다. 당신은 <<tearful>> 무릎으로 기어간다.
 		<<set $audiencemod += 1>>
 	<</if>>
 	<<person1>>
@@ -83,7 +83,7 @@
 		<</if>>
 		손을 뻗어 당신의 넓적다리를 꽉 잡는다.
 		<<if !$worn.over_lower.type.includes("naked") and !$worn.lower.type.includes("naked")>>
-			<<if (($worn.over_lower.skirt is 1 and $worn.lower.skirt is 1) or ($worn.over_lower.skirt is 1 and $worn.lower.type.includes("naked")) or ($worn.lower.skirt is 1 and $worn.over_lower.type.includes("naked")))>>
+			<<if ((setup.clothes.over_lower[clothesIndex('over_lower', $worn.over_lower)].skirt is 1 and setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1) or (setup.clothes.over_lower[clothesIndex('over_lower', $worn.over_lower)].skirt is 1 and $worn.lower.type.includes("naked")) or (setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1 and $worn.over_lower.type.includes("naked")))>>
 				<<if $worn.genitals.type.includes("chastity") and $worn.under_lower.type.includes("naked")>>
 					<<HePost "은">> 당신의 치마 아래에 손을 뻗고, 정조대 아래에 지폐를 밀어넣는동안,
 				<<elseif $worn.under_lower.type.includes("naked")>>
@@ -105,7 +105,7 @@
 		<</if>>당신의 <<bottomPost "에">> 키스한다.
 	<<else>>
 		<<if !$worn.over_lower.type.includes("naked") and !$worn.lower.type.includes("naked")>>
-			<<if (($worn.over_lower.skirt is 1 and $worn.lower.skirt is 1) or ($worn.over_lower.skirt is 1 and $worn.lower.type.includes("naked")) or ($worn.lower.skirt is 1 and $worn.over_lower.type.includes("naked")))>>
+			<<if ((setup.clothes.over_lower[clothesIndex('over_lower', $worn.over_lower)].skirt is 1 and setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1) or (setup.clothes.over_lower[clothesIndex('over_lower', $worn.over_lower)].skirt is 1 and $worn.lower.type.includes("naked")) or (setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1 and $worn.over_lower.type.includes("naked")))>>
 				<<if $worn.genitals.type.includes("chastity") and $worn.under_lower.type.includes("naked")>>
 					<<HePost "은">> 당신의 치마 아래에 손을 뻗고, 정조대 아래에 지폐를 밀어넣는다.
 				<<elseif $worn.under_lower.type.includes("naked")>>
@@ -169,8 +169,14 @@
 
 <<if $danceaction is "skirtstruggle">>
 	<<set $danceaction to 0>>
-	당신은 한 손으로 당신의 <<trClothes "under_lower" $worn.under_lower.name "name" "을">>_trResult 잡고, 다른 한손으로 치맛자락을 잡으려 한다. 짧은 저항 끝에 당신의 옷을 거의 온전하게 되찾는다.
-	<<arousal 100>><<set $worn.under_lower.integrity -= 10>><<set $dancespeech to "struggle">>
+	당신은 한 손으로 당신의 <<trClothes "under_lower" $worn.under_lower.name "name" "을">>_trResult 잡고, 다른 한손으로 치맛자락을 잡으려 한다.
+	<<if !$worn.lower.type.includes("dance")>>
+		당신은 신축성 있는 천을 비틀어 풀고, <span class="teal">아무런 손상이 없는 채로,</span> 당신의 옷과 당신의 존엄성을 거의 온전하게 되찾아온다.
+	<<else>>
+		 짧은 몸싸움 끝에, 당신의 옷과, 당신의 존엄성을 거의 온전하게 되찾아온다.
+		<<set $worn.under_lower.integrity -= 10>>
+	<</if>>
+	<<arousal 100>><<set $dancespeech to "struggle">>
 	<<if $worn.under_lower.integrity lte 0>>
 		하지만 당신의 <<trClothes "under_lower" $worn.under_lower.name "name" "은">>_trResult 저항중에 손상을 받았다. 망가진 천은 너덜너덜한 부분이 당신의 다리 사이로 떨어진다. 오직 <<trClothes "lower" $worn.lower.name>>_trResult만이 가리고 있는 <<genitalsPost "을">> 산들바람이 애무한다.
 		<<set $audiencemod += 2>><<arousal 100>><<underruined>><<set $audiencearousal += 5>><<set $audienceexcitement += 5>><<set $dancespeech to "strip">>
@@ -188,26 +194,38 @@
 
 <<if $danceaction is "overupperstruggle">>
 	<<set $danceaction to 0>>
-	You struggle to prevent your $worn.over_upper.name being ripped clean from your body. After a brief tussle, you manage to regain control of your clothes, dignity mostly intact.
-	<<arousal 100>><<set $worn.over_upper.integrity -= 10>><<set $dancespeech to "struggle">>
+	당신은 <<trClothes "over_upper" $worn.over_upper.name "name" "이">>_trResult 완전히 찢어지는 것을 막기 위해 고군분투한다.
+	<<if !$worn.over_upper.type.includes("dance")>>
+		당신은 신축성 있는 천을 비틀어 풀고, <span class="teal">아무런 손상이 없는 채로,</span> 당신의 옷과 당신의 존엄성을 거의 온전하게 되찾아온다.
+	<<else>>
+		짧은 몸싸움 끝에, 당신의 옷과, 당신의 존엄성을 거의 온전하게 되찾아온다.
+		<<set $worn.over_upper.integrity -= 10>>
+	<</if>>
+	<<arousal 100>><<set $dancespeech to "struggle">>
 	<<if $worn.over_upper.integrity lte 0>>
-		Your $worn.over_upper.name <<overupperplural>> damaged by the struggle however.
+		하지만 당신의 <<trClothes "over_upper" $worn.over_upper.name "name" "은">>_trResult 저항중에 손상을 받았다.
 		<<overupperruined>>
-		The ruined fabric soon falls apart, leaving your <<exposedupper>> exposed for the world to leer at.
+		망가진 천은 곧 조각나 떨어지고, 당신의 <<exposedupperPost "을">> 세상의 음흉한 시선에 노출시킨다.
 		<<arousal 100>><<set $audiencemod += 2>><<set $leftactiondefault to "uppercover">><<set $audiencearousal += 5>><<set $audienceexcitement += 5>><<set $dancespeech to "strip">>
 	<</if>>
 <</if>>
 
 <<if $danceaction is "overuppersurrender">>
 	<<set $danceaction to 0>>
-	Your $worn.over_upper.name <<overupperplural>> torn from your body, leaving your <<overupperruined>><<exposedupper>> exposed for the world to see.
+	당신의 <<trClothes "over_upper" $worn.over_upper.name "name" "은">>_trResult 당신의 몸에서 찢어져, 당신의 <<exposedupperPost "을">> 세상이 볼 수 있도록 노출시킨다.
 	<<set $audiencemod += 2>><<set $leftactiondefault to "uppercover">><<arousal 200>><<set $audiencearousal += 5>><<set $audienceexcitement += 5>><<set $dancespeech to "strip">>
 <</if>>
 
 <<if $danceaction is "upperstruggle">>
 	<<set $danceaction to 0>>
-	당신은 <<trClothes "upper" $worn.upper.name "name" "이">>_trResult 깨끗하게 찢어지는 것을 막기 위해 고군분투한다. 짧은 저항 끝에 당신의 옷을 거의 온전하게 되찾는다.
-	<<arousal 100>><<set $worn.upper.integrity -= 10>><<set $dancespeech to "struggle">>
+	당신은 <<trClothes "upper" $worn.upper.name "name" "이">>_trResult 완전히 찢어지는 것을 막기 위해 고군분투한다.
+	<<if !$worn.upper.type.includes("dance")>>
+		당신은 신축성 있는 천을 비틀어 풀고, <span class="teal">아무런 손상이 없는 채로,</span> 당신의 옷과 당신의 존엄성을 거의 온전하게 되찾아온다.
+	<<else>>
+		짧은 몸싸움 끝에, 당신의 옷과, 당신의 존엄성을 거의 온전하게 되찾아온다.
+		<<set $worn.upper.integrity -= 10>>
+	<</if>>
+	<<arousal 100>><<set $dancespeech to "struggle">>
 	<<if $worn.upper.integrity lte 0>>
 		하지만 당신의 <<trClothes "upper" $worn.upper.name "name" "은">>_trResult 저항중에 손상을 받았다. 당신의 <<breastsPost "을">> 세상에 노출시킨 채로 넝마조각이 된 천은 곧 떨어져내린다.
 		<<arousal 100>><<set $audiencemod += 2>><<set $leftactiondefault to "uppercover">><<upperruined>><<set $audiencearousal += 5>><<set $audienceexcitement += 5>><<set $dancespeech to "strip">>
@@ -216,56 +234,68 @@
 
 <<if $danceaction is "uppersurrender">>
 	<<set $danceaction to 0>>
-	당신의 <<trClothes "upper" $worn.upper.name "name" "은">>_trResult 당신의 몸에서 찢어져, 당신의 <<exposedupperPost "이">> 세상에 노출된다.
-	<<set $audiencemod += 2>><<set $leftactiondefault to "uppercover">><<arousal 200>><<upperruined>><<set $audiencearousal += 5>><<set $audienceexcitement += 5>><<set $dancespeech to "strip">>
+	당신의 <<trClothes "upper" $worn.upper.name "name" "은">>_trResult 당신의 몸에서 찢어져, 당신의 <<upperruined>><<exposedupperPost "을">> 세상이 볼 수 있도록 노출시킨다.
+	<<set $audiencemod += 2>><<set $leftactiondefault to "uppercover">><<arousal 200>><<set $audiencearousal += 5>><<set $audienceexcitement += 5>><<set $dancespeech to "strip">>
 <</if>>
 
 <<if $danceaction is "overlowerstruggle">>
 	<<set $danceaction to 0>>
-	You struggle to keep hold of your $worn.over_lower.name and manage to prevent it from being ripped from your body.
-	<<arousal 100>><<set $worn.over_lower.integrity -= 10>><<set $dancespeech to "struggle">>
+	당신은 <<trClothes "over_lower" $worn.over_lower.name "name" "을">>_trResult 붙잡고 몸부림쳐서
+	<<if !$worn.over_lower.type.includes("dance")>>
+		<span class="teal">아무런 손상이 없는 채로,</span> 당신의 옷과 당신의 존엄성을 거의 온전하게 되찾아온다.
+	<<else>>
+		간신히 당신의 몸에서 찢어져 나가는 것을 막는다.
+		<<set $worn.over_lower.integrity -= 10>>
+	<</if>>
+	<<arousal 100>><<set $dancespeech to "struggle">>
 	<<if $worn.over_lower.integrity lte 0>>
-		However, the struggle was fierce and you soon find your $worn.over_lower.name falling from your body in tatters.
+		하지만, 저항은 격렬했으며, 당신의 <<trClothes "over_lower" $worn.over_lower.name "name" "이">>_trResult 넝마가 되어 몸에서 떨어지는 것을 알게 되었다.
 		<<arousal 100>><<set $audiencemod += 2>><<set $rightactiondefault to "lowercover">><<overlowerruined>><<set $audiencearousal += 5>><<set $audienceexcitement += 5>><<set $dancespeech to "strip">>
 		<<if $worn.lower.name isnot "naked">>
-			Your breath catches in your throat as your $worn.lower.name <<lowerplural>> revealed for all to see.
+			당신의 <<worn_lower_name_i>> 모두에게 노출되는 순간, 당신의 숨이 턱 막혔다.
 			<<set $audiencearousal += 3>><<set $audienceexcitement += 3>><<set $audiencemod += 1>><<arousal 100>>
 		<<elseif $worn.under_lower.name is "naked">>
-			Your breath catches in your throat as your <<genitals_are>> revealed for all to see.
+			당신의 <<genitalsPost "이">> 모두에게 노출되는 순간, 당신의 숨이 턱 막혔다.
 			<<set $audiencearousal += 5>><<set $audienceexcitement += 5>><<set $audiencemod += 2>><<arousal 100>>
 			<<if $audience gte 2>>
 				<<dance_crossdress_reveal>>
 			<</if>>
 		<<else>>
-			Your $worn.under_lower.name <<underlowerplural>> now exposed, becoming the only thing protecting your <<genitals>>.
+			당신의 <<genitalsPost "을">> 지키는 유일한 <<trClothes "under_lower" $worn.under_lower.name "name" "은">>_trResult 현재 노출되어 있다.
 		<</if>>
 	<</if>>
 <</if>>
 
 <<if $danceaction is "overlowersurrender">>
 	<<set $danceaction to 0>>
-	Your $worn.over_lower.name <<lowerplural>> ripped from your body.
+	당신의 <<trClothes "over_lower" $worn.over_lower.name "name" "은">>_trResult 당신의 몸에서 찢어진다.
 	<<arousal 100>><<set $audiencemod += 2>><<set $rightactiondefault to "lowercover">><<overlowerruined>><<set $audiencearousal += 5>><<set $audienceexcitement += 5>><<set $dancespeech to "strip">>
 	<<if $worn.lower.name is "naked">>
-		Your breath catches in your throat as your $worn.lower.name <<lowerplural>> revealed for all to see.
+		당신의 <<worn_lower_name_i>> 모두에게 노출되는 순간, 당신의 숨이 턱 막혔다.
 		<<set $audiencearousal += 3>><<set $audienceexcitement += 3>><<set $audiencemod += 1>><<arousal 100>>
 	<<elseif $worn.under_lower.name is "naked">>
-		Your breath catches in your throat as your <<genitals_are>> revealed for all to see.
+		당신의 <<genitalsPost "이">> 모두에게 노출되는 순간, 당신의 숨이 턱 막혔다.
 		<<set $audiencearousal += 5>><<set $audienceexcitement += 5>><<set $audiencemod += 2>><<arousal 100>>
 		<<if $audience gte 2>>
 			<<dance_crossdress_reveal>>
 		<</if>>
 	<<else>>
-		Your $worn.under_lower.name <<underlowerplural>> now exposed, becoming the only thing protecting your <<genitals>>.
+		당신의 <<genitalsPost "을">> 지키는 유일한 <<trClothes "under_lower" $worn.under_lower.name "name" "은">>_trResult 현재 노출되어 있다.
 	<</if>>
 <</if>>
 
 <<if $danceaction is "lowerstruggle">>
 	<<set $danceaction to 0>>
-	당신은 <<trClothes "lower" $worn.lower.name "name" "을">>_trResult 붙잡고 저항하여, 간신히 당신의 몸에서 찢어져 나가는 것을 막는다.
-	<<arousal 100>><<set $worn.lower.integrity -= 10>><<set $dancespeech to "struggle">>
+	당신은 <<trClothes "lower" $worn.lower.name "name" "을">>_trResult 붙잡고 몸부림쳐서
+	<<if !$worn.over_lower.type.includes("dance")>>
+		<span class="teal">아무런 손상이 없는 채로,</span> 당신의 옷과 당신의 존엄성을 거의 온전하게 되찾아온다.
+	<<else>>
+		간신히 당신의 몸에서 찢어져 나가는 것을 막는다.
+		<<set $worn.lower.integrity -= 10>>
+	<</if>>
+	<<arousal 100>><<set $dancespeech to "struggle">>
 	<<if $worn.lower.integrity lte 0>>
-		하지만, 저항은 격렬했으며, 당신의 <<trClothes "lower" $worn.lower.name "name" "이">>_trResult 넝마가 되어 몸에서 떨지는 것을 알게 되었다.
+		하지만, 저항은 격렬했으며, 당신의 <<trClothes "lower" $worn.lower.name "name" "이">>_trResult 넝마가 되어 몸에서 떨어지는 것을 알게 되었다.
 		<<arousal 100>><<set $audiencemod += 2>><<set $rightactiondefault to "lowercover">><<lowerruined>><<set $audiencearousal += 5>><<set $audienceexcitement += 5>><<set $dancespeech to "strip">>
 		<<if $worn.under_lower.name is "naked">>
 			당신의 <<genitalsPost "이">> 모두에게 노출되는 순간, 당신의 숨이 턱 막혔다.
@@ -296,10 +326,15 @@
 
 <<if $danceaction is "understruggle">>
 	<<set $danceaction to 0>>
-	당신은 <<trClothes "under_lower" $worn.under_lower.name "name" "을">>_trResult 지키기 위해 다툰다.
-	<<arousal 100>><<set $worn.under_lower.integrity -= 10>><<set $dancespeech to "struggle">>
+	<<if !$worn.under_lower.type.includes("dance")>>
+		당신은 <<worn_under_lower_name_ul>> 지키기 위해 필사적으로 싸운다. <span class="teal">그 유연한 재질은 그런 몸부림을 견뎌낸다.</span>
+	<<else>>
+		당신은 <<trClothes "under_lower" $worn.under_lower.name "name" "을">>_trResult 지키기 위해 고군분투한다.
+		<<set $worn.under_lower.integrity -= 10>>
+	<</if>>
+	<<arousal 100>><<set $dancespeech to "struggle">>
 	<<if $worn.under_lower.integrity lte 0>>
-		옷이 찢어지면서 잡아당기는 힘에서 풀려나기 시작했다, 당신은 속옷 없이 땅에 던져진다. 당신의 <<genitalsPost "이">> 모두에게 노출되는 순간, 당신의 숨이 턱 막혔다.
+		당신이 옷 잡아당기기에서 이기기 시작하고 있을 때 옷이 찢어지면서, 당신은 속옷 없이 땅에 던져진다. 당신의 <<genitalsPost "이">> 모두에게 노출되는 순간, 당신의 숨이 턱 막혔다.
 		<<set $audiencearousal += 5>><<set $audienceexcitement += 5>><<set $audiencemod += 4>><<arousal 100>><<underlowerruined>><<set $rightactiondefault to "undercover">><<set $dancespeech to "strip">>
 		<<if $audience gte 2>>
 			<<dance_crossdress_reveal>>
@@ -318,26 +353,40 @@
 
 <<if $danceaction is "underupperstruggle">>
 	<<set $danceaction to 0>>
-	You fight desperately to keep your $worn.under_upper.name held up.
-	<<arousal 100>><<set $worn.under_upper.integrity -= 10>><<set $dancespeech to "struggle">>
+	<<if !$worn.under_upper.type.includes("dance")>>
+		당신은 <<worn_under_upper_name_ul>> 지키기 위해 필사적으로 싸운다. <span class="teal">그 유연한 재질은 그런 몸부림을 견뎌낸다.</span>
+	<<else>>
+		당신은 <<trClothes "under_upper" $worn.under_upper.name "name" "을">>_trResult 지키기 위해 고군분투한다.
+		<<set $worn.under_upper.integrity -= 10>>
+	<</if>>
+	<<arousal 100>><<set $dancespeech to "struggle">>
 	<<if $worn.under_upper.integrity lte 0>>
-		You are starting to win the tug of war when the fabric tears, throwing you onto the ground minus your underwear. Your breath catches in your throat as your <<breasts>> revealed for all to see.
+		당신이 옷 잡아당기기에서 이기기 시작하고 있을 때 옷이 찢어지면서, 당신은 속옷 없이 땅에 던져진다. 당신의 <<breastsPost "이">> 모두에게 노출되는 순간, 당신의 숨이 턱 막혔다.
 		<<set $audiencearousal += 5>><<set $audienceexcitement += 5>><<set $audiencemod += 4>><<arousal 100>><<underupperruined>><<set $rightactiondefault to "undercover">><<set $dancespeech to "strip">>
 	<</if>>
 <</if>>
 
 <<if $danceaction is "underuppersurrender">>
 	<<set $danceaction to 0>>
-	당신의 <<trClothes "under_lower" $worn.under_lower.name "name" "이">>_trResult 당신에게서 찢어져가, 당신의 <<genitalsPost "이">> 모두가 볼 수 있게 해방된다. 그 굴욕에 당신의 심장이 쿵쿵대기 시작했다.
+	당신의 <<trClothes "under_upper" $worn.under_upper.name "name" "이">>_trResult 당신에게서 찢어져가, 당신의 <<breastsPost "이">> 모두가 볼 수 있게 해방된다. 그 굴욕에 당신의 심장이 쿵쿵대기 시작했다.
 	<<set $audiencearousal += 10>><<set $audienceexcitement += 10>><<set $audiencemod += 4>><<arousal 300>><<underupperruined>><<set $rightactiondefault to "undercover">><<set $dancespeech to "strip">>
 <</if>>
 
-<<if $danceaction is "cool">>
+<<if $danceaction is "robinignore">>
+	당신은 당신의 눈을 돌려 로빈의 존재를 알아채지 못한 척 한다. <<nnpc_He_nun "Robin">> 더 절박한 목소리로 계속 당신의 이름을 계속 부른다.
+	<br>
+	필사적인 노력으로, <<nnpc_he_nun "Robin">> 군중들 사이를 밀치고 <<nnpc_his_yi "Robin">> 길을 만들려 하지만, <<nnpc_he_nun "Robin">> 격렬하게 마주 밀쳐지는 결과만 얻었을 뿐이다. <<nnpc_He_nun "Robin">> 낙담한 눈으로 당신을 보고는 뾰루퉁하게 사라진다.
+<</if>>
+
+<<if ($danceaction is "cool" or $danceaction is "sexual" or $danceaction is "sophisticated" or $danceaction is "seductive") and $arousal gte $arousalmax>>
+	<<orgasmstage>>
+<<elseif $danceaction is "cool">>
+	
 	<<set $danceaction to 0>><<set $danceactiondefault to "cool">>
 	<<stress -2>><<tiredness 1>><<dancestat>><<set $dancespeech to "dance">>
 	<<if $audience gte 1>>
-		<<set $audiencearousal += $allure / 2000 + $danceskill / 100>>
-		<<set $audienceexcitement += $danceskill / 100>>
+		<<set $audiencearousal += $allure / 2000 + currentSkillValue('danceskill') / 100>>
+		<<set $audienceexcitement += currentSkillValue('danceskill') / 100>>
 	<</if>>
 	<<if $danceskill lte 200>>
 		달리 무엇을 할지 모른 채, 리드미컬하게 까딱거리기만 한다.
@@ -363,8 +412,8 @@
 	<<set $danceaction to 0>><<set $danceactiondefault to "sophisticated">>
 	<<stress -2>><<tiredness 1>><<dancestat>><<set $dancespeech to "dance">>
 	<<if $audience gte 1>>
-		<<set $audiencearousal += $allure / 3000 + $danceskill / 100>>
-		<<set $audienceexcitement += $danceskill / 100>>
+		<<set $audiencearousal += $allure / 3000 + currentSkillValue('danceskill') / 100>>
+		<<set $audienceexcitement += currentSkillValue('danceskill') / 100>>
 	<</if>>
 	<<if $danceskill lte 200>>
 		당신은 세련되어 보이길 바라며, 이리저리 몸을 흔들고 있다. 
@@ -390,8 +439,8 @@
 	<<set $danceaction to 0>><<set $danceactiondefault to "seductive">>
 	<<stress -2>><<tiredness 1>><<exhibitionism1>><<dancestat>><<set $dancespeech to "dance">>
 	<<if $audience gte 1>>
-		<<set $audiencearousal += $allure / 1000 + $danceskill / 100>>
-		<<set $audienceexcitement += $danceskill / 100>>
+		<<set $audiencearousal += $allure / 1000 + currentSkillValue('danceskill') / 100>>
+		<<set $audienceexcitement += currentSkillValue('danceskill') / 100>>
 	<</if>>
 	<<if $danceskill lte 200>>
 		당신은 요염하게 춤을 추려고 노력하지만, 섹시하기 보다 멍청해보인다.
@@ -417,8 +466,8 @@
 	<<set $danceaction to 0>><<set $danceactiondefault to "sexual">>
 	<<stress -2>><<tiredness 1>><<exhibitionism2>><<dancestat>><<set $dancespeech to "dance">>
 	<<if $audience gte 1>>
-		<<set $audiencearousal += $allure / 500 + $danceskill / 100>>
-		<<set $audienceexcitement += $danceskill / 100>>
+		<<set $audiencearousal += $allure / 500 + currentSkillValue('danceskill') / 100>>
+		<<set $audienceexcitement += currentSkillValue('danceskill') / 100>>
 	<</if>>
 	<<if $danceskill lte 200>>
 		당신은 도발적으로 춤을 추려고 한다. 당신의 부족한 실력으로 인해, 그저 엉덩이 흔드는 것으로 밖에 보이지 않는다.
@@ -433,7 +482,6 @@
 	<<else>>
 		당신의 움직임은 원초적이고 도취적인 성적 에너지를 발산한다.
 	<</if>>
-	<br><br>
 	<<danceskilluse>>
 	<<pass 1>>
 	<<set $dancephysique += 1>>
@@ -441,85 +489,115 @@
 		<<set $dancephysique -= 10>>
 		<<physique>>
 	<</if>>
+<<elseif $danceaction is "orgasm">>
+		<<orgasmstage>>
 <<elseif $danceaction is "groom">>
 	<<set $audiencearousal += 4>><<set $audienceexcitement += 4>><<set $audiencemod += 1>><<set $danceactiondefault to "groom">>
-	<<if $neckgoo gte 1>>
-		<<set $neckgoo -= 1>>
+	<<if $player.bodyliquid.neck.goo gte 1>>
+		<<set $player.bodyliquid.neck.goo -= 1>>
 		당신은 스스로 그루밍한다. 당신의 목에 묻은 점액을 손으로 닦고, 당신의 손을 할짝거린다.
-	<<elseif $rightarmgoo gte 1>>
-		<<set $rightarmgoo -= 1>>
+	<<elseif $player.bodyliquid.rightarm.goo gte 1>>
+		<<set $player.bodyliquid.rightarm.goo -= 1>>
 		당신은 스스로 그루밍한다. 오른팔에 묻은 점액을 할짝거린다.
-	<<elseif $leftarmgoo gte 1>>
-		<<set $leftarmgoo -= 1>>
+	<<elseif $player.bodyliquid.leftarm.goo gte 1>>
+		<<set $player.bodyliquid.leftarm.goo -= 1>>
 		당신은 스스로 그루밍한다. 왼팔에 묻은 점액을 할짝거린다.
-	<<elseif $thighgoo gte 1>>
-		<<set $thighgoo -= 1>>
+	<<elseif $player.bodyliquid.thigh.goo gte 1>>
+		<<set $player.bodyliquid.thigh.goo -= 1>>
 		당신은 스스로 그루밍한다. 당신의 넓적다리에 묻은 점액을 손으로 닦고, 당신의 손을 할짝거린다.
-	<<elseif $bottomgoo gte 1>>
-		<<set $bottomgoo -= 1>>
+	<<elseif $player.bodyliquid.bottom.goo gte 1>>
+		<<set $player.bodyliquid.bottom.goo -= 1>>
 		당신은 스스로 그루밍한다. 당신의 <<bottomPost "에">> 묻은 점액을 손으로 닦고, 당신의 손을 할짝거린다.
-	<<elseif $tummygoo gte 1>>
-		<<set $tummygoo -= 1>>
+	<<elseif $player.bodyliquid.tummy.goo gte 1>>
+		<<set $player.bodyliquid.tummy.goo -= 1>>
 		당신은 스스로 그루밍한다. 당신의 배에 묻은 점액을 손으로 닦고, 당신의 손을 할짝거린다.
-	<<elseif $chestgoo gte 1>>
-		<<set $chestgoo -= 1>>
+	<<elseif $player.bodyliquid.chest.goo gte 1>>
+		<<set $player.bodyliquid.chest.goo -= 1>>
 		당신은 스스로 그루밍한다. 당신의 가슴에 묻은 점액을 손으로 닦고, 당신의 손을 할짝거린다.
-	<<elseif $facegoo gte 1>>
-		<<set $facegoo -= 1>>
+	<<elseif $player.bodyliquid.face.goo gte 1>>
+		<<set $player.bodyliquid.face.goo -= 1>>
 		당신은 스스로 그루밍한다. 당신의 얼굴에 묻은 점액을 손으로 닦고, 당신의 손을 할짝거린다.
-	<<elseif $hairgoo gte 1>>
-		<<set $hairgoo -= 1>>
+	<<elseif $player.bodyliquid.hair.goo gte 1>>
+		<<set $player.bodyliquid.hair.goo -= 1>>
 		당신은 스스로 그루밍한다. 당신의 머리카락에 묻은 점액을 손으로 닦고, 당신의 손을 할짝거린다.
-	<<elseif $feetgoo gte 1>>
-		<<set $feetgoo -= 1>>
+	<<elseif $player.bodyliquid.feet.goo gte 1>>
+		<<set $player.bodyliquid.feet.goo -= 1>>
 		당신은 스스로 그루밍한다. 당신의 발에 묻은 점액을 손으로 닦고, 당신의 손을 할짝거린다.
-	<<elseif $vaginaoutsidegoo gte 1>>
-		<<set $vaginaoutsidegoo -= 1>>
+	<<elseif $player.bodyliquid.vaginaoutside.goo gte 1>>
+		<<set $player.bodyliquid.vaginaoutside.goo -= 1>>
 		당신은 스스로 그루밍한다. 당신의 <<pussyPost "에">> 묻은 점액을 손으로 닦고, 당신의 손을 할짝거린다.
-	<<elseif $penisgoo gte 1>>
-		<<set $penisgoo -= 1>><<set _dance_penis_cleaned to true>>
+	<<elseif $player.bodyliquid.penis.goo gte 1>>
+		<<set $player.bodyliquid.penis.goo -= 1>><<set _dance_penis_cleaned to true>>
 		당신은 스스로 그루밍한다. 당신의 <<penisPost>>에 묻은 점액을 손으로 닦고, 당신의 손을 할짝거린다.
-	<<elseif $necksemen gte 1>>
-		<<set $necksemen -= 1>>
+	<<elseif $player.bodyliquid.neck.semen gte 1>>
+		<<set $player.bodyliquid.neck.semen -= 1>>
 		당신은 스스로 그루밍한다. 당신의 목에 묻은 정액을 손으로 닦고, 당신의 손을 할짝거린다.
-	<<elseif $rightarmsemen gte 1>>
-		<<set $rightarmsemen -= 1>>
+	<<elseif $player.bodyliquid.rightarm.semen gte 1>>
+		<<set $player.bodyliquid.rightarm.semen -= 1>>
 		당신은 스스로 그루밍한다. 오른팔에 묻은 정액을 할짝거린다.
-	<<elseif $leftarmsemen gte 1>>
-		<<set $leftarmsemen -= 1>>
+	<<elseif $player.bodyliquid.leftarm.semen gte 1>>
+		<<set $player.bodyliquid.leftarm.semen -= 1>>
 		당신은 스스로 그루밍한다. 왼팔에 묻은 정액을 할짝거린다.
-	<<elseif $thighsemen gte 1>>
-		<<set $thighsemen -= 1>>
+	<<elseif $player.bodyliquid.thigh.semen gte 1>>
+		<<set $player.bodyliquid.thigh.semen -= 1>>
 		당신은 스스로 그루밍한다. 당신의 넓적다리에 묻은 정액을 손으로 닦고, 당신의 손을 할짝거린다.
-	<<elseif $bottomsemen gte 1>>
-		<<set $bottomsemen -= 1>>
+	<<elseif $player.bodyliquid.bottom.semen gte 1>>
+		<<set $player.bodyliquid.bottom.semen -= 1>>
 		당신은 스스로 그루밍한다. 당신의 <<bottomPost "에">> 묻은 정액을 손으로 닦고, 당신의 손을 할짝거린다.
-	<<elseif $tummysemen gte 1>>
-		<<set $tummysemen -= 1>>
+	<<elseif $player.bodyliquid.tummy.semen gte 1>>
+		<<set $player.bodyliquid.tummy.semen -= 1>>
 		당신은 스스로 그루밍한다. 당신의 배에 묻은 정액을 손으로 닦고, 당신의 손을 할짝거린다.
-	<<elseif $chestsemen gte 1>>
-		<<set $chestsemen -= 1>>
+	<<elseif $player.bodyliquid.chest.semen gte 1>>
+		<<set $player.bodyliquid.chest.semen -= 1>>
 		당신은 스스로 그루밍한다. 당신의 가슴에 묻은 정액을 손으로 닦고, 당신의 손을 할짝거린다.
-	<<elseif $facesemen gte 1>>
-		<<set $facesemen -= 1>>
+	<<elseif $player.bodyliquid.face.semen gte 1>>
+		<<set $player.bodyliquid.face.semen -= 1>>
 		당신은 스스로 그루밍한다. 당신의 얼굴에 묻은 정액을 손으로 닦고, 당신의 손을 할짝거린다.
-	<<elseif $hairsemen gte 1>>
-		<<set $hairsemen -= 1>>
+	<<elseif $player.bodyliquid.hair.semen gte 1>>
+		<<set $player.bodyliquid.hair.semen -= 1>>
 		당신은 스스로 그루밍한다. 당신의 머리카락에 묻은 정액을 손으로 닦고, 당신의 손을 할짝거린다.
-	<<elseif $feetsemen gte 1>>
-		<<set $feetsemen -= 1>>
+	<<elseif $player.bodyliquid.feet.semen gte 1>>
+		<<set $player.bodyliquid.feet.semen -= 1>>
 		당신은 스스로 그루밍한다. 당신의 발에 묻은 정액을 손으로 닦고, 당신의 손을 할짝거린다.
-	<<elseif $vaginaoutsidesemen gte 1>>
-		<<set $vaginaoutsidesemen -= 1>>
+	<<elseif $player.bodyliquid.vaginaoutside.semen gte 1>>
+		<<set $player.bodyliquid.vaginaoutside.semen -= 1>>
 		당신은 스스로 그루밍한다. 당신의 <<pussyPost "에">> 묻은 정액을 손으로 닦고, 당신의 손을 할짝거린다.
-	<<elseif $penissemen gte 1>>
-		<<set $penissemen -= 1>><<set _dance_penis_cleaned to true>>
+	<<elseif $player.bodyliquid.penis.semen gte 1>>
+		<<set $player.bodyliquid.penis.semen -= 1>><<set _dance_penis_cleaned to true>>
 		당신은 스스로 그루밍한다. 당신의 <<penisPost>>에 묻은 정액을 손으로 닦고, 당신의 손을 할짝거린다.
 	<</if>>
 	<<if $goooutsidecount + $semenoutsidecount lte 1 or (_dance_penis_cleaned is true and $goooutsidecount + $semenoutsidecount lte 3)>>
 		<<set $danceactiondefault to "cool">>
 	<</if>>
 	<<pass 1>>
+<<elseif $danceaction is "drink">>
+	<<if $danceSuccess>>
+		당신은 술을 잡아, <span class="green">마시는 동작을 춤에 엮어넣고,</span> 내려놓는다. 관중들이 환호한다.
+		<<if random(1, 10) is 10>>
+			<span class="pink">당신은 따뜻함을 느낀다.</span><<set $drugged += 60>>
+		<<else>>
+			당신은 어지러움을 느낀다.
+		<</if>>
+		<<set $audiencemod += 4>><<set $drunk += 60>>
+	<<else>>
+		당신은 춤의 흐름을 끊지 않고 술을 잡으려 하지만, <span class="red">대신 그 <<persons_yi>> 손에서 잔을 쳐버려</span> 와인을 <<himPost>>에게 쏟아버린다. 관중들은 즐거워하는 듯하다.<<set $audiencemod += 1>>
+	<</if>>
+<<elseif $danceaction is "drink_careful">>
+	<<set $danceaction to 0>>
+	당신은 움직임을 늦춰 안전하게 술을 마신다. 당신은 어지러움을 느끼지만, 관중들은 만족해한다.<<set $drunk += 60>><<set $audiencemod += 2>>
+<<elseif $danceaction is "drink_ignore">>
+	<<set $danceaction to 0>>
+	당신은 술을 무시하고, 계속 춤을 춘다. 그 <<person_un>> 실망한 듯 보이고, <<hePost>>만 실망한 것이 아니다.<<set $audienceexcitement -= 5>>
+<<elseif $danceaction is "light_flaunt">>
+	<<set $danceaction to 0>>
+	당신은 무대 가장자리를 활보하고, 돌고, 한 손을 정강이에 대고 다리를 약간 벌리며 몸을 앞으로 숙인다. 당신은 천천히 일어나며, 손을 무릎에서 넓적다리로 끌어올린다. 팔 하나가 어둠에서 당신에게 뻗어나오지만, 당신이 걸어나오며, 그 팔이 허공을 잡도록 한다.
+	<<dance_job_interest 5>>
+	<<set $audienceexcitement += 5>>
+	<<set $audiencearousal += 5>>
+<<elseif $danceaction is "light_cover">>
+	<<set $danceaction to 0>>
+	당신은 두 팔로 당신의 몸을 가린 채로 가능한 한 춤을 추며, 조명의 색상이 바뀌어 다시 안전해지기를 기다린다.
+	<<set $audiencearousal += 5>>
 <<elseif $danceaction is "privaterefuse">>
 	당신은 잠재적인 고객을 무시했다.
 <<elseif $danceaction is "corruptionResult">>
@@ -531,10 +609,10 @@
 			슬라임의 통제를 두려워하며, 당신은 자신을 진정시킬 기회를 주기 위해 무대를 떠나기로 결정한다.
 			<<set $danceevent to "finish">>
 		<</if>>
-	<<elseif $corruptionResult is "obey">>
-		슬라임이 무대를 떠나지 못하게 막는다.
-		<<set $corruptionDancing to 1>>
-	<<elseif $corruptionResult is "submit">>
+		<<elseif $corruptionResult is "obey">>
+			슬라임이 무대를 떠나지 못하게 막는다.
+			<<set $corruptionDancing to 1>>
+		<<elseif $corruptionResult is "submit">>
 		당신은 슬라임의 명령을 의도적으로 지킨다.
 		<<promiscuity5>>
 		<<set $corruptionDancing to 2>>
@@ -674,13 +752,13 @@
 		<</if>>
 	<<elseif $dancespeech is "crossdressaroused">>
 		<<if $rng gte 76>>
-			<<if $penisexist is 1>>
+			<<if $player.penisExist>>
 				"자지가 있으니 낫네."
 			<<else>>
 				"보지가 있으니 낫네."
 			<</if>>
 		<<elseif $rng gte 51>>
-			<<if $penisexist is 1>>
+			<<if $player.penisExist>>
 				"뜻밖의 자지라니 최고군."
 			<<else>>
 				"뜻밖의 보지라니 최고군."
@@ -698,7 +776,7 @@
 		<<elseif $rng gte 26>>
 			"완전히 속았어."
 		<<else>>
-			<<if $penisexist is 1>>
+			<<if $player.penisExist>>
 				"자지? 말도 안돼."
 			<<else>>
 				"보지? 말도 안돼."
@@ -708,7 +786,7 @@
 		<<if $rng gte 76>>
 			"이건 내가 평소에 좋아하는게 아닌데. 그래도 여전히 귀여워."
 		<<elseif $rng gte 51>>
-			<<if $penisexist is 1>>
+			<<if $player.penisExist>>
 				"그 자지를 어떻게 해야할 지 모르겠어."
 			<<else>>
 				"그 보지를 어떻게 해야할 지 모르겠어."
@@ -783,7 +861,7 @@
 				<</if>>
 			<<elseif $danceskill gte 400>>
 				<<if $rng gte 76>>
-					"너가 섹시하진 않아도 볼만한 가치는 있을거야."
+					"네가 섹시하진 않아도 볼만한 가치는 있을거야."
 				<<elseif $rng gte 51>>
 					"이 <<girl_un>> 나쁜 댄서는 아니야."
 				<<elseif $rng gte 26>>
@@ -837,7 +915,7 @@
 						<<elseif $rng gte 26>>
 							"그가 사람들 앞에서 노출하는 걸 좋아하는 것이 틀림없어."
 						<<else>>
-							"너가 젖꼭지를 만지는걸 좋아할거라 장담해."
+							"네가 젖꼭지를 만지는걸 좋아할거라 장담해."
 						<</if>>
 					<<else>>
 						<<set $rng to random(1, 100)>>
@@ -851,7 +929,7 @@
 							"그 작은 가슴이 춤추는 걸 쉽게 만들어 주겠네."
 							<<insecurity "breasts_tiny" 1>><<ginsecurity "breasts_tiny">>
 						<<else>>
-							"너가 젖꼭지를 만지는걸 좋아할거라 장담해."
+							"네가 젖꼭지를 만지는걸 좋아할거라 장담해."
 						<</if>>
 					<</if>>
 				<<elseif $player.perceived_breastsize lte 5>>
@@ -914,7 +992,7 @@
 		<<elseif $rng gte 1>>
 			<<if $worn.over_lower.type.includes("naked") and $worn.lower.type.includes("naked")>>
 				<<if $worn.under_lower.type.includes("naked") and !$worn.genitals.type.includes("chastity")>>
-					<<if $penisexist is 1 and $vaginaexist is 1 and random(1, 2) is 2>>
+					<<if $player.penisExist and $player.vaginaExist and random(1, 2) is 2>>
 						<<set $rng to random(1, 10)>>
 						<<switch $rng>>
 						<<case 1>>
@@ -932,15 +1010,15 @@
 						<<case 7>>
 							"보지와 자지가 둘 다? 내가 이걸 놓치지 않아서 다행이야."
 						<<case 8>>
-							"내가 한번 더 <<pherPost "의">> 자지를 먹고 싶은건지, 보지를 먹고 싶은건지 모르겠군."
+							"내가 <<pherPost "의">> 자지와 보지중 어떤 것을 더 맛보고 싶은지 모르겠군."
 						<<case 9>>
 							"난 후타나리가 신화라고 생각했었어."
 						<<default>>
 							"넌 <<pshePost "이">> 양쪽의 성기를 모두 가지고 태어났다고 생각해?"
 						<</switch>>
-					<<elseif $penisexist is 1>>
+					<<elseif $player.penisExist>>
 						<<set $rng to random(1, 100)>>
-						<<if $penissize gte 4>>
+						<<if $player.penissize gte 4>>
 							<<if $rng gte 76>>
 								"<<pherPost "의">> 커다란 자지가 움직이는 것 좀 봐!"
 								<<insecurity "penis_big" 1>><<ginsecurity "penis_big">>
@@ -954,7 +1032,7 @@
 								"분명 너는 네 <<penisPost "을">> 뽐내는걸 좋아하겠지"
 								<<insecurity "penis_big" 1>><<ginsecurity "penis_big">>
 							<</if>>
-						<<elseif $penissize is 3>>
+						<<elseif $player.penissize is 3>>
 							<<if $rng gte 76>>
 								"<<pherPost "의">> <<penisPost "이">> 움직이는 것 좀 봐!"
 								<<if $player.gender is "h">><<insecurity "penis_big" 1>><<ginsecurity "penis_big">><</if>>
@@ -968,7 +1046,7 @@
 								"분명 너는 네 <<penisPost>>에 장난하는 걸 좋아하겠지"
 								<<if $player.gender is "h">><<insecurity "penis_big" 1>><<ginsecurity "penis_big">><</if>>
 							<</if>>
-						<<elseif $penissize is 2>>
+						<<elseif $player.penissize is 2>>
 							<<if $rng gte 76>>
 								"<<pherPost "의">> <<penisPost "이">> 움직이는 것 좀 봐!"
 							<<elseif $rng gte 51>>
@@ -978,7 +1056,7 @@
 							<<else>>
 								"분명 너는 네 <<penisPost>>에 장난하는 걸 좋아하겠지"
 							<</if>>
-						<<elseif $penissize is 1>>
+						<<elseif $player.penissize is 1>>
 							<<if $rng gte 76>>
 								"<<pherPost "의">> 자지 너무 작아!"
 								<<insecurity "penis_small" 1>><<ginsecurity "penis_small">>
@@ -1035,15 +1113,19 @@
 					<<if $rng gte 76>>
 						"난 <<pherPost "의">> <<trClothes "under_lower" $worn.under_lower.name>>_trResult 냄새가 어떨지 궁금해."
 					<<elseif $rng gte 51>>
-						"어이, <<bitch>>. 우리한테 <<trClothes "under_lower" $worn.under_lower.name>>_trResult 던져봐."
+						"어이, <<bitch_ya>>. 우리한테 <<trClothes "under_lower" $worn.under_lower.name>>_trResult 던져봐."
 					<<elseif $rng gte 26>>
-						"그 <<trClothes "under_lower" $worn.under_lower.name "name" "은">>_trResult 별로 안 가려져."
+						<<if $worn.under_lower.plural is 1>>
+							"그 <<trClothes "under_lower" $worn.under_lower.name "name" "은">>_trResult 별로 안 가려져."
+						<<else>>
+							"그 <<trClothes "under_lower" $worn.under_lower.name "name" "은">>_trResult 별로 안 가려져."
+						<</if>>
 					<<else>>
 						"<<pShePost "은">> 엄청 노출하고 있어. 좋은걸."
 					<</if>>
 				<</if>>
 			<<else>>
-				<<if (($worn.over_lower.skirt is 1 and $worn.lower.skirt is 1) or ($worn.over_lower.skirt is 1 and $worn.lower.type.includes("naked")) or ($worn.lower.skirt is 1 and $worn.over_lower.type.includes("naked")))>>
+				<<if ((setup.clothes.over_lower[clothesIndex('over_lower', $worn.over_lower)].skirt is 1 and setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1) or (setup.clothes.over_lower[clothesIndex('over_lower', $worn.over_lower)].skirt is 1 and $worn.lower.type.includes("naked")) or (setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1 and $worn.over_lower.type.includes("naked")))>>
 					<<set $rng to random(1, 100)>>
 					<<if $rng gte 76>>
 						"네 치마 밑 우리에게 살짝 들처줘."
@@ -1105,7 +1187,11 @@
 			<<elseif $audiencearousal gte 20>>
 				"난 네가 보기보다 순진하다고 생각하지 않아."
 			<<else>>
-				"<<pShePost "은">> 여기있는 평범한 걸레보단 훨씬 낫군."
+				<<if $dancelocation is "party" or $dancelocation is "smuggler_forced">>
+					"진짜 춤을 보자고, <<girl_a>>."
+				<<else>>
+					"<<pShePost "은">> 여기있는 평범한 걸레보단 훨씬 낫군."
+				<</if>>
 			<</if>>
 		<<elseif $audienceexcitement gte 61>>
 			<<if $audiencearousal gte 100>>
@@ -1147,7 +1233,11 @@
 			<<elseif $audiencearousal gte 20>>
 				"좀 더 야하게 춰 봐."
 			<<else>>
-				"저 <<girlPost "이">> 더 낫다."
+				<<if $dancelocation is "party" or $dancelocation is "smuggler_forced">>
+					"무언가 해 봐, <<bitch_ya>>. 난 점점 지루하다고."
+				<<else>>
+					"저 <<girlPost "이">> 더 낫다."
+				<</if>>
 			<</if>>
 		<<else>>
 			<<if $audiencearousal gte 100>>
@@ -1159,10 +1249,18 @@
 			<<elseif $audiencearousal gte 40>>
 				"<<pShesPost "은">> 지루하지만, 저번 <<pshesPost "은">> 귀여웠어."
 			<<elseif $audiencearousal gte 20>>
-				"그 귀여운 <<girlPost "은">> 어디 갔지? <<phimPost "을">> 다시 데려와."
+				<<if $dancelocation is "party" or $dancelocation is "smuggler_forced">>
+					"우리가 진짜 이 <<slut_uro>> 정한 거야?"
+				<<else>>
+					"그 귀여운 <<girlPost "은">> 어디 갔지? <<phimPost "을">> 다시 데려와."
+				<</if>>
 			<<else>>
 				<<if $rng gte 76>>
-					"이 쓸모없는 걸레는 어디서 찾았지?"
+					<<if $dancelocation is "party" or $dancelocation is "smuggler_forced">>
+						"어디서 이 쓸모없는 <<slut_i>> 기어나온 거지?"
+					<<else>>
+						"이 쓸모없는 <<slut_ul>> 어디서 찾았지?"
+					<</if>>
 				<<elseif $rng gte 51>>
 					"그냥 치우고, 다른 더 나은 애 데려와."
 				<<elseif $rng gte 26>>

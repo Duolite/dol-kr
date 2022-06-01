@@ -298,39 +298,73 @@
 		<<if $famebusiness gte 400>>
 			<<if $famesocial gte 400>>
 				<<set _text_output to "그 고아">>
+			<<elseif $famemodel gte 400>>
+				<<set _text_output to "인기인">>
 			<<else>>
 				<<set _text_output to "친절한 사람">>
 			<</if>>
 		<<else>>
 			<<if $famesocial gte 400>>
-				<<set _text_output to "과시자">>
+				<<if $famemodel gte 400>>
+					<<if $player.gender_appearance is "m">><<set _text_output to "스캔들남">><<else>><<set _text_output to "스캔들녀">><</if>>
+				<<else>>
+					<<set _text_output to "과시자">>
+				<</if>>
 			<<else>>
-				<<set _text_output to "미소">>
+				<<if $famemodel gte 400>>
+					<<set _text_output to "비너스">>
+				<<else>>
+					<<set _text_output to "미소">>
+				<</if>>
 			<</if>>
 		<</if>>
 	<<else>>
 		<<if $famebusiness gte 400>>
 			<<if $famesocial gte 400>>
-				<<if $player.gender_appearance is "m">><<set _text_output to "완벽남">><<else>><<set _text_output to "완벽녀">><</if>>
-			<<else>>
-				<<if $player.gender_appearance is "m">>
-					<<set _text_output to "수상한 가게 소년">>
+				<<if $famemodel gte 400>>
+					<<set _text_output to "표지 모델">>
 				<<else>>
-					<<set _text_output to "수상한 가게 소녀">>
+					<<if $player.gender_appearance is "m">><<set _text_output to "완벽남">><<else>><<set _text_output to "완벽녀">><</if>>
+				<</if>>
+			<<else>>
+				<<if $famemodel gte 400>>
+					<<set _text_output to "잘나가는 모델">>
+				<<else>>
+					<<if $player.gender_appearance is "m">>
+						<<set _text_output to "수상한 가게 소년">>
+					<<else>>
+						<<set _text_output to "수상한 가게 소녀">>
+					<</if>>
 				<</if>>
 			<</if>>
 		<<else>>
 			<<if $famesocial gte 400>>
-				<<if $player.gender_appearance is "m">>
-					<<set _text_output to "파티 소년">>
+				<<if $famemodel gte 400>>
+					<<if $player.gender_appearance is "m">>
+						<<set _text_output to "신진 남배우">>
+					<<else>>
+						<<set _text_output to "신진 여배우">>
+					<</if>>
 				<<else>>
-					<<set _text_output to "파티 소녀">>
+					<<if $player.gender_appearance is "m">>
+						<<set _text_output to "파티 소년">>
+					<<else>>
+						<<set _text_output to "파티 소녀">>
+					<</if>>
 				<</if>>
 			<<else>>
-				<<if $player.gender_appearance is "m">>
-					<<set _text_output to "음란 소년">>
+				<<if $famemodel gte 400>>
+					<<if $player.gender_appearance is "m">>
+						<<set _text_output to "핀업 보이">>
+					<<else>>
+						<<set _text_output to "핀업 걸">>
+					<</if>>
 				<<else>>
-					<<set _text_output to "음란 소녀">>
+					<<if $player.gender_appearance is "m">>
+						<<set _text_output to "음란 소년">>
+					<<else>>
+						<<set _text_output to "음란 소녀">>
+					<</if>>
 				<</if>>
 			<</if>>
 		<</if>>
@@ -339,36 +373,72 @@
 	<<if $famegood gte 400>>
 		<<if $famebusiness gte 400>>
 			<<if $famesocial gte 400>>
-				<<set _text_output to "꽃">>
+				<<if $famemodel gte 400>>
+					<<set _text_output to "우상">>
+				<<else>>
+					<<set _text_output to "꽃">>
+				<</if>>
 			<<else>>
-				<<set _text_output to "자선가">>
+				<<if $famemodel gte 400>>
+					<<set _text_output to "마스코트">>
+				<<else>>
+					<<set _text_output to "자선가">>
+				<</if>>
 			<</if>>
 		<<else>>
 			<<if $famesocial gte 400>>
-				<<set _text_output to "꼰대">>
+				<<if $famemodel gte 400>>
+					<<set _text_output to "귀염둥이">>
+				<<else>>
+					<<set _text_output to "꼰대">>
+				<</if>>
 			<<else>>
-				<<set _text_output to "천사">>
+				<<if $famemodel gte 400>>
+					<<set _text_output to "여신">>
+				<<else>>
+					<<set _text_output to "천사">>
+				<</if>>
 			<</if>>
 		<</if>>
 	<<else>>
 		<<if $famebusiness gte 400>>
 			<<if $famesocial gte 400>>
-				<<set _text_output to "친구">>
-			<<else>>
-				<<if $player.gender_appearance is "m">>
-					<<set _text_output to "가게 소년">>
+				<<if $famemodel gte 400>>
+					<<set _text_output to "외판원">>
 				<<else>>
-					<<set _text_output to "가게 소녀">>
+					<<set _text_output to "친구">>
+				<</if>>
+			<<else>>
+				<<if $famemodel gte 400>>
+					<<set _text_output to "싸구려 모델">>
+				<<else>>
+					<<if $player.gender_appearance is "m">>
+						<<set _text_output to "가게 소년">>
+					<<else>>
+						<<set _text_output to "가게 소녀">>
+					<</if>>
 				<</if>>
 			<</if>>
 		<<else>>
 			<<if $famesocial gte 400>>
-				<<set _text_output to "왕따">>
-			<<else>>
-				<<if $player.gender_appearance is "m">>
-					<<set _text_output to "어떤 고아 소년">>
+				<<if $famemodel gte 400>>
+					<<set _text_output to "멋쟁이">>
 				<<else>>
-					<<set _text_output to "어떤 고아 소녀">>
+					<<set _text_output to "왕따">>
+				<</if>>
+			<<else>>
+				<<if $famemodel gte 400>>
+					<<if $player.gender_appearance is "m">>
+						<<set _text_output to "글래머 소년">>
+					<<else>>
+						<<set _text_output to "글래머 소녀">>
+					<</if>>
+				<<else>>
+					<<if $player.gender_appearance is "m">>
+						<<set _text_output to "어떤 고아 소년">>
+					<<else>>
+						<<set _text_output to "어떤 고아 소녀">>
+					<</if>>
 				<</if>>
 			<</if>>
 		<</if>>
@@ -377,3 +447,103 @@
 <<print _text_output>>
 <</widget>>
 
+<<widget "pcpetname">><<silently>>
+<<switch _args[0]>>
+	<<case "Avery" "avery">>
+		/* note: female terms for male pc are intentional */
+		<<set _names to []>>
+		<<set _gender to $player.gender_appearance>>
+		<<set _names.push(_gender is "m" ? "소년" : "소녀")>>
+		<<set _love to $NPCName[$NPCNameList.indexOf("Avery")].love>>
+		<<set _rage to $NPCName[$NPCNameList.indexOf("Avery")].rage>>
+		<<if _love + _rage gte 25>>
+			/* generic */
+			<<if _love gte 30>>
+				<<set _names.push("인형", "햇빛")>>
+				<<if _love gte 60>>
+					<<set _names.push("공주")>>
+					<<if _gender is "m">><<set _names.push("왕자")>><</if>>
+				<</if>>
+			<</if>>
+			<<if _rage gte 30>>
+				<<set _names.push("버릇없는 애새끼")>>
+				<<if _rage gte 60>>
+					<<set _names.push("비열한 년")>>
+					<<if _gender is "m">><<set _names.push("비열한 놈")>><</if>>
+				<</if>>
+			<</if>>
+			/* tf */
+			<<if ($cat gte 6) and ($transformationParts.cat.ears isnot "hidden") and ($transformationParts.cat.tail isnot "hidden")>>
+				<<set _names.push("아기 고양이", "새끼 고양이")>>
+			<</if>>
+			<<if ($wolfgirl gte 6) and ($transformationParts.wolf.ears isnot "hidden") and ($transformationParts.wolf.tail isnot "hidden")>>
+				<<set _names.push("강아지", "새끼 강아지")>>
+			<</if>>
+			<<if ($cow gte 6) and ($transformationParts.cow.ears isnot "hidden") and ($transformationParts.cow.tail isnot "hidden") and ($transformationParts.cow.horns isnot "hidden")>>
+				<<set _names.push(_gender is "m"? "카우보이" : "카우걸")>>
+			<</if>>
+			<<if ($bird gte 6) and ($transformationParts.bird.wings isnot "hidden") and ($transformationParts.bird.tail isnot "hidden") and ($transformationParts.bird.plumage isnot "hidden")>>
+				<<set _names.push("아기 새", "새끼 백조")>>
+			<</if>>
+			<<if ($angel gte 6) and ($transformationParts.angel.wings isnot "hidden") and ($transformationParts.angel.halo isnot "hidden")>>
+				<<set _names.push("천사", "아기 천사")>>
+			<</if>>
+			<<if ($demon gte 6) and ($transformationParts.demon.wings isnot "hidden") and ($transformationParts.demon.tail isnot "hidden") and ($transformationParts.demon.horns isnot "hidden")>>
+				<<set _names.push("악마", "서큐버스")>>
+				<<if _gender is "m">><<set _names.push("인큐버스")>><</if>>
+			<</if>>
+			/* attitude */
+			<<if random(0, 100) lt 40>>
+				<<if $submissive gte 1150>>
+					<<set _names.push("애완동물")>>
+					<<if $submissive gte 1500>>
+						<<set _names.push("장난감")>>
+						<<if $submissive gte 1900>>
+							<<set _names.push("노예")>>
+						<</if>>
+					<</if>>
+				<</if>>
+			<</if>>
+			/* fame */
+			<<if random(0, 100) lt 20>>
+				<<if $fameexhibitionism gte 400>>
+					<<set _names.push("자랑꾼")>>
+					<<if $fameexhibitionism gte 600>>
+						<<set _names.push("과시자")>>
+					<</if>>
+				<</if>>
+				<<if $famesex gte 400>>
+					<<set _names.push("님프")>>
+					<<if $famesex gte 600>>
+						<<set _names.push("걸레")>>
+					<</if>>
+				<</if>>
+				<<if $fameprostitution gte 400>>
+					<<set _names.push(_gender is "m"?"잡놈":"잡년")>>
+					<<if $fameprostitution gte 600>>
+						<<set _names.push(_gender is "m"?"남창":"창녀")>>
+					<</if>>
+				<</if>>
+				<<if $famerape gte 400>>
+					<<set _names.push("섹스인형")>>
+					<<if $fameprostitution gte 600>>
+						<<set _names.push("육변기")>>
+					<</if>>
+				<</if>>
+			<</if>>
+		<</if>>
+		/* pick and decorate */
+		<<set _text_output to _names.pluck()>>
+		<<if _love gte 30 and random(0, 100) lt _love - 30>>
+			<<set _text_output to "작은 " + _text_output>>
+		<</if>>
+		<<if _rage gte 50 and random(0, 100) lt _rage - 30>>
+			<<set _text_output to "빌어먹을 " + _text_output>>
+		<</if>>
+		<<if _love gte 60 and random(0, 100) lt _love - 30>>
+			<<set _text_output to "나의 " + _text_output>>
+		<</if>>
+	<<default>>
+		<<girl>>
+<</switch>>
+<</silently>><<print _text_output>><</widget>>

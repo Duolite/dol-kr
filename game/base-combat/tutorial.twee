@@ -7,7 +7,7 @@
 	<<neutral 1>>
 	<<molested>>
 
-	<<set $rescue to 1>>
+	<<enable_rescue>>
 	<<maninit>>
 	<<set $NPCList[0].chest to "none">>
 	<<HePost "은">> 당신을 향해 손을 뻗는다.

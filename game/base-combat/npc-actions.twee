@@ -1,12 +1,12 @@
 :: Widgets Npc Actions [widget]
 
 <<widget "cheeklick">>
-	<<set _n to $args[0]>>
+	<<set _n to _args[0]>>
 	<<set _npcff to ["즐긴다","미소를 짓는다","음흉하게 웃는다","이빨을 드러내고 웃는다"]>>
 	<<set _npccr to ["눌린","밀어붙여진","짓눌린","비벼지는"]>>
 	<<set _i to random(0, 3)>>
 	<<set _j to random(0, 3)>>
-	<<if $args[0]>>
+	<<if _args[0]>>
 		<<if $NPCList[_n].penis is "mouth">>
 			<<He_nun>>  <<his_yi>> 사타구니에 _npccr[_j] 당신 얼굴의 모습을 보고 _npcff[_i].
 			<<neutral 1>>

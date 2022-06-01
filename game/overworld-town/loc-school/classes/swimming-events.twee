@@ -6,9 +6,12 @@
 	<<violence 1>>
 	<<neutral 1>>
 	<<molested>>
-	<<maninit>><<npcexpose>>
+	<<maninit>>
 	<<set $timer to 18>>
-	<<if $delinquency lt 400>><<set $rescue to 1>><</if>>
+	<<if $delinquency lt 400>><<enable_rescue>><</if>>
+	<<if $swimall is 1>>
+		<<npcexpose>>
+	<</if>>
 	<<person2>><<personPost "이">> 계속해서 당신의 엉덩이를 애무하는 동안 <<person1>><<personPost "은">> 몸을 굽혀 당신의 가슴에 손을 뻗는다.
 	<<if $worn.upper.exposed gte 2 and $worn.under_upper.exposed gte 1>>
 		시선을 피하지 않으며, <<HePost "은">> 혀 끝으로 부드럽게 당신의 <<nipple_ul>> 핥는다.
@@ -128,8 +131,11 @@
 	<<neutral 1>>
 	<<molested>>
 
-	<<maninit>><<npcexpose>>
-	<<if $delinquency lt 400>><<set $rescue to 1>><</if>>
+	<<maninit>>
+	<<if $swimall is 1>>
+		<<npcexpose>>
+	<</if>>
+	<<if $delinquency lt 400>><<enable_rescue>><</if>>
 		<<personPost "은">> 당신에게로 헤엄쳐 온다.
 		<br><br>
 <</if>>
@@ -271,7 +277,10 @@
 	<<molested>>
 
 	<<maninit>>
-	<<if $delinquency lt 400>><<set $rescue to 1>><</if>>
+	<<if $swimall is 1>>
+		<<npcexpose>>
+	<</if>>
+	<<if $delinquency lt 400>><<enable_rescue>><</if>>
 <</if>>
 
 <<effects>>
@@ -363,7 +372,7 @@
 	<</if>>
 <</if>>
 
-:: Evens Swimming Endure
+:: Events Swimming Swim Endure
 <<set $outside to 0>><<set $location to "pool">><<schooleffects>><<effects>>
 
 그들은 잠시동안 당신을 계속해서 희롱하다가, 곧 다른 사람을 찾아 떠난다.
@@ -380,7 +389,10 @@
 	<<molested>>
 
 	<<maninit>>
-	<<if $delinquency lt 400>><<set $rescue to 1>><</if>>
+	<<if $swimall is 1>>
+		<<npcexpose>>
+	<</if>>
+	<<if $delinquency lt 400>><<enable_rescue>><</if>>
 	<<set $timer to 20>>
 <</if>>
 
@@ -419,7 +431,10 @@
 	<<molested>>
 
 	<<maninit>><<npcstrip>>
-	<<if $delinquency lt 400>><<set $rescue to 1>><</if>>
+	<<if $swimall is 1>>
+		<<npcexpose>>
+	<</if>>
+	<<if $delinquency lt 400>><<enable_rescue>><</if>>
 <</if>>
 <<set $timer to 20>>
 
@@ -620,7 +635,7 @@
 <<elseif $phase is 2>>/*secret dive*/
 	메이슨이 수영장 가장자리에서 수영 테크닉 시범을 보여주기 시작한다.
 	<<if $awareness gte 200 or ($rng % 3 is 0)>>
-		<<if $awareness gte 300 or $skulduggery gte 400>>
+		<<if $awareness gte 300 or currentSkillValue('skulduggery') gte 400>>
 			메이슨이 당신의 시선을 무언가로부터 돌리려 한다는 것을 느끼고
 		<<else>>
 			<<if $rng % 2>>뒤쪽에서 뭔가 소리가 들려와<<else>>메이슨이 당신의 뒤쪽을 쳐다보는 것을 보고<</if>>
@@ -700,7 +715,7 @@
 
 	곧, 메이슨이 시범을 마치고 당신은 계속해서 수영한다.
 <<elseif $phase is 3>>
-	"선생님! 쟤 좀 보세요!" 당신이 손가락질을 하며 외친다. "아무 것도 안 입고 있어요!"<<status 1>>
+	"선생님! 저 <<personsimplePost>> 좀 보세요!" 당신이 손가락질을 하며 외친다. "아무 것도 안 입고 있어요!"<<status 1>>
 	<br>
 	모든 학생들이 뒤로 돌아 <<personPost "을">> 멍하니 쳐다본다.
 	<<if $rng % 2>>

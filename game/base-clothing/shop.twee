@@ -1,4 +1,4 @@
-:: Forest Shop
+:: Forest Shop [exitCheckBypass]
 
 <div id="clothingShop-div" class="main-shop-div">
 	<<forestShop-main>>
@@ -14,20 +14,76 @@
 	<<if $forest_shop_intro isnot 1>>
 		<<set $forest_shop_intro to 1>>
 		<<npc Gwylan>><<person1>>
-		당신은 기이한 건물에 들어간다. 내부는 어둡고, 높은 선반들로 가득하며, 온갖 물건들이 들어있다. 곧 부스럭거리는 소리와 쾅 하는 소리에 침묵이 깨진다. 발판 사다리를 든 <<if $pronoun is "m">>소년이<<else>>소녀가<</if>> 가장 가까이 있는 통로 끝에서 나타난다.
-		<br><br>
-		"손님이잖아!" <<hePost "이">> 사다리를 떨구고는 걸어오며 말한다. <<HePost "은">> 앞치마에 손을 닦는다. "내 가게에 온 걸 환영해."
-		<br><br>
-		<<HePost "은">> 당신과 비슷한 나이대로 보이고, 칙칙한 갈색 머리카락에 주근깨가 언뜻 보인다. "이래 봬도 보기보다는 나이가 많아." <<hePost "이">> 마치 당신의 머릿속을 들여다보기라도 하는 듯 말한다. "난 그윌란이야." <<HePost "은">> 양손을 앞으로 뻗어, 당신의 손을 잡은 뒤 악수를 한다. "만나서 반가워. 난-" 그윌란은 잠시 말을 멈춘다. "내 <<if $pronoun is "m">>할아버지<<else>>할머니<</if>>는-" 또 다시 멈춘다. "난 이것저것 자질구래한 것들을 팔아. 보통 다른 상점에서는 구할 수 없는 것들을 말야. 나도 여기 재고에 뭐가 있는지 모른다니까!" <<HePost "은">> 자랑스럽다는듯 말한다.
-		<br><br>
-		"뭔가 맘에 드는 걸 찾게 되길 바랄게." 그윌란은 다시 사다리를 집어들며 말한다. "못 찾는다고 해도 너무 걱정하진 마. <<if $pronoun is "m">>할아버지<<else>>할머니<</if>>의 말을 빌리자면, 물건들도 팔리기 싫어하는 사람한테서는 숨곤 한다니까 말이야." <<hePost "이">> 웃음을 터트린다. "나는 그 말을 믿어."
+		<<if $gwylan_rescue is 1>>
+			당신은 기이한 건물에 들어간다. 내부는 어둡고, 높은 선반들로 가득하며, 온갖 물건들이 들어있다.
+			<br><br>
+
+			부스럭거리는 소리와 쾅 하는 소리에 침묵이 깨진다. 발판 사다리를 든 칙칙한 갈색 머리카락의 <<personsimple_i>> 가장 가까이 있는 통로 끝에서 나타난다. 그윌란이다.
+			<br><br>
+
+			"와줬구나!" <<he_nun>> 말하며, 사다리를 떨구고는 걸어온다. <<He_nun>> <<his_yi>> 앞치마에 손을 닦는다. "내 가게에 어서 와."
+
+			<<if $gwylan_aborted is 1>>
+				<<set $gwylan_aborted to 0>>
+				<br><br>
+				<<if $gwylan_eden_coop gte 1>>
+					<<He_nun>> <<his_yi>> 목 뒤를 문지른다. "그건 그렇고, 저번에 너를 구해 주지 못해서 미안해, 하지만 나는 에덴에게 맞설 수가 없어. <<nnpc_He_nun "Eden">> 아직 나를 겁주거든." <<He_nun>> 얼굴을 찌푸린다. "그나저나 왜 너희 둘은 싸우는 거야? 사이가 틀어졌어?"
+
+				<<else>>
+					<<He_nun>> <<his_yi>> 목 뒤를 문지른다. "그건 그렇고, 저번에 너를 구해 주지 못해서 미안해, 하지만 나는 <<nnpc_titlePost "Eden">>에게 맞설 수가 없어. <<nnpc_He_nun "Eden">> 이 숲에서 가장 무서운 것이라고."
+				<</if>>
+
+			<<elseif $gwylan_aborted is 2>>
+				<<set $gwylan_aborted to 0>>
+				<br><br>
+				<<He_nun>> <<his_yi>> 목 뒤를 문지른다. "그건 그렇고, 저번에 너를 구해 주지 못해서 미안해, 하지만 나는 우두머리에게 맞설 수가 없어. 무리 전체가 우리 가게 문을 부수는 것을 원하지는 않거든."
+			
+			<<elseif $gwylan_aborted is 3>>
+				<<set $gwylan_aborted to 0>>
+				<br><br>
+				<<He_nun>> 염려스러운 눈으로 당신을 살펴본다. "너 괜찮니? 너 좀 창백해 보이고, 저번 밤에 네가 비명지르는 소리를 들었던 것 같은데..."
+			<</if>>
+
+		<<else>>
+			당신은 기이한 건물에 들어간다. 내부는 어둡고, 높은 선반들로 가득하며, 온갖 물건들이 들어있다. 곧 부스럭거리는 소리와 쾅 하는 소리에 침묵이 깨진다. 발판 사다리를 든 <<personsimple_i>> 가장 가까이 있는 통로 끝에서 나타난다.
+			<br><br>
+
+			"손님이잖아!" <<hePost "이">> 사다리를 떨구고는 걸어오며 말한다. <<HePost "은">> 앞치마에 손을 닦는다. "내 가게에 온 걸 환영해."
+			<br><br>
+
+			<<HePost "은">> 당신과 비슷한 나이대로 보이고, 칙칙한 갈색 머리카락에 주근깨가 언뜻 보인다. "이래 봬도 보기보다는 나이가 많아." <<hePost "이">> 마치 당신의 머릿속을 들여다보기라도 하는 듯 말한다. "난 그윌란이야." <<HePost "은">> 양손을 앞으로 뻗어, 당신의 손을 잡은 뒤 악수를 한다. "만나서 반가워. 난-" 그윌란은 잠시 말을 멈춘다. "내 <<if $pronoun is "m">>할아버지<<else>>할머니<</if>>는-" 또 다시 멈춘다. "난 이것저것 자질구레한 것들을 팔아. 보통 다른 상점에서는 구할 수 없는 것들을 말야. 나도 여기 재고에 뭐가 있는지 모른다니까!" <<HePost "은">> 자랑스럽다는듯 말한다.
+			<br><br>
+
+			"뭔가 맘에 드는 걸 찾게 되길 바랄게." 그윌란은 다시 사다리를 집어들며 말한다. "못 찾는다고 해도 너무 걱정하진 마. <<if $pronoun is "m">>할아버지<<else>>할머니<</if>>의 말을 빌리자면, 물건들도 팔리기 싫어하는 사람한테서는 숨곤 한다니까 말이야." <<hePost "이">> 웃음을 터트린다. "나는 그 말을 믿어."
+		<</if>>
 		<br><br>
 		<<link [[다음|Forest Shop]]>><<endevent>><</link>>
 		<br>
+
 	<<else>>
 		당신은 숲 상점에 있다. 내부는 어둡고, 높은 선반들로 가득하며, 온갖 물건들이 들어있다. 대부분은 쓸모 없는 자질구래한 물건들이지만, 개중에 당신의 흥미를 끄는 것들이 있다.
 		<br><br>
-		어둠 속 어딘가에서 그윌란이 부스럭거리는 소리가 들려온다.
+		<<if $gwylan_aborted is 1>>
+			<<set $gwylan_aborted to 0>>
+			<<if $gwylan_eden_coop gte 1>>
+				"어이," 당신이 들어오자 그윌란이 말한다. "저번에 너를 구해 주지 못해서 미안해, 하지만 나는 에덴에게 맞설 수가 없어. <<nnpc_He_nun "Eden">> 아직 나를 겁주거든." <<He_nun>> 얼굴을 찌푸린다. "그나저나 왜 너희 둘은 싸우는 거야? 사이가 틀어졌어?"
+
+			<<else>>
+				"어이," 당신이 들어오자 그윌란이 말한다. "저번에 너를 구해 주지 못해서 미안해, 하지만 나는 <<nnpc_titlePost "Eden">>에게 맞설 수가 없어. <<nnpc_He_nun "Eden">> 이 숲에서 가장 무서운 것이라고."
+			<</if>>
+
+		<<elseif $gwylan_aborted is 2>>
+			<<set $gwylan_aborted to 0>>
+			"어이," 당신이 들어오자 그윌란이 말한다. "저번에 너를 구해 주지 못해서 미안해, 하지만 나는 우두머리에게 맞설 수가 없어. 무리 전체가 우리 가게 문을 부수는 것을 원하지는 않거든."
+		
+		<<elseif $gwylan_aborted is 3>>
+			<<set $gwylan_aborted to 0>>
+			<br><br>
+			"어이," 당신이 들어오자 그윌란이 말한다. <<nnpc_He_nun "Gwylan">> 염려하고 있는 듯 보인다. "너 괜찮니? 너 좀 창백해 보이고, 저번 밤에 네가 비명지르는 소리를 들었던 것 같은데..."
+		
+		<<else>>
+			어둠 속 어딘가에서 그윌란이 부스럭거리는 소리가 들려온다.
+		<</if>>
 		<br><br>
 
 		<div id="tryonstats-div"><<tryOnStats>></div>
@@ -46,7 +102,9 @@
 			<<link [[로빈을 위한 선물을 찾는다 (0:10)|Forest Christmas Robin]]>><<pass 10>><</link>>
 			<br>
 		<</if>>
-
+		<<clothingcategoryicon "all">>
+		<<link "전부 본다">><<replace "#clothingShop-div">><<AllShop>><</replace>><</link>>
+		<br><br>
 		<<clothingcategoryicon "outfit">>
 		<<link "검은 가리개 뒤를 살펴본다">><<replace "#clothingShop-div">><<OutfitShop>><</replace>><</link>>
 		<br>
@@ -74,6 +132,9 @@
 		<<clothingcategoryicon "neck">>
 		<<link "빛나는 상자 안을 살펴본다">><<replace "#clothingShop-div">><<NeckShop>><</replace>><</link>>
 		<br>
+		<<clothingcategoryicon "hand">>
+		<<link "기울어진 화장대 안을 살펴본다">><<replace "#clothingShop-div">><<HandsShop>><</replace>><</link>>
+		<br>  
 		<<clothingcategoryicon "legs">>
 		<<link "해진 스타킹을 살펴본다">><<replace "#clothingShop-div">><<LegsShop>><</replace>><</link>>
 		<br>
@@ -83,6 +144,7 @@
 		<<run linkifyDivs('.button-back-to-shop')>>
 
 		<<if $tryOn.value gt 0 and $tryOn.value lt $money>>
+			<<sendItemsToDropdown>>
 			<<link "옷을 사서 옷장으로 보낸다">>
 				<<buyTryOnClothes "wardrobe">>
 				<<updatesidebarmoney>>
@@ -95,7 +157,7 @@
 			<</link>>
 			<br>
 		<<elseif $tryOn.value is 0>>
-			<<link [[나간다|Forest]]>><<shopClothingFilterReset>><<endnpc>><<unset $clothes_choice>><<set $tryOn.autoReset to true>><<set $eventskip to 1>><<unset $tempDisable>><</link>>
+			<<link [[나간다|Forest]]>><<shopClothingFilterReset>><<endnpc>><<unset $clothes_choice>><<ShowUnderEquip "normal">><<ShowUnderEquip "over">><<set $tryOn.autoReset to true>><<set $eventskip to 1>><<unset $tempDisable>><</link>>
 		<</if>>
 	<</if>>
 <</widget>>
@@ -124,37 +186,3 @@
 
 <<link [[다음|Forest Shop]]>><</link>>
 <br>
-
-<!-- Redirects for passages that were removed, so that old saves won't break in case they saved in one of these -->
-:: Forest Shop Outfit
-<<goto "Forest Shop">>
-
-:: Forest Shop Upper
-<<goto "Forest Shop">>
-
-:: Forest Shop Lower
-<<goto "Forest Shop">>
-
-:: Forest Shop Under Outfit
-<<goto "Forest Shop">>
-
-:: Forest Shop Under Upper
-<<goto "Forest Shop">>
-
-:: Forest Shop Under Lower
-<<goto "Forest Shop">>
-
-:: Forest Shop Head
-<<goto "Forest Shop">>
-
-:: Forest Shop Face
-<<goto "Forest Shop">>
-
-:: Forest Shop Neck
-<<goto "Forest Shop">>
-
-:: Forest Shop Legs
-<<goto "Forest Shop">>
-
-:: Forest Shop Feet
-<<goto "Forest Shop">>

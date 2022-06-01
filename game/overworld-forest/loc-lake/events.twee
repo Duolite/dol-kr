@@ -32,7 +32,7 @@
 <<flaunting>> 당신은 호수 가장자리를 따라 걷는다. 주변에 사람들이 몇몇 있지만, 그들은 당신이 얼마나 노출되어 있는지 알지 못할 것 같다.
 <<exhibitionism5>>
 
-<<if $vaginasemen gte 2>> 정액 몇 방울이 당신의 <<pussyPost>>에서 떨어져 땅에 떨어진다.<</if>>
+<<if $player.bodyliquid.vagina.semen gte 2>> 정액 몇 방울이 당신의 <<pussyPost>>에서 떨어져 땅에 떨어진다.<</if>>
 
 <<if $beauty gte (($beautymax / 7) * 3)>>
 <<generate1>>걸어가던 도중 <<person1>><<personPost "이">> <<hisPost "의">> 돗자리에 누워 당신의 <<genitalsPost "을">> 훔쳐보려고 하는 것을 알아챘다. 당신은 <<himPost "을">> 향해 손을 흔들었다. <<HePost "은">> 얼굴을 붉히곤 고개를 돌렸다.
@@ -69,11 +69,11 @@
 <<exhibitionism4>>
 <br><br>
 
-<<if $vaginasemen gte 2>>
+<<if $player.bodyliquid.vagina.semen gte 2>>
 당신이 걷자 정액 몇 방울이 당신의 <<pussyPost>>에서 떨어져 땅에 떨어진다.
 <</if>>
 
-	<<if $rng gte 80 and $deviancy gte 15 and $vaginaexist is 1 and $swarmdisable is "f">>
+	<<if $rng gte 80 and $deviancy gte 15 and $player.vaginaExist and $swarmdisable is "f">>
 
 	몇 분 후 당신은 멋진 공터를 발견했다. 부드러운 바람에 기분이 좋아진다. 당신은 눕기로 했다.
 	<br><br>
@@ -144,7 +144,7 @@
 간질거리는 느낌이 난다. <<genitalsPost>>에 따뜻한 느낌이 퍼져나간다. 벌레가 기어다니는 것을 느끼면서 당신은 자위하기 시작했다.
 <<deviancy4>>
 <br><br>
-<<link [[다음|Lake Masturbation]]>><<set $bugsinside to 1>><</link>>
+<<link [[다음|Lake Masturbation]]>><<set $bugsinside to 1>><<set $masturbationstart to 1>><</link>>
 <br>
 <<elseif $phase is 3>>
 
@@ -190,17 +190,17 @@
 	<br><br>
 	엄청나게 음란하고 말도 안 되는 생각이 머리에 떠오른다.
 	<br>
-	당신은 "보관함" 하나를 가지고 있다. 날 때부터 가지고 있던 그것 말이다. 바로 당신의 <<if $vaginaexist is 1>>보지<<else>>항문<</if>>!
+	당신은 '보관함' 하나를 가지고 있다. 날 때부터 가지고 있던 그것 말이다. 바로 당신의 <<print ($player.vaginaExist ? "보지" : "항문")>>!
 	<br>
 	지체 없이 당신은 금괴 하나를 집어든다. 심장이 큰 소리로 뛴다.
 	<<if $arousal gte ($arousalmax / 5) * 3>>
-		<<if $vaginaexist is 1>>
+		<<if $player.vaginaExist>>
 			<br><br>
 			당신은 완전히 흥분했고 당신의 <<pussyPost>>는 완전히 젖어 있다. 보지에 금괴 끝을 집어넣는 데엔 별 힘이 들지 않는다.
 			<br>
 			당신은 온 힘을 다해 금괴를 집어넣는다. 보지가 금괴를 빨아들이면서 벌어진다.
 			<br>
-			<<if $vaginasemen gte 3>> 또 자궁에서 흘러나오는 정액이 금괴를 넣기 훨씬 편하게 해 주는 윤활류 역할을 한다.<</if>>
+			<<if $player.bodyliquid.vagina.semen gte 3>> 또, 자궁에서 흘러나오는 정액이 금괴를 넣기 훨씬 편하게 해 주는 윤활액 역할을 한다.<</if>>
 			<br>
 			금괴가 자궁 입구에 맞닿는 것이 느껴지고, 마지막으로 힘을 주자 금괴가 완전히 당신의 안에 들어온다.
 		<<else>>
@@ -212,13 +212,13 @@
 			얼마 지나지 않아 금괴가 완전히 당신의 안에 들어온다.
 		<</if>>
 	<<elseif $arousal gte ($arousalmax / 10) * 3>>
-		<<if $vaginaexist is 1>>
+		<<if $player.vaginaExist>>
 			<br><br>
 			당신은 흥분했고 당신의 <<pussyPost>>는 약간 젖어 있다. 보지에 금괴 끝을 집어넣는 데에 크게 노력할 필요는 없다.
 			<br>
 			당신은 온 힘을 다해 금괴를 집어넣는다. 보지가 금괴를 받아들이면서 벌어진다. 약간 아프지만, 참을 만 하다.
 			<br>
-			<<if $vaginasemen gte 3>> 또, 자궁에서 흘러나오는 정액이 금괴를 넣기 편하게 해 주는 윤활류 역할을 한다.<</if>>
+			<<if $player.bodyliquid.vagina.semen gte 3>> 또, 자궁에서 흘러나오는 정액이 금괴를 넣기 편하게 해 주는 윤활액 역할을 한다.<</if>>
 			<br>
 			금괴가 자궁 입구에 맞닿는 것이 느껴지고, 마지막으로 힘을 주자 금괴가 완전히 당신의 안으로 들어온다.
 		<<else>>
@@ -230,13 +230,13 @@
 			얼마 지나지 않아 금괴가 완전히 당신의 안에 들어온다.
 		<</if>>
 	<<elseif $arousal gte $arousalmax / 10>>
-		<<if $vaginaexist is 1>>
+		<<if $player.vaginaExist>>
 			<br><br>
 			당신의 <<pussyPost>>는 젖어있지는 않다. 보지에 금괴 끝을 집어넣는 데에 큰 힘이 들 것이다.
 			<br>
 			당신은 온 힘을 다해 금괴를 집어넣는다. 당신의 보지가 금괴를 받아들이려 하면서 고통스럽게 벌어진다. 아프지만, 겨우 참아낸다.
 			<br>
-			<<if $vaginasemen gte 3>> 자궁에서 흘러나오는 정액이 금괴를 넣기 편하게 해 주는 윤활류 역할을 한다.<</if>>
+			<<if $player.bodyliquid.vagina.semen gte 3>> 자궁에서 흘러나오는 정액이 금괴를 넣기 편하게 해 주는 윤활액 역할을 한다.<</if>>
 			<br>
 			금괴가 자궁 입구에 맞닿는 것이 느껴지고, 마지막으로 힘을 주자 금괴가 완전히 당신의 안으로 들어온다.
 		<<else>>
@@ -277,15 +277,15 @@
 <<arousal 1000>>
 
 <<if $arousal gte ($arousalmax / 5) * 3>>
-<br>
-연인은 당신의 <<if $penisexist is 1>>완전히 발기한 자지<<else>>애액이 꿀처럼 뚝뚝 떨어지는 젖은 보지<</if>>를 보지 않으려 최대한 노력한다.
-<br>
-오랜 시간 뒤에 그들은 당신의 손을 바라본다.
-<br>
+	<br>
+	연인은 당신의 <<if $player.penisExist>>완전히 발기한 자지<<else>>애액이 꿀처럼 뚝뚝 떨어지는 젖은 보지<</if>>를 보지 않으려 최대한 노력한다.
+	<br>
+	오랜 시간 뒤에 그들은 당신의 손을 바라본다.
+	<br>
 <<else>>
-<br>
-연인은 당신의 <<genitalsPost "을">> 확인한다. 잠시 후에 그들은 당신의 손을 바라본다.
-<br>
+	<br>
+	연인은 당신의 <<genitalsPost "을">> 확인한다. 잠시 후에 그들은 당신의 손을 바라본다.
+	<br>
 <</if>>
 <br>
 "<<pher_yi>> 손엔 아무 것도 없는 것 같아, <<pshe_nun>> 그냥 변태야."라고 남자가 말한다.
@@ -337,7 +337,7 @@
 		<br>
 		<<link [[Don't scream|Lake Mermaid 2]]>><</link>>
 	<<else>>
-		<<link [[Next|Lake Mermaid 2]]>><</link>>
+		<<link [[다음|Lake Mermaid 2]]>><</link>>
 	<</if>>
 <</if>>
 
@@ -352,7 +352,21 @@ Others along the shore flee the area, hearing the gunshots as well, leaving you 
 <<endevent>><<npc Eden>>
 "What do we have here?" says a familiar voice. It's Eden.
 
-<<if $edenfreedom gte 2 and $edendays gte 8>>
+<<if $edenCagedEscape>>
+	"I told you I'd catch you again." <<He>> digs you out and grips your wrist tight. The moment you're on your feet, <<he>> begins dragging you into the woods.
+	<br><br>
+
+	"You keep letting me down, and you still rely on me to save your ass." <<He>> glares over <<his>> shoulder, eyes narrowed. "You're overdue for your punishment."
+	<<set $location to "forest">>
+	<br><br>
+
+	<<link [[Fight|Eden Caged Caught Resist]]>><<set $fightstart to 1>><<def 1>><</link>>
+	<br>
+	<<link [[Try to pull away|Eden Caged Caught Pull]]>><<def 1>><<npcincr Eden dom -1>><</link>><<physiquedifficulty 2000 18000>><<ldom>>
+	<br>
+	<<link [[Submit (0:30)|Eden Caged Caught]]>><<set $phase to 1>><<pass 30>><<sub 1>><<npcincr Eden dom 1>><</link>><<gdom>>
+	<br>
+<<elseif $edenfreedom gte 2 and $edendays gte 8>>
 	"I trusted you," <<he>> says. "This is what happens if you don't obey me. It's for your own protection." <<He>> digs you out and pulls you to your feet. "Let's go home."
 	<br><br>
 
@@ -367,7 +381,7 @@ Others along the shore flee the area, hearing the gunshots as well, leaving you 
 	<<link [[Next (0:30)|Eden Recaptured]]>><<pass 30>><</link>>
 	<br>
 
-	<<elseif $edenfreedom gte 1>>
+<<elseif $edenfreedom gte 1>>
 
 	"I knew you'd end up like this. This place dangerous," <<he>> says, digging you out and helping you to your feet. "Let's go home."
 	<br><br>
@@ -379,16 +393,16 @@ Others along the shore flee the area, hearing the gunshots as well, leaving you 
 	<br>
 <</if>>
 
-
 :: Lake Mermaid 2
 <<set $outside to 1>><<set $location to "lake">><<effects>><<lakeeffects>>
 
 <<if $NPCList[0].penis isnot "none">>
 	그들은 자지를 꺼내 당신의 얼굴 바로 앞에서 문지르기 시작한다. 당신은 모래 너머로 저항하려고 하지만, 손끝 하나 움직일 수 없다. 한 <<personPost "이">> 가장 먼저 싼다. 정액이 이마에 흩뿌려지고 눈가로 흘러내린다. 나머지도 따라서 싸기 시작하고, 곧 당신의 목 위는 완전히 정액으로 뒤덮인다.
+	<<set $player.bodyliquid.face.semen += 5>>
 <<else>>
 	그들은 보지를 드러내고 당신의 얼굴 바로 앞에서 문지르기 시작한다. 당신은 모래 너머로 저항하려고 하지만, 손끝 하나 움직일 수 없다. 한 <<personPost "이">> 가장 먼저 싸고, 애액을 이마에 흩뿌린다. 애액은 눈가로 흘러내린다. 나머지도 따라서 싸기 시작하고, 곧 당신의 목 위는 완전히 보지즙으로 뒤덮인다.
+	<<set $player.bodyliquid.face.goo += 5>>
 <</if>>
-<<set $facesemen += 5>>
 <br><br>
 "솜씨 좋지 않아?" <<personPost "이">> 말한다. 그들은 우선 사진을 찍은 뒤에, 일어나서 떠난다. 모래사장의 다른 사람들은 구경하고 있다.
 <<gtrauma>><<trauma 6>><<famerape 30>><<status -30>><<llcool>>
@@ -523,7 +537,7 @@ Others along the shore flee the area, hearing the gunshots as well, leaving you 
 
 :: Lake Couple Sex Finish
 
-<<set $outside to 1>><<set $location to "forest">><<effects>>
+<<effects>>
 <<if $enemyarousal gte $enemyarousalmax>>
 	<<ejaculation>>
 	당신은 그들의 따뜻한 몸을 느끼며 좀 더 누워 있는다. 그것은 편안하지만, 작은 텐트 때문에 곧 갑갑해진다. 당신은 그들이 잠을 잘 수 있도록 나온다.
@@ -628,7 +642,7 @@ Others along the shore flee the area, hearing the gunshots as well, leaving you 
 
 :: Lake Wolf Sex Finish
 
-<<set $outside to 1>><<set $location to "forest">><<effects>>
+<<effects>>
 <<if $enemyarousal gte $enemyarousalmax>>
 	<<beastejaculation>>
 	만족한 채로, <<beasttypePost "은">> 숲 깊은 곳으로 어슬렁거리며 사라진다.
@@ -806,8 +820,8 @@ Others along the shore flee the area, hearing the gunshots as well, leaving you 
 	<<maninit>>
 	<<hand_gag 0 left>>
 	<<if $loveInterest>>
-		<<if ($loveInterest.primary is "Eden" or $loveInterest.secondary is "Eden") and $location is "lake" and random(1,2) is 2>>
-			<<set $rescue to 1>>
+		<<if ($loveInterest.primary is "Eden" or $loveInterest.secondary is "Eden") and !$edenCagedEscape and $location is "lake" and random(1,2) is 2>>
+			<<enable_rescue>>
 		<</if>>
 	<</if>>
 <</if>>
@@ -869,9 +883,18 @@ Others along the shore flee the area, hearing the gunshots as well, leaving you 
 
 :: Lake Wave
 
-<<set $outside to 1>><<set $location to "lake">><<effects>><<lakeeffects>>
+<<set $outside to 1>><<set $location to "lake">><<effects>><<lakeeffects>><<rngWraith 1>>
 당신은 <<personPost>>에게 손을 흔든다. <<HePost>>도 당신에게 손을 흔들어 준다. <<HesPost "은">> 멀리 떨어져 있지만, 당신은 <<hesPost "이">> 미소짓고 있을 것이라고 생각한다.
 <br><br>
+<<if _wraithEvent>>
+	<<if $wraith.state is "haunt">>
+		<<His>> head tilts to the side, and <<his>> smile falters as <<he>> turns pale. For a brief moment, you see <<him>> clutching at <<his>> neck and reaching for you. You blink, and <<hes>> gone. <<trauma 6>><<gtrauma>>
+	<<else>>
+		Upon closer inspection, you see a necklace of ivory wrapped around <<his>> neck. You blink, and <<hes>> suddenly gone. <<trauma 3>><<gtrauma>>
+	<</if>>
+	<br><br>
+<</if>>
+
 <<link [[다음|Lake Shallows]]>><<endevent>><<set $eventskip to 1>><</link>>
 <br>
 
@@ -911,7 +934,7 @@ Others along the shore flee the area, hearing the gunshots as well, leaving you 
 <<elseif $vorestomach gte 5>>
 	<span id="next"><<link [[다음|Lake Vore Finish]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link "다음">><<script>>state.display(state.active.title, null)<</script>><!--</script>--><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Lake Vore]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: Lake Vore Finish
@@ -945,7 +968,7 @@ Others along the shore flee the area, hearing the gunshots as well, leaving you 
 
 :: Lake Ritual
 
-<<set $outside to 1>><<set $location to "forest">><<effects>>
+<<location "forest">><<effects>>
 <<set $forest to 10>>
 <<set $leftarm to "bound">><<set $rightarm to "bound">>
 <<upperruined>><<lowerruined>><<underruined>>
@@ -955,7 +978,10 @@ Others along the shore flee the area, hearing the gunshots as well, leaving you 
 <<else>>
 	<<generatef2>><<generatef3>><<generatef4>><<generatef5>><<generatef6>>
 <</if>>
-당신은 석판 위에 팔이 묶인 상태로 깨어난다. 당신 주변엔 의식용 예복을 입은 <<monks>>이 어렴풋이 보인다. 그들은 당신이 알아들을 수 없는 언어로 노래한다. 순간 그들이 고요해지고, 당신을 향해 다가온다.
+<<for _i = 0; _i < $NPCList.length; _i++>>
+	<<npcClothesType $NPCList[_i] "temple">>
+<</for>>
+당신은 석판 위에 팔이 묶인 상태로 깨어난다. 당신 주변엔 의식용 예복을 입은 <<monks_ga>> 어렴풋이 보인다. 그들은 당신이 알아들을 수 없는 언어로 노래한다. 순간 그들이 고요해지고, 당신을 향해 다가온다.
 <br><br>
 <<link [[다음|Lake Ritual Molestation]]>><<set $molestationstart to 1>><</link>>
 <br>
@@ -974,8 +1000,12 @@ Others along the shore flee the area, hearing the gunshots as well, leaving you 
 	<<set $enemyarousalmax /= 2>>
 	<<set $enemyarousal /= 2>>
 	<<if $loveInterest>>
-		<<if ($loveInterest.primary is "Eden" or $loveInterest.secondary is "Eden") and $location is "forest" and random(1,2) is 2>>
-			<<set $rescue to 1>>
+		<<if ($loveInterest.primary is "Eden" or $loveInterest.secondary is "Eden") and !$edenCagedEscape and (random(1, 2) is 2 or $eden_rescue isnot 1)>>
+			<<enable_rescue>>
+			<<set $phase2 to 1>>
+		<<elseif $wraith and $wraith.state isnot "" and $hallucinations gte 2>>
+			<<enable_rescue>>
+			<<set $phase2 to 2>>
 		<</if>>
 	<</if>>
 <</if>>
@@ -1007,20 +1037,54 @@ Others along the shore flee the area, hearing the gunshots as well, leaving you 
 	<<pass 20>>
 	<<link [[다음|Forest]]>><<set $eventskip to 1>><</link>>
 <<elseif $rescue is 1 and $alarm is 1>>
-	You hear a gun fire close by, and a bullet lands at the group's feet. They back off in fear and flee into the forest.
-	<br><br>
-	<<clotheson>>
-	<<unbind>>
-	<<endcombat>>
-	Eden emerges, slashes your bindings, and helps you collect yourself.
-	<br><br>
+	<<if $phase2 is 2>>
+		<<set $wraith.seen ++>>
+		You hear your own scream echo back through the trees. The group backs off, looking to the source. They all go quiet. After a moment, you see a flash of <<wraithEyes>> from the darkness. <<rainWraith true>>
+		<br><br>
+		One of the <<person1>><<monks>> is hurled backwards by an unseen force, colliding with a tree. Splinters of bark fall after <<him>> as <<he>> comes crashing to the ground. The rest all clutch their heads in agony, attempting to block their ears. You don't hear anything.
+		<br><br>
+		Another <<monk>> attempts to run. You see a long translucent limb ensnare <<his>> legs, lifting <<him>> helplessly into the air. Phantom shapes dance through the air, slowly taking the form of a pale humanoid figure.
+		<br><br>
+		"<span class="wraith">The mercy of silence has left you.</span>"
+		<br><br>
+		A blaring shriek fills your ears as the figure opens its mouth. With the way you're bound, you have no way to block it out. <<stress 24>><<trauma 24>><<gggstress>><<gggtrauma>>
+		<br><br>
+		The <<monk>> is lifted high into the air and slammed into the ground. You think <<hes>> screaming, but it's too loud to hear. Dirt and rocks are kicked up by the impact. Two more <<monks>> are grabbed by translucent limbs. The remaining <<monks>> flee, and you take the opportunity to follow.
+		You struggle against the bonds holding you in place. You feel them become looser, and they soon snap. Not a moment too soon.
+		<br><br>
+		You run away as fast as you can, until the screams grow distant. After a few minutes, you hear it speak again.
+		<br><br>
+		"<span class="wraith">Finally... some quiet...</span>"
+		<br><br>
+		You quicken your pace.
+		<<clotheson>>
+		<<endcombat>>
+		<<pass 20>>
+		<<link [[다음|Forest]]>><<endRainWraith>><<set $eventskip to 1>><</link>>
+	<<else>>
+		You hear a gun fire close by, and a bullet lands at the group's feet. They back off and whisper amongst themselves for a moment, then disappear into the forest.
+		<br><br>
+		<<clotheson>>
+		<<unbind>>
+		<<endcombat>>
+		Eden emerges, slashes your bindings, and helps you collect yourself. "Damn bastards," <<nnpc_he "Eden">> mutters. "Are you okay?"
+		<br><br>
 
-	"Are you okay?" Eden asks.
-	<br><br>
-	<<link [[Go back to the cabin (0:30)|Forest Cabin Return]]>><<pass 30>><</link>>
-	<br>
-	<<link [[Say goodbye|Forest]]>><<endevent>><</link>>
-	<br>
+		<<if $gwylan_eden_coop gte 1>>
+			Eden glances around for a moment. "We must be in too deep for that shopkeep," <<nnpc_he "Eden">> says.
+			<br><br>
+		<</if>>
+
+		<<if $eden_rescue isnot 1>>
+			<<set $eden_rescue to 1>>
+			Eden pats you on the shoulder. "I was able to save you because I happened to be in the area," <<nnpc_he "Eden">> says. "<span class="gold">I might not always be around, but I should be able to save you anywhere in the forest.</span> Give me a holler if you're in trouble."
+			<br><br>
+		<</if>>
+
+		<<link [[Go back to the cabin (0:30)|Forest Cabin Return]]>><<pass 30>><</link>>
+		<br>
+		<<link [[Say goodbye|Lake Shore]]>><<endevent>><</link>>
+	<</if>>
 <<else>>
 	<<ejaculation>>
 	"의식이 완료되었다," <<person1>><<personPost "이">> 더듬거린다. "이제 사원으로 돌아가자." 그들은 숲으로 사라진다. 당신을 풀어주지는 않는다.
@@ -1084,8 +1148,8 @@ Others along the shore flee the area, hearing the gunshots as well, leaving you 
 	<<beastCombatInit>>
 	<<set $NPCList[0].stance to "top">>
 	<<if $loveInterest>>
-		<<if ($loveInterest.primary is "Eden" or $loveInterest.secondary is "Eden") and $location is "lake" and random(1,2) is 2>>
-			<<set $rescue to 1>>
+		<<if ($loveInterest.primary is "Eden" or $loveInterest.secondary is "Eden") and !$edenCagedEscape and (random(1, 2) is 2 or $eden_rescue isnot 1)>>
+			<<enable_rescue>>
 		<</if>>
 	<</if>>
 <</if>>
@@ -1132,17 +1196,25 @@ Others along the shore flee the area, hearing the gunshots as well, leaving you 
 <<elseif $rescue is 1 and $alarm is 1>>
 	You hear a gun fire close by, and a bullet lands at the <<beasttype>>'s feet. It backs off in fear and flees into the trees.
 	<br><br>
-	Eden emerges and helps you collect yourself.
+	Eden emerges and helps you collect yourself. "Damn boars," <<nnpc_he "Eden">> mutters. "Are you okay?"
 	<br><br>
 
 	<<clotheson>>
 	<<endcombat>>
-	"Are you okay?" Eden asks.
-	<br><br>
+	<<if $gwylan_eden_coop gte 1>>
+		Eden glances around for a moment. "We must be in too deep for that shopkeep," <<nnpc_he "Eden">> says.
+		<br><br>
+	<</if>>
+
+	<<if $eden_rescue isnot 1>>
+		<<set $eden_rescue to 1>>
+		Eden pats you on the shoulder. "I was able to save you because I happened to be in the area," <<nnpc_he "Eden">> says. "<span class="gold">I might not always be around, but I should be able to save you anywhere in the forest.</span> Give me a holler if you're in trouble."
+		<br><br>
+	<</if>>
+
 	<<link [[Go back to the cabin (0:30)|Forest Cabin Return]]>><<pass 30>><</link>>
 	<br>
 	<<link [[Say goodbye|Lake Shore]]>><<endevent>><</link>>
-	<br>
 <</if>>
 
 :: Lake Masturbation
@@ -1157,7 +1229,7 @@ Others along the shore flee the area, hearing the gunshots as well, leaving you 
 <<masturbationactions>>
 <<link [[계속한다|Lake Masturbation]]>><</link>><<nexttext>>
 <br>
-<<if $corruptionMasturbation isnot true and random(0,3) gt $orgasmcurrent and $corruption_slime gt ($willpower / 10)>>
+<<if $corruptionMasturbation isnot true and random(0,3) gt $orgasmcurrent and $corruption_slime gt (currentSkillValue('willpower') / 10)>>
 	<<link [[멈춘다|$passage]]>><<set $corruptionMasturbation to true>><</link>>
 <<elseif $corruptionMasturbation isnot true>>
 	<<link [[멈춘다|Lake Masturbation Finish]]>><<set $finish to 1>><</link>>

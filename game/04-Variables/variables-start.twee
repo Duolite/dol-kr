@@ -1,6 +1,14 @@
 :: StoryInit
+/* This passage runs EVERY time the page is opened or refreshed, not just when a new game is started */
+/* This passage ALWAYS runs BEFORE story variables are loaded, meaning EVERY variable is undefined. Checking if they are undefined WILL NOT WORK. */
+/* You should ONLY use this passage to define setup variables, NOT $variables. */
 
 <<variablesStatic>>
+
+:: gameStartOnly [widget]
+/* The following is only run when the widget is called, which is only on new game start. Add to this if you want something to be run when you start a new game. */
+<<widget "gameStartOnly">>
+
 <<if StartConfig.enableImages is true>>
 	<<set $images to 1>>
 <<else>>
@@ -15,13 +23,28 @@
 
 <<if $objectVersion is undefined>>
 	<<set $objectVersion to {
-		"updateClothes": 8,
-		"feats": 1
+		"updateClothes": 29,
+		"feats": 1,
+		"wardrobes": 2,
+		"customColors": 4,
+		"uncomfortable": 2,
+		"special_clothes": 5,
+		"chastity": 3,
+		"skinColor": 1,
+		"prenancyObjectRepair": 2,
+		"museumAntiques": 9,
+		"npcClothes": 1,
+		"animations": 1
 	}>>
 <</if>>
 
+<<set $saveVersions to [StartConfig.version]>>
+
 <<set $dev to 0>>
 <<set $numberify_enabled to 1>>
+<<set $sidebarRenderer to 'canvas'>>
+<<set $showDebugRenderer to !!StartConfig.debug>>
+<<set $lastWardrobeSlot to "head">>
 
 <<set $gamemode to "normal">>
 
@@ -33,7 +56,7 @@
 <<set $npcNamedVersion to 2>>
 <<set $clothing_number to 13>>
 
-<<set $player = {gender: 0, sex: 0, appearance: 0, penis: 0, vagina: 0, penissize: 0, breastsize: 0, bottomsize: 0, ballssize: 0, pronoun: 0, pronouns: {he: 0, his: 0}, gender_body: 0, virginity:{anal:true,oral:true,penile:true,vaginal:true,temple:false,handholding:true,kiss:true}}>>
+<<set $player = {gender: 0, sex: 0, appearance: 0, penis: 0, vagina: 0, penissize: 0, breastsize: 0, bottomsize: 0, ballssize: 0, pronoun: 0, pronouns: {he: 0, his: 0}, gender_body: 0, condom: false, virginity: {anal: true, oral: true, penile: true, vaginal: true, temple: false, handholding: true, kiss: true}}>>
 <<npcList>>
 <<npcNamed>>
 <<set $controlmax to 1000>>
@@ -42,6 +65,7 @@
 <<clothinginit>>
 <<parasiteinit>>
 <<skinColorInit>>
+<<init_names>>
 
 <<set $time to 420>>
 <<set $days to 0>>
@@ -71,7 +95,9 @@
 <<set $year to 2020>>
 <<set $birthmonth to "september">>
 <<set $birthday to 3>>
-<<set $npc to 0>>
+<<set $npc to []>>
+<<set $npcnum to []>>
+<<set $npcrow to []>>
 <<set $dancestudioanger to 0>>
 <<set $dancelocation to 0>>
 <<set $alarm to 0>>
@@ -79,11 +105,11 @@
 <<set $id to 0>>
 <<set $forest to 0>>
 <<set $forestmod to 1>>
-<<set $tipcount to 0>>
 <<set $tipmod to 1>>
 /*<<set $worn.genitals.anal_shield to 0>>*/
 <<set $blackmoney to 0>>
 <<set $crime to 0>>
+<<set $ironmanmode to false>>
 <<set $crimehistory to 0>>
 <<set $worn.neck.collaredpolice to 0>>
 <<set $bullytimer to 50>>
@@ -91,7 +117,6 @@
 <<set $bullyevent to 0>>
 <<set $bullyeventoutside to 0>>
 <<set $bullygate to 0>>
-<<set $buy to 0>>
 <<set $masturbationorgasm to 0>>
 <<set $malechance to 50>>
 <<set $malevictimchance to 50>>
@@ -151,6 +176,8 @@
 <<set $wolf_plot_intro to 1>>
 <<set $asylum_plot_intro to 1>>
 <<set $plots to {}>>
+<<set $tendingvars to {}>>
+<<set $tending_yield_factor to 5>>
 <<set $plants_known to []>>
 <<set $plants to {}>>
 <<set $stall_rejected to 0>>
@@ -171,6 +198,7 @@
 <<set $blackjack_won to 0>>
 <<set $blackjack_streak to 0>>
 <<set $blackjack_streak_high to 0>>
+<<set $cardcover = { style: 0, colour: 'red' }>>
 <<set $hoodDown to 0>>
 <<set $prof to {}>>
 <<set $prof.spray to 0>>
@@ -194,11 +222,15 @@
 <<set $angelbuild to 0>>
 <<set $angel to 0>>
 <<set $angelforgive to 0>>
+<<set $angelBanish to 0>>
+<<set $angelBanishMax to 0>>
 <<set $demonbuild to 0>>
 <<set $demon to 0>>
 <<set $demonabsorb to 0>>
+<<set $fallenangel to 0>>
 <<set $catbuild to 0>>
 <<set $cat to 0>>
+<<set $heterochromia to 0>>
 <<set $cowbuild to 0>>
 <<set $cow to 0>>
 <<set $birdbuild to 0>>
@@ -233,21 +265,19 @@
 <<set $pain to 0>>
 <<set $combat to 0>>
 <<set $location to 0>>
-<<set $breastsize to 0>>
 <<set $breastsizeold to 0>>
 <<set $breastsizemax to 12>>
 <<set $breastsizemin to 0>>
 <<set $breastsensitivity to 1>>
-<<set $bottomsize to 0>>
 <<set $bottomsizeold to 0>>
 <<set $bottomsizemax to 8>>
 <<set $bottomsizemin to 0>>
 <<set $bottomgrowthtimer to 350>>
 <<set $workouts to 0>>
 <<set $genitalsensitivity to 1>>
-<<set $penissize to 2>>
+<<set $player.penissize to 2>>
 <<set $penissizemax to 4>>
-<<set $penissizemin to -1>>
+<<set $penissizemin to -2>>
 <<set $penisgrowthtimer to 700>>
 <<set $ballssize to 2>>
 <<set $ballssizemax to 4>>
@@ -270,6 +300,10 @@
 <<set $underlowerwetstage to 0>>
 <<set $underupperwet to 0>>
 <<set $underupperwetstage to 0>>
+<<set $overlowerwet to 0>>
+<<set $overlowerwetstage to 0>>
+<<set $overupperwet to 0>>
+<<set $overupperwetstage to 0>>
 
 <<set $genderknown to ["Robin", "Bailey"]>>
 
@@ -356,9 +390,15 @@
 <<set $masturbationorgasmstat to 0>>
 <<set $masturbationtimestat to 0>>
 <<set $milk_drank_stat to 0>>
+<<set $nectar_drank_stat to 0>>
+<<set $nectar_addiction to 0>>
+<<set $nectar_timer to 0>>
 <<set $gloryholestat to 0>>
 <<set $parasite_known to []>>
 <<set $chokeorgasm to 0>>
+<<set $analdoublestat to 0>>
+<<set $vaginaldoublestat to 0>>
+<<set $sextoystat to 0>>
 
 <<set $danceaction to 0>>
 <<set $danceactiondefault to 0>>
@@ -385,6 +425,8 @@
 	<<set $brothel_basement_price to 500>>
 <</if>>
 
+<<set $brothelshowdata to { counts:{ agreed:0, done:0 }, type:"none", intro:false, done:false, missed:false }>>
+
 <<set $speechorgasmweakcumcount to 0>>
 <<set $speechorgasmnocumcount to 0>>
 <<set $speechorgasmcount to 0>>
@@ -401,7 +443,8 @@
 <<set $uncomfortable to {
 	underwear: true,
 	nude: true,
-	prostituting: true
+	prostituting: true,
+	lewd: true
 }>>
 <<set $rescue to 0>>
 <<set $drugged to 0>>
@@ -414,6 +457,7 @@
 <<set $enemywounded to 0>>
 <<set $enemyejaculated to 0>>
 <<set $enemyno to 0>>
+<<set $enemynomax to 0>>
 <<set $semenpuddle to 0>>
 <<set $eventskip to 0>>
 <<set $menu to 0>>
@@ -469,7 +513,9 @@
 <<set $danceevent to 0>>
 <<set $dancephysique to 0>>
 <<set $hypnosis to 0>>
+<<set $hypnotised to 0>>
 <<set $pills to 0>>
+<<set $pillsconsumed to 0>>
 <<set $medicated to 0>>
 <<set $trance to 0>>
 <<set $harperexam to 0>>
@@ -497,7 +543,9 @@
 <<set $famescrap to 0>>
 <<set $famepimp to 0>>
 <<set $famesocial to 0>>
+<<set $famemodel to 0>>
 <<set $famepark to 0>>
+<<set $famepregnancy to 0>>
 <<set $park_run_seen_by to []>>
 
 <<set $spray to 0>>
@@ -523,7 +571,7 @@
 	"data":{}
 }>>
 
-<<set $claws to 1>>
+<!-- <<set $claws to 1>> -->
 <<set $water to 0>>
 <<set $foresthunt to 0>>
 <<set $edenforesthunt to 0>>
@@ -575,44 +623,20 @@
 
 <<set $leftleg to 0>>
 <<set $rightleg to 0>>
-<<set $breastuse to 0>>
 <<set $leftnipple to 0>>
 <<set $rightnipple to 0>>
 <<set $leftarmstate to 0>>
 <<set $rightarmstate to 0>>
 <<set $feetstate to 0>>
 
-<<set $neckgoo to 0>>
-<<set $rightarmgoo to 0>>
-<<set $leftarmgoo to 0>>
-<<set $thighgoo to 0>>
-<<set $bottomgoo to 0>>
-<<set $tummygoo to 0>>
-<<set $chestgoo to 0>>
-<<set $facegoo to 0>>
-<<set $hairgoo to 0>>
-<<set $feetgoo to 0>>
-<<set $vaginagoo to 0>>
-<<set $vaginaoutsidegoo to 0>>
-<<set $penisgoo to 0>>
-<<set $anusgoo to 0>>
-<<set $mouthgoo to 0>>
+<<set $player.bodyliquid to {}>>
+<<for _bodypart range setup.bodyliquid.bodyparts>>
+	/* look in variables-static for the list of body parts */
+	<<set $player.bodyliquid[_bodypart] to {}>>
+	<<set $player.bodyliquid[_bodypart]["goo"] to 0>>
+	<<set $player.bodyliquid[_bodypart]["semen"] to 0>>
+<</for>>
 
-<<set $necksemen to 0>>
-<<set $rightarmsemen to 0>>
-<<set $leftarmsemen to 0>>
-<<set $thighsemen to 0>>
-<<set $bottomsemen to 0>>
-<<set $tummysemen to 0>>
-<<set $chestsemen to 0>>
-<<set $facesemen to 0>>
-<<set $hairsemen to 0>>
-<<set $feetsemen to 0>>
-<<set $vaginasemen to 0>>
-<<set $vaginaoutsidesemen to 0>>
-<<set $penissemen to 0>>
-<<set $anussemen to 0>>
-<<set $mouthsemen to 0>>
 <<exam_difficulty>>
 
 <<set $detention to 0>>
@@ -722,12 +746,22 @@
 <<set $brothel_raid_day to 0>>
 <<set $brothel_thief to 0>>
 
+/*pharmacy contact lenses related */
+<<set $left_before_nurse_returned to 0>>
+<<set $lenses_ordered to []>>
+<<set $custom_lenses_already_ordered to 0>>
+<<set $custom_eyecolours to []>>
+
 /*long hair related*/
 <<set $o_long_and_beautiful to 0>>
 <<set $hy_sibling to 0>>
 <<set $hy_parent to 0>>
 <<set $long_hair_meet_day to 99999>>
 <<set $misbehaviour_day to 99999>>
+
+/*steal related*/
+<<set $stealtarget to "">>
+<<set $stealdifficulty to 1>>
 
 <<set $showCaptionText to true>>
 <<set $confirmSave to false>>
@@ -767,11 +801,15 @@
 	<<set $makeup.owned.mascara = []>>
 	<<set $makeup.lipstick = 0>>
 	<<set $makeup.eyeshadow = 0>>
-	<<set $makeup.eyelenses = 0>>
+	<<set $makeup.eyelenses = {"left":0, "right":0}>>
 	<<set $makeup.mascara = 0>>
 	<<set $makeup.pbcolour = 0>>
 	<<set $makeup.browscolour = 0>>
 	<<set $makeup.concealer = 0>>
+<</if>>
+
+<<if $makeup.owned.custom_eyelenses is undefined>>
+	<<set $makeup.owned.custom_eyelenses to []>> /* pharmacy custom eye lenses */
 <</if>>
 
 <<set $prepareSaveDetails to true>>
@@ -800,17 +838,27 @@
 <</if>>
 
 <<set $shopDefaults to {
-    "color":"black",
-    "colorSet":null,
-    "secColor":"black",
-    "secColorSet":null,
-    "disableReturn": false,
-    "alwaysBackToShopButton": false,
-    "noHelp": false,
-    "noTraits": false,
-    "highContrast": false,
-    "mannequinGender": "same",
-    "mannequinGenderFromClothes": false,
-    "colourItems": "random",
-    "compactMode": false,
+	"color":"black",
+	"colorSet":null,
+	"secColor":"black",
+	"secColorSet":null,
+	"disableReturn": false,
+	"alwaysBackToShopButton": false,
+	"noHelp": false,
+	"noTraits": false,
+	"highContrast": false,
+	"mannequinGender": "same",
+	"mannequinGenderFromClothes": false,
+	"colourItems": "random",
+	"compactMode": false,
 }>>
+
+<<initAllNNPCVirginities>>
+
+<<set $templePromised to "">>
+
+<<if $sleepStat is undefined>>
+	<<set $sleepStat to 0>>
+<</if>>
+<<run window.createInventoryObject()>>
+<</widget>>

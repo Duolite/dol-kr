@@ -462,12 +462,7 @@ You sit on the stool in the corner, and lean against the wall to rest your eyes.
 	<</switch>>
 	<br><br>
 
-	<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
-		<<skulduggeryskilluse>>
-	<<else>>
-		<span class="blue">That was too easy. You didn't learn anything.</span>
-		<br><br>
-	<</if>>
+	<<skulduggeryuse>>
 
 	You continue working until it's time to end the session.
 
@@ -498,12 +493,7 @@ You sit on the stool in the corner, and lean against the wall to rest your eyes.
 	<<He>> casts a suspicious glance back at you, and doesn't doze again.<<body_tip hand 0.1>>
 	<br><br>
 
-	<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
-		<<skulduggeryskilluse>>
-	<<else>>
-		<span class="blue">That was too easy. You didn't learn anything.</span>
-		<br><br>
-	<</if>>
+	<<skulduggeryuse>>
 
 	You continue working until the end of the session.
 
@@ -541,13 +531,11 @@ You sit on the stool in the corner, and lean against the wall to rest your eyes.
 	The <<person>> rubs <<his>> chin a moment, then thumbs through <<his>> cash. "I can tip more generously," <<he>> says.
 	<br><br>
 
-	<<if $exhibitionism gte 55>>
-		<<link [[Negotiate|Spa Rude Negotiate]]>><</link>>
-		<<if $phase2 is 1>>
-			<<exhibitionist5>>
-		<<else>>
-			<<exhibitionist4>>
-		<</if>>
+	<<if $exhibitionism gte 75 and $phase2 is 1>>
+		<<link [[Negotiate|Spa Rude Negotiate]]>><</link>><<exhibitionist5>>
+		<br>
+	<<elseif $exhibitionism gte 55 and $phase2 is 0>>
+		<<link [[Negotiate|Spa Rude Negotiate]]>><</link>><<exhibitionist4>>
 		<br>
 	<</if>>
 	<<link [[Refuse|Spa Rude Refuse 2]]>><</link>>
@@ -740,7 +728,7 @@ You negotiate a fee of <<printmoney $tip>>,
 <<He>> grasps your $worn.under_lower.name with <<his>> other hand,
 <<if $worn.under_lower.open is 1 or _broken or $worn.under_lower.integrity lte 20>>
 	<<fameexhibitionism 1>>
-	<<if $worn.under_lower.skirt is 1>>
+	<<if setup.clothes.under_lower[clothesIndex('under_lower', $worn.under_lower)].skirt is 1>>
 		and flips it up,
 	<<elseif $worn.under_lower.integrity gt 20>>
 		and tugs it down,
@@ -855,7 +843,7 @@ The <<person>> watches all the while. You lie down on the table.
 		"That's that," <<he>> says, pulling away. You push yourself onto your knees to stand, <span class="lewd">and <<he>> strikes,</span> grasping your hips and hoisting your <<bottom>> into the air. Before you can react, <<hes>> climbed onto the table and pushed <<his>> pelvis against yours. Your <<genitals>> brushes against <<his>> <<if $NPCList[0].penis isnot "none">>cock.<<else>>vagina.<</if>><<ggarousal>><<arousal 1200>>
 		<br><br>
 
-		"There are other forms of massage," <<he>> says, grasping your shoulders and humping you. <<if $NPCList[0].penis isnot "none" and ($vaginaexist is 1 or $analdisable is "f") and !$worn.genitals.type.includes("chastity")>><<He>> doesn't try to penetrate, but it would be easy from such a position.<</if>><<ggarousal>><<arousal 1200>>
+		"There are other forms of massage," <<he>> says, grasping your shoulders and humping you. <<if $NPCList[0].penis isnot "none" and ($player.vaginaExist or $analdisable is "f") and !$worn.genitals.type.includes("chastity")>><<He>> doesn't try to penetrate, but it would be easy from such a position.<</if>><<ggarousal>><<arousal 1200>>
 		<br><br>
 
 
@@ -882,7 +870,7 @@ The <<person>> watches all the while. You lie down on the table.
 
 The <<person>> rubs oil over your chest, then continues rubbing <<his>> body against yours.
 
-<<if $penisexist is 1 and $NPCList[0].penis is "none" and !$worn.genitals.type.includes("chastity")>>
+<<if $player.penisExist and $NPCList[0].penis is "none" and !$worn.genitals.type.includes("chastity")>>
 	<<He>> need only back up a little, and your <<penis>> would enter <<him>>, but <<he>> doesn't take advantage.
 <</if>>
 <br><br>
@@ -907,7 +895,7 @@ The <<person>> rubs oil over your chest, then continues rubbing <<his>> body aga
 <<if $arousal gte $arousalmax>>
 	You open your mouth to speak, just as your body betrays you.<<orgasm>>
 	<br>
-	The <<person>> laughs, rubbing oil over your chest. "Were you trying to say something?" <<he>> says as you twitch beneath <<him>>. <<if $penisexist is 1>>"You're getting my ass all slimy.<</if>>
+	The <<person>> laughs, rubbing oil over your chest. "Were you trying to say something?" <<he>> says as you twitch beneath <<him>>. <<if $player.penisExist>>"You're getting my ass all slimy.<</if>>
 	<br><br>
 
 	<<He>> climbs off. "Thanks for humouring me. Commendable service, all round." <<He>> picks up <<his>> towel and leaves the room.
@@ -919,7 +907,7 @@ The <<person>> rubs oil over your chest, then continues rubbing <<his>> body aga
 	<<spa_end>>
 <<else>>
 	<<if $submissive gte 1150>>
-		"Pl-please stop," you say. "I might get in trouble."
+		"P-please stop," you say. "I might get in trouble."
 	<<elseif $submissive lte 850>>
 		"Get off," you say. "You'll get me in trouble."
 	<<else>>
@@ -950,7 +938,7 @@ The <<person>> rubs oil over your back, and continues to hump you.
 <<if $arousal gte $arousalmax>>
 	<<orgasm>>
 	<br>
-	<<He>> laughs as your spasms subside. "I'd better not overdo it," <<he>> says <<he>> climbs off the table. "Any longer and I might lose control. Thanks for humouring me."<<set $tipmod to 1.5>><<tipset>><<tipreceive>><<pass 50>>
+	<<He>> laughs as your spasms subside. "I'd better not overdo it," <<he>> says as <<he>> climbs off the table. "Any longer and I might lose control. Thanks for humouring me."<<set $tipmod to 1.5>><<tipset>><<tipreceive>><<pass 50>>
 <<else>>
 	<<He>> continues massaging your back in this manner until the end of the session. "Any longer and I might lose control," <<he>> laughs as <<he>> climbs off the table. "Thanks for humouring me."<<set $tipmod to 1.2>><<tipset>><<tipreceive>><<pass 50>>
 <</if>>
@@ -981,7 +969,7 @@ The <<person>> rubs oil over your back, and continues to hump you.
 
 <<else>>
 	<<if $submissive gte 1150>>
-		"Pl-please stop," you say. "I might get in trouble."
+		"P-please stop," you say. "I might get in trouble."
 	<<elseif $submissive lte 850>>
 		"Get off," you say. "You'll get me in trouble."
 	<<else>>
@@ -1067,7 +1055,7 @@ The <<person>> lies back and shuts <<his>> eyes.
 
 
 <<if $NPCList[0].penis isnot "none">>
-	<<handejacstat>><<ejacstat>><<set $leftarmsemen += 1>><<set $rightarmsemen += 1>>
+	<<handejacstat>><<ejacstat>><<set $player.bodyliquid.leftarm.semen += 1>><<set $player.bodyliquid.rightarm.semen += 1>>
 	You accelerate the pace, until <<his>> <<print $NPCList[0].penisdesc>> erupts over your hands while <<his>> body spasms and jerks.
 <<else>>
 	You accelerate the pace, until <<his>> body spasms and jerks. You feel <<his>> juices on your fingers.
@@ -1097,7 +1085,7 @@ The <<person>> lies back and shuts <<his>> eyes.
 		"I like having you in my hand like this," you say. "I could go on all day."
 	<</if>>
 	<br><br>
-	"I-I'll pay more," the <<person>> stammers. "Just go a bit faster."<<body_tip hand add>><<set $tip_add to ($tip + (500, 1500))>><<tip_up>>
+	"I-I'll pay more," the <<person>> stammers. "Just go a bit faster."<<body_tip hand add>><<set $tip_add to ($tip + random(500, 1500))>><<tip_up>>
 	<br><br>
 
 	<<link [[Finish|Spa Lewd Hand Finish]]>><</link>>
@@ -1136,7 +1124,7 @@ The <<person>> lies back and shuts <<his>> eyes.
 	<br><br>
 
 
-	The <<person>> falls back. "Pl-please," <<he>> says. "J-just finish me off."<<body_tip hand add>><<set $tip_add to ($tip + (500, 1500))>><<tip_up>>
+	The <<person>> falls back. "P-please," <<he>> says. "J-just finish me off!"<<body_tip hand add>><<set $tip_add to ($tip + random(500, 1500))>><<tip_up>>
 	<br><br>
 
 	<<link [[Finish|Spa Lewd Hand Finish]]>><</link>>
@@ -1170,7 +1158,7 @@ The <<person>> lies back and shuts <<his>> eyes.
 		"You'll have to do better," you say.
 	<</if>>
 	<br><br>
-	"Y-yes," the <<person>> stammers. "A-anything. I can't take this any longer."<<body_tip hand add>><<set $tip_add to ($tip + (500, 1500))>><<tip_up>>
+	"Y-yes," the <<person>> stammers. "A-anything. I can't take this any longer."<<body_tip hand add>><<set $tip_add to ($tip + random(500, 1500))>><<tip_up>>
 	<br><br>
 
 	Before you can consider your next move, the <<person>> loses control. <<He>> grasps <<his>>
@@ -1254,7 +1242,7 @@ Your hands are occupied. You need to use something else.
 <<effects>>
 
 <<if $NPCList[0].penis isnot "none">>
-	<<set $thighsemen += 1>><<thighejacstat>><<ejacstat>>
+	<<set $player.bodyliquid.thigh.semen += 1>><<thighejacstat>><<ejacstat>>
 	You <<thightext>> rub <<his>> <<print $NPCList[0].penisdesc>> hard between your thighs. <<His>> body trembles, and <<he>> ejaculates, splattering you with semen.
 <<else>>
 	You <<thightext>> rub your thigh hard against <<his>> pussy. <<His>> body trembles and spasms beneath you as <<he>> cums.
@@ -1279,7 +1267,7 @@ Your hands are occupied. You need to use something else.
 		and <<thightext>> push your thigh into <<his>> pussy. <<He>> rubs against you as <<he>> half-heartedly strains against your grasp. You're careful not to press too hard, <span class="green">making sure <<he>> can't cum.</span>
 	<</if>>
 	<br><br>
-	<<if $breastsize gte 1>>
+	<<if $player.breastsize gte 1>>
 		You press your <<breasts>> against <<him>>.
 	<</if>>
 	<<if $spa.behaviour is "cute">>
@@ -1289,7 +1277,7 @@ Your hands are occupied. You need to use something else.
 	<</if>>
 	<br><br>
 
-	"Pl-please," the <<person>> begs. "Whatever you want. J-just let me cum."<<body_tip thigh add>><<set $tip_add to ($tip + (500, 1500))>><<tip_up>>
+	"P-please," the <<person>> begs. "Whatever you want! J-just let me cum!"<<body_tip thigh add>><<set $tip_add to ($tip + random(500, 1500))>><<tip_up>>
 	<br><br>
 
 	<<link [[Finish|Spa Lewd Thigh Finish]]>><</link>>
@@ -1301,7 +1289,7 @@ Your hands are occupied. You need to use something else.
 	<<if random(1, 10) gte 4>>
 		You lay flat against the <<person>>,
 		<<if $NPCList[0].penis isnot "none">>
-			<<set $thighsemen += 1>><<thighejacstat>><<ejacstat>>
+			<<set $player.bodyliquid.thigh.semen += 1>><<thighejacstat>><<ejacstat>>
 			and <<thightext>> grasp <<his>> <<print $NPCList[0].penisdesc>> between your thighs. <<He>> thrusts against you as <<he>> half-heartedly strains against your grasp, <span class="red">and manages to finish <<himself>>,</span> erupting over your legs.
 		<<else>>
 			and <<thightext>> push your thigh into <<his>> pussy. <<He>> rubs against you as <<he>> half-heartedly strains against your grasp, <span class="red">and manages to finish <<himself>>,</span> <<his>> body convulsing.
@@ -1343,12 +1331,12 @@ Your hands are occupied. You need to use something else.
 	<br><br>
 
 	<span class="green">The <<person>> trembles as <<he>> nods.</span> "Y-y-yes," <<he>> says. "A-anything."
-	<<body_tip thigh add>><<set $tip_add to ($tip + (500, 1500))>><<tip_up>>
+	<<body_tip thigh add>><<set $tip_add to ($tip + random(500, 1500))>><<tip_up>>
 	<br><br>
 
 	You'd worry for <<his>> health if you kept this up,
 	<<if $NPCList[0].penis isnot "none">>
-		<<set $thighsemen += 2>><<thighejacstat>><<ejacstat>>
+		<<set $player.bodyliquid.thigh.semen += 2>><<thighejacstat>><<ejacstat>>
 		so you <<thightext>> squeeze <<his>> <<print $NPCList[0].penisdesc>> between your thighs, and pump as hard as you can.
 	<<else>>
 		so you <<thightext>> press your thigh against <<his>> pussy, and rub as hard as you can.
@@ -1370,7 +1358,7 @@ Your hands are occupied. You need to use something else.
 
 	<<if random(1, 10) gte 4>>
 		<<if $NPCList[0].penis isnot "none">>
-			<<set $thighsemen += 1>><<thighejacstat>><<ejacstat>>
+			<<set $player.bodyliquid.thigh.semen += 1>><<thighejacstat>><<ejacstat>>
 			The <<person>> thrusts against you as <<he>> half-heartedly strains against your grasp, <span class="red">and manages to finish <<himself>>,</span> erupting over your legs.
 		<<else>>
 			The <<person>> rubs against you as <<he>> half-heartedly strains against your grasp, <span class="red">and manages to finish <<himself>>,</span> <<his>> body convulsing.
@@ -1396,7 +1384,7 @@ Your hands are occupied. You need to use something else.
 <<effects>>
 
 <<if $NPCList[0].penis isnot "none">>
-	<<set $bottomsemen += 1>><<bottomejacstat>><<ejacstat>>
+	<<set $player.bodyliquid.bottom.semen += 1>><<bottomejacstat>><<ejacstat>>
 	You <<bottomtext>> rub your <<bottom>> hard against the <<persons>> <<print $NPCList[0].penisdesc>>, until <<he>> spasms and erupts over you.
 <<else>>
 	You <<bottomtext>> grind your <<bottom>> hard against the <<persons>> pussy, until <<his>> body convulses in orgasm.
@@ -1425,7 +1413,7 @@ Your hands are occupied. You need to use something else.
 	<</if>>
 	<br><br>
 
-	<<if $breastsize gte 1>>
+	<<if $player.breastsize gte 1>>
 		You press your <<breasts>> against <<him>>.
 	<</if>>
 	<<if $spa.behaviour is "cute">>
@@ -1434,7 +1422,7 @@ Your hands are occupied. You need to use something else.
 		"How does this feel?" you ask, keeping <<him>> on a torturous edge. "I can keep you like this as long as I want."
 	<</if>>
 	<br><br>
-	"Pl-please," the <<person>> begs. "Whatever you want. J-just let me cum."<<body_tip thigh add>><<set $tip_add to ($tip + (500, 1500))>><<tip_up>>
+	"P-please," the <<person>> begs. "Whatever you want! J-just let me cum!"<<body_tip thigh add>><<set $tip_add to ($tip + random(500, 1500))>><<tip_up>>
 	<br><br>
 
 	<<link [[Finish|Spa Lewd Bottom Finish]]>><</link>>
@@ -1446,7 +1434,7 @@ Your hands are occupied. You need to use something else.
 	<<if random(1, 10) gte 4>>
 		You shunt yourself down <<his>> body,
 		<<if $NPCList[0].penis isnot "none">>
-			<<set $bottomsemen += 1>><<bottomejacstat>><<ejacstat>>
+			<<set $player.bodyliquid.bottom.semen += 1>><<bottomejacstat>><<ejacstat>>
 			until you feel <<his>> <<print $NPCList[0].penisdesc>> against your <<bottom>>. You begin <<bottomtext>> bobbing up and down against <<his>> length. <span class="red">It sends <<him>> over the edge.</span> <<He>> spasms, and <<his>> semen erupts onto you.
 		<<else>>
 			and <<bottomtext>> grind your <<bottom>> against <<his>> pussy. <span class="green">It sends <<him>> over the edge.</span> <<He>> spasms and moans as the orgasm runs through <<his>> body.
@@ -1463,7 +1451,7 @@ Your hands are occupied. You need to use something else.
 	<<else>>
 		You shunt yourself down <<his>> body,
 		<<if $NPCList[0].penis isnot "none">>
-			<<set $bottomsemen += 1>><<bottomejacstat>><<ejacstat>>
+			<<set $player.bodyliquid.bottom.semen += 1>><<bottomejacstat>><<ejacstat>>
 			until you feel <<his>> <<print $NPCList[0].penisdesc>> against your <<bottom>>. You begin <<bottomtext>> bobbing up and down against <<his>> length.
 		<<else>>
 			and <<bottomtext>> grind your <<bottom>> against <<his>> pussy.
@@ -1493,12 +1481,12 @@ Your hands are occupied. You need to use something else.
 	<br><br>
 
 	<span class="green">The <<person>> trembles as <<he>> nods.</span> "Y-y-yes," <<he>> says. "A-anything."
-	<<body_tip bottom add>><<set $tip_add to ($tip + (500, 1500))>><<tip_up>>
+	<<body_tip bottom add>><<set $tip_add to ($tip + random(500, 1500))>><<tip_up>>
 	<br><br>
 
 	You'd worry for <<his>> health if you kept this up,
 	<<if $NPCList[0].penis isnot "none">>
-		<<set $bottomsemen += 2>><<thighejacstat>><<ejacstat>>
+		<<set $player.bodyliquid.bottom.semen += 2>><<thighejacstat>><<ejacstat>>
 		so you <<bottomtext>> squeeze <<his>> <<print $NPCList[0].penisdesc>> between your <<bottom>> cheeks, and pump as hard as you can.
 	<<else>>
 		so you <<bottomtext>> press your <<bottom>> against <<his>> pussy, and rub as hard as you can.
@@ -1519,7 +1507,7 @@ Your hands are occupied. You need to use something else.
 <<else>>
 	<<if random(1, 10) gte 4>>
 		<<if $NPCList[0].penis isnot "none">>
-			<<set $bottomsemen += 1>><<bottomejacstat>><<ejacstat>>
+			<<set $player.bodyliquid.bottom.semen += 1>><<bottomejacstat>><<ejacstat>>
 			The <<person>> thrusts between your cheeks, <span class="red">and manages to send <<himself>> over the edge,</span> <<his>> <<print $NPCList[0].penisdesc>> erupting over your <<bottom>>.
 		<<else>>
 			The <<person>> humps your <<bottom>>, <span class="red">and manages to send <<himself>> over the edge,</span> wracking <<his>> whole body with orgasmic convulsions.
@@ -1580,7 +1568,7 @@ You climb off the <<person>>, and <<he>> struggles to a sitting position.
 
 	<<maninit>>
 	<<if $spa_event isnot "party">>
-		<<set $rescue to 1>>
+		<<enable_rescue>>
 	<</if>>
 	<<set $enemyarousal to ($enemyarousalmax * 0.9)>>
 	<<if $phase is 1>>
@@ -1755,7 +1743,7 @@ You climb off the <<person>>, and <<he>> struggles to a sitting position.
 <<seductioncheck>>
 <br><br>
 <<if $seductionskill lt 1000>>
-	<span class="gold">You feel more confident in your powers of seduction.</span>
+	<span class="gold">당신은 유혹하는 데 좀 더 자신감이 붙었다.</span>
 	<br><br>
 <</if>>
 <<seductionskilluse>>
@@ -1837,7 +1825,7 @@ You kneel in front of the <<person>>. <<He>> grasps the back of your head.
 	<<npcoral>>
 	<<set $enemytrust -= 20>>
 	<<if $spa_event isnot "party">>
-		<<set $rescue to 1>>
+		<<enable_rescue>>
 	<</if>>
 <</if>>
 <<effects>>
@@ -1913,7 +1901,7 @@ You kneel in front of the <<person>>. <<He>> grasps the back of your head.
 
 	<<maninit>>
 	<<if $spa_event isnot "party">>
-		<<set $rescue to 1>>
+		<<enable_rescue>>
 	<</if>>
 	<<prop table>>
 <</if>>
@@ -2012,10 +2000,10 @@ The <<person>> watches all the while. "Nice," <<he>> says. "There are other form
 <br><br>
 
 <<if $promiscuity gte 35>>
-	<<link [[Next|Spa Lewd Breasts]]>><</link>><<promiscuous3>><<gchestskill>><<chestskill 5>>
+	<<link [[Next|Spa Lewd Breasts]]>><<chestskill 5>><</link>><<promiscuous3>><<gchestskill>>
 	<br>
 <<elseif $uncomfortable.prostituting is false>>
-	<<link [[Next|Spa Lewd Breasts]]>><<set $desperateaction to 1>><</link>><<promiscuous3>><<gchestskill>><<chestskill 5>>
+	<<link [[Next|Spa Lewd Breasts]]>><<chestskill 5>><<set $desperateaction to 1>><</link>><<promiscuous3>><<gchestskill>>
 	<br>
 <</if>>
 <<link [[Refuse|Spa Lewd Breasts Refuse]]>><</link>>
@@ -2038,10 +2026,10 @@ The <<person>> nods, disappointed but not upset. <<He>> seems satisfied by the e
 <<effects>>
 
 <<body_tip chest add>><<set $tip_add to ($tip + random(100, 1000))>>
-You pour oil over your <<if $breastsize gte 1>><<breasts>><<else>>chest<</if>> and down your body, before rubbing it over you. You climb onto the table, and swing a leg over the <<person>>.
+You pour oil over your <<if $player.breastsize gte 1>><<breasts>><<else>>chest<</if>> and down your body, before rubbing it over you. You climb onto the table, and swing a leg over the <<person>>.
 <br><br>
 
-"Like this?" you ask, pressing your bodies together. <<He>> nods, so you rub <<him>> up and down<<if $breastsize gte 1>>, pressing your <<breasts>> against <<his>> body<</if>>.
+"Like this?" you ask, pressing your bodies together. <<He>> nods, so you rub <<him>> up and down<<if $player.breastsize gte 1>>, pressing your <<breasts>> against <<his>> body<</if>>.
 
 <<if $NPCList[0].penis isnot "none">>
 	You sometimes slide too far back, and your <<bottom>> presses against <<his>> erect penis.
@@ -2132,14 +2120,14 @@ You grasp the <<persons>> arms, and push them away. "Look," you say. "Don't touc
 
 	<<maninit>><<npc_attempt_sex>>
 	<<if $spa_event isnot "party">>
-		<<set $rescue to 1>>
+		<<enable_rescue>>
 	<</if>>
 	<<set $enemyarousal to ($enemyarousalmax * 0.65)>>
 	<<promiscuity5>>
-	<<if $penisexist is 1>>
+	<<if $player.penisExist>>
 		<<body_tip penile add>><<set $tip_add to ($tip + random(100, 1000))>>
 	<</if>>
-	<<if $vaginaexist is 1>>
+	<<if $player.vaginaExist>>
 		<<body_tip vaginal add>><<set $tip_add to ($tip + random(100, 1000))>>
 	<</if>>
 	<<prop table>>
@@ -2205,7 +2193,7 @@ You step in front of the <<person>>, preventing <<him>> from leaving the room. "
 		<<He>> pushes past you.
 	<</if>>
 	<br><br>
-	<<link [[Beg|Spa Polite Beg]]>><<stress 6>><</link>><<gstress>>
+	<<link [[Beg|Spa Polite Beg]]>><<sub 1>><<stress 6>><</link>><<gstress>>
 	<br>
 	<<link [[Let your client leave|Spa Polite Leave]]>><</link>>
 	<br>
@@ -2225,7 +2213,7 @@ You step in front of the <<person>>, preventing <<him>> from leaving the room. "
 You grasp <<his>> arm.
 
 <<if $submissive gte 1150>>
-	"Pl-please <<sir>>," you say. "I really need the money."
+	"P-please <<sir>>," you say. "I really need the money."
 <<elseif $submissive lte 850>>
 	"Come on," you say. "I need the money."
 <<else>>

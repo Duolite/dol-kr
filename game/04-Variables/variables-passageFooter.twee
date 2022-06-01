@@ -5,18 +5,64 @@
 	<div id="feat"></div>
 	<div id="mobileStats"></div>
 	<div id="exportWarning" @class="'no-numberify ' + ($days gte $saveDetails.exported.days + $saveDetails.exported.frequency ? '':'hidden')">
-		<span class="red">You haven't exported your save in a while</span> |
-		<<link "Help me export">><<overlayReplace "optionsExportImport">><</link>> |
-		<<link "Ignore for now">><<set $saveDetails.exported.days to Math.floor($days - ($saveDetails.exported.frequency * 0.5))>><<addclass #exportWarning "hidden">><</link>>
+		<span class="red">한동안 세이브 파일을 내보내지 않았습니다</span> |
+		<<link "내보내도록 도와줘">><<overlayReplace "optionsExportImport">><</link>> |
+		<<link "지금은 무시한다">><<set $saveDetails.exported.days to Math.floor($days - ($saveDetails.exported.frequency * 0.5))>><<addclass #exportWarning "hidden">><</link>>
 	</div>
 <</if>>
 <<if $replayScene isnot undefined>>
 	<<if $replayScene.startPassage is $passage or $passage is "Scene Viewer End">>
 	<<elseif !$replayScene.passages.includes($passage)>>
+		<!-- todo: replace goto with something that doesn't have a potential to fuck up the history -->
 		<<goto "Scene Viewer End">>
 	<</if>>
 	<<if $replayScene is undefined>>
 	<<elseif $replayScene.startPassage>>
 		<<run delete $replayScene.startPassage>>
 	<</if>>
+<</if>>
+<div id="customOverlay" class="customOverlay hidden">
+	<div id="customOverlayTitle" class="fixedClose"></div>
+	<div id="customOverlayContent"></div>
+</div>
+
+<<if $combat is 1>>
+	<<printCombatMenu>>
+<</if>>
+
+<<if $debug is 1>>
+	<<checkTimeSystem "Footer">>
+<</if>>
+
+<<if !Story.has($passage)>>
+	<br>
+	Please report this, and either reload a previous save or take the emergency exit at the bottom of the page to the last safe location you were in.
+	<<if $maxStates gt 1>>
+		Alternatively, return to the previous passage using the history depth function.
+	<</if>>
+	<br>
+	<<set _exit to $safePassage ? $safePassage : "Bedroom">>
+	<span id="next"><<link [[Back to safety|_exit]]>><<endcombat>><<clotheson>><</link>></span>
+<<elseif !_link and !tags().includes("exitCheckBypass")>>
+	/* Does not trigger if the scene has a red link. Those will probably be reported anyway */
+	<br>
+	<<error `"the passage " + $passage + " has no usable links"` `"Previous passage: " + $passagePrev + " | phase: " + $phase + " | rng: " + $rng`>>
+	<br><br>
+	Please report this,
+	<<if $cheatdisable is "f">>
+		unless you got here through the use of a cheat,
+	<</if>>
+	and either reload a previous save or take the emergency exit at the bottom of the page to the last safe location you were in.
+	<<if $maxStates gt 1>>
+		Alternatively, return to the previous passage using the history depth function.
+	<</if>>
+	<br><br><br>
+	<<set _exit to $safePassage ? $safePassage : "Bedroom">>
+	<span id="next"><<link [[Back to safety|_exit]]>><<endcombat>><<clotheson>><</link>></span>
+<</if>>
+
+<!-- handle autosaves in the footer, so the description getter don't have to guess what happened in the passage -->
+<<if _autosavehere and !_preventUpdate and !$autosavedisabled>>
+	<<run Save.autosave.save(null, {"saveId":$saveId, "saveName":$saveName})>>
+	<<run setSaveDetail("autosave",{"saveId":$saveId,"saveName":$saveName},Story.get($passage).description())>>
 <</if>>

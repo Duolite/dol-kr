@@ -24,11 +24,11 @@
 
 :: Robin Chocolate Help
 <<effects>>
+<<npc Robin>><<person1>>
 <<if $leftarm is "bound" or $rightarm is "bound">>
 	<<He>> looks at your arms. "Oh. You can't help like that. Here." <<He>> walks behind you, and undoes your bindings with deft hands.<<unbind>>
 	<br><br>
 <</if>>
-<<npc Robin>><<person1>>
 <<if $hour gte 17>>
 	"I'd like help carrying my stuff home," Robin says. "It's getting nippy."
 	<br><br>
@@ -80,12 +80,13 @@
 		"I'd like to give out free samples. Could you take this tray around the park, and offer them to anyone who looks cold? I hope it's not too heavy."
 		<br><br>
 		You take the tray, and walk through the park. You find no shortage of cold and thirsty hands, and make sure to mention Robin's stand.
+		<<set $robinmoney += 5>>
 		<<generate2>><<person2>>
 		<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
 		<<if $danger gte (9900 - $allure)>>
 			<br><br>
 			A <<person>> creeps up behind you,
-			<<if $worn.lower.skirt is 1>>
+			<<if setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1>>
 				<span class="purple">and grasps the hem of your skirt.</span>
 			<<elseif $worn.lower.set isnot $worn.upper.set>>
 				<span class="purple">and grasps the hem of your $worn.lower.name.</span>
@@ -221,7 +222,7 @@ You nod, pick up <<his>> dropped equipment and continue to walk to the park with
 
 Before your hand meets the <<persons>>, someone pulls your arm back. Robin pushes you behind <<person1>><<him>>. "I need to ask you to leave," <<He>> says, handing the <<person2>><<person>> <<his>> cup.
 <br><br>
-"Careful, <<person1>><<if $pronoun is "m">>boy<<else>>girl<</if>>," the <<person2>><<person>> says. "Your friend is worth a lot. I'd hate to see you wind up like them."
+"Careful, <<person1>><<nnpc_gendery "Robin">>," the <<person2>><<person>> says. "Your friend is worth a lot. I'd hate to see you wind up like them."
 <br><br>
 Robin frowns. "I'm asking you to leave one last time before I call the police."
 <br><br>
@@ -302,7 +303,7 @@ The other customers are less creepy.
 :: Robin Chocolate Endure
 <<effects>>
 
-<<if $worn.lower.skirt is 1>>
+<<if setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1>>
 	<<if $worn.under_lower.type.includes("naked")>>
 		<<if $worn.genitals.type.includes("chastity")>>
 			The <<person>> lifts your $worn.lower.name, <span class="lewd">exposing your $worn.genitals.name in the middle of the park.</span>
@@ -358,7 +359,7 @@ The other customers are less creepy.
 	At last, <<he>> pulls your $worn.lower.name back up. <<He>> takes a mug of hot chocolate, thanks you, and walks away.
 	<br><br>
 <<else>>
-	<<if $breastsize gte 3>>
+	<<if $player.breastsize gte 3>>
 		The <<person2>> squeezes your <<breasts>>,
 	<<else>>
 		The <<person2>> runs <<his>> fingers over your <<breasts>>,
@@ -374,7 +375,7 @@ The other customers are less creepy.
 	At last, the <<person>> pulls away. <<He>> takes a mug of hot chocolate, thanks you, and walks away.
 	<br><br>
 <</if>>
-
+<<set $robinmoney += 5>>
 <<person1>>
 Robin smiles when you return to <<him>>. "Business has improved a lot," <<he>> says. "Thank you."
 <br><br>
@@ -400,12 +401,7 @@ Robin smiles when you return to <<him>>. "Business has improved a lot," <<he>> s
 <</if>>
 <<masturbationeffects>>
 <<masturbationactions>>
-<<set $masturbation_fluid to ($masturbation_semen + $masturbation_milk + $masturbation_vaginaFluid)>>
-<<if $masturbation_fluid gt $creamstat>>
-	<<set $creamstat to $masturbation_fluid>>
-<</if>>
-<<masturbationbowlimage>>
-You've gathered <<print ($masturbation_fluid).toFixed(1)>> ml of fluid.
+<<masturbationbowl>>
 <br><br>
 
 <<if $timer lte 1>>
@@ -499,7 +495,7 @@ You arrive at Harvest Street, and enter a rustic shop. The proprietor, a <<perso
 <<seductioncheck>>
 <br><br>
 <<if $seductionskill lt 1000>>
-	<span class="gold">You feel more confident in your powers of seduction.</span>
+	<span class="gold">당신은 유혹하는 데 좀 더 자신감이 붙었다.</span>
 	<br><br>
 <</if>>
 <<seductionskilluse>>
@@ -577,12 +573,7 @@ Milk from the surrounding farms is processed in a factory on the corner of Harve
 	You enter a large room, full of tall metal tanks. You hear a low hum from deeper within. There's no one around, so you open a tap, and fill your bottle with milk. <span class="green">Nobody notices you.</span> This should be fresh enough for Robin.
 	<br><br>
 
-	<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
-		<<skulduggeryskilluse>>
-	<<else>>
-		<span class="blue">That was too easy. You didn't learn anything.</span>
-		<br><br>
-	<</if>>
+	<<skulduggeryuse>>
 
 	<<endevent>><<npc Robin>><<person1>>
 	You return to Robin. <<He>> smiles when <<he>> sees you, and takes the milk. <<He>> pours it into a pot while you quietly leave <<his>> £5 on the counter.<<glove>><<npcincr Robin love 1>>
@@ -601,12 +592,7 @@ Milk from the surrounding farms is processed in a factory on the corner of Harve
 	<span class="red">"Oi," shouts a voice from above.</span> "Where do you think you're going? Security!" You turn and run the way you came, hauling yourself over the wall before anyone arrives.
 	<br><br>
 
-	<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
-		<<skulduggeryskilluse>>
-	<<else>>
-		<span class="blue">That was too easy. You didn't learn anything.</span>
-		<br><br>
-	<</if>>
+	<<skulduggeryuse>>
 	You resort to plan B, and enter a rustic shop. The proprietor fills your bottle from a tank behind the counter.
 	<br><br>
 
@@ -779,7 +765,7 @@ You focus on making the snowball as sturdy as possible, until the <<person2>><<p
 You start preparing your ammunition.
 
 <<if $NPCName[$NPCNameList.indexOf("Robin")].dom gte 60>>
-	Robin watches, <span class="green">then joins in.</span> Together you soon have enough snowballs. | <span class="green"> + Preparedness</span>
+	Robin watches, <span class="green">then joins in.</span> Together you soon have enough snowballs.<<if $statdisable is "f">> | <span class="green"> + Preparedness</span><</if>>
 	<br><br>
 	You need to draw fire away from Robin's apparatus, so you bundle them in an arm, and spring from your hiding place.
 	<br><br>
@@ -790,7 +776,7 @@ You start preparing your ammunition.
 	<<link [[Patiently|Robin Chocolate Patient]]>><<set $phase to 0>><</link>><<dancedifficulty 1 1200>>
 	<br>
 <<elseif $NPCName[$NPCNameList.indexOf("Robin")].dom gte 20>>
-	Robin watches, <span class="green">then joins in.</span> Together you soon have enough snowballs. | <span class="green"> + Preparedness</span>
+	Robin watches, <span class="green">then joins in.</span> Together you soon have enough snowballs.<<if $statdisable is "f">> | <span class="green"> + Preparedness</span><</if>>
 	<br><br>
 	You need to draw fire away from Robin's apparatus, so you bundle them in an arm, and spring from your hiding place.
 	<br><br>

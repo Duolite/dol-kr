@@ -78,6 +78,9 @@
 		<<eventsmoorlow>>
 	<</if>>
 <<else>>
+	<<if $arousal gte $arousalmax>>
+		<<orgasmLocation "moor">>
+	<</if>>
 	<<if $moor gte 100>>
 		<<link [[Enter the castle (0:10)|Castle]]>><<pass 10>><</link>>
 		<br><br>
@@ -117,14 +120,16 @@
 			<<print '<<link [[Fly ('+_hoursPassed+':'+ (_minutesPassed lt 10 ? "0" : "") + _minutesPassed + ')|Moor]]>><<set $fatigueMod to _fatigueMod>><<set $flightTime to _flightTime>><<bird_pass _flightTime>><<set $moor += 5>><<set $forestmod to 1>><<set $moormove to "fly">><</link>>'>><<flight_text>><<gtiredness>>
 			<br>
 		<</if>>
-		<<if $worn.feet.type.includes("heels")>>
+		<<if $worn.feet.type.includes("heels") and !$possessed>>
 			<<link [[Hobble in heels (0:30)|Moor]]>><<bird_pass 30>><<set $moor += 5>><<set $forestmod to 3>><<set $moormove to "hobble">><<if $moor_hunt gte 1>><<set $moor_hunt += 2>><</if>><</link>><<gharass>>
 		<<else>>
-			<<runicon>><<link [[Quickly (0:05)|Moor]]>><<bird_pass 5>><<set $moor += 5>><<set $forestmod to 3>><<set $moormove to "quick">><<if $moor_hunt gte 1>><<set $moor_hunt += 0.5>><</if>><</link>><<gharass>>
-			<br>
+			<<if !$worn.feet.type.includes("shackle")>>
+				<<runicon>><<link [[Quickly (0:05)|Moor]]>><<bird_pass 5>><<set $moor += 5>><<set $forestmod to 3>><<set $moormove to "quick">><<if $moor_hunt gte 1>><<set $moor_hunt += 0.5>><</if>><</link>><<gharass>>
+				<br>
+			<</if>>
 			<<walkicon>><<link [[Normally (0:10)|Moor]]>><<bird_pass 10>><<set $moor += 5>><<set $forestmod to 1>><<set $moormove to "normal">><<if $moor_hunt gte 1>><<set $moor_hunt += 1>><</if>><</link>>
 			<br>
-			<<ind>><<link [[Carefully (0:30)|Moor]]>><<bird_pass 30>><<set $moor += 5>><<set $moormove to "careful">><<set $forestmod to 0.5>><<if $moor_hunt gte 1>><<set $moor_hunt += 2>><</if>><</link>><<lharass>>
+			<<sneakicon>><<link [[Carefully (0:30)|Moor]]>><<bird_pass 30>><<set $moor += 5>><<set $moormove to "careful">><<set $forestmod to 0.5>><<if $moor_hunt gte 1>><<set $moor_hunt += 2>><</if>><</link>><<lharass>>
 		<</if>>
 		<br><br>
 	<</if>>
@@ -134,11 +139,13 @@
 			<<print '<<link [[Fly ('+_hoursPassedSearch+':'+ (_minutesPassedSearch lt 10 ? "0" : "") + _minutesPassedSearch + ')|Moor]]>><<set $fatigueMod to _fatigueMod>><<set $flightTime to _flightTimeSearch>><<bird_pass _flightTimeSearch>><<set $forestmod to 0.5>><<set $moormove to "fly_search">><</link>>'>><<flight_text>><<gtiredness>><<lharass>>
 			<br>
 		<</if>>
-		<<runicon>><<link [[Quickly (0:05)|Moor]]>><<bird_pass 5>><<set $forestmod to 3>><<set $moormove to "quick_search">><<if $moor_hunt gte 1>><<set $moor_hunt += 0.5>><</if>><</link>><<gharass>>
-		<br>
+		<<if !$worn.feet.type.includes("shackle")>>
+			<<runicon>><<link [[Quickly (0:05)|Moor]]>><<bird_pass 5>><<set $forestmod to 3>><<set $moormove to "quick_search">><<if $moor_hunt gte 1>><<set $moor_hunt += 0.5>><</if>><</link>><<gharass>>
+			<br>
+		<</if>>
 		<<walkicon>><<link [[Normally (0:10)|Moor]]>><<bird_pass 10>><<set $forestmod to 1>><<set $moormove to "normal_search">><<if $moor_hunt gte 1>><<set $moor_hunt += 1>><</if>><</link>>
 		<br>
-		<<ind>><<link [[Carefully (0:30)|Moor]]>><<bird_pass 30>><<set $forestmod to 0.5>><<set $moormove to "careful_search">><<if $moor_hunt gte 1>><<set $moor_hunt += 2>><</if>><</link>><<lharass>>
+		<<sneakicon>><<link [[Carefully (0:30)|Moor]]>><<bird_pass 30>><<set $forestmod to 0.5>><<set $moormove to "careful_search">><<if $moor_hunt gte 1>><<set $moor_hunt += 2>><</if>><</link>><<lharass>>
 		<br><br>
 	<<if $moor gt 0>>
 		Go towards the coast
@@ -147,14 +154,16 @@
 			<<print '<<link [[Fly ('+_hoursPassed+':'+ (_minutesPassed lt 10 ? "0" : "") + _minutesPassed + ')|Moor]]>><<set $fatigueMod to _fatigueMod>><<set $flightTime to _flightTime>><<bird_pass _flightTime>><<set $moor -= 5>><<set $forestmod to 1>><<set $moormove to "fly">><</link>>'>><<flight_text>><<gtiredness>>
 			<br>
 		<</if>>
-		<<if $worn.feet.type.includes("heels")>>
+		<<if $worn.feet.type.includes("heels") and !$possessed>>
 			<<link [[Hobble in heels (0:30)|Moor]]>><<bird_pass 30>><<set $moor -= 5>><<set $forestmod to 3>><<set $moormove to "hobble">><<if $moor_hunt gte 1>><<set $moor_hunt += 2>><</if>><</link>><<gharass>>
 		<<else>>
-			<<runicon>><<link [[Quickly (0:05)|Moor]]>><<bird_pass 5>><<set $moor -= 5>><<set $forestmod to 3>><<set $moormove to "quick">><<if $moor_hunt gte 1>><<set $moor_hunt += 0.5>><</if>><</link>><<gharass>>
-			<br>
+			<<if !$worn.feet.type.includes("shackle")>>
+				<<runicon>><<link [[Quickly (0:05)|Moor]]>><<bird_pass 5>><<set $moor -= 5>><<set $forestmod to 3>><<set $moormove to "quick">><<if $moor_hunt gte 1>><<set $moor_hunt += 0.5>><</if>><</link>><<gharass>>
+				<br>
+			<</if>>
 			<<walkicon>><<link [[Normally (0:10)|Moor]]>><<bird_pass 10>><<set $moor -= 5>><<set $forestmod to 1>><<set $moormove to "normal">><<if $moor_hunt gte 1>><<set $moor_hunt += 1>><</if>><</link>>
 			<br>
-			<<ind>><<link [[Carefully (0:30)|Moor]]>><<bird_pass 30>><<set $moor -= 5>><<set $forestmod to 0.5>><<set $moormove to "careful">><<if $moor_hunt gte 1>><<set $moor_hunt += 2>><</if>><</link>><<lharass>>
+			<<sneakicon>><<link [[Carefully (0:30)|Moor]]>><<bird_pass 30>><<set $moor -= 5>><<set $forestmod to 0.5>><<set $moormove to "careful">><<if $moor_hunt gte 1>><<set $moor_hunt += 2>><</if>><</link>><<lharass>>
 		<</if>>
 		<br><br>
 	<<else>>
@@ -167,7 +176,7 @@
 <<unset $moormove>>
 
 :: Castle
-<<set $location to "moor">><<effects>>
+<<set $location to "castle">><<effects>>
 
 You are in the courtyard of a ruined castle. Even derelict and half-sunk, the ruin towers all around you.
 <br><br>
@@ -194,7 +203,7 @@ You are in the courtyard of a ruined castle. Even derelict and half-sunk, the ru
 <br>
 
 :: Castle Fly
-<<effects>>
+<<set $location to "tower">><<effects>>
 
 <<npc "Great Hawk">>
 You fly to the top of the tower, and land beside the nest.
@@ -229,7 +238,7 @@ You call up to the tower.
 	<<link [[Stop|Castle]]>><<endevent>><</link>>
 	<br>
 <<else>>
-
+	<<set $location to "tower">>
 	At once, the <<beasttype>> swoops from your nest. <<bHe>> grasps your shoulders in <<bhis>> talons, and carries you home.
 	<br><br>
 	<<if ($leftarm is "bound" or $rightarm is "bound" or $feetuse is "bound")>>
@@ -250,7 +259,7 @@ You call up to the tower.
 <</if>>
 
 :: Castle Call Wait
-<<effects>>
+<<set $location to "tower">><<effects>>
 
 You wait, watching the skies, until you see the <<beasttype>> soaring over the moor. You call out as <<bhe>> passes overhead. <<bHe>> swoops towards you, grasps your shoulders, and carries you home.
 <br><br>
@@ -374,10 +383,10 @@ You drop into the water, and wade through. The creatures dart towards you as you
 
 
 <<if $struggle.done gte $struggle.number>>
-	<<link [[Next|Moor Box Struggle End]]>><</link>>
+	<span id="next"><<link [[Next|Moor Box Struggle End]]>><</link>></span>
 	<br>
 <<else>>
-	<<link [[Next|Moor Box Struggle]]>><</link>>
+	<span id="next"><<link [[Next|Moor Box Struggle]]>><</link>></span>
 	<br>
 <</if>>
 
@@ -521,23 +530,23 @@ The journey back to shore proves safer.
 	<<flaunting>> you face the <<person>>. <<He>> ogles your <<genitals>>.
 <</if>>
 <<exhibitionism4>>
-<<if $penisexist is 1 and $vaginaexist is 1>>
+<<if $player.penisExist and $player.vaginaExist>>
 	"Both?" <<he>> asks. "It's my lucky day. Shame I don't have a camera."
-<<elseif $penisexist is 1>>
+<<elseif $player.penisExist>>
 	<<if $player.gender_appearance is "f">>
 		"Now there's a surprise," <<he>> says.
-		<<if $penissize gte 4>>
+		<<if $player.penissize gte 4>>
 			"And it's so big. Shame I don't have a camera."
-		<<elseif $penissize lte 1>>
+		<<elseif $player.penissize lte 1>>
 			"Though I can barely see it from here."
 		<<else>>
 
 		<</if>>
 	<<else>>
 		"Nice cock," <<he>> says.
-		<<if $penissize gte 4>>
+		<<if $player.penissize gte 4>>
 			"It's so big. Shame I don't have a camera."
-		<<elseif $penissize lte 1>>
+		<<elseif $player.penissize lte 1>>
 			"Though I can barely make it out from here." <<He>> laughs.
 		<<else>>
 
@@ -603,7 +612,7 @@ The <<person>> sighs. "Fine." <<He>> chucks it onto the earth beside you. You cr
 :: Moor Box Show
 <<effects>>
 
-<<if $worn.lower.skirt is 1>>
+<<if setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1>>
 	<<flaunting>> you lift your skirt.
 <<elseif $worn.upper.set is $worn.lower.set>>
 	<<flaunting>> you tug your $worn.upper.name down your chest, over you waist, and then your thighs.
@@ -613,23 +622,23 @@ The <<person>> sighs. "Fine." <<He>> chucks it onto the earth beside you. You cr
 The <<person>> ogles your <<genitals>>.
 <<exhibitionism4>>
 
-<<if $penisexist is 1 and $vaginaexist is 1>>
+<<if $player.penisExist and $player.vaginaExist>>
 	"Both?" <<he>> asks. "It's my lucky day. Shame I don't have a camera."
-<<elseif $penisexist is 1>>
+<<elseif $player.penisExist>>
 	<<if $player.gender_appearance is "f">>
 		"Now there's a surprise," <<he>> says.
-		<<if $penissize gte 4>>
+		<<if $player.penissize gte 4>>
 			"And it's so big. Shame I don't have a camera."
-		<<elseif $penissize lte 1>>
+		<<elseif $player.penissize lte 1>>
 			"Though I can barely see it from here."
 		<<else>>
 
 		<</if>>
 	<<else>>
 		"Nice cock," <<he>> says.
-		<<if $penissize gte 4>>
+		<<if $player.penissize gte 4>>
 			"It's so big. Shame I don't have a camera."
-		<<elseif $penissize lte 1>>
+		<<elseif $player.penissize lte 1>>
 			"Though I can barely make it out from here." <<He>> laughs.
 		<<else>>
 
@@ -691,7 +700,7 @@ The <<person>> sighs. "Fine." <<He>> chucks it onto the earth beside you. You cr
 		<br><br>
 		<<underlowerruined>>
 	<</if>>
-<<elseif $worn.lower.skirt is 1>>
+<<elseif setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1>>
 	<<if $worn.under_upper.set is $worn.under_lower.set>>
 		<<if $worn.upper.type.includes("naked")>>
 			You'll be left topless. "Turn around," you say. The <<person>> obliges, facing away and resting <<his>> hands on <<his>> hips.

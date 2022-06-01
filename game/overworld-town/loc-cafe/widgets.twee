@@ -216,7 +216,7 @@
 <</widget>>
 
 <<widget "CafeExhibitionismLegsPartPantyTakeoffDecision">>
-	짖궂은 생각이 떠오른다. 카페에는 화장실이 있어서, 원한다면 아무 것도 모르는 <<personPost "을">> 가지고 재미를 더 볼 수 있을 것이다.
+	짓궂은 생각이 떠오른다. 카페에는 화장실이 있어서, 원한다면 아무 것도 모르는 <<personPost "을">> 가지고 재미를 더 볼 수 있을 것이다.
 	<br><br>
 	<<link [[화장실에서 팬티를 벗고 온다|Cafe Exhibitionism Legs Part Panty Takeoff]]>><</link>> <<exhibitionist5>>
 	<br>
@@ -225,7 +225,7 @@
 <</widget>>
 
 <<widget "CafeExhibitionismLegsPartEnd">>
-	시간이 갈수록 시선을 감추려는 시도가 점차 사라지고 있다는 것에 당신은 접시를 비운 뒤 <<hePost "이">> 당신이 일부러 보여주고 있다는 것을 깨닫기 전에 떠나기로 한다.
+	시간이 갈수록 <<His_yi>> 시선을 감추려는 시도가 점차 사라지고 있다. 당신은 접시를 비운 뒤 <<hePost "이">> 당신이 일부러 보여주고 있다는 것을 깨닫기 전에 떠나기로 한다.
 	<br><br>
 	<<CafeExhibitionismLegsPartNormalTerminate>>
 <</widget>>
@@ -251,7 +251,7 @@
 	모르는 사람들이 대놓고 <<undiesPost "을">> 볼 수 있게 노출하자 매우 당황스러우나, 거기서 느껴지는 <<print ["난처함", "굴욕감", "취약함", "노출감"].pluck()>>에도 불구하고 당신은 더더욱 탐닉하게 된다.
 <<else>>
 	모르는 사람들이 대놓고 <<undiesPost "을">> 볼 수 있게 노출하자 당신은 <<print ["흥분된다", "신이 난다", "발정한다", "스릴이 느껴진다", "꼴린다", "음란한 기분이 든다"].pluck()>>.
-	<<if $assertiveaction is "trauma">> 참 짖궂기도 하지. <<trauma -2>><<ltrauma>> <</if>>
+	<<if $assertiveaction is "trauma">> 참 짓궂기도 하지. <<trauma -2>><<ltrauma>> <</if>>
 <</if>>
 
 <<switch $phase>>

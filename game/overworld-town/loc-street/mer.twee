@@ -1,6 +1,6 @@
 :: Mer Street
 
-<<set $outside to 1>><<set $location to "town">><<effects>><<set $bus to "mer">>
+<<set $outside to 1>><<set $location to "town">><<effects>><<set $bus to "mer">><<getTarget true>>
 당신은 메르 가에 있다. 이 거리는 부두와 해운업이 특징이다.
 <<if $daystate is "day">>
 	<<if $weather is "rain">>
@@ -27,11 +27,11 @@
 <<if $arousal gte $arousalmax>>
 	<<orgasmstreet>>
 <</if>>
-<<if $stress gte $stressmax>>
+<<if $stress gte $stressmax and !$possessed>>
 	<<passoutstreet>>
 <<else>>
 	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
-	<<if $danger gte (9900 - $allure) and $eventskip is 0>>
+	<<if ($danger gte (9900 - $allure) or $eventforced) and $eventskip is 0>>
 		<<eventsstreet>>
 	<<else>>
 		<<if $map.top is true>>
@@ -40,10 +40,10 @@
 		<</if>>
 		주요 장소
 		<br>
-		<<link [[부두|Docks]]>><</link>>
+		<<docksicon>><<link [[부두|Docks]]>><</link>>
 		<br>
 		<<if $historytrait gte 2>>
-			<<link [[해안 산책로 (0:30)|Coast Path Mer]]>><<pass 30>><</link>>
+			<<ind>><<link [[해안 산책로 (0:30)|Coast Path Mer]]>><<pass 30>><</link>>
 			<br>
 		<</if>>
 		<br>

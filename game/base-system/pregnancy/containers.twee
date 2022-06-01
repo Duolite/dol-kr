@@ -1,0 +1,250 @@
+:: Widgets containers [widget]
+<<widget "creatureActivity">>
+<<if _args[0]>>
+	<<if _args[0] lt 60>>
+		<span class="gold">완벽한 움직임</span>
+		<<earnFeat "Top Broodmother Host">>
+	<<elseif _args[0] lte 70>>
+		<span class="green">놀라운 움직임</span>
+	<<elseif _args[0] lte 100>>
+		<span class="teal">좋은 움직임</span>
+	<<elseif _args[0] lte 150>>
+		<span class="lblue">적절한 움직임</span>
+	<<elseif _args[0] lte 200>>
+		<span class="blue">그냥저냥한 움직임</span>
+	<<elseif _args[0] lte 250>>
+		<span class="purple">약한 움직임</span>
+	<<elseif _args[0] lte 300>>
+		<span class="pink">어쩌다 움직임</span>
+	<<else>>
+		<span class="red">거의 움직이지 않음</span>
+	<</if>>
+<</if>>
+<</widget>>
+
+<<widget "creatureContainersProgressDay">>
+<<set _list to $container.list>>
+<<for _i to 0; _i lt _list.length; _i++>>
+	<<set _container to $container[_list[_i]]>>
+	<<if _container.count is 0>>
+		<<set _container.daysSinceFed to 0>>
+		<<continue>>
+	<</if>>
+	<<if _list[_i] is "home">>
+		<<if $NPCName[$NPCNameList.indexOf("Kylar")].love gte 75 and $NPCName[$NPCNameList.indexOf("Kylar")].state is "active">>
+			<<set _container.kylarHelp to true>>
+		<<else>>
+			<<set _container.kylarHelp to false>>
+		<</if>>
+		<<if _container.kylarHelp is true and _container.kylarDelay is 0 and _container.daysSinceFed is _container.maxDaysWithoutFood>>
+			<<npcincr Kylar love -1>>
+			<<set _container.daysSinceFed -= 1>>
+			<<set _container.kylarFed to true>>
+		<<elseif _container.kylarHelp is true and _container.kylarDelay gt 0 and _container.daysSinceFed is 0>>
+			<<set _container.kylarDelay-->>
+			<<set _container.kylarFed to false>>
+		<</if>>
+	<</if>>
+	<<set _container.daysSinceFed += 1>>
+	<<if _container.daysSinceFed gt _container.maxDaysWithoutFood>>
+		<<set _container.deadCreatures to _container.count>>
+		<<for _i to 0; _i lt _container.count; _i++>>
+			<<if _container.creatures[_i].creature.includes("Pale") and $wraith and $wraith.state isnot "">>
+				<<set $wraith.offspring to "dead">>
+				<<set $wraithAnger to 30>>
+				<<set $wraithShow to true>>
+			<</if>>
+		<</for>>
+		<<set _container.count to 0>>
+		<<set _container.creatures to {}>>
+	<</if>>
+	<<set _container.visited to false>>
+<</for>>
+<</widget>>
+
+<<widget "creatureVisit">>
+<<set _container to $container[$location]>>
+<<set _container.visited to true>>
+<<set _container.daysSinceFed to 0>>
+
+/*stress, trauma, fatigue, purity, impurity, hallucinogens*/
+<<set _boosts to [false,false,false,false,false,false]>>
+<<set _purityGain to 0>><<set _tenticles to 0>><<set _paleChance to 0>>
+<<for _i to 0; _i lt _container.maxCount; _i++>>
+	<<if _container.creatures[_i] is undefined>>
+		<<continue>>
+	<</if>>
+	<<if _container.creatures[_i] isnot null>>
+		<<set _tendingMulti to 1 + (currentSkillValue('tending') / 1000)>>
+		<<set _value = Math.floor(5000 / _container.creatures[_i].stats.speed)>>
+		<<if _container.upgrades.luxury gt 0>>
+			<<set _value to Math.floor(_value * (1 + (0.25 * _container.upgrades.luxury)))>>
+		<</if>>
+		<<if _value gt 0>>
+			<<set $stress -= Math.floor(_value * _tendingMulti)>>
+			<<set _boosts[0] to true>>
+		<</if>>
+		<<if Math.floor(_value / 8) gt 0>>
+			<<set $trauma -= Math.floor(_value / 8)>>
+			<<set _boosts[1] to true>>
+		<</if>>
+		<<if _container.creatures[_i].creature is "Slime">>
+			<<set _purityGain += 0.5>>
+		<</if>>
+		<<if _container.creatures[_i].creature is "Pale Slime">>
+			<<set _purityGain += 1.5>>
+			<<set $hallucinogen += 20>>
+			<<set _boosts[5] to true>>
+			<<set _paleChance ++>>
+		<</if>>
+		<<if _container.creatures[_i].creature is "Worm">>
+			<<set _purityGain -= 0.5>>
+		<</if>>
+		<<if _container.creatures[_i].creature is "Tentacle">>
+			<<if Math.floor(_value / 4) gt 0>>
+				<<set $tiredness -= Math.floor((_value / 4) * _tendingMulti)>>
+				<<set _boosts[2] to true>>
+			<</if>>
+			<<set _tenticles += 0.5>>
+		<</if>>
+		<<if _container.creatures[_i].creature is "Pale Tentacle">>
+			<<if Math.floor(_value / 3) gt 0>>
+				<<set $tiredness -= Math.floor((_value / 3) * _tendingMulti)>>
+				<<set _boosts[2] to true>>
+				<<set $hallucinogen += 30>>
+				<<set _boosts[5] to true>>
+				<<set _paleChance ++>>
+			<</if>>
+			<<set _tenticles += 1.5>>
+		<</if>>
+		<<if _container.creatures[_i].creature is "Vine">>
+			<<set _tenticles += 0.5>>
+		<</if>>
+	<</if>>
+<</for>>
+
+<<if _purityGain gt 0>>
+	<<set _purityGain += _tenticles>>
+<<elseif _purityGain lt 0>>
+	<<set _purityGain -= _tenticles>>
+<</if>>
+<<if Math.floor(_purityGain) gt 0>>
+	<<set _purityGain to Math.floor(_purityGain)>>
+	<<set _boosts[3] to true>>
+<<elseif Math.ceil(_purityGain) lt 0>>
+	<<set _purityGain to Math.ceil(_purityGain)>>
+	<<set _boosts[4] to true>>
+<</if>>
+<<purity _purityGain>>
+
+<<if _boosts[0]>> <<lstress>><</if>>
+<<if _boosts[1]>> <<ltrauma>><</if>>
+<<if _boosts[2]>> <<ltiredness>><</if>>
+<<if _boosts[3]>> <<gpurity>><</if>>
+<<if _boosts[4]>> <<lpurity>><</if>>
+<<if _boosts[5]>> <<ghallucinogens>><</if>>
+
+<<if $wraith and $wraith.state isnot "" and _paleChance gte random(1, 10) and !$possessed>>
+	<br><br>
+	당신은 창백한 형체가 당신 바로 옆에 서 있는 것을 언뜻 본다. 당신은 놀라 뒤로 펄쩍 뛴다. 그것은 천천히 당신에게로 몸을 돌린다.
+	<br><br>
+	"<span class="wraith">아름답군. <<if _container.count isnot 1>>그들을<<else>>그것을<</if>> 안전하게 보호해라.</span>" 그것은 눈부신 불빛과 함께 사라진다. <<stress 6>><<gstress>>
+	<<set $wraith.offspring to "alive">>
+<</if>>
+
+<</widget>>
+
+:: Containers
+<<set $outside to 0>><<set $location to $container.lastLocation>><<effects>>
+<<set _container to $container[$location]>>
+<<set _pregnancy to $sexStats.anus.pregnancy>>
+<<set $checkboxResult to {}>>
+
+<<if _container.count is 0>>
+	<<if _container.deadCreatures is 0>>
+		당신의 <<print _container.name>> 안에 <<if _pregnancy.namesChildren is true>>아기가<<else>>기생충이<</if>> 하나도 없다.
+		<br>
+	<<else>>
+		<<if _pregnancy.namesChildren is true>>당신의 아기들을<<else>>기생충들을<</if>> 돌보고 먹이지 않아서, 몇몇이 죽은 것 같다. 당신은 그들을 묻어주는 데 시간을 보낸다.
+		<<ggtrauma>>
+		<br><br>
+		<<if _pregnancy.namesChildren is true>>
+			<<set _traumaMulti to 2>>
+		<<else>>
+			<<set _traumaMulti to 1>>
+		<</if>>
+		<<trauma `30 * _traumaMulti * _container.deadCreatures`>>
+		<<if $wraith and $wraith.state isnot "" and $wraithShow>>
+			<<unset $wraithShow>>
+			당신은 무언가가 당신 뒤에서 조심스럽게 당신의 목을 잡는 것을 느낀다.
+			<br><br>
+			"<span class="wraith">용서할 수 없어. 너도 곧 <<if _container.count isnot 1>>그들에게<<else>>그것에게<</if>> 동참할 것이다.</span>" <<stress 12>><<trauma 12>><<ggstress>><<ggtrauma>>
+			<br><br>
+			당신은 뒤로 돌았으나, 거기에는 아무것도 없다.
+			<br><br>
+		<</if>>
+
+		<<link [[다음 (1:00)|$passage]]>><<set _container.deadCreatures to 0>><<pass 60>><</link>>
+	<</if>>
+<<else>>
+	<<if _container.visited is false>>
+		당신은 <<if _pregnancy.namesChildren is true>>당신의 아기<<if _container.count isnot 1>>들을<<else>>를<</if>><<else>>기생충<<if _container.count isnot 1>>들<</if>>을<</if>> 확인하고, <<print _container.name>> 안에서 <<if _container.count isnot 1>>그들이<<else>>그것이<</if>> 필요한 모든 것이 있는지 돌본다.
+		<br>
+		<<creatureVisit>>
+	<<else>>
+		당신은 <<print _container.name>> 안에 있는 <<if _pregnancy.namesChildren is true>>아기<<if _container.count isnot 1>>들을<<else>>를<</if>><<else>>기생충<<if _container.count isnot 1>>들<</if>>을<</if>> 쳐다본다.
+	<</if>>
+	<br><br>
+	거기에는 최대 <<trNumber _container.maxCount>> 자리가 있고, <<print _container.feederName>> 덕분에 <<if _pregnancy.namesChildren is true>>당신의 아기<<if _container.count isnot 1>>들은<<else>>는<</if>><<else>>기생충<<if _container.count isnot 1>>들<</if>>은<</if>> <<trNumberHanja _container.maxDaysWithoutFood>>일 동안 당신의 돌봄 없이 생존할 수 있다. <<if _container.decorations>>당신은 수조 안에 <<print _container.decorations>>을 해 두었다.<</if>>
+<</if>>
+
+<<if _container.count gt 0>>
+	<ul>
+		<<for _i to 0; _i lt _container.maxCount; _i++>>
+			<<if _container.creatures[_i] is undefined>>
+				<<continue>>
+			<</if>>
+			<<if _container.creatures[_i] isnot null>>
+				<li><label><<print '<<checkbox "$checkboxResult[' + clone(_i) + ']" false true>>'>> - <<trCreature "all" _container.creatures[_i].creature>><<print _trResult>> - <<putpost _container.creatures[_i].stats.gender>> - <<creatureActivity _container.creatures[_i].stats.speed>></label></li>
+			<</if>>
+		<</for>>
+	</ul>
+<</if>>
+
+<<if _container.deadCreatures is 0>>
+	<<if _pregnancy.feltMovement is true>>
+		<<if $worn.genitals.anal_shield is 1>>
+			당신은 애널 보호대를 하고 있는 동안에는 <<if _pregnancy.namesChildren is true>>당신의 아기들을<<else>>기생충들을<</if>> 낳을 수가 없다.
+			<br><br>
+		<<else>>
+			<<if _pregnancy.namesChildren is true>>
+				<<link [[아기를 낳으려 시도한다 (1:00)|GiveBirth]]>><<pass 60>><</link>>
+				<br>
+			<<else>>
+				<<link [[기생충을 낳으려 시도한다 (1:00)|GiveBirth]]>><<pass 60>><</link>>
+				<br>
+			<</if>>
+		<</if>>
+	<<elseif _pregnancy.count - (_pregnancy.motherStatus is 2 ? 1 : 0) gt 0>>
+		당신은 아직 <<print (_pregnancy.namesChildren is true ? "당신의 아기들이" : "기생충들이")>> 나올 때가 되었다고 생각하지 않는다.
+		<br><br>
+	<</if>>
+	<br>
+	<<if _container.count gt 0>>
+		<<link [[팔기 위해 옮긴다|$passage]]>>
+			<<for _i to 0; _i lt _container.maxCount;_i++>>
+				<<if _container.creatures[_i] is undefined>>
+					<<continue>>
+				<</if>>
+				<<if _container[_i] isnot null>>
+					<<if $checkboxResult[_i] is true>>
+						<<set $number to clone(_i)>>
+						<<moveCreature $location "portable" _i>>
+					<</if>>
+				<</if>>
+			<</for>>
+		<</link>>
+		<br>
+	<</if>>
+	<<link [[돌아간다|$container[$location].leaveLink]]>><</link>>
+<</if>>

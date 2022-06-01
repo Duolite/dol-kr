@@ -1,6 +1,6 @@
 :: Commercial alleyways
 
-<<set $outside to 1>><<set $location to "alley">><<effects>><<set $bus to "commercial">>
+<<set $outside to 1>><<set $location to "alley">><<effects>><<set $bus to "commercial">><<getTarget true>>
 당신은 상업 지구의 골목길에 있다.
 <<if $daystate is "day">>
 	번화가에서 소란스러운 소리가 들린다.
@@ -22,11 +22,11 @@
 <<if $arousal gte $arousalmax>>
 	<<orgasmstreet>>
 <</if>>
-<<if $stress gte $stressmax>>
+<<if $stress gte $stressmax and !$possessed>>
 	<<passoutalley>>
 <<else>>
 	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
-	<<if $danger gte (9900 - $allure) and $eventskip is 0>>
+	<<if ($danger gte (9900 - $allure) or $eventforced) and $eventskip is 0>>
 		<<eventsstreet>>
 	<<else>>
 		<<if $map.top is true>>

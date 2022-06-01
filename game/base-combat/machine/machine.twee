@@ -4,14 +4,14 @@
 <<set $enemytype to "machine">>
 <<set $machine to {}>>
 <<set $machine.number to 0>>
-<<for _i = 0; _i < $args.length; _i++>>
-	<<set $machine[$args[_i]] to {}>>
-	<<set $machine[$args[_i]].health to $machine_health>>
-	<<set $machine[$args[_i]].ammo to $machine_ammo>>
-	<<set $machine[$args[_i]].hack to 0>>
-	<<set $machine[$args[_i]].state to "ready">>
-	<<set $machine[$args[_i]].use to "ready">>
-	<<if $args[_i] isnot "arm_chains" and $args[_i] isnot "leg_chains">>
+<<for _i = 0; _i < _args.length; _i++>>
+	<<set $machine[_args[_i]] to {}>>
+	<<set $machine[_args[_i]].health to $machine_health>>
+	<<set $machine[_args[_i]].ammo to $machine_ammo>>
+	<<set $machine[_args[_i]].hack to 0>>
+	<<set $machine[_args[_i]].state to "ready">>
+	<<set $machine[_args[_i]].use to "ready">>
+	<<if _args[_i] isnot "arm_chains" and _args[_i] isnot "leg_chains">>
 		<<set $machine.number += 1>>
 	<</if>>
 <</for>>
@@ -21,17 +21,17 @@
 <</widget>>
 
 <<widget "machine_damage">>
-<<if $machine[$args[0]].health gte $machine_health>>
+<<if $machine[_args[0]].health gte $machine_health>>
 `	<span class="red">튼튼한</span>
-<<elseif $machine[$args[0]].health gte ($machine_health * 0.8)>>
+<<elseif $machine[_args[0]].health gte ($machine_health * 0.8)>>
 	<span class="pink">찌그러진</span>
-<<elseif $machine[$args[0]].health gte ($machine_health * 0.6)>>
+<<elseif $machine[_args[0]].health gte ($machine_health * 0.6)>>
 	<span class="purple">찌그러진</span>
-<<elseif $machine[$args[0]].health gte ($machine_health * 0.4)>>
+<<elseif $machine[_args[0]].health gte ($machine_health * 0.4)>>
 	<span class="blue">균열이 생긴</span>
-<<elseif $machine[$args[0]].health gte ($machine_health * 0.2)>>
+<<elseif $machine[_args[0]].health gte ($machine_health * 0.2)>>
 	<span class="lblue">금이 간</span>
-<<elseif $machine[$args[0]].health gte ($machine_health * 0.1)>>
+<<elseif $machine[_args[0]].health gte ($machine_health * 0.1)>>
 	<span class="teal">금이 간</span>
 <<else>>
 	<span class="green">부서진</span>
@@ -212,11 +212,17 @@
 				<span class="pink"><<machine_damage vaginal>> 남근 기계는 당신의 <<pussyPost "을">> 찌른다.</span>
 			<<else>>
 				<<sex 100>>
-				<<violence 25>>
-				<<takeVirginity "sex machine" "vaginal">><<bruise vagina>><<vaginalstat>><<raped>><<vaginaraped>>
+				<<bruise vagina>><<vaginalstat>><<raped>><<vaginaraped>>
 				<<set $vaginastate to "penetrated">><<set $machine.vaginal.state to "penetrated">>
-				<span class="red"><<machine_damage vaginal>> 남근 기계는 당신의 처녀를 찌르고, 당신의 처녀막을 부셔, 당신의 순결을 영원히 앗아가 버린다.</span>
+				<span class="red"><<machine_damage vaginal>> 남근 기계는 당신의 처녀 보지를 찌르고,
+					<<if $sexStats.vagina.pregnancy.totalBirthEvents gt 0>>
+						당신은 처녀막이 없음에도 불구하고, 당신의 처녀와 순결을 뺏겨 당신 안의 무언가가 바뀐 것 같은 기분이 든다.<<violence 10>>
+					<<else>>
+						당신의 처녀막을 찢어, 영원히 당신의 순결을 빼앗겨 버린다.<<violence 25>>
+					<</if>>
+				</span>
 			<</if>>
+			<<takeVirginity "sex machine" "vaginal">>
 		<<case "penetrated">>
 
 			<<set $rng to random(1, 5)>>
@@ -343,10 +349,10 @@
 			<<set $machine.arm_chains.use to "grapple">>
 			<<set $machine.arm_chains.state to "grapple">>
 			<<if $leftarm isnot "bound">>
-				<<set $leftarm to "grappled">>
+				<<set $leftarm to "mechgrappled">><<set $lefttarget to "machine">>
 			<</if>>
 			<<if $rightarm isnot "bound">>
-				<<set $rightarm to "grappled">>
+				<<set $rightarm to "mechgrappled">><<set $righttarget to "machine">>
 			<</if>>
 		<<else>>
 			<<machine_damage arm_chains>> 팔을 잡고 있는 체인은 당신의 움직임에 저항하지만, <span class="lblue">느슨한 상태를 유지한다.</span>
@@ -365,14 +371,14 @@
 		<<if _machine_legs is 1>>
 			<<machine_damage leg_chains>> 당신의 족쇄에 부착된 체인은, <span class="pink">당신의 다리를 잡아당겨 움직이지 못하게 만든다.</span>
 			<<set $feetactiondefault to "chain_struggle">>
-			<<set $feetuse to "grappled">>
+			<<set $feetuse to "mechgrappled">><<set $feettarget to "machine">>
 			<<set $machine.leg_chains.use to "grapple">>
 			<<set $machine.leg_chains.state to "grapple">>
 			<<if $leftleg isnot "bound">>
-				<<set $leftleg to "grappled">>
+				<<set $leftleg to "mechgrappled">>
 			<</if>>
 			<<if $rightleg isnot "bound">>
-				<<set $rightleg to "grappled">>
+				<<set $rightleg to "mechgrappled">>
 			<</if>>
 		<<else>>
 			<<machine_damage leg_chains>> 다리를 잡고 있는 체인은 당신의 움직임에 저항하지만, <span class="lblue">느슨한 상태를 유지한다.</span>

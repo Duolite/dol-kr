@@ -1,4 +1,4 @@
-:: Clothes Testing
+:: Clothes Testing [exitCheckBypass]
 <h3>Character Viewer</h3>
 <<if $images is 1>>
 	<<if $debugClothesEquipped is undefined>>
@@ -87,13 +87,13 @@
 		<br>
 		<a onclick="wikifier('clothesTestingImageUpdate')">Refresh</a>
 		<br><br>
-		<<link Body>>
+		<<link "Body">>
 			<<replace #controls>><<clothesTestingBodyControls>><</replace>>
 		<</link>> |
-		<<link Transformations>>
+		<<link "Transformations">>
 			<<replace #controls>><<clothesTestingTransformationsControls>><</replace>>
 		<</link>> |
-		<<link Clothes>>
+		<<link "Clothes">>
 			<<replace #controls>><<clothesTestingClothesControls>><</replace>>
 		<</link>>
 		<br>
@@ -140,7 +140,7 @@
 
 <<widget "clothesTestingImageGenerateAll">>
 <<set _colors to ["black", "blue", "brown", "green", "pink", "purple", "red", "tangerine", "teal", "white", "yellow"]>>
-<<set _eyeColors to ["purple", "dark blue", "light blue", "amber", "hazel", "green", "red", "pink", "grey", "purple", "purple"]>>
+<<set _eyeColors to ["purple", "dark blue", "light blue", "amber", "hazel", "lime green", "green", "red", "pink", "grey", "light grey", "purple", "purple"]>>
 <<set _test to []>>
 <<for _i to 0; _i lt $debugBodyState.charactersToShow; _i++>>
 <<capture _i>>
@@ -177,7 +177,7 @@
 <<widget "clothesTestingImageGenerate">>
 <<set _img to setup.tanImg.sidebar[$skinColor.tanImgEnabled]>>
 <<set _filters to $debugSkinColor.style>>
-<div @class="`debug-images hideImageOverflow ` + debugColourContainerClasses($args[0])">
+<div @class="`debug-images hideImageOverflow ` + debugColourContainerClasses(_args[0])">
 	<img class="layer-base anim-idle-2f" @src="_img.basenoarms" @style="'filter: '+_filters.body">
 	<img class="layer-basehead anim-idle-2f" @src="_img.basehead" @style="'filter: '+_filters.body">
 	<img class="layer-base" @src="_img.leftarmidle" @style="'filter: '+_filters.body">
@@ -194,9 +194,9 @@
 		<img class="layer-brow colour-hair" src="img/hair/red/browtopred.png">
 		<img class="layer-lashes colour-hair" src="img/hair/red/lashesred.png">
 	<</if>>
-	<<if $args[0].eyes isnot "none">>
+	<<if _args[0].eyes isnot "none">>
 		<img class="layer-mouth" @src="_img.mouthsmile" @style="'filter: '+_filters.mouth">
-		<img class="layer-eyes colour-eye anim-idle-2f" src="img/eyes/eyeshazel.png">
+		<img class="layer-eyes left-iris anim-idle-2f" src="img/eyes/eyeshazel.png">
 	<</if>>
 	<<if $debugClothesEquipped.upper is 0>>
 		<<if $debugClothesEquipped.under_upper isnot 0>>
@@ -356,6 +356,10 @@
 	<<for _i to 0; _i lt _equip.length; _i++>>
 		<<if $debugClothesEquipped[_equip[_i]] isnot 0>>
 			<<set _item to setup.clothes[_equip[_i]][$debugClothesEquipped[_equip[_i]]]>>
+			<<set _acc_state to "">>
+			<<if _item.variable == "gothic">> /* Files are not named according to a same convention. Some are named _acc, ohters _acc_full, so we manage exceptions here */
+				<<set _acc_state to "_full">>
+			<</if>>
 			<img @class="'layer-'+_equip[_i]+(_item.colour_options.length isnot 0 ?` colour-`+_equip[_i]:``)+' anim-idle-2f'" @src="'img/clothes/'+_equip[_i]+'/' + _item.variable + '/' + 'full.png'">
 			<<if _equip[_i] is "upper" or _equip[_i] is "under_upper">>
 				<<if _item.sleeve_img is 1>>
@@ -394,7 +398,7 @@
 				<</if>>
 			<</if>>
 			<<if _equip[_i] is "under_lower">>
-				<<if $worn.under_lower.penis_img is 1 and $penisexist is 1>>
+				<<if $worn.under_lower.penis_img is 1 and $player.penisExist>>
 					<img class="layer-under_lower-top colour-under_lower anim-idle-2f" @src="'img/clothes/under_lower/' + _item.variable + '/' + 'penis.png'">
 				<</if>>
 			<</if>>
@@ -405,7 +409,7 @@
 				<img @class="'layer-'+_equip[_i]+' colour-'+_equip[_i]+' anim-idle-2f'" @src="'img/clothes/'+_equip[_i]+'/' + _item.variable + '/' + 'right.png'">
 			<</if>>
 			<<if _item.accessory is 1>>
-				<img @class="'layer-'+_equip[_i] + ' colour-'+_equip[_i]+'_acc anim-idle-2f'" @src="'img/clothes/'+_equip[_i]+'/' + _item.variable + '/' + 'acc.png'">
+				<img @class="'layer-'+_equip[_i] + ' colour-'+_equip[_i]+'_acc anim-idle-2f'" @src="'img/clothes/'+_equip[_i]+'/' + _item.variable + '/' + 'acc' +_acc_state+ '.png'">
 			<</if>>
 		<</if>>
 	<</for>>
@@ -524,7 +528,7 @@ Yellowish:
 <br>
 <<set _hairTypeByName to {"Default": "default", "Braid left": "braid left", "Braid right": "braid right", "Flat ponytail": "flat ponytail",
 "Loose": "loose", "Messy": "messy", "Pigtails": "pigtails", "Ponytail": "ponytail", "Short": "short", "Side tail left": "side tail left",
-"Side tail right": "side tail right", "Straight": "straight", "Swept left": "swept left", "Twin braids": "twin braids", "Twintails": "twintails", "Curl": "curl"}>>
+"Side tail right": "side tail right", "Straight": "straight", "Swept left": "swept left", "Twin braids": "twin braids", "Twintails": "twintails", "Curl": "curl", "Neat": "neat", "Dreads": "dreads"}>>
 <<set _keys to Object.keys(_hairTypeByName)>>
 <<for _i to 0; _i lt _keys.length; _i++>>
 	<label>
@@ -537,7 +541,7 @@ Yellowish:
 <span class="gold">Fringe Type</span>
 <br>
 <<set _fringeTypeByName to {"Default": "default", "Thin flaps": "thin flaps", "Wide flaps": "wide flaps", "Hime": "hime", "Loose": "loose", "Messy": "messy", "Overgrown": "overgrown",
-"Ringlets": "ringlets", "Split": "split", "Straight": "straight", "Swept left": "swept left", "Back": "back", "Parted": "parted", "Flat": "flat", "Quiff": "quiff", "Straight curl": "straight curl", "Ringlet curl": "ringlet curl"}>>
+"Ringlets": "ringlets", "Split": "split", "Straight": "straight", "Swept left": "swept left", "Back": "back", "Parted": "parted", "Flat": "flat", "Quiff": "quiff", "Straight curl": "straight curl", "Ringlet curl": "ringlet curl", "Curtain": "curtain"}>>
 <<set _keys to Object.keys(_fringeTypeByName)>>
 <<for _i to 0; _i lt _keys.length; _i++>>
 	<label>
@@ -660,6 +664,7 @@ Horns:
 	<<option "Hide" "hidden">>
 	<<option "Default" "default">>
 	<<option "Classic" "classic">>
+			<<option "Pink" "pink">>
 <</listbox>>
 ||
 Tail:
@@ -667,12 +672,14 @@ Tail:
 	<<option "Hide" "hidden">>
 	<<option "Default" "default">>
 	<<option "Classic" "classic">>
+			<<option "Pink" "pink">>
 <</listbox>>
 ||
 Demon Wings:
 <<listbox "$debugBodyState.demonWings" autoselect>>
 	<<option "Hide" "hidden">>
 	<<option "Default" "default">>
+			<<option "Pink" "pink">>
 <</listbox>>
 <br>
 Demon Wings Type:

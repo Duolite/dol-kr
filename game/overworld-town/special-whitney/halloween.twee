@@ -3,15 +3,15 @@
 <<widget "halloweenwhitney">>
 
 <<npc Whitney>><<generatey2>><<generatey3>><<generatey4>><<generatey5>><<generate6>><<person2>>
-You hear a screech from your left. A <<person>> steps out from behind a tree, wearing a pair of horns and what look like blood-stained rags. <<His>> face is painted red. <<covered>> <<He>> holds a cricket bat above <<his>> head, as if about to swing.
+당신의 왼쪽으로부터 날카로운 목소리가 들려온다. 한 쌍의 뿔과 피가 묻은 것처럼 보이는 누더기를 입은 <<person_i>> 나무 뒤에서 걸어나온다. <<His_yi>> 얼굴은 빨갛게 칠해져 있다. <<covered>> <<He_nun>> 마치 휘두를 것 처럼 <<his_yi>> 머리 위로 크리켓 배트를 들고 있다.
 <br><br>
-You back away, but another screech erupts from behind you. Then from your left and right. More costumed villains emerge and rush around you, each with their own bat. They shriek and hiss, punctuated by laughter.
+당신은 뒤로 물러나지만, 당신의 뒤에서 또 다른 날카로운 목소리가 들려온다. 직후 당신의 왼쪽과 오른쪽에서 코스츔을 입은 더 많은 악당들이 각자의 배트를 든 채로 나타나 당신의 주변으로 빠르게 움직인다. 그들은 간간이 웃으면서 날카롭게 소리를 지르고 쉬익하는 소리를 낸다.
 <br><br>
 <<person1>>
-You spin around, looking for a way out. You're surrounded. Then the shrieks stop. Each figure turns and stares at something behind you.
+당신은 빠져나갈 곳을 찾기 위해 주위를 돌아본다. 당신은 포위됐다. 이후 날카로운 소리가 멈춘다. 그들은 각자 돌아서고는 당신 뒤의 무언가를 응시한다.
 <br><br>
 
-<<link [[Next|Whitney Trick 1]]>><</link>>
+<<link [[다음|Whitney Trick 1]]>><</link>>
 <br>
 
 <</widget>>
@@ -19,96 +19,102 @@ You spin around, looking for a way out. You're surrounded. Then the shrieks stop
 :: Whitney Trick 1
 <<set $outside to 0>><<set $location to "home">><<effects>>
 
-You turn, and come face-to-face with a <<if $NPCName[$NPCNameList.indexOf("Whitney")].pronoun is "m">>boy<<else>>girl<</if>> in a terrifying mask. <<He>> wears bloody rags like the others, but <<his>> horns are larger. More of <<his>> skin is exposed. All painted red. <<His>> abdominal muscles are highlighted with a darker colour.
+당신이 돌아보자, 무서운 가면을 쓴 <<nnpc_gendery_wa "Whitney">> 대면한다. <<He_nun>> 다른 이들처럼 피투성이의 누더기를 입고 있지만, <<his_yi>> 뿔이 다른 이들의 것에 비해 더 크다. <<his_yi>> 대부분의 피부가 노출되어 있다. 완전히 빨갛게 칠해져 있다. <<His_yi>> 복근이 어두운 색으로 강조되어 있다.
 <br><br>
 
 <<if $exposed gte 1>>
-You feel <<his>> eyes feast on your lewdness. "Nice," <<he>> says. It's Whitney.
+당신은 <<his_yi>> 눈이 당신의 음란함을 탐닉하는 것을 느낀다. "좋아," <<he_ga>> 말한다. 휘트니다.
 	<<if $whitneyromance is 1>>
 	<<set $dateCount.Total++>><<set $dateCount.Whitney++>>
-	"My <<if $player.gender_appearance is "m">>boyfriend<<else>>girlfriend<</if>>." <<He>> steps forward and grasps the back of your neck, pulling you into a deep kiss. <<His>> friends screech until <<he>> pulls away.
+	"내 <<if $player.gender_appearance is "m">>남자친구<<else>>여자친구<</if>>." <<He_nun>> 앞으로 걷고는 당신의 뒷목을 잡고 진하게 키스한다. <<His_yi>> 친구들은 <<he_ga>> 놓아줄 때까지 날카로운 소리를 낸다.
 	<</if>>
 <<else>>
-"Look who it is," <<he>> says. It's Whitney.
+"이게 누구야," <<he_ga>> 말한다. 휘트니다.
 	<<if $whitneyromance is 1>>
 	<<set $dateCount.Total++>><<set $dateCount.Whitney++>>
-	"My <<if $player.gender_appearance is "m">>boyfriend<<else>>girlfriend<</if>>." <<He>> steps forward and grasps the back of your neck, pulling you into a deep kiss. <<His>> friends screech until <<he>> pulls away.
+	"My <<if $player.gender_appearance is "m">>남자친구<<else>>여자친구<</if>>." <<He_nun>> 앞으로 걷고는 당신의 뒷목을 잡고 진하게 키스한다. <<His_yi>> 친구들은 <<he_ga>> 놓아줄 때까지 날카로운 소리를 낸다.
 	<</if>>
 <</if>>
 
 <<if $worn.upper.name is "vampire jacket">>
-"I like your jacket. Must be easy to keep clean."
+"네 자켓 마음에 드는데. 깨끗하게 유지하기 쉬울 거야."
 <<elseif $worn.upper.name is "witch dress" or $worn.lower.name is "witch skirt">>
-"I like your dress. Smells a bit though."
+"네 드레스 마음에 드는데. 약간 냄새가 나긴 하지만."
 <<elseif $worn.upper.name is "nun's habit" or $worn.lower.name is "nun's habit skirt">>
-"I like your habit. It makes me want to fuck you."
+"네 수녀복 마음에 드는데. 널 따먹고 싶게 만들어."
 <<elseif $worn.upper.name is "maid dress" or $worn.lower.name is "maid skirt">>
-"You're asking for it, dressed as a maid."
+"메이드처럼 입고서, 해 달라고 조르고 있구나."
+<<elseif $worn.upper.name.includes("christmas") or $worn.lower.name.includes("christmas") or $worn.head.name.includes("christmas", "mini snowman")>>
+"기념일이 틀렸어, 멍청아."
+<<elseif $worn.upper.name is "cheerleading top" or $worn.lower.name is "cheerleading skirt" or $worn.hands.name is "pom poms">>
+"너는 내 개인적 치어리더야. 멋진데."
+<<elseif $worn.upper.name is "prison jumpsuit" or $worn.lower.name is "prison jumpsuit trousers">>
+"네 점프수트가 맘에 들어. 이제 우리는 폭동을 일으킬 거야."
 <<elseif $worn.upper.type.includes("costume") or $worn.lower.type.includes("costume") or $worn.upper.type.includes("naked") and $worn.under_upper.type.includes("costume") or $worn.lower.type.includes("naked") and $worn.under_lower.type.includes("costume")>>
-"Dunno what you're supposed to be. At least you're dressed up."
+"네가 뭘 의도한 건지는 모르겠는데, 적어도 뭔가 차려입긴 했네."
 <<elseif $angel gte 6>>
-"Dunno how you get that halo to stay up."
+"어떻게 그 링을 띄워놓은 건지 모르겠네."
 <<elseif $wolfgirl gte 6>>
-"I like your costume. How does the tail stay in?"
+"네 코스츔 마음에 드는데. 꼬리는 어떻게 붙어있는 거야?"
 <<elseif $fallenangel gte 2>>
-"Dunno how you get all those bits above your head to stay up."
+"어떻게 그 파편들을 띄워놓은 건지 모르겠네."
 <<elseif $demon gte 6>>
-"Cool costume. I'm impressed."
+"멋진 코스츔인데. 인상깊은 걸."
 <<elseif $cat gte 6>>
-"I like your costume. I may have something for you to lap up."
+"네 코스츔 마음에 드는데. 나한테 네가 핥아 먹을 만한 게 있으려나."
 <<elseif $cow gte 6>>
-"I like your costume. Hope your head's not the only horny thing about you."
+"네 코스츔 마음에 드는데. 네가 딱딱하게 세울 수 있는 게 네 머리에 있는 그 뿔만이 아니었으면 좋겠네."
 <<elseif $harpy gte 6>>
-"I like your costume. The eyes are a nice touch."
+"네 코스츔 마음에 드는데. 눈이 좋은 느낌인 걸."
 <<if $rng gte 91>>
-	"And look at the wings," the <<person2>><<person>> from before speaks up. "The way the color shifts between the primaries, secondaries and tertiaries, and between the alula and scapulars, it's subtle but very accurate. You can see where the folds are meant to go." <<He>> grabs one of your wings, tracing <<his>> fingers across it with a surprising gentleness. "They're so soft too, what fabric did you use? You can actually feel how the secondaries change as they get closer to the ulna, and-"
+	"그리고 저 날개 좀 봐," 뒤에 있던 <<person2>><<person_i>> 말한다. "첫째날개깃과 둘째날개덮깃, 셋째날개덮깃이랑, 작은날개깃과 어깨깃 사이의 색상 변화는 절묘하지만, 굉장히 정확해. 접히는 부분이 어떻게 움직이는지 볼 수 있을 거야." <<He_nun>> 당신의 날개 중 하나를 잡고, 놀라울 정도로 부드럽게 <<his_yi>> 손가락으로 따라간다. "게다가 완전 부드럽잖아, 무슨 천을 쓴 거야? 척골에 가까워질 수록 어떻게 둘째날개덮깃이 달라지는 지 확실히 느낄 수 있어 그리고-"
 	<br><br>
-	Whitney abruptly elbows <<him>> away, glowering. The <<person>> clears <<his>> throat and lets out a half-hearted screech. "Fucking moron," Whitney mutters.
+	휘트니가 갑자기 팔꿈치를 치켜들어 <<him_ul>> 노려보며 밀친다. <<person_un>> 헛기침을 하고는 성의없이 날카로운 소리를 낸다. "병신새끼," 휘트니가 중얼거린다.
 	<<person1>>
 <</if>>
 <<elseif $exposed gte 2>>
-You feel <<his>> eyes taking in every inch of your bare skin. "I can't think of a better outfit."
+당신은 <<his_yi>> 눈이 당신의 맨 몸을 인치 단위로 훑어보고 있는 것을 느낀다. "이것보다 더 좋은 옷은 생각나지 않아."
 <<elseif $exposed gte 1>>
-"Dressing up as a slut for Halloween? Not very original, but I'm not complaining."
+"할로윈을 위해 걸레처럼 분장한 거야? 근본은 아니지만, 불평하진 않을 게."
 <<else>>
-"Couldn't you be bothered to dress up?" <<He>> looks around at <<his>> friends. "Maybe we should help dress <<phim>> as a slut." Hands reach from all around, grabbing, pulling, and tearing. Your clothes are torn to shreds, leaving you <span class="lewd">naked</span> in the street.<<upperruined>><<lowerruined>><<underupperruined>><<underlowerruined>>
+"좀 차려입지 그래?" <<He_nun>> <<his_yi>> 친구들을 둘러본다. "아무래도 우리가 <<phim_ul>> 걸레로 꾸미는 걸 도와줘야 겠는데." 사방에서 손이 다가와 붙잡고, 당기고, 찢는다. 당신의 옷은 갈기갈기 찢겨져 거리에 <span class="lewd">벌거벗은 채로</span> 거리에 남겨진다.<<upperruined>><<lowerruined>><<underupperruined>><<underlowerruined>>
 <</if>>
 <br><br>
 
-<<He>> prowls around you. "We're going trick-or-treating," <<he>> says at last. "You're coming too."
+<<He_ga>> 당신 주변을 어슬렁거린다. "우리는 이제 사탕받으러 돌아 다닐 거야," <<he_ga>> 마침내 말한다. "너도 같이 가는 거야."
 <br><br>
 
-<<link [[Nod (2:00)|Whitney Trick 2]]>><<pass 30>><<npcincr Whitney love 1>><</link>><<glove>>
+<<link [[끄덕인다 (2:00)|Whitney Trick 2]]>><<pass 30>><<npcincr Whitney love 1>><</link>><<glove>>
 <br>
-<<link [[Refuse|Whitney Trick Refuse]]>><<npcincr Whitney love -1>><<npcincr Whitney dom -1>><</link>><<llove>><<ldom>>
+<<link [[거절한다|Whitney Trick Refuse]]>><<npcincr Whitney love -1>><<npcincr Whitney dom -1>><</link>><<llove>><<ldom>>
 <br>
 
 :: Whitney Trick Refuse
 <<set $outside to 0>><<set $location to "home">><<effects>>
 
-"Fine," Whitney says, looking at the orphanage. "That shithole's your home, right?" A <<person5>><<person>> sits outside, tucking into a bag of sweets. Whitney grins, and <<person1>><<he>> and <<his>> entourage march over, ignoring you.
+"좋아," 휘트니가 고아원을 바라보며 말한다. "저 거지소굴같은 곳이 네 집이지, 맞지?" <<person5>><<person_i>> 밖에 앉아 사탕이 든 가방을 집어넣고 있다. 휘트니는 히죽히죽 웃고, <<person1>><<he_wa>> <<his_yi>> 수행원들이 당신을 무시하고 앞으로 나아간다.
 <br><br>
 
-The <<person5>><<person>> is so engrossed <<he>> doesn't notice. Until Whitney snatches the bag from <<his>> hands. "Give that back!" the <<person>> shouts, but one of Whitney's friends knocks <<him>> down with <<person2>><<his>> bat.
+<<person5>><<person_un>> 지나치게 몰두하여 <<he_nun>> 눈치채지 못한다. 휘트니가 <<his_yi>> 손에서 가방을 낚아채기 전까지는. "돌려줘!" <<person_i>> 외치지만, 휘트니의 친구 중 한 명이 <<him_ul>> <<person2>><<his_yi>> 배트로 때려눕힌다.
 <br><br>
-"I really fancied sweets," Whitney says, unwrapping one. "'Course, if we go trick-or-treating I could get my own. But you don't want to. Unless you've changed your mind?"
+"나는 사탕을 정말 좋아했어," 휘트니가 하나의 포장을 뜯으며 말한다. "'물론, 우리가 직접 사탕을 받으러 가면 내 것을 얻을 수도 있겠지. 근데 너는 하기 싫다며. 아니면 생각이 바뀌셨나?"
 <br><br>
 
-<<link [[Nod (1:30)|Whitney Trick 2]]>><<pass 30>><<npcincr Whitney love 1>><</link>><<glove>>
+<<link [[끄덕인다 (1:30)|Whitney Trick 2]]>><<pass 30>><<npcincr Whitney love 1>><</link>><<glove>>
 <br>
-<<link [[Refuse|Whitney Trick Refuse 2]]>><<hope -3>><<npcincr Whitney love -1>><<npcincr Whitney dom -1>><</link>><<llhope>><<llove>><<ldom>>
+<<link [[거절한다|Whitney Trick Refuse 2]]>><<hope -3>><<npcincr Whitney love -1>><<npcincr Whitney dom -1>><</link>><<llhope>><<llove>><<ldom>>
 <br>
 
 :: Whitney Trick Refuse 2
 
 <<set $outside to 0>><<set $location to "home">><<effects>>
 
-Whitney snarls, drops the bag, and stomps on it. The <<person5>><<person>> bursts into tears. Whitney doesn't care, and continues to stomp until the sweets are ground to dust.
+휘트니는 으르렁거리며 가방을 떨어트리고는 짓밟는다. <<person5>><<person_un>> 눈물을 터트린다. 휘트니는 개의치 않고 사탕이 가루가 될 때까지 계속 짓밟는다.
 <br><br>
-The <<person5>><<person>> runs inside, chased by laughter. "See you around, slut." Whitney says, resting <<person1>><<his>> bat on <<his>> shoulder and marching away. <<His>> friends follow.
+<<person5>><<person_un>> 웃음 소리에 쫓기며 안쪽으로 도망간다. "나중에 보자, 걸레야." 휘트니가 <<person1>><<his_yi>> 배트를 <<his_yi>> 어깨에 얹고 나아가며 말한다. <<His_yi>> 친구들이 따라간다.
 <br><br>
 
-<<link [[Next|Domus Street]]>><<endevent>><<set $eventskip to 1>><</link>>
+<<link [[다음|Domus Street]]>><<endevent>><<set $eventskip to 1>><</link>>
 <br>
 
 :: Whitney Trick 2
@@ -116,86 +122,86 @@ The <<person5>><<person>> runs inside, chased by laughter. "See you around, slut
 <<endevent>>
 <<npc Whitney>><<generatey2>><<generatey3>><<generatey4>><<generatey5>><<generate6>><<person1>>
 
-You nod. Whitney grasps your arm and pushes you in front of <<him>>. You're marched down the road while Whitney fondles your <<bottom>>.
+당신은 고개를 끄덕인다. 휘트니가 당신의 팔을 잡고 <<his_yi>> 앞으로 밀어낸다. 휘트니가 당신의 <<bottom_ul>> 애무하며 당신은 길을 따라 나아간다.
 
 <<if $exposed gte 1>>
-<<covered>> Whitney laughs. "You shouldn't be ashamed. You were made to be seen."
+<<covered>> 휘트니가 웃는다. "부끄러워할 필요 없어. 넌 보여지도록 만들어졌어."
 <</if>>
 <<if $halloween_trick_NPC>>
-The police officer you saw earlier is gone.
+당신이 아까 본 경찰관은 이미 가고 없다.
 <</if>>
 <br><br>
-<<link [[Next|Whitney Trick 3]]>><</link>>
+<<link [[다음|Whitney Trick 3]]>><</link>>
 <br>
 
 :: Whitney Trick 3
 <<set $outside to 0>><<set $location to "home">><<effects>>
 
-You stop at the first house without any decorations. "I bet these fucks have loads to give," Whitney says. "Just trying to keep it to themselves." Whitney marches you up to the front door. <<His>> friends hang back and rummage around the garden.
+당신은 첫 번째로 아무 장식도 걸려있지 않은 집 앞에서 멈춘다. "이 새끼들 분명 줄 게 많을 거야," 휘트니가 말한다. "그냥 자기들끼리만 갖고 있으려고 하는 거지." 휘트니는 당신을 데리고 앞문으로 향한다. <<His_yi>> 친구들은 뒤에 남아 정원을 뒤진다.
 <br><br>
-There's no answer. Whitney bashes <<his>> bat against the door. <<He>> doesn't stop. A minute passes until a <<person6>><<person>> answers. "I-I don't want any trouble," <<he>> stammers.
+대답이 없다. 휘트니는 문에 대고 <<his_yi>> 배트로 후려친다. <<He_nun>> 멈추지 않는다. 1분 정도 지나자 <<person6>><<person_i>> 응답한다. "나-나는 어떤 문제도 원하지 않아," <<he_nun>> 말을 더듬는다.
 <br><br>
-"Good evening," Whitney says. "I'm Whitney." <<He>> gestures at you. "This is my babe. And those are my friends back there. Trick or treat."
+"좋은 저녁입니다," 휘트니가 말한다. "나는 휘트니에요." <<person1>><<He_nun>> 당신에게 몸짓한다. "얘는 제 애인이고요. 그리고 저 뒤에 있는 놈들은 제 친구죠. 트릭 오어 트릿."
 <br><br>
-"I don't have anything," the <<person6>><<person>> replies. "Please leave."
+"난 아무 것도 갖고 있지 않아," <<person6>><<person_i>> 대답한다. "나가줘."
 <br><br>
-"Alright. Have a nice evening." Whitney takes your hand, and together you walk to the front of the garden.<<takeHandholdingVirginity "Whitney" "romantic">>
+"알겠어요. 좋은 저녁 보내길." 휘트니는 당신의 손을 잡고 정원 앞으로 함께 걸어간다.<<takeHandholdingVirginity "Whitney" "romantic">>
 <br><br>
 
-<<link [[Next|Whitney Trick 4]]>><</link>>
+<<link [[다음|Whitney Trick 4]]>><</link>>
 <br>
 
 :: Whitney Trick 4
 
 <<set $outside to 0>><<set $location to "home">><<effects>>
 
-<<person1>>One of Whitney's friends passes <<him>> a rock. Whitney wastes no time. <<He>> hurls it at the house, <span class="red">breaking a plant pot.</span> <<His>> friends follow suit, <span class="red">shattering windows and breaking tiles off the roof.</span> All the while screeching and laughing.
+<<person1>>휘트니의 친구 중 한 명이 <<himPost "에게">> 돌멩이를 건네준다. 휘트니는 시간을 낭비하지 않는다. <<He_nun>> 그것을 집을 향해 던져, <span class="red">화분을 깨트린다.</span> <<His_yi>> 친구들이 휘트니를 따라 돌을 던져, <span class="red">창문을 깨트리고 지붕 타일을 부순다.</span> 모두가 날카로운 소리를 내며 웃는다.
 <br><br>
 
-No one tries to stop them.
+아무도 그들을 멈추려 하지 않는다.
 <br><br>
 
-<<link [[Try to stop them|Whitney Trick Stop]]>><</link>>
+<<link [[그들을 멈춘다|Whitney Trick Stop]]>><</link>>
 <br>
-<<link [[Watch|Whitney Trick Watch]]>><</link>>
+<<link [[쳐다본다|Whitney Trick Watch]]>><</link>>
 <br>
 
 :: Whitney Trick Stop
 <<set $outside to 0>><<set $location to "home">><<effects>>
 
 <<if $submissive gte 1150>>
-"Please stop," you say. "You might hurt someone."
+"제발 그만해," 당신이 말한다. "누가 다칠 지도 몰라."
 <<elseif $submissive lte 850>>
-"Stop, cowards," you say. "This isn't fair."
+"그만해, 비겁자야," 당신이 말한다. "이건 불공평해."
 <<else>>
-"Stop," you say. "You'll get in trouble."
+"그만해," 당신이 말한다. "문제에 휘말리게 될 거야."
 <</if>>
 <br><br>
 
-Whitney's laughter redoubles. "Fucking what?" <<he>> howls, and throws another rock. It collides with a drainpipe, <span class="red">knocking it to the ground.</span>
+휘트니의 웃음이 배가 된다. "씨발 뭐라고?" <<he_ga>> 울부짖으며 또 다른 돌멩이를 던진다. 돌멩이가 벽의 배수관과 부딪혀, <span class="red">땅에 떨어진다.</span>
 <br><br>
-<<His>> laughter subsides, and <<he>> pauses. "It's time to move on," <<he>> says. "It'll be more fun elsewhere." <<He>> grasps your arm and pulls you from the garden. <<His>> friends fall in behind you. "Where to next?" <<he>> muses. <<His>> gaze fixes on a house with a particularly extravagant display.
+<<His_yi>> 웃음이 가라앉고, <<he_ga>> 멈춘다. "움직일 시간이야," <<he_ga>> 말한다. "다른 곳은 더 재미있을 거야." <<He_nun>> 당신의 팔을 잡고 정원에서 당신을 끌어낸다. <<His_yi>> 친구들이 당신의 뒤로 모인다. "다음은 어디로 갈까?" <<he_nun>> 골똘히 생각한다. <<His_yi>> 시선이 유독 화려한 장식이 돋보이는 집으로 집중된다.
 <<if $halloween_trick_NPC>>
-The one you visited with Robin.
+당신이 로빈과 함께 갔던 곳이다.
 <</if>>
 <br><br>
 
-<<link [[Next|Whitney Trick 5]]>><<endevent>><</link>>
+<<link [[다음|Whitney Trick 5]]>><<endevent>><</link>>
 <br>
 
 :: Whitney Trick Watch
 <<set $outside to 0>><<set $location to "home">><<effects>>
 
-You stand back and watch the destruction. There's no sign of the <<person6>><<person>>, but the front of <<his>> house is reduced to a ruin.
+당신은 뒤에 서서 그들이 집을 파괴하는 것을 지켜본다. <<person6>><<persons_yi>> 기색은 없지만, <<his_yi>> 집 앞은 폐허로 변했다.
 <br><br>
 
-Satisfied, or bored, at last, Whitney grasps your arm and pulls you from the garden. <<person1>><<His>> friends fall in behind you. "Where to next?" <<he>> muses. <<His>> gaze fixes on a house with a particularly extravagant display.
+마침내 만족한, 아니면 지루해진, 휘트니가 당신의 팔을 잡고 정원에서 당신을 끌어낸다. <<person1>><<His_yi>> 친구들이 당신의 뒤로 모인다. "다음은 어디로 갈까?" <<he_nun>> 골똘히 생각한다. <<His_yi>> 시선이 유독 화려한 장식이 돋보이는 집으로 집중된다.
 <<if $halloween_trick_NPC>>
-The one you visited with Robin.
+당신이 로빈과 함께 갔던 곳이다.
 <</if>>
 <br><br>
 
-<<link [[Next|Whitney Trick 5]]>><<endevent>><</link>>
+<<link [[다음|Whitney Trick 5]]>><<endevent>><</link>>
 <br>
 
 :: Whitney Trick 5
@@ -203,74 +209,74 @@ The one you visited with Robin.
 
 <<npc Whitney>><<generatey2>><<generatey3>><<generatey4>><<generatey5>><<if $halloween_trick_NPC>><<loadNPC 5 trick_or_treat>><<else>><<generatey6>><</if>>
 
-Whitney rings the doorbell. <<person1>><<His>> friends crowd around this time.
+휘트니가 초인종을 울린다. 이번에는 <<person1>><<His_yi>> 친구들도 모여있다.
 <<if $halloween_trick_NPC is "oral">>
-The <<person6>><<person>> from earlier answers it. "Back for more?" <<he>> smirks when <<he>> sees you. "And you've brought friends to help."
+이전의 <<person6>><<person_i>> 대답한다. "더 받으러 다시 온 거야?" <<he_ga>> 당신을 보자 능글맞게 웃는다. "이번엔 도와줄 친구도 데려왔네."
 <br><br>
 
-"More what?" Whitney looks at you. "What's <<he>> talking about?"
+"뭘 더 받아?" 휘트니가 당신을 쳐다본다. "무슨 말을 하는 거야?"
 <br><br>
 
-"This little slut sells <<pher>> body for sweets," the <<person>> replies. "I got my money's worth."
+"이 작은 걸레는 사탕 좀 받겠다고 <<pher_yi>> 몸을 팔아," <<person_i>> 대답한다. "나는 본전은 뽑았지."
 <br><br>
 
-Whitney stares a moment. Then swings <<person1>><<his>> bat <span class="red">into the <<person6>><<persons>> stomach.</span> <<He>> keels over, and Whitney <span class="red">delivers a second blow to <<his>> back.</span> Whitney's friends join in the pummelling, whacking <<him>> while <<he>> struggles to deflect the blows with <<his>> arms. Others move into the house. You hear a shatter.
+휘트니는 잠시동안 쳐다본다. 그러고는 <<person1>><<his_yi>> 배트를 <span class="red"><<person6>><<persons_yi>> 복부에 휘두른다.</span> <<He_nun>> 무릎을 꿇고, 휘트니는 <span class="red"><<his_yi>> 등에 두 번째 타격을 가한다.</span> 휘트니의 친구들이 합류하여, 팔로 공격을 피하려고 애쓰는 <<him_ul>> 후려친다. 나머지는 집으로 들어간다. 무언가 부서지는 소리가 들린다.
 <br><br>
 
-Once back out on the street Whitney carries a bag full of stolen booze. "We got a treat for once," <<person1>><<he>> laughs.
+다시 거리로 나온 휘트니는 훔친 술로 가득 찬 가방을 들고 있다. "이번엔 좋은 걸 받았네," <<person1>><<he_ga>> 웃는다.
 <br><br>
 
-<<link [[Next|Whitney Trick 6]]>><<endevent>><<pass 30>><</link>>
+<<link [[다음|Whitney Trick 6]]>><<endevent>><<pass 30>><</link>>
 <br>
 
 <<elseif $halloween_trick_NPC is "refused">>
 
-The <<person6>><<person>> from earlier answers it. "Changed your mind?" <<he>> smirks when <<he>> sees you. "And you've brought friends to help."
+이전의 <<person6>><<person_i>> 대답한다. "생각이 바뀌었니?" <<he_ga>> 당신을 보자 능글맞게 웃는다. "이번엔 도와줄 친구도 데려왔네."
 <br><br>
 
-"Changed <<pher>> mind?" Whitney looks at you. "What's <<he>> talking about?"
+"<<pher_yi>> 생각이 바뀌어?" 휘트니가 당신을 쳐다본다. "무슨 말을 하는 거야?"
 <br><br>
 
-"This little slut wanted sweets, but refused to pay the price," the <<person>> replies, leering at you. "I don't mind an audience if that's what it takes."
+"이 작은 걸레는 사탕을 원했는데, 그 값을 내는 걸 거부했거든," <<person_i>> 당신을 음흉하게 보면서 대답한다. "꼭 필요한 거라면 구경꾼이 있어도 난 신경쓰지 않아."
 <br><br>
 
-Whitney stares a moment. Then swings <<person1>><<his>> bat <span class="red">into the <<person6>><<persons>> stomach.</span> <<He>> keels over, and Whitney <span class="red">delivers a second blow to <<his>> back.</span> Whitney's friends join in the pummelling, screeching and whacking <<him>> while <<he>> struggles to deflect the blows with <<his>> arms. Others move into the house. You hear a shatter.
+휘트니는 잠시동안 쳐다본다. 그러고는 <<person1>><<his_yi>> 배트를 <span class="red"><<person6>><<persons_yi>> 복부에 휘두른다.</span> <<He_nun>> 무릎을 꿇고, 휘트니는 <span class="red"><<his_yi>> 등에 두 번째 타격을 가한다.</span> 휘트니의 친구들이 합류하여, 팔로 공격을 피하려고 애쓰는 <<him_ul>> 후려친다. 나머지는 집으로 들어간다. 무언가 부서지는 소리가 들린다.
 <br><br>
 
-Once back out on the street Whitney carries a bag full of stolen booze. "We got a treat for once," <<person1>><<he>> laughs. <<He>> hugs you with one arm. "Imagine trying to sleep with my <<girl>> without my permission."
+다시 거리로 나온 휘트니는 훔친 술로 가득 찬 가방을 들고 있다. "이번엔 좋은 걸 받았네," <<person1>><<he_ga>> 웃는다. <<He_nun>> 한쪽 팔로 당신을 안는다. "내 허락없이 내 <<girl_gwa>> 자려고 한 걸 생각해 봐."
 <br><br>
 
-<<link [[Next|Whitney Trick 6]]>><<endevent>><<pass 30>><</link>>
+<<link [[다음|Whitney Trick 6]]>><<endevent>><<pass 30>><</link>>
 <br>
 
 <<else>>
-The <<person6>><<person>> from earlier answers it. "What you want?"
+이전의 <<person6>><<person_i>> 대답한다. "뭘 원하니?"
 <br><br>
 
-"Trick or treat!" Whitney and <<person1>><<his>> friends shout, stroking their cricket bats.
+"트릭 오어 트릿!" 휘트니와 <<person1>><<his_yi>> 친구들이 그들의 크리켓 배트를 휘두르며 외친다.
 <br><br>
 
-The <<person6>><<person>> throws up <<his>> hands. "Alright. I got some sweets here-"
+<<person6>><<person_i>> <<his_yi>> 양손을 든다. "그래. 여기 사탕이 있어-"
 <br><br>
 
-"Fuck your sweets," Whitney interrupts. "We want cash. Or drinks."
+"사탕은 좆까라 그래," 휘트니가 끼어든다. "우리는 돈을 원해. 아니면 술이나."
 <br><br>
 	<<if $exposed gte 2 and $uncomfortable.nude is false or $exposed gte 2 and $leftarm is "bound" and $rightarm is "bound">>
-	The <<person>> stares at your uncovered <<lewdness>>. <<He>> nods. "Sure. I got booze." <<He>> disappears a moment, then returns with a clinking bag in one hand, and <<his>> phone in the other. <<He>> takes a picture of you.
+	<<person_un>> 아무것도 덮여있지 않은 당신의 <<lewdness_rul>> 응시한다. <<He_nun>> 끄덕인다. "좋아. 나한테 술이 있어." <<He_nun>> 잠시 사라졌다가, 한 손에 땡그랑거리는 가방을, 다른 한 손에는 <<his_yi>> 휴대폰을 든 채 돌아온다. <<He_nun>> 당신의 사진을 찍는다.
 	<<garousal>><<arousal 600>><<fameexhibitionism 10>>
 	<br><br>
 
-	"We got a treat for once," Whitney says once back on the road.
+	"이번엔 좋은 걸 받았네," 휘트니가 도로로 돌아와 말한다.
 	<br><br>
 
-	<<link [[Next|Whitney Trick 6]]>><<endevent>><<pass 30>><</link>>
+	<<link [[다음|Whitney Trick 6]]>><<endevent>><<pass 30>><</link>>
 	<br>
 
 	<<else>>
-	The <<person>> thinks a moment, then smirks. "I got booze. But I want a little something in return." <<He>> nods at you. "Show me <<pher>> body."
+	<<person_un>> 잠시 생각하더니, 능글맞게 웃는다. "나한테 술이 있어. 대신 작은 뭔가를 받았으면 좋겠는데." <<He_nun>> 당신에게 고개를 까딱한다. "<<pher_yi>> 몸을 보여줘."
 	<br><br>
 
-	<<link [[Next|Whitney Trick Exhibitionism]]>><</link>>
+	<<link [[다음|Whitney Trick Exhibitionism]]>><</link>>
 	<</if>>
 
 <</if>>
@@ -278,48 +284,48 @@ The <<person6>><<person>> throws up <<his>> hands. "Alright. I got some sweets h
 :: Whitney Trick Exhibitionism
 <<set $outside to 0>><<set $location to "home">><<effects>>
 
-Whitney shrugs, and nods to <<person1>><<his>> friends.
+휘트니는 어깨를 으쓱하고는 <<person1>><<his_yi>> 친구들에게 고개를 끄덕인다.
 
 <<if $exposed gte 2>>
 
-Hands reach from all around, grabbing your arms and <span class="lewd">pulling them aside.</span> The <<person6>><<person>> looks about to salivate. "The booze," Whitney says. The <<person>> nods and disappears for a moment, returning with a clinking bag.
+사방에서 손이 뻗어와 당신의 팔을 붙잡고 <span class="lewd">옆으로 잡아당긴다.</span> <<person6>><<person_un>> 침을 흘리려고 한다. "술," 휘트니가 말한다. <<person_i>> 끄덕이고 잠시 사라졌다가, 땡그랑거리는 가방을 들고 돌아온다.
 <<gtrauma>><<gstress>><<trauma 6>><<stress 6>>
 <br><br>
 
 <<else>>
 
-Hands reach from all around, grabbing your clothes and <span class="lewd">pulling them aside.</span> The <<person6>><<person>> leers at your exposed body. <<He>> looks about to salivate. "The booze," Whitney says. The <<person>> nods and disappears for a moment, returning with a clinking bag.
+사방에서 손이 뻗어와 당신의 옷을 붙잡고 <span class="lewd">옆으로 잡아당긴다.</span> <<person6>><<person_un>> 당신의 노출된 몸을 음흉하게 쳐다본다. <<He_nun>> 침을 흘리려고 한다. "술," 휘트니가 말한다. <<person_i>> 끄덕이고 잠시 사라졌다가, 땡그랑거리는 가방을 들고 돌아온다.
 <<gtrauma>><<gstress>><<trauma 6>><<stress 6>>
 <br><br>
 
 <</if>>
 
-Whitney takes the bag, then jabs the <<person6>><<person>> in the stomach with <<his>> bat. <<person1>>"That's for asking for something in return," <<he>> says as the <<person6>><<person>> splutters.
+휘트니는 가방을 들고, <<his_yi>> 배트로 <<person6>><<persons_yi>> 복부를 찌른다. <<person1>>"대가를 요구한 거에 대한 보답이야," <<he_ga>> 켁켁거리는 <<person6>><<person_ul>> 향해 말한다.
 <br><br>
 
-"We got a treat for once," Whitney says once back on the road.
+"이번엔 좋은 걸 받았네," 휘트니가 도로로 돌아와 말한다.
 	<br><br>
 
-<<link [[Next|Whitney Trick 6]]>><<endevent>><<pass 30>><</link>>
+<<link [[다음|Whitney Trick 6]]>><<endevent>><<pass 30>><</link>>
 <br>
 
 :: Whitney Trick 6
 <<set $outside to 0>><<set $location to "home">><<effects>>
 <<npc Whitney>><<person1>>
-You hear a police siren. Whitney grabs your arm and pushes you down an alleyway. "We're done anyway," <<he>> says. "Let's go to the park."
+당신은 경찰의 사이렌 소리를 듣는다. 휘트니가 당신의 팔을 붙잡고 골목길로 밀어 들어간다. "어쨌든 끝났어," <<he_ga>> 말한다. "공원으로 가자."
 <br><br>
 
-You journey through small streets and side roads, through Connudatus and the High Street, until you arrive at the park. Whitney leads you to a circle of tree stumps. <<His>> friends ransack the bag of booze once Whitney takes a couple of bottles for <<himself>>.
+당신은 작은 거리와 곁길, 코누다투스, 하이 가를 지나 공원에 도착한다. 휘트니는 당신을 원을 그리며 서있는 나무 그루터기로 데려간다. 휘트니가 <<himself_rul>> 위해 술 두병을 집어들자 <<His_yi>> 친구들이 술이 든 가방을 뒤진다.
 <br><br>
-They drink and swap stories. It sounds like they got up to some mischief before you joined them tonight.
-<br><br>
-
-Whitney offers you a bottle.
+그들은 술을 마시면서 이야기를 나눈다. 오늘 밤 당신이 그들과 합류하기 전에 한 나쁜 짓에 대한 이야기인 것 같다.
 <br><br>
 
-<<link [[Accept|Whitney Trick Drink]]>><<set $phase to 0>><<set $drunk += 180>><</link>>
+휘트니가 당신에게 한 병을 권한다.
+<br><br>
+
+<<link [[받아들인다|Whitney Trick Drink]]>><<set $phase to 0>><<alcohol 180>><</link>>
 <br>
-<<link [[Refuse|Whitney Trick Drink]]>><<set $phase to 1>><</link>>
+<<link [[거절한다|Whitney Trick Drink]]>><<set $phase to 1>><</link>>
 <br>
 
 :: Whitney Trick Drink
@@ -327,48 +333,48 @@ Whitney offers you a bottle.
 
 <<if $phase is 0>>
 
-You take a swig from the bottle. It's bitter. You suppress a gag. "Old fuck had bad taste," Whitney says. "We'll have to visit someone more refined next time."
+당신은 술을 한 모금 마신다. 씁쓸한 맛이 난다. 당신은 토하려는 것을 참는다. "틀딱새끼 취향 더럽게 별로네," 휘트니가 말한다. "다음 번엔 좀 더 세련된 사람을 찾아야겠어."
 <br><br>
 <<else>>
-Whitney shrugs, and takes a swig from the proffered bottle <<himself>>.
+휘트니는 어깨를 으쓱이고는 당신에게 권했던 술을 한 모금 마신다.
 <br><br>
 <</if>>
-"There's a reason I wanted you along," <<he>> says, reclining. <<He>> flips over the rags covering <<his>> groin. <<Hes>> not wearing anything underneath. "On your knees, <<girl>>," <<he>> says. "Get to work."
+"내가 너랑 같이 하길 원했던 이유가 있어," <<he_ga>> 몸을 뒤로 편하게 기대며 말한다. <<He_nun>> <<his_yi>> 사타구니를 덮고 있는 누더기를 홱 뒤집는다. <<He_nun>> 아래에 아무 것도 입고 있지 않다. "무릎 꿇어, <<girl_a>>," <<he_ga>> 말한다. "어서 일해."
 <br><br>
 
 <<if $promiscuity gte 55>>
-	<<link [[Kneel|Whitney Trick Sex]]>><<pass 30>><<npcincr Whitney love 1>><<set $sexstart to 1>><</link>><<glove>><<promiscuous4>>
+	<<link [[꿇는다|Whitney Trick Sex]]>><<pass 30>><<npcincr Whitney love 1>><<set $sexstart to 1>><</link>><<glove>><<promiscuous4>>
 	<br>
 <</if>>
-<<link [[Refuse|Whitney Trick Sex Refuse]]>><<pass 30>><<npcincr Whitney love -1>><<npcincr Whitney dom -1>><</link>><<llove>><<ldom>>
+<<link [[거절한다|Whitney Trick Sex Refuse]]>><<pass 30>><<npcincr Whitney love -1>><<npcincr Whitney dom -1>><</link>><<llove>><<ldom>>
 <br>
 
 :: Whitney Trick Sex Refuse
 
 <<set $outside to 0>><<set $location to "home">><<effects>>
 <<if $submissive gte 1150>>
-	"N-no," you say. "I'm sorry! I'm too shy."
+	"시-싫어," 당신이 말한다. "미안해! 너무 부끄러워."
 <<elseif $submissive lte 850>>
-	"In a filthy shed in front of your scummy friends?" you say. "Fuck off."
+	"이 더러운 정자에 있는 것도 모자라서 저 쓸모없는 네 친구들 앞에서?" 당신이 말한다. "꺼져."
 <<else>>
-	"No," you say. "Especially not with people watching."
+	"싫어," 당신이 말한다. "특히 사람들이 보는 앞에서는 더."
 <</if>>
 <br><br>
-Whitney's friends laugh at your brazen refusal. Whitney laughs too. "Suit yourself," <<he>> says. "My <<girl>> knows what <<pshe>> wants." <<He>> doesn't push you, instead simply taking another swig of <<his>> drink.
+휘트니의 친구들이 당신의 뻔뻔한 거절에 웃는다. 휘트니 또한 웃는다. "네 마음대로 해," <<he_ga>> 말한다. "내 <<girl_un>> <<pshe_ga>> 원하는 걸 알고 있지." <<He_nun>> 당신을 밀어붙이지 않고, 대신 그저 <<his_yi>> 술을 한 모금 마신다.
 <br><br>
 
-<<link [[Next|Whitney Trick 7]]>><</link>>
+<<link [[다음|Whitney Trick 7]]>><</link>>
 <br>
 
 :: Whitney Trick 7
 <<set $outside to 0>><<set $location to "home">><<effects>>
 <<endevent>><<npc Whitney>>
 
-Whitney stands and chucks <<his>> bottle at the wall. "Done for tonight," <<he>> says. "Fuck off home." <<He>> gives your <<bottom>> a firm slap before walking away. <<His>> friends disperse into smaller groups.
+휘트니는 일어서서 <<his_yi>> 병을 벽에 던진다. "오늘 밤은 이걸로 끝이야," <<he_ga>> 말한다. "집으로 꺼져." <<He_nun>> 당신의 <<bottom_ul>> 철썩하고 치고는 물러난다. <<His_yi>> 친구들은 작은 무리로 흩어진다.
 <br><br>
 <<endevent>>
 
-<<link [[Next|Park]]>><<set $eventskip to 1>><</link>>
+<<link [[다음|Park]]>><<set $eventskip to 1>><</link>>
 <br>
 
 :: Whitney Trick Sex
@@ -379,11 +385,11 @@ Whitney stands and chucks <<his>> bottle at the wall. "Done for tonight," <<he>>
 	<<set $consensual to 1>>
 	<<neutral 1>>
 	<<maninit>>
-	You drop to your knees in front of <<him>>. <<He>> clutches the back of your head and guides you closer to <<his>>
+	당신은 <<his_yi>> 앞에 무릎을 꿇는다. <<He_nun>> 당신의 뒤통수를 잡고 <<his_yi>>
 	<<if $NPCList[0].penis isnot "none">>
-	$NPCList[0].penisdesc<<else>>pussy
+	<<trPenisdesc $NPCList[0].penisdesc>>에<<else>>보지에
 	<</if>>
-	. <<His>> friends crowd closer and scramble for their phones.
+	더 가까이 끌어당긴다. <<His_yi>> 친구들은 가까이 모여들어 서둘러 휴대폰을 찾는다.
 <br><br>
 
 <<npcoral>><<set $NPCList[0].lefthand to "hair">><<set $audienceforceteen to 1>>
@@ -394,13 +400,13 @@ Whitney stands and chucks <<his>> bottle at the wall. "Done for tonight," <<he>>
 <br><br>
 <<actionsman>>
 <<if $finish is 1>>
-	<span id="next"><<link [[Next|Whitney Trick Sex Finish]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Whitney Trick Sex Finish]]>><</link>></span><<nexttext>>
 <<elseif $enemyhealth lte 0>>
-	<span id="next"><<link [[Next|Whitney Trick Sex Finish]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Whitney Trick Sex Finish]]>><</link>></span><<nexttext>>
 <<elseif $enemyarousal gte $enemyarousalmax>>
-	<span id="next"><<link [[Next|Whitney Trick Sex Finish]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Whitney Trick Sex Finish]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link [[Next|Whitney Trick Sex]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Whitney Trick Sex]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: Whitney Trick Sex Finish
@@ -408,33 +414,33 @@ Whitney stands and chucks <<his>> bottle at the wall. "Done for tonight," <<he>>
 <<set $outside to 0>><<effects>>
 <<if $enemyarousal gte $enemyarousalmax>>
 	<<ejaculation>><<promiscuity4>>
-	Whitney's convulsions knock <<his>> horns askew. <<He>> doesn't notice or care.
+	휘트니의 경련이 <<his_yi>> 뿔을 삐딱하게 만든다. <<He_nun>> 눈치채거나 신경쓰지 않는다.
 	<br><br>
-	<<tearful>> you rest your head on <<his>> stomach. <<He>> cradles your head with one arm.
+	<<tearful>> 당신은 <<his_yi>> 배에 머리를 기대고 있다. <<He_nun>> 한 팔로 당신의 머리를 감싼다.
 	<br><br>
 	<<clotheson>>
 	<<endcombat>>
 
-	<<npc Whitney>><<person1>>Whitney stands, knocking you aside. <<He>> chucks <<his>> bottle at the wall. "Done for tonight," <<he>> says. "Fuck off home." <<He>> gives your <<bottom>> a firm slap before walking away. <<His>> friends disperse into smaller groups.
+	<<npc Whitney>><<person1>>휘트니는 당신을 옆으로 밀어내고 일어선다. <<He_nun>> <<his_yi>> 병을 벽에 던진다. "오늘 밤은 이걸로 끝이야," <<he_ga>> 말한다. "집으로 꺼져." <<He_nun>> 당신의 <<bottom_ul>> 철썩하고 치고는 물러난다. <<His_yi>> 친구들은 작은 무리로 흩어진다.
 <br><br>
 <<endevent>>
 
 <<elseif $enemyhealth lte 0>>
-	You shove Whitney off <<his>> stump. <<tearful>> you run for the trees. You're not sure if you're pursued. If so, you manage to evade them.
+	당신은 휘트니를 <<his_yi>> 그루터기에서 밀쳐낸다. <<tearful>> 당신은 나무를 향해 달린다. 당신은 쫓기고 있는지 확신하지 못한다. 만약 그랬다면, 당신은 그들을 피할 수 있었다.
 	<br><br>
 	<<clotheson>>
 	<<endcombat>>
 
 <<else>>
-	Whitney shoves you to the ground. "Fine," <<he>> says. "You're lucky I don't choke you."
+	휘트니는 당신을 바닥으로 밀친다. "좋아," <<he_ga>> 말한다. "내가 널 질식시키지 않아서 다행인 줄 알아."
 	<br><br>
-	<<tearful>> you stagger to your feet.
+	<<tearful>> 당신은 비틀거리며 일어선다.
 	<br><br>
 	<<clotheson>>
 	<<endcombat>>
-<<npc Whitney>><<person1>>Whitney stands, knocking you aside. <<He>> chucks <<his>> bottle at the wall. "Done for tonight," <<he>> says. "Fuck off home." <<He>> gives your <<bottom>> a firm slap before walking away. <<His>> friends disperse into smaller groups.
+<<npc Whitney>><<person1>>휘트니가 당신을 옆으로 밀어내고 일어선다. <<He_nun>> <<his_yi>> 병을 벽에 던진다. "오늘 밤은 이걸로 끝이야," <<he_ga>> 말한다. "집으로 꺼져." <<He_nun>> 당신의 <<bottom_ul>> 철썩하고 치고는 물러난다. <<His_yi>> 친구들은 작은 무리로 흩어진다.
 <</if>>
 <br><br>
 
-<<link [[Next|Park]]>><<set $eventskip to 1>><</link>>
+<<link [[다음|Park]]>><<set $eventskip to 1>><</link>>
 <br>

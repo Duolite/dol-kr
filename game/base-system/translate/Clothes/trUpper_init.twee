@@ -1,10 +1,10 @@
 :: Widgets trUpper [widget nobr]
 <<widget "init_trUpper">>
-    <<set _trClothes.upper to [
+    <<set setup.trClothes.upper to [
         {
             index: 0,
             name: "naked",
-            name_ko: "알몸",
+            name_ko: "벗음",
             variable: "naked",
             description: "naked",
             post: 0
@@ -13,7 +13,7 @@
         {
             index: 1,
             name: "sundress",
-            name_ko: "선 드레스",
+            name_ko: "선드레스",
             variable: "sundress",
             description: "뛰어 놀기에 좋다.",
             post: 1
@@ -606,7 +606,7 @@
         {
             index: 67,
             name: "classic sundress",
-            name_ko: "클래식 선 드레스",
+            name_ko: "클래식 선드레스",
             variable: "classicsundress",
             description: "뛰어 놀기 좋다. 좋았던 기억을 떠올리게 한다.",
             post: 0
@@ -763,6 +763,87 @@
             variable: "keyhole",
             post: 1,
             description: "당신의 가슴을 드러낸다."
+        },
+
+        {
+            index: 85,
+            name: "prison shirt",
+            name_ko: "죄수복 셔츠",
+            variable: "prison",
+            post: 1,
+            description: "교화시설 유니폼."
+        },
+
+        {
+            index: 86,
+            name: "prison jumpsuit",
+            name_ko: "죄수복 점프수트",
+            variable: "jumpsuit",
+            post: 1,
+            description: "교화시설 유니폼."
+        },
+
+        {
+            index: 87,
+            name: "patient gown",
+            name_ko: "환자복 가운",
+            variable: "patient",
+            post: 0,
+            description: "당신의 등짝을 넓게 드러낸다."
+        },
+
+        {
+            index: 88,
+            name: "cropped hoodie",
+            name_ko: "크롭 후드",
+            variable: "croppedhoodie",
+            post: 1,
+            description: "당신의 배꼽을 과시하고, 그 외에 조금 더 보여준다."
+        },
+
+        {
+            index: 89,
+            name: "cow onesie",
+            name_ko: "젖소 한벌옷",
+            variable: "cowonesie",
+            post: 0,
+            description: "포근하다."
+        },
+
+        {
+            index: 90,
+            name: "baseball shirt",
+            name_ko: "야구 유니폼 셔츠",
+            variable: "baseball",
+            post: 1,
+            description: "이국의, 크리켓 비슷한 스포츠에서 유래한 디자인의 반바지."
+        },
+
+        {
+            index: 91,
+            name: "scarecrow shirt",
+            name_ko: "허수아비 셔츠",
+            variable: "scarecrow",
+            post: 1,
+            description: "근지럽다.",
+        },
+
+        {
+            index: 92,
+            name: "waitress uniform",
+            name_ko: "웨이트리스 유니폼",
+            variable: "waitress",
+            post: 0,
+            description: "일을 끝내자.",
+        },
+
+        {
+            index: 93,
+            name: "split dress",
+            name_ko: "옆트임 드레스",
+            variable: "split",
+            post: 1,
+            description: "산들바람만 불어도 대참사.",
         },
 		]>>
 <</widget>>

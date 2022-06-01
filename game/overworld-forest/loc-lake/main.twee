@@ -49,7 +49,7 @@
 <</if>>
 
 <<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
-<<if $stress gte $stressmax>>
+<<if $stress gte $stressmax and !$possessed>>
 <<passoutlake>>
 <<elseif $foresthunt gte 10>>
 <<foresthunt>>
@@ -69,13 +69,21 @@
 		<br>
 	<</if>>
 	<<if $season is "winter">>
-		<<ind>><<link [[얼음 위를 걸어간다 (0:02)|Lake Shallows Ice]]>><<pass 2>><</link>>
+		<<if $nextPassageCheck is "Lake Shallows Ice">>
+			<span class="nextLink"><<ind>><<link [[걸어라.|Lake Shallows Ice]]>><<pass 2>><</link>></span>
+		<<else>>
+			<<ind>><<link [[얼음 위를 걸어간다 (0:02)|Lake Shallows Ice]]>><<pass 2>><</link>>
+		<</if>>
 		<br>
 	<<else>>
-		<<swimicon>><<link [[수영한다 (0:02)|Lake Shallows]]>><<pass 2>><</link>>
+		<<if $nextPassageCheck is "Lake Shallows">>
+			<span class="nextLink"><<swimicon>><<link [[수영해라.|Lake Shallows]]>><<pass 2>><</link>></span>
+		<<else>>
+			<<swimicon>><<link [[수영한다 (0:02)|Lake Shallows]]>><<pass 2>><</link>>
+		<</if>>
 		<br>
 	<</if>>
-	<<if $season isnot "winter">>
+	<<if $season isnot "winter" and !($moonstate is "evening" and $hour gte 21 or $moonstate is "morning" and $hour lt 6)>>
 		<<if $exposed gte 2>>
 			<<if $exhibitionism gte 75 and $laketeenspresent is 1>>
 				<<ind>><<link [[산책한다 (1:00)|Lake Stroll]]>><<pass 60>><<stress -6>><<arousal 1000>><<set $rng to random(1, 100)>><<set $phase to 2>><</link>><<exhibitionist5>><<garousal>><<lstress>>
@@ -89,12 +97,16 @@
 			<br>
 		<</if>>
 	<</if>>
-<br>
+	
 	<<if $dev is 1>>
 		<<ind>><<link [[북쪽 모닥불 구덩이로 간다 (0:10)|Lake Firepit]]>><<pass 10>><</link>>
 		<br>
 	<</if>>
-<<ind>><<link [[남쪽 폭포로 간다 (0:10)|Lake Waterfall]]>><<pass 10>><</link>>
+<<if $nextPassageCheck is "Lake Waterfall">>
+	<span class="nextLink"><<ind>><<link [[남쪽 폭포로 간다 (0:10)|Lake Waterfall]]>><<pass 10>><</link>></span>
+<<else>>
+	<<ind>><<link [[남쪽 폭포로 간다 (0:10)|Lake Waterfall]]>><<pass 10>><</link>>
+<</if>>
 <br><br>
 <<foresticon>><<link [[숲 (0:10)|Forest]]>><<pass 10>><</link>>
 <br>
@@ -109,7 +121,7 @@
 	<<if $daystate is "night">>
 		당신은 폭포에 있다. 달빛 아래 은색 장막과도 같다.
 	<<else>>
-		당신은 폭포에 있다. 얼음 사이를 통해 호수를 채워 주고 있다.
+		You are at the waterfall. It feeds the lake through a gap in the ice.
 	<</if>>
 	<<if $weather is "snow">>
 		눈이 얼음 표면에 앉는다.
@@ -118,11 +130,11 @@
 	<</if>>
 <<else>>
 	<<if $laketeenspresent is 1>>
-		당신은 폭포에 있다. 어린 학생 몇몇은 떨어지는 폭포수 아래에서 놀고 있다. 십대들은 물이 내려오는 상류에 앉아 있다.
+		You are at the waterfall. Some of the younger students are playing in the falling water. Teens sit in the pond above.
 	<<elseif $daystate is "night">>
 		당신은 폭포에 있다. 달빛 아래 은색 장막과도 같다.
 	<<else>>
-		당신은 폭포에 있다. 물이 연못에서 바위 위로 흘러내리고 있다. 상쾌한 안개가 생겨난다.
+		You are at the waterfall. Water is flowing down from the pond up on the rocks. A refreshing mist rolls out.
 	<</if>>
 	<<if $weather is "rain">>
 		비가 수면을 치면서 물은 생동감 있게 움직인다.
@@ -140,7 +152,7 @@
 	<br><br>
 <</if>>
 <<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
-<<if $stress gte $stressmax>>
+<<if $stress gte $stressmax and !$possessed>>
 	<<passoutlake>>
 <<elseif $foresthunt gte 10>>
 	<<foresthunt>>
@@ -151,14 +163,22 @@
 	<<lakereturnjourney>>
 	<<if $sexStats.anus.pregnancy.seenDoctor gte 2>>
 		<<set $container.lastLocation to $location>>
-		<<print '<<link [[Check ' + $container[$location].name + ' (0:05)|Containers]]>><<pass 5>><</link>>'>>
+		<<if $nextPassageCheck is "Containers">>
+			<<print '<span class="nextLink"><<link [[' + $container[$location].name + ' 확인 (0:05)|Containers]]>><<pass 5>><</link>></span>'>>
+		<<else>>
+			<<print '<<link [[' + $container[$location].name + ' 확인 (0:05)|Containers]]>><<pass 5>><</link>>'>>
+		<</if>>
 		<br>
 	<</if>>
 	<<if $mason_count gte 2 and $season isnot "winter">>
 		<<link [[메이슨의 연못 (0:05)|Mason Pond]]>><<pass 5>><</link>>
 		<br>
 	<</if>>
-	<<link [[북쪽 호숫가로 간다 (0:10)|Lake Shore]]>><<pass 10>><</link>>
+	<<if $nextPassageCheck is "Lake Shore">>
+		<span class="nextLink"><<link [[호수.|Lake Shore]]>><<pass 10>><</link>></span>
+	<<else>>
+		<<link [[북쪽 호숫가로 간다 (0:10)|Lake Shore]]>><<pass 10>><</link>>
+	<</if>>
 	<br>
 	<<link [[남쪽 바위낚시터로 간다 (0:10)|Lake Fishing Rock]]>><<pass 10>><</link>>
 	<br>
@@ -213,7 +233,7 @@
 	<br><br>
 <</if>>
 <<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
-<<if $stress gte $stressmax>>
+<<if $stress gte $stressmax and !$possessed>>
 	<<passoutlake>>
 <<elseif $foresthunt gte 10>>
 	<<foresthunt>>
@@ -224,7 +244,11 @@
 	<<lakereturnjourney>>
 	<<link [[명상한다|Lake Meditate]]>><<set $phase to 1>><</link>>
 	<br>
-	<<link [[북쪽 폭포로 간다 (0:10)|Lake Waterfall]]>><<pass 10>><</link>>
+	<<if $nextPassageCheck is "Lake Waterfall">>
+		<span class="nextLink"><<link [[호수.|Lake Waterfall]]>><<pass 10>><</link>></span>
+	<<else>>
+		<<link [[북쪽 폭포로 간다 (0:10)|Lake Waterfall]]>><<pass 10>><</link>>
+	<</if>>
 	<br>
 	<<link [[남쪽 캠핑장으로 간다 (0:20)|Lake Campsite]]>><<pass 20>><</link>>
 	<br><br>
@@ -286,13 +310,16 @@
 	<br><br>
 <</if>>
 <<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
-<<if $stress gte $stressmax>>
+<<if $stress gte $stressmax and !$possessed>>
 	<<passoutlake>>
 <<elseif $foresthunt gte 10>>
 	<<foresthunt>>
 <<elseif $danger gte (9900 - $allure) and $eventskip is 0 and $laketeenspresent isnot 1>>
 	<<eventlake>>
 <<else>>
+	<<if $arousal gte $arousalmax>>
+		<<orgasmLocation "lake" `$laketeenspresent isnot 1`>>
+	<</if>>
 	<<eventlakesafe>>
 	<<lakereturnjourney>>
 	<<link [[남쪽 호숫가로 간다 (0:10)|Lake Shore]]>><<pass 10>><</link>>
@@ -346,20 +373,27 @@
 	<br><br>
 <</if>>
 <<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
-<<if $stress gte $stressmax>>
+<<if $stress gte $stressmax and !$possessed>>
 	<<passoutlake>>
 <<elseif $foresthunt gte 10>>
 	<<foresthunt>>
 <<elseif $danger gte (9900 - $allure) and $eventskip is 0 and $laketeenspresent isnot 1>>
 	<<eventlake>>
 <<else>>
+	<<if $arousal gte $arousalmax>>
+		<<orgasmLocation "campsite">>
+	<</if>>
 	<<eventlakesafe>>
 	<<lakereturnjourney>>
 	<<if $weather isnot "rain" and $weather isnot "snow" and $hour gte 18 and $exposed lte 0 and $lakecouple isnot 1>>
 		<<link [[연인에게 다가간다|Lake Couple]]>><</link>>
 		<br>
 	<</if>>
-	<<link [[북쪽 바위낚시터로 간다 (0:10)|Lake Fishing Rock]]>><<pass 10>><</link>>
+	<<if $nextPassageCheck is "Lake Fishing Rock">>
+		<span class="nextLink"><<link [[호수.|Lake Fishing Rock]]>><</link>></span>
+	<<else>>
+		<<link [[북쪽 바위낚시터로 간다 (0:10)|Lake Fishing Rock]]>><<pass 10>><</link>>
+	<</if>>
 	<br><br>
 	<<foresticon>><<link [[숲 (0:10)|Forest]]>><<pass 10>><</link>>
 	<br>
@@ -381,7 +415,7 @@
 <<if $schoolday isnot 1 and $weather is "rain" and $daystate is "day">>
 	누군가 부두를 지나쳐 더 멀리 헤엄쳐 나가고 있다.
 <</if>>
-<<if $science gte 400 and !$plants_known.includes("lotus")>>
+<<if $sciencetrait gte 2 and !$plants_known.includes("lotus")>>
 	연꽃이 당신 옆에 떠 있다.
 <</if>>
 <br><br>
@@ -441,19 +475,21 @@
 	당신은 즉석으로 갈대와 백합을 엮어 허리에 두른다. 약하고 노출이 심하며, 부수지 않고는 벗기 어려울 것 같지만, 아무것도 없는 것보다는 낫다.
 	<<plantlower>>
 	<br><br>
-	<<if $rng gte 91 and $parasite.penis.name is undefined and $penisexist is 1 and $parasitedisable is "f" and !$worn.genitals.type.includes("chastity")>>
+	<<if $rng gte 91 and $parasite.penis.name is undefined and $player.penisExist and $parasitedisable is "f" and !$worn.genitals.type.includes("chastity")>>
 		당신의 만족감은 <<penisPost "에">> 전해지는 꼬집히는 느낌에 저지된다. 당신은 당황해서 범인을 찾기 위해 치마를 들어올린다. 작고 부드러운 무척추동물이 달라붙어 있다. 그것은 젖을 빠는 것처럼 당신을 마사지하고 빤다. 아프지는 않지만, 그 감각이 당신을 흥분시킨다. 괴롭힘에서 벗어나기 위해 잡아당겨 보지만, 너무 단단히 달라붙어 있다. 게다가, 힘을 주어 떼내려고 하는 것은 그들이 더 강하게 빨도록 만들 뿐이다. 이것을 없애기 위해서는 도움이 필요할 것이다.
 		<<parasite penis urchin>><<garousal>><<arousal 600>>
 		<br><br>
-	<<elseif $rng gte 91 and $parasite.clit.name is undefined and $vaginaexist is 1 and $parasitedisable is "f" and !$worn.genitals.type.includes("chastity") and $penisexist isnot 1>>
+	<<elseif $rng gte 91 and $parasite.clit.name is undefined and $player.vaginaExist and $parasitedisable is "f" and !$worn.genitals.type.includes("chastity") and !$player.penisExist>>
 		당신의 만족감은 <<pussyPost>>에 전해지는 꼬집히는 느낌에 저지된다. 당신은 당황해서 범인을 찾기 위해 치마를 들어올린다. 작고 부드러운 무척추동물이 당신의 클리토리스에 달라붙어 있다. 그것은 젖을 빠는 것처럼 당신을 마사지하고 빤다. 아프지는 않지만, 그 감각이 당신을 흥분시킨다. 괴롭힘에서 벗어나기 위해 잡아당겨 보지만, 너무 단단히 달라붙어 있다. 게다가, 힘을 주어 떼내려고 하는 것은 그들이 더 강하게 빨도록 만들 뿐이다. 이것을 없애기 위해서는 도움이 필요할 것이다.
 		<<parasite clit urchin>><<garousal>><<arousal 600>>
 		<br><br>
 	<</if>>
 <</if>>
 <<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
-<<if $stress gte $stressmax>>
+<<if $stress gte $stressmax and !$possessed>>
 	<<passoutlake>>
+<<elseif $foresthunt gte 10>>
+	<<foresthunt>>
 <<elseif $danger gte (9900 - ($allure / 2)) and $eventskip is 0>>
 	<<eventlakewater>>
 <<else>>
@@ -473,7 +509,7 @@
 		<<link [[식물로 치마를 만들어 입는다 (0:20)|Lake Shallows]]>><<pass 20>><<set $phase to 2>><</link>>
 		<br>
 	<</if>>
-	<<if $science gte 400 and !$plants_known.includes("lotus")>>
+	<<if $sciencetrait gte 2 and !$plants_known.includes("lotus")>>
 		<<link [[씨앗을 찾는다 (0:30)|Lake Lotus]]>><<set $plants_known.push("lotus")>><<pass 30>><<tending 6>><</link>><<gtending>>
 		<br>
 	<</if>>
@@ -483,7 +519,11 @@
 		<<link [[수영용 부두까지 헤엄친다 (0:10)|Lake Dock]]>><<pass 10>><</link>>
 		<br>
 	<</if>>
-	<<link [[더 멀리 헤엄친다 (0:12)|Lake Depths]]>><<pass 12>><</link>>
+	<<if $nextPassageCheck is "Lake Depths">>
+		<span class="nextLink"><<link [[더 멀리.|Lake Depths]]>><<pass 12>><</link>></span>
+	<<else>>
+		<<link [[더 멀리 헤엄친다 (0:12)|Lake Depths]]>><<pass 12>><</link>>
+	<</if>>
 	<br>
 	<<if $exposed gte 1 and $laketeenspresent is 1>>
 		<<if $exposed gte 2 and $exhibitionism gte 75>>
@@ -506,15 +546,15 @@
 	In a moment of daring, you casually emerge from the lake despite your <<lewdness>>. <<flaunting>> you stroll right past a group of teens.
 	It takes a moment for anyone to notice, but eventually a <<person1>><<person>> gasps and points at you, drawing the attention of several more.
 	<br><br>
-	A few avert their eyes in embarassment, but many more have their eyes glued to you as you stride over to the rocky alcove.
+	A few avert their eyes in embarrassment, but many more have their eyes glued to you as you stride over to the rocky alcove.
 	A <<person2>><<person>> especially takes an interest in you, but seems to hesitate before doing anything. You decide to increase your pace.
 	<br><br>
 	You sit by the rocky alcove, just out of sight. You wonder how many are still looking in your direction.
 <<else>>
-	In a moment of daring, you emerge from the lake despite your <<lewdness>>. You run right past a group of teens, attemting to cover yourself however you can.
+	In a moment of daring, you emerge from the lake despite your <<lewdness>>. You run right past a group of teens, attempting to cover yourself however you can.
 	A <<person1>><<person>> points and laughs as you run, drawing the attention of several more. <<status -10>><<lcool>>
 	<br><br>
-	A few avert their eyes in embarassment, but many more have their eyes glued to you as you stride over to the rocky alcove.
+	A few avert their eyes in embarrassment, but many more have their eyes glued to you as you stride over to the rocky alcove.
 	A <<person2>><<person>> especially takes an interest in you, and for a moment, you think <<hes>> going to chase you. You increase your pace.
 	<br><br>
 	You sit by the rocky alcove, just out of sight. You wonder how many are still looking in your direction.
@@ -540,7 +580,7 @@
 		당신은 호숫가 근처 얼어붙은 호수 위에 홀로 서 있다. 숲의 소리가 대기를 채운다.
 	<</if>>
 <</if>>
-<<if $science gte 400 and !$plants_known.includes("lotus")>>
+<<if $sciencetrait gte 2 and !$plants_known.includes("lotus")>>
 	당신은 연꽃이 얼음 안에 갇혀있는 것을 본다.
 <</if>>
 <br><br>
@@ -550,8 +590,10 @@
 <</if>>
 
 <<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
-<<if $stress gte $stressmax>>
+<<if $stress gte $stressmax and !$possessed>>
 	<<passoutlake>>
+<<elseif $foresthunt gte 10>>
+	<<foresthunt>>
 <<elseif $danger gte (9900 - ($allure / 2)) and $eventskip is 0>>
 	<<eventlakeice>>
 <<else>>
@@ -559,13 +601,17 @@
 	<<eventlakesafe>>
 	<<lakereturnjourney>>
 
-	<<link [[스케이트를 탄다 (0:30)|Lake Skate]]>><<pass 30>><<tiredness 5>><<danceskill 5>><</link>><<gtiredness>> | <span class="green">+ Dancing Skill</span>
+	<<link [[스케이트를 탄다 (0:30)|Lake Skate]]>><<pass 30>><<tiredness 5>><<danceskill 5>><</link>><<gtiredness>><<gdanceskill>>
 	<br>
-	<<if $science gte 400 and !$plants_known.includes("lotus")>>
+	<<if $sciencetrait gte 2 and !$plants_known.includes("lotus")>>
 		<<link [[씨앗을 찾는다 (0:30)|Lake Lotus Ice]]>><<set $plants_known.push("lotus")>><<pass 30>><<tending 6>><</link>><<gtending>>
 		<br>
 	<</if>>
-	<<link [[더 멀리 걸어가 본다 (0:12)|Lake Depths Ice]]>><<pass 12>><</link>>
+	<<if $nextPassageCheck is "Lake Depths Ice">>
+		<span class="nextLink"><<link [[더 멀리.|Lake Depths Ice]]>><<pass 12>><</link>></span>
+	<<else>>
+		<<link [[더 멀리 걸어가 본다 (0:12)|Lake Depths Ice]]>><<pass 12>><</link>>
+	<</if>>
 	<br>
 	<<link [[호숫가 (0:02)|Lake Shore]]>><<pass 2>><</link>>
 	<br>
@@ -663,19 +709,21 @@
 	당신은 즉석으로 갈대와 백합을 엮어 허리에 두른다. 약하고 노출이 심하며, 부수지 않고는 벗기 어려울 것 같지만, 아무것도 없는 것보다는 낫다.
 	<<plantlower>>
 	<br><br>
-	<<if $rng gte 91 and $parasite.penis.name is undefined and $penisexist is 1 and $parasitedisable is "f" and !$worn.genitals.type.includes("chastity")>>
+	<<if $rng gte 91 and $parasite.penis.name is undefined and $player.penisExist and $parasitedisable is "f" and !$worn.genitals.type.includes("chastity")>>
 		당신의 만족감은 <<penisPost "에">> 전해지는 꼬집히는 느낌에 저지된다. 당신은 당황해서 범인을 찾기 위해 치마를 들어올린다. 작고 부드러운 무척추동물이 달라붙어 있다. 그것은 젖을 빠는 것처럼 당신을 마사지하고 빤다. 아프지는 않지만, 그 감각이 당신을 흥분시킨다. 괴롭힘에서 벗어나기 위해 잡아당겨 보지만, 너무 단단히 달라붙어 있다. 게다가, 힘을 주어 떼내려고 하는 것은 그들이 더 강하게 빨도록 만들 뿐이다. 이것을 없애기 위해서는 도움이 필요할 것이다.
 		<<parasite penis urchin>><<garousal>><<arousal 600>>
 		<br><br>
-	<<elseif $rng gte 91 and $parasite.clit.name is undefined and $vaginaexist is 1 and $parasitedisable is "f" and !$worn.genitals.type.includes("chastity")>>
+	<<elseif $rng gte 91 and $parasite.clit.name is undefined and $player.vaginaExist and $parasitedisable is "f" and !$worn.genitals.type.includes("chastity")>>
 		당신의 만족감은 <<pussyPost>>에 전해지는 꼬집히는 느낌에 저지된다. 당신은 당황해서 범인을 찾기 위해 치마를 들어올린다. 작고 부드러운 무척추동물이 당신의 클리토리스에 달라붙어 있다. 그것은 젖을 빠는 것처럼 당신을 마사지하고 빤다. 아프지는 않지만, 그 감각이 당신을 흥분시킨다. 괴롭힘에서 벗어나기 위해 잡아당겨 보지만, 너무 단단히 달라붙어 있다. 게다가, 힘을 주어 떼내려고 하는 것은 그들이 더 강하게 빨도록 만들 뿐이다. 이것을 없애기 위해서는 도움이 필요할 것이다.
 		<<parasite clit urchin>><<garousal>><<arousal 600>>
 		<br><br>
 	<</if>>
 <</if>>
 <<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
-<<if $stress gte $stressmax>>
+<<if $stress gte $stressmax and !$possessed>>
 	<<passoutlake>>
+<<elseif $foresthunt gte 10>>
+	<<foresthunt>>
 <<elseif $danger gte (9900 - ($allure + 1000)) and $eventskip is 0 and $lakesurface is 1>>
 	<span class="purple">저 깊은 곳에서 무언가 당신을 따라왔다.</span> <<eventlakewater>>
 <<elseif $danger gte (9900 - ($allure / 2)) and $eventskip is 0>>
@@ -683,7 +731,7 @@
 <<else>>
 	<<link [[수영 연습을 한다 (0:30)|Lake Depths]]>><<pass 30>><<stress -6>><<tiredness 6>><<set $lakeswim to 1>><<slimeEventEnd>><</link>><<gswimming>><<lstress>><<gtiredness>>
 	<br>
-	<<if $schoolday isnot 1 and $weather is "rain" and $daystate is "day" and $mason_spoken isnot 1>>
+	<<if $schoolday isnot 1 and $weather is "rain" and $daystate is "day" and $mason_spoken isnot 1 and !$possessed>>
 		<<if $mason_count gte 1>>
 			<<link [[메이슨을 향해 헤엄친다 (0:05)|Lake Mason]]>><<pass 5>><<set $mason_spoken to 1>><</link>>
 			<br>
@@ -706,7 +754,11 @@
 		<<link [[식물로 치마를 만들어 입는다 (0:20)|Lake Depths]]>><<pass 20>><<set $phase to 2>><</link>>
 		<br>
 	<</if>>
-	<<link [[잠수한다 (0:01)|Lake Underwater]]>><<pass 1>><</link>>
+	<<if $nextPassageCheck is "Lake Underwater">>
+		<span class="nextLink"><<link [[아래로.|Lake Underwater]]>><<pass 1>><</link>></span>
+	<<else>>
+		<<link [[잠수한다 (0:01)|Lake Underwater]]>><<pass 1>><</link>>
+	<</if>>
 	<br>
 	<<link [[호숫가를 향해 헤엄친다 (0:12)|Lake Shallows]]>><<pass 12>><</link>>
 	<br><br>
@@ -739,7 +791,7 @@
 	<br><br>
 <<else>>
 	<<if $lake_ice_broken is undefined>>
-		누군가 부두 옆에 삽을 포함해서 장비를 놓고 갔다. 이곳의 어름은 얇다. 조금만 힘을 들이면 뚫을 수 있을 것이다.
+		누군가 부두 옆에 삽을 포함해서 장비를 놓고 갔다. 이곳의 얼음은 얇다. 조금만 힘을 들이면 뚫을 수 있을 것이다.
 		<br><br>
 	<<else>>
 		물 속으로 들어갈 수 있는 구멍이 뚫려 있다.
@@ -752,8 +804,10 @@
 	<</if>>
 
 <<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
-<<if $stress gte $stressmax>>
+<<if $stress gte $stressmax and !$possessed>>
 	<<passoutlake>>
+<<elseif $foresthunt gte 10>>
+	<<foresthunt>>
 <<elseif $danger gte (9900 - ($allure + 1000)) and $eventskip is 0 and $lakesurface is 1>>
 	<span class="purple">저 깊은 곳에서 무언가 당신을 따라왔다.</span> <<eventlakewater>>
 <<elseif $danger gte (9900 - ($allure / 2)) and $eventskip is 0>>
@@ -762,7 +816,10 @@
 	<<if $schoolday isnot 1 and $weather is "snow" and $daystate is "day">>
 		<<set $lake_ice_broken to 1>>
 	<</if>>
-	<<if $lake_ice_broken is undefined>>
+	<<if $nextPassageCheck is "Lake Depths Ice Break">>
+		<span class="nextLink"><<link [[아래로.|Lake Depths Ice Break]]>><<pass 12>><</link>></span>
+		<br>
+	<<elseif $lake_ice_broken is undefined>>
 		<<link [[얼음을 깬다 (0:30)|Lake Ice Break]]>><<pass 30>><<set $lake_ice_broken to 2>><<tiredness 3>><</link>><<gtiredness>>
 		<br>
 	<<else>>
@@ -923,8 +980,10 @@
 	<</if>>
 <</if>>
 <<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
-<<if $stress gte $stressmax>>
+<<if $stress gte $stressmax and !$possessed>>
 	<<passoutlake>>
+<<elseif $foresthunt gte 10>>
+	<<foresthunt>>
 <<else>>
 	<<meditateoptions>>
 <</if>>

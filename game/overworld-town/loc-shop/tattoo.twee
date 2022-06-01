@@ -2,7 +2,7 @@
 
 <<set $outside to 0>><<effects>><<set $lock to 0>>
 
-<<if $skulduggery gte $lock>>
+<<if currentSkillValue('skulduggery') gte $lock>>
 	<span class="green">이 자물쇠는 아주 따기 쉬워 보인다.</span>
 	<br><br>
 
@@ -73,12 +73,11 @@
 :: Tattoo Bodywriting Choice
 <<effects>>
 
-<<for _e to 0; _e lt $bodypart_number; _e++>>
-	<<activebodypart>>
-	<<if $skin[_active_bodypart].pen is "pen" or $skin[_active_bodypart].pen is "marker">>
+<<for _active_bodypart range setup.bodyparts>>
+	<<if ["pen","marker","lipstick","mud"].includes($skin[_active_bodypart].pen)>>
 		<<if $money gte 50000>>
 		You have <<if $skin[_active_bodypart].type is "text">><span class="pink">"<<print $skin[_active_bodypart].writing>>"</span> written<<else>>a $skin[_active_bodypart].writing drawn<</if>> on your <<bodypart _active_bodypart>>.
-			<<if $skin[_active_bodypart].special is "bestiality" and $deviancy lte 34>>
+			<<if ($skin[_active_bodypart].special is "bestiality" or $skin[_active_bodypart].special is "Black Wolf" or $skin[_active_bodypart].special is "Great Hawk") and $deviancy lte 34>>
 				<<if (_active_bodypart is "left_bottom" or _active_bodypart is "right_bottom" or _active_bodypart is "pubic" or _active_bodypart is "breasts") and $exhibitionism lte 34>>
 					<span class="blue">당신은 문신 시술자에게 <<bodypart_rul _active_bodypart>> 보여주기엔 너무 부끄럽다. 게다가 이런 걸 문신으로 새길 만큼 이상성욕이 강하지도 않다.</span>
 				<<else>>
@@ -93,7 +92,7 @@
 			<<elseif (_active_bodypart is "left_bottom" or _active_bodypart is "right_bottom" or _active_bodypart is "pubic" or _active_bodypart is "breasts") and $exhibitionism lte 34>>
 				<span class="blue">당신은 문신 시술자에게 <<bodypart_rul _active_bodypart>> 보여주기엔 너무 부끄럽다.</span>
 			<<else>>
-			<<capture _active_bodypart>> | <<link [[낙서를 문신으로 새긴다 (£500 1:00)|Tattoo Bodywriting]]>><<pass 60>><<set $money -= 50000>><<set $tattoo_bodypart to _active_bodypart>><<set $tattoo_parlour to clone($skin[_active_bodypart])>><<if $skin[_active_bodypart].lewd is 1 or $skin[_active_bodypart].special is "bestiality">><<control 50>><<else>><<control 25>><</if>><<set $skin[_active_bodypart].pen to "tattoo">><<pain 6>><</link>><</capture>> <<if $skin[_active_bodypart].lewd is 1 or $skin[_active_bodypart].special is "bestiality">><<gggcontrol>><<else>><<ggcontrol>><</if>>
+			<<capture _active_bodypart>> | <<link [[낙서를 문신으로 새긴다 (£500 1:00)|Tattoo Bodywriting]]>><<pass 60>><<set $money -= 50000>><<set $tattoo_bodypart to _active_bodypart>><<set $tattoo_parlour to clone($skin[_active_bodypart])>><<if $skin[_active_bodypart].lewd is 1 or $skin[_active_bodypart].special is "bestiality" or $skin[_active_bodypart].special is "Black Wolf" or $skin[_active_bodypart].special is "Great Hawk">><<control 50>><<else>><<control 25>><</if>><<set $skin[_active_bodypart].pen to "tattoo">><<pain 6>><</link>><</capture>> <<if $skin[_active_bodypart].lewd is 1 or $skin[_active_bodypart].special is "bestiality" or $skin[_active_bodypart].special is "Black Wolf" or $skin[_active_bodypart].special is "Great Hawk">><<gggcontrol>><<else>><<ggcontrol>><</if>>
 			<</if>><<gpain>>
 		<br>
 		<</if>>
@@ -122,9 +121,7 @@
 <br><br>
 
 위치:<br>
-<<for _e to 0; _e lt $bodypart_number; _e++>>
-	<<activebodypart>>
-
+<<for _active_bodypart range setup.bodyparts>>
 	<<if $skin[_active_bodypart].writing>>
 
 	<<else>><<set _bodypart_detected to 1>>
@@ -163,7 +160,7 @@
 <span class="lewd">이상성욕적인</span> 문신:
 <br>
 <<if $deviancy gte 35>>
-	<label>동물 발바닥 <<radiobutton "$tattoo_choice" "paw_print">></label> |
+	<label>짐승 발바닥 <<radiobutton "$tattoo_choice" "paw_print">></label> |
 <<else>>
 	당신은 이 문신을 새기기엔 이상성욕이 강하지 않다.
 <</if>>

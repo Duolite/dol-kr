@@ -1,6 +1,6 @@
 :: Riding School Lock
 <<set $outside to 1>><<effects>><<set $lock to 200>>
-<<if $skulduggery gte $lock>>
+<<if currentSkillValue('skulduggery') gte $lock>>
 	<span class="green">The lock looks easy to pick.</span>
 	<br><br>
 	<<link [[Pick it (0:10)|Riding School]]>><<pass 10>><<crimeup 20>><</link>><<crime>>
@@ -95,7 +95,7 @@ You are at Remy's riding school. Stables surround a central courtyard. A small o
 	<<else>>
 
 		<<if $money gte 2500>>
-			<<link [[Take riding lesson (1:00)|Riding School Lesson]]>><<set $riding_lesson to 0>><<set $money -= 2500>><<set $thighskill += 12>><</link>><<gtiredness>> | <span class="green">+ Thigh skill</span>
+			<<link [[Take riding lesson (1:00)|Riding School Lesson]]>><<set $riding_lesson to 0>><<set $money -= 2500>><<set $thighskill += 18>><</link>><<gtiredness>><<gthighskill>>
 			<br>
 		<</if>>
 
@@ -114,7 +114,7 @@ You are at Remy's riding school. Stables surround a central courtyard. A small o
 		<br><br>
 	<</if>>
 	<!-- Modified for Monster People -->
-	<<if ($monsterchance gte 1 and $hallucinations gte 1) or ($monsterchance gte 1 and $monsterhallucinations is "f") or ($bestialitydisable is "t")>>
+	<<if ($monsterchance gte 1 and $hallucinations gte 1) or ($monsterchance gte 1 and $monsterhallucinations is "f")>>
 		<<if $malechance lt random(1, 100)>>
 			Remy assigns you to a centaur, who watches as you <<thightext>> climb into the saddle.
 			<<set $steed to "female">>
@@ -162,10 +162,11 @@ You are at Remy's riding school. Stables surround a central courtyard. A small o
 	<<set $rng to random(1, 100)>>
 	<<set $danger to random(1, 10000)>>
 	<<if $danger gte (9900 - $allure)>>
-		<<if $rng gte 81>>
+		<<if $rng gte 81 and $horsedisable is "f">>
 			Remy leads you to an open field. The steeds are eager to frolic, and become harder to control.
 			<br><br>
 			<!-- Modified for Monster People -->
+			<<if $steed isnot "mare" and $steed isnot "stallion" or $bestialitydisable is "f">>
 				<<if $thighskill gte 200>>
 					Your <<steed_text>> bolts. You manage to remain steady, but nothing you do convinces the steed to stop.
 				<<else>>
@@ -181,13 +182,14 @@ You are at Remy's riding school. Stables surround a central courtyard. A small o
 				<br>
 				<<link [[Brace yourself|Riding School Lesson Brace]]>><</link>>
 				<br>
-				<!-- You manage to keep yours in line, but some of the newer students lose control. Remy gallops after them, herding them back to the others. -->
-				<!-- Your <<steed_text>> lurches aside, and gallops. You throw your arms around <<steed_his>> neck and cling as hard as you can, until Remy catches up and grasps the reins, pulling you to a stop.<<gstress>><<stress 6>> -->
-				<!-- <br><br> -->
+			<<else>>
+				You manage to keep yours in line, but some of the newer students lose control. Remy gallops after them, herding them back to the others.
+				Your <<steed_text>> lurches aside, and gallops. You throw your arms around <<steed_his>> neck and cling as hard as you can, until Remy catches up and grasps the reins, pulling you to a stop.<<gstress>><<stress 6>>
+				<br><br>
 
-				<!-- <<link [[Next|Riding School Lesson]]>><</link>> -->
-				<!-- <br> -->
-
+				<<link [[Next|Riding School Lesson]]>><</link>>
+				<br>
+			<</if>>
 		<<elseif $rng gte 61>>
 			<<npc Remy>><<person1>>
 			Remy leads you to a smooth lane, and pushes <<his>> steed to a trot. The other horses follow suit.
@@ -489,7 +491,7 @@ You steer the <<steed_text>> into the trees, away from prying eyes. You ride dow
 
 Perhaps there are clothes inside.
 <<if $physiquesize lte 6000>>
-	If you move some of the smaller bits of debris, you small frame should have no trouble squeezing through.
+	If you move some of the smaller bits of debris, your small frame should have no trouble squeezing through.
 <<else>>
 <</if>>
 <br><br>
@@ -519,7 +521,7 @@ You drop to your knees and crawl inside. The interior is dark and dusty. You get
 <br><br>
 
 <!-- Modified for Monster People -->
-	<<if $horsedisable is "f">>
+	<<if $horsedisable is "f" and $analingusdisablereceiving is "f" and ($steed isnot "mare" and $steed isnot "stallion" or $bestialitydisable is "f")>>
 		You push against the wall and wiggle your hips. You're making progress, but then something wet touches your <<bottom>>. It's a tongue.
 
 		<<if $steed is "male" or $steed is "female">>
@@ -527,7 +529,7 @@ You drop to your knees and crawl inside. The interior is dark and dusty. You get
 			<br><br>
 
 		<<else>>
-			A very long tongue. Its the horse.<<gstress>><<garousal>><<stress 6>><<arousal 600>>
+			A very long tongue. It's the horse.<<gstress>><<garousal>><<stress 6>><<arousal 600>>
 			<br><br>
 		<</if>>
 
@@ -752,12 +754,7 @@ You lean behind the <<person>>, and tap <<him>> on the opposite shoulder.
 	<span class="green"><<He>> turns away from you.</span> You grasp the hem of <<his>> shirt, and after a brief struggle, tug it up and over <<his>> head.
 	<br><br>
 
-	<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
-		<<skulduggeryskilluse>>
-	<<else>>
-		<span class="blue">That was too easy. You didn't learn anything.</span>
-		<br><br>
-		<</if>>
+	<<skulduggeryuse>>
 
 
 	<<if $pronoun is "f">>
@@ -783,12 +780,7 @@ You lean behind the <<person>>, and tap <<him>> on the opposite shoulder.
 	<br><br>
 
 
-	<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
-		<<skulduggeryskilluse>>
-	<<else>>
-		<span class="blue">That was too easy. You didn't learn anything.</span>
-		<br><br>
-	<</if>>
+	<<skulduggeryuse>>
 
 	The <<person>> laughs as you climb back into your saddle.
 	<br><br>
@@ -826,7 +818,7 @@ You lean behind the <<person>>, and tap <<him>> on the opposite shoulder.
 
 <<if $steed is "male" or $steed is "female">>
 	<<if $submissive gte 1150>>
-		"Pl-please don't hurt me," you say, trying to remain calm. "I didn't do anything to hurt you."
+		"P-please don't hurt me," you say, trying to remain calm. "I didn't do anything to hurt you."
 	<<elseif $submissive lte 850>>
 		"Knock if off," you say, trying to remain calm. "Or I'll knock some sense into you."
 	<<else>>
@@ -895,7 +887,7 @@ You brace yourself as the horse charges, knocking you down and taking position a
 <<elseif $enemyarousal gte $enemyarousalmax>>
 <span id="next"><<link [[Next|Riding School Horse Rape Finish]]>><</link>></span><<nexttext>>
 <<else>>
-<span id="next"><<link "Next">><<script>>state.display(state.active.title, null)<</script>><</link>></span><<nexttext>>
+<span id="next"><<link [[Next|Riding School Horse Rape]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: Riding School Horse Rape Finish
@@ -941,7 +933,7 @@ You reach up, and manage to snag one off the branch. Greens and purples blend to
 "Don't eat the fruit," Remy says from further up the procession. "It's toxic without preparation."
 <br><br>
 
-<<link [[Eat it anyway|Riding School Lesson Eat]]>><<def 1>><<set $drugged += 60>><<stress -6>><</link>><<garousal>><<lstress>>
+<<link [[Eat it anyway|Riding School Lesson Eat]]>><<def 1>><<drugs 60>><<stress -6>><</link>><<garousal>><<lstress>>
 <br>
 <<link [[Throw it away|Riding School Lesson]]>><</link>>
 <br>

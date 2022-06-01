@@ -25,7 +25,7 @@ Light-headed, you try and fail to stand up without collapsing. You hear footstep
 
 <<effects>><<set $location to "sewers">>
 
-You nod. The figure outstretches <<his>> arms, and grabs you in a hug. "I knew it," <<he>> cries. "They lied to me," <<He>> runs <<his>> hands over your body.
+You nod. The figure outstretches <<his>> arms, and grabs you in a hug. "I knew it," <<he>> cries. "They lied to me." <<He>> runs <<his>> hands over your body.
 <br><br>
 
 <<link [[Allow|Sewers Intro Molestation]]>><<set $molestationstart to 1>><</link>>
@@ -45,7 +45,7 @@ You nod. The figure outstretches <<his>> arms, and grabs you in a hug. "I knew i
 <</if>>
 <br><br>
 
-<<He>> grabs your arm and pulls you closer. <<He>> examines your scalp. "Yes, yes, good, looks good." <<he>> babbles, running <<his>> fingers over your head. "My child, you're beginning to upset me. You didn't lose your memory, right?" <<He>> runs <<his>> hands over your body.
+<<He>> grabs your arm and pulls you closer. <<He>> examines your scalp. "Yes, yes, good, looks good," <<he>> babbles, running <<his>> fingers over your head. "My child, you're beginning to upset me. You didn't lose your memory, right?" <<He>> runs <<his>> hands over your body.
 <br><br>
 
 <<link [[Allow|Sewers Intro Molestation]]>><<set $molestationstart to 1>><</link>>
@@ -222,7 +222,7 @@ You shove Morgan away from you, dodge <<his>> clutching grasp and stumble to you
 <<if $breastfeedingdisable is "f" and $pronoun is "f">>
 	Morgan loosens <<his>> sash, and exposes <<his>> breast from underneath <<his>> tattered and discoloured gown. "Come, dear. I know you're a bit old for this, but it was always your favourite."
 	<br><br>
-	<<link [[Feed|Sewers Breastfeed]]>><<npcincr Morgan love 1>><<npcincr Morgan dom 1>><</link>>
+	<<link [[Feed|Sewers Breastfeed]]>><<breastfed>><<npcincr Morgan love 1>><<npcincr Morgan dom 1>><</link>>
 	<br>
 	<<link [[Refuse|Sewers Breastfeed Refuse]]>><<npcincr Morgan love -1>><<npcincr Morgan dom -1>><</link>>
 	<br>
@@ -291,12 +291,7 @@ You toss the rats and pour the sludge down a drain, while making exaggerated cho
 "I hope you enjoyed the meal," Morgan says. "It has been quite a while since I've been able to cook for somebody else, much less my own flesh and blood. Now, there are chores you can help me with, or maybe we'll take a nap."
 <br><br>
 
-	<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
-	<<skulduggeryskilluse>>
-	<<else>>
-	<span class="blue">That was too easy. You didn't learn anything.</span>
-	<br><br>
-	<</if>>
+	<<skulduggeryuse>>
 
 <<link [[Next|Sewers Morgan]]>><</link>>
 <br>
@@ -309,12 +304,7 @@ You try to toss the rats down a drain, but they splat against the bars. You lift
 Morgan turns. "I made that for you!" <<he>> says. "You spoiled brat."
 <br><br>
 
-	<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
-	<<skulduggeryskilluse>>
-	<<else>>
-	<span class="blue">That was too easy. You didn't learn anything.</span>
-	<br><br>
-	<</if>>
+	<<skulduggeryuse>>
 
 <<link [[Next|Sewers Spank]]>><<set $molestationstart to 1>><</link>>
 <br>
@@ -426,7 +416,7 @@ Morgan yawns, stretches and falls back on a pile of blankets. <<He>> snores.
 Now could be your chance to escape.
 <br><br>
 
-<<link [[Sleep|Sewers Sleep]]>><<set $saveDetails.auto.count++>><</link>>
+<<link [[Sleep|Sewers Sleep]]>><<if $ironmanmode isnot true>><<set $saveDetails.auto.count++>><</if>><</link>>
 <br>
 <<link [[Escape|Sewers Escape Night]]>><</link>>
 <br>
@@ -443,7 +433,7 @@ Morgan stares at you and smiles.
 "Now, sweetie," Morgan says. "It's important for people of our status to be educated about the finer things in life. Allow me to begin by telling you again of our family history." <<He>> prattles, gibbers, and mumbles <<his>> way through what <<he>> calls a history lesson.
 <br><br>
 
-<<link [[Pay attention (1:00)|Sewers History]]>><<pass 60>><<trauma 6>><<stress 6>><</link>><<gtrauma>><<gstress>> | <span class="blue">History?</span>
+<<link [[Pay attention (1:00)|Sewers History]]>><<pass 60>><<trauma 6>><<stress 6>><</link>><<gtrauma>><<gstress>><<if $statdisable is "f">> | <span class="blue">History?</span><</if>>
 <br>
 <<link [[Daydream (1:00)|Sewers History Daydream]]>><<pass 60>><</link>>
 <br>
@@ -454,7 +444,7 @@ Morgan stares at you and smiles.
 "Mathematics," Morgan says. "My favourite subject." <<He>> licks <<his>> lips and hands you an old receipt to write on.
 <br><br>
 
-<<link [[Pay attention (1:00)|Sewers Maths]]>><<pass 60>><<trauma 6>><<stress 6>><</link>><<gtrauma>><<gstress>> | <span class="blue">Maths?</span>
+<<link [[Pay attention (1:00)|Sewers Maths]]>><<pass 60>><<trauma 6>><<stress 6>><</link>><<gtrauma>><<gstress>><<if $statdisable is "f">> | <span class="blue">Maths?</span><</if>>
 <br>
 <<link [[Daydream (1:00)|Sewers Maths Daydream]]>><<pass 60>><</link>>
 <br>
@@ -465,7 +455,7 @@ Morgan stares at you and smiles.
 "Now pay attention," Morgan says. "You must be the quintessential socialite."
 <br><br>
 
-<<link [[Pay attention (1:00)|Sewers English]]>><<pass 60>><<trauma 6>><<stress 6>><</link>><<gtrauma>><<gstress>> | <span class="blue">English?</span>
+<<link [[Pay attention (1:00)|Sewers English]]>><<pass 60>><<trauma 6>><<stress 6>><</link>><<gtrauma>><<gstress>><<if $statdisable is "f">> | <span class="blue">English?</span><</if>>
 <br>
 <<link [[Daydream (1:00)|Sewers English Daydream]]>><<pass 60>><</link>>
 <br>
@@ -476,7 +466,7 @@ Morgan stares at you and smiles.
 "Listen carefully <<charles>>," Morgan says. "This is important." <<He>> instructs you on the nutritional value of food in the old sewers.
 <br><br>
 
-<<link [[Pay attention (1:00)|Sewers Science]]>><<pass 60>><<trauma 6>><<stress 6>><</link>><<gtrauma>><<gstress>> | <span class="blue">Science?</span>
+<<link [[Pay attention (1:00)|Sewers Science]]>><<pass 60>><<trauma 6>><<stress 6>><</link>><<gtrauma>><<gstress>><<if $statdisable is "f">> | <span class="blue">Science?</span><</if>>
 <br>
 <<link [[Daydream (1:00)|Sewers Science Daydream]]>><<pass 60>><</link>>
 <br>
@@ -510,6 +500,24 @@ Morgan stares at you and smiles.
 <br>
 <<link [[Refuse|Sewers Collar Refuse]]>><</link>>
 <br>
+
+<<elseif $rng gte 81 and $worn.feet.type.includes("shackle")>>
+	"Oh, <<charles>>, your feet!" Morgan exclaims. "It's dangerous to be locked up like that down here. What if you trip into the water?" <<He>> produces a tea plate and a screwdriver. "<<if $pronoun is "m">>Daddy<<else>>Mummy<</if>> will get those nasty things off you."
+	<br><br>
+
+	<<link [[Allow|Sewers Shackles]]>><<remove_shackle>><<trauma 6>><<stress 6>><<pain 6>><</link>><<gtrauma>><<gstress>><<gpain>>
+	<br>
+	<<link [[Refuse|Sewers Collar Refuse]]>><</link>>
+	<br>
+
+<<elseif $rng gte 71 and ($leftarm is "bound" or $rightarm is "bound")>>
+	"Now how'd you get like that, <<charles>>?" Morgan asks, poking at your bindings. "You shouldn't be playing with rope, you could hurt yourself." <<He>> produces a pair of rusty gardening shears. "Don't be shy, let <<if $pronoun is "m">>daddy<<else>>mummy<</if>> take care of it."
+	<br><br>
+
+	<<link [[Allow|Sewers Bindings]]>><<unbind>><<trauma 6>><<stress 6>><<pain 6>><</link>><<gtrauma>><<gstress>><<gpain>>
+	<br>
+	<<link [[Refuse|Sewers Collar Refuse]]>><</link>>
+	<br>
 
 <<elseif $rng gte 51>>
 "I'm going to bake scones," Morgan says, clutching a number of rats by their tails. "You put the kettle on."
@@ -573,15 +581,12 @@ You help Morgan search for salvage, doing your best to avoid anything too gross.
 <br>
 
 :: Sewers Sleep
-<<run Save.autosave.save(null, {"saveId":$saveId, "saveName":$saveName})>>
-<<if _preventUpdate is undefined>>
-	<<run setSaveDetail("autosave",{"saveId":$saveId,"saveName":$saveName})>>
-<</if>>
+<<set _autosavehere to true>>
 <<effects>><<set $location to "sewers">><<set $outside to 0>>
 You lie down beside Morgan. <<He>> wraps an arm around you.
 <br><br>
 <<sewerssleep>>
-You awaken some time later. A pair of hands grope you from behind. "I've seen how you've look at me," <<he>> whispers. "I remember how much of a struggle you would put up. I still have that scar."
+You awaken some time later. A pair of hands grope you from behind. "I've seen how you've looked at me," <<he>> whispers. "I remember how much of a struggle you would put up. I still have that scar."
 <br><br>
 <<link [[Next|Sewers Rape]]>><<set $molestationstart to 1>><</link>>
 <br>
@@ -871,6 +876,25 @@ Morgan pulls you close, and sticks the greased bobby pin down between a gap betw
 
 <<effects>><<set $location to "sewers">><<set $outside to 0>>
 Morgan shrugs. "Have it your way, dear."
+<br><br>
+<<link [[Next|Sewers Morgan]]>><</link>>
+<br>
+
+:: Sewers Shackles
+<<effects>><<set $location to "sewers">><<set $outside to 0>>
+
+Morgan pulls you close, and sticks the plate between your ankle and one of the shackles. It digs uncomfortably into your skin. "I can't have it moving while doing this," Morgan rambles, "and there's enough room around your leg for it to wiggle. That won't do, it needs a tight fit." <<He>> shakes the shackle to make sure it's flush against the plate, before inserting the screwdriver into the keyhole. <<He>> jams it in and out, the shackle unable to move with the plate holding it in place. "When you don't have a key, brute force does the trick! Remember it well, <<charles>>!"
+<br><br>
+
+Eventually, you hear a snap, and the shackle pops open. <<tearful>> you rise to your feet as Morgan snatches and examines the remains.
+<br><br>
+<<link [[Next|Sewers Morgan]]>><</link>>
+<br>
+
+:: Sewers Bindings
+<<effects>><<set $location to "sewers">><<set $outside to 0>>
+
+Morgan pulls you close, and wedges one end of the shears between your wrists. "These old things can't cut anymore," Morgan grumbles. "It's a shame, but that's what happens when you don't buy things with a warranty. Let that be a lesson, <<charles>>." <<He>> wiggles the blade back and forth, loosening your restraints. When they're loose enough, Morgan drops the shears and rips the ropes apart with <<his>> bare hands. <<tearful>> you rise to your feet as Morgan snatches and examines the remains.
 <br><br>
 <<link [[Next|Sewers Morgan]]>><</link>>
 <br>

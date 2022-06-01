@@ -39,22 +39,22 @@ window.prepareSaveDetails = function (forceRun){
 }
 
 window.setSaveDetail = function (saveSlot, metadata, story){
-	var saveDetails = JSON.parse(localStorage.getItem("dolSaveDetails"));
+	const saveDetails = JSON.parse(localStorage.getItem("dolSaveDetails"));
 	if(saveSlot === "autosave"){
 		saveDetails.autosave = {
-			title:SugarCube.Story.get(V.passage).description(),
+			title: Story.get(V.passage).description(),
 			date:Date.now(),
 			metadata:metadata
 		};
 	}else{
 		var slot = parseInt(saveSlot);
 		saveDetails.slots[slot] = {
-			title:SugarCube.Story.get(V.passage).description(),
+			title: Story.get(V.passage).description(),
 			date:Date.now(),
 			metadata:metadata
 		};
 	}
-	localStorage.setItem("dolSaveDetails" ,JSON.stringify(saveDetails));
+	localStorage.setItem("dolSaveDetails", JSON.stringify(saveDetails));
 }
 
 window.getSaveDetails = function (saveSlot){
@@ -85,19 +85,64 @@ window.resetSaveMenu = function () {
 	new Wikifier(null, '<<resetSaveMenu>>');
 }
 
-window.loadSave = function (saveSlot, confirm) {
+window.ironmanAutoSave = function() {
+	const saveSlot = 8;
+	updateSavesCount();
+	const success = Save.slots.save(saveSlot, null, { "saveId": V.saveId, "saveName": V.saveName, "ironman": V.ironmanmode });
+	if (success) {
+		const save = Save.slots.get(saveSlot);
+		setSaveDetail(saveSlot, {
+			"saveId": V.saveId, "saveName": V.saveName, 
+			"ironman": V.ironmanmode, "ironman_signature": (V.ironmanmode ? md5(JSON.stringify(save.state.delta[0])) : false)
+		});
+	}
+}
+
+window.getStateDelta = function (saveSlot) {
+	let saveDetails = getSaveDetails()
+	if (saveDetails == undefined)
+		saveDetails = returnSaveDetails()
+	else if(saveDetails.autosave == undefined || saveDetails.slots == undefined)
+		saveDetails = returnSaveDetails()
+	return saveDetails.slots[saveSlot];
+}
+
+window.loadSave = function(saveSlot, confirm) {
 	if (V.confirmLoad === true && confirm === undefined) {
 		new Wikifier(null, '<<loadConfirm ' + saveSlot + '>>');
 	} else {
 		if (saveSlot === "auto") {
 			Save.autosave.load();
 		} else {
+			const saveDetails = JSON.parse(localStorage.getItem("dolSaveDetails"));
+			const metadata = saveDetails.slots[saveSlot].metadata;
+			/* Check if metadata for save matches the save's computed md5 hash. If it matches, the ironman save was not tampered with. */
+			if (metadata.ironman) {
+				const save = Save.slots.get(saveSlot);
+				const signature = md5(JSON.stringify(save.state.delta[0]));
+				// (if ironman mode enabled) following checks md5 signature of the save to see if the variables have been modified
+				if (signature !== metadata.ironman_signature) {
+					new Wikifier(null, '<<loadIronmanCheater ' + saveSlot + '>>');
+					return;
+				}
+			}
 			Save.slots.load(saveSlot);
+			if (V.ironmanmode) {
+				// (ironman) remove all saves(except auto-save) with the same saveId than loaded save
+				[0, 1, 2, 3, 4, 5, 6, 7].forEach(id => {
+					const saveDetail = saveDetails.slots[id];
+					if (saveDetail == null) return;
+					if (saveDetail.metadata.saveId === metadata.saveId) {
+						Save.slots.delete(id);
+						deleteSaveDetails(id);
+					}
+				});
+			}
 		}
 	}
 }
 
-window.save = function (saveSlot, confirm, saveId, saveName) {
+window.save = function(saveSlot, confirm, saveId, saveName) {
 	if (saveId == null) {
 		new Wikifier(null, '<<saveConfirm ' + saveSlot + '>>');
 	} else if ((V.confirmSave === true && confirm != true) || (V.saveId != saveId && saveId != null)) {
@@ -105,10 +150,18 @@ window.save = function (saveSlot, confirm, saveId, saveName) {
 	} else {
 		if (saveSlot != undefined) {
 			updateSavesCount();
-			Save.slots.save(saveSlot, null, { "saveId": saveId, "saveName": saveName });
-			setSaveDetail(saveSlot, { "saveId": saveId, "saveName": saveName })
-			V.currentOverlay = null;
-			overlayShowHide("customOverlay");
+			const success = Save.slots.save(saveSlot, null, { "saveId": saveId, "saveName": saveName, "ironman": V.ironmanmode });
+			if (success) {
+				const save = Save.slots.get(saveSlot);
+				setSaveDetail(saveSlot, {
+					"saveId": saveId, "saveName": saveName, 
+					"ironman": V.ironmanmode, "ironman_signature": (V.ironmanmode ? md5(JSON.stringify(save.state.delta[0])) : false)
+				});
+				V.currentOverlay = null;
+				overlayShowHide("customOverlay");
+				if (V.ironmanmode === true)
+					SugarCube.Engine.restart();
+			}
 		}
 	}
 }
@@ -136,7 +189,7 @@ window.deleteSave = function (saveSlot, confirm) {
 			return;
 		} else {
 			Save.slots.delete(saveSlot);
-			deleteSaveDetails(saveSlot)
+			deleteSaveDetails(saveSlot);
 		}
 	}
 	new Wikifier(null, '<<resetSaveMenu>>');
@@ -232,17 +285,17 @@ window.updateExportDay = function(){
 }
 
 window.updateSavesCount = function(){
-	if(V.saveDetails != undefined && SugarCube.State.history[0].variables.saveDetails != undefined){
+	if(V.saveDetails != undefined && State.history[0].variables.saveDetails != undefined){
 		V.saveDetails.slot.count++;
-		SugarCube.State.history[0].variables.saveDetails.slot.count++;
+		State.history[0].variables.saveDetails.slot.count++;
 		V.saveDetails.slot.dayCount++;
-		SugarCube.State.history[0].variables.saveDetails.slot.dayCount++;
-		var sessionJson = sessionStorage.getItem(SugarCube.Story.domId + ".state");
+		State.history[0].variables.saveDetails.slot.dayCount++;
+		var sessionJson = sessionStorage.getItem(Story.domId + ".state");
 		if(sessionJson != undefined){
 			var session = JSON.parse(sessionJson);
 			session.delta[0].variables.saveDetails.slot.dayCount++;
 			session.delta[0].variables.saveDetails.slot.count++;
-			sessionStorage.setItem(SugarCube.Story.domId + ".state", JSON.stringify(session));
+			sessionStorage.setItem(Story.domId + ".state", JSON.stringify(session));
 		}
 	}
 }
@@ -286,7 +339,7 @@ var importSettingsData = function (data) {
 			var namedObjects = ["player", "skinColor"];
 
 			for (var i = 0; i < listKey.length; i++) {
-				if (namedObjects.contains(listKey[i]) && S.starting[listKey[i]] != undefined) {
+				if (namedObjects.includes(listKey[i]) && S.starting[listKey[i]] != undefined) {
 					var itemKey = Object.keys(listObject[listKey[i]]);
 					for (var j = 0; j < itemKey.length; j++) {
 						if (V[listKey[i]][itemKey[j]] != undefined && S.starting[listKey[i]][itemKey[j]] != undefined) {
@@ -295,7 +348,7 @@ var importSettingsData = function (data) {
 							}
 						}
 					}
-				} else if (!namedObjects.contains(listKey[i])) {
+				} else if (!namedObjects.includes(listKey[i])) {
 					if (V[listKey[i]] != undefined && S.starting[listKey[i]] != undefined) {
 						if (validateValue(listObject[listKey[i]], S.starting[listKey[i]])) {
 							V[listKey[i]] = S.starting[listKey[i]];
@@ -311,7 +364,7 @@ var importSettingsData = function (data) {
 			var namedObjects = ["map", "skinColor", "shopDefaults"];
 
 			for (var i = 0; i < listKey.length; i++) {
-				if (namedObjects.contains(listKey[i]) && S.general[listKey[i]] != undefined) {
+				if (namedObjects.includes(listKey[i]) && S.general[listKey[i]] != undefined) {
 					var itemKey = Object.keys(listObject[listKey[i]]);
 					for (var j = 0; j < itemKey.length; j++) {
 						if (V[listKey[i]][itemKey[j]] != undefined && S.general[listKey[i]][itemKey[j]] != undefined) {
@@ -320,7 +373,7 @@ var importSettingsData = function (data) {
 							}
 						}
 					}
-				} else if (!namedObjects.contains(listKey[i])) {
+				} else if (!namedObjects.includes(listKey[i])) {
 					if (V[listKey[i]] != undefined && S.general[listKey[i]] != undefined) {
 						if (validateValue(listObject[listKey[i]], S.general[listKey[i]])) {
 							V[listKey[i]] = S.general[listKey[i]];
@@ -404,7 +457,7 @@ window.exportSettings = function (data, type) {
 		var namedObjects = ["player", "skinColor"];
 
 		for (var i = 0; i < listKey.length; i++) {
-			if (namedObjects.contains(listKey[i]) && V[listKey[i]] != undefined) {
+			if (namedObjects.includes(listKey[i]) && V[listKey[i]] != undefined) {
 				var itemKey = Object.keys(listObject[listKey[i]]);
 				for (var j = 0; j < itemKey.length; j++) {
 					if (V[listKey[i]][itemKey[j]] != undefined) {
@@ -413,7 +466,7 @@ window.exportSettings = function (data, type) {
 						}
 					}
 				}
-			} else if (!namedObjects.contains(listKey[i])) {
+			} else if (!namedObjects.includes(listKey[i])) {
 				if (V[listKey[i]] != undefined) {
 					if (validateValue(listObject[listKey[i]], V[listKey[i]])) {
 						S.starting[listKey[i]] = V[listKey[i]];
@@ -428,7 +481,7 @@ window.exportSettings = function (data, type) {
 	var namedObjects = ["map", "skinColor", "shopDefaults"];
 
 	for (var i = 0; i < listKey.length; i++) {
-		if (namedObjects.contains(listKey[i]) && V[listKey[i]] != undefined) {
+		if (namedObjects.includes(listKey[i]) && V[listKey[i]] != undefined) {
 			var itemKey = Object.keys(listObject[listKey[i]]);
 			for (var j = 0; j < itemKey.length; j++) {
 				if (V[listKey[i]][itemKey[j]] != undefined) {
@@ -437,7 +490,7 @@ window.exportSettings = function (data, type) {
 					}
 				}
 			}
-		} else if (!namedObjects.contains(listKey[i])) {
+		} else if (!namedObjects.includes(listKey[i])) {
 			if (V[listKey[i]] != undefined) {
 				if (validateValue(listObject[listKey[i]], V[listKey[i]])) {
 					S.general[listKey[i]] = V[listKey[i]];
@@ -483,65 +536,76 @@ window.settingsObjects = function (type) {
 	switch (type) {
 		case "starting":
 			result = {
-				bodysize: { min: 0, max: 3, decimals: 0 },
-				penissize: { min: 0, max: 3, decimals: 0 },
-				breastsize: { min: 0, max: 4, decimals: 0 },
-				bottomsize: { min: 0, max: 3, decimals: 0 },
-				breastsensitivity: { min: 0, max: 5, decimals: 0 },
-				genitalsensitivity: { min: 0, max: 5, decimals: 0 },
-				eyeselect: { strings: ["purple", "dark blue", "light blue", "amber", "hazel", "green", "red", "pink", "grey"] },
-				hairselect: { strings: ["red", "jetblack", "black", "brown", "softbrown", "lightbrown", "burntorange", "blond", "softblond", "platinumblond", "ashyblond", "strawberryblond", "ginger"] },
-				hairlength: { min: 0, max: 400, decimals: 0 },
-				awareselect: { strings: ["innocent", "knowledgeable"] },
-				background: { strings: ["waif", "nerd", "athlete", "delinquent", "promiscuous", "exhibitionist", "deviant", "beautiful", "crossdresser", "lustful", "greenthumb"] },
+				bodysize: { min: 0, max: 3, decimals: 0, randomize: "characterAppearance" },
+				breastsensitivity: { min: 0, max: 5, decimals: 0, randomize: "characterTrait" },
+				genitalsensitivity: { min: 0, max: 5, decimals: 0, randomize: "characterTrait" },
+				eyeselect: { strings: ["purple", "dark blue", "light blue", "amber", "hazel", "green", "lime green", "red", "pink", "grey", "light grey", "random"], randomize: "characterAppearance" },
+				hairselect: { strings: ["red", "jetblack", "black", "brown", "softbrown", "lightbrown", "burntorange", "blond", "softblond", "platinumblond", "ashyblond", "strawberryblond", "ginger", "random"], randomize: "characterAppearance" },
+				hairlength: { min: 0, max: 400, decimals: 0, randomize: "characterAppearance" },
+				awareselect: { strings: ["innocent", "knowledgeable"], randomize: "characterTrait" },
+				background: { strings: ["waif", "nerd", "athlete", "delinquent", "promiscuous", "exhibitionist", "deviant", "beautiful", "crossdresser", "lustful", "greenthumb", "plantlover"], randomize: "characterTrait" },
 				gamemode: { strings: ["normal", "soft", "hard"] },
+				ironmanmode: {bool: false, bool:true},
+				maxStates: {min: 1, max:20, decimals: 0},
 				player: {
-					gender: { strings: ["m", "f", "h"] },
-					gender_body: { strings: ["m", "f", "a"] },
-					ballsExist: { bool: true },
-					freckles: { bool: true, strings: ["random"] },
+					gender: { strings: ["m", "f", "h"], randomize: "characterAppearance" },
+					gender_body: { strings: ["m", "f", "a"], randomize: "characterAppearance" },
+					ballsExist: { bool: true, randomize: "characterAppearance" },
+					freckles: { bool: true, strings: ["random"], randomize: "characterAppearance" },
+					breastsize: { min: 0, max: 4, decimals: 0, randomize: "characterAppearance"  },
+					penissize: { min: 0, max: 3, decimals: 0, randomize: "characterAppearance" },
+					bottomsize: { min: 0, max: 3, decimals: 0, randomize: "characterAppearance" }
 				},
 				skinColor: {
-					natural: { strings: ["light", "medium", "dark", "gyaru", "ylight", "ymedium", "ydark", "ygyaru"] },
-					range: { min: 0, max: 100, decimals: 0 },
+					natural: { strings: ["light", "medium", "dark", "gyaru", "ylight", "ymedium", "ydark", "ygyaru"], randomize: "characterAppearance" },
+					range: { min: 0, max: 100, decimals: 0, randomize: "characterAppearance" },
 				}
 			};
 			break;
 		case "general":
 			result = {
-				malechance: { min: 0, max: 100, decimals: 0 },
-				dgchance: { min: 0, max: 100, decimals: 0 },
-				cbchance: { min: 0, max: 100, decimals: 0 },
-				malevictimchance: { min: 0, max: 100, decimals: 0 },
-				homochance: { min: 0, max: 100, decimals: 0 },
-				breast_mod: { min: -12, max: 12, decimals: 0 },
-				penis_mod: { min: -8, max: 8, decimals: 0 },
-				whitechance: { min: 0, max: 100, decimals: 0 },
-				blackchance: { min: 0, max: 100, decimals: 0 },
-				straponchance: { min: 0, max: 100, decimals: 0 },
-				alluremod: { min: 0.2, max: 2, decimals: 1 },
-				clothesPrice: { min: 1, max: 10, decimals: 1 },
-				clothesPriceUnderwear: { min: 1, max: 2, decimals: 1 },
-				clothesPriceSchool: { min: 1, max: 2, decimals: 1 },
-				clothesPriceLewd: { min: 0.1, max: 2, decimals: 1 },
-				rentmod: { min: 0.1, max: 3, decimals: 1 },
-				beastmalechance: { min: 0, max: 100, decimals: 0 },
-				monsterchance: { min: 0, max: 100, decimals: 0 },
-				monsterhallucinations: { boolLetter: true, bool: true },
-				blackwolfmonster: { min: 0, max: 2, decimals: 0 },
+				malechance: { min: 0, max: 100, decimals: 0, randomize: "encounter" },
+				dgchance: { min: 0, max: 100, decimals: 0, randomize: "encounter" },
+				cbchance: { min: 0, max: 100, decimals: 0, randomize: "encounter" },
+				malevictimchance: { min: 0, max: 100, decimals: 0, randomize: "encounter" },
+				homochance: { min: 0, max: 100, decimals: 0, randomize: "encounter" },
+				npcVirginityChance: { min: 0, max: 100, decimals: 0, randomize: "encounter" },
+				npcVirginityChanceAdult: { min: 0, max: 100, decimals: 0, randomize: "encounter" },
+				breast_mod: { min: -12, max: 12, decimals: 0, randomize: "encounter" },
+				penis_mod: { min: -8, max: 8, decimals: 0, randomize: "encounter" },
+				whitechance: { min: 0, max: 100, decimals: 0, randomize: "encounter" },
+				blackchance: { min: 0, max: 100, decimals: 0, randomize: "encounter" },
+				straponchance: { min: 0, max: 100, decimals: 0, randomize: "encounter" },
+				alluremod: { min: 0.2, max: 2, decimals: 1, randomize: "gameplay" },
+				clothesPrice: { min: 1, max: 10, decimals: 1, randomize: "gameplay" },
+				clothesPriceUnderwear: { min: 1, max: 2, decimals: 1, randomize: "gameplay" },
+				clothesPriceSchool: { min: 1, max: 2, decimals: 1, randomize: "gameplay" },
+				clothesPriceLewd: { min: 0.1, max: 2, decimals: 1, randomize: "gameplay" },
+				tending_yield_factor: { min: 1, max: 10, decimals: 1, randomize: "gameplay" },
+				rentmod: { min: 0.1, max: 3, decimals: 1, randomize: "gameplay" },
+				beastmalechance: { min: 0, max: 100, decimals: 0, randomize: "encounter" },
+				monsterchance: { min: 0, max: 100, decimals: 0, randomize: "encounter" },
+				monsterhallucinations: { boolLetter: true, bool: true, randomize: "encounter" },
+				blackwolfmonster: { min: 0, max: 2, decimals: 0, randomize: "encounter" },
+				greathawkmonster: { min: 0, max: 2, decimals: 0, randomize: "encounter" },
 				bestialitydisable: { boolLetter: true, bool: true },
 				swarmdisable: { boolLetter: true, bool: true },
 				slimedisable: { boolLetter: true, bool: true },
 				voredisable: { boolLetter: true, bool: true },
 				tentacledisable: { boolLetter: true, bool: true },
 				analdisable: { boolLetter: true, bool: true },
+				analdoubledisable: { boolLetter: true, bool: true },
 				analingusdisablegiving: { boolLetter: true, bool: true },
 				analingusdisablereceiving: { boolLetter: true, bool: true },
+				vaginaldoubledisable: { boolLetter: true, bool: true },
 				transformdisable: { boolLetter: true, bool: true },
+				transformdisabledivine: { boolLetter: true, bool: true },
 				hirsutedisable: { boolLetter: true, bool: true },
+				pbdisable: { boolLetter: true, bool: true },
 				breastfeedingdisable: { boolLetter: true, bool: true },
 				analpregdisable: { boolLetter: true, bool: true },
 				watersportsdisable: { boolLetter: true, bool: true },
+				facesitdisable: { boolLetter: true, bool: true },
 				spiderdisable: { boolLetter: true, bool: true },
 				bodywritingdisable: { boolLetter: true, bool: true },
 				parasitedisable: { boolLetter: true, bool: true},
@@ -550,11 +614,25 @@ window.settingsObjects = function (type) {
 				beedisable: { boolLetter: true, bool: true},
 				lurkerdisable: {boolLetter: true, bool: true},
 				horsedisable: {boolLetter: true, bool: true},
-				asphyxiaLvl: { min: 0, max: 3, decimals: 0 },
+				plantdisable: {boolLetter: true, bool: true},
+				footdisable: {boolLetter: true, bool: true},
+				toydildodisable: {boolLetter: true, bool: true},
+				toywhipdisable: {boolLetter: true, bool: true},
+				asphyxiaLvl: { min: 0, max: 4, decimals: 0 },
+				NudeGenderDC: { min: 0, max: 2, decimals: 0 },
+				breastsizemin: { min: 0, max: 4, decimals: 0 },
 				breastsizemax: { min: 0, max: 13, decimals: 0 },
 				bottomsizemax: { min: 0, max: 9, decimals: 0 },
-				penissizemax: { min: -1, max: 4, decimals: 0 },
-				penissizemin: { min: -1, max: 0, decimals: 0 },
+				penissizemax: { min: -2, max: 4, decimals: 0 },
+				penissizemin: { min: -2, max: 0, decimals: 0 },
+				/*ToDo: Pregnancy, uncomment to properly enable, add defaults back to DolSettingsExport.json*/
+				//baseVaginalPregnancyChance: { min: 0, max: 96, decimals: 0 },
+				//baseNpcPregnancyChance: { min: 0, max: 16, decimals: 0 },
+				//humanPregnancyMonths: { min: 1, max: 9, decimals: 0 },
+				//wolfPregnancyWeeks: { min: 2, max: 12, decimals: 0 },
+				//playerPregnancyHumanDisable: {boolLetter: true, bool: true},
+				//playerPregnancyBeastDisable: {boolLetter: true, bool: true},
+				//npcPregnancyDisable: {boolLetter: true, bool: true},
 				images: { min: 0, max: 1, decimals: 0 },
 				sidebarAnimations: { bool: true },
 				combatAnimations: { bool: true },
@@ -564,10 +642,11 @@ window.settingsObjects = function (type) {
 				halfcloseddisable: { boolLetter: true, bool: true },
 				numberify_enabled: { min: 0, max: 1, decimals: 0 },
 				timestyle: { strings: ["military", "ampm"] },
-				checkstyle: { strings: ["percentage", "words", "skillname"] },
+				checkstyle: { strings: ["percentage", "words", "skillname"], randomize: "gameplay" },
 				tipdisable: { boolLetter: true, bool: true },
 				debugdisable: { boolLetter: true, bool: true },
-				cheatdisable: { boolLetter: true, bool: true },
+				statdisable: { boolLetter: true, bool: true },
+				cheatdisabletoggle: { boolLetter: true, bool: true },
 				showCaptionText: { bool: true },
 				confirmSave: { bool: true },
 				confirmLoad: { bool: true },
@@ -580,6 +659,8 @@ window.settingsObjects = function (type) {
 				reducedLineHeight: { bool: true },
 				neverNudeMenus: { bool: true },
 				skipStatisticsConfirmation: { bool: true},
+				multipleWardrobes: { strings: [false, "isolated"] }, //, "all"
+				outfitEditorPerPage: { min: 5, max: 20, decimals: 0 }, //, "all"
 				map: {
 					movement: { bool: true },
 					top: { bool: true },
@@ -683,6 +764,60 @@ window.loadExternalExportFile = function () {
 		});
 }
 
+window.randomizeSettings = function (filter) {
+	let settingsResult = {};
+	const settingContainers = ['player','skinColor'];
+	const randomizeSettingLoop = function (settingsObject, mainObject, subObject) {
+		if(mainObject && !settingsResult[mainObject]){
+			settingsResult[mainObject] = {};
+		}
+		if(subObject){
+			if(!settingsResult[mainObject][subObject]) settingsResult[mainObject][subObject] = {};
+		}
+		Object.entries(settingsObject).forEach((setting) => {
+			if(settingContainers.includes(setting[0])) {
+				randomizeSettingLoop(setting[1],mainObject,setting[0]);
+			} else if((!filter && setting[1].randomize) || (filter && filter === setting[1].randomize)){
+				if(subObject){
+					settingsResult[mainObject][subObject][setting[0]] = randomizeSettingSet(setting[1]);
+				} else {
+					settingsResult[mainObject][setting[0]] = randomizeSettingSet(setting[1]);
+				}
+			}
+		})
+	}
+	const randomNumber = function(min,max,decimals = 0) {
+		let decimalsMult = Math.pow(10,decimals);
+		let minMult = min * decimalsMult;
+		let maxMult = max * decimalsMult;
+		let rn = (Math.floor(Math.random() * (maxMult - minMult)) + minMult) / decimalsMult;
+		return parseFloat(rn.toFixed(decimals));
+	}
+	const randomizeSettingSet = function (setting) {
+		let result;
+		var keys = Object.keys(setting);
+		if(keys.includes('min')){
+			result = randomNumber(setting.min, setting.max, setting.decimals);
+		}
+		if(keys.includes('strings')){
+			result = setting.strings.pluck();
+		}
+		if(keys.includes('boolLetter')){
+			result = ['t','f'].pluck();
+		}
+		if(keys.includes('bool')){
+			result = [true,false].pluck();
+		}
+		return result;
+	}
+	if(V.passage === "Start"){
+		randomizeSettingLoop(settingsObjects('starting'),'starting');
+	}
+	randomizeSettingLoop(settingsObjects('general'),'general');
+
+	return JSON.stringify(settingsResult);
+}
+
 // !!Hack warning!! Don't use it maybe?
 window.updateMoment = function () {
 	// change last (and only) moment in local history
@@ -693,7 +828,9 @@ window.updateMoment = function () {
 	// this is a bad thing to do probably btw, because while history and delta appear to look very similar,
 	// they're not always the same thing, SugarCube actually decodes delta into history (see: https://github.com/tmedwards/sugarcube-2/blob/36a8e1600160817c44866205bc4d2b7730b2e70c/src/state.js#L527)
 	// but for my purpose it works (i think?)
-	delete Object.assign(moment, {delta: moment.history}).history;
+	//delete Object.assign(moment, {delta: moment.history}).history;
+	// delta-encode the state
+	delete Object.assign(moment, {delta: State.deltaEncode(moment.history)}).history;
 	// replace saved moment in session with the new one
 	let gameName = SugarCube.Story.domId;
 	sessionStorage[gameName + ".state"] = JSON.stringify(moment);
@@ -704,10 +841,10 @@ window.updateMoment = function () {
 }
 
 window.isJsonString = function(s) {
-    try {
-        JSON.parse(s);
-    } catch (e) {
-        return false;
-    }
+	try {
+		JSON.parse(s);
+	} catch (e) {
+		return false;
+	}
 	return true;
 }

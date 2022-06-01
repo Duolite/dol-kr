@@ -1,10 +1,10 @@
 :: Widgets trLower [widget nobr]
 <<widget "init_trLower">>
-    <<set _trClothes.lower to [
+    <<set setup.trClothes.lower to [
         {
             index: 0,
             name: "naked",
-            name_ko: "알몸",
+            name_ko: "벗음",
             variable: "naked",
             description: "naked",
             post: 0
@@ -13,7 +13,7 @@
         {
             index: 1,
             name: "sundress skirt",
-            name_ko: "선 드레스 치마",
+            name_ko: "선드레스 치마",
             variable: "sundress",
             description: "뛰어 놀기에 좋다.",
             post: 1
@@ -535,7 +535,7 @@
         {
             index: 59,
             name: "classic sundress skirt",
-            name_ko: "클래식 선 드레스",
+            name_ko: "클래식 선드레스",
             variable: "classicsundress",
             description: "뛰어 놀기 좋다. 좋았던 기억을 떠올리게 한다.",
             post: 1
@@ -691,6 +691,87 @@
            name_ko: "청반바지",
            variable: "bootyjorts",
 					description: "꽉 조이고 노출이 심하다.",
+					post: 1
+        },
+		
+        {
+           index: 77,
+           name: "prison trousers",
+           name_ko: "죄수복 바지",
+           variable: "prison",
+					description: "교화시설 유니폼.",
+					post: 1
+        },
+		
+        {
+           index: 78,
+           name: "prison jumpsuit trousers",
+           name_ko: "죄수복 점프수트 바지",
+           variable: "jumpsuit",
+					description: "교화시설 유니폼.",
+					post: 1
+        },
+		
+        {
+           index: 79,
+           name: "patient gown skirt",
+           name_ko: "환자복 스커트",
+           variable: "patient",
+					description: "당신의 등짝을 넓게 드러낸다.",
+					post: 1
+        },
+		
+        {
+           index: 80,
+           name: "cow onesie bottoms",
+           name_ko: "젖소 한벌옷 바지",
+           variable: "cowonesie",
+					description: "포근하다.",
+					post: 1
+        },
+		
+        {
+           index: 81,
+           name: "cow print chaps",
+           name_ko: "젖소무늬 가죽바지",
+           variable: "cowchaps",
+					description: "힘든 낮의 일에 적합하다.",
+					post: 1
+        },
+		
+        {
+           index: 82,
+           name: "baseball shorts",
+           name_ko: "야구 유니폼 반바지",
+           variable: "baseball",
+					description: "이국의, 크리켓 비슷한 스포츠에서 유래한 디자인의 반바지.",
+					post: 1
+        },
+		
+        {
+           index: 83,
+           name: "scarecrow skirt",
+           name_ko: "허수아비 스커트",
+           variable: "scarecrow",
+					description: "근지럽다.",
+					post: 1
+        },
+		
+        {
+           index: 84,
+           name: "waitress skirt",
+           name_ko: "웨이트리스 스커트",
+           variable: "waitress",
+					description: "일을 끝내자.",
+					post: 1
+        },
+		
+        {
+           index: 85,
+           name: "split dress skirt",
+           name_ko: "옆트임 드레스 스커트",
+           variable: "split",
+					description: "산들바람만 불어도 대참사.",
 					post: 1
         },
     ]>>

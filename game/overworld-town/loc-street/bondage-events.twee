@@ -8,7 +8,7 @@
 	<<molested>>
 
 	<<maninit>>
-	<<set $rescue to 1>>
+	<<enable_rescue>>
 <</if>>
 
 <<effects>>
@@ -20,13 +20,13 @@
 <<actionsman>>
 
 <<if $enemyhealth lte 0>>
-	<span id="next"><<link [[Next|Bondage Rape Finish]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Bondage Rape Finish]]>><</link>></span><<nexttext>>
 <<elseif $enemyarousal gte $enemyarousalmax>>
-	<span id="next"><<link [[Next|Bondage Rape Finish]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Bondage Rape Finish]]>><</link>></span><<nexttext>>
 <<elseif $alarm is 1 and $rescue is 1>>
-	<span id="next"><<link [[Next|Bondage Rape Finish]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Bondage Rape Finish]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link [[Next|Bondage Rape]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Bondage Rape]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: Bondage Rape Finish
@@ -34,10 +34,10 @@
 <<if $enemyarousal gte $enemyarousalmax>>
 <<ejaculation>>
 
-<<He>> shoves you against the ground. "Enjoy the rest of your adventure, <<bitch>>."
+<<He_ga>> 당신을 땅바닥에 밀친다. "남은 모험 즐겨라, <<bitchPost "아">>."
 <br><br>
 
-<<tearful>> you try to get your bearings.
+<<tearful>> 당신은 몸을 추스리려고 한다.
 <br><br>
 
 <<clotheson>>
@@ -48,10 +48,10 @@
 
 <<elseif $enemyhealth lte 0>>
 
-You shove the <<person>> away from you and flee in a random direction.
+당신은 <<person_ul>> 밀쳐내고, 아무 방향으로 도망친다.
 <br><br>
 
-<<tearful>> you try to get your bearings.
+<<tearful>> 당신은 몸을 추스리려고 한다.
 <br><br>
 
 <<clotheson>>
@@ -65,41 +65,41 @@ You shove the <<person>> away from you and flee in a random direction.
 
 		<<endcombat>>
 		<<generate1>><<generate2>><<person1>>
-		"What do you think you're doing?" a voice shouts.
+		"무슨 짓을 하려고 하는 거야?" 누군가가 소리친다.
 		<br><br>
-		"Leave the <<girl>> alone," says another. "Or you'll be sorry."
+		"그 <<girl_ul>> 내버려둬." 다른 누군가가 말한다. "아니면 후회하게 될 거야."
 		<br><br>
 
-		Your attacker flees, leaving you to slump to the ground. <<tearful>> you struggle to your feet.
+		당신을 공격한 이는 당신을 땅바닥에 내팽개친 채 도망친다. <<tearful>> 당신은 두 발로 일어서려 애쓴다.
 		<br><br>
 
 		<<clotheson>>
 
 	<<if $rng gte 51 and $daystate isnot "night" or $rng gte 76>>
 
-		A hand gropes at the back of your head, and <span class="green">your blindfold comes free.</span> You squint against the light.
+		손 하나가 당신 머리 뒤쪽을 붙잡고, <span class="green">당신의 눈가리개가 벗겨진다.</span> 당신은 환한 빛에 눈을 게슴츠레하게 뜬다.
 		<br><br>
 
-		"I can't believe what's become of some people," says a <<person>>.
+		"몇몇 사람들이 이런 짓을 한다는 게 믿겨지질 않아." <<person_i>> 말한다.
 		<<if $leftarm is "bound" or $rightarm is "bound" or $feetuse is "bound">>
 			<<if $worn.face.type.includes("gag")>>
-				A <<person2>><<person>> beside <<him>> removes your gag and unties your <<if $rightarm is "bound" or $leftarm is "bound">>arms<</if>><<if ($rightarm is "bound" or $leftarm is "bound") and $feetuse is "bound">> and <</if>><<if $feetuse is "bound">>legs<</if>>.
+				<<his_yi>> 옆에 있는 <<person2>><<person_i>> 당신의 재갈을 빼내고 <<if $rightarm is "bound" or $leftarm is "bound">>팔<</if>><<if ($rightarm is "bound" or $leftarm is "bound") and $feetuse is "bound">>과 <<else>>을<</if>><<if $feetuse is "bound">>다리를<</if>> 풀어 준다.
 			<<else>>
-				A <<person2>><<person>> beside <<him>> unties your <<if $rightarm is "bound" or $leftarm is "bound">>arms<</if>><<if ($rightarm is "bound" or $leftarm is "bound") and $feetuse is "bound">> and <</if>><<if $feetuse is "bound">>legs<</if>>.
+				<<his_yi>> 옆에 있는 <<person2>><<person_i>> 당신의 <<if $rightarm is "bound" or $leftarm is "bound">>팔<</if>><<if ($rightarm is "bound" or $leftarm is "bound") and $feetuse is "bound">>과 <<else>>을<</if>><<if $feetuse is "bound">>다리를<</if>> 풀어 준다.
 			<</if>><<unbind>>
 		<<else>>
 			<<if $worn.face.type.includes("gag")>>
-				A <<person2>><<person>> beside <<him>> removes your gag.
+				<<his_yi>> 옆에 있는 <<person2>><<person_i>> 당신의 재갈을 빼내 준다.
 			<<else>>
-				A <<person2>><<person>> beside <<him>> watches you with a concerned expression.
+				<<his_yi>> 옆에 있는 <<person2>><<person_i>> 당신을 걱정스럽게 바라본다.
 			<</if>>
 		<</if>>
 		<<set $worn.face.type.push("broken")>>
 		<<faceruined>>
-		"They have no shame."
+		"부끄러움이라는 걸 모른다니까."
 		<br><br>
 
-		The pair make sure you're uninjured before moving on.
+		두 명은 당신에게 어디 다친 곳이 없다는 걸 확인하고서야 떠난다.
 		<<ltrauma>><<lpain>><<lllstress>><<trauma -6>><<pain -6>><<stress -24>>
 		<br><br>
 
@@ -107,15 +107,15 @@ You shove the <<person>> away from you and flee in a random direction.
 		<<destinationeventend>>
 
 	<<else>>
-		<span class="red">Your scream has attracted something worse.</span>
+		<span class="red">당신의 비명 소리는 더욱 끔찍한 것을 불러들였다.</span>
 		<br><br>
 
-		"Such riffraff don't deserve a cutie like you," says a voice above you. Hands grasp your arms and pull you to your feet. They try to pull you somewhere.
+		"그런 쓰레기는 너 같은 귀여운 놈을 범할 자격이 없어." 당신의 위쪽에서 누군가 말한다. 두 손이 당신의 팔을 붙잡고, 발이 질질 끌리도록 잡아당긴다. 그들은 당신을 어딘가로 끌고 가려 한다.
 		<br><br>
-		"I know," says a second voice. "The absolute nerve. A toy like you is fit for only the best." Someone licks your neck.
+		"알아." 다른 목소리가 말한다. "뻔뻔하기도 하지. 너 같은 장난감은 가장 뛰어난 사람에게나 어울려." 누군가 당신의 목을 핥는다.
 		<br><br>
 
-		<<link [[Next|Bondage Two Rape]]>><<set $molestationstart to 1>><</link>>
+		<<link [[다음|Bondage Two Rape]]>><<set $molestationstart to 1>><</link>>
 		<br>
 
 	<</if>>
@@ -131,25 +131,24 @@ You shove the <<person>> away from you and flee in a random direction.
 	<<molested>>
 
 	<<maninit>>
-	<<set $rescue to 1>>
+	<<enable_rescue>>
 <</if>>
 
 <<effects>>
 
 <<effectsman>><<man>>
-<<if $enemyhealth gt 0>><<npcdamage>><</if>>
 <<stateman>>
 <br><br>
 <<actionsman>>
 
 <<if $enemyhealth lte 0>>
-	<span id="next"><<link [[Next|Bondage Two Rape Finish]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Bondage Two Rape Finish]]>><</link>></span><<nexttext>>
 <<elseif $enemyarousal gte $enemyarousalmax>>
-	<span id="next"><<link [[Next|Bondage Two Rape Finish]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Bondage Two Rape Finish]]>><</link>></span><<nexttext>>
 <<elseif $alarm is 1 and $rescue is 1>>
-	<span id="next"><<link [[Next|Bondage Two Rape Finish]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Bondage Two Rape Finish]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link [[Next|Bondage Two Rape]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Bondage Two Rape]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: Bondage Two Rape Finish
@@ -157,10 +156,10 @@ You shove the <<person>> away from you and flee in a random direction.
 <<if $enemyarousal gte $enemyarousalmax>>
 <<ejaculation>>
 
-The pair leave you to slump against a wall. You think you're in an alley, but you can't be sure.
+두 명은 당신을 벽에 기대 쓰러진 채 놓아두고 떠난다. 당신이 생각하기에 당신은 골목길 안에 있는 것 같지만, 확신할 수는 없다.
 <br><br>
 
-<<tearful>> you try to get your bearings.
+<<tearful>> 당신은 몸을 추스리려고 한다.
 <br><br>
 
 <<clotheson>>
@@ -171,10 +170,10 @@ The pair leave you to slump against a wall. You think you're in an alley, but yo
 
 <<elseif $enemyhealth lte 0>>
 
-You shove the pair away from you and stumble in a random direction.
+당신은 둘을 밀쳐내고, 아무 방향으로 도망친다.
 <br><br>
 
-<<tearful>> you try to get your bearings.
+<<tearful>> 당신은 몸을 추스리려고 한다.
 <br><br>
 
 <<clotheson>>
@@ -187,49 +186,49 @@ You shove the pair away from you and stumble in a random direction.
 	<<set $rescued += 1>>
 
 		<<endcombat>>
-		<<generate1>><<person1>>You hear a police whistle. The pair back away from you, leaving you to slump against a wall. Another whistle, and you hear rapid footsteps as the pair flee.
+		<<generatePolice 1>><<person1>>경찰 호루라기 소리가 들린다. 두 명은 당신을 벽에 기대 쓰러진 채 두고, 당신에게서 떨어진다. 호루라기 소리가 한 번 더 울려퍼지자, 두 명이 달아나는 황급한 발소리가 들린다.
 		<br><br>
 
 		<<clotheson>>
 
-		<<tearful>> you try to get your bearings. You hear more footsteps approaching.
+		<<tearful>> 당신은 몸을 추스리려고 한다. 더 많은 발자국 소리가 가까워진다.
 		<br><br>
 
 		<<if $exposed gte 1>>
-			"You're under arrest for public indecency," says an angry voice. "And for inciting indecency in others!" <<He>> grasps your arm and tries to drag you away.
+			"공공외설법 위반으로 널 체포한다." 화가 난 목소리가 말한다. "그리고 다른 이들이 외설적으로 행동하도록 선동한 죄로도!" <<He_nun>> 당신의 팔을 붙잡고 끌고 가려 한다.
 			<<crime>><<crimeup 10>>
 			<br><br>
 			<<if $worn.face.type.includes("gag")>>
-				Gagged as you are, you can't voice your protests.
+				재갈이 물려져 있으므로, 당신은 항의의 목소리를 낼 수 없다.
 				<br><bR>
 			<</if>>
 
-			<<link [[Go willingly|Bondage Police Willing]]>><</link>>
+			<<link [[순순히 따라간다|Bondage Police Willing]]>><</link>>
 			<br>
 			<<if !$worn.face.type.includes("gag")>>
-				<<link [[Try to explain|Bondage Police Explain]]>><</link>> | <span class="blue">English</span>
+				<<link [[설명을 시도한다|Bondage Police Explain]]>><</link>><<englishdifficulty 0 1000>>
 				<br>
 			<</if>>
-			<<link [[Fight to escape|Bondage Police Fight]]>><<set $fightstart to 1>><<crimeup 50>><</link>><<crime>>
+			<<link [[도망을 위해 싸운다|Bondage Police Fight]]>><<set $fightstart to 1>><<crimeup 50>><</link>><<crime>>
 			<br>
 
 		<<else>>
 
-			"It's okay <<if $player.gender_appearance is "f">>miss<<else>>sir<</if>>," An authoritative voice says. "I'm a police officer. Do you require assistance?"
+			"이제 괜찮습니다 <<if $player.gender_appearance is "f">>여성분<<else>>남성분<</if>>," 권위적인 목소리가 말한다. "저는 경찰관입니다. 도움이 필요하신가요?"
 			<br><br>
 			<<if $worn.face.type.includes("gag")>>
-				<<He>> must notice your gag, as <<he>> assumes you do need help.
+				<<He_ga>> 당신이 재갈을 물고 있다는 것을 알아차렸을 테니, 분명히 <<he_nun>> 당신에게 도움이 필요하다고 생각할 것이다.
 			<<else>>
-				You explain the situation.
+				당신은 상황을 설명한다.
 			<</if>>
 			<<blindfoldremove>>
 
-			"Who did this to you?" <<he>> asks. "Tell me as much as you can about when and where it happened. I'll file a report. Though with how busy we've been lately I can't guarantee it will be seen to in a timely manner."
+			"누가 이런 짓을 했습니까?" <<He_ga>> 묻는다. "이 일이 언제, 어디서 일어났는지 가능한 한 많이 말씀해 주시기 바랍니다. 그럼 제가 보고서를 정리해 제출하겠습니다. 최근에 저희가 많이 바빠져서, 보고서가 제때 올라갈 수 있을지는 장담하지는 못합니다만."
 			<br><br>
 
-			<<link [[Give report (0:20)|Bondage Police Report]]>><<pass 20>><<stress 6>><<trauma -6>><</link>><<gstress>><<ltrauma>>
+			<<link [[증언한다 (0:20)|Bondage Police Report]]>><<pass 20>><<stress 6>><<trauma -6>><</link>><<gstress>><<ltrauma>>
 			<br>
-			<<link [[Don't give report|Bondage Police No Report]]>><</link>>
+			<<link [[증언하지 않는다|Bondage Police No Report]]>><</link>>
 			<br>
 		<</if>>
 <</if>>
@@ -237,19 +236,19 @@ You shove the pair away from you and stumble in a random direction.
 :: Bondage Police Willing
 <<effects>>
 
-You're cuffed and dragged behind the police officer. <<He>> pushes you into the back of what you assume is a police car.
+당신은 수갑을 찬 채 경찰관 뒤로 끌려간다. <<He_nun>> 경찰차라고 생각되는 것 뒤편으로 당신을 민다.
 <br><br>
 
-<<He>> opens the driver's door, but doesn't get inside. Instead you hear <<him>> speak. <<He>> gives a description of you.
+<<He_nun>> 운전석을 열지만, 차에 타지는 않는다. 대신 당신은 <<him_i>> 말하는 소리를 듣는다. <<He_nun>> 당신의 모습을 묘사한다.
 <br><br>
 <<if $crime gte 5000>>
-	<<He>> laughs, and slaps the car above your seat. "Looks like I've bagged a naughty <<girl>>. Can't wait to hear what they do to <<phim>>." <<He>> climbs in, and you drive away.
+	<<He_ga>> 웃음을 터뜨리며, 당신의 좌석 위의 차체를 한 번 때린다. "Looks like I've bagged a naughty <<girl>>. Can't wait to hear what they do to <<phim>>." <<He>> climbs in, and you drive away.
 	<br><br>
 
 	"I knew you were bad news the moment I saw you," <<he>> says as <<he>> drives.
 	<br><br>
 
-	<<link [[Next|Hospital Arrest Sit]]>><</link>>
+	<<link [[다음|Hospital Arrest Sit]]>><</link>>
 <<elseif $crime gte 1000>>
 	"Alright," <<he>> says. "I'll bring <<phim>> in." <<He>> climbs in, and you drive away.
 	<br><br>
@@ -257,7 +256,7 @@ You're cuffed and dragged behind the police officer. <<He>> pushes you into the 
 	"I knew you were trouble," the <<person>> says as <<he>> drives. "It'll be the pillory for you, I wager."
 	<br><br>
 
-	<<link [[Next|Hospital Arrest Sit]]>><</link>>
+	<<link [[다음|Hospital Arrest Sit]]>><</link>>
 <<else>>
 	"Roger," <<he>> says. "Looks like it's your lucky day." <<His>> hands reach in and remove your blindfold.
 
@@ -288,7 +287,7 @@ You're cuffed and dragged behind the police officer. <<He>> pushes you into the 
 	<</if>>
 	<br><br>
 	<<endcombat>>
-	<<link [[Next|Orphanage]]>><</link>>
+	<<link [[다음|Orphanage]]>><</link>>
 	<br>
 <</if>>
 
@@ -296,7 +295,6 @@ You're cuffed and dragged behind the police officer. <<He>> pushes you into the 
 
 :: Bondage Police Explain
 <<effects>>
-<<englishdifficulty 0 1000 true>>
 <<if $englishSuccess>>
 
 You manage to stammer out an explanation as you're dragged off. <span class="green">It gets through to <<him>>.</span> <<He>> sighs and releases your arm.
@@ -322,7 +320,7 @@ You manage to stammer out an explanation as you're dragged off. <span class="gre
 	You try to stammer out an explanation, <span class="red">but the police officer is too focused on getting you out of public.</span> <<He>> ignores you.
 	<br><br>
 
-	<<link [[Next|Bondage Police Willing]]>><</link>>
+	<<link [[다음|Bondage Police Willing]]>><</link>>
 	<br>
 
 <</if>>
@@ -348,13 +346,13 @@ You manage to stammer out an explanation as you're dragged off. <span class="gre
 <<actionsman>>
 
 <<if $enemyhealth lte 0>>
-	<span id="next"><<link [[Next|Bondage Police Fight Finish]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Bondage Police Fight Finish]]>><</link>></span><<nexttext>>
 <<elseif $enemyarousal gte $enemyarousalmax>>
-	<span id="next"><<link [[Next|Bondage Police Fight Finish]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Bondage Police Fight Finish]]>><</link>></span><<nexttext>>
 <<elseif $pain gte 100 and $willpowerpain is 0>>
-	<span id="next"><<link [[Next|Bondage Police Fight Finish]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Bondage Police Fight Finish]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link [[Next|Bondage Police Fight]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Bondage Police Fight]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: Bondage Police Fight Finish
@@ -362,10 +360,10 @@ You manage to stammer out an explanation as you're dragged off. <span class="gre
 <<if $enemyarousal gte $enemyarousalmax>>
 <<ejaculation>>
 
-You hear the <<person>> slump against a wall. You seize the opportunity and run in a random direction.
+<<person_i>> 벽에 나자빠지는 소리가 들린다. 당신은 기회를 낚아채 아무 방향으로나 도망친다.
 <br><br>
 
-<<tearful>> you try to get your bearings.
+<<tearful>> 당신은 몸을 추스리려고 한다.
 <br><br>
 
 <<clotheson>>
@@ -375,10 +373,10 @@ You hear the <<person>> slump against a wall. You seize the opportunity and run 
 <<destinationbondage>>
 
 <<elseif $enemyhealth lte 0>>
-You catch the officer off-guard. You shove <<him>> to the ground and run away. <<His>> shouting voice quickly fades into the background noise of the city.
+당신은 경찰관의 허점을 포착하여, <<him_ul>> 땅바닥에 밀치고 도망친다. <<his_yi>> 외침은 도시의 배경 소음에 묻혀 빠르게 희미해져 간다.
 <br><br>
 
-<<tearful>> you slump beside a wall. You got away.
+<<tearful>> 당신은 벽에 기대 쓰러진다. 당신은 도망쳐 나왔다.
 <br><br>
 
 <<clotheson>>
@@ -394,16 +392,16 @@ You fall to the ground, too hurt to continue fighting. "Indecent exposure, and n
 
 <<clotheson>>
 
-<<link [[Next|Bondage Police Willing]]>><</link>>
+<<link [[다음|Bondage Police Willing]]>><</link>>
 
 <</if>>
 
 :: Bondage Police Report
 <<effects>>
 
-The officer scribbles in <<his>> notepad as <<he>> listens. You're uncomfortable talking about it, but it does give you a catharsis.
+<<He_nun>> 그걸 들으며, <<his_yi>> 공책에 끄적인다. 당신은 사건에 대해 말하는 것이 불편하지만, 당신에게 카타르시스를 불러일으킨다.
 <br><br>
-Once finished <<he>> confirms that you're unhurt, then continues on <<his>> way.
+<<He_ga>> 당신에게 다친 곳이 없다는 것을 확인하고서, 가던 길을 간다.
 <<lpain>><<pain -6>>
 <br><br>
 <<endevent>>
@@ -412,7 +410,7 @@ Once finished <<he>> confirms that you're unhurt, then continues on <<his>> way.
 :: Bondage Police No Report
 <<effects>>
 
-The officer confirms that you're unhurt, then continues on <<his>> way.
+경찰관은 당신이 다치지 않았다는 것을 확인하고서 가던 길을 간다.
 <<lpain>><<pain -6>>
 <br><br>
 
@@ -429,11 +427,11 @@ The officer confirms that you're unhurt, then continues on <<his>> way.
 	<<beastCombatInit>>
 
 <<set $NPCList[0].stance to "top">>
-<<set $rescue to 1>>
+<<enable_rescue>>
 <</if>>
 
 <<if $rescue is 0>>
-You know you're being filmed, but you can't do anything about it.
+당신은 당신이 촬영당하고 있다는 사실을 알지만, 손 쓸 방법이 아무것도 없다.
 <br><br>
 <</if>>
 
@@ -448,13 +446,13 @@ You know you're being filmed, but you can't do anything about it.
 <<actionsman>>
 
 <<if $enemyhealth lte 0>>
-	<span id="next"><<link [[Next|Bondage Dog Rape Finish]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Bondage Dog Rape Finish]]>><</link>></span><<nexttext>>
 <<elseif $enemyarousal gte $enemyarousalmax>>
-	<span id="next"><<link [[Next|Bondage Dog Rape Finish]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Bondage Dog Rape Finish]]>><</link>></span><<nexttext>>
 <<elseif $alarm is 1 and $rescue is 1>>
-	<span id="next"><<link [[Next|Bondage Dog Rape Finish]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Bondage Dog Rape Finish]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link "Next">><<script>>state.display(state.active.title, null)<</script>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Bondage Dog Rape]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: Bondage Dog Rape Finish
@@ -467,9 +465,9 @@ You know you're being filmed, but you can't do anything about it.
 Finished with you, the <<beasttype>> leaves you shivering on the ground.
 <br><br>
 	<<if $rescue is 0>>
-		<<tearful>> you try to get your bearings. There's no sign of the person with camera.<<famebestiality 10>>
+		<<tearful>> 당신은 몸을 추스리려고 한다. There's no sign of the person with camera.<<famebestiality 10>>
 	<<else>>
-		<<tearful>> you try to get your bearings. You hope no one saw you.
+		<<tearful>> 당신은 몸을 추스리려고 한다. You hope no one saw you.
 	<</if>>
 	<br><br>
 
@@ -484,9 +482,9 @@ Finished with you, the <<beasttype>> leaves you shivering on the ground.
 The <<beasttype>> whimpers and flees.
 <br><br>
 	<<if $rescue is 0>>
-		<<tearful>> you try to get your bearings. There's no sign of the person with the camera.
+		<<tearful>> 당신은 몸을 추스리려고 한다. There's no sign of the person with the camera.
 	<<else>>
-		<<tearful>> you try to get your bearings. You hope no one saw that.
+		<<tearful>> 당신은 몸을 추스리려고 한다. You hope no one saw that.
 	<</if>>
 <br><br>
 
@@ -523,7 +521,7 @@ The <<beasttype>> whimpers and flees.
 		<br><br>
 		<</if>>
 
-		<<link [[Next|Bondage Dog Rape]]>><<set $rescue to 0>><</link>>
+		<<link [[다음|Bondage Dog Rape]]>><<set $rescue to 0>><</link>>
 		<br>
 	<<else>>
 		"Shoo!" shouts a voice. The <<beasttype>> pulls away from you as footsteps approach.
@@ -550,7 +548,7 @@ The <<beasttype>> whimpers and flees.
 			Before you can stand, a <<person>> climbs on top of you. "Hold still <<girl>>," <<he>> says. "You owe me for saving you from that <<beasttype 0>>."
 			<br><br>
 
-			<<link [[Next|Bondage Rape]]>><<set $molestationstart to 1>><</link>>
+			<<link [[다음|Bondage Rape]]>><<set $molestationstart to 1>><</link>>
 			<br>
 
 		<</if>>
@@ -566,7 +564,7 @@ The <<beasttype>> whimpers and flees.
 	<<molested>>
 	<<beastCombatInit>>
 	<<beastTrainGenerate>>
-	<<set $rescue to 1>>
+	<<enable_rescue>>
 <</if>>
 
 <<effects>>
@@ -583,13 +581,13 @@ The <<beasttype>> whimpers and flees.
 <br><br>
 <<actionsman>>
 <<if $alarm is 1 and $rescue is 1>>
-	<span id="next"><<link [[Next|Bondage Three Dogs Rape End]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Bondage Three Dogs Rape End]]>><</link>></span><<nexttext>>
 <<elseif $enemyarousal gte $enemyarousalmax>>
-	<span id="next"><<link [[Next|Bondage Three Dogs Rape End]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Bondage Three Dogs Rape End]]>><</link>></span><<nexttext>>
 <<elseif $enemyhealth lte 0>>
-	<span id="next"><<link [[Next|Bondage Three Dogs Rape End]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Bondage Three Dogs Rape End]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link [[Next|Bondage Three Dogs Rape]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Bondage Three Dogs Rape]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: Bondage Three Dogs Rape End
@@ -600,12 +598,12 @@ The <<beasttype>> whimpers and flees.
 		The <<beasttype>> recoils in pain and fear, but another is eager for a go.
 		<<combatTrainAdvance>>
 		<br><br>
-		[[Next|Bondage Three Dogs Rape]]
+		<<link [[다음|Bondage Three Dogs Rape]]>><</link>>
 	<<else>>
 		The <<beasttype>> recoils in pain and fear.
 		<<combatTrainAdvance>>
 		<br><br>
-		<<link [[Next|Bondage Three Dogs Rape End]]>><<set $finish to 1>><</link>>
+		<<link [[다음|Bondage Three Dogs Rape End]]>><<set $finish to 1>><</link>>
 	<</if>>
 <<elseif $enemyarousal gte $enemyarousalmax>>
 	<<beastejaculation>>
@@ -613,12 +611,12 @@ The <<beasttype>> whimpers and flees.
 		Satisfied, the dog moves and another takes its turn.
 		<<combatTrainAdvance>>
 		<br><br>
-		[[Next|Bondage Three Dogs Rape]]
+		<<link [[다음|Bondage Three Dogs Rape]]>><</link>>
 	<<else>>
 		Satisfied, the <<beasttype>> moves away from you.
 		<<combatTrainAdvance>>
 		<br><br>
-		<<link [[Next|Bondage Three Dogs Rape End]]>><<set $finish to 1>><</link>>
+		<<link [[다음|Bondage Three Dogs Rape End]]>><<set $finish to 1>><</link>>
 	<</if>>
 <<elseif $finish is 1>>
 	<<if $enemyejaculated gte 1>><<famebestiality 1>>
@@ -636,7 +634,7 @@ The <<beasttype>> whimpers and flees.
 		<br><br>
 	<</if>>
 
-	<<tearful>> you try to get your bearings.
+	<<tearful>> 당신은 몸을 추스리려고 한다.
 	<br><br>
 	<<clotheson>>
 	<<endcombat>>
@@ -644,20 +642,16 @@ The <<beasttype>> whimpers and flees.
 	<<destinationbondage>>
 <<else>>
 	<<if $rng gte 51 and $daystate isnot "night" or $rng gte 76>>
-		<<set $rescued += 1>>
-		<<saveNPC 0 three_dogs>>
-		<<saveNPC 1 three_dogs>>
-		<<saveNPC 2 three_dogs>>
-		<<endcombat>>
-		<<loadNPC 0 three_dogs>>
-		<<loadNPC 1 three_dogs>>
-		<<loadNPC 2 three_dogs>>
-		"Leave that <<girl>> alone," you hear someone shout. The <<beastsplural>> are tugged away from you. You hear them being dragged away.
-		<br><br>
-		<<clearNPC 0 three_dogs>>
-		<<clearNPC 1 three_dogs>>
-		<<clearNPC 2 three_dogs>>
-		<<generate1>><<person1>>
+        <<set $rescued += 1>>
+        <<silently>><<beastsplural>><<set _beastspluraltext to _text_output>><</silently>>
+        <<endcombat>>
+        "Leave that <<girl>> alone," you hear someone shout. The _beastspluraltext are tugged away from you. You hear them being dragged away.
+        <br><br>
+        /* clearing up ghost dogs for old saves */
+        <<if $per_npc.three_dogs>>
+            <<clearNPC three_dogs>>
+        <</if>>
+        <<generate1>><<person1>>
 
 		Footsteps approach. A hand gropes at your blindfold. "It's okay," the voice says. "I got you."
 		<<blindfoldremove>>
@@ -689,7 +683,7 @@ The <<beasttype>> whimpers and flees.
 		<<gtrauma>><<gstress>>
 		<br><br>
 
-		<<link [[Next|Bondage Three Dogs Rape]]>><</link>>
+		<<link [[다음|Bondage Three Dogs Rape]]>><</link>>
 		<br>
 
 	<</if>>
@@ -704,7 +698,7 @@ The <<beasttype>> whimpers and flees.
 	<<molested>>
 	<<beastCombatInit>>
 	<<beastTrainGenerate>>
-	<<set $rescue to 1>>
+	<<enable_rescue>>
 <</if>>
 
 <<effects>>
@@ -716,13 +710,13 @@ The <<beasttype>> whimpers and flees.
 <br><br>
 <<actionsman>>
 <<if $alarm is 1 and $rescue is 1>>
-	<span id="next"><<link [[Next|Bondage Two Wolf Rape End]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Bondage Two Wolf Rape End]]>><</link>></span><<nexttext>>
 <<elseif $enemyarousal gte $enemyarousalmax>>
-	<span id="next"><<link [[Next|Bondage Two Wolf Rape End]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Bondage Two Wolf Rape End]]>><</link>></span><<nexttext>>
 <<elseif $enemyhealth lte 0>>
-	<span id="next"><<link [[Next|Bondage Two Wolf Rape End]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Bondage Two Wolf Rape End]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link [[Next|Bondage Two Wolf Rape]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Bondage Two Wolf Rape]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: Bondage Two Wolf Rape End
@@ -733,12 +727,12 @@ The <<beasttype>> whimpers and flees.
 		The <<beasttype>> recoils in pain and fear, but another is eager for a go.
 		<<combatTrainAdvance>>
 		<br><br>
-		[[Next|Bondage Two Wolf Rape]]
+		<<link [[다음|Bondage Two Wolf Rape]]>><</link>>
 	<<else>>
 		The <<beasttype>> recoils in pain and fear.
 		<<combatTrainAdvance>>
 		<br><br>
-		<<link [[Next|Bondage Two Wolf Rape End]]>><<set $finish to 1>><</link>>
+		<<link [[다음|Bondage Two Wolf Rape End]]>><<set $finish to 1>><</link>>
 	<</if>>
 <<elseif $enemyarousal gte $enemyarousalmax>>
 	<<beastejaculation>>
@@ -746,12 +740,12 @@ The <<beasttype>> whimpers and flees.
 		Satisfied, the <<beasttype>> moves and another takes its turn.
 		<<combatTrainAdvance>>
 		<br><br>
-		[[Next|Bondage Two Wolf Rape]]
+		<<link [[다음|Bondage Two Wolf Rape]]>><</link>>
 	<<else>>
 		Satisfied, the <<beasttype>> moves away from you.
 		<<combatTrainAdvance>>
 		<br><br>
-		<<link [[Next|Bondage Two Wolf Rape End]]>><<set $finish to 1>><</link>>
+		<<link [[다음|Bondage Two Wolf Rape End]]>><<set $finish to 1>><</link>>
 	<</if>>
 <<elseif $finish is 1>>
 	<<if $enemywounded is 1 and $enemyejaculated is 0>>
@@ -766,7 +760,7 @@ The <<beasttype>> whimpers and flees.
 		The <<beastsplural>> leave you spent and shivering on the dirt.
 	<</if>>
 	<br><br>
-	<<tearful>> you try to get your bearings.
+	<<tearful>> 당신은 몸을 추스리려고 한다.
 	<br><br>
 	<<clotheson>>
 	<<endcombat>>
@@ -778,7 +772,7 @@ The <<beasttype>> whimpers and flees.
 	"Sh-shit!" the voice continues. "Don't eat me!" You hear the rapid falls of their feet as they run away. The <<beastsplural>> make no attempt to chase, content with their current prize.
 	<br><br>
 
-	<<link [[Next|Bondage Two Wolf Rape]]>><</link>>
+	<<link [[다음|Bondage Two Wolf Rape]]>><</link>>
 	<br>
 
 <</if>>
@@ -792,7 +786,7 @@ The <<beasttype>> whimpers and flees.
 <<molested>>
 	<<beastCombatInit>>
 
-<<set $rescue to 1>>
+<<enable_rescue>>
 <</if>>
 
 <<effects>>
@@ -806,11 +800,11 @@ The <<beasttype>> whimpers and flees.
 <<actionsman>>
 
 <<if $enemyhealth lte 0>>
-	<span id="next"><<link [[Next|Bondage Wolf Rape Finish]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Bondage Wolf Rape Finish]]>><</link>></span><<nexttext>>
 <<elseif $enemyarousal gte $enemyarousalmax>>
-	<span id="next"><<link [[Next|Bondage Wolf Rape Finish]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Bondage Wolf Rape Finish]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link "Next">><<script>>state.display(state.active.title, null)<</script>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Bondage Wolf Rape]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: Bondage Wolf Rape Finish
@@ -823,7 +817,7 @@ The <<beasttype>> whimpers and flees.
 Satsfied, the <<beasttype>> leaves you be. You hear <<bhis>> feet patter against the ground.
 <br><br>
 
-<<tearful>> you try to get your bearings.
+<<tearful>> 당신은 몸을 추스리려고 한다.
 <br><br>
 
 <<clotheson>>
@@ -837,7 +831,7 @@ Satsfied, the <<beasttype>> leaves you be. You hear <<bhis>> feet patter against
 You hear the patter of the <<beasttypes>> feet against the dirt as it flees.
 <br><br>
 
-<<tearful>> you try to get your bearings.
+<<tearful>> 당신은 몸을 추스리려고 한다.
 <br><br>
 
 <<clotheson>>
@@ -895,7 +889,7 @@ You hear the patter of the <<beasttypes>> feet against the dirt as it flees.
 		"Sh-shit!" the voice continues. "Don't eat me!" You hear the rapid falls of their feet as they run away. The <<beasttype>> makes no attempt to chase, content with <<bhis>> current prize.
 		<br><br>
 
-		<<link [[Next|Bondage Wolf Rape]]>><</link>>
+		<<link [[다음|Bondage Wolf Rape]]>><</link>>
 		<br>
 
 	<</if>>
@@ -912,25 +906,24 @@ You hear the patter of the <<beasttypes>> feet against the dirt as it flees.
 	<<molested>>
 
 	<<maninit>>
-	<<set $rescue to 1>>
+	<<enable_rescue>>
 <</if>>
 
 <<effects>>
 
 <<effectsman>><<man>>
-<<if $enemyhealth gt 0>><<npcdamage>><</if>>
 <<stateman>>
 <br><br>
 <<actionsman>>
 
 <<if $enemyhealth lte 0>>
-	<span id="next"><<link [[Next|Bondage Sailor Rape Finish]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Bondage Sailor Rape Finish]]>><</link>></span><<nexttext>>
 <<elseif $enemyarousal gte $enemyarousalmax>>
-	<span id="next"><<link [[Next|Bondage Sailor Rape Finish]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Bondage Sailor Rape Finish]]>><</link>></span><<nexttext>>
 <<elseif $alarm is 1 and $rescue is 1>>
-	<span id="next"><<link [[Next|Bondage Sailor Rape Finish]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Bondage Sailor Rape Finish]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link [[Next|Bondage Sailor Rape]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Bondage Sailor Rape]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: Bondage Sailor Rape Finish
@@ -944,7 +937,7 @@ Someone smacks your <<bottom>>. "That's a good <<girl>>," the <<person1>><<perso
 They laugh and leave you lying on the sandy ground.
 <br><br>
 
-<<tearful>> you try to get your bearings.
+<<tearful>> 당신은 몸을 추스리려고 한다.
 <br><br>
 
 <<clotheson>>
@@ -969,7 +962,7 @@ They laugh and leave you lying on the sandy ground.
 
 <<else>><<set $rescue to 0>>
 
-<<person4>>"Stop hurting that <<girl>>," says a <<if $pronoun is "m">>man's<<else>>woman's<</if>> voice from some way away.
+<<person4>>"Stop hurting that <<girl>>," says a <<personsimple>>'s voice from some way away.
 <br><br>
 
 <<person1>>"Or fucking what?" responds the <<person1>><<person>>. "You gonna start something?" <<His>> friends laugh.
@@ -978,7 +971,7 @@ They laugh and leave you lying on the sandy ground.
 "I fucking thought so," the <<person>> continues. <<He>> leans close. "You hear that? No one's coming to help you. No one cares."
 <br><br>
 
-<<link [[Next|Bondage Sailor Rape]]>><</link>>
+<<link [[다음|Bondage Sailor Rape]]>><</link>>
 <</if>>
 
 :: Bondage Student Rape
@@ -992,25 +985,24 @@ They laugh and leave you lying on the sandy ground.
 
 	<<maninit>>
 	<<npcstrip>><<npcidlegenitals>>
-	<<set $rescue to 1>>
+	<<enable_rescue>>
 <</if>>
 
 <<effects>>
 
 <<effectsman>><<man>>
-<<if $enemyhealth gt 0>><<npcdamage>><</if>>
 <<stateman>>
 <br><br>
 <<actionsman>>
 
 <<if $enemyhealth lte 0>>
-	<span id="next"><<link [[Next|Bondage Student Rape Finish]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Bondage Student Rape Finish]]>><</link>></span><<nexttext>>
 <<elseif $enemyarousal gte $enemyarousalmax>>
-	<span id="next"><<link [[Next|Bondage Student Rape Finish]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Bondage Student Rape Finish]]>><</link>></span><<nexttext>>
 <<elseif $alarm is 1 and $rescue is 1>>
-	<span id="next"><<link [[Next|Bondage Student Rape Finish]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Bondage Student Rape Finish]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link [[Next|Bondage Student Rape]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Bondage Student Rape]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: Bondage Student Rape Finish
@@ -1026,10 +1018,10 @@ They laugh and leave you lying on the sandy ground.
 	<</if>>
 	<<clotheson>>
 	<<if $exposed gte 1>>
-		<<covered>> You feel cool air against your bare skin as you listen, trying to figure out if anyone is watching you. You can't tell. <<tearful>> you try to get your bearings.
+		<<covered>> You feel cool air against your bare skin as you listen, trying to figure out if anyone is watching you. You can't tell. <<tearful>> 당신은 몸을 추스리려고 한다.
 	<br><br>
 	<<else>>
-		<<tearful>> you try to get your bearings.
+		<<tearful>> 당신은 몸을 추스리려고 한다.
 		<br><br>
 	<</if>>
 
@@ -1052,7 +1044,7 @@ They laugh and leave you lying on the sandy ground.
 	They retreat, jeering through grunts of pain and trying to save face.
 	<br><br>
 
-	<<tearful>> you try to get your bearings.
+	<<tearful>> 당신은 몸을 추스리려고 한다.
 	<br><br>
 
 	<<clotheson>>
@@ -1064,7 +1056,7 @@ They laugh and leave you lying on the sandy ground.
 <<else>>
 	<<endevent>>
 	<<generate1>><<generate2>><<person1>>
-	"Fucking brats," shouts a mature voice. "Leave <<phim>> alone." The invading hands withdraw, and you hear the feet of your assailants as they run away.
+	"Fucking brats," shouts a mature voice. "Leave <<phim>> alone." The invading hands withdraw, and you hear the feet of the <<group>> as they run away.
 	<br><br>
 
 	<<clotheson>>
@@ -1072,7 +1064,7 @@ They laugh and leave you lying on the sandy ground.
 
 	<<set $rng to random(1, 100)>>
 	<<if $rng gte 51 and $daystate isnot "night" or $rng gte 76>><<set $rescued += 1>>
-		"I'm gonna remove that blindfold," says a <<if $pronoun is "m">>man<<else>>woman<</if>> right beside you. "Here goes."
+		"I'm gonna remove that blindfold," says a <<personsimple>> right beside you. "Here goes."
 		<<blindfoldremove>>
 
 		The <<person>> smiles at you. A <<person2>><<person>> stands beside <<person1>><<him>>, looking concerned. "I wouldn't believe such cruelty existed if I hadn't just seen it." They make sure you're unhurt, then continue on their way.
@@ -1086,7 +1078,7 @@ They laugh and leave you lying on the sandy ground.
 		"Now that the rabble are out of the way," says <<personsimple>> above you. "Time for our fun." Hands grasp your arms and pull you to your feet. They grope more violently than the students.
 		<br><br>
 
-		<<link [[Next|Bondage Two Rape]]>><<set $molestationstart to 1>><</link>>
+		<<link [[다음|Bondage Two Rape]]>><<set $molestationstart to 1>><</link>>
 	<</if>>
 <</if>>
 
@@ -1109,7 +1101,7 @@ You wake up, but can't see a thing. You feel something wrapped around your face.
 They grab you from both sides.
 <br><br>
 
-<<link [[Next|Street Wake Blindfold Rape]]>><<set $molestationstart to 1>><</link>>
+<<link [[다음|Street Wake Blindfold Rape]]>><<set $molestationstart to 1>><</link>>
 <br>
 
 :: Street Wake Blindfold Rape
@@ -1128,17 +1120,16 @@ They grab you from both sides.
 <<effects>>
 
 <<effectsman>><<man>>
-<<if $enemyhealth gt 0>><<npcdamage>><</if>>
 <<stateman>>
 <br><br>
 <<actionsman>>
 
 <<if $enemyhealth lte 0>>
-	<span id="next"><<link [[Next|Street Wake Blindfold Rape Finish]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Street Wake Blindfold Rape Finish]]>><</link>></span><<nexttext>>
 <<elseif $enemyarousal gte $enemyarousalmax>>
-	<span id="next"><<link [[Next|Street Wake Blindfold Rape Finish]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Street Wake Blindfold Rape Finish]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link [[Next|Street Wake Blindfold Rape]]>><</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Street Wake Blindfold Rape]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: Street Wake Blindfold Rape Finish
@@ -1148,9 +1139,9 @@ They grab you from both sides.
 
 You hear a door open, and a breeze makes you shiver. The pair grasp your shoulders and shove you forward. You fall onto hard pavement.
 <br><br>
-An engine comes to life, and you hear your attackers drive away.
+An engine comes to life, and you hear the <<group>> drive away.
 <br><br>
-<<tearful>> you try to get your bearings. You might not be far from where you passed out, but it's hard to tell.
+<<tearful>> 당신은 몸을 추스리려고 한다. You might not be far from where you passed out, but it's hard to tell.
 <br><br>
 
 <<else>>
@@ -1159,7 +1150,7 @@ An engine comes to life, and you hear your attackers drive away.
 <br><br>
 You run in the direction of the breeze, and fall down a small ledge. Stumbling, you run in a random direction.
 <br><br>
-You're not sure if they tried to give chase, but you got away. <<tearful>> you try to get your bearings. You might not be far from where you passed out, but it's hard to tell.
+You're not sure if they tried to give chase, but you got away. <<tearful>> 당신은 몸을 추스리려고 한다. You might not be far from where you passed out, but it's hard to tell.
 <br><br>
 
 <</if>>

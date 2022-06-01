@@ -75,18 +75,18 @@
 			<<if $worn.genitals.type.includes("chastity")>>
 				<<trClothes "genitals" $worn.genitals.name "name" "을">>_trResult 보자 휘파람을 불기까지 한다.
 			<<else>>
-				<<if $penisexist is 1>>자지<</if>><<if $penisexist is 1 and $vaginaexist is 1>>와 <</if>><<if $vaginaexist is 1>>귀여운 보지<</if>>를 보자 휘파람을 불기까지 한다.
+				<<if $player.penisExist>>자지<</if>><<if $player.penisExist and $player.vaginaExist>>와 <</if>><<if $player.vaginaExist>>귀여운 보지<</if>>를 보자 휘파람을 불기까지 한다.
 			<</if>>
 		<</if>>
 	<</if>>
 	<br>
 	소녀는 당신에게 자를 건네준다. 당신은 리버의 책상으로 걸어가 그 위에 걸터앉아, 반 친구들이 모두 당신의
-	<<if $penisexist is 1>>항문을<<else>>보지를<</if>> 분명하게 볼 수 있도록 다리를 벌린다.
+	<<if $player.penisExist>>항문을<<else>>보지를<</if>> 분명하게 볼 수 있도록 다리를 벌린다.
 	<br>
 	그러고는 한 손을 내려, 두 손가락을 이용해
-	<<if $penisexist is 1>>항문을<<else>>보지를<</if>> 최대한 벌리기 시작한다.
+	<<if $player.penisExist>>항문을<<else>>보지를<</if>> 최대한 벌리기 시작한다.
 
-	<<if $anussemen gte 1 or $vaginasemen gte 1>>
+	<<if $player.bodyliquid.anus.semen gte 1 or $player.bodyliquid.vagina.semen gte 1>>
 		<br>
 		거기서 정액이 몇 방울 흘러나와 책상 위로 떨어진다. "아, 보아하니 최근에 사용된 적이 있구나." 소녀가 말한다.
 		<br>
@@ -94,7 +94,7 @@
 	<</if>>
 	<br><br>
 	<<if $arousal gte ($arousalmax / 5) * 3>>
-		<<if $vaginaexist is 1>>
+		<<if $player.vaginaExist>>
 			보지는 이미 완전히 젖어있어서 별다른 노력이 없어도 자 끝부분이 들어간다.
 		<<else>>
 			항문에 자 끝부분을 넣는 데에는 별다른 노력이 필요하지 않았다.
@@ -111,7 +111,7 @@
 		학생들은 그 광경에 홀리기라도 한듯, 당신의 행위를 지켜보며 조금의 소리도 내지 않는다.
 		<br>
 		당신은 계속해서 자를 밀어넣고, 결국 거의 전체가 안에 들어간다.
-		<<if $deviancy gte 35 and $vaginaexist is 1>>
+		<<if $deviancy gte 35 and $player.vaginaExist>>
 			<br><br>
 			자가 자궁경부에 닿는 느낌이 난다. 조금만 더 밀어넣으면 완전히 들어갈 것 같다.
 			<br><br>
@@ -121,7 +121,7 @@
 			<</if>>
 		<</if>>
 	<<elseif $arousal gte ($arousalmax / 10) * 3>>
-		<<if $vaginaexist is 1>>
+		<<if $player.vaginaExist>>
 			보지가 조금 젖어있어서 약간의 노력만 들여도 자 끝부분이 들어간다.
 		<<else>>
 			항문에 자 끝부분을 넣는 데에는 약간의 노력만이 필요했다.
@@ -150,7 +150,7 @@
 
 		<<link [[다음|Maths Lesson]]>><<endevent>><</link>>
 	<<elseif $arousal gte ($arousalmax / 20) * 3>>
-		<<if $vaginaexist is 1>>
+		<<if $player.vaginaExist>>
 			보지는 거의 젖어있지 않아 자 끝부분을 넣는 데에도 상당한 노력이 필요했다.
 		<<else>>
 			항문에 자 끝부분을 넣는 데에는 상당한 노력이 필요했다.
@@ -291,8 +291,10 @@
 	<<neutral 1>>
 	<<molested>>
 	<<maninit>>
-	<<if $delinquency lt 400>>
-		<<set $rescue to 1>>
+	<<if $drugged lte 0 and $pillory_tenant.special.name isnot "Whitney" and $whitneyromance is 1 and $NPCName[$NPCNameList.indexOf("Whitney")].dom gte random(10, 25)>>
+		<<set $rescue to 2>>
+	<<elseif $delinquency lt 400 and $pillory_tenant.special.name isnot "Leighton">>
+		<<enable_rescue>>
 	<</if>>
 	<<if $phase is 1>>
 		<<npcstrip>><<set $timer to 15>>
@@ -319,7 +321,7 @@
 	<span id="next"><<link [[다음|Maths Note Molestation Finish]]>><</link>></span><<nexttext>>
 <<elseif $enemyarousal gte $enemyarousalmax>>
 	<span id="next"><<link [[다음|Maths Note Molestation Finish]]>><</link>></span><<nexttext>>
-<<elseif $rescue is 1 and $alarm is 1>>
+<<elseif $rescue gte 1 and $alarm is 1>>
 	<span id="next"><<link [[다음|Maths Note Molestation Finish]]>><</link>></span><<nexttext>>
 <<elseif $timer is 1>>
 	<span id="next"><<link [[다음|Maths Note Molestation Finish]]>><</link>></span><<nexttext>>
@@ -332,7 +334,7 @@
 
 <<if $enemyhealth lte 0>>
 
-	공격자들은 고통에 몸을 움찔거린다. <<tearful>> 당신은 그 기회를 틈타 도망친다.
+	<<group_un>> 고통에 몸을 움찔거린다. <<tearful>> 당신은 그 기회를 틈타 도망친다.
 	<br><br>
 
 	<<clotheson>>
@@ -365,8 +367,58 @@
 	<br><br>
 
 	<<link [[다음|Maths Lesson]]>><</link>>
+<<elseif $rescue gte 2 and $alarm is 1>><<set $rescued += 1>>
+	An angry voice echoes from down the hall. "Let my <<girl>> go." It's Whitney<<if $whitneymaths isnot "active" and $whitneymaths isnot "seat">>, flanked by <<nnpc_his "Whitney">> friends<</if>>. Your assailants tense up.<<status 1>><<gcool>>
+	<br><br>
+
+	The <<group>> share nervous glances with each other, weighing their odds.
+	<<if $delinquency lt 400 and $pillory_tenant.special.name isnot "Leighton">>
+		Before they can reach a decision, a second voice breaks the silence, scaring them into a sprint. They leave you on the ground.
+		<br><br>
+
+		<<clotheson>>
+		<<endcombat>>
+
+		You look up to find Leighton fast approaching, <<nnpc_his "Leighton">> glare fixed on Whitney.
+		<<npc Leighton>><<endevent>>
+		"You again. I should've known."
+		<br><br>
+
+		"Get your hands off me. You don't know shit!" Whitney protests as <<nnpc_hes "Whitney">> dragged to the head's office.
+		<br><br>
+
+		<<if !$worn.upper.type.includes("naked") and !$worn.lower.type.includes("naked")>>
+		<<else>>
+			당신은 화장실로 도망가, 누가 보기 전에 수건으로 몸을 가린다.<<towelup>>
+		<</if>>
+
+		<<tearful>> you hurry back to the classroom.
+		<<set $whitneymaths to "sent">>
+		<br><br>
+
+		<<link [[다음|Maths Lesson]]>><</link>>
+		<br>
+	<<else>>
+		Finally, the <<person1>><<person>> shoves you to Whitney. "Dunno what you see in this loser," <<he>> scoffs. <<He>> slinks away, <<his>> buddies following suit.
+		<br><br>
+
+		Whitney rolls <<nnpc_his "Whitney">> eyes. "Poseurs."
+		<<if $whitneymaths is "seat" or $whitneymaths is "active">>
+			There's a brief moment of silence. Unprompted, Whitney gives you an indignant shove. "Shut up. I got bored."
+			<<set $whitneymaths to "sent">>
+			<<set $whitneyRescueAlone to true>>
+		<</if>>
+		<br><br>
+
+		<<clotheson>>
+		<<endcombat>>
+		<<npc Whitney>><<person1>>
+
+		<<link [[다음|Whitney Rescue 2]]>><<set $whitneyRescueExit to "hallways">><<set $whitneyRescueSpecial to "mathsNote">><</link>>
+		<br>
+	<</if>>
 <<elseif $rescue is 1 and $alarm is 1>><<set $rescued += 1>>
-	<<endevent>><<npc Leighton>><<person1>>레이턴이 당신의 비명소리를 듣고는 모퉁이에서 걸어나온다. 공격자들의 태도가 단박에 바뀌더니, 교장실로 끌려간다.
+	<<endevent>><<npc Leighton>><<person1>>레이턴이 당신의 비명소리를 듣고는 모퉁이에서 걸어나온다. <<groupPost "의">> 태도가 단박에 바뀌더니, 교장실로 끌려간다.
 	<br><br>
 
 	<<clotheson>>
@@ -431,7 +483,7 @@
 
 	<<maninit>><<npcstrip>>
 	<<set $timer to 10>>
-	<<set $rescue to 1>>
+	<<enable_rescue>>
 	<<set $enemyhealthmax to 1>><<set $enemyhealth to $enemyhealthmax>>
 <</if>>
 
@@ -569,6 +621,9 @@
 	<<molested>>
 
 	<<maninit>><<npcidlegenitals>>
+	<<if $pillory_tenant.special.name isnot "Whitney" and $whitneyromance is 1 and $NPCName[$NPCNameList.indexOf("Whitney")].dom gte random(10, 25)>>
+		<<enable_rescue>>
+	<</if>>
 <</if>>
 
 <<effects>>
@@ -589,6 +644,8 @@
 	<span id="next"><<link [[다음|Maths Event4 Molestation Finish]]>><</link>></span><<nexttext>>
 <<elseif $enemyarousal gte $enemyarousalmax>>
 	<span id="next"><<link [[다음|Maths Event4 Molestation Finish]]>><</link>></span><<nexttext>>
+<<elseif $alarm is 1 and $rescue is 1>>
+	<span id="next"><<link [[다음|Whitney Rescue]]>><<set $whitneyRescueSpecial to "mathsSent">><<set $whitneyRescueExit to "hallways">><</link>></span><<nexttext>>
 <<else>>
 	<span id="next"><<link [[다음|Maths Event4 Molestation]]>><</link>></span><<nexttext>>
 <</if>>
@@ -679,7 +736,7 @@
 
 	<<maninit>>
 	<<set $enemytrust += 100>><<promiscuity5>>
-	<<set $rescue to 1>>
+	<<enable_rescue>>
 <</if>>
 
 <<effects>>
@@ -915,7 +972,7 @@
 <<effects>>
 
 <<if $worn.under_lower.type.includes("naked")>>
-	<<if $worn.lower.skirt is 1>>
+	<<if setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1>>
 		당신은 넓적다리까지 치마를 올려, 허리선을 보여 치마 밑에 속옷을 입고 있지 않다는 것을 보인다. 그러고는 재빨리 다시 덮는다.<<exhibitionism1>>
 
 		"멋진걸." 휘트니는 그렇게 말하고, 그걸 들은 리버가 고개를 돌려 노려본다.
@@ -929,7 +986,7 @@
 		<<unset $whitneypantiesmaths>>
 	<</if>>
 <<elseif $whitneypantiescheck is 1>>
-	<<if $worn.lower.skirt is 1>>
+	<<if setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1>>
 		당신은 넓적다리까지 치마를 올려, 허리선을 보여 그 밑에 <<trClothes "under_lower" $worn.under_lower.name "name" "을">>_trResult 입고 있는 걸 보인다. 그러고는 재빨리 다시 덮는다.<<exhibitionism1>>
 
 		휘트니는 당신을 노려보나, 별다른 말은 하지 않는다. 이걸로 끝나진 않을 것이다.
@@ -945,7 +1002,7 @@
 		<<set $whitneypantiesmaths to "seen">>
 	<</if>>
 <<else>>
-	<<if $worn.lower.skirt is 1>>
+	<<if setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1>>
 		당신은 넓적다리까지 치마를 올려, <<trClothes "under_lower" $worn.under_lower.name "name" "이">>_trResult 보일 정도로 올린다. 그러고는 재빨리 다시 덮는다.<<exhibitionism1>>
 
 		"멋진걸." 휘트니는 그렇게 말하고, 그걸 들은 리버가 고개를 돌려 노려본다.
@@ -967,7 +1024,7 @@
 :: Maths Whitney Undies Trick
 <<effects>>
 
-<<if $worn.lower.skirt is 1>>
+<<if setup.clothes.lower[clothesIndex('lower', $worn.lower)].skirt is 1>>
 	당신은 넓적다리까지 치마를 올리면서 <<trClothes "under_lower" $worn.under_lower.name>>_trResult도 함께 추켜올리며, 치마 밑에 아무 것도 입고 있지 않은 것처럼 보이길 바란다.
 <<else>>
 	당신은 $worn.lower.name과 <<trClothes "under_lower" $worn.under_lower.name "name" "을">>_trResult 함께 약간 내려, 밑에는 아무 것도 입고 있지 않은 것처럼 보이길 바란다.
@@ -980,12 +1037,7 @@
 	<span class="green">"멋진걸."</span> 휘트니는 속아 넘어가 그렇게 말한다. 리버가 뒤로 돌아 <<hePost "을">> 노려본다.
 	<br><br>
 
-		<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
-		<<skulduggeryskilluse>>
-		<<else>>
-		<span class="blue">너무 쉬웠다. 아무 것도 배우지 못했다.</span>
-		<br><br>
-		<</if>>
+		<<skulduggeryuse>>
 
 	<<link [[다음|Maths Lesson]]>><<endevent>><</link>>
 	<br>
@@ -995,12 +1047,7 @@
 <span class="red">휘트니가 당신을 노려본다.</span> 당신의 속임수를 간파한 모양이다. <<HePost "은">> 아무런 말도 하지 않지만, 이걸로 끝나진 않을 것이다.
 <br><br>
 
-	<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
-	<<skulduggeryskilluse>>
-	<<else>>
-	<span class="blue">너무 쉬웠다. 아무 것도 배우지 못했다.</span>
-	<br><br>
-	<</if>>
+	<<skulduggeryuse>>
 
 	<<link [[다음|Maths Lesson]]>><<endevent>><</link>>
 	<br>
@@ -1161,12 +1208,7 @@
 	당신은 하고 싶지 않으나, 휘트니의 말에 따르는 것이 가장 편한 길이라고 판단한다. 리버가 교실 반대편에서 다른 일에 정신이 팔려있는 동안, 당신은 휘트니의 책상 밑으로 슬그머니 들어간다. 빠르게 끝내지 않으면 리버가 눈치챌 것이다.
 	<br><br>
 
-	<<if $pronoun is "m">>
-		당신이 내려가자 휘트니는 바지 지퍼를 내려,
-	<<else>>
-		당신이 내려가자 휘트니는 치마를 들춰,
-	<</if>>
-
+	Whitney <<npcUndressText $NPCName[$NPCNameList.indexOf("Whitney")] "lower" "self">> once you're underneath,
 	<<set $enemyanger to 70>>
 	<<if $NPCList[0].penis isnot "none">>
 		자지를 꺼낸다. <<HePost "은">> 이미 발기해있다.
@@ -1178,7 +1220,7 @@
 
 	<<npcoral>><<set $NPCList[0].lefthand to "hair">><<set $head to "grappled">><<set $NPCList[0].mouth to "none">><<set $enemyhealthmax to 10>><<set $enemyhealth to 10>>
 	<<set $timer to 10>>
-	<<set $rescue to 1>>
+	<<enable_rescue>>
 <</if>>
 
 <<if $sexstart is 1>>
@@ -1192,12 +1234,7 @@
 	당신은 리버가 교실 반대편에서 이쪽을 신경쓰지 않는지 확인한 뒤에, 책상 밑으로 슬그머니 들어간다. 빠르게 끝내지 않으면 리버가 눈치챌 것이다.
 	<br><br>
 
-	<<if $pronoun is "m">>
-		당신이 내려가자 휘트니는 바지 지퍼를 내려,
-	<<else>>
-		당신이 내려가자 휘트니는 치마를 들춰,
-	<</if>>
-
+	당신이 아래로 내려가자마자 휘트니는 <<npcUndressText $NPCName[$NPCNameList.indexOf("Whitney")] "lower" "self" "and">>,
 	<<set $enemyanger to 70>>
 	<<if $NPCList[0].penis isnot "none">>
 		자지를 꺼낸다. <<HePost "은">> 이미 발기해있다. 당신은 앞으로 몸을 기울여, 뿌리부터 끝까지 혀로 핥으며 살갗에 당신의 숨결이 닿는 걸 <<hePost "이">> 만끽하게 한다.
@@ -1215,7 +1252,7 @@
 
 	<<npcoral>><<set $NPCList[0].lefthand to "hair">><<set $head to "grappled">><<set $NPCList[0].mouth to "none">><<set $enemyhealthmax to 10>><<set $enemyhealth to 10>>
 	<<set $timer to 10>>
-	<<set $rescue to 1>>
+	<<enable_rescue>>
 <</if>>
 
 <<effects>>
@@ -1567,7 +1604,7 @@
 	휘트니는 움직임을 멈추고는, <<hePost "을">> 놔준다. "내 <<girlfriend>>가 마음이 약해서 운 좋은 줄 알아." <<person2>><<personPost "이">> 서둘러 몸을 가리는 동안 <<person1>><<hePost "이">> 말한다.
 	<br><br>
 <<else>>
-	<span class="green"><<person2>><<hePost "을">> 놔준다.</span> <<personPost "은">> <<person1>><<he>>로부터 물러나지만, 휘트니는 흥미가 가신 눈치다.
+	<span class="green"><<person2>><<hePost "을">> 놔준다.</span> <<personPost "은">> <<person1>><<he_robuter>> 물러나지만, 휘트니는 흥미가 가신 눈치다.
 <</if>>
 <br><br>
 <<HePost "은">> 당신 옆에 앉고, 그러자마자 리버가 교실로 돌아온다.
@@ -1711,3 +1748,225 @@
 <<link [[다음|Maths Lesson]]>><<clotheson>><<endevent>><</link>>
 <br>
 
+:: Maths Whitney Shirt Expose
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+You slide a hand behind Whitney's back.
+<<skulduggerycheck>>
+<<if $skulduggerysuccess is 1>>
+	<span class="green">You deftly navigate your way to <<his>> <<if $pronoun is "m">>belt<<else>>bra<</if>> without alerting <<him>>.</span>
+	<<promiscuity2>>
+	<br><br>
+	<<skulduggeryuse>>
+	<<if $pronoun is "m">>
+		You smoothly tug the belt free from <<his>> trousers, letting them fall to the floor. <span class="lewd"><<Hes>> not wearing underwear.</span>
+		<<if $NPCList[0].penis isnot "none">>
+			<<if $NPCList[0].penissize lte 1>>
+				Giggles erupt
+			<<else>>
+				The class gawks
+			<</if>>
+			at <<his>> <<print $NPCList[0].penisdesc>>.
+		<<else>>
+			The class gawks at <<his>> exposed pussy.
+		<</if>>
+	<<else>>
+		You smoothly unhook the bra and whisk it away, <span class="lewd">liberating <<his>> <<print $NPCList[0].breastdesc>>.</span> Some blush and turn away, others gawk.
+	<</if>>
+	River takes one look before collapsing at <<nnpc_his "River">> desk.
+	<br><br>
+
+	<<link [[Taunt|Maths Whitney Shirt Expose Taunt]]>><<npcincr Whitney dom -3>><<npcincr Whitney lust 10>><</link>><<lldom>><<glust>>
+	<br>
+	<<link [[Stay silent|Maths Whitney Shirt Expose Silent]]>><</link>>
+	<br>
+<<else>>
+	<span class="red">You feel <<him>> tense up as your fingers brush <<his>> exposed skin.</span>
+	<br><br>
+	<<skulduggeryuse>>
+
+	<<His>> hands shoot from the hem of your $worn.upper.name to your shoulders. <<He>> shoves you against your desk.
+	<br><br>
+
+	"You wanna show some skin that bad?" <<he>> snickers. "Fine by me."
+	<br><br>
+
+	<<run npcMakeNaked($NPCList[0], "upper")>>
+
+	<<link [[다음|Maths Whitney Shirt Forced]]>><<set $molestationstart to 1>><<set $whitneyShirtRiver to "awake">><</link>>
+	<br>
+<</if>>
+
+:: Maths Whitney Shirt Expose Silent
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+At first, Whitney's too busy fumbling with your $worn.upper.name to notice <<his>> exposure. Once <<he>> does,
+<<if $NPCName[$NPCNameList.indexOf("Whitney")].dom gte 10>>
+	<<he>> freezes.
+	<br><br>
+
+	<<He>> jerks away, hands shooting <<if $pronoun is "m">>down<<else>>up<</if>> to cover <<himself>>. <<He>> stops when <<he>> notices the leering crowd, and instead holds them at <<his>> sides. <<He>> shoots you a withering look, then grabs you by the collar and pulls you out of your seat.
+<<else>>
+	<<he>> shrugs.
+	<br><br>
+
+	<<He>> folds <<his>> hands behind <<his>> head and reclines against the desk, shameless in <<his>> exposure. Not content to leave it there, <<he>> starts to strutting about the classroom. <<He>> makes sure you get a good eyeful more than the rest of the class.<<arousal 200>><<garousal>>
+<</if>>
+<br><br>
+
+<<link [[다음|Maths Whitney Shirt Expose End]]>><</link>>
+<br>
+
+:: Maths Whitney Shirt Expose End
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+<<if $NPCName[$NPCNameList.indexOf("Whitney")].dom gte 10>>
+	"Real funny, slut," <<he>> growls, pressing <<his>> lips to your ear. "I've got a sense of humour too, you know. Watch your ass." <<He>> bites your ear before shoving you back into your seat.<<stress 6>><<npcincr Whitney lust 15>><<gstress>><<gglust>>
+	<br><br>
+
+	<<He>> fixes <<his>> clothes before storming outside, showing no reaction to the class' lewd stares.
+<<else>>
+	Through with basking in the attention, <<he>> flaunts <<his>> way to the door. <<He>> only stops to <<print either("shove", "kick", "slap", "snarl at")>> a handsy
+	<<if ($pronoun is "m" and $homochance gte random(1, 100)) or ($pronoun is "f" and $homochance lt random(1, 100))>>
+		<<generateym2>>
+	<<else>>
+		<<generateyf2>>
+	<</if>>
+	<<person2>><<person>>.
+	<br><br>
+
+	<<person1>><<He>> gives you a parting wink over <<his>> shoulder and mouths "You're next," as <<he>> saunters out of the class.<<stress 2>><<npcincr Whitney lust 5>><<gstress>><<glust>>
+<</if>>
+<<set $whitneymaths to "sent">>
+<br><br>
+
+The door slams shut, startling River out of <<nnpc_his "River">> stupor. It takes <<nnpc_him "River">> a minute to reign the class in and resume the lesson.
+<br><br>
+
+<<link [[다음|Maths Lesson]]>><<endevent>><</link>>
+<br>
+
+:: Maths Whitney Shirt Expose Taunt
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+You clear your throat. Whitney, too busy fumbling with your $worn.upper.name to notice <<his>> exposure, snaps to attention.
+<<if $submissive gte 1150>>
+	You don't say a word, and silently gesture at <<his>> <<if $pronoun is "m">>crotch<<else>>chest<</if>>.
+<<elseif $submissive lte 850>>
+	You dangle <<his>> <<if $pronoun is "m">>belt<<else>>bra<</if>> on one finger, smirking. "Still too hot?"
+<<else>>
+	"I think you should worry about yourself first," you giggle.
+<</if>>
+<br><br>
+
+<<His>> face flushes, and <<his>> breath quickens. <<His>> eyes burn with anger and lust.
+<br><br>
+
+"Alright, slut. Your turn." <<He>> lunges for you!
+<br><br>
+
+<<run npcMakeNaked($NPCList[0], "upper")>>
+<<if $pronoun is "m">>
+	<<run npcMakeNaked($NPCList[0], "lower")>>
+<</if>>
+
+<<link [[다음|Maths Whitney Shirt Forced]]>><<set $molestationstart to 1>><<set $whitneyShirtRiver to "conked">><</link>>
+<br>
+
+:: Maths Whitney Shirt Forced
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<violence 1>>
+	<<neutral 1>>
+	<<molested>>
+
+	<<maninit>><<npcidlegenitals>><<npcstrip>>
+	The class forms a ring around you as Whitney bears down on you.
+	<<if $whitneyShirtRiver is "awake">>
+		You faintly make out River's voice amidst the chaos.
+		<<set $timer to 10>>
+	<</if>>
+	<<controlloss>>
+<</if>>
+
+<<effects>>
+
+<<effectsman>><<man>>
+
+<<audience>>
+
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if $enemyhealth lte 0>>
+	<span id="next"><<link [[다음|Maths Whitney Shirt Forced Finish]]>><</link>></span><<nexttext>>
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<span id="next"><<link [[다음|Maths Whitney Shirt Forced Finish]]>><</link>></span><<nexttext>>
+<<elseif $worn.upper.type.includes("naked") and $worn.lower.type.includes("naked") and $worn.under_upper.type.includes("naked") and $worn.under_lower.type.includes("naked")>>
+	<span id="next"><<link [[다음|Maths Whitney Shirt Forced Finish]]>><</link>></span><<nexttext>>
+<<elseif $whitneyShirtRiver is "awake" and $timer lte 0>>
+	<span id="next"><<link [[다음|Maths Whitney Shirt Forced Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[다음|Maths Whitney Shirt Forced]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Maths Whitney Shirt Forced Finish
+<<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
+
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+
+	<<He>> pushes off you and saunters out the class with a satisfied smirk. <<He>> doesn't bother to get dressed.<<npcincr Whitney lust -20>><<llust>>
+	<br><br>
+
+	<<if $whitneyShirtRiver is "awake">>
+		River harries the crowd into their seats.
+	<<else>>
+		River comes to <<nnpc_his "River">> senses.
+	<</if>>
+
+	It takes <<nnpc_him "River">> a minute to reign the class in and resume the lesson. <<nnpc_He "River">> avoids looking at you.
+<<elseif $enemyhealth lte 0>>
+	You shove Whitney away. <<He>> leers at you, then laughs. "Whatever. You don't need my help to slut it up, anyway." <<He>> throws <<his>> clothes back on before storming outside.
+	<br><br>
+
+	<<if $whitneyShirtRiver is "awake">>
+		River harries the crowd into their seats.
+	<<else>>
+		River comes to <<nnpc_his "River">> senses.
+	<</if>>
+
+	It takes <<nnpc_him "River">> a minute to reign the class in and resume the lesson.
+<<elseif $whitneyShirtRiver is "awake" and $timer lte 0>>
+	River finally breaks through the crowd. <<nnpc_He "River">> grabs Whitney by the wrist, covering <<nnpc_his "River">> eyes with one hand.
+	<br><br>
+
+	When River returns, <<nnpc_his "River">> face is red, and <<nnpc_hes "River">> panting. Whitney isn't with <<nnpc_him "River">>. <<nnpc_He "River">> struggles to get the class under the control.
+<<else>>
+	Whitney raises your clothes overhead, like a trophy. <<He>> keeps you pinned with <<his>> free hand. The class celebrates <<his>> victory.<<trauma 6>><<stress 6>><<npcincr Whitney dom 3>><<gtrauma>><<gstress>><<ggdom>>
+	<br><br>
+
+	<<if $whitneyShirtRiver is "awake">>
+		River finally breaks through the crowd. <<nnpc_He "River">> grabs Whitney by the wrist, covering <<nnpc_his "River">> eyes with one hand.
+	<<else>>
+		The clamor wakes River from <<nnpc_his "River">> stupor. <<nnpc_He "River">> hastens to grab Whitney, covering <<nnpc_his "River">> eyes with one hand.
+	<</if>>
+	Whitney drops the clothes atop you as <<hes>> dragged from the room.
+	<br><br>
+
+	When River returns, <<nnpc_his "River">> face is red, and <<nnpc_hes "River">> panting. Whitney isn't with <<nnpc_him "River">>. <<nnpc_He "River">> struggles to get the class under the control.
+<</if>>
+<br><br>
+
+<<clotheson>>
+<<endcombat>>
+<<set $whitneymaths to "sent">>
+<<unset $whitneyShirtRiver>>
+
+<<if $exposed gte 1>>
+	<<towelup>>
+<</if>>
+
+<<link [[다음|Maths Lesson]]>><<endevent>><</link>>
+<br>

@@ -1,5 +1,248 @@
-:: Widgets Vore [widget]
+:: Widgets Vore Actions Generation [widget]
+<<widget "generateActionsVore">>
+<<set $combat to 1>>
+<<if _targetlist is undefined>>
+	<<getTargetList>>
+<</if>>
+<div id="listContainer">
+	<div id="leftaction" @class="$combatControls + 'Control'">
+		<<leftActionInitVore>>
+	</div>
 
+	<div id="rightaction" @class="$combatControls + 'Control'">
+		<<rightActionInitVore>>
+	</div>
+
+	<<if ($mouthuse is 0 and !($dissociation lte 1 and $orgasmdown lte 0 and ($pain lt 100 or $willpowerpain is undefined)))>>
+		<div id="mouthaction" @class="$combatControls + 'Control'">
+			<<mouthActionInit>>
+		</div>
+	<</if>>
+</div>
+<</widget>>
+
+<<widget "leftActionInitVore">>
+<<set $lefttarget to "vore">>
+<<switch $leftarm>>
+<<case 0>>
+	<<set $lefttarget to "vore">>
+	<<if $orgasmdown gte 1>>
+		<<set _leftOptions to "orgasm">>
+		<span class="lewd">당신의 왼팔은 자유로우나, 경련을 멈출 수가 없다.</span>
+	<<elseif $pain gte 100 and $willpowerpain is 0>>
+		<<set _leftOptions to "pain">>
+		<span class="red">당신의 왼팔은 자유로우나, 아파서 움직일 수가 없다.</span>
+	<<elseif $dissociation gte 2>>
+		<<set _leftOptions to "unreal">>
+		<span class="pink">당신의 왼팔은 자유로우나, 진짜처럼 느껴지지 않는다.</span>
+	<<else>>
+		<<if _targetYourself is true and _targetnumber gt 1>>
+			<<set _targetlistarms["당신 자신"] to "self">>
+		<</if>>
+		<<if $combatControls isnot "radio" and _targetnumber gt 1>>
+			대상: <span onchange="actionsreplace('left')">
+			<<listbox "$lefttarget" autoselect>>
+				<<optionsfrom _targetlistarms>>
+			<</listbox>>
+			</span>
+		<</if>>
+		<<set _leftOptions to "free">>
+		<span @class="($lastOptions.left isnot _leftOptions ?'gold':'')">당신의 왼팔은 자유롭다.</span>
+		<<if $combatControls is "radio" and _targetnumber gt 1>><br>
+			대상: <span onchange="actionsreplace('left')">
+			<<listbox "$lefttarget" autoselect>>
+				<<optionsfrom _targetlistarms>>
+			<</listbox>>
+			</span><br>
+		<</if>>
+	<</if>>
+<<case "bound">>
+	<<set _leftOptions to "bound">>
+	<<if $orgasmdown gte 1>>
+		<span class="lewd">당신의 왼팔은 묶인 상태로 경련하고 있다.</span>
+	<<elseif $pain gte 100 and $willpowerpain is 0>>
+		<span class="red">당신의 왼팔은 아프게 묶여 있다.</span>
+	<<elseif $dissociation gte 2>>
+		<span class="pink">당신의 왼팔은 묶인 상태로 축 처져 있다.</span>
+	<<else>>
+		<span @class="($lastOptions.left isnot _leftOptions ?'gold':'')">당신의 왼팔은 묶여 있다.</span>
+	<</if>><<if $combatControls is "radio">><br><</if>>
+<<case "trapped">>
+	<<set _leftOptions to "trapped">>
+	<span @class="($lastOptions.left isnot _leftOptions ?'gold':'purple')">당신의 왼팔은 <<trVore $vorecreature>>_trResult에게 잡혀있다.</span><<if $combatControls is "radio">><br><</if>>
+<<case "grappled" "penis" "othervagina" "vagina" "coverpenis" "anus" "behind">>
+	<<set $_changetype to true>><<leftActionInit>>
+<<case "struggle">>
+	<<set $_changetype to true>><<leftActionInitStruggle>>
+<<case "swarmgrappled">>
+	<<set $_changetype to true>><<leftActionInitSwarm>>
+<<case "mechgrappled">>
+	<<set $_changetype to true>><<leftActionInitMachine>>
+<<default>>
+	<<set $_changetype to true>><<leftActionInitTentacle>>
+<</switch>>
+<<if $_changetype isnot true>>
+	<<leftActionsVore>>
+	<<if Object.keys(_leftaction).length gt 0>>
+		<<if !(Object.values(_leftaction).includes($leftactiondefault))>>
+			<<set $leftactiondefault to "rest">>
+		<</if>>
+		<<set $leftaction to $leftactiondefault>>
+		<<set _textColor to combatListColor('leftaction', (Object.values(_leftaction).includes($leftaction) ? $leftaction : Object.values(_leftaction)[0]), "Vore")>>
+		<div class="extraMargin">
+			<<generateCombatActionOthers _leftaction "leftaction" _textColor $leftaction "Vore">>
+		</div>
+		<<if $combatControls.includes("ists")>>
+			<div id="leftactionDifficulty">
+				<<leftactionDifficulty>>
+			</div>
+		<</if>>
+	<</if>>
+	<<set $lastOptions.left to clone(_leftOptions)>>
+<</if>>
+<</widget>>
+
+<<widget "leftactionDifficultyVore">>/* Blank widget to pacify the JavaScript Gods. */
+<</widget>>
+
+<<widget "leftActionsVore">>
+<<set _leftaction to {}>>
+<<if !(["orgasm", "pain", "unreal"].includes(_leftOptions))>>
+	<<set _leftaction["쉰다"] to "rest">>
+<</if>>
+<<switch _leftOptions>>
+<<case "free">>
+	<<trVore $vorecreature "을" "sep">><<set _leftaction[_trResult+"에게서 도망친다"] to "leftescape">>
+	<<if $vorestage lte 6>>
+		<<set _leftaction[_trResult + _trPost + " 꽉 잡는다"] to "lefthold">>
+	<</if>>
+	<<if $rightarm is "trapped">>
+		<<set _leftaction["잡힌 오른팔을 푼다"] to "leftvorefree">>
+	<</if>>
+<<case "bound" "trapped">>
+<<case "orgasm">>
+	<<set _leftaction["팔을 붙잡는다"] to "leftfold">>
+	<<set _leftaction["움켜쥔다"] to "leftgrip">>
+<<case "pain">>
+	<<set _leftaction["몸부림친다"] to "leftstruggleweak">>
+	<<set _leftaction["몸을 지킨다"] to "leftprotect">>
+<<case "unreal">>
+	<<set _leftaction["자신을 찌른다"] to "leftpoke">>
+	<<set _leftaction["당신의 팔을 그대로 놔둔다"] to "leftcurl">>
+<</switch>>
+<</widget>>
+
+<<widget "rightActionInitVore">>
+<<set $righttarget to "vore">>
+<<switch $rightarm>>
+<<case 0>>
+	<<if $orgasmdown gte 1>>
+		<<set _rightOptions to "orgasm">>
+		<span class="lewd">당신의 오른팔은 자유로우나, 경련을 멈출 수가 없다.</span>
+	<<elseif $pain gte 100 and $willpowerpain is 0>>
+		<<set _rightOptions to "pain">>
+		<span class="red">당신의 오른팔은 자유로우나, 아파서 움직일 수가 없다.</span>
+	<<elseif $dissociation gte 2>>
+		<<set _rightOptions to "unreal">>
+		<span class="pink">당신의 오른팔은 자유로우나, 진짜처럼 느껴지지 않는다.</span>
+	<<else>>
+		<<if _targetYourself is true and _targetnumber gt 1>>
+			<<set _targetlistarms["당신 자신"] to "self">>
+		<</if>>
+		<<if $combatControls isnot "radio" and _targetnumber gt 1>>
+			대상: <span onchange="actionsreplace('right')">
+			<<listbox "$righttarget" autoselect>>
+				<<optionsfrom _targetlistarms>>
+			<</listbox>>
+			</span>
+		<</if>>
+		<<set _rightOptions to "free">>
+		<span @class="($lastOptions.right isnot _rightOptions ?'gold':'')">당신의 오른팔은 자유롭다.</span>
+		<<if $combatControls is "radio" and _targetnumber gt 1>><br>
+			대상: <span onchange="actionsreplace('right')">
+			<<listbox "$righttarget" autoselect>>
+				<<optionsfrom _targetlistarms>>
+			<</listbox>>
+			</span><br>
+		<</if>>
+	<</if>>
+<<case "bound">>
+	<<set _rightOptions to "bound">>
+	<<if $orgasmdown gte 1>>
+		<span class="lewd">당신의 오른팔은 묶인 상태로 경련하고 있다.</span>
+	<<elseif $pain gte 100 and $willpowerpain is 0>>
+		<span class="red">당신의 오른팔은 아프게 묶여 있다.</span>
+	<<elseif $dissociation gte 2>>
+		<span class="pink">당신의 오른팔은 묶인 상태로 축 처져 있다.</span>
+	<<else>>
+		<span @class="($lastOptions.right isnot _rightOptions ?'gold':'')">당신의 오른팔은 묶여 있다.</span>
+	<</if>>
+<<case "trapped">>
+	<<set _rightOptions to "trapped">>
+	<span @class="($lastOptions.right isnot _rightOptions ?'gold':'purple')">당신의 오른팔은 <<trVore $vorecreature>>_trResult에게 잡혀있다.</span><br>
+<<case "grappled" "penis" "othervagina" "vagina" "coverpenis" "anus" "behind">>
+	<<set $_changetype to true>><<rightActionInit>>
+<<case "struggle">>
+	<<set $_changetype to true>><<rightActionInitStruggle>>
+<<case "swarmgrappled">>
+	<<set $_changetype to true>><<rightActionInitSwarm>>
+<<case "mechgrappled">>
+	<<set $_changetype to true>><<rightActionInitMachine>>
+<<default>>
+	<<set $_changetype to true>><<rightActionInitTentacle>>
+<</switch>>
+<<if $_changetype isnot true>>
+	<<rightActionsVore>>
+	<<if Object.keys(_rightaction).length gt 0>>
+		<<if !(Object.values(_rightaction).includes($rightactiondefault))>>
+			<<set $rightactiondefault to "rest">>
+		<</if>>
+		<<set $rightaction to $rightactiondefault>>
+		<<set _textColor to combatListColor('rightaction', (Object.values(_rightaction).includes($rightaction) ? $rightaction : Object.values(_rightaction)[0]), "Vore")>>
+		<div class="extraMargin">
+			<<generateCombatActionOthers _rightaction "rightaction" _textColor $rightaction "Vore">>
+		</div>
+		<<if $combatControls.includes("ists")>>
+			<div id="rightactionDifficulty">
+				<<rightactionDifficulty>>
+			</div>
+		<</if>>
+	<</if>>
+	<<set $lastOptions.right to clone(_rightOptions)>>
+<</if>>
+<</widget>>
+
+<<widget "rightactionDifficultyVore">>/* But seriously, not having this blank widget will cause red blocks of error in the "lists" actions types */
+<</widget>>
+
+<<widget "rightActionsVore">>
+<<set _rightaction to {}>>
+<<if !(["orgasm", "pain", "unreal"].includes(_rightOptions))>>
+	<<set _rightaction["쉰다"] to "rest">>
+<</if>>
+<<switch _rightOptions>>
+<<case "free">>
+	<<trVore $vorecreature "을" "sep">><<set _rightaction[_trResult+"에게서 도망친다"] to "rightescape">>
+	<<if $vorestage lte 6>>
+		<<set _rightaction[_trResult + _trPost + " 꽉 잡는다"] to "righthold">>
+	<</if>>
+	<<if $leftarm is "trapped">>
+		<<set _rightaction["잡힌 왼팔을 푼다"] to "rightvorefree">>
+	<</if>>
+<<case "bound" "trapped">>
+<<case "orgasm">>
+	<<set _rightaction["팔을 붙잡는다"] to "rightfold">>
+	<<set _rightaction["움켜쥔다"] to "rightgrip">>
+<<case "pain">>
+	<<set _rightaction["몸부림친다"] to "rightstruggleweak">>
+	<<set _rightaction["몸을 지킨다"] to "rightprotect">>
+<<case "unreal">>
+	<<set _rightaction["자신을 찌른다"] to "rightpoke">>
+	<<set _rightaction["당신의 팔을 그대로 놔둔다"] to "rightcurl">>
+<</switch>>
+<</widget>>
+
+:: Widgets Vore [widget]
 <<widget "vore">>
 <<set $rng to random(1, 100)>>
 <<if $vorestage is 1>>
@@ -25,7 +268,7 @@
 	<<neutral 20>>
 <</if>>
 <<if $vorestage is 1>>
-	<<if ($vorestruggle * $physique) gte $vorestrength>>
+	<<if ($vorestruggle * currentSkillValue('physique')) gte $vorestrength>>
 		<<if $vorestruggle is 2>>
 			당신은 그 <<vorecreature_yi>> 목구멍을 양팔로 내리눌러, <span class="green">당신을 더 삼키지 못하게 막는다.</span>
 		<<elseif $vorestruggle is 1>>
@@ -51,7 +294,7 @@
 	<<elseif $worn.under_lower.integrity lte 0>>
 		<<set $worn.under_lower.integrity -= 1>>
 	<</if>>
-	<<if ($vorestruggle * $physique) gte $vorestrength>>
+	<<if ($vorestruggle * currentSkillValue('physique')) gte $vorestrength>>
 		<<if $vorestruggle is 2>>
 			당신은 그 <<vorecreature_yi>> 목구멍을 양팔로 내리눌러, <span class="green">당신을 더 삼키지 못하게 막는다.</span>
 		<<elseif $vorestruggle is 1>>
@@ -85,7 +328,7 @@
 		<<set $worn.under_upper.integrity -= 1>>
 	<</if>>
 	<<set $worn.upper.integrity -= 1>>
-	<<if ($vorestruggle * $physique) gte $vorestrength>>
+	<<if ($vorestruggle * currentSkillValue('physique')) gte $vorestrength>>
 		<<if $vorestruggle is 2>>
 			당신은 그 <<vorecreature_yi>> 목구멍을 양팔로 내리눌러, <span class="green">당신을 더 삼키지 못하게 막는다.</span>
 		<<elseif $vorestruggle is 1>>
@@ -118,7 +361,7 @@
 	<<elseif $worn.under_upper.integrity gt 0>>
 		<<set $worn.under_upper.integrity -= 1>>
 	<</if>>
-	<<if ($vorestruggle * $physique) gte $vorestrength>>
+	<<if ($vorestruggle * currentSkillValue('physique')) gte $vorestrength>>
 		<<if $vorestruggle is 2>>
 			당신은 그 <<vorecreature_yi>> 목구멍 안쪽을 양팔로 붙잡아, <span class="green">당신을 더 삼키지 못하게 막는다.</span>
 		<<elseif $vorestruggle is 1>>
@@ -151,7 +394,7 @@
 	<<elseif $worn.under_upper.integrity gt 0>>
 		<<set $worn.under_upper.integrity -= 1>>
 	<</if>>
-	<<if ($vorestruggle * $physique) gte $vorestrength>>
+	<<if ($vorestruggle * currentSkillValue('physique')) gte $vorestrength>>
 		<<if $vorestruggle is 2>>
 			당신은 그 <<vorecreature_yi>> 목구멍 안쪽을 양팔로 붙잡아, <span class="green">당신을 더 삼키지 못하게 막는다.</span>
 		<<elseif $vorestruggle is 1>>
@@ -184,7 +427,7 @@
 	<<elseif $worn.under_upper.integrity gt 0>>
 		<<set $worn.under_upper.integrity -= 1>>
 	<</if>>
-	<<if ($vorestruggle * $physique) gte $vorestrength>>
+	<<if ($vorestruggle * currentSkillValue('physique')) gte $vorestrength>>
 		<<if $vorestruggle is 2>>
 			당신은 그 <<vorecreature_yi>> 목구멍 안쪽을 양팔로 붙잡아, <span class="green">당신을 더 삼키지 못하게 막는다.</span>
 		<<elseif $vorestruggle is 1>>
@@ -197,7 +440,7 @@
 		<<set $vorestage += 1>>
 		<<if $vorestruggle is 2>>
 			당신은 그 <<vorecreature_yi>> 목구멍 안쪽을 양팔로 붙잡지만,<span class="pink"> 충분하지 못했다.</span> 그 <<vorecreature_nun>> 당신을 더 아래로 빨아들여, 당신을 살로 감싸인 방 안에 밀어넣는다.
-			<<if $leftarm is "grappled">><<set $leftarm to 0>><</if>><<if $rightarm is "grappled">><<set $rightarm to 0>><<swallowed>><</if>>
+			<<if $leftarm is "trapped">><<set $leftarm to 0>><</if>><<if $rightarm is "trapped">><<set $rightarm to 0>><<swallowed>><</if>>
 		<<elseif $vorestruggle is 1>>
 			당신은 그 <<vorecreature_yi>> 목구멍 안쪽을 한팔로 붙잡지만,<span class="pink"> 충분하지 못했다.</span> 그 <<vorecreature_nun>> 당신을 더 아래로 빨아들여, 당신을 살로 감싸인 방 안에 밀어넣는다.
 			<<if $leftarm is "trapped">><<set $leftarm to 0>><</if>><<if $rightarm is "trapped">><<set $rightarm to 0>><<swallowed>><</if>>
@@ -210,21 +453,21 @@
 	<<if $worn.over_lower.integrity gt 0>>
 		<<set $worn.over_lower.integrity -= 5>>
 	<</if>>
-	<<if ($worn.over_lower.name is "naked" or $worn.over_lower.integrity lte $worn.over_lower.integrity_max / 5) and $worn.lower.integrity gt 0>>
+	<<if ($worn.over_lower.name is "naked" or $worn.over_lower.integrity lte clothingData('over_lower',$worn.over_lower,'integrity_max') / 5) and $worn.lower.integrity gt 0>>
 		<<set $worn.upper.integrity -= 5>>
 	<</if>>
-	<<if ($worn.over_lower.name is "naked" or $worn.over_lower.integrity lte $worn.over_lower.integrity_max / 5)
-		and ($worn.lower.name is "naked" or $worn.lower.integrity lte $worn.lower.integrity_max / 5) and $worn.under_lower.integrity gt 0>>
+	<<if ($worn.over_lower.name is "naked" or $worn.over_lower.integrity lte clothingData('over_lower',$worn.over_lower,'integrity_max') / 5)
+		and ($worn.lower.name is "naked" or $worn.lower.integrity lte clothingData('lower',$worn.lower,'integrity_max') / 5) and $worn.under_lower.integrity gt 0>>
 		<<set $worn.under_lower.integrity -= 5>>
 	<</if>>
 	<<if $worn.over_upper.integrity gt 0>>
 		<<set $worn.over_upper.integrity -= 5>>
 	<</if>>
-	<<if ($worn.over_upper.name is "naked" or $worn.over_upper.integrity lte $worn.over_upper.integrity_max / 5) and $worn.upper.integrity gt 0>>
+	<<if ($worn.over_upper.name is "naked" or $worn.over_upper.integrity lte clothingData('over_upper',$worn.over_upper,'integrity_max') / 5) and $worn.upper.integrity gt 0>>
 		<<set $worn.upper.integrity -= 5>>
 	<</if>>
-	<<if ($worn.over_upper.name is "naked" or $worn.over_upper.integrity lte $worn.over_upper.integrity_max / 5) and
-		($worn.upper.name is "naked" or $worn.upper.integrity lte $worn.upper.integrity_max / 5) and $worn.under_upper.integrity gt 0>>
+	<<if ($worn.over_upper.name is "naked" or $worn.over_upper.integrity lte clothingData('over_upper',$worn.over_upper,'integrity_max') / 5) and
+		($worn.upper.name is "naked" or $worn.upper.integrity lte clothingData('upper',$worn.upper,'integrity_max') / 5) and $worn.under_upper.integrity gt 0>>
 		<<set $worn.under_upper.integrity -= 5>>
 	<</if>>
 <</if>>
@@ -289,10 +532,10 @@
 <<elseif $vorestage is 6>>
 	<<if $rng gte 81 and $leftarm is 0>>
 		식도 옆쪽의 홈이 당신의 왼팔을 조여서, 움직이지 못하게 한다.
-		<<set $leftarm to "trapped">><<neutral 10>>
+		<<set $leftarm to "trapped">><<set $lefttarget to "vore">><<neutral 10>>
 	<<elseif $rng gte 61 and $rightarm is 0>>
 		식도 옆쪽의 홈이 당신의 오른팔을 조여서, 움직이지 못하게 한다.
-		<<set $rightarm to "trapped">><<neutral 10>>
+		<<set $rightarm to "trapped">><<set $righttarget to "vore">><<neutral 10>>
 	<<elseif $rng gte 41>>
 		식도가 당신의 온몸을 조여서, 당신을 그 위치에 잡는다.
 		<<neutral 10>>
@@ -306,13 +549,13 @@
 <<elseif $vorestage is 7>>
 	<<if $rng gte 81 and $rightarm is 0>>
 		위장 옆쪽의 홈이 당신의 오른팔을 조여서, 움직이지 못하게 한다.
-		<<set $rightarm to "trapped">><<neutral 15>>
+		<<set $rightarm to "trapped">><<set $righttarget to "vore">><<neutral 15>>
 	<<elseif $rng gte 61>>
 		위장 옆에서 더 많은 액체를 쏘아대어, 당신을 끈적끈적한 점액으로 뒤덮는다.
 		<<neutral 15>><<outergoo>>
 	<<elseif $rng gte 41 and $leftarm is 0>>
 		위장 옆쪽의 홈이 당신의 왼팔을 조여서, 움직이지 못하게 한다.
-		<<set $leftarm to "trapped">><<neutral 15>>
+		<<set $leftarm to "trapped">><<set $lefttarget to "vore">><<neutral 15>>
 	<<elseif $rng gte 21>>
 		위장이 완만한 리듬으로 고동친다.
 		<<neutral 15>>
@@ -368,27 +611,22 @@
 <<if $voretrait gte 1>>
 	<<set $vorestrength -= 2500>>
 <</if>>
-<<if $enemytype isnot "tentacles">>
-	<<if $panicattacks gte 1 and $panicviolence is 0 and $panicparalysis is 0 and $controlled is 0>>
-		<<set $rng to random(1, 100)>>
-		<<if $rng is 100>>
-			<<set $panicparalysis to 10>>
-		<</if>>
+<<if $panicattacks gte 1 and $panicviolence is 0 and $panicparalysis is 0 and $controlled is 0 and _panicchecked isnot true>>
+	<<set $rng to random(1, 100)>>
+	<<if $rng is 100>>
+		<<set $panicparalysis to 5>>
 	<</if>>
-	<<if $panicattacks gte 2 and $panicviolence is 0 and $panicparalysis is 0 and $controlled is 0>>
-		<<set $rng to random(1, 100)>>
-		<<if $rng is 100>>
-			<<set $panicviolence to 3>>
-		<</if>>
+	<<set _panicchecked to true>>
+<</if>>
+<<if $panicattacks gte 2 and $panicviolence is 0 and $panicparalysis is 0 and $controlled is 0 and _paniccheckedviolence isnot true>>
+	<<set $rng to random(1, 100)>>
+	<<if $rng is 100>>
+		<<set $panicviolence to 3>>
 	<</if>>
-	<<if $arousal gte $arousalmax>>
-		<<orgasm>>
-	<</if>>
-	<<set $seconds += 10>>
-	<<if $seconds gte 60>>
-		<<set $seconds to 0>>
-		<<pass 1>>
-	<</if>>
+	<<set _paniccheckedviolence to true>>
+<</if>>
+<<if $arousal gte $arousalmax and $orgasmdown lte 0>>
+	<<orgasm>>
 <</if>>
 <</widget>>
 <<widget "swallowedstat">>
@@ -408,21 +646,16 @@
 	<br>
 	<</timed>>
 <</if>>
-<<if $enemytype isnot "tentacles">>
-	<<willpowerpain>>
-	<<willpowerorgasm>>
-	<<actioncarry>>
-	<<actioncarrydrop>>
-<</if>>
-<<if $trance lte 0 and $dissociation lte 1 and $panicparalysis is 0 and $panicviolence is 0 and $orgasmdown lte 0 and ($pain lt 100 or $willpowerpain is undefined)>>
-	<<if $enemytype isnot "tentacles">>
-		<<generateActionsTentacle>>
-	<</if>>
-<</if>>
+<<willpowerpain>>
+<<willpowerorgasm>>
+<<actioncarry>>
+<<actioncarrydrop>>
 
-<<if $enemytype isnot "tentacles">>
-	<<combatstate>>
-	<<carryblock>>
+<<combatstate>>
+<<carryblock>>
+
+<<if $trance lte 0 and $panicparalysis is 0 and $panicviolence is 0>>
+	<<generateActionsVore>>
 <</if>>
 <br>
 <</widget>>

@@ -59,7 +59,7 @@
 :: School Fame Blackmail
 <<set $outside to 0>><<set $location to "school">><<schooleffects>><<effects>>
 
-당신은 <<npc Leighton>><<person1>>교장실로 따라가 책상 앞에 서고, <<hePost "은">> 자리에 앉는다. 레이턴은 의자에 기대어 앉으며 당신을 본다.
+당신은 <<person1>>교장실로 따라가 책상 앞에 서고, <<hePost "은">> 자리에 앉는다. <<He_nun>> 의자에 기대어 앉으며 당신을 본다.
 <br><br>
 
 "뭔가 흥미로운 걸 얻었단 말이지." <<hePost "은">> 어색한 미소를 지으며 말한다. "사진이야. 네가 찍힌 사진. 야한 짓들을 하고 있더군. 학교 안의 모두가 보게 될지도 모르지." <<HePost "은">> 몸을 앞으로 숙이며 서랍에서 카메라를 꺼낸다. "네가 협조를 한다면 말이 달라질 거야. 사진만 찍게 해주면 돼. 그럼 그 사진들이 빛을 볼 일은 없을 거고."
@@ -132,7 +132,7 @@
 	<<strip>>
 	당신은 <<nervously>> 옷을 벗는다. <<HisPost "의">> 눈이 당신의 알몸을 훑어본다. "좋아." <<hePost "이">> 말한다. "돈 값은 확실히 하겠어." <<HePost "은">> 카메라를 눈가로 가져간 뒤 사진을 찍고, 곧 한 장을 더 찍는다. <<HePost "은">> 당신 주변을 돌며 다른 각도에서도 사진들을 찍는다.
 	<br><br>
-	<<fameexhibitionism 10>>
+	<<fameexhibitionism 10 pic>>
 <<else>>
 	"그 옷은 질리지가 않는단 말이지." <<hePost "이">> 말한다. 레이턴은 카메라를 눈가로 가져간 뒤 사진을 찍는다. 그러고는 당신 주변을 돌며 다른 각도에서도 사진들을 찍는다. <<HePost "은">> 이따금 멈춰서 당신의 옷매무새를 바로잡으며, 셔츠의 단추를 하나 풀거나 <<trClothes "lower" $worn.lower.name "name" "을">>_trResult 내려 엉덩이가 좀 더 잘 보이게 하거나 한다.
 	<br><br>
@@ -146,7 +146,7 @@
 <<set $rng to random(1, 100)>>
 <<if $rng gte 61>>
 	<<HePost "은">> 당신에게 몸을 숙이거나, 무릎을 꿇거나, 다른 외설적인 자세를 취하라고 한다.
-	<<fameexhibitionism 10>>
+	<<fameexhibitionism 10 pic>>
 <<else>>
 	<<HePost "은">> 당신에게 여러 자세를 주문하지만, 그 중에 음란한 자세는 없다.
 <</if>>
@@ -158,13 +158,13 @@
 	<<HePost "은">> 마지못해 머리카락을 놔준다. <<hePost "이">> 당신을 원한다는 걸 알 수 있다.
 	<br><br>
 
-	<<link [[섹스한다|Head's Office Photoshoot Sex]]>>/*'>>*/<<set $sexstart to 1>><<set $phase to 0>><</link>>
+	<<link [[섹스한다|Head's Office Photoshoot Sex]]>><<set $sexstart to 1>><<set $phase to 0>><</link>>
 	<br>
 	<<if $promiscuity gte 15>>
-		<<link [[돈을 받고 섹스한다|Head's Office Photoshoot Seduce]]>>/*'>>*/<</link>>
+		<<link [[돈을 받고 섹스한다|Head's Office Photoshoot Seduce]]>><</link>>
 		<br>
 	<</if>>
-	<<link [[나간다|Head's Office Photoshoot Leave]]>>/*'>>*/<</link>>
+	<<link [[나간다|Head's Office Photoshoot Leave]]>><</link>>
 	<br>
 <<else>>
 	레이턴은 몸을 돌린다. "이거면 됐다." <<hePost "이">> 말한다. "자." <<HePost "은">> 당신에게 <<moneyGain 50>>를 준다.
@@ -224,7 +224,7 @@
 레이턴도 남은 사진들을 게시판에서 떼어내나, 그걸 자신의 주머니에 집어넣는다. <<HePost "은">> 당신에게 별 말을 하지 않는다. <<HePost "은">> 마지막 남은 사진까지 떼어낸 뒤 당신을 복도에 홀로 내버려 두고 떠난다.
 <br><br>
 
-<<link [[다음|Hallways]]>><<set $eventskip to 1>><</link>>
+<<link [[다음|Hallways]]>><<endevent>><<set $eventskip to 1>><</link>>
 <br>
 
 :: School Fame Gangbang Finish
@@ -348,7 +348,7 @@
 	<<strip>>
 	당신은 <<nervously>> 옷을 벗는다. <<HePost "이">> 당신의 알몸을 눈에 담는게 느껴진다. "좋아." 레이턴이 말한다. "몸을 가리는 건 상관없어. 오히려 귀엽잖아." <<HePost "은">> 카메라를 눈가로 가져간 뒤 사진을 찍고, 곧 한 장을 더 찍는다. <<HePost "은">> 당신 주변을 돌며 다른 각도에서도 사진들을 찍는다.
 	<br><br>
-	<<fameexhibitionism 10>>
+	<<fameexhibitionism 10 pic>>
 <<else>>
 	"그 옷은 질리지가 않는단 말이지." <<hePost "이">> 말한다. 레이턴은 카메라를 눈가로 가져간 뒤 사진을 찍는다. 그러고는 당신 주변을 돌며 다른 각도에서도 사진들을 찍는다. <<HePost "은">> 이따금 멈춰서 당신의 옷매무새를 바로잡으며, 셔츠의 단추를 하나 풀거나 <<trClothes "lower" $worn.lower.name "name" "을">>_trResult 내려 엉덩이가 좀 더 잘 보이게 하거나 한다.
 	<br><br>
@@ -362,7 +362,7 @@
 <<set $rng to random(1, 100)>>
 <<if $rng gte 61>>
 	<<HePost "은">> 당신에게 몸을 숙이거나, 무릎을 꿇거나, 다른 외설적인 자세를 취하라고 한다.
-	<<fameexhibitionism 10>>
+	<<fameexhibitionism 10 pic>>
 <<else>>
 	<<HePost "은">> 당신에게 여러 자세를 주문하지만, 그 중에 음란한 자세는 없다.
 <</if>>
@@ -374,7 +374,7 @@
 	아무런 경고도 없이, 레이턴은 머리카락을 움켜잡고는 책상 위로 당신을 내던진다. 그 바람에 종이와 장식품들이 바닥에 떨어진다.
 	<br><br>
 
-	<<link [[다음|Head's Office Blackmail Rape]]>>/*'>>*/<<set $molestationstart to 1>><</link>>
+	<<link [[다음|Head's Office Blackmail Rape]]>><<set $molestationstart to 1>><</link>>
 	<br>
 <<else>>
 	<<HePost "은">> 몸을 돌린다. "이거면 됐다. 잊지마. 등교할 때마다 와야 해."
@@ -410,11 +410,11 @@
 <<actionsman>>
 
 <<if $enemyhealth lte 0>>
-	<span id="next"><<link [[다음|Head's Office Blackmail Rape Finish]]>>/*'>>*/<</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Head's Office Blackmail Rape Finish]]>><</link>></span><<nexttext>>
 <<elseif $enemyarousal gte $enemyarousalmax>>
-	<span id="next"><<link [[다음|Head's Office Blackmail Rape Finish]]>>/*'>>*/<</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Head's Office Blackmail Rape Finish]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link [[다음|Head's Office Blackmail Rape]]>>/*'>>*/<</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Head's Office Blackmail Rape]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: Head's Office Blackmail Rape Finish
@@ -461,7 +461,7 @@
 	<<promiscuity2>>
 	<br><br>
 
-	<<link [[다음|Head's Office Photoshoot Sex]]>>/*'>>*/<<set $sexstart to 1>><<set $phase to 1>><</link>>
+	<<link [[다음|Head's Office Photoshoot Sex]]>><<set $sexstart to 1>><<set $phase to 1>><</link>>
 	<br>
 <<else>>
 	"이미 돈을 주고 있잖아." <<HePost "이">> 말한다.
@@ -510,13 +510,13 @@
 <<actionsman>>
 
 <<if $finish is 1>>
-	<span id="next"><<link [[다음|Head's Office Photoshoot Sex Finish]]>>/*'>>*/<</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Head's Office Photoshoot Sex Finish]]>><</link>></span><<nexttext>>
 <<elseif $enemyhealth lte 0>>
-	<span id="next"><<link [[다음|Head's Office Photoshoot Sex Finish]]>>/*'>>*/<</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Head's Office Photoshoot Sex Finish]]>><</link>></span><<nexttext>>
 <<elseif $enemyarousal gte $enemyarousalmax>>
-	<span id="next"><<link [[다음|Head's Office Photoshoot Sex Finish]]>>/*'>>*/<</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Head's Office Photoshoot Sex Finish]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link [[다음|Head's Office Photoshoot Sex]]>>/*'>>*/<</link>></span><<nexttext>>
+	<span id="next"><<link [[다음|Head's Office Photoshoot Sex]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: Head's Office Photoshoot Sex Finish

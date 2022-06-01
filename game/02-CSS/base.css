@@ -1,4 +1,7 @@
-mouse.tooltip {font-weight: normal;}
+mouse.tooltip {
+	font-weight: normal;
+	border-bottom: 1px dotted rgb(176, 176, 180);
+}
 
 mouse.tooltip span {
 	z-index:210;
@@ -15,12 +18,48 @@ mouse.tooltip span {
 mouse.tooltip:hover span {
 	display:inline;
 	position:absolute;
-	border:2px solid #000000;
-	color: #000000;
+	border:2px solid gold;
 	font-weight: normal;
 	text-decoration: none;
 	font-size:1.0em;
-	background:#C4C4C4 repeat-x 0 0;
+	background:#1a1919 repeat-x 0 0;
+}
+
+mouse.tooltip-small {
+	font-weight: normal;
+	border-bottom: 1px dotted;
+}
+
+mouse.tooltip-small span {
+	z-index:210;
+	display:none;
+	padding:10px 6px;
+	margin-top:40px; margin-left:-30px;
+	min-width: 50px;
+	max-width: 450px !important;
+	line-height:20px;
+	border-radius:1px;
+	box-shadow: 0px 0px 8px 4px #000;
+}
+
+mouse.tooltip-small:hover span {
+	display:inline;
+	position:absolute;
+	border:1px solid gold;
+	font-weight: normal;
+	text-decoration: none;
+	font-size:80%;
+	background:#1a1919 repeat-x 0 0;
+}
+
+@media only screen and (max-width: 800px) {
+	mouse.tooltip:hover span {
+		left: 100px;
+	}
+
+	mouse.tooltip-small:hover span {
+		left: 100px;
+	}
 }
 
 #next {
@@ -28,13 +67,56 @@ mouse.tooltip:hover span {
 	bottom: -1px;
 	border: 1px solid #aaa;
 	background-color: #222;
-	z-index: 200;
+	z-index: 700;
 }
 
 #next a {
 	color: gold;
 	padding: 10px 20px 30px 20px;
 	display: block;
+}
+
+#cbtToggleMenu {
+    position: fixed;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+    bottom: -1px;
+	margin-left: 7em;
+    border: 1px solid #aaa;
+    background-color: #222;
+    z-index: 700;
+}
+
+#cbtToggleMenu p {
+	display: inline;
+}
+
+#cbtToggleMenu .cbtToggle {
+    color: gold;
+}
+
+#cbtToggleMenu:not(.visible) .cbtToggle {
+	padding: 0 10px 0 10px;
+}
+
+#cbtToggleMenu > hr {
+    margin: 1px;
+    width: 90%;
+}
+
+#cbtToggleMenu .cbtOption {
+	padding: 0 10px 0 10px;
+	align-self: flex-end;
+}
+
+#cbtToggleMenu:not(.visible) > hr,
+#cbtToggleMenu:not(.visible) .cbtOption {
+	display: none;
+}
+
+#cbtToggleMenu input {
+	margin: 10px;
 }
 
 #saveDataInput {
@@ -103,6 +185,16 @@ mouse.tooltip:hover span {
 	border: 1px solid #fff;
 }
 
+.macro-button:active {
+	background-color: #ffd700;
+	border: 1px solid #fff;
+}
+
+.macro-button:focus {
+	background-color: #555;
+	border: 1px solid #ffd700;
+}
+
 .customOverlay {
 	display: block;
 	position:fixed;
@@ -119,6 +211,7 @@ mouse.tooltip:hover span {
 	overflow-y: scroll;
 	z-index: 1000;
 	max-width: 1000px;
+	line-height: 1.32em;
 }
 .customOverlay[data-overlay="canvasLayers"],
 .customOverlay[data-overlay="canvasColours"],
@@ -132,20 +225,32 @@ mouse.tooltip:hover span {
 	}
 }
 
+.unstowable {
+	visibility: visible;
+}
+
 .debugOverlay {
 	display: block;
 	position: fixed;
 	top: 20px;
 	bottom: 20px;
-	right: 20px;
+	right: 31px;
 	height: auto;
 	width: auto;
-	max-width: 700px;
+	max-width: 85%;
 	z-index: 1001;
 	padding: 3px;
 	border: 2px #fff solid;
 	background-color: #333;
 	overflow-y: scroll;
+	text-align: center;
+}
+
+.overlayMenu {
+	position: sticky;
+    top: 0;
+    background-color: #333333;
+	z-index:1;
 }
 
 .overlayMenu ul {
@@ -153,16 +258,19 @@ mouse.tooltip:hover span {
 	list-style: none;
 	margin: 0;
 	padding: 0;
+	display: flex;
+	overflow-x: auto;
 }
 
 .overlayMenu ul li {
 	float: left;
 	height: 35px;
 	margin-right: 1px;
+	font-size: 16px;
 }
 
 .debugOverlay ul li input {
-	width: 80px;
+	width: 85px;
 	margin: 0;
 }
 
@@ -181,6 +289,30 @@ mouse.tooltip:hover span {
 	display: none !important;
 }
 
+.condhide {
+	display: none !important;
+}
+
+input#searchEvents::placeholder {
+    background: #bfbf9f;
+    text-shadow: 0 0 5px #7293ac;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: #00b3ff1c;
+}
+
+input#addEventsTitle::placeholder {
+    color: #c9c9c966;
+	padding-left: 14px;
+}
+input#addEventsPassage::placeholder {
+    color: #c9c9c966;
+	padding-left: 14px;
+}
+input#addEventsWidgets::placeholder {
+    color: #c9c9c966;
+	padding-left: 14px;
+}
 .close {
 	background-color: darkred;
 }
@@ -282,6 +414,28 @@ mouse.tooltip:hover span {
 	max-width: 400px;
 	z-index: 1001;
 }
+
+/* favourites button debug events */
+
+.heart {
+	height: 13px;
+    padding-left: 5px;
+	filter: saturate(5%) brightness(150%);
+}
+
+input.heart {
+	border: none!important;
+    padding: 0;
+	background-color: unset!important;
+}
+
+input.heart:hover{
+	filter: hue-rotate(337deg)saturate(4.9) brightness(0.55)
+}
+.liked {
+	filter: saturate(0.9) brightness(1) drop-shadow(0 0 6px #ed5353)!important;
+}
+/************/
 
 #scenesViewer, #produceDisplay {
 	display: inline-flex;
@@ -433,7 +587,7 @@ mouse.tooltip:hover span {
 	overflow-y: hidden;
 }
 
-#savesListContainer .savesListRow .saveGroup .deleteButton {
+#savesListContainer .savesListRow .saveGroup .deleteButton .exportButton .exportDebugButton {
 	display: flex;
 	justify-content: right;
 	margin: 0;
@@ -488,6 +642,13 @@ mouse.tooltip:hover span {
 	border: 1px solid #666;
 }
 
+.settingsToggle input[name|="numberslider-input"]{
+	width: 83%;
+	height: 0.75em;
+	min-height: unset;
+	margin-left: 1em;
+}
+
 .settingsToggleBig {
 	float: left;
 	width: 100%;
@@ -526,6 +687,34 @@ mouse.tooltip:hover span {
 	position: absolute;
 	left: 0px;
 	top: 0px;
+	z-index: 20;
+}
+
+#prison_map {
+	position: relative;
+	left: 0px;
+	top: 0px;
+	z-index: 10;
+}
+
+#prison_map_overlay {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	z-index: 20;
+}
+
+#prison_map_rut {
+	position: absolute;
+	left: 0px;
+	top: 86px;
+	z-index: 10;
+}
+
+#prison_map_rut_overlay {
+	position: absolute;
+	left: 0px;
+	top: 86px;
 	z-index: 20;
 }
 
@@ -693,6 +882,13 @@ body.no-images #ui-bar-body {
 	position: relative;
 }
 
+.bg-color-debug-selected {
+	background-color:#66685d!important
+}
+.bg-color-debug-unselected {
+	background-color:transparent
+}
+
 /*Wardrobe UI*/
 .wardrobeItem {
 
@@ -745,6 +941,19 @@ body.no-images #ui-bar-body {
 
 .clothingBox div ul{
 	margin-left: 0px;
+}
+
+#outfitEditorList {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+#outfitEditorList > div {
+	border: 1px solid #ccc;
+	padding: 5px;
+	margin: 5px;
+	max-width: 500px;
+	flex-direction: column;
 }
 
 #customColor div {
@@ -823,6 +1032,10 @@ span.number, span.suit {
 	color: #38B20A;
 }
 
+.lime-green{
+	color: #44e342
+}
+
 .brown {
 	color: #4C2217;
 }
@@ -855,6 +1068,10 @@ span.number, span.suit {
 
 .gold, .gold button, .goldLink a {
 	color: #FFD700;
+}
+
+.linkBlue {
+	color: #5888dd;
 }
 
 .silver {
@@ -931,6 +1148,10 @@ span.number, span.suit {
 	color: #B7B7B7;
 }
 
+.light-grey {
+	color: #dddada;
+}
+
 .tan {
 	color: #D2B48C;
 }
@@ -949,6 +1170,30 @@ span.number, span.suit {
 
 .wine {
 	color: #8B3626;
+}
+
+.relaxed {
+	color:#63719C
+}
+
+.anxious {
+	color:#973253
+}
+
+.veteran {
+	color:#956BB4
+}
+
+.methodical {
+	color:#CE7993
+}
+
+.scarred {
+	color:#D8621F
+}
+
+.tattooed {
+	color:#266568
 }
 
 /* background colours */
@@ -987,6 +1232,10 @@ span.number, span.suit {
 
 .bg-light-green {
 	background-color: #7caf7c;
+}
+
+.bg-lime-green{
+	background-color: #44e342
 }
 
 .bg-brown {
@@ -1226,8 +1475,8 @@ span.number, span.suit {
 }
 
 #story-title {
-    font-size: 1.69em;
-    line-height: 1.25em;
+	font-size: 1.69em;
+	line-height: 1.25em;
 }
 
 #startingPlayerImage {
@@ -1338,6 +1587,85 @@ span.number, span.suit {
 	top: 192px;
 	z-index: 10;
 }
+
+#spray7 {
+	position: fixed;
+	left: 80px;
+	top: 192px;
+	z-index: 10;
+}
+
+#childrenToysUI {
+	display: flex;
+	flex-wrap: wrap
+}
+
+.toysUiElement {
+	border: 1px solid #ccc;
+	margin: 2px;
+	padding: 0px 5px 10px;
+	min-width: 300px;
+	min-height: 50px;
+	width: 48%;
+}
+
+#birthUi {
+	display: flex;
+	flex-wrap: wrap
+}
+
+.childUi {
+	border: 1px solid #ccc;
+	margin: 2px;
+	padding: 5px;
+	min-width: 300px;
+	width: 48%;
+}
+
+#childViewer {
+	display: inline-flex;
+	flex-wrap: wrap;
+}
+
+.childrenUi {
+	border: 1px solid #ccc;
+	margin: 2px;
+	padding: 5px;
+	min-width: 230px;
+	width: 47%;
+}
+.childrenUi input {
+	width: 90%;
+	max-width: 230px;
+	min-width: 200px;
+}
+
+.childrenUiControls {
+	display: inline-flex;
+	margin: 2px;
+	padding: 5px;
+	min-width: 230px;
+	width: 47%;
+}
+
+.childrenUiControls div {
+	flex-grow: 1;
+	text-align: center;
+}
+
+@media only screen and (max-width: 750px) {
+	.childrenUi {
+		width: 100%;
+	}
+	.childrenUiControls {
+		width: 100%;
+	}
+	.toysUiElement {
+		width: 100%;
+	}
+}
+
+
 
 @media screen and (min-color-index:0) and(-webkit-min-device-pixel-ratio:0)
 { @media all{
@@ -1454,12 +1782,103 @@ Combat display styles
 	min-width: 46%;
 }
 
+/* search bar for events debugging related */
+
+.rainbow{
+    font-size: 100px;
+    position: relative;
+    text-decoration: none;
+    font-family: "Poppins",sans-serif;
+    color: #ffffff;
+    cursor: pointer;
+}
+.rainbow:before{
+    content: "";
+    position: absolute;
+    height: 0.1em;
+    width: 100%;
+    background: linear-gradient(
+        to right,
+        #fd004c,
+        #fe9000,
+        #fff020,
+        #3edf4b,
+        #3363ff,
+        #b102b7
+    );
+    background-size: 200% 100%;
+    bottom: -0.1em;
+    transition: 1.5s;
+}
+.rainbow:hover:before{
+    background-position: 100% 0;
+}
+
+.searchBorderColour {
+	border-color:  #cce6ff!important;
+}
+
+.header-content-search-content {
+	display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #6b6b6b;
+    border-radius: 10px;
+    padding: 3px;
+    max-height: 50px;
+	margin-bottom: 3px;
+}
+
+.header-content-search-content input {
+    text-align: center;
+    background: 0 0;
+    border: 0;
+    outline: none;
+    width: 300px;
+    height: 40px;
+    border-radius: 10px;
+}
+.addevent-content-search-content {
+	display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #6b6b6b;
+    padding: 3px;
+    max-height: 25px;
+	margin-bottom: 3px;
+}
+
+.addevent-content-search-content input {
+    text-align: center;
+    background: 0 0;
+    border: 0;
+    outline: none;
+    width: 300px;
+    height: 10px;
+	color: #c5c5c5;
+	font-size: 14px;
+}
+
+/**********************************************/
+/* pharmacy contact lenses related */
+#picker {
+	padding-left: 10%;
+}
+/************************************/
+
 @media only screen and (max-width: 500px) {
 	.limitedListsControl, .listsControl {
 		min-width: 99%;
 	}
 	.limitedListsControl .flavorText select, .listsControl .flavorText select {
 		max-width: 500px;
+	}
+	#picker { /* pharmacy contact lenses */
+		padding-left: 0%;
 	}
 }
 
@@ -1775,8 +2194,38 @@ removed unused:
 	z-index: 250;
 }
 
-#closechestpenis, #divsex #closechestpenis {
-	z-index: 260;
+.div_stalk {
+	width: 512;
+	height: 32px;
+	position: relative;
+}
+.stalk_1 {
+	left: 0px;
+	position: absolute;
+}
+.stalk_2 {
+	left: 64px;
+	position: absolute;
+}
+.stalk_3 {
+	left: 128px;
+	position: absolute;
+}
+.stalk_4 {
+	left: 192px;
+	position: absolute;
+}
+.stalk_5 {
+	left: 256px;
+	position: absolute;
+}
+.stalk_6 {
+	left: 322px;
+	position: absolute;
+}
+.stalk_7 {
+	left: 386px;
+	position: absolute;
 }
 
 #closechestbreasts, #divsex #closechestbreasts {
@@ -1785,6 +2234,10 @@ removed unused:
 
 #closechestnip, #divsex #closechestnip {
 	z-index: 280;
+}
+
+#closechestpenis, #divsex #closechestpenis {
+	z-index: 290;
 }
 
 .layer-behind {
@@ -1817,6 +2270,9 @@ removed unused:
 }
 .layer-sexskinback {
 	z-index: 11;
+}
+.layer-sexlegsback {
+	z-index: 12;
 }
 .layer-sexlegsbackacc {
 	z-index: 13;
@@ -1874,10 +2330,10 @@ removed unused:
 	z-index: 101;
 }
 .layer-sexshoes {
-	z-index: 102;
+	z-index: 103;
 }
 .layer-sexlegs {
-	z-index: 103;
+	z-index: 102;
 }
 .layer-sexlegsacc {
 	z-index: 104;
@@ -1898,13 +2354,16 @@ removed unused:
 	z-index: 106;
 }
 .layer-sexupper {
-	z-index: 107;
+	z-index: 108;
 }
 .layer-sexaboveclothes {
 	z-index: 108;
 }
 .layer-sexarmsskin {
-	z-index: 108;
+	z-index: 107;
+}
+.layer-sexrightarmsskin {
+	z-index: 109;
 }
 .layer-sexhands {
 	z-index: 110;
@@ -1992,6 +2451,18 @@ div[id|="numberslider-body"] span {
 	text-align: center;
 	vertical-align: middle;
 }
+
+div[id|="numberslider-body"] .small-description{
+	margin-left: -6em;
+	text-align: left;
+}
+
+div[id|="numberslider-body"] span .inline-colour{
+	margin-left: unset;
+	min-width: unset; 
+	vertical-align: unset;
+}
+
 div[id|="numberslider-body"] input {
 	-webkit-appearance: none;
 	cursor: pointer;
@@ -2512,46 +2983,107 @@ label {
 }
 
 /* Eye: base is hazel */
-.eye-dark-blue .colour-eye {
+.eye-dark-blue
+{
 	-webkit-filter: hue-rotate(170deg) brightness(90%) saturate(100%) contrast(140%);
 	filter: hue-rotate(170deg) brightness(90%) saturate(100%) contrast(140%);
 }
-.eye-light-blue .colour-eye {
+.eye-light-blue
+{
 	-webkit-filter: hue-rotate(160deg) brightness(180%) saturate(120%) contrast(100%);
 	filter: hue-rotate(160deg) brightness(180%) saturate(120%) contrast(100%);
 }
-.eye-purple .colour-eye {
+.eye-purple
+{
 	-webkit-filter: hue-rotate(-120deg) brightness(80%) saturate(200%) contrast(190%);
 	filter: hue-rotate(-120deg) brightness(80%) saturate(200%) contrast(190%);
 }
-.eye-hazel .colour-eye {
+.eye-hazel
+{
 	-webkit-filter: hue-rotate(0deg) saturate(100%) brightness(100%) contrast(100%);
 	filter: hue-rotate(0deg) saturate(100%) brightness(100%) contrast(100%);
 }
-.eye-amber .colour-eye {
+.eye-amber
+{
 	-webkit-filter: hue-rotate(0deg) brightness(170%) saturate(100%) contrast(100%);
 	filter: hue-rotate(0deg) brightness(170%) saturate(100%) contrast(100%);
 }
-.eye-green .colour-eye {
+.eye-green
+{
 	-webkit-filter: hue-rotate(30deg) brightness(140%) saturate(100%) contrast(100%);
 	filter: hue-rotate(30deg) brightness(140%) saturate(100%) contrast(100%);
 }
-.eye-lightgreen .colour-eye,
-.eye-light-green .colour-eye {
+.eye-light-green
+{
 	-webkit-filter: hue-rotate(30deg) brightness(170%) saturate(160%) contrast(100%);
 	filter: hue-rotate(30deg) brightness(170%) saturate(160%) contrast(100%);
 }
-.eye-red .colour-eye {
+.eye-limegreen,
+.eye-lime-green
+{
+	-webkit-filter: hue-rotate(85deg) brightness(155%) saturate(124%) contrast(140%);
+	filter: hue-rotate(85deg) brightness(155%) saturate(124%) contrast(140%);
+}
+.eye-red
+{
 	-webkit-filter: hue-rotate(335deg) saturate(200%) brightness(100%) contrast(140%);
 	filter: hue-rotate(335deg) saturate(200%) brightness(100%) contrast(140%);
 }
-.eye-pink .colour-eye {
+.eye-pink
+{
 	-webkit-filter: hue-rotate(-105deg) brightness(150%) saturate(120%) contrast(120%);
 	filter: hue-rotate(-105deg) brightness(150%) saturate(120%) contrast(120%);
 }
-.eye-grey .colour-eye {
+.eye-grey
+{
 	-webkit-filter: hue-rotate(0deg) brightness(140%) saturate(0%) contrast(100%);
 	filter: hue-rotate(0deg) brightness(140%) saturate(0%) contrast(100%);
+}
+.eye-lightgrey,
+.eye-light-grey
+{
+	-webkit-filter: hue-rotate(0deg) brightness(220%) saturate(0%) contrast(100%);
+	filter: hue-rotate(0deg) brightness(220%) saturate(0%) contrast(100%);
+}
+.eye-redPossessed {
+	-webkit-filter: hue-rotate(335deg) saturate(200%) brightness(90%) contrast(140%);
+	filter: hue-rotate(335deg) saturate(200%) brightness(90%) contrast(140%);
+}
+.eye-bluePossessed {
+	-webkit-filter: hue-rotate(180deg) brightness(100%) saturate(100%) contrast(140%);
+	filter: hue-rotate(180deg) brightness(100%) saturate(100%) contrast(140%);
+}
+.eye-cat_tf_stage_0_left {
+	-webkit-filter: hue-rotate(245deg) brightness(99%) saturate(90%) contrast(137%);
+	filter: hue-rotate(245deg) brightness(99%) saturate(90%) contrast(137%);
+}
+.eye-cat_tf_stage_0_right {
+	-webkit-filter: hue-rotate(245deg) brightness(99%) saturate(90%) contrast(137%);
+	filter: hue-rotate(245deg) brightness(99%) saturate(90%) contrast(137%);
+}
+.eye-cat_tf_stage_1_left {
+	-webkit-filter: hue-rotate(211deg) brightness(105%) saturate(109%) contrast(160%);
+	filter: hue-rotate(211deg) brightness(105%) saturate(109%) contrast(160%);
+}
+.eye-cat_tf_stage_1_right {
+	-webkit-filter: hue-rotate(211deg) brightness(105%) saturate(109%) contrast(160%);
+	filter: hue-rotate(211deg) brightness(105%) saturate(109%) contrast(160%);
+}
+.eye-cat_tf_stage_2_left {
+	-webkit-filter: hue-rotate(117deg) brightness(139%) saturate(0%) contrast(210%);
+	filter: hue-rotate(117deg) brightness(139%) saturate(0%) contrast(210%);
+}
+.eye-cat_tf_stage_2_right {
+	-webkit-filter: hue-rotate(211deg) brightness(107%) saturate(140%) contrast(100%);
+	filter: hue-rotate(211deg) brightness(107%) saturate(140%) contrast(100%);
+}
+.eye-cat_tf_stage_3_left {
+	-webkit-filter: hue-rotate(127deg) brightness(120%) saturate(109%) contrast(100%);
+	filter: hue-rotate(127deg) brightness(120%) saturate(109%) contrast(100%);
+}
+.eye-cat_tf_stage_3_right {
+	-webkit-filter: hue-rotate(140deg) brightness(100%) saturate(210%) contrast(200%);
+	filter: hue-rotate(140deg) brightness(100%) saturate(210%) contrast(200%);
 }
 
 /* Clothing specific classes */
@@ -2576,6 +3108,11 @@ label {
 }
 
 /* Clothing: base is red */
+.clothes-lime-green {
+	-webkit-filter: hue-rotate(85deg) brightness(185%) saturate(294%) contrast(120%);
+	filter: hue-rotate(85deg) brightness(185%) saturate(294%) contrast(120%);
+}
+
 .clothes-blue {
 	-webkit-filter: hue-rotate(-120deg) saturate(100%) brightness(100%) contrast(100%);
 	filter: hue-rotate(-120deg) saturate(100%) brightness(100%) contrast(100%);
@@ -4102,19 +4639,26 @@ canvas {
 }
 
 .button {
-    width: fit-content;
+	width: fit-content;
 	border: 1px solid #888;
-    padding: 0 0.5em;
+	padding: 0 0.5em;
 }
 .button:hover {
 	background-color: #333;
 	cursor: pointer;
 }
 
+#button-remove{
+	background-color:#a33
+}
+
+#button-remove:hover {
+	background-color: #b74444!important;
+}
 
 #card-cover-options {
 	display: flex;
-    flex-wrap: wrap;
+	flex-wrap: wrap;
 }
 
 .card.active {
@@ -4122,49 +4666,49 @@ canvas {
 }
 
 #card-cover-options .cardcover0 {
-    background-color: #222;
-    line-height: 1.75;
+	background-color: #222;
+	line-height: 1.75;
 }
 
 /* patterns are taken from http://projects.verou.me/css3pattern */
 .cardcover1 {
 	background-color: #600;
-    background-image: repeating-linear-gradient(135deg, transparent, transparent 5px, #a88 6px, transparent 7px), repeating-linear-gradient(225deg, transparent, transparent 5px, #a88 6px, transparent 7px);
-    box-shadow: inset 0px 0px 0px 2px #400;
+	background-image: repeating-linear-gradient(135deg, transparent, transparent 5px, #a88 6px, transparent 7px), repeating-linear-gradient(225deg, transparent, transparent 5px, #a88 6px, transparent 7px);
+	box-shadow: inset 0px 0px 0px 2px #400;
 }
 .cardcover2 {
 	background-color: #300;
-    background-image: radial-gradient(maroon 3px, transparent 3.33px),repeating-radial-gradient(maroon 0, maroon 1.33px, transparent 1.66px, transparent 6.66px, maroon 7px, maroon 8.33px, transparent 8.66px, transparent 16.66px);
-    background-size: 10px 10px, 30px 30px;
-    background-position: -5px -2px;
+	background-image: radial-gradient(maroon 3px, transparent 3.33px),repeating-radial-gradient(maroon 0, maroon 1.33px, transparent 1.66px, transparent 6.66px, maroon 7px, maroon 8.33px, transparent 8.66px, transparent 16.66px);
+	background-size: 10px 10px, 30px 30px;
+	background-position: -5px -2px;
 	box-shadow: inset 0px 0px 0px 2px #400;
 }
 .cardcover3 {
 	background-color: #900;
-    background-image: repeating-linear-gradient(120deg, rgba(255,255,255,.1), rgba(255,255,255,0.1) 1px, transparent 1px, transparent 60px), repeating-linear-gradient(60deg, rgba(255,255,255,-0.8), rgba(255,255,255,0.1) 1px, transparent 2px, transparent 60px), linear-gradient(60deg, rgba(0,0,0,0.2) 25%, transparent 25%, transparent 75%, rgba(0,0,0,0.2) 75%), linear-gradient(120deg, rgba(0,0,0,0.2) 25%, transparent 25%, transparent 75%, rgba(0,0,0,0.2) 75%);
-    background-size: 70px 120px;
-    background-position: -10px -17px;
+	background-image: repeating-linear-gradient(120deg, rgba(255,255,255,.1), rgba(255,255,255,0.1) 1px, transparent 1px, transparent 60px), repeating-linear-gradient(60deg, rgba(255,255,255,-0.8), rgba(255,255,255,0.1) 1px, transparent 2px, transparent 60px), linear-gradient(60deg, rgba(0,0,0,0.2) 25%, transparent 25%, transparent 75%, rgba(0,0,0,0.2) 75%), linear-gradient(120deg, rgba(0,0,0,0.2) 25%, transparent 25%, transparent 75%, rgba(0,0,0,0.2) 75%);
+	background-size: 70px 120px;
+	background-position: -10px -17px;
 	box-shadow: inset 0px 0px 0px 2px #660000;
 }
 .cardcover4 {
 	background-color: #400;
-    background-image: linear-gradient(135deg, rgba(200,0,0,.5) 50%, transparent 50%), linear-gradient(225deg, rgba(200,0,0,.5) 50%, transparent 50%);
-    background-size: 14px 17px;
-    background-position: 11px 17px;
+	background-image: linear-gradient(135deg, rgba(200,0,0,.5) 50%, transparent 50%), linear-gradient(225deg, rgba(200,0,0,.5) 50%, transparent 50%);
+	background-size: 14px 17px;
+	background-position: 11px 17px;
 	box-shadow: inset 0px 0px 0px 2px #400;
 }
 .cardcover5 {
 	background-color: #400;
-    background-image: linear-gradient(90deg, rgba(200,0,0,.5) 50%, transparent 50%), linear-gradient(0deg, rgba(200,0,0,.5) 50%, transparent 50%);
-    background-size: 12px 12px;
-    background-position: -2px 4px;
+	background-image: linear-gradient(90deg, rgba(200,0,0,.5) 50%, transparent 50%), linear-gradient(0deg, rgba(200,0,0,.5) 50%, transparent 50%);
+	background-size: 12px 12px;
+	background-position: -2px 4px;
 	box-shadow: inset 0px 0px 0px 2px #400;
 }
 .cardcover6 {
 	background: linear-gradient(135deg, maroon 25%, transparent 25%) -50px 0,linear-gradient(225deg, maroon 25%, transparent 25%) -50px 0,linear-gradient(315deg, maroon 25%, transparent 25%),linear-gradient(45deg, maroon 25%, transparent 25%);
-    background-size: 20px 21px;
-    background-position: 5px 1px, 5px 1px, 15px 1px, 15px 1px;
-    background-color: #300;
+	background-size: 20px 21px;
+	background-position: 5px 1px, 5px 1px, 15px 1px, 15px 1px;
+	background-color: #300;
 	box-shadow: inset 0px 0px 0px 2px #400;
 }
 .cardcover7 {
@@ -4175,15 +4719,15 @@ canvas {
 }
 
 #new-version-notification {
-    position: fixed;
-    top: 0.5em;
-    display: inline-flex;
+	position: fixed;
+	top: 0.5em;
+	display: inline-flex;
 	flex-wrap: wrap;
-    border: 2px solid greenyellow;
-    border-radius: 4px;
-    background: green;
-    padding: 0 1em;
-    font-size: 90%;
+	border: 2px solid greenyellow;
+	border-radius: 4px;
+	background: green;
+	padding: 0 1em;
+	font-size: 90%;
 	align-items: center;
 }
 #new-version-notification .new-version-notification-buttons {
@@ -4192,28 +4736,28 @@ canvas {
 }
 #new-version-notification .btn-update {
 	border: 1px solid greenyellow;
-    border-radius: 3px;
-    background-color: green;
+	border-radius: 3px;
+	background-color: green;
 	color: greenyellow;
-    text-decoration: none;
-    align-self: center;
+	text-decoration: none;
+	align-self: center;
 	display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-left: 0.5em;
-    margin-top: 0.5em;
-    margin-bottom: 0.5em;
+	align-items: center;
+	justify-content: center;
+	margin-left: 0.5em;
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
 	padding: 0 0.5em;
 }
 #new-version-notification .btn-update a {
 	color: greenyellow;
 }
 #new-version-notification .btn-update:hover {
-    background-color: darkgreen;
+	background-color: darkgreen;
 }
 #new-version-notification .btn-update::after {
 	filter: invert(0.75);
-    mix-blend-mode: luminosity;
+	mix-blend-mode: luminosity;
 }
 
 a[target="_blank"]::after {
@@ -4223,26 +4767,26 @@ a[target="_blank"]::after {
 }
 
 #action-popup {
-    position: fixed;
-    top: 0;
+	position: fixed;
+	top: 0;
 	transform: translateY(-100%);
-    transition: all 0.25s;
-    border: 1px solid #888;
-    border-top: none;
-    border-radius: 0 0 5px 5px;
-    padding: 0 3em;
-    text-align: center;
-    background-color: #222;
-    z-index: 100;
+	transition: all 0.25s;
+	border: 1px solid #888;
+	border-top: none;
+	border-radius: 0 0 5px 5px;
+	padding: 0 3em;
+	text-align: center;
+	background-color: #222;
+	z-index: 100;
 }
 #action-popup br {
-    display: none;
+	display: none;
 }
 #wardrobewear {
 	display: table;
 	background-color: #0000;
-    border-radius: 3px;
-    transition: all 1.25s;
+	border-radius: 3px;
+	transition: all 1.25s;
 }
 #wardrobewear.flash {
 	background-color: #edd464aa;
@@ -4253,7 +4797,7 @@ a[target="_blank"]::after {
 }
 .action-flash {
 	border-color: #edd464 !important;
-    color: #edd464 !important;
+	color: #edd464 !important;
 }
 .action-flash a {
 	color: #edd464 !important;
@@ -4264,9 +4808,9 @@ a[target="_blank"]::after {
 
 
 img, canvas {
-    image-rendering: pixelated;
-    image-rendering: -moz-crisp-edges;
-    image-rendering: crisp-edges;
+	image-rendering: pixelated;
+	image-rendering: -moz-crisp-edges;
+	image-rendering: crisp-edges;
 }
 
 .rotate-90 {
@@ -4298,3 +4842,215 @@ img, canvas {
 	max-width: 100%;
 	height: auto;
 }
+
+@keyframes rainbow {
+    0% { background-position: 0; }
+    100% { background-position: -6000px; }
+}
+
+.rainbow {
+	animation: 60s infinite linear rainbow;
+	background: linear-gradient(90deg, #ff0000, #ff8800, #ffff00, #00ff00, #0088ff, #0000ff, #8800ff, #ff0000);
+	background-clip: text;
+	-webkit-background-clip: text;
+	color: transparent ;
+}
+
+@keyframes lustful {
+    0% { background-position: 0; }
+    100% { background-position: -6000px; }
+}
+
+.lustful {
+	animation: 60s infinite linear lustful;
+	background: linear-gradient(90deg, #8800ff, #E04880, #b66bec, #FF1493 );
+	background-clip: text;
+	-webkit-background-clip: text;
+	color: transparent ;
+}
+
+@keyframes tentacle {
+    0% { background-position: 0; }
+    100% { background-position: -6000px; }
+}
+
+.tentacle {
+	animation: 60s infinite linear tentacle;
+	background: linear-gradient(90deg, #8800ff, #8800ff, #8800ff, #8800ff, #8800ff, #FF1493 );
+	background-clip: text;
+	-webkit-background-clip: text;
+	color: transparent ;
+}
+
+.wraith {
+	background: #f1f1db;
+	text-shadow: 
+		0 0 7px #f1f1db,
+		0 0 22px #8800ff,
+		0 0 32px #8800ff;
+	background-clip: text;
+	-webkit-background-clip: text;
+	color: transparent;
+}
+
+.nextLink a {
+	background: #5888dd;
+	text-shadow: 
+		0 0 7px #f1f1db,
+		0 0 22px #8800ff,
+		0 0 32px #8800ff;
+	background-clip: text;
+	-webkit-background-clip: text;
+	color: transparent;	
+}
+
+.fading {
+	background: #f1f1db;
+	text-shadow: 0 0 32px #8800ff;
+	background-clip: text;
+	-webkit-background-clip: text;
+	color: transparent;
+	opacity: 1;
+}
+.faded {
+	background: #f1f1db;
+	text-shadow: 0 0 32px #8800ff;
+	background-clip: text;
+	-webkit-background-clip: text;
+	color: transparent;
+	opacity: 0;
+	transition: opacity 0.5s ease-in;
+}
+
+@keyframes flicker {
+	0% {
+		opacity: 0;
+	}
+	80% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+.flicker {
+	background: #f1f1db;
+	text-shadow: 0 0 32px #8800ff;
+	background-clip: text;
+	-webkit-background-clip: text;
+	color: transparent;
+	animation: 3s flicker alternate infinite;
+}
+
+.ironmade-ul {
+	padding-left: 1.5em;
+    margin: 0px 0px 5px 0px;
+}
+
+.tentacles-blue {
+	-webkit-filter: hue-rotate(-120deg) saturate(100%) brightness(100%) contrast(100%);
+	filter: hue-rotate(-120deg) saturate(100%) brightness(100%) contrast(100%);
+}
+
+.tentacles-vines {
+	-webkit-filter: hue-rotate(180deg) saturate(60%) brightness(200%) contrast(100%);
+	filter: hue-rotate(180deg) saturate(60%) brightness(200%) contrast(100%);
+}
+
+.tentacles-roots {
+	-webkit-filter: hue-rotate(120deg) saturate(70%) brightness(140%) contrast(100%);
+	filter: hue-rotate(120deg) saturate(70%) brightness(140%) contrast(100%);
+}
+
+.tentacles-red {
+	-webkit-filter: hue-rotate(40deg) saturate(100%) brightness(100%) contrast(100%);
+	filter: hue-rotate(40deg) saturate(100%) brightness(100%) contrast(100%);
+}
+
+.tentacles-purple {
+	-webkit-filter: hue-rotate(0deg) saturate(100%) brightness(100%) contrast(100%);
+	filter: hue-rotate(0deg) saturate(100%) brightness(100%) contrast(100%);
+}
+
+.tentacles-peach {
+	-webkit-filter: hue-rotate(90deg) saturate(20%) brightness(260%) contrast(100%);
+	filter: hue-rotate(90deg) saturate(20%) brightness(260%) contrast(100%);
+}
+
+.tentacles-wraith {
+	-webkit-filter: hue-rotate(0deg) saturate(0%) brightness(500%) contrast(160%);
+	filter: hue-rotate(0deg) saturate(0%) brightness(500%) contrast(160%);
+	opacity: 0.50;
+}
+
+#die_text {
+	font-size: 200%;
+}
+
+.strapon-purple {
+	-webkit-filter: hue-rotate(270deg) saturate(70%) brightness(100%) contrast(100%);
+	filter: hue-rotate(270deg) saturate(70%) brightness(100%) contrast(100%);
+}
+
+.strapon-red {
+	-webkit-filter: hue-rotate(0deg) saturate(120%) brightness(50%) contrast(100%);
+	filter: hue-rotate(0deg) saturate(120%) brightness(50%) contrast(140%);
+}
+
+.strapon-blue {
+	-webkit-filter: hue-rotate(210deg) saturate(100%) brightness(100%) contrast(100%);
+	filter: hue-rotate(210deg) saturate(100%) brightness(100%) contrast(100%);
+}
+
+.strapon-black {
+	-webkit-filter: hue-rotate(0deg) saturate(0%) brightness(40%) contrast(120%);
+	filter: hue-rotate(0deg) saturate(0%) brightness(40%) contrast(120%);
+}
+
+.strapon-pink {
+	-webkit-filter: hue-rotate(350deg) saturate(110%) brightness(120%) contrast(100%);
+	filter: hue-rotate(350deg) saturate(110%) brightness(120%) contrast(100%);
+}
+
+.strapon-fleshy {
+	-webkit-filter: hue-rotate(0deg) saturate(70%) brightness(140%) contrast(100%);
+	filter: hue-rotate(0deg) saturate(70%) brightness(140%) contrast(100%);
+}
+
+.strapon-green { 
+	-webkit-filter: hue-rotate(120deg) saturate(70%) brightness(140%) contrast(100%);
+	filter: hue-rotate(120deg) saturate(70%) brightness(140%) contrast(100%);
+}
+
+.strapon-brown {
+	-webkit-filter: hue-rotate(20deg) saturate(100%) brightness(30%) contrast(100%);
+	filter: hue-rotate(20deg) saturate(100%) brightness(30%) contrast(100%);
+}
+
+/* Jimmy: Error display CSS.
+	Includes custom error handlers for <<error>> macros. */
+.error-view {
+	z-index: 999;
+}
+
+.error-view > .error-toggle + .dol-error {
+	margin-left: 1.5em;
+}
+
+.error-view > .dol-error {
+    display: inline-block;
+    margin-left: .25em;
+}
+
+.error-view > .dol-error:before {
+    content: "\e80d\00a0\00a0";
+    font-family: tme-fa-icons;
+    font-style: normal;
+    font-weight: 400;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    speak: none;
+}
+/* End of error CSS */

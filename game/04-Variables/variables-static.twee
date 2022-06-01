@@ -6,13 +6,21 @@ and are required for processing for loops, default objects, etc.*/
 /*Can be found at 'SugarCube.setup'*/
 
 <<set setup.test to "testing">>
-<<set setup.baseNPC = {penis : 0, vagina: 0, breastsdesc: 0, chest: 0, lactation: 0, lefthand: 0, righthand: 0, anus: 0, mouth: 0, gender: 0, description: 0, insecurity: 0, pronoun: 0, pronouns: {he: 0, his: 0}, penissize: 0, breastsize: 0, bottomsize: 0, ballssize: 0, penisdesc: 0, breastdesc: 0, health: 0, skincolour: 0, teen: 0, adult: 0, intro:0, speechpenisescape: 0, speechvaginaescape: 0, speechanusescape:0}>>
+<<set setup.baseNPC = {
+	"chastity": { penis: "", vagina: "", anus: "" },
+	"location": {},
+	"skills": {},
+	"pronouns": {},
+	"traits": []
+}>>
 
 <<clothing_data>>
 <<init_bodywriting_objects>>
 <<init_plant_objects>>
+<<init_locations>>
+<<init_tips>>
 
-<<set setup.baseNNPC = {penis : 0, vagina: 0, gender: 0, description: 0, title: 0, insecurity: 0, pronoun: 0, penissize: 0, penisdesc: 0, bottomsize: 0, ballssize: 0, breastsize: 0, breastdesc: 0, breastsdesc: 0, skincolour: 0, teen: 0, adult: 0, init: 0, intro: 0, type: 0, trust: 0, love: 0, dom: 0, lust: 0, rage: 0, state: 0, trauma: 0, eyeColour: 0, hairColour: 0}>>
+<<set setup.baseNNPC = {penis : 0, vagina: 0, gender: 0, description: 0, title: 0, insecurity: 0, pronoun: 0, penissize: 0, penisdesc: 0, bottomsize: 0, ballssize: 0, breastsize: 0, breastdesc: 0, breastsdesc: 0, skincolour: 0, teen: 0, adult: 0, init: 0, intro: 0, type: "human", trust: 0, love: 0, dom: 0, lust: 0, rage: 0, state: 0, trauma: 0, eyeColour: 0, hairColour: 0}>>
 
 <<set setup.skinColor to {
 	"light": {"hStart": 30, "hEnd": 47, "sStart": 0.15, "sEnd": 0.30,"bStart": 4.3, "bEnd": 3.4},
@@ -212,7 +220,8 @@ and are required for processing for loops, default objects, etc.*/
 			"activedolphinrighthand":"img/sex/doggyRed/frontbeast/dolphin/activedolphinrighthand.png",
 			"activedolphinrighthandpenis":"img/sex/doggyRed/frontbeast/dolphin/activedolphinrighthandpenis.png",
 			"doggyactiveshadow":"img/sex/doggyRed/active/body/doggyactiveshadow.png",
-			"doggyactivechastitycagepenis":"img/sex/doggyRed/active/body/doggyactivechastitycagepenis.png"
+			"doggyactivechastitycagepenis":"img/sex/doggyRed/active/body/doggyactivechastitycagepenis.png",
+			"doggyactivestrapon":"img/sex/doggyRed/active/body/doggyactivepenisvirgin.png"
 		},
 		"f":{
 			"doggyactivebase":"img/sex/doggy/active/body/doggyactivebase.png",
@@ -300,7 +309,9 @@ and are required for processing for loops, default objects, etc.*/
 			"activeshadow":"img/sex/missionaryRed/active/body/activeshadow.png",
 			"activechastitycagepenis":"img/sex/missionaryRed/active/body/activechastitycagepenis.png",
 			"activechastitycagedownpenis":"img/sex/missionaryRed/active/body/activechastitycagedownpenis.png",
-			"activeclosedmouth":"img/sex/missionaryRed/active/body/activeclosedmouth.png"
+			"activeclosedmouth":"img/sex/missionaryRed/active/body/activeclosedmouth.png",
+			"activestrapon":"img/sex/missionaryRed/active/body/activestrapon.png",
+			"activestrapondown":"img/sex/missionaryRed/active/body/activestrapondown.png"
 		},
 		"f":{
 			"activearmsbound":"img/sex/missionary/active/body/activearmsbound.png",
@@ -339,7 +350,9 @@ and are required for processing for loops, default objects, etc.*/
 			"activeshadow":"img/sex/missionary/active/body/activeshadow.png",
 			"activechastitycagepenis":"img/sex/missionary/active/body/activechastitycagepenis.png",
 			"activechastitycagedownpenis":"img/sex/missionary/active/body/activechastitycagedownpenis.png",
-			"activeclosedmouth":"img/sex/missionary/active/body/activeclosedmouth.png"
+			"activeclosedmouth":"img/sex/missionary/active/body/activeclosedmouth.png",
+			"activestrapon":"img/sex/missionary/active/body/activestrapon.png",
+			"activestrapondown":"img/sex/missionary/active/body/activestrapondown.png"
 		}
 	},
 	"close":{
@@ -443,4 +456,69 @@ and are required for processing for loops, default objects, etc.*/
 	}
 }>>
 
+<<set setup.bodyliquid to {
+	/* edit the bodyparts list to add a new bodypart, or the liquidtypes list to add a new liquid */
+	"bodyparts": [
+		"neck","rightarm","leftarm","thigh","bottom","tummy","chest","face","hair","feet","vaginaoutside","vagina","penis","anus","mouth"
+	],
+	"innerbodyparts": [
+		"vagina","penis","anus","mouth"
+	],
+	"liquidtype": [
+		"goo", "semen"
+	],
+	combined(bodypart){
+		return $player.bodyliquid[bodypart].goo + $player.bodyliquid[bodypart].semen;
+	}
+}>>
+
+<<set setup.bodyparts to ["forehead", "left_cheek", "right_cheek", "left_shoulder", "right_shoulder", "breasts", "back", "left_bottom", "right_bottom", "pubic", "left_thigh", "right_thigh"]>>
+
+<<set setup.actionsTypes to {
+	'personTypes': [
+		'Everyone', 'Strangers', 'Acquaintances', 'Alternative', 'Defiant', 'Submissive', 'Animals', 'Tentacles', 'Bailey', 'Robin', 'Whitney', 'Kylar', 'Sydney', 'Eden', 'Avery', 'Leighton'
+	],
+	'combatTypes': [
+		'rape', 'consensual'
+	],
+	'actionTypes': [
+		'leftaction', 'rightaction', 'feetaction', 'mouthaction', 'penisaction', 'vaginaaction', 'anusaction', 'askActions', 'regrab'
+	]
+}>>
+
+<<set setup.majorAreas to [
+	"Orphanage", "Bedroom", "Barb Street", "Cliff Street", "Connudatus Street", "Danube Street", "Domus Street", "Elk Street", 
+	"Harvest Street", "High Street", "Mer Street", "Nightingale Street", "Oxford Street", "Starfish Street", "Wolf Street", 
+	"Residential alleyways", "Commercial alleyways", "Industrial alleyways", "Park", "Hallways", "Brothel", "Strip Club", 
+	"Beach", "Ocean Breeze", "Docks Work", "Residential Drain", "Commercial Drain", "Industrial Drain", "Forest", "Farmland", 
+	"Livestock Field", "Moor", "Forest Wolf Cave", "Wolf Cave", "Wolf Cave Clearing", "Asylum", "Asylum Cell", "Underground Cell", "Prison Cell"
+]>>
+
+<<set setup.clothingStateIndex to {"chest": 6, "midriff": 5, "waist": 4, "thighs": 3, "knees": 2, "ankles": 1}>>
+<<set setup.clothingStateNextDown to {
+	"chest": "midriff",
+	"midriff": "waist",
+	"waist": "thighs",
+	"thighs": "knees",
+	"knees": "ankles",
+	"ankles": 0,
+}>>
+<<set setup.clothingStateNextUp to {
+	"chest": 0,
+	"midriff": "chest",
+	"waist": "midriff",
+	"thighs": "waist",
+	"knees": "thighs",
+	"ankles": "knees",
+}>>
+
+<<set setup.npcPenisRemarks to {
+	"big": ["그것을 보고 당신의 몸에서 힘이 빠지는 것을 느낀다.","그것을 보고 당신은 몸서리친다.","그 크기를 보고 무의식중에 신음소리를 낸다.","그 거대한 두께에 헉 소리를 낸다.","그것을 보고 있자니 당신의 넓적다리에 힘이 풀리는 것을 느낀다."],	
+	"small": ["그것을 보고 당신은 비웃음을 꾹 참는다.","그것을 보고 당신은 실실 웃는다.","그것을 보고 당신은 나오려는 웃음을 꾹 참는다.","그것을 보고 당신은 킥킥 웃으려는 것을 꾹 참는다.","당신은 웃지 않으려 노력한다."]
+}>>
+
+<<set setup.breastsizes to ["", "약간 솟아오른", "조그마한", "작은", "앙증맞은", "평범한", "봉긋한", "큰", "풍만한", "커다란", "매우 큰", "엄청난", "거대한"]>>
+
+<<set setup.NPCVirginityTypes to {"anal": false, "oral": false, "penile": false, "vaginal": false, "handholding": false, "temple": false, "kiss": false}>>
+<<set setup.NPCVirginityTypesVirgin to {"anal": true, "oral": true, "penile": true, "vaginal": true, "handholding": true, "temple": false, "kiss": true}>>
 <</widget>>

@@ -1,6 +1,6 @@
 :: Connudatus Street
 
-<<set $outside to 1>><<set $location to "town">><<effects>><<set $bus to "connudatus">>
+<<set $outside to 1>><<set $location to "town">><<effects>><<set $bus to "connudatus">><<getTarget true>>
 당신은 코누다투스 가에 있다. 클럽과 바, 레스토랑이 즐비하여 밤에는 도시에서 가장 활력이 넘치는 장소가 된다. 낮에는 다양한 물건을 파는 행상인들이 거리에 널려있다.
 <<if $daystate is "day">>
 	거리는 쇼핑객들로 가득하다.
@@ -24,9 +24,9 @@
 	사회의 규칙을 깬 경험을 통해 거리를 새로운 시각에서 볼 수 있게 된다. 많은 사람들이 손 닿는 거리에 귀중품을 두지만, 아무런 경계도 하지 않는다. <span class="gold">이제 당신은 코누다투스 가에서 도둑질을 할 수 있다.</span>
 	<br><br>
 <</if>>
-<<if $stress gte $stressmax>>
+<<if $stress gte $stressmax and !$possessed>>
 	<<passoutstreet>>
-<<elseif $bartend_info is 1>>
+<<elseif $bartend_info is 1 and !$possessed>>
 	<<set $bartend_info to 2>>
 	<<generate1>><<person1>>
 	"거기 <<girlPost>>." 클럽 쪽에서 목소리가 들려온다. <<personPost "이">> 벽에 기대어 서있다. "데릴이 널 기다리고 있으라 하더군. 일하다가 문제가 생겨서 집까지 바래다 줄 사람이 필요하다고 말이야."
@@ -36,7 +36,7 @@
 	<br>
 	<<link [[거절한다|Connudatus VIP Refuse]]>><</link>>
 	<br>
-<<elseif $per_npc.bartend>>
+<<elseif $per_npc.bartend and !$possessed>>
 	<<loadNPC 0 bartend>><<person1>>
 	<<if $rng gte 81>>
 		<<generate2>><<generate3>>
@@ -59,9 +59,19 @@
 	<</if>>
 	<<link [[다음|Connudatus VIP Rape]]>><<set $molestationstart to 1>><</link>>
 	<br>
+<<elseif $brothel_rivalry is undefined and $NPCName[$NPCNameList.indexOf("Darryl")].love gte 10 and !$possessed>>
+	
+	자동차 하나가 당신 앞에서 끼익 하면서 선다. 문이 열리고, <span class="pink">두꺼운 두 팔이 당신을 끌어당긴다.</span>
+	<br><br>
+
+	<<link [[다음|Connudatus Briar Abduct]]>><<set $brothel_rivalry to 1>><<set $brothel_rivalry_timer to 7>><</link>>
+	<br>
+
+
+	
 <<else>>
 	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
-	<<if $danger gte (9900 - $allure) and $eventskip is 0>>
+	<<if ($danger gte (9900 - $allure) or $eventforced) and $eventskip is 0>>
 		<<eventsstreet>>
 	<<else>>
 		<<if $map.top is true>>
@@ -96,6 +106,7 @@
 				<br>
 			<<else>>
 				<span class="blue">돈이 충분하다면, 여기서 가판대를 빌릴 수 있다.</span>
+				<br>
 			<</if>>
 		<<elseif $stall_rented is 1 and $daystate isnot "night" and $exposed lte 0>>
 			<<link [[가판대에 선다 (0:20)|Stall]]>><<pass 20>><</link>>
@@ -136,7 +147,7 @@
 	<<molested>>
 
 	<<maninit>>
-	<<if $daystate isnot "night">><<set $rescue to 1>><</if>>
+	<<if $daystate isnot "night">><<enable_rescue>><</if>>
 <</if>>
 
 <<effects>>
@@ -160,10 +171,11 @@
 :: Connudatus VIP Rape Finish
 <<effects>>
 <<if $enemyarousal gte $enemyarousalmax>>
-<<ejaculation>>
+	<<ejaculation>>
 	<<if $pain gte 100 and $willpowerpain is 0>>
-		"아직 안 끝났어, 걸레야." <<person1>><<personPost "이">> 자신의 외투로 손을 뻗으며 말한다. <span class="red"><<HePost 1 "은">> 재갈과 안대를 꺼내든다.</span> 당신은 너무 크게 다쳐 저항하지 못하고, <<hePost "은">> 강제로 당신의 입에 재갈을 물리고 안대까지 씌운다. 당신은 아무 것도 볼 수 없다.
+		"아직 안 끝났어, <<slut_a>>." <<person1>><<personPost "이">> <<his_yi>> 외투로 손을 뻗으며 말한다. <span class="red"><<HePost "은">> 재갈과 안대를 꺼내든다.</span> 당신은 너무 크게 다쳐 저항하지 못하고, <<hePost "은">> 강제로 당신의 입에 재갈을 물리고 안대까지 씌운다. 당신은 아무 것도 볼 수 없다. 그리고 당신의 양팔은 뒤로 당겨져 <<he_ga>> 그대로 묶는다.
 		<<facewear 6>>
+		<<bind>>
 		<br><br>
 
 		"즐기도록 해." <<hePost "은">> 당신을 길거리로 떠밀며 웃음을 터트린다. <<hePost "이">> 떠나가는 소리가 들려온다.
@@ -181,7 +193,7 @@
 		<<destinationbondage>>
 
 	<<else>>
-		"아직 안 끝났어, 걸레야." <<person1>><<personPost "이">> 자신의 외투로 손을 뻗으며 말한다. <span class="red"><<HePost 1 "은">> 재갈과 안대를 꺼내든다.</span> <<HePost "은">> 재갈을 당신의 입에 쑤셔 넣으려고 하지만, <span class="green">당신은 어떻게든 도망친다.</span>
+		"아직 안 끝났어, <<slut_a>>." <<person1>><<personPost "이">> <<his_yi>> 외투로 손을 뻗으며 말한다. <span class="red"><<HePost "은">> 재갈과 안대를 꺼내든다.</span> <<HePost "은">> 재갈을 당신의 입에 쑤셔 넣으려고 하지만, <span class="green">당신은 어떻게든 도망친다.</span>
 		<br><br>
 
 		<<tearful>> 당신은 안전한 곳으로 피한다.
@@ -194,32 +206,32 @@
 	<</if>>
 <<elseif $enemyhealth lte 0>>
 
-<<person1>><<personPost "은">> 균형을 잃으며 도로 쪽으로 넘어지고, 마침 그때 자동차 한 대가 지나간다. 자동차는 <<hePost "을">> 피하려고 방향을 틀고는, 가로등에 부딪힌다.
-<br><br>
+	<<person1>><<personPost "은">> 균형을 잃으며 도로 쪽으로 넘어지고, 마침 그때 자동차 한 대가 지나간다. 자동차는 <<hePost "을">> 피하려고 방향을 틀고는, 가로등에 부딪힌다.
+	<br><br>
 
-운전자는 잔뜩 화가 난 채로 나와서는 <<personPost "을">> 향해 소리친다. <<tearful>> 당신은 그 기회를 놓치지 않고 안전한 곳으로 피한다.
-<br><br>
+	운전자는 잔뜩 화가 난 채로 나와서는 <<personPost "을">> 향해 소리친다. <<tearful>> 당신은 그 기회를 놓치지 않고 안전한 곳으로 피한다.
+	<br><br>
 
-<<clotheson>>
-<<endcombat>>
-<<clearNPC bartend>>
-<<destinationeventend>>
+	<<clotheson>>
+	<<endcombat>>
+	<<clearNPC bartend>>
+	<<destinationeventend>>
 
 <<else>>
-<<set $rescued += 1>>
+	<<set $rescued += 1>>
 
-자동차 한 대가 멈춰서더니, <<generate4>><<person4>><<personPost "이">> 나온다. "그 <<girlPost "을">> 내버려둬." <<hePost "이">> 말한다. "아님 흠씬 두들겨 패줄테다."
-<br><br>
-<<person1>><<personPost "은">> 화가 나서 <<person4>><<personPost "을">> 노려본다. "니가 씨발 뭔데?" <<hePost "은">> 그렇게 말하며 당신을 놔주고는 <<person4>><<personPost>>에게로 다가간다.
-<br><br>
+	자동차 한 대가 멈춰서더니, <<generate4>><<person4>><<personPost "이">> 나온다. "그 <<girlPost "을">> 내버려둬." <<hePost "이">> 말한다. "아님 흠씬 두들겨 패줄테다."
+	<br><br>
+	<<person1>><<personPost "은">> 화가 나서 <<person4>><<personPost "을">> 노려본다. "니가 씨발 뭔데?" <<hePost "은">> 그렇게 말하며 당신을 놔주고는 <<person4>><<personPost>>에게로 다가간다.
+	<br><br>
 
-<<tearful>> 당신은 아귀다툼이 이어지는 틈을 타 안전한 곳으로 피한다.
-<br><br>
+	<<tearful>> 당신은 아귀다툼이 이어지는 틈을 타 안전한 곳으로 피한다.
+	<br><br>
 
-<<clotheson>>
-<<endcombat>>
-<<clearNPC bartend>>
-<<destinationeventend>>
+	<<clotheson>>
+	<<endcombat>>
+	<<clearNPC bartend>>
+	<<destinationeventend>>
 
 <</if>>
 
@@ -261,3 +273,30 @@
 <<link [[다음|Orphanage]]>><</link>>
 <br>
 
+:: Connudatus Briar Abduct
+<<set $outside to 0>><<effects>>
+<<npc Briar>><<generate2>><<generate3>><<person1>>
+<<pass 5>>
+당신이 자세를 잡기도 전에 자동차는 움직이면서 흔들린다. "달링," 친숙한 음성이 들린다. "진정하도록 해." 브라이어다. <<He_nun>> 반대쪽에 앉아있다. <<person2>><<person_gwa>> <<person3>><<person_un>> 당신 양 옆에 앉아있다.
+<br><br>
+
+"네가 내... 동료인 데릴을 만났다고 들어서, 말이지," <<person1>>브라이어는 계속 말한다. <<He_nun>> 세 좌석에 걸쳐 느긋하게 누워 있다. "내가 <<nnpc_him_i "Darryl">> 걱정돼서 말야. 네게 부탁 좀 해도 될까? <<nnpc_himPost "Darryl">> 주위의 사람들을 좀 감시해 줬으면 해. 경비원들, 고객들, 그런 종류의 것들 말이야. 그러면 내가 안심할 수 있을 거야."
+<br><br>
+
+자동차가 멈춘다. 당신은 도무스 가에 있다. <<person2>><<person_i>> 문을 연다. "여기가 네 집인가? 아늑해 보이는군. 좋은
+<<if $daystate is "day">>
+	하루 되기를."
+<<elseif $daystate is "night">>
+	밤 되기를."
+<<elseif $daystate is "dusk">>
+	저녁 되기를."
+<<else>>
+	아침 되기를."
+<</if>>
+<br><br>
+
+당신은 차에서 내렸고, 자동차는 떠난다.
+<br><br>
+
+<<link [[다음|Domus Street]]>><<endevent>><</link>>
+<br>

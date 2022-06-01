@@ -55,25 +55,29 @@ A <<generate1>><<person1>><<person>> approaches you, smiling. "Rope accident?" <
 <</widget>>
 
 <<widget "dockstatus">>
-<<if $args[0]>>
-	<<set $dockstatus += ($args[0] * 2)>>
+<<if _args[0]>>
+	<<set $dockstatus += (_args[0] * 2)>>
 <</if>>
 <</widget>>
 
 <<widget "dockwork">>
 <<set $dockhours += 1>>
 <<if $stress gte $stressmax>>
-	You've pushed yourself too much.
-	<br><br>
-	<<passout>>
-
-	<<if $danger gte (9900 - $allure)>>
-		<<link [[Next|Passout Docks]]>><</link>>
-		<br>
+	/*ToDo: Pregnancy, remove $pregnancyTesting to properly enable*/
+	<<if $sexStats.vagina.pregnancy.waterBreaking is true and $pregnancyTesting>>
+		<<pregnancyWatersBrokenPassout "docks">>
 	<<else>>
-		<<ambulance>>
-	<</if>>
+		You've pushed yourself too much.
+		<br><br>
+		<<passout>>
 
+		<<if $danger gte (9900 - $allure)>>
+			<<link [[Next|Passout Docks]]>><</link>>
+			<br>
+		<<else>>
+			<<ambulance>>
+		<</if>>
+	<</if>>
 <<elseif $hour gte 19>>
 	You help put away equipment and make sure the containers are locked for the night.
 	<br><br>
@@ -89,7 +93,7 @@ A <<generate1>><<person1>><<person>> approaches you, smiling. "Rope accident?" <
 		<br><br>
 		<<endevent>>
 		<<if $money gte 500>>
-			<<link [[Accept (1:00 £5)|Docks Pub Crawl]]>><<set $dockpubcount to 0>><<set $money -= 500>><<set $drunk += 120>><<dockstatus 1>><<stress -6>><<pass 60>><</link>><<gcool>><<lstress>>
+			<<link [[Accept (1:00 £5)|Docks Pub Crawl]]>><<set $dockpubcount to 0>><<set $money -= 500>><<alcohol 120>><<dockstatus 1>><<stress -6>><<pass 60>><</link>><<gcool>><<lstress>>
 			<br>
 		<</if>>
 		<<link [[Decline|Docks]]>><</link>>
@@ -108,7 +112,7 @@ A <<generate1>><<person1>><<person>> approaches you, smiling. "Rope accident?" <
 			You enter the keycode, but it doesn't unlock. "Not that one," another docker says. <<He>> points at the initials printed on the door. "We don't inspect these." If <<he>> hears the crying, <<he>> ignores it.
 			<br><br>
 			<<set $lock to 400>>
-			<<if $skulduggery gte $lock>>
+			<<if currentSkillValue('skulduggery') gte $lock>>
 				<span class="green">The lock looks easy to pick.</span>
 				<br><br>
 				<<link [[Break in anyway (£100 1:00)|Docks Slave Open]]>><<set $dockslave to 1>><<crimeup 1>><</link>><<crime>>
@@ -188,7 +192,7 @@ A <<generate1>><<person1>><<person>> approaches you, smiling. "Rope accident?" <
 		<br><br>
 		"Don't pay them no mind," the <<person2>><<person>> working beside you says. "They handle their own shipments."
 		<br><br>
-		<<link [[Sneak closer for a look|Docks Compound]]>><<set $drugged += 240>><<stress -6>><</link>><<garousal>><<lstress>>
+		<<link [[Sneak closer for a look|Docks Compound]]>><<drugs 240>><<stress -6>><</link>><<garousal>><<lstress>>
 		<br>
 		<<link [[Ignore|Docks Compound Ignore]]>><</link>>
 		<br>
@@ -210,7 +214,8 @@ A <<generate1>><<person1>><<person>> approaches you, smiling. "Rope accident?" <
 		<<if $rng gte 61>>
 			You notice a pink shape in the water, in front of an approaching ship.
 			<br><br>
-			<<link [[Examine|Docks History]]>><<set $phase to 0>><<stress 6>><</link>> | <span class="blue">History</span><<gstress>>
+			<!-- Convert to proper history skill check? -->
+			<<link [[Examine|Docks History]]>><<set $phase to 0>><<stress 6>><</link>><<if $statdisable is "f">> | <span class="blue">History</span><</if>><<gstress>>
 			<br>
 			<<link [[Ignore|Docks History]]>><<set $phase to 1>><</link>>
 			<br>
@@ -261,7 +266,7 @@ A <<generate1>><<person1>><<person>> approaches you, smiling. "Rope accident?" <
 			<br><br>
 			<<dockoptions>>
 		<<elseif !$worn.over_lower.type.includes("naked")>>
-			You're working on a crane when it roars into life, and the boom rises. You find yourself yanked upwards by a hook embedded in your $worn.over_lower.name.
+			You're working on a crane when it roars to life, and the boom rises. You find yourself yanked upwards by a hook embedded in your $worn.over_lower.name.
 			<br><br>
 			<<generate1>><<person1>>The crane stops, leaving you suspended in the air. The <<person>> manning the crane waves at you as you spin. Other dockers step into view. They whistle and applaud.
 			<br><br>
@@ -288,7 +293,7 @@ A <<generate1>><<person1>><<person>> approaches you, smiling. "Rope accident?" <
 				<br>
 			<</if>>
 		<<else>>
-			You're working on a crane when it roars into life, and the boom rises. You find yourself yanked upwards by a hook embedded in your $worn.lower.name.
+			You're working on a crane when it roars to life, and the boom rises. You find yourself yanked upwards by a hook embedded in your $worn.lower.name.
 			<br><br>
 			<<generate1>><<person1>>The crane stops, leaving you suspended in the air. The <<person>> manning the crane waves at you as you spin. Other dockers step into view. They whistle and applaud.
 			<br><br>
@@ -359,7 +364,7 @@ A <<generate1>><<person1>><<person>> approaches you, smiling. "Rope accident?" <
 <<widget "dockpuboptions">>
 	<<endevent>>
 	<<if $money gte 500>>
-		<<link [[Continue (1:00 £5)|Docks Pub Crawl]]>><<set $dockpubcount to 0>><<set $money -= 500>><<set $drunk += 120>><<dockstatus 1>><<stress -6>><<pass 60>><</link>><<gcool>><<lstress>>
+		<<link [[Continue (1:00 £5)|Docks Pub Crawl]]>><<set $dockpubcount to 0>><<set $money -= 500>><<alcohol 120>><<dockstatus 1>><<stress -6>><<pass 60>><</link>><<gcool>><<lstress>>
 		<br>
 	<</if>>
 	<<dockpubdestination>>
@@ -433,6 +438,7 @@ is lovemaking, which prompts a bawdy cheer. Your colleagues insist this will be 
 
 <<widget "skul_dock_init">>
 <<if $skul_dock_init is undefined>>
+	<<unset $catsuit_spawned>>
 	<<set $skul_dock_init to 1>>
 	<<set $dock_security to 1>>
 	<<set $skul_dock to {}>>
@@ -461,7 +467,8 @@ is lovemaking, which prompts a bawdy cheer. Your colleagues insist this will be 
 		<<elseif $rng gte 65>>
 			<<set $skul_dock[_skul_dock_keys[_i]].contents to "fertiliser">>
 			<<set _count++>>
-		<<elseif $rng gte 55 and $catsuit_found isnot true>>
+		<<elseif $rng gte 55 and $catsuit_found isnot true and $catsuit_spawned is undefined>>
+			<<set $catsuit_spawned to 1>>
 			<<set $skul_dock[_skul_dock_keys[_i]].contents to "equipment">>
 			<<set _count++>>
 		<<else>>
@@ -496,7 +503,7 @@ is lovemaking, which prompts a bawdy cheer. Your colleagues insist this will be 
 <<widget "skul_dock_contents">>
 <<set _skul_dock_keys to Object.keys($skul_dock)>>
 <<for _i to 0; _i lt _skul_dock_keys.length; _i++>>
-	<<if $skul_dock[_skul_dock_keys[_i]].contents is $args[0] and $skul_dock[_skul_dock_keys[_i]].state isnot "known">>
+	<<if $skul_dock[_skul_dock_keys[_i]].contents is _args[0] and $skul_dock[_skul_dock_keys[_i]].state isnot "known">>
 		<<set $skul_dock[_skul_dock_keys[_i]].state to "known">>
 		<<set _dock_location to _skul_dock_keys[_i]>>
 		<<set _dock_contents to $skul_dock[_skul_dock_keys[_i]].contents>>
@@ -506,7 +513,7 @@ is lovemaking, which prompts a bawdy cheer. Your colleagues insist this will be 
 <</widget>>
 
 <<widget "skul_dock_location">>
-<<switch $args[0]>>
+<<switch _args[0]>>
 <<case "NW">>
 	<<set _text_output to "moorings">>
 <<case "N">>
@@ -546,7 +553,7 @@ is lovemaking, which prompts a bawdy cheer. Your colleagues insist this will be 
 	<<link [[Sneak to the cranes (0:05)|Docks Sneak]]>><<pass 5>><<set $bus to "W">><</link>><<skul_dock_state W>><br>
 <</if>>
 <<if $bus is "E">>
-	<<link [[Sneak to the tallest stacks of cargo containers|Docks Sneak]]>><<pass 5>><<set $bus to "M">><</link>><<skul_dock_state M>><br>
+	<<link [[Sneak to the tallest stacks of cargo containers (0:05)|Docks Sneak]]>><<pass 5>><<set $bus to "M">><</link>><<skul_dock_state M>><br>
 <</if>>
 <<if $bus is "SE" or $bus is "M" or $bus is "NE">>
 	<<link [[Sneak to the office (0:05)|Docks Sneak]]>><<pass 5>><<set $bus to "E">><</link>><<skul_dock_state E>><br>
@@ -568,15 +575,15 @@ is lovemaking, which prompts a bawdy cheer. Your colleagues insist this will be 
 <</widget>>
 
 <<widget "skul_dock_state">>
-<<if $skul_dock[$args[0]].state is "known">>
-	<<if $skul_dock[$args[0]].contents is "none">>
+<<if $skul_dock[_args[0]].state is "known">>
+	<<if $skul_dock[_args[0]].contents is "none">>
 		<span class="purple">The containers here contain nothing of value to you.</span>
-	<<elseif $skul_dock[$args[0]].contents is "fertiliser" and $tending lt 400>>
+	<<elseif $skul_dock[_args[0]].contents is "fertiliser" and $tending lt 400>>
 		<span class="purple">The containers here contain nothing of value to you.</span>
 	<<else>>
-		<span class="teal">A container here contains valuable <<print $skul_dock[$args[0]].contents>>.</span>
+		<span class="teal">A container here contains valuable <<print $skul_dock[_args[0]].contents>>.</span>
 	<</if>>
-<<elseif $skul_dock[$args[0]].state is "empty">>
+<<elseif $skul_dock[_args[0]].state is "empty">>
 	<span class="lblue">You've checked here.</span>
 <<else>>
 	<span class="blue">Unknown contents.</span>
@@ -587,14 +594,14 @@ is lovemaking, which prompts a bawdy cheer. Your colleagues insist this will be 
 <<if $dock_security gte random(1, 4)>>
 	<<set $rng to random(1, 5)>>
 	<<if $rng is 1>>
-		<<generate1>><<person1>>
+		<<generateSecurity 1>><<person1>>
 		You hear footsteps approach. You take cover behind a container, and wait for the noise to pass. You exhale.<<gstress>><<stress 6>>
 		<br><br>
 
 		<<link [[Next|Docks Sneak]]>><<endevent>><<set $eventskip to 1>><</link>>
 		<br>
 	<<elseif $rng is 2>>
-		<<generate1>><<person1>>
+		<<generateSecurity 1>><<person1>>
 		Torchlight appears on the container in front of you. Whoever's holding it is close, and getting closer.
 		<br><br>
 		You look around. The containers are packed tight. You could run the way you came, but it's some distance and you don't have long.
@@ -611,8 +618,8 @@ is lovemaking, which prompts a bawdy cheer. Your colleagues insist this will be 
 	<<elseif $rng is 3>>
 		You hear a patter of feet on the other side of a row of containers.
 		<!-- Modified for Monster People -->
-		<<if ($monsterchance gte random(1, 100) and ($hallucinations gte 1 or $monsterhallucinations is "f")) or ($bestialitydisable is "t")>>
-			<<if $malechance lt random(1, 100)>>
+		<<if ($monsterchance gte random(1, 100) and ($hallucinations gte 1 or $monsterhallucinations is "f"))>>
+			<<if $beastmalechance lt random(1, 100)>>
 				<<set $dock_dog to "girl">>
 				You peer between them, and see a doggirl on all fours sniffing the ground. You walked there not long ago. She has your scent.
 				<br><br>
@@ -685,7 +692,7 @@ is lovemaking, which prompts a bawdy cheer. Your colleagues insist this will be 
 		<<link [[Go quietly|Docks Machine Brace]]>><</link>>
 		<br>
 	<<else>>
-		<<generate1>><<person1>>
+		<<generateSecurity 1>><<person1>>
 		A <<person>> in a security uniform rounds a corner up ahead. You dive between two containers. You don't think <<he>> saw you.
 		<<if random(1, 2) is 1>>
 			As <<he>> passes by however, <<he>> reaches into your hiding place. "Got you," <<he>> says, grasping your arm and pulling you out.
@@ -724,7 +731,7 @@ is lovemaking, which prompts a bawdy cheer. Your colleagues insist this will be 
 		<<link [[Next|Docks Sneak]]>><<set $eventskip to 1>><</link>>
 		<br>
 	<<elseif $rng is 3>>
-		<<generate1>><<generate2>>
+		<<generateSecurity 1>><<generateSecurity 2>>
 		You hear voices up ahead. Two guards are in the way.
 		<br><br>
 
@@ -740,7 +747,7 @@ is lovemaking, which prompts a bawdy cheer. Your colleagues insist this will be 
 		<<link [[Next|Docks Sneak]]>><<set $eventskip to 1>><</link>>
 		<br>
 	<<elseif $rng is 5>>
-		<<if $skulduggery gte random(1, 1000)>>
+		<<if currentSkillValue('skulduggery') gte random(1, 1000)>>
 			There's a security camera up ahead. You avoid it. <span class="green">You're glad you spotted it in time.</span>
 			<br><br>
 
@@ -765,8 +772,8 @@ is lovemaking, which prompts a bawdy cheer. Your colleagues insist this will be 
 <</widget>>
 
 <<widget "dock_security">>
-<<if $args[0]>>
-	<<set $dock_security += $args[0]>>
+<<if _args[0]>>
+	<<set $dock_security += _args[0]>>
 <</if>>
 <</widget>>
 

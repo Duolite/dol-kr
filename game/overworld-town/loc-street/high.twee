@@ -1,7 +1,7 @@
 :: High Street
 
-<<set $outside to 1>><<set $location to "town">><<effects>><<set $bus to "high">>
-당신은 도시의 상업 활동의 중심지인 중심가에 있다. 새 옷을 살 수 있는 쇼핑 센터가 여기 있다.
+<<set $outside to 1>><<set $location to "town">><<effects>><<set $bus to "high">><<getTarget true>>
+당신은 도시의 상업 활동의 중심지인 하이 가에 있다. 새 옷을 살 수 있는 쇼핑 센터가 여기 있다.
 <<if $daystate is "day">>
 	<<if $weather is "rain">>
 		비가 내리는 와중에도 거리는 부산스럽다.
@@ -37,11 +37,11 @@
 <<if $arousal gte $arousalmax>>
 	<<orgasmstreet>>
 <</if>>
-<<if $stress gte $stressmax>>
+<<if $stress gte $stressmax and !$possessed>>
 	<<passoutstreet>>
 <<else>>
 	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
-	<<if $danger gte (9900 - $allure) and $eventskip is 0>>
+	<<if ($danger gte (9900 - $allure) or $eventforced) and $eventskip is 0>>
 		<<eventsstreet>>
 	<<else>>
 		<<if $map.top is true>>
@@ -51,20 +51,24 @@
 		주요 장소
 		<br>
 		<<if $daystate is "night" and $hour isnot 21>>
-			<<link [[쇼핑 센터|Shopping Centre Sneak]]>><</link>>
+			<<shoppingcentreicon>><<link [[쇼핑 센터|Shopping Centre Sneak]]>><</link>>
 			<br>
 		<<elseif $hour is 21>>
 			<span class="blue">사람들이 쇼핑 센터에서 나오고 있다.</span> 문을 닫을 시간인가 보다.
 			<br>
 		<<else>>
-			<<link [[쇼핑 센터 (0:02)|Shopping Centre]]>><<pass 2>><</link>>
+			<<shoppingcentreicon>><<link [[쇼핑 센터 (0:02)|Shopping Centre]]>><<pass 2>><</link>>
+			<br>
+		<</if>>
+		<<if $daystate is "day" and $exposed is 0 and $photo and $photo.street is "ready">>
+			<<link [[모델 일을 한다 (3:00)|Model Silly]]>><</link>><<gtiredness>>
 			<br>
 		<</if>>
 		<<if $daystate is "night" and $exposed gte 2 and $exhibitionism gte 75 and $ex_high isnot 1>>
-			<<link [[휴게소에서 사탕을 산다 (0:05)|Service Naked]]>><<pass 5>><<set $ex_high to 1>><</link>><<exhibitionist5>>
+			<<link [[편의점에서 사탕을 산다 (0:05)|Service Naked]]>><<pass 5>><<set $ex_high to 1>><</link>><<exhibitionist5>>
 			<br>
 		<<elseif $daystate is "night" and $exposed gte 1 and $exhibitionism gte 35 and $ex_high isnot 1>>
-			<<link [[휴게소에서 사탕을 산다 (0:05)|Service Undies]]>><<pass 5>><<set $ex_high to 1>><</link>><<exhibitionist3>>
+			<<link [[편의점에서 사탕을 산다 (0:05)|Service Undies]]>><<pass 5>><<set $ex_high to 1>><</link>><<exhibitionist3>>
 			<br>
 		<</if>>
 		<br>

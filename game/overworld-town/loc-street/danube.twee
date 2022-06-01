@@ -1,7 +1,7 @@
 :: Danube Street
 
-<<set $outside to 1>><<set $location to "town">><<effects>><<set $bus to "danube">>
-당신은 다누베 가에 있다. 이곳에 있는 집들은 다들 널찍하고 우아하다.
+<<set $outside to 1>><<set $location to "town">><<effects>><<set $bus to "danube">><<getTarget true>>
+당신은 다뉴브 가에 있다. 이곳에 있는 집들은 다들 널찍하고 우아하다.
 <<if $daystate is "day">>
 	<<if $weather is "rain">>
 		비 때문에 사람들이 실내로 들어간다.
@@ -28,11 +28,11 @@
 <<if $arousal gte $arousalmax>>
 	<<orgasmstreet>>
 <</if>>
-<<if $stress gte $stressmax>>
+<<if $stress gte $stressmax and !$possessed>>
 	<<passoutstreet>>
 <<else>>
 	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
-	<<if $danger gte (9900 - $allure) and $eventskip is 0>>
+	<<if ($danger gte (9900 - $allure) or $eventforced) and $eventskip is 0>>
 		<<eventsstreet>>
 	<<else>>
 		<<if $map.top is true>>
@@ -55,10 +55,10 @@
 			<br>
 		<</if>>
 		<<if $daystate is "night">>
-			<<ind>><<link [[한 집에 다가간다 (0:02)|Danube House Lock]]>><<pass 2>><</link>>
+			<<danubehouseicon>><<link [[한 집에 다가간다 (0:02)|Danube House Lock]]>><<pass 2>><</link>>
 			<br>
 		<<elseif $exposed lte 0>>
-			<<ind>><<link [[한 집의 문을 두드린다 (0:02)|Danube House Knock]]>><<pass 2>><</link>>
+			<<danubehouseicon>><<link [[한 집의 문을 두드린다 (0:02)|Danube House Knock]]>><<pass 2>><</link>>
 			<br>
 		<</if>>
 		<br>

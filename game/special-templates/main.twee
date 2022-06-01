@@ -1,24 +1,17 @@
 :: Test
-<<set $location to "sea">><<set $outside to 1>><<effects>>
+<<location town>><<effects>>
 <<endcombat>>
+<<link [[Test]]>><</link>>
+<br><br>
 
-<<generatef1>><<person1>>
-<<set $NPCList[0].vagina to "lefthand">>
-		/*<<set $_npchand to $NPCList[_n].vagina.slice(0,4)>>*/
 		
-		<<if $rng lte 80>>
-			<<He>> strokes <<his>> pussy with <<his>> hand.
-			<<neutral 1>><<set $enemyarousal += 20>>
-		<<else>>
-			<span class="blue"><<He>> moves <<his>> hand away from <<his>> pussy.</span>
-			<<set $NPCList[_n][$NPCList[_n].vagina] to 0>><<set $NPCList[_n].vagina to 0>>
-		<</if>>
-
 
 :: Robin
 <<set $NPCName[$NPCNameList.indexOf("Robin")].love to 50>>
 <<if $NPCName[$NPCNameList.indexOf("Robin")].love gte 50>>
 <</if>>
+
+<<link [["Ask " + $NPCList[0].pronouns.him + " how " + $NPCList[0].pronouns.he + " gets in and out"|Prison Wren Ask 2]]>><</link>>
 
 :: Sex
 
@@ -86,13 +79,13 @@
 	<<molested>>
 
 	<<maninit>>
-
-	<<set $rescue to 1>>/*Remove line if rescue is impossible*/
+	<<enable_rescue>>/*Remove line if rescue is impossible*/
 <</if>>
 
 <<effects>>
 
 <<effectsman>><<man>>
+	
 
 <<stateman>>
 <br><br>
@@ -118,7 +111,7 @@
 	<br><br>
 	<<clotheson>>
 	<<endcombat>>
-	<<link [[Next|Rape]]>><</link>>/*Link points wherever you want the player to end up*/
+	<<link [[Next|Rape]]>><<set $molestationstart to 1>><</link>>/*Link points wherever you want the player to end up*/
 
 <<elseif $enemyhealth lte 0>>
 	Text about escaping.
@@ -127,7 +120,7 @@
 	<br><br>
 	<<clotheson>>
 	<<endcombat>>
-	<<link [[Next|Rape]]>><</link>>
+	<<link [[Next|Rape]]>><<set $molestationstart to 1>><</link>>
 
 <<else>>
 	<<set $rescued += 1>>/*Unnecessary if rescue is impossible*/
@@ -137,7 +130,7 @@
 	<br><br>
 	<<clotheson>>
 	<<endcombat>>
-	<<link [[Next|Rape]]>><</link>>
+	<<link [[Next|Rape]]>><<set $molestationstart to 1>><</link>>
 
 <</if>>
 
@@ -256,7 +249,7 @@ Possible text describing your attempt.
 	<<set $consensual to 1>>
 	<<neutral 1>>
 
-	<<beastNEWinit 1 dog>>
+	<<beastNEWinit 1 dog>>/* - Delete if beasts are already generated*/
 	<<beastCombatInit>>
 	<<beastTrainGenerate>>/* - Delete if there aren't multiple beasts*/
 <</if>>
@@ -355,7 +348,7 @@ Possible text describing your attempt.
 <<elseif $enemyarousal gte $enemyarousalmax>>
 	<span id="next"><<link [[Next|Beast Rape Finish]]>><</link>></span><<nexttext>>
 <<else>>
-	<span id="next"><<link "Next">><<script>>state.display(state.active.title, null)<</script>><</link>></span><<nexttext>>
+	<span id="next"><<link [[Next|Beast Rape]]>><</link>></span><<nexttext>>
 <</if>>
 
 :: Beast Rape Finish
@@ -416,7 +409,7 @@ Possible text describing your attempt.
 	<<beastNEWinit 1 wolf>>
 	<<beastCombatInit>>
 	<<beastTrainGenerate>>
-	<<set $rescue to 1>>/*optional*/
+	<<enable_rescue>>/*optional*/
 <</if>>
 <<effects>>
 <<effectsman>>
@@ -445,7 +438,7 @@ Possible text describing your attempt.
 
 		<<combatTrainAdvance>>
 		<br><br>
-		[[Next|Beast Gang]]
+		<<link [[Next|Beast Gang]]>><</link>>
 	<<else>>
 		The <<beasttype>> recoils in pain and fear.
 		<<combatTrainAdvance>>
@@ -459,7 +452,7 @@ Possible text describing your attempt.
 
 		<<combatTrainAdvance>>
 		<br><br>
-		[[Next|Beast Gang]]
+		<<link [[Next|Beast Gang]]>><</link>>
 	<<else>>
 		Satisfied, the <<beasttype>> moves away from you.
 		<<combatTrainAdvance>>
@@ -503,7 +496,7 @@ Possible text describing your attempt.
 <<seductioncheck>>
 <br><br>
 <<if $seductionskill lt 1000>>
-	<span class="gold">You feel more confident in your powers of seduction.</span>
+	<span class="gold">당신은 유혹하는 데 좀 더 자신감이 붙었다.</span>
 	<br><br>
 <</if>>
 <<seductionskilluse>>
@@ -805,7 +798,7 @@ $NPCName[$NPCNameList.indexOf("Robin")].love
 <</if>>
 
 <<statetentacles>>
-You count $tentacles.active tentacles surrounding you.
+
 
 <<effects>>
 <<effectstentacles>>
@@ -906,23 +899,23 @@ Text about failing the physique check.
 :: Encounter Movements
 
 <span class="blue"><<He>> positions <<his>> $NPCList[_n].penisdesc in front of your mouth.</span>
-<<neutral 5>><<set $mouthuse to "penis">><<set $NPCList[_n].penis to "mouthentrance">><<set $mouthstate to "entrance">><<set $speechmouthentrance to 1>>
+<<neutral 5>><<set $mouthuse to "penis">><<set $NPCList[_n].penis to "mouthentrance">><<set $mouthstate to "entrance">><<set $speechmouthentrance to 1>><<set $mouthtarget to _n>>
 
 <span class="purple"><<He>> wraps <<his>> legs around your head and presses <<his>> pussy against your mouth.</span>
-<<submission 5>><<set $mouthuse to "othervagina">><<set $NPCList[_n].vagina to "mouth">><<set $mouthstate to "othervagina">><<violence 3>><<bruise face>><<set $speechvaginamouth to 1>>
+<<submission 5>><<set $mouthuse to "othervagina">><<set $NPCList[_n].vagina to "mouth">><<set $mouthstate to "othervagina">><<violence 3>><<bruise face>><<set $speechvaginamouth to 1>><<set $mouthtarget to _n>>
 
 <span class="blue"><<He>> moves between your legs, positioning <<his>> $NPCList[_n].penisdesc in front of your <<pussy>>.</span>
-<<neutral 5>><<set $vaginause to "penis">><<set $NPCList[_n].penis to "vaginaentrance">><<set $vaginastate to "entrance">><<set $speechvaginaentrance to 1>>
+<<neutral 5>><<set $vaginause to "penis">><<set $NPCList[_n].penis to "vaginaentrance">><<set $vaginastate to "entrance">><<set $speechvaginaentrance to 1>><<set $vaginatarget to _n>>
 
-<<set $penisuse to "othervagina">><<set $NPCList[_n].vagina to "penisentrance">><<set $penisstate to "entrance">>
+<<set $penisuse to "othervagina">><<set $NPCList[_n].vagina to "penisentrance">><<set $penisstate to "entrance">><<set $penistarget to _n>>
 <span class="blue"><<He>> straddles you, <<his>> pussy hovering close to your <<penis>>.</span>
 
 <span class="blue"><<He>> moves between your legs, positioning <<his>> $NPCList[_n].penisdesc in front of your <<bottom>>.</span>
-<<neutral 5>><<set $anususe to "penis">><<set $NPCList[_n].penis to "anusentrance">><<set $anusstate to "entrance">><<set $speechanusentrance to 1>>
+<<neutral 5>><<set $anususe to "penis">><<set $NPCList[_n].penis to "anusentrance">><<set $anusstate to "entrance">><<set $speechanusentrance to 1>><<set $anustarget to _n>>
 
 :: Monster Selection
 <!-- Modified for Monster People -->
-<<if ($monsterchance gte 1 and $hallucinations gte 1) or ($monsterchance gte 1 and $monsterhallucinations is "f") or ($bestialitydisable is "t")>>
+<<if ($monsterchance gte 1 and $hallucinations gte 1) or ($monsterchance gte 1 and $monsterhallucinations is "f")>>
 	<<if $malechance lt random(1, 100)>>
 		Monstergirl
 	<<else>>
@@ -1057,10 +1050,10 @@ Number of active machines: <<print $machine.number>><br>
 
 
 <<if $struggle.done gte $struggle.number>>
-	<<link [[Next|Struggle End]]>><</link>>
+	<span id="next"><<link [[Next|Struggle End]]>><</link>></span>
 	<br>
 <<else>>
-	<<link [[Next|Struggle]]>><</link>>
+	<span id="next"><<link [[Next|Struggle]]>><</link>></span>
 	<br>
 <</if>>
 
@@ -1080,14 +1073,230 @@ Stuff happens.
 /*Farm stage reminders:
 $farm_stage = 1: Alex met, farm work explained.
 $farm_stage = 2: Farm work accepted. 1 field clear
-$farm=stage = 3: Worked at the farm a little, harasser appeared.
-$farm=stage = 4: 2 fields clear. Alex offered booze.
-$farm=stage = 5: 3 fields clear. Remy threatened Alex.
-$farm=stage = 6: 4 fields clear. Alex's parent visits.
-$farm=stage = 7: Time passed since Alex's parent's visit. Bailey visits. Fields are now controlled by the player, steeds can be saddled, and Alex can be chosen as a love interest. Attacks begin. Wall can be upgraded.
-$farm=stage = 8: 5 fields clear. More upgrades can be bought.
-$farm=stage = 9: 6 fields clear. Lab unlocked. 1 phial available for PC to sell to compound.
-$farm=stage = 10: 7 fields clear. "Hurl net" ability unlocked, and more phials can now be produced.
-$farm=stage = 11: 8 fields clear. Strange flowers can now be grown.
-$farm=stage = 12: 9 fields clear. Remy threatens again.
+$farm_stage = 3: Worked at the farm a little, harasser appeared.
+$farm_stage = 4: 2 fields clear. Alex offered booze.
+$farm_stage = 5: 3 fields clear. Remy threatened Alex.
+$farm_stage = 6: 4 fields clear. Alex's parent visits.
+$farm_stage = 7: Time passed since Alex's parent's visit. Bailey visits. Fields are now controlled by the player, steeds can be saddled, and Alex can be chosen as a love interest. Attacks begin. Wall can be upgraded.
+$farm_stage = 8: 5 fields clear. More upgrades can be bought.
+$farm_stage = 9: 6 fields clear. Lab unlocked. 1 phial available for PC to sell to compound.
+$farm_stage = 10: 7 fields clear. "Hurl net" ability unlocked, and more phials can now be produced.
+$farm_stage = 11: 8 fields clear. Strange flowers can now be grown.
+$farm_stage = 12: 9 fields clear. Remy threatens again.
 */
+
+
+:: Stalk
+
+<<if $molestationstart is 1>>
+	<<set $molestationstart to 0>>
+	<<violence 1>>
+	<<neutral 1>>
+
+	<<maninit>>
+	<<stalk_init>>
+	<<if $daystate isnot "night">>
+		<<enable_rescue>>/*Remove if rescue is impossible*/
+	<</if>>
+	<<set $location to "town">>
+<</if>>
+
+<<effects>>
+
+<<effectsman>><<man>>
+
+<<if $audience_active>>
+	<<audience>>
+<</if>>
+
+<<stateman>>
+<br><br>
+<<actionsman>>
+
+<<if $enemyhealth lte 0>>
+	<span id="next"><<link [[Next|Stalk Finish]]>><</link>></span><<nexttext>>
+<<elseif $enemyarousal gte $enemyarousalmax>>
+	<span id="next"><<link [[Next|Stalk Finish]]>><</link>></span><<nexttext>>
+<<elseif $alarm is 1 and $rescue is 1>>
+	<span id="next"><<link [[Next|Stalk Finish]]>><</link>></span><<nexttext>>
+<<elseif $stalk_end>>/*Not usually needed */
+	<span id="next"><<link [[Next|Stalk Finish]]>><</link>></span><<nexttext>>
+<<else>>
+	<span id="next"><<link [[Next|Stalk]]>><</link>></span><<nexttext>>
+<</if>>
+
+:: Stalk Finish
+<<effects>>
+<<if $enemyarousal gte $enemyarousalmax>>
+	<<ejaculation>>
+	<<if $combat_end_text>>
+		<<print $combat_end_text>>
+	<<else>>
+		Text about the aftermath of them cumming.
+	<</if>>
+	<br><br>
+	<<tearful>> you recover.
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[Next|Stalk]]>><<set $molestationstart to 1>><</link>>/*Link points wherever you want the player to end up*/
+
+<<elseif $enemyhealth lte 0>>
+	Text about escaping.
+	<br><br>
+	<<tearful>> you recover.
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[Next|Stalk]]>><<set $molestationstart to 1>><</link>>
+<<elseif $stalk_end is "escaped">>
+	You slow to a walk. <<tearful>> you continue your journey.
+	<br><br>
+
+	<<clotheson>>
+	<<endcombat>>
+
+	<<link [[Next|Stalk]]>><<set $molestationstart to 1>><</link>>
+	<br>
+
+<<elseif $stalk_end is "passed">>
+	You take a deep breath. <<tearful>> you continue your journey.
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+
+	<<link [[Next|Stalk]]>><<set $molestationstart to 1>><</link>>
+	<br>
+
+<<elseif $stalk_end is "hide">>
+	<<covered>> <<tearful>> you emerge from your hiding place. You continue your journey.
+	<br><br>
+
+	<<set $stealtextskip to 1>>
+	<<stealclothes>>
+	<<clotheson>>
+	<<endcombat>>
+
+	<<link [[Next|Stalk]]>><<set $molestationstart to 1>><</link>>
+	<br>
+<<elseif $stalk_end is "outpaced">>/*Unnecessary if the PC can't become the pursuer */
+	<<if $exposed gte 1>>
+		<<switch $location>>
+		<<case alley>>
+			<<tearful>> you slow to a stop. <<covered>> There's no one around, but this is still a public place.
+		<<case forest lake>>
+			<<tearful>> you slow to a stop. <<covered>> There's no one around right now, but there's no knowing who you could meet in the woods.
+		<<case moor>>
+			<<tearful>> you slow to a stop. <<covered>> There's no one around, but being exposed in such an open place is frightening regardless.
+		<<default>>
+			<<covered>> <<tearful>> you dive down an alley, hoping to shield your body from any prying eyes.
+		<</switch>>
+	<<else>>
+		<<tearful>> you slow to stop.
+	<</if>>
+	<br><br>
+	<<set $stealtextskip to 1>>
+	<<stealclothes>>
+	<<clotheson>>
+	<<endcombat>>
+
+	<<link [[Next|Stalk]]>><<set $molestationstart to 1>><</link>>
+	<br>
+<<else>>
+	<<set $rescued += 1>>/*Unnecessary if rescue is impossible*/
+	<<if $position is "stalk">>
+		Text about being rescued while pursued.
+	<<else>>
+		Text about being rescued while assaulted.
+	<</if>>
+	<br><br>
+	<<tearful>> you recover.
+	<br><br>
+	<<clotheson>>
+	<<endcombat>>
+	<<link [[Next|Stalk]]>><<set $molestationstart to 1>><</link>>
+
+<</if>>
+<br><br>
+<<link [[Escape!|Domus Street]]>><<endevent>><</link>>
+<br>
+
+:: Dance
+<<effects>>
+
+<<if $dancestart is 1>>
+	<<unset $dancestart>>
+	<<danceinit>>
+	<<set $dancing to 1>>
+    <<set $audience to 25>>
+	<<set $venuemod to 1>>
+	<<set $dancelocation to "party">>
+<</if>>
+
+<<danceeffects>>
+<<danceaudience>>
+<<danceactions>>
+
+<<if $corruptionDancing gt 0 and $danceevent is 0 and (($exhibitionism lte 74 and $exposed gte 2) or ($exhibitionism lte 34 and $exposed gte 1))>>
+	There's no way you could normally continue dancing while so exposed.
+<<elseif $danceevent is 0 and $exhibitionism lte 74 and $exposed gte 2>>
+	There's no way you can continue dancing while so exposed! Face reddening, you flee the scene.
+	<br><br>
+<<elseif $danceevent is 0 and $exhibitionism lte 34 and $exposed gte 1 and !$worn.under_lower.type.includes("dance")>>
+	There's no way you can continue dancing while so exposed! Face reddening, you flee the scene.
+	<br><br>
+<</if>>
+
+<<if $danceevent is "finish">>
+	<<unset $corruptionDancing>>
+	<<link [[Next|Brothel]]>><<clotheson>><<endevent>><</link>>
+<<elseif $danceevent is "private">>
+	<<if $corruptionDancing is 2>>
+		The slime wants you to have fun with more than an individual.
+	<<elseif $promiscuity gte 35>>
+		<<link [[Private room|Brothel Private]]>><<set $phase to 0>><<set $enemyno to 1>><<set $enemynomax to 1>><<unset $corruptionDancing>><</link>><<promiscuous3>>
+	<<elseif $promiscuity lte 34 and $uncomfortable.prostituting is false>>
+		<<link [[Private room|Brothel Private]]>><<set $phase to 0>><<set $enemyno to 1>><<set $enemynomax to 1>><<unset $corruptionDancing>><<set $desperateaction to 1>><</link>><<promiscuous3>>
+		<br>
+	<</if>>
+<<elseif $danceevent is "rape">>
+	<<link [[Next|Brothel Dance Rape]]>><<set $molestationstart to 1>><<unset $corruptionDancing>><</link>>
+<<elseif $danceevent is "leighton">>
+	<<if $corruptionDancing is 2>>
+		The slime wants you to have fun with more than an individual.
+	<<elseif $promiscuity gte 35>>
+		<<link [[Private room|Leighton Private]]>><<clotheson>><<endevent>><<unset $corruptionDancing>><</link>><<promiscuous3>>
+		<br>
+	<</if>>
+<<elseif $danceevent is "robin">>
+	<<if $corruptionDancing is 2>>
+		The slime wants you to have fun with more than an individual.
+	<<else>>
+		<<link [[Private room|Robin Brothel]]>><<clotheson>><<endevent>><<unset $corruptionDancing>><</link>>
+	<</if>>
+
+<<elseif $danceevent is 0>>
+	<<if $corruptionDancing isnot undefined>>
+		The slime in your ear is forcing you.
+	<<elseif $exposed gte 2 and $exhibitionism lte 74>>
+		<<link [[Flee|Brothel Dressing Room]]>><<clotheson>><<endevent>><<unset $corruptionDancing>><</link>>
+	<<elseif $exposed gte 1 and $exhibitionism lte 34>>
+		<<link [[Flee|Brothel Dressing Room]]>><<clotheson>><<endevent>><<unset $corruptionDancing>><</link>>
+	<<else>>
+		<<link [[Stop|Brothel]]>><<clotheson>><<endevent>><<unset $corruptionDancing>><</link>>
+	<</if>>
+<</if>>
+/*More simple setup below */
+<<if $danceevent is "rape">>
+	<<link [[Next|Beach Party Dance Rape]]>><<set $molestationstart to 1>><</link>>
+<<elseif $danceevent is "finish">>
+	<<link [[Next|Beach Party]]>><<clotheson>><<endevent>><</link>>
+<<elseif $danceevent is 0>>
+	<<if $exposed gte 2 and $exhibitionism lte 74>>
+		<<link [[Flee|Changing Room]]>><<clotheson>><<endevent>><</link>>
+	<<elseif $exposed gte 1 and $exhibitionism lte 34>>
+		<<link [[Flee|Changing Room]]>><<clotheson>><<endevent>><</link>>
+	<<else>>
+		<<link [[Stop|Beach Party]]>><<clotheson>><<endevent>><</link>>
+	<</if>>
+<</if>>

@@ -6,15 +6,15 @@
 		<<outfitChecks>>
 		/*Check for when the pc is only wearing an overcoat*/
 		<<if $worn.over_upper.name isnot "naked" and $worn.over_lower.name isnot "naked" and $worn.under_upper.name is "naked" and $worn.under_lower.name is "naked">>
-			As you go to hang your <<if _middleOutfit>>$worn.over_upper.name<<else>>$worn.over_upper.name and $worn.over_lower.name<</if>>, you remember that you're naked underneath.
+			<<if _middleOutfit>><<worn_over_upper_name_ul>><<else>><<worn_over_upper_name_gwa>> <<worn_over_lower_name_ul>><</if>> 벗자마자, 당신은 외투 아래에 아무것도 입지 않았다는 사실을 자각했다.
 		<<elseif $worn.over_upper.name isnot "naked" and $worn.over_lower.name isnot "naked" and ($worn.under_upper.type.includes("swim") or $worn.under_lower.type.includes("swim"))>>
-			As you go to hang your <<if _middleOutfit>>$worn.over_upper.name<<else>>$worn.over_upper.name and $worn.over_lower.name<</if>>, you remember that you're only wearing swimwear underneath.
+			<<if _middleOutfit>><<worn_over_upper_name_ul>><<else>><<worn_over_upper_name_gwa>> <<worn_over_lower_name_ul>><</if>> 벗자마자, 당신은 외투 아래에 수영복만 입고 있다는 사실을 자각했다.
 		<<elseif $worn.over_upper.name isnot "naked" and $worn.over_lower.name isnot "naked" and $worn.under_upper.name isnot "naked" and $worn.under_lower.name isnot "naked">>
-			As you go to hang your <<if _middleOutfit>>$worn.over_upper.name<<else>>$worn.over_upper.name and $worn.over_lower.name<</if>>, you remember that you're only wearing underwear underneath.
+			<<if _middleOutfit>><<worn_over_upper_name_ul>><<else>><<worn_over_upper_name_gwa>> <<worn_over_lower_name_ul>><</if>> 벗자마자, 당신은 외투 아래에 속옷만 입고 있다는 사실을 자각했다.
 		<</if>>
 		<br><br>
 		<<npc Sirris>><<person1>>
-		Sirris looks at you while you stand there. "What are you staring into space for? You can't just be wearing nothing under that coat can you? The head might have some spares if you need them."
+		당신이 우두커니 서 있는 동안 시리스가 당신을 쳐다본다. "허공은 뭐하러 보는 거니? 코트 아래에 아무것도 안 입고 있으면 안 되지. 교복을 찾는다면 교장 선생님이 여분을 갖고 있을 거야."
 		<br><br>
 		<!--<<link [[Hang up coat|]]>><<endevent>><</link>>
 		<br><br> good starting point for when you can go to class naked-->
@@ -48,10 +48,15 @@
 		<<else>>
 			당신은 과학 교실에 들어간다.
 			<<npc Sirris>><<person1>>
-			시리스가 말을 하다 말고 당신을 바라본다. "미안하지만, 지각 기록을 해야겠어."
-			<<gdelinquency>>
-			<br><br>
-			<<detention 1>>
+			<<if $scienceExcused is true>>
+				<<unset $scienceExcused>>
+				시리스가 말을 하다 말고 당신을 바라본다. "지각 사유를 들었으니, 가서 앉아라." <<He_nun>> 당신에게 웃음짓는다.
+			<<else>>
+				시리스가 말을 하다 말고 당신을 바라본다. "미안하지만, 지각 기록을 해야겠어."
+				<<gdelinquency>>
+				<br><br>
+				<<detention 1>>
+			<</if>>
 			당신은
 			<<if $worn.over_upper.name isnot "naked" or $worn.over_lower.name isnot "naked" or $worn.over_head.name isnot "naked">>
 				교실 뒷편에 코트를 건 뒤
@@ -120,6 +125,9 @@
 <<else>>
 	당신은 과학 교실에 있다. 실험 장비들은 사용하지 않을 때에는 안전하게 보관함에 넣어 잠궈 둔다.
 	<br><br>
+	<<if $arousal gte $arousalmax>>
+		<<orgasmLocation "emptyClassroom">>
+	<</if>>
 	<<storeon "scienceClassroom" "check">>
 	<<if _store_check is 1>>
 		<<storeon "scienceClassroom">>
@@ -195,8 +203,8 @@
 <!-- add stress every 5 minutes -->
 <<set _stress to Math.trunc(_time_to_pass / 5)>>
 <<stress _stress>>
-<!-- improve science grade with half of efficiency of a proper lesson -->
-<<set _science to _time_to_pass / 10>>
+<!-- improve science grade with same efficiency as studying in the library -->
+<<set _science to _time_to_pass / 20>>
 <<scienceskill _science>>
 
 :: Science Lesson
@@ -207,14 +215,18 @@
 	<<npc Sirris>><<person1>>
 	"금요일 시험 시간이란다." 시리스가 소책자를 들고 말한다. "긴장하지 마렴."<<gstress>><<stress 6>>
 	<br><br>
+	<<if $arousal gte $arousalmax>>
+		<<set _teacher to "Sirris">>
+		<<orgasmLocation "classroom">>
+	<</if>>
 
 	<<exam science>>
 	<br><br>
-	학생을이 첫 페이지를 넘기는 소리가 울린다. "시험시간 동안 대화는 금지야" 시리스가 반의 맨 앞에 앉아서 덧붙인다. "다 했다고 해도 말이야. 별로 오래 안걸릴거야."
+	학생들이 첫 페이지를 넘기는 소리가 울린다. "시험시간 동안 대화는 금지야" 시리스가 반의 맨 앞에 앉아서 덧붙인다. "다 했다고 해도 말이야. 별로 오래 안걸릴거야."
 	<br><br>
 	<<endevent>>
 	<<exam_cheat science>>
-	<<link [[집중한다|Science Exam]]>><<stress 6>><<set $phase to 0>><<set $exam_chance += 5>><</link>><<gstress>> | <span class="green">+ 5% 합격 기회</span>
+	<<link [[집중한다|Science Exam]]>><<stress 6>><<set $phase to 0>><<set $exam_chance += 5>><</link>><<gstress>><<passPercent 5>>
 	<br>
 	<<link [[진정한다|Science Exam]]>><<set $phase to 1>><</link>>
 	<br>
@@ -292,6 +304,10 @@
 	<<else>>
 		과학 수업이 계속된다. 무엇을 할까?
 		<br><br>
+	<</if>>
+	<<if $arousal gte $arousalmax>>
+		<<set _teacher to "Sirris">>
+		<<orgasmLocation "classroom">>
 	<</if>>
 
 	<<link [[수업에 집중한다|Science Lesson Focus]]>><</link>><<gstress>><<gscience>>

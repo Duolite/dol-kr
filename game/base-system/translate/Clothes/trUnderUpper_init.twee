@@ -1,10 +1,10 @@
 :: Widgets trUnderUpper [widget nobr]
 <<widget "init_trUnderUpper">>
-    <<set _trClothes.under_upper to [
+    <<set setup.trClothes.under_upper to [
         {
             index: 0,
             name: "naked",
-            name_ko: "알몸",
+            name_ko: "벗음",
             variable: "naked",
             description: "naked",
             post: 0
@@ -225,5 +225,50 @@
             description: "외국의 학교 수영복을 모방했다.",
             post: 1
         },
-    ]>>
+
+        {
+            index: 25,
+            name: "tape",
+            name_ko: "테이프",
+            variable: "tape",
+            description: "간신히 거기에 붙어있다.",
+            post: 1
+        },
+
+        {
+            index: 26,
+            name: "cow bra",
+            name_ko: "소 브라",
+            variable: "cow",
+            description: "잘 지탱해준다.",
+            post: 1
+        },
+
+        {
+            index: 27,
+            name: "chest binder",
+            name_ko: "가슴 압박대",
+            variable: "chestbinder",
+            description: "평평하게 만드는 동시에 보호해준다.",
+            post: 1
+        },
+
+        {
+            index: 28,
+            name: "undershirt",
+            name_ko: "속셔츠",
+            variable: "undershirt",
+            description: "따뜻하고 몸에 꼭 맞는다.",
+            post: 1
+        },
+
+        {
+            index: 29,
+            name: "see-through swimsuit",
+            name_ko: "속이 비치는 수영복",
+            variable: "seethroughswimsuit",
+            description: "당신의 몸통 모양을 잡는다.",
+            post: 0
+        },
+		]>>
 <</widget>>

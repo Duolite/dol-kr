@@ -1,11 +1,11 @@
 :: overlayReplace [widget]
 
 <<widget "overlayReplace">>
-	<<if $args[0]>>
-		<<if $currentOverlay isnot $args[0]>>
-			<<set $currentOverlay to $args[0]>>
+	<<if _args[0]>>
+		<<if $currentOverlay isnot _args[0]>>
+			<<set $currentOverlay to _args[0]>>
 			<<run $(".customOverlay").attr("data-overlay",$currentOverlay)>>
-			<<switch $args[0]>>
+			<<switch _args[0]>>
 			<<case "characteristics">>
 				<<replace #customOverlayTitle>><<OverlayTitle "colorCodes">><</replace>>
 				<<replace #customOverlayContent>><<characteristics>><</replace>>
@@ -40,6 +40,15 @@
 				<<replace #customOverlayTitle>><<OverlayTitle "saves">><</replace>>
 				<<replace #customOverlayContent>>
 					<h3>세이브</h3>
+					<<if $ironmanmode is true>>
+						<span style="background-color: #ffffff1a;">철인 모드가 활성화되어 있습니다 :</span>
+						<ul class="ironman-ul"><li>당신은 철인 모드에서 게임을 저장할 수 있지만, 저장 후에는 시작 화면으로 돌아갈 것입니다.</li>
+							<li style="text-decoration: underline;">철인 모드의 세이브를 로드하면 로드 후에 <span style="color: #ff0000;">세이브 파일은 지워집니다</span></li>
+							<li>자동 세이브는 매 5일 - 8일마다 (게임 시간 기준) 저장되며, 그 세이브들은 로드시 지워지지 않습니다. 취침 후의 일반적인 자동 세이브는 비활성됩니다. </li>
+							<li>치트가 비활성화되어 있습니다</li>
+							<li>철인모드 세이브는 <img src="img/ui/SilverCoin.gif" style="max-width: 16px;filter: brightness(2.2);"> 표시가 뒤에 붙어 구분 가능합니다</li>
+						</ul>
+					<</if>>
 					<div id="saveList">
 						<<saveList>>
 					</div>
@@ -62,6 +71,12 @@
 			<<case "blackjackHelp">>
 				<<replace #customOverlayTitle>><<OverlayTitle>><</replace>>
 				<<replace #customOverlayContent>><<blackjackHelp>><</replace>>
+			<<case "eventExtraInfo">>
+				<<replace #customOverlayTitle>><<OverlayTitle>><</replace>>
+				<<replace #customOverlayContent>><<eventExtraInfo>><</replace>>
+			<<case "outfitEditor">>
+				<<replace #customOverlayTitle>><<OverlayTitle>><</replace>>
+				<<replace #customOverlayContent>><<outfitEditor>><</replace>>
 			<</switch>>
 			<<removeclass "#customOverlay" "hidden">>
 			<<run document.getElementById("customOverlay").scrollTop = 0>>
@@ -77,19 +92,19 @@
 	<<addclass "#customOverlay" "hidden">>
 	<<set $currentOverlay to null>>
 <</button>>
-<<if $args[0] is "saves">>
+<<if _args[0] is "saves">>
 	<<button "세이브 내보내기/불러오기">>
 		<<overlayReplace "optionsExportImport">>
 		<<set $currentOverlay to null>>
 	<</button>>
 <</if>>
-<<if $args[0] is "optionsExportImport">>
+<<if _args[0] is "optionsExportImport">>
 	<<button "옵션으로 돌아가기">>
 		<<overlayReplace "saves">>
 		<<set $currentOverlay to "saves">>
 	<</button>>
 <</if>>
-<<if $args[0] is "statistics">>
+<<if _args[0] is "statistics">>
 	<<button "추가 통계 (스포일러)">>
 		<<if $skipStatisticsConfirmation>>
 			<<overlayReplace "extraStatistics">>
@@ -99,13 +114,13 @@
 		<<set $currentOverlay to null>>
 	<</button>>
 <</if>>
-<<if $args[0] is "extraStatistics">>
+<<if _args[0] is "extraStatistics">>
 	<<button "통계">>
 		<<overlayReplace "statistics">>
 		<<set $currentOverlay to null>>
 	<</button>>
 <</if>>
-<<if $args[0] is "colorCodes">>
+<<if _args[0] is "colorCodes">>
 	<<button "색상 코드">>
 		<<script>>overlayShowHide('statsHelp');<</script>>
 	<</button>>
@@ -126,22 +141,22 @@
 		<br>
 	</div>
 <</if>>
-<<if $args[0] && $args[0].indexOf("canvas") == 0>>
-	<<if $args[0] is not "canvasLayers">>
+<<if _args[0] && _args[0].indexOf("canvas") == 0>>
+	<<if _args[0] is not "canvasLayers">>
 		<<button "레이어">>
 			<<overlayReplace "canvasLayers">>
 		<</button>>
 	<<else>>
 		<div class="buttonlike -noborder">레이어</div>
 	<</if>>
-	<<if $args[0] is not "canvasColours">>
+	<<if _args[0] is not "canvasColours">>
 		<<button "색상">>
 			<<overlayReplace "canvasColours">>
 		<</button>>
 	<<else>>
 		<div class="buttonlike -noborder">색상</div>
 	<</if>>
-	<<if $args[0] is not "canvasModel">>
+	<<if _args[0] is not "canvasModel">>
 		<<button "모델">>
 			<<overlayReplace "canvasModel">>
 		<</button>>

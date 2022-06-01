@@ -1,65 +1,65 @@
 :: Widgets Exams [widget]
 <<widget "exam">>
 
-Understanding:
-<<if $args[0] is "science">>
+이해도:
+<<if _args[0] is "science">>
 	<<set $exam_chance to $science_exam>>
 	<span class="black"><<print Math.trunc($science_exam)>> %</span>
 	<br>
 	<<if $NPCName[$NPCNameList.indexOf("Sirris")].love gte 10>>
 		<<set $exam_chance += 5>>
-		<span class="green">Sirris's love</span> <span class="black">+5%</span>
+		<span class="green">시리스의 사랑</span> <span class="black">+5%</span>
 		<br>
 	<</if>>
-<<elseif $args[0] is "maths">>
+<<elseif _args[0] is "maths">>
 	<<set $exam_chance to $maths_exam>>
 	<span class="black"><<print Math.trunc($maths_exam)>> %</span>
 	<br>
 	<<if $NPCName[$NPCNameList.indexOf("River")].love gte 10>>
 		<<set $exam_chance += 5>>
-		<span class="green">River's love</span> <span class="black">+5%</span>
+		<span class="green">리버의 사랑</span> <span class="black">+5%</span>
 		<br>
 	<</if>>
 	<<if $whitneymaths is "active">>
 		<<set $exam_chance -= 5>>
-		<span class="pink">Whitney's distractions</span> <span class="black">-5%</span>
+		<span class="pink">휘트니의 방해</span> <span class="black">-5%</span>
 		<br>
 	<<elseif $whitneymaths is "seat">>
 		<<set $exam_chance -= 10>>
-		<span class="red">Whitney's distractions</span> <span class="black">-10%</span>
+		<span class="red">휘트니의 방해</span> <span class="black">-10%</span>
 		<br>
 	<</if>>
-<<elseif $args[0] is "english">>
+<<elseif _args[0] is "english">>
 	<<set $exam_chance to $english_exam>>
 	<span class="black"><<print Math.trunc($english_exam)>> %</span>
 	<br>
 	<<if $NPCName[$NPCNameList.indexOf("Doren")].love gte 10>>
 		<<set $exam_chance += 5>>
-		<span class="green">Doren's love</span> <span class="black">+5%</span>
+		<span class="green">도렌의 사랑</span> <span class="black">+5%</span>
 		<br>
 	<</if>>
-<<elseif $args[0] is "history">>
+<<elseif _args[0] is "history">>
 	<<set $exam_chance to $history_exam>>
 	<span class="black"><<print Math.trunc($history_exam)>> %</span>
 	<br>
 	<<if $NPCName[$NPCNameList.indexOf("Winter")].love gte 10>>
 		<<set $exam_chance += 5>>
-		<span class="green">Winter's love</span> <span class="black">+5%</span>
+		<span class="green">윈터의 사랑</span> <span class="black">+5%</span>
 		<br>
 	<</if>>
 <</if>>
 <<if $anxiety gte 2>>
 	<<set $exam_chance -= 20>>
-	<span class="red">Very anxious</span> <span class="black">-20%</span>
+	<span class="red">굉장히 긴장함</span> <span class="black">-20%</span>
 	<br>
 <<elseif $anxiety gte 1>>
 	<<set $exam_chance -= 10>>
-	<span class="red">Anxious</span> <span class="black">-10%</span>
+	<span class="red">긴장함</span> <span class="black">-10%</span>
 	<br>
 <</if>>
 
 
-Pass chance: <<print Math.trunc($exam_chance)>> %
+합격 확률: <<print Math.trunc($exam_chance)>> %
 
 <</widget>>
 
@@ -67,11 +67,11 @@ Pass chance: <<print Math.trunc($exam_chance)>> %
 <<if $exam_chance lt 0>>
 	<<set $exam_chance to 0>>
 <</if>>
-<<print '<<if $exam_chance gte $' + $args[0] + '_exam_difficulty>>
+<<if $exam_chance gte V[_args[0] + '_exam_difficulty']>>
 	<<set _exam_success to true>>
 <<else>>
 	<<set _exam_success to false>>
-<</' + 'if>>'>>
+<</if>>
 <</widget>>
 
 <<widget "exam_difficulty">>
@@ -86,68 +86,65 @@ Pass chance: <<print Math.trunc($exam_chance)>> %
 <</widget>>
 
 <<widget "school_mark">>
-<<print '
-<<if $' + $args[0] + 'trait gte 4>>
-	an <span class="green">A*</span>
-<<elseif $' + $args[0] + 'trait gte 3>>
-		an <span class="teal">A</span>
-<<elseif $' + $args[0] + 'trait gte 2>>
-	a <span class="lblue">B</span>
-<<elseif $' + $args[0] + 'trait gte 1>>
-	a <span class="blue">C</span>
-<<elseif $' + $args[0] + 'trait gte 0>>
-	a <span class="purple">D</span>
+<<if V[_args[0] + 'trait'] gte 4>>
+	<span class="green">A*</span>
+<<elseif V[_args[0] + 'trait'] gte 3>>
+	<span class="teal">A</span>
+<<elseif V[_args[0] + 'trait'] gte 2>>
+	<span class="lblue">B</span>
+<<elseif V[_args[0] + 'trait'] gte 1>>
+	<span class="blue">C</span>
+<<elseif V[_args[0] + 'trait'] gte 0>>
+	<span class="purple">D</span>
 <<else>>
-	a <span class="red">F</span>
-<</' + 'if>>'>>
+	<span class="red">F</span>
+<</if>>
 <</widget>>
 
 <<widget "school_skill_up">>
-<<print '<<if $' + $args[0] + 'trait lt 4>>
-	<<set $' + $args[0] + 'trait += 1>>
-<</' + 'if>>
-<<if $' + $args[0] + 'trait gte 4>>
-	<<set $' + $args[0] + ' to 1000>>
-<<elseif $' + $args[0] + 'trait gte 3>>
-	<<set $' + $args[0] + ' to 700>>
-<<elseif $' + $args[0] + 'trait gte 2>>
-	<<set $' + $args[0] + ' to 400>>
-<<elseif $' + $args[0] + 'trait gte 1>>
-	<<set $' + $args[0] + ' to 200>>
-<<elseif $' + $args[0] + 'trait gte 0>>
-	<<set $' + $args[0] + ' to 100>>
-<<else>>
-	<<set $' + $args[0] + ' to 0>>
+<<if V[_args[0] + 'trait'] lt 4>>
+	<<set V[_args[0] + 'trait'] += 1>>
 <</if>>
-<<set $' + $args[0] + '_exam to 0>>
-'>>
+<<if V[_args[0] + 'trait'] gte 4>>
+	<<set V[_args[0]] to 1000>>
+<<elseif V[_args[0] + 'trait'] gte 3>>
+	<<set V[_args[0]] to 700>>
+<<elseif V[_args[0] + 'trait'] gte 2>>
+	<<set V[_args[0]] to 400>>
+<<elseif V[_args[0] + 'trait'] gte 1>>
+	<<set V[_args[0]] to 200>>
+<<elseif V[_args[0] + 'trait'] gte 0>>
+	<<set V[_args[0]] to 100>>
+<<else>>
+	<<set V[_args[0]] to 0>>
+<</if>>
+<<set V[_args[0] + '_exam'] to 0>>
 <<set $school to $science + $maths + $english + $history>>
 <</widget>>
 
 <<widget "school_skill_down">>
-<<print '<<if $' + $args[0] + 'trait gte 0>>
-	<<set $' + $args[0] + 'trait -= 1>>
-<</' + 'if>>
-<<if $' + $args[0] + 'trait gte 4>>
-	<<set $' + $args[0] + ' to 1000>>
-<<elseif $' + $args[0] + 'trait gte 3>>
-	<<set $' + $args[0] + ' to 700>>
-<<elseif $' + $args[0] + 'trait gte 2>>
-	<<set $' + $args[0] + ' to 400>>
-<<elseif $' + $args[0] + 'trait gte 1>>
-	<<set $' + $args[0] + ' to 200>>
-<<elseif $' + $args[0] + 'trait gte 0>>
-	<<set $' + $args[0] + ' to 100>>
-<<else>>
-	<<set $' + $args[0] + ' to 0>>
+<<if V[_args[0] + 'trait'] gte 0>>
+	<<set V[_args[0] + 'trait'] -= 1>>
 <</if>>
-<<set $' + $args[0] + '_exam to 0>>
-'>>
+<<if V[_args[0] + 'trait'] gte 4>>
+	<<set V[_args[0]] to 1000>>
+<<elseif V[_args[0] + 'trait'] gte 3>>
+	<<set V[_args[0]] to 700>>
+<<elseif V[_args[0] + 'trait'] gte 2>>
+	<<set V[_args[0]] to 400>>
+<<elseif V[_args[0] + 'trait'] gte 1>>
+	<<set V[_args[0]] to 200>>
+<<elseif V[_args[0] + 'trait'] gte 0>>
+	<<set V[_args[0]] to 100>>
+<<else>>
+	<<set V[_args[0]] to 0>>
+<</if>>
+<<set V[_args[0] + '_exam'] to 0>>
 <<set $school to $science + $maths + $english + $history>>
 <</widget>>
 
 <<widget "exam_clamp">>
-<<print '<<set $' + $args[0] + '_exam = Math.clamp($' + $args[0] + '_exam, -107, 200)>>'>>
+<<set V[_args[0] + '_exam'] = Math.clamp(V[_args[0] + '_exam'], -107, 200)>>
 <</widget>>
 
 <<widget "exam_clamp_all">>
@@ -158,91 +155,91 @@ Pass chance: <<print Math.trunc($exam_chance)>> %
 <</widget>>
 
 <<widget "exam_cheat">>
-<<print '<<if $' + $args[0] + 'trait gte 4>>
+<<if V[_args[0] + 'trait'] gte 4>>
 	<<set $skulduggerydifficulty to 1100>>
-<<elseif $' + $args[0] + 'trait gte 3>>
+<<elseif V[_args[0] + 'trait'] gte 3>>
 	<<set $skulduggerydifficulty to 1100>>
-<<elseif $' + $args[0] + 'trait gte 2>>
+<<elseif V[_args[0] + 'trait'] gte 2>>
 	<<set $skulduggerydifficulty to 700>>
-<<elseif $' + $args[0] + 'trait gte 1>>
+<<elseif V[_args[0] + 'trait'] gte 1>>
 	<<set $skulduggerydifficulty to 400>>
-<<elseif $' + $args[0] + 'trait gte 0>>
+<<elseif V[_args[0] + 'trait'] gte 0>>
 	<<set $skulduggerydifficulty to 200>>
 <<else>>
 	<<set $skulduggerydifficulty to 100>>
-<</' + 'if>>'>>
+<</if>>
 <</widget>>
 
 
 <<widget "science_skill_up_text">>
 <<switch $sciencetrait>>
 <<case 4>>
-	<span class="gold">You've gained the <span class="green">Excellent Science</span> trait,</span> making pain much easier to cope with.
+	<span class="gold">당신은 <span class="green">훌륭한 과학 실력</span> 특성을 얻었다.</span> 이제 고통에 대처하기 훨씬 쉬워졌다.
 <<case 3>>
-	<span class="gold">You've gained the <span class="teal">Good Science</span> trait,</span> making pain easier to cope with.
+	<span class="gold">당신은 <span class="teal">우수한 과학 실력</span> 특성을 얻었다.</span> 이제 고통에 대처하기 많이 쉬워졌다.
 <<case 2>>
-	<span class="gold">You've gained the <span class="lblue">Decent Science</span> trait,</span> making pain moderately easier to cope with.
+	<span class="gold">당신은 <span class="lblue">좋은 과학 실력</span> 특성을 얻었다.</span> 이제 고통에 대처하기 쉬워졌다.
 <<case 1>>
-	<span class="gold">You've gained the <span class="blue">Passable Science</span> trait,</span> making pain slightly easier to cope with.
+	<span class="gold">당신은 <span class="blue">그럭저럭 괜찮은 과학 실력</span> 특성을 얻었다.</span> 이제 고통에 대처하기 조금 쉬워졌다.
 <<default>>
-	Keep at it, and you're sure to benefit.
+	계속 이렇게만 하면, 분명 이득을 볼 데가 있을 것이다.
 <</switch>>
 <<if $sciencetrait lt 4>>
-	However, the next exam will be harder.
+	하지만 다음 번 시험은 더 어려울 것이다.
 <</if>>
 <</widget>>
 
 <<widget "maths_skill_up_text">>
 <<switch $mathstrait>>
 <<case 4>>
-	<span class="gold">You've gained the <span class="green">Excellent Maths</span> trait,</span> letting you make 100% more from tips and negotiated fees.
+	<span class="gold">당신은 <span class="green">훌륭한 수학 실력</span> 특성을 얻었다.</span> 이제 팁과 협상한 금액을 100% 더 받을 수 있다.
 <<case 3>>
-	<span class="gold">You've gained the <span class="teal">Good Maths</span> trait,</span> letting you make 75% more from tips and negotiated fees.
+	<span class="gold">당신은 <span class="teal">우수한 수학 실력</span> 특성을 얻었다.</span> 이제 팁과 협상한 금액을 75% 더 받을 수 있다.
 <<case 2>>
-	<span class="gold">You've gained the <span class="lblue">Decent Maths</span> trait,</span> letting you make 50% more from tips and negotiated fees.
+	<span class="gold">당신은 <span class="lblue">좋은 수학 실력</span> 특성을 얻었다.</span> 이제 팁과 협상한 금액을 50% 더 받을 수 있다.
 <<case 1>>
-	<span class="gold">You've gained the <span class="blue">Passable Maths</span> trait,</span> letting you make 25% more from tips and negotiated fees.
+	<span class="gold">당신은 <span class="blue">그럭저럭 괜찮은 수학 실력</span> 특성을 얻었다.</span> 이제 팁과 협상한 금액을 25% 더 받을 수 있다.
 <<default>>
-	Keep at it, and you're sure to benefit.
+	계속 이렇게만 하면, 분명 이득을 볼 데가 있을 것이다.
 <</switch>>
 <<if $mathstrait lt 4>>
-	However, the next exam will be harder.
+	하지만 다음 번 시험은 더 어려울 것이다.
 <</if>>
 <</widget>>
 
 <<widget "english_skill_up_text">>
 <<switch $englishtrait>>
 <<case 4>>
-	<span class="gold">You've gained the <span class="green">Excellent English</span> trait,</span> making speech actions five times as effective.
+	<span class="gold">당신은 <span class="green">훌륭한 영어 실력</span> 특성을 얻었다.</span> 이제 말로 하는 행동들이 5배 효과적이다.
 <<case 3>>
-	<span class="gold">You've gained the <span class="teal">Good English</span> trait,</span> making speech actions four times as effective.
+	<span class="gold">당신은 <span class="teal">우수한 영어 실력</span> 특성을 얻었다.</span> 이제 말로 하는 행동들이 4배 효과적이다.
 <<case 2>>
-	<span class="gold">You've gained the <span class="lblue">Decent English</span> trait,</span> making speech actions three times as effective.
+	<span class="gold">당신은 <span class="lblue">좋은 영어 실력</span> 특성을 얻었다.</span> 이제 말로 하는 행동들이 3배 효과적이다.
 <<case 1>>
-	<span class="gold">You've gained the <span class="blue">Passable English</span> trait,</span> making speech actions (plead, moan, demand, apologise, mock, tease) twice as effective.
+	<span class="gold">당신은 <span class="blue">그럭저럭 괜찮은 영어 실력</span> 특성을 얻었다.</span> 이제 말로 하는 행동들(애원하기, 신음하기, 요구하기, 사과하기, 놀리기, 희롱하기)이 2배 효과적이다.
 <<default>>
-	Keep at it, and you're sure to benefit.
+	계속 이렇게만 하면, 분명 이득을 볼 데가 있을 것이다.
 <</switch>>
 <<if $englishtrait lt 4>>
-	However, the next exam will be harder.
+	하지만 다음 번 시험은 더 어려울 것이다.
 <</if>>
 <</widget>>
 
 <<widget "history_skill_up_text">>
 <<switch $historytrait>>
 <<case 4>>
-	<span class="gold">You've gained the <span class="green">Excellent History</span> trait,</span> teaching you more secret paths around town.
+	<span class="gold">당신은 <span class="green">훌륭한 역사 실력</span> 특성을 얻었다.</span> 이제 마을에 있는 비밀 통로를 더 많이 알고 있다.
 <<case 3>>
-	<span class="gold">You've gained the <span class="teal">Good History</span> trait,</span> teaching you more secret paths around town.
+	<span class="gold">당신은 <span class="teal">우수한 역사 실력</span> 특성을 얻었다.</span> 이제 마을에 있는 비밀 통로를 더 많이 알고 있다.
 <<case 2>>
-	<span class="gold">You've gained the <span class="lblue">Decent History</span> trait,</span> teaching you more secret paths around town.
+	<span class="gold">당신은 <span class="lblue">좋은 역사 실력</span> 특성을 얻었다.</span> 이제 마을에 있는 비밀 통로를 더 많이 알고 있다.
 <<case 1>>
-	<span class="gold">You've gained the <span class="blue">Passable History</span> trait,</span> teaching you secret paths around town.
+	<span class="gold">당신은 <span class="blue">그럭저럭 괜찮은 역사 실력</span> 특성을 얻었다.</span> 이제 마을에 있는 비밀 통로를 몇 가지 알고 있다.
 <<default>>
-	Keep at it, and you're sure to benefit.
+	계속 이렇게만 하면, 분명 이득을 볼 데가 있을 것이다.
 <</switch>>
 <<if $historytrait lt 4>>
-	However, the next exam will be harder.
+	하지만 다음 번 시험은 더 어려울 것이다.
 <</if>>
 <</widget>>
 
@@ -250,48 +247,38 @@ Pass chance: <<print Math.trunc($exam_chance)>> %
 :: Science Exam
 <<schooleffects>><<effects>>
 
-<<set _time_temp to (60 - $minute)>>
+<<set _time_temp to (59 - $minute)>>
 <<pass _time_temp>>
 
 
 <<switch $phase>>
 <<case 0>>
-	You focus on the exam, doing your best to tune out the scribbling and groans of other students.
+	당신은 시험에 집중하며, 다른 학생들이 신음하고 사각거리는 동안 최선을 다한다.
 	<br><br>
 <<case 1>>
-	You take a deep breath, and try not to let the pressure get to you.
+	당신은 숨을 깊게 들이마시고, 압박감을 받지 않도록 노력한다.
 	<br><br>
 <<case 2>>
 	<<skulduggerycheck>>
 	<<npc Sirris>><<person1>>
-	You watch Sirris. <<Hes>> supposed to keep an eye on the room, but spends more time looking out the window. You should be able to copy your neighbours if you're
+	당신은 시리스를 주시한다. <<He_nun>> 방을 감시하고 있어야 하지만, 창문 밖을 내다보는 데 시간을 더 쓰고 있는 것 같다. 조심하기만 한다면 옆 자리 아이의 걸 베낄 수
 
 
 	<<if $skulduggerysuccess is 1>>
 		<<set $exam_chance += 10>>
-		careful. <span class="green">You manage to glean a few answers to some of the tougher questions.</span> | <span class="green">+10% Pass chance</span>
+		있을 것이다. <span class="green">당신은 어려운 문제들에 대한 답 몇 개를 옮겨적었다.</span><<passPercent 10>>
 		<br><br>
 
-		<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
-			<<skulduggeryskilluse>>
-		<<else>>
-			<span class="blue">That was too easy. You didn't learn anything.</span>
-			<br><br>
-		<</if>>
+		<<skulduggeryuse>>
 
 	<<else>>
 		<<set $exam_chance -= 10>>
-		care-
+		있-
 		<br><br>
-		<span class="red">"Focus on your own paper,"</span> Sirris says, looking right at you. <<He>> wasn't as distracted as <<he>> appeared.<<gstress>><<stress 6>> | <span class="red">-10% Pass chance</span><<gdelinquency>><<detention 5>>
+		<span class="red">"네 시험지에만 집중해,"</span> 시리스가 바로 당신을 쳐다보며 말한다. <<He_nun>> 보기보단 여기에 집중하고 있었던 모양이다.<<gstress>><<stress 6>><<passPercent -10>><<gdelinquency>><<detention 5>>
 		<br><br>
 
-		<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
-			<<skulduggeryskilluse>>
-		<<else>>
-			<span class="blue">That was too easy. You didn't learn anything.</span>
-			<br><br>
-		<</if>>
+		<<skulduggeryuse>>
 
 	<</if>>
 	<<endevent>>
@@ -301,54 +288,54 @@ Pass chance: <<print Math.trunc($exam_chance)>> %
 <<endevent>>
 
 <<npc Sirris>><<person1>>
-Sirris looks at <<his>> watch now and then. "And done," <<he>> says. "I hope that wasn't too bad." Some students continue to scribble, but Sirris zips around the room in <<his>> haste to retrieve the booklets.
+시리스는 <<his_yi>> 시계를 보고, 말한다. "이제 끝났단다. 너무 어렵지 않았었으면 좋겠구나." 몇몇 학생들은 계속 끄적이지만, 시리스는 휙 하고 방을 빠르게 돌아다니며 시험지들을 회수한다.
 <br><br>
-The class are allowed to chat while Sirris marks the papers. They make up for the period of silence with more noise than usual, though some are too nervous to talk
+시리스가 시험지를 채점하는 동안 학생들은 떠들어도 좋다는 허락을 받았다. 너무 긴장해서 아무 말도 못하는 학생도 있지만, 다른 이들은 잠깐의 침묵을 더 시끄러운 소음으로 채운다.
 <br><br>
-The bell rings. Sirris stands by the door, smiling as <<he>> hands the booklets back to passing students. <<He>> holds out yours,
+종이 울린다. 시리스는 문 옆에 서서, 학생들에게 채점한 시험지를 돌려주며 미소짓는다. <<He_nun>>
 <<if _exam_success is true>>
 	<<if $sciencetrait gte 4>>
 		<<school_skill_up science>>
-		<<school_mark science>> printed and circled on the front, with <span class="green">"Distinction"</span> written beside it in green ink.<<ggcontrol>><<control 25>>
+		앞면에 <<school_mark science>> 가 찍혀 있고, 그 옆에 녹색 잉크로 <span class="green">"우수"</span> 라고 적힌 당신의 시험지를 들고 있다.<<ggcontrol>><<control 25>>
 		<<distinction_stat>>
 	<<else>>
 		<<school_skill_up science>>
-		<<school_mark science>> printed and circled on the front. <span class="green">You've improved your mark!</span>
+		앞면에 <<school_mark science>> 가 찍혀 있는 당신의 시험지를 들고 있다. <span class="green">시험 성적이 올랐다!</span>
 		<br>
 		<<science_skill_up_text>>
 	<</if>>
 <<else>>
-	<<school_mark science>> printed and circled on the front. The expected mark.
+	앞면에 <<school_mark science>> 가 찍혀 있는 당신의 시험지를 들고 있다. 예상했던 성적이다.
 <</if>>
 <br><br>
 
-You join the throng of students in the hallway.
+당신은 학생들 무리를 따라 복도로 나간다.
 <br><br>
 
 <<endevent>>
 <<exam_end>>
 
-<<link [[Next|Hallways]]>><</link>>
+<<link [[다음|Hallways]]>><</link>>
 <br>
 
 
 :: Maths Exam
 <<schooleffects>><<effects>>
 
-<<set _time_temp to (60 - $minute)>>
+<<set _time_temp to (59 - $minute)>>
 <<pass _time_temp>>
 
 
 <<switch $phase>>
 <<case 0>>
-	You focus on the exam, doing your best to tune out the scribbling and groans of other students.
+	당신은 시험에 집중하며, 다른 학생들이 신음하고 사각거리는 동안 최선을 다한다.
 	<br><br>
 <<case 1>>
-	You take a deep breath, and try not to let the pressure get to you.
+	당신은 숨을 깊게 들이마시고, 압박감을 받지 않도록 노력한다.
 	<br><br>
 <<case 2>>
 	<<skulduggerycheck>>
-	You glance sideways. The <<generatey1>><<person1>><<person>> beside you seems confident. You cover your glances with innocuous movements,
+	당신은 옆을 본다. 옆에 있는 <<generatey1>><<person1>><<person_un>> 자신감에 차 있는 것처럼 보인다. 리버의 시선을 피할 수 있길 바라며, 당신은 악의 없는 행동으로
 
 	<<endevent>>
 	<<npc River>><<person1>>
@@ -356,92 +343,82 @@ You join the throng of students in the hallway.
 
 	<<if $skulduggerysuccess is 1>>
 		<<set $exam_chance += 10>>
-		hoping to avoid River's gaze. <span class="green">You manage to glean a few answers to some of the tougher questions.</span> | <span class="green">+10% Pass chance</span>
+		시선을 감춘다. <span class="green">당신은 어려운 문제들에 대한 답 몇 개를 옮겨적었다.</span><<passPercent 10>>
 		<br><br>
 
-		<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
-			<<skulduggeryskilluse>>
-		<<else>>
-			<span class="blue">That was too easy. You didn't learn anything.</span>
-			<br><br>
-		<</if>>
+		<<skulduggeryuse>>
 
 	<<else>>
 		<<set $exam_chance -= 10>>
-		hoping to-
+		시선을-
 		<br><br>
-		<span class="red">"Eyes in front,"</span> River says, piercing you with <<his>> gaze. <<He>> doesn't say another word on the matter, but you know your paper will be under thorough scrutiny.<<gstress>><<stress 6>> | <span class="red">-10% Pass chance</span><<gdelinquency>><<detention 5>>
+		<span class="red">"눈은 앞을 봐야지,"</span> 리버가 <<his_yi>> 눈빛으로 당신을 꿰뚫으며 말한다. <<He_nun>> 이 문제에 대해서는 한 마디도 더 하지 않지만, 당신의 시험지가 더욱 철저히 검토받을 것임을 안다.<<gstress>><<stress 6>><<passPercent -10>><<gdelinquency>><<detention 5>>
 		<br><br>
 
-		<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
-			<<skulduggeryskilluse>>
-		<<else>>
-			<span class="blue">That was too easy. You didn't learn anything.</span>
-			<br><br>
-		<</if>>
+		<<skulduggeryuse>>
 
 	<</if>>
 	<<endevent>>
 <<case 3>>
 	<<if $danceSuccess>>
 		<<npc Whitney>><<person1>>
-		You glance behind you as Whitney throws, <span class="green">and manage to snatch the rubber from the air.</span> Deprived of <<his>> projectile, Whitney can only glower.<<set $exam_chance += 5>> | <span class="green">+5% Pass chance</span>
+		휘트니가 지우개를 던지자, 당신은 뒤를 바라보며 <span class="green">허공에서 지우개를 낚아챈다.</span> 던질 게 없어진 휘트니가 할 수 있는 건 노려보는 것 뿐이다.<<set $exam_chance += 5>><<passPercent 5>>
 		<br><br>
 		<<endevent>>
 	<<else>>
 		<<npc Whitney>><<person1>>
-		You glance behind you as Whitney throws, hoping to snatch the rubber from the air.
+		휘트니가 지우개를 던지자, 당신은 뒤를 바라보며 허공에서 지우개를 낚아채려 한다.
 		<br><br>
 		<<endevent>>
 		<<npc River>><<person1>>
-		<span class="red">"Eyes in front,"</span> River says, piercing you with <<his>> gaze. <<He>> doesn't say another word on the matter, but you know your paper will be under thorough scrutiny.<<gstress>><<stress 6>> | <span class="red">-10% Pass chance</span><<set $exam_chance -= 10>>
+		<span class="red">"눈은 앞을 봐야지,"</span> 리버가 <<his_yi>> 눈빛으로 당신을 꿰뚫으며 말한다. <<He_nun>> 이 문제에 대해서는 한 마디도 더 하지 않지만, 당신의 시험지가 더욱 철저히 검토받을 것임을 안다.<<gstress>><<stress 6>><<passPercent -10>><<set $exam_chance -= 10>>
 		<br><br>
 		<<endevent>>
 		<<npc Whitney>><<person1>>
-		Whitney stops harassing you, but you just know <<hes>> smirking.
+		휘트니는 더 이상 괴롭히지는 않지만, 당신은 <<he_ga>> 히죽거리고 있으리라는 걸 안다.
 		<br><br>
 		<<endevent>>
 	<</if>>
 <<case 4>>
 	<<npc Whitney>><<person1>>
 	<<if $pronoun is "f">>
-		You pull up Whitney's skirt, and wrap your fingers around <<his>> <<print $NPCName[$NPCNameList.indexOf("Whitney")].penisdesc>>.
+		당신은 휘트니의 치마를 뒤집으며, <<his_yi>> <<penisdesc_rul $NPCName[$NPCNameList.indexOf("Whitney")].penisdesc>> 당신의 손가락으로 감싼다.
 	<<else>>
-		You unzip Whitney's trousers, and wrap your fingers around <<his>> <<print $NPCName[$NPCNameList.indexOf("Whitney")].penisdesc>>.
+		당신은 휘트니의 바지 지퍼를 내리고, <<his_yi>> <<penisdesc_rul $NPCName[$NPCNameList.indexOf("Whitney")].penisdesc>> 당신의 손가락으로 감싼다.
 	<</if>>
-	You <<handtext>> stroke <<him>>.
+	당신은 <<handtext>> <<him_ul>> 쓰다듬는다.
 	<br><br>
 	<<if $handskill gte random(1, 1000)>>
-		You need to finish <<him>> quick, before River notices. <<He>> has the sense not to make a noise, but shudders as <<he>> <span class="green">climaxes over your hand.</span><<set $leftarmsemen += 1>> | <span class="green">+10% Pass chance</span><<set $exam_chance += 5>>
+		당신은 리버가 눈치채기 전에 <<him_ul>> 빨리 가게 만들어야 한다. <<He_nun>> 시끄러운 소리를 내지 않아야 한다는 자각 정도는 있지만, <<he_ga>> <span class="green">당신의 손 위로 절정할 때</span> <<he_ga>> 몸을 부르르 떤다.<<set $player.bodyliquid.leftarm.semen += 1>><<passPercent 10>><<set $exam_chance += 5>>
 		<br><br>
-		<<He>> leans back, content, allowing you to work through the booklet.
+		<<He_nun>> 만족한 채로, 뒤로 기대며 당신이 시험을 치를 수 있게 허락한다.
 		<br><br>
 	<<else>>
-		You know you need to finish <<him>> quick, before River notices, but it's difficult with such limited movement.
+		당신은 리버가 눈치채기 전에 <<him_ul>> 빨리 가게 만들어야 한다는 걸 알지만, 이렇게 움직임이 제한되어 있을 때는 그러기 힘들다.
 		<<endevent>><<npc River>><<person1>>
 		<br><br>
-		<span class="red">"Stop fidgeting,"</span> River says, piercing you with <<his>> gaze. You pull your hand away, leaving you to endure Whitney's sporadic groping.
+		<span class="red">"손장난은 그만 해라."</span> 리버가 <<his_yi>> 눈빛으로 당신을 꿰뚫으며 말한다. 당신은 휘트니가 때때로 더듬는 것을 참아내며, 손을 치운다.
 		<br><br>
 	<</if>>
 <<default>>
 	<<npc Whitney>><<person1>>
 	<<if $pronoun is "f">>
-		You pull up Whitney's skirt, and press your fingers against <<his>> clit.
+		당신은 휘트니의 치마를 뒤집으며, 당신의 손가락을 <<his_yi>> 클리토리스에 대고 누른다.
 	<<else>>
-		You unzip Whitney's trousers, and press your fingers against <<his>> clit.
+		당신은 휘트니의 바지 지퍼를 내리고, 당신의 손가락을 <<his_yi>> 클리토리스에 대고 누른다.
 	<</if>>
-	You <<handtext>> stroke <<him>>.
+	당신은 <<handtext>> <<him_ul>> 쓰다듬는다.
 	<br><br>
 	<<if $handskill gte random(1, 1000)>>
-		You need to finish <<him>> quick, before River notices. <<He>> has the sense not to make a noise, but shudders as <<he>> <span class="green">climaxes.</span> | <span class="green">+10% Pass chance</span><<set $exam_chance += 5>>
+		당신은 리버가 눈치채기 전에 <<him_ul>> 빨리 가게 만들어야 한다. <<He_nun>> 시끄러운 소리를 내지 않아야 한다는 자각 정도는 있지만, <<he_ga>> <span class="green">절정할 때</span> 몸을 부르르 떤다.<<passPercent 10>><<set $exam_chance += 5>>
 		<br><br>
-		<<He>> leans back, content, allowing you to work through the booklet.
+		<<He_nun>> 만족한 채로, 뒤로 기대며 당신이 시험을 치를 수 있게 허락한다.
 		<br><br>
 	<<else>>
-		You know you need to finish <<him>> quick, before River notices, but it's difficult with such limited movement.
+		당신은 리버가 눈치채기 전에 <<him_ul>> 빨리 가게 만들어야 한다는 걸 알지만, 이렇게 움직임이 제한되어 있을 때는 그러기 힘들다.
 		<<endevent>><<npc River>><<person1>>
 		<br><br>
-		<span class="red">"Stop fidgeting,"</span> River says, piercing you with <<his>> gaze. You pull your hand away, leaving you to endure Whitney's sporadic groping.
+		<span class="red">"손장난은 그만 해라."</span> 리버가 <<his_yi>> 눈빛으로 당신을 꿰뚫으며 말한다. 당신은 휘트니가 때때로 더듬는 것을 참아내며, 손을 치운다.
 		<br><br>
 	<</if>>
 <</switch>>
@@ -450,34 +427,34 @@ You join the throng of students in the hallway.
 <<endevent>>
 
 <<npc River>><<generatey2>><<person1>>
-River watches throughout, casting an occasional glance at the clock on the wall. "Put down your pens," <<He>> says. A <<person2>><<person>> keeps writing, until River shoots <<him>> a sharp look.
+리버는 시험 내내 교실 안을 주시하며, 가끔씩 벽에 걸린 시계로 시선을 옮긴다. "다들 펜 내려놓으렴." <<He_ga>> 말한다. <<person2>><<personPost>> 한 명이 답안을 계속 적다가, 리버가 <<himPost "에게">> 날카로운 시선을 보내자 그만둔다.
 <br><br>
 <<person1>>
-River directs the class to solve some "fun" puzzles at the back of your textbooks while <<he>> marks the exam. It only takes a few minutes.
+리버는 <<he_ga>> 시험지를 채점하는 동안 학생들에게 교과서 뒤쪽에 실린 "재미있는" 퍼즐 몇 개를 풀라고 지시한다. 채점을 끝내기까진 몇 분도 걸리지 않는다.
 <br><br>
-The marked booklet lands on your desk,
+당신의 채점된 시험지가 책상 위에 올려진다.
 <<if _exam_success is true>>
 	<<if $mathstrait gte 4>>
 		<<school_skill_up maths>>
-		<<school_mark maths>> printed and circled on the front, with <span class="green">"Distinction"</span> written beside it in green ink.<<ggcontrol>><<control 25>>
+		앞면에 <<school_mark maths>> 가 찍혀 있고, 그 옆에 녹색 잉크로 <span class="green">"우수"</span> 라고 적힌 당신의 시험지가 책상에 내려앉는다.<<ggcontrol>><<control 25>>
 		<<distinction_stat>>
 	<<else>>
 		<<school_skill_up maths>>
-		<<school_mark maths>> printed and circled on the front. <span class="green">You've improved your mark!</span>
+		앞면에 <<school_mark maths>> 가 찍혀 있는 당신의 시험지가 책상에 내려앉는다. <span class="green">시험 성적이 올랐다!</span>
 		<br>
 		<<maths_skill_up_text>>
 	<</if>>
 <<else>>
-	<<school_mark maths>> printed and circled on the front. The expected mark.
+	앞면에 <<school_mark maths>> 가 찍혀 있는 당신의 시험지가 책상에 내려앉는다. 예상했던 성적이다.
 <</if>>
 <br><br>
-The bell rings. You shuffle with the other students into the throng of the hallway.
+당신은 학생들 무리를 따라 복도로 나간다.
 <br><br>
 
 <<endevent>>
 <<exam_end>>
 
-<<link [[Next|Hallways]]>><</link>>
+<<link [[다음|Hallways]]>><</link>>
 <br>
 
 
@@ -485,56 +462,46 @@ The bell rings. You shuffle with the other students into the throng of the hallw
 :: English Exam
 <<schooleffects>><<effects>>
 
-<<set _time_temp to (60 - $minute)>>
+<<set _time_temp to (59 - $minute)>>
 <<pass _time_temp>>
 
 
 <<switch $phase>>
 <<case 0>>
-	You focus on the exam, doing your best to tune out the scribbling and groans of other students.
+	당신은 시험에 집중하며, 다른 학생들이 신음하고 사각거리는 동안 최선을 다한다.
 	<br><br>
 <<case 1>>
-	You take a deep breath, and try not to let the pressure get to you.
+	당신은 숨을 깊게 들이마시고, 압박감을 받지 않도록 노력한다.
 	<br><br>
 <<case 2>>
 	<<skulduggerycheck>>
 	<<endevent>>
 	<<npc Doren>><<person1>>
 
-	Doren's back is often turned to you, but <<his>> path is unpredictable.
+	도렌은 종종 당신에게 등을 보이지만, <<his_yi>> 경로는 예측하기 어렵다.
 
 	<<if $skulduggerysuccess is 1>>
 		<<set $exam_chance += 10>>
-		<<He>> could turn at any moment, <span class="green">but you manage to read your neighbour's papers with daring glances.</span> | <span class="green">+10% Pass chance</span>
+		<<He_nun>> 언제라도 돌아볼 수 있었지만, <span class="green">당신은 대담한 눈초리로 옆사람의 시험지를 읽어볼 수 있었다.</span><<passPercent 10>>
 		<br><br>
 
-		<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
-			<<skulduggeryskilluse>>
-		<<else>>
-			<span class="blue">That was too easy. You didn't learn anything.</span>
-			<br><br>
-		<</if>>
+		<<skulduggeryuse>>
 
 	<<else>>
 		<<set $exam_chance -= 10>>
-		You wait until <<he>> passes, then sneak a glance at your neighbour. Doren spins, <span class="red">and smacks <<his>> hand against your desk.</span>
+		당신은 <<he_ga>> 지나가길 기다렸다가, 옆 자리 아이의 시험지를 훔쳐 본다. 도렌은 갑자기 휙 돌아보더니, <span class="red"><<his_yi>> 손을 당신의 책상에 쾅 내려친다.</span>
 		<br><br>
 
-		"Got the fly," <<he>> says. <<Hes>> sparing you the embarrassment of being caught cheating, but your paper will be under extra scrutiny.<<gstress>><<stress 6>> | <span class="red">-10% Pass chance</span><<gdelinquency>><<detention 5>>
+		"파리가 있었구나." <<he_ga>> 말한다. <<He_nun>> 당신이 부정행위를 하다 걸린 부끄러움을 느끼게 내버려 두었지만, 어쨌든 당신의 시험지는 더욱 철저히 검토받을 것이다.<<gstress>><<stress 6>><<passPercent -10>><<gdelinquency>><<detention 5>>
 		<br><br>
 
-		<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
-			<<skulduggeryskilluse>>
-		<<else>>
-			<span class="blue">That was too easy. You didn't learn anything.</span>
-			<br><br>
-		<</if>>
+		<<skulduggeryuse>>
 
 	<</if>>
 	<<endevent>>
 <<default>>
 	<<npc Kylar>><<person1>>
-	You glance at Kylar's booklet. <<He>> notices and, eager to please, keeps <<his>> arm from obscuring your view as <<he>> writes. <<He>> has creative answers to the tougher questions.
+	당신은 카일라의 시험지를 쳐다본다. <<He_nun>> 그걸 알아차리고 자기 시험지를 보여주고 싶어 안달난 듯, <<he_ga>> 답안을 적는 동안 당신의 시야를 가로막는 <<his_yi>> 팔을 치운다. <<He_nun>> 어려운 문제에 창의적인 해답을 적는다.
 	<br><br>
 <</switch>>
 
@@ -542,87 +509,77 @@ The bell rings. You shuffle with the other students into the throng of the hallw
 <<endevent>>
 
 <<npc Doren>><<person1>>
-Doren prowls throughout, then lifts the tray on <<his>> desk. <<He>> walks around the room, gathering the booklets.
+도렌은 시험 내내 얼굴을 찌푸리고 있다가, 작은 상자를 꺼내 <<his_yi>> 책상 위에 놓는다. <<He_nun>> 교실을 돌아다니며, 시험지를 모은다.
 <br><br>
-"Won't be long," <<he>> says, tearing through the first paper with a red pen. <<Hes>> unbothered by the chatter that erupts. <<Hes>> soon finished.
+"오래 걸리진 않을 거란다." <<he_ga>> 빨간 펜으로 첫 번째 시험지를 그으며 말한다. <<He_nun>> 쏟아져 나오는 잡담 소리에도 방해받지 않는 듯하다. <<He_nun>> 곧 채점을 끝낸다.
 <br><br>
-Your marked booklet skids in front of you,
+당신의 채점된 시험지가 당신 앞에 미끄러져 온다.
 <<if _exam_success is true>>
 	<<if $englishtrait gte 4>>
 		<<school_skill_up english>>
-		<<school_mark english>> printed and circled on the front, with <span class="green">"Distinction"</span> written beside it in green ink.<<ggcontrol>><<control 25>>
+		그 앞면에는 <<school_mark english>> 가 찍혀 있고, 그 옆에 녹색 잉크로 <span class="green">"우수"</span> 라고 적혀 있다.<<ggcontrol>><<control 25>>
 		<<distinction_stat>>
 	<<else>>
 		<<school_skill_up english>>
-		<<school_mark english>> printed and circled on the front. <span class="green">You've improved your mark!</span>
+		그 앞면에는 <<school_mark english>> 가 찍혀 있다. <span class="green">시험 성적이 올랐다!</span>
 		<br>
 		<<english_skill_up_text>>
 	<</if>>
 <<else>>
-	<<school_mark english>> printed and circled on the front. The expected mark.
+	그 앞면에는 <<school_mark english>> 가 찍혀 있다. 예상했던 성적이다.
 <</if>>
 <br><br>
-The bell rings. You shuffle with the other students into the throng of the hallway.
+당신은 학생들 무리를 따라 복도로 나간다.
 <br><br>
 
 <<endevent>>
 <<exam_end>>
 
-<<link [[Next|Hallways]]>><</link>>
+<<link [[다음|Hallways]]>><</link>>
 <br>
 
 :: History Exam
 <<schooleffects>><<effects>>
 
-<<set _time_temp to (60 - $minute)>>
+<<set _time_temp to (59 - $minute)>>
 <<pass _time_temp>>
 
 
 <<switch $phase>>
 <<case 0>>
-	You focus on the exam, doing your best to tune out the scribbling and groans of other students.
+	당신은 시험에 집중하며, 다른 학생들이 신음하고 사각거리는 동안 최선을 다한다.
 	<br><br>
 <<case 1>>
-	You take a deep breath, and try not to let the pressure get to you.
+	당신은 숨을 깊게 들이마시고, 압박감을 받지 않도록 노력한다.
 	<br><br>
 <<case 2>>
 	<<skulduggerycheck>>
 	<<npc Winter>><<person1>>
-	Winter occupies <<himself>> with a book, and doesn't seem to be paying attention.
+	윈터는 책을 한 권 가져와 읽으며, 시험에는 신경을 쓰지 않는 것처럼 보인다.
 
 
 	<<if $skulduggerysuccess is 1>>
 		<<set $exam_chance += 10>>
-		You know that isn't true. There are moments, here and there, where the teacher's attention is taken. You glance at your neighbours during those moments, <span class="green">and manage to glean a few answers to the tougher questions.</span> | <span class="green">+10% Pass chance</span>
+		하지만 당신은 그게 사실이 아니라는 걸 알고 있다. 방금, 그리고 지금, 선생님의 관심이 끌리는 순간들이 있다. 그러한 순간들을 노려, 당신은 옆 자리 아이의 것을 훔쳐보면서, <span class="green">어려운 문제들에 대한 답 몇 개를 옮겨적었다.</span><<passPercent 10>>
 		<br><br>
 
-		<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
-			<<skulduggeryskilluse>>
-		<<else>>
-			<span class="blue">That was too easy. You didn't learn anything.</span>
-			<br><br>
-		<</if>>
+		<<skulduggeryuse>>
 
 	<<else>>
 		<<set $exam_chance -= 10>>
-		You take the chance, and look at your neighbour's paper.
+		당신은 기회를 노려 옆 자리 아이의 시험지를 훔쳐본다.
 		<br><br>
 		<<if $robinhistory is "seat">>
-			<span class="red">Robin nudges you.</span> "You shouldn't cheat!"
+			<span class="red">로빈이 당신의 옆구리를 푹 찌른다.</span> "부정행위는 안 되지!"
 			<br><br>
-			Winter glances up. "No talking." You won't be able to get away with it now.<<gstress>><<stress 6>>
+			윈터가 쳐다본다. "잡담은 금지다." 지금 이 상황을 빠져나가는 건 불가능할 것이다.<<gstress>><<stress 6>>
 			<br><br>
 		<<else>>
-			<span class="red">"No cheating,"</span> Winter says without looking up. You know <<he>> was referring to you, though <<he>> gives no indication.<<gstress>><<stress 6>> | <span class="red">-10% Pass chance</span><<gdelinquency>><<detention 5>>
+			<span class="red">"부정행위는 안 돼,"</span> 윈터는 책에서 눈을 떼지도 않고 말한다. 딱히 누구라고 말하진 않았지만 당신은 <<he_ga>> 당신에게 말하고 있다는 걸 안다.<<gstress>><<stress 6>><<passPercent -10>><<gdelinquency>><<detention 5>>
 			<br><br>
 		<</if>>
 
-		<<if $skulduggery lte ($skulduggerydifficulty + 100)>>
-			<<skulduggeryskilluse>>
-		<<else>>
-			<span class="blue">That was too easy. You didn't learn anything.</span>
-			<br><br>
-		<</if>>
+		<<skulduggeryuse>>
 
 	<</if>>
 	<<endevent>>
@@ -632,30 +589,30 @@ The bell rings. You shuffle with the other students into the throng of the hallw
 <<endevent>>
 
 <<npc Winter>><<person1>>
-Winter thumbs through the pages of <<his>> book while the students work. <<He>> thuds it shut. "Done," <<he>> announces.
+윈터는 학생들이 문제를 푸는 동안 <<his_yi>> 책 페이지를 넘긴다. <<He_ga>> 책을 탁 닫더니, 선언한다. "시험 종료다."
 <br><br>
-You form into another orderly queue. Winter marks each booklet as <<he>> receives them, <<his>> red pen ablur. Yours is no different. <<He>> hands it back to you,
+당신은 순서에 따라 시험지를 올려놓는다. 윈터는 그걸 받자마자 <<his_yi>> 붉은 펜으로 각 시험지에 성적을 기입한다. 당신의 것도 다르지 않다. <<He_nun>> 
 <<if _exam_success is true>>
 	<<if $historytrait gte 4>>
 		<<school_skill_up history>>
-		<<school_mark history>> printed and circled on the front, with <span class="green">"Distinction"</span> written beside it in green ink.<<ggcontrol>><<control 25>>
+		앞면에 <<school_mark history>> 가 찍혀 있고, 그 옆에 녹색 잉크로 <span class="green">"우수"</span> 라고 적힌 당신의 시험지를 돌려준다.<<ggcontrol>><<control 25>>
 		<<distinction_stat>>
 	<<else>>
 		<<school_skill_up history>>
-		<<school_mark history>> printed and circled on the front. <span class="green">You've improved your mark!</span>
+		앞면에 <<school_mark history>> 가 찍혀 있는 당신의 시험지를 돌려준다. <span class="green">시험 성적이 올랐다!</span>
 		<br>
 		<<history_skill_up_text>>
 	<</if>>
 <<else>>
-	<<school_mark history>> printed and circled on the front. The expected mark.
+	앞면에 <<school_mark history>> 가 찍혀 있는 당신의 시험지를 돌려준다. 예상했던 성적이다.
 <</if>>
 <br><br>
 
-The bell rings, and you join the throng of students in the hallway.
+당신은 학생들 무리를 따라 복도로 나간다.
 <br><br>
 
 <<endevent>>
 <<exam_end>>
 
-<<link [[Next|Hallways]]>><</link>>
+<<link [[다음|Hallways]]>><</link>>
 <br>

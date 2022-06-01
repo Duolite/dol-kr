@@ -15,5 +15,4 @@ Degrees of Lewdity <<print StartConfig.version>>에 오신 것을 환영합니�
 
 완료된 것 같다.
 
-[[시작|$navigation.stack.last()][$navigation.stack.pop()]]
-
+<<link [[시작|$navigation.stack.last()]]>><<run $navigation.stack.pop()>><</link>>

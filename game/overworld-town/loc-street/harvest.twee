@@ -1,6 +1,6 @@
 :: Harvest Street
 
-<<set $outside to 1>><<set $location to "town">><<effects>><<set $bus to "harvest">>
+<<set $outside to 1>><<set $location to "town">><<effects>><<set $bus to "harvest">><<getTarget true>>
 당신은 하베스트 가에 있다. 도시 밖으로 향하는 도로가 있으며, 이곳의 많은 건물이 인근 농가에서 생산하는 작물에 대한 일을 한다. 도시의 이 구역은 범죄율이 높은 것으로 악명이 높다.
 <<if $daystate is "day">>
 	<<if $weather is "rain">>
@@ -23,11 +23,11 @@
 <<if $arousal gte $arousalmax>>
 	<<orgasmstreet>>
 <</if>>
-<<if $stress gte $stressmax>>
+<<if $stress gte $stressmax and !$possessed>>
 	<<passoutstreet>>
 <<else>>
 	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
-	<<if $danger gte (9900 - $allure) and $eventskip is 0>>
+	<<if ($danger gte (9900 - $allure) or $eventforced) and $eventskip is 0>>
 		<<eventsstreet>>
 	<<else>>
 		<<if $map.top is true>>
@@ -35,7 +35,7 @@
 			<br>
 		<</if>>
 		<<if $averyPub is 1 and ($daystate is "day" or $daystate is "dusk")>>
-			<span class="blue">You see Avery's car parked across the street from the pub.</span>
+			<span class="blue">당신은 에이버리의 자동차가 술집 건너편에 세워져 있는 걸 볼 수 있다.</span>
 			<br><br>
 		<</if>>
 		주요 장소
@@ -60,13 +60,13 @@
 			<br>
 		<</if>>
 		<<if $daystate is "night">>
-			<<ind>><<link [[버스 정류장 (0:02)|Bus Station Entrance]]>><<pass 2>><</link>>
+			<<busstationicon>><<link [[버스 차고지 (0:02)|Bus Station Entrance]]>><<pass 2>><</link>>
 		<<else>>
-			<<ind>><<link [[버스 정류장 (0:02)|Bus Station]]>><<pass 2>><</link>>
+			<<busstationicon>><<link [[버스 차고지 (0:02)|Bus Station]]>><<pass 2>><</link>>
 		<</if>>
 		<br>
 		<<if $daystate isnot "night" and $exposed lt 1>>
-			<<ind>><<link [[공장 (0:05)|Farmers Centre]]>><<pass 5>><</link>>
+			<<factoryicon>><<link [[공장 (0:05)|Farmers Centre]]>><<pass 5>><</link>>
 			<br>
 		<</if>>
 		<br>

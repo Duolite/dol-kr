@@ -1,5 +1,5 @@
 :: Churchyard
-<<set $outside to 1>><<set $location to "forest">><<effects>>
+<<location "forest">><<effects>>
 
 당신은 숲 공동묘지에 있습니다. 돌 유적으로 둘러싸인 언덕에서 오래된 저택이 우뚝 솟아 있습니다.
 

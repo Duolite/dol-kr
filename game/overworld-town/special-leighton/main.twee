@@ -1,64 +1,54 @@
 :: Leighton Private
 <<set $outside to 0>><<effects>>
-<<npc Leighton>><<person1>>
-<<if $headblackmailed is 1 and $rng gte 61>><!-- Modified for Monster People -->
+	<<endevent>>
+	<<npc Leighton>><<person1>>
+	You lead Leighton behind the stage. You're looking for an unoccupied room when <<he>> grasps your arm. "This one," <<he>> says, gesturing to a closed door. You open it.
+	<<endevent>>
+	<<beastNEWinit 1 dog>>
+	<<promiscuity3>>
+<<if $headblackmailed is 1 and $rng gte 61 and ($monster is 1 or $bestialitydisable is "f")>><!-- Modified for Monster People -->
+	A tripod camera stands in the corner. Beside it, chained to the wall, sits a <<beasttype 0>>. <<bHe 0>> growls. <<if $monster is 1>><<bHe 0>>'s completely naked, but doesn't seem to care. "Let me go! I want to have fun too!"<</if>>
+	<br><br>
 
-You lead Leighton behind the stage. You're looking for an unoccupied room when <<he>> grasps your arm. "This one," <<he>> says, gesturing to a closed door. You open it.
-<<promiscuity3>>
-<br><br>
+	Leighton takes a seat and grasps the chain. An empty glass sits on a nearby table, next to an open bottle of wine. "Right," the headteacher says. "Whenever you're ready."
+	<br><br>
 
-<<endevent>>
-<<beastNEWinit 1 dog>>
-A tripod camera stands in the corner. Beside it, chained to the wall, sits a <<beasttype 0>>. <<bHe 0>> growls. <<if $monster is 1>><<bHe 0>>'s completely naked, but doesn't seem to care. "Let me go! I want to have fun too!"<</if>>
-<br><br>
-
-Leighton takes a seat and grasps the chain. An empty glass sits on a nearby table, next to an open bottle of wine. "Right," the headteacher says. "Whenever you're ready."
-<br><br>
-
-<<if $deviancy gte 55>>
-<<link [[Perform|Leighton Club Blackmail Beast]]>><</link>><<deviant4>>
-<br><br>
-<</if>>
-<<link [[Refuse|Leighton Club Blackmail Beast Refuse]]>><</link>>
-<br><br>
+	<<if $deviancy gte 55>>
+	<<link [[Perform|Leighton Club Blackmail Beast]]>><</link>><<deviant4>>
+	<br><br>
+	<</if>>
+	<<link [[Refuse|Leighton Club Blackmail Beast Refuse]]>><</link>>
+	<br><br>
 
 <<elseif $headblackmailed is 1 and $rng gte 21>>
-You lead Leighton behind the stage. You're looking for an unoccupied room when <<he>> grasps your arm. "This one," <<he>> says, gesturing to a closed door. You open it.
-<<promiscuity3>>
-<br><br>
+	<<endevent>><<generatey1>><<generatey2>><<person1>>
+	There's someone already inside, sat on the sofa with <<his>> eyes fixed on the ground. <<He>> looks up. <<Hes>> a <<person>> you recognise from school. <<person2>>A <<person>> sits next <<person1>>to <<him>>, gazing at a wall. A tripod camera stands in the corner.
+	<br><br>
 
-<<endevent>><<generatey1>><<generatey2>><<person1>>
-There's someone already inside, sat on the sofa with <<his>> eyes fixed on the ground. <<He>> looks up. <<Hes>> a <<person>> you recognise from school. <<person2>>A <<person>> sits next <<person1>>to <<him>>, gazing at a wall. A tripod camera stands in the corner.
-<br><br>
+	Leighton takes a seat, and rests one leg on the other. An empty glass sits on a nearby table, next to an open bottle of wine. "Right," the headteacher says. "Whenever you're ready."
+	<br><br>
 
-Leighton takes a seat, and rests one leg on the other. An empty glass sits on a nearby table, next to an open bottle of wine. "Right," the headteacher says. "Whenever you're ready."
-<br><br>
-
-<<link [[Perform|Leighton Club Blackmail]]>><</link>>
-<br>
-<<link [[Refuse|Leighton Club Blackmail Refuse]]>><</link>>
-<br>
+	<<link [[Perform|Leighton Club Blackmail]]>><</link>>
+	<br>
+	<<link [[Refuse|Leighton Club Blackmail Refuse]]>><</link>>
+	<br>
 
 <<else>>
-You lead Leighton behind the stage. You're looking for an unoccupied room when <<he>> grasps your arm. "This one," <<he>> says, gesturing to a closed door. You open it.
-<<promiscuity3>>
-<br><br>
+	<<endevent>><<generatey1>><<person1>>
+	There's someone already inside, sat on the sofa with <<his>> eyes fixed on the ground. <<He>> looks up. <<Hes>> a <<person>> you recognise from school.
+	<br><br>
 
-<<endevent>><<generatey1>><<person1>>
-There's someone already inside, sat on the sofa with <<his>> eyes fixed on the ground. <<He>> looks up. <<Hes>> a <<person>> you recognise from school.
-<br><br>
+	Leighton takes a seat, and rests one leg on the other. An empty glass sits on a nearby table, next to an open bottle of wine. "Right," the headteacher says. "Whenever you're ready."
+	<br><br>
 
-Leighton takes a seat, and rests one leg on the other. An empty glass sits on a nearby table, next to an open bottle of wine. "Right," the headteacher says. "Whenever you're ready."
-<br><br>
-
-<<link [[Perform|Leighton Private 2]]>><</link>>
-<br>
-	<<if $promiscuity gte 55>>
-	<<link [[Ask Leighton To Join|Leighton Private 2 Join]]>><<promiscuous4>><</link>>
+	<<link [[Perform|Leighton Private 2]]>><</link>>
 	<br>
-	<</if>>
-<<link [[Refuse|Leighton Private 2 Refuse]]>><</link>>
-<br>
+		<<if $promiscuity gte 55>>
+		<<link [[Ask Leighton to join|Leighton Private 2 Join]]>><<promiscuous4>><</link>>
+		<br>
+		<</if>>
+	<<link [[Refuse|Leighton Private 2 Refuse]]>><</link>>
+	<br>
 <</if>>
 
 :: Leighton Club Blackmail
@@ -77,7 +67,7 @@ You nod. Leighton reaches over to the camera as the <<person1>><<person>> and <<
 <<set $consensual to 1>>
 <<neutral 1>>
 
-<<person2>><<person3>><<maninit>>
+<<maninit>>
 <<set $enemytrust += 100>>
 
 <</if>>
@@ -111,7 +101,7 @@ Leighton watches with a blank expression, occasionally sipping wine.
 
 "I'll see you at school," Leighton says, picking up the camera and dropping some notes on the table. <<tearful>> you count the money. 당신은 <<moneyGain 70>>를 얻었다.
 <br><br>
-<<fameprostitution 30>><<set $prostitutionstat += 1>>
+<<fameprostitution 30 vid>><<set $prostitutionstat += 1>>
 <<clotheson>>
 <<endcombat>>
 
@@ -121,7 +111,7 @@ Leighton watches with a blank expression, occasionally sipping wine.
 
 <<person2>>The <<person>> falls to the floor in pain. <<tearful>> you seize the opportunity and flee the room.
 <br><br>
-<<famescrap 30>>
+<<famescrap 30 vid>>
 
 <<clotheson>>
 <<endcombat>>
@@ -156,7 +146,7 @@ You refuse. Leighton sighs, and nods at the pair. They grab both your arms. "Sor
 <<neutral 1>>
 <<molested>>
 
-<<person2>><<person3>><<maninit>>
+<<maninit>>
 
 <</if>>
 
@@ -187,7 +177,7 @@ Leighton watches with a blank expression, occasionally sipping wine.
 
 "I'll see you at school," Leighton says, picking up the camera and dropping some notes on the table. <<tearful>> you count the money. 당신은 <<moneyGain 30>>를 얻었다.
 <br><br>
-<<famerape 30>><<set $forcedprostitutionstat += 1>><<fameprostitution 30>>
+<<famerape 30 vid>><<set $forcedprostitutionstat += 1>><<fameprostitution 30 vid>>
 <<clotheson>>
 <<endcombat>>
 
@@ -196,7 +186,7 @@ Leighton watches with a blank expression, occasionally sipping wine.
 
 <<person2>>The <<person>> falls to the floor in pain. <<tearful>> you seize the opportunity and flee the room.
 <br><br>
-<<famescrap 30>>
+<<famescrap 30 vid>>
 
 <<clotheson>>
 <<endcombat>>
@@ -255,12 +245,12 @@ Leighton watches with a blank expression, occasionally sipping wine.
 <<if $monster is 1>>
 	"Thanks for the fun," the <<beasttype>> says suddenly. "So many dirty people come through here. You're fun, though. I like you."
 <</if>>
-<<fameprostitution 30>><<famebestiality 30>><<set $prostitutionstat += 1>>
+<<fameprostitution 30 vid>><<famebestiality 30 vid>><<set $prostitutionstat += 1>>
 
 <<elseif $enemyhealth lte 0>>
 The <<beasttype 0>> whimpers and hides behind Leighton. <<if $monster is 1>>"I don't like <<phim>>!"<</if>> <<tearful>> you seize the opportunity and flee the room.
 <br><br>
-<<famescrap 30>>
+<<famescrap 30 vid>>
 
 <<else>>
 
@@ -289,7 +279,7 @@ You refuse. Leighton smiles. "Too late for that," <<nnpc_he "Leighton">> says. <
 <<molested>>
 	<<beastCombatInit>>
 
-<<set $beastance to "top">>
+<<set $NPCList[0].stance to "top">>
 <br><br>
 
 <</if>>
@@ -325,13 +315,13 @@ Leighton watches with a blank expression, occasionally sipping wine.
 
 "That position suits you," Leighton says, picking up the camera and dropping some notes on the table. "See you at school." <<tearful>> you count the money. You've gained <<moneyGain 100>>
 <br><br>
-<<famebestiality 30>><<famerape 30>><<set $forcedprostitutionstat += 1>><<fameprostitution 30>>
+<<famebestiality 30 vid>><<famerape 30 vid>><<set $forcedprostitutionstat += 1>><<fameprostitution 30 vid>>
 
 <<else>>
 
 The <<beasttype 0>> whimpers and hides behind Leighton. <<if $monster is 1>>"I don't like <<phim>>!"<</if>> <<tearful>> you seize the opportunity and flee the room.
 <br><br>
-<<famescrap 30>>
+<<famescrap 30 vid>>
 <br><br>
 
 <</if>>
@@ -356,7 +346,7 @@ Leighton reaches for the camera, and the <<person>> reaches for you.
 <<set $consensual to 1>>
 <<neutral 1>>
 
-<<person2>><<person3>><<maninit>>
+<<maninit>>
 <<set $enemytrust += 100>>
 
 <</if>>
@@ -453,7 +443,7 @@ Leighton smiles. "It would be an insult to my position if I didn't personally in
 "You're not gonna join in?" you say sitting next to the <<person>>. "Seems unfair that we get all the fun."
 <br><br>
 
-Leighton pauses as the <<person>> pulls you into a kiss, then smiles. The headteacher <<if $NPCName[$NPCNameList.indexOf("Leighton")].pronoun is "m">>opens his fly, revealing his<<else>>lifts her skirt, revealing her<</if>> <<if $NPCName[$NPCNameList.indexOf("Leighton")].gender is "m">>erect $NPCList[0].penisdesc.<<else>>pussy.<</if>>
+Leighton pauses as the <<person>> pulls you into a kiss, then smiles. The headteacher <<if $NPCName[$NPCNameList.indexOf("Leighton")].pronoun is "m">>opens his fly, revealing his<<else>>lifts her skirt, revealing her<</if>> <<if $NPCName[$NPCNameList.indexOf("Leighton")].gender is "m">>erect <<print $NPCName[$NPCNameList.indexOf("Leighton")].penisdesc>>.<<else>>pussy.<</if>>
 <br><br>
 <<link [[Next|Leighton Private 2 Join Sex 2]]>><<set $sexstart to 1>><</link>>
 <</if>>
@@ -600,7 +590,7 @@ You shove the <<person>> away from you. <<tearful>> you flee the room.
 :: Leighton Club Ignore
 <<set $outside to 0>><<effects>>
 <<npc Leighton>><<person1>><<generate2>><<generate3>>
-The dressing room is empty, save a <<if $pronoun is "m">>man<<else>>woman<</if>> examining a rack of costumes, <<his>> back turned. It's Leighton.
+The dressing room is empty, save a <<nnpc_gender "Leighton">> examining a rack of costumes, <<his>> back turned. It's Leighton.
 <br><br>
 
 <<link [[Confront|Leighton Club Confront]]>><</link>>
@@ -624,7 +614,7 @@ You decide to stand your ground. Leighton turns. "No need to look so scared," <<
 You hide in a wardrobe just before <<he>> turns. You peek through the gap. "I heard you," Leighton says, scanning the room. "No need to be scared."
 <br><br>
 
-You hear footsteps. "Must have run out the back," says a <<person2>><<if $pronoun is "m">>man's<<else>>woman's<</if>> voice.
+You hear footsteps. "Must have run out the back," says a <<person2>><<personsimple>> voice.
 <br><br>
 
 "Already been grabbed by someone else, then," says a third voice.
@@ -715,7 +705,7 @@ Satisfied, <<person1>> the <<person>> and <<person2>> <<person>> fix their cloth
 
 "I'm glad we have an understanding," Leighton says, rummaging through the clothes rack. You spend the next hour wearing outfits and striking poses as Leighton meticulously photographs you from every angle. <<He>> lets you change behind a curtain between shoots, but some of the outfits don't hide much.
 
-<<if $player.gender is "f" or $player.gender is "h">>
+<<if $player.gender_appearance is "f">>
 	<<if $rng gte 81>>
 	The most revealing is an undersized micro bikini.
 	<<elseif $rng gte 61>>
@@ -772,7 +762,7 @@ A <<person>> and <<person2>><<person>> enter the room, closing the door behind t
 
 <<person2>><<person3>><<maninit>>
 <<hand_gag 0 left>>
-<<set $rescue to 1>>
+<<enable_rescue>>
 <</if>>
 
 <<effects>>

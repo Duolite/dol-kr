@@ -1,6 +1,6 @@
 :: Industrial alleyways
 
-<<set $outside to 1>><<set $location to "alley">><<effects>><<set $bus to "industrial">>
+<<set $outside to 1>><<set $location to "alley">><<effects>><<set $bus to "industrial">><<getTarget true>>
 당신은 공업 지구의 골목길에 있다.
 <<if $daystate is "day">>
 	주변 건물에서 기계가 작동하는 소리가 들려온다.
@@ -17,11 +17,11 @@
 <<if $arousal gte $arousalmax>>
 	<<orgasmstreet>>
 <</if>>
-<<if $stress gte $stressmax>>
+<<if $stress gte $stressmax and !$possessed>>
 	<<passoutalley>>
 <<else>>
 	<<set $danger to random(1, 10000)>><<set $dangerevent to 0>>
-	<<if $danger gte (9900 - $allure) and $eventskip is 0>>
+	<<if ($danger gte (9900 - $allure) or $eventforced) and $eventskip is 0>>
 		<<eventsstreet>>
 	<<else>>
 		<<if $map.top is true>>
@@ -32,7 +32,7 @@
 		<br>
 		<<link [[사다리를 오른다 (0:02)->Industrial rooftops]]>><<pass 2>><</link>>
 		<br>
-		<<link [[버스정류장 뒷문으로 간다 (0:02)|Bus Station Back Entrance]]>><<pass 2>><</link>>
+		<<link [[버스 차고지 뒷문으로 간다 (0:02)|Bus Station Back Entrance]]>><<pass 2>><</link>>
 		<br>
 		<<link [[울타리를 넘어 학교로 들어간다 (0:05)|School Rear Fence]]>><<pass 5>><</link>>
 		<br><br>

@@ -30,7 +30,7 @@
 			<<generatey1>><<person1>>
 			다른 학생들은 낄낄대지만 호의적인 웃음이다. 그러나 당신만 힘들어하고 있는 것은 아니다. <<person1>><<person_i>> 당신이 균형을 잡을 수 있게 팔을 빌려준다.<<gdanceskill>>
 		<<elseif random(1, 400) gte $cool>>
-			다른 학생들이 당신의 스케이트가 낭비라고 비웃는다.<<gtrauma>><<gstress>><<lcool>><<status -10>><<ltrauma>><<lstress>>
+			다른 학생들이 당신의 스케이트가 낭비라고 비웃는다.<<gtrauma>><<gstress>><<lcool>><<status -10>><<trauma 6>><<stress 6>>
 		<<else>>
 			다른 학생들은 낄낄대지만 호의적인 웃음이다. 그러나 당신만 힘들어하고 있는 것은 아니다.
 		<</if>>
@@ -45,7 +45,7 @@
 <<if $danger gte (9900 - $allure) and $laketeenspresent is 1>>
 	<<if $rng gte 81>>
 		<<generatey1>><<person1>>
-		<<person_i>> 스케이트를 타고 지나간다. <<He_ga>> 지나가면서 빙글 돌고, <<He_ga>> 윙크를 날린다. <<He_nun>> 잘날 척 하려는 듯이 보인다.
+		<<person_i>> 스케이트를 타고 지나간다. <<He_ga>> 지나가면서 빙글 돌고, 윙크를 날린다. <<He_nun>> 잘날 척 하려는 듯이 보인다.
 		<br><br>
 
 		<<link [[경쟁한다 (0:05)|Lake Skate Challenge]]>><<pass 5>><</link>><<dancedifficulty 200 1000>>
@@ -54,7 +54,7 @@
 		<br>
 
 	<<elseif $rng gte 61>>
-		당신은 호숫가에서 당신을 칭찬하던 <<generatey1>><<person1>><<person_ul>> 마주친다. <<He_ga>> 당신의 눈과 <<his_yi>> 눈이 마주칠 때마다 피한다.
+		당신은 호숫가에서 당신을 황홀하게 바라보던 <<generatey1>><<person1>><<person_ul>> 마주친다. <<He_ga>> 당신의 눈과 <<his_yi>> 눈이 마주칠 때마다 피한다.
 		<br><br>
 
 		<<link [[빙판 위로 데려온다 (0:05)|Lake Skate Flirt]]>><<pass 5>><</link>><<promiscuous1>>
@@ -92,7 +92,7 @@
 		<</if>>
 	<<else>>
 		<<generatey1>><<person1>><<generatey2>><<generatey3>><<generatey4>>
-		몇 명의 비행 청소년들이 <<person_ul>> 둘러싸고 있다. 그들은 <<him_ul>> 다른 10대들로부터 밀어내며 <<him_ul>> 고립시킨다.
+		몇 명의 비행 청소년들이 한 <<person_ul>> 둘러싸고 있다. 그들은 <<him_ul>> 다른 10대들로부터 밀어내며 <<him_ul>> 고립시킨다.
 		<br><br>
 		<<link [[개입한다 (0:05)|Lake Skate Intervene]]>><<def 1>><<famegood 4>><<pass 5>><</link>>
 		<br>
@@ -113,7 +113,7 @@
 <<else>>
 	비틀거리며
 <</if>>
-<<person_gwa>> 비행 청소년에게 다가간다.
+<<person_gwa>> 비행 청소년들에게 다가간다.
 
 <<if $submissive gte 1150>>
 	"멈- 멈춰, <<him_ul>> 괴롭히지마." 당신이 말한다.
@@ -125,11 +125,11 @@
 <br><br>
 
 <<person2>>
-그들이 괴롭히던 아이를 두고 당신에게 다가온다. "쳐맞고 싶은 새끼가 있나보네?" 한 <<person_i>> 앞장서서 말한다.
+그들이 괴롭히던 아이를 두고 당신에게 다가온다. "쳐맞고 싶은 새끼가 있나보네?" <<person_i>> 앞장서서 말한다.
 <br><br>
 
 <<if $rng gte 71>>
-	당신이 반응하기도 전에 무리 중에 <<person3>><<person_i>> 얼음 위로 굴러떨어진다. <<person1>><<person_i>> <<person3>><<him_yi>> 뒤에 누워서, <<persons_yi>> 다리를 붙잡고 있다.
+	당신이 반응하기도 전에 무리 중에 <<person3>><<person_i>> 얼음 위로 굴러넘어진다. <<person1>><<person_i>> <<person3>><<him_yi>> 뒤에 누워서, <<persons_yi>> 다리를 붙잡고 있다.
 	<br><br>
 
 	다른 두 명의 비행 청소년들도 <<person1>><<persons_yi>> 예상치 못한 행동에 당황해 돌다가 미끄러질 뻔 한다.
@@ -149,7 +149,7 @@
 :: Lake Skate Charge
 <<effects>>
 
-당신은 흐트러진 비행 청소년에게 스케이트를 타고 가다가 <<person2>><<person_gwa>> 부딪힌다.
+당신은 흐트러진 비행 청소년들에게 스케이트를 타고 가서, <<person2>><<person_gwa>> 부딪힌다.
 
 <<if $danceSuccess>>
 	<span class="green">당신은 그럭저럭 똑바로 중심을 잡았다.</span> <<He_ga>> 땅에 구르면서 <<his_yi>> 친구의 팔을 잡고 <<person4>><<himPost "도">> 넘어뜨린다.
@@ -185,7 +185,7 @@
 	<</if>>
 	<br><br>
 
-	<<person2>><<person_i>> 휙 돌아 당신을 향한다. <span class="green">그러다 <<his_yi>> 발이 꼬인다.</span> <<He_ga>> <<his_yi>> 남은 친구들까지 끌고 땅으로 <<him_gwa>> 미끄러진다.
+	<<person2>><<person_i>> 휙 돌아 당신을 향한다. <span class="green">그러다 <<his_yi>> 발이 꼬인다.</span> <<He_ga>> <<his_yi>> 남은 친구들까지 끌고 땅으로 <<him_gwa>> 함께 미끄러진다.
 	<br><br>
 
 	당신은 <<person1>><<person_i>> <<his_yi>> 발을 딛고 일어날 수 있게 돕는다. 그리고 비행 청소년들이 회복하기 전에 호숫가로 돌아간다.
@@ -244,7 +244,7 @@
 당신은 충격에 대비한다. <<person2>><<person_i>> 먼저 때리고,
 
 <<if $physiqueSuccess>>
-	당신에게 덤벼든다. <span class="green">당신은 그럭저럭 똑바로 중심을 잡았다.</span> <<person3>><<person_i>> 이어서 다가온다. <<his_yi>> 몸이 당신에게 닿는 순간 <<his_yi>> 팔을 잡는다. 당신은 돌면서, <<his_yi>> 추진력을 되돌려서 <<person4>><<person_i>>있는 <<him_ga>> 왔던 길로 <<he_rul>> 돌려보낸다.
+	당신에게 덤벼든다. <span class="green">당신은 그럭저럭 똑바로 중심을 잡았다.</span> <<person3>><<person_i>> 이어서 다가온다. <<his_yi>> 몸이 당신에게 닿는 순간 <<his_yi>> 팔을 잡는다. 당신은 돌면서, <<his_yi>> 추진력을 되돌려서 <<him_i>> 왔던 길로 <<he_rul>> 돌려보낸다. <<person4>><<person_i>> 있는 바로 그 곳으로.
 	<br><br>
 
 	그들은 충돌하고, 얼음으로 굴러떨어진다. <<person2>><<person_i>> <<his_yi>> 친구들을 보고 비웃지만, 당신에게 다시 접근하려하지 않는다.
@@ -256,7 +256,7 @@
 	<<link [[다음|Lake Shallows Ice]]>><<endevent>><</link>>
 	<br>
 <<else>>
-	당신에게 덤벼든다. <span class="red">그의 힘이 당신을 땅으로 미끄러지게 한다.</span><<ggpain>><<gstress>><<pain 8>><<stress 6>>
+	당신에게 덤벼든다. <span class="red">그 힘이 당신을 땅으로 미끄러지게 한다.</span><<ggpain>><<gstress>><<pain 8>><<stress 6>>
 	<br><br>
 
 	비행 청소년들이 거의 넘어갈듯이 웃어제낀다. <<person2>><<person_i>> 당신의 팔을 붙잡고, 빙판을 가로질러 질질 끌고 간다.
@@ -325,7 +325,7 @@
 	<<generatey5>>
 	<<tearful>> 당신은 천천히 일어선다. <<person1>><<person_gwa>> <<his_yi>> 친구들이 당신의 곁으로 다가온다. 그들은 모두 <<himPost "보다">> 조금 나이가 많아보인다. <<person5>><<person_i>> 입을 연다.
 	<br><br>
-	"네가 내 <<person1>><<if $pronoun is "m">>남동생<<else>>여동생<</if>>을 구해줬다며?" <<person5>><<He_ga>> 말한다. "정말로 고마워, 이만 실례할게." <<He_ga>> <<himself>> 도망친 애들을 쫓아가고 다른 친구들이 따라간다. <<person1>><<person_i>> 그 뒤에 서있다가 멋쩍은 미소를 지어보인다. 당신은 함께 호숫가로 돌아온다.<<gcool>><<status 1>>
+	"네가 내 <<person1>><<if $pronoun is "m">>남동생<<else>>여동생<</if>>을 구해줬다며?" <<person5>><<He_ga>> 말한다. "정말로 고마워, 이만 실례할게." <<He_ga>> 도망친 애들을 쫓아가고 다른 친구들이 따라간다. <<person1>><<person_i>> 그 뒤에 서있다가 멋쩍은 미소를 지어보인다. 당신은 함께 호숫가로 돌아온다.<<gcool>><<status 1>>
 	<br><br>
 
 	<<link [[다음|Lake Shallows Ice]]>><<endevent>><</link>>
@@ -368,7 +368,7 @@
 <<elseif $danceskill gte 100>>
 	당신은 <<persons_yi>> 앞에서 스케이트를 탄다. <<He_nun>> 그것을 지켜보다가, 당신에게 균형을 잘 잡는 방법에 대해 조언을 한다.
 <<else>>
-	<<persons_yi>> 당신의 손을 잡고 스케이트를 타는 것을 도우며 조언을 한다. 당신은 그가 잡아주고 있어서 더욱 모험적으로 스케이트를 탈 수 있었다.
+	<<person_un>> 당신의 손을 잡고 스케이트를 타는 것을 도우며 조언을 한다. 당신은 엉덩방아를 찧지 않을 것을 알기에, 더욱 대담하게 스케이트를 탈 수 있었다.
 <</if>>
 당신은 많은 것을 배웠다.
 <br><br>
@@ -391,7 +391,7 @@
 :: Lake Skate Shove
 <<effects>>
 
-당신은 <<person_ul>> 당신으로부터 밀어냈다. <<He_nun>> <<his_yi>>발을 헛디뎌 한 발을 어정쩡하게 <<his_yi>> 뒤쪽에 딛는다. 여러 방향에서 웃음소리가 들려온다.
+당신은 <<person_ul>> 당신으로부터 밀어냈다. <<He_nun>> <<his_yi>> 발을 헛디뎠고, <<his_yi>> 등으로 넘어진다. 여러 방향에서 웃음소리가 들려온다.
 <br><br>
 
 <<if $rng gte 81>>
@@ -442,7 +442,7 @@
 	<<else>>
 		<<hand_gag 0 left>>
 	<</if>>
-	<<set $rescue to 1>>
+	<<enable_rescue>>
 <</if>>
 
 
@@ -533,9 +533,9 @@
 
 
 <<if $danceskill gte 200>>
-	당신은 스케이트를 탄다.
+	당신은 스케이트를 타고 다가간다.
 <<else>>
-	당신은 비틀거리면서 앞으로 나아간다.
+	당신은 비틀거리면서 다가간다.
 <</if>>
 <<He_ga>> 얼굴을 붉힌다.
 <br><br>
@@ -605,7 +605,7 @@
 	<<if $danceskill gte 200>>
 		당신은 <<him_ul>> 호숫가에 데려다준다.
 	<<else>>
-		당신은 <<his_yi>> 발을 딛고 일어서게 도와준 후, <<him_ul>> 호숫가에 데려다준다.
+		당신은 <<he_ga>> <<his_yi>> 발을 딛고 일어서게 도와준 후, <<him_ul>> 호숫가에 데려다준다.
 	<</if>>
 	<<He_nun>> <<he_ga>> 원하는 것을 말하고 싶어 보였지만, 아무말도 하지 않았다.
 	<br><br>

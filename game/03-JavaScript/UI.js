@@ -6,25 +6,29 @@ window.overlayShowHide = function (elementId) {
 			V.debugMenu[0] = !V.debugMenu[0];
 		}
 	}
+	window.cacheDebugDiv();
 }
 
 window.overlayMenu = function (elementId, type) {
-	switch (type) {
-		case "debug":
-			var debug = ["debugMain", "debugCharacter", "debugEvents"]
-			for (var i = 0, l = debug.length; i < l; i++) {
-				var div = document.getElementById(debug[i]);
-				if (div != undefined) {
-					V.debugMenu[1] = elementId;
-					if (elementId === debug[i]) {
-						div.classList.remove("hidden");
-					} else {
-						div.classList.add("hidden");
-					}
-				}
-			}
-			break;
+	if (type == "debug"){
+		window.toggleClassDebug(elementId+"Button", "bg-color")
+		V.debugMenu[1] = elementId;
+		if (document.getElementById(elementId) != undefined) {
+			if (V.debugMenu[2].length > 0)
+				window.toggleClassDebug(elementId, "hideWhileSearching")
+			else 
+				window.toggleClassDebug(elementId, "classicHide")
+		}
+		if ((elementId == "debugFavourites" || elementId == "debugAdd") && V.debugMenu[2] != undefined && V.debugMenu[2].length > 0){
+			V.debugMenu[2] = "";
+			document.getElementById('searchEvents').value = ""
+			window.researchEvents("")
+		}
+		if (elementId == "debugFavourites"){
+			window.patchDebugMenu();
+		}
 	}
+	window.cacheDebugDiv();
 }
 
 /*Sidebar swipe*/
@@ -309,7 +313,8 @@ window.beastTogglesCheck = function () {
 		"waspdisable",
 		"beedisable",
 		"lurkerdisable",
-		"horsedisable"
+		"horsedisable",
+		"plantdisable"
 	];
 	T.anyBeastOn = T.beastVars.some(x => V[x] == 'f');
 }
@@ -322,35 +327,89 @@ window.settingsAsphyxiation = function () {
 			case 0:
 				text = "내 목 절대 건들지 마!"; break;
 			case 1:
-				text = "NPC들이 당신의 목을 <span class='blue' style='margin-left: unset; min-width: unset;'>잡을</span> 지도 모릅니다. 숨 쉬는 데 영향을 주진 않아요."; break;
+				text = "NPC들이 당신의 목을 <span class='blue inline-colour'>잡을</span> 지도 모릅니다. 숨 쉬는 데 영향을 주진 않아요."; break;
 			case 2:
-				text = "합의된 교제 중에, NPC들이 당신의 <span class='purple' style='margin-left: unset; min-width: unset;'>숨을 막히게</span> 할지도 모릅니다."; break;
+				text = "합의된 교제 중에, NPC들이 당신의 <span class='purple inline-colour'>숨을 막히게</span> 할지도 모릅니다."; break;
 			case 3:
-				text = "합의되지 않은 교제 중에, NPC들이 당신의 <span class='red' style='margin-left: unset; min-width: unset;'>목을 졸라 질식시킬지도</span> 모릅니다."; break;
+				text = "합의되지 않은 교제 중에, NPC들이 당신의 <span class='red inline-colour'>목을 졸라 질식시킬지도</span> 모릅니다."; break;
+			case 4:
+				text = "합의되지 않은 교제 중에, NPC들이 <span class='red inline-colour'>자주</span> 당신의 <span class='red inline-colour'>목을 졸라 질식시키려</span> 시도합니다."; break;
+
 			default:
 				text = "Error: bad value: " + val;
 				val = 0;
 		}
-		jQuery('#numberslider-value-asphyxialvl').text('').append(text).addClass('small-description')
-												 .css('text-align', 'left')
-												 .css('margin-left', '-7em');
+		jQuery('#numberslider-value-asphyxialvl').text('').append(text).addClass('small-description');
 	};
+	
 	jQuery(document).ready(() => {
 		updateText();
-		jQuery('#numberslider-input-asphyxialvl').on('input change', function (e) { updateText(); })
-												 .css('width', '83%')
-												 .css('min-height', 'unset')
-												 .css('height', '0.75em')
-												 .css('margin-left', '1em');
+		jQuery('#numberslider-input-asphyxialvl').on('input change', function (e) { updateText(); });
 	});
 }
 
-window.settingsNamedNpcBreastSize = function () {
+window.settingsNudeGenderAppearance = function () {
+	let updateText = () => {
+		let val = V.NudeGenderDC;
+		let text = null;
+		switch (val) {
+			case 0:
+				text = "NPC들은 당신의 성별을 파악할 때 당신의 생식기를 <span class='blue inline-colour'>무시할</span> 것입니다."; break;
+			case 1:
+				text = "NPC들은 당신의 성별을 파악할 때 당신의 생식기를 <span class='purple inline-colour'>고려할</span> 것입니다."; break;
+			case 2:
+				text = "NPC들은 당신의 생식기로 당신의 성별을 <span class='red inline-colour'>판단할</span> 것입니다."; break;
+
+			default:
+				text = "Error: bad value: " + val;
+				val = 0;
+		}
+		jQuery('#numberslider-value-nudegenderdc').text('').append(text).addClass('small-description')
+		                                          .css('margin-left', '1em');
+	};
+
+	jQuery(document).ready(() => {
+		updateText();
+		jQuery('#numberslider-input-nudegenderdc').on('input change', function (e) { updateText(); })
+		                                          .css('width', '100%');
+	});
+}
+
+window.settingsBodywriting = function () {
+	let updateText = () => {
+		let val = V.bodywritingLvl;
+		let text = null;
+		switch (val) {
+			case 0:
+				text = "NPC들은 당신 몸에 무언가를 쓰지 <span class='green inline-colour'>않을</span> 것입니다."; break;
+			case 1:
+				text = "NPC들은 당신 몸에 무언가를 써도 되는지 <span class='blue inline-colour'>물어볼</span> 것입니다."; break;
+			case 2:
+				text = "NPC들은 당신 몸에 무언가를 <span class='purple inline-colour'>강제로</span> 쓰려 할 것입니다."; break;
+			case 3:
+				text = "NPC들은 당신 몸에 무언가를 <span class='red inline-colour'>강제로</span> 쓰고 <span class='red inline-colour'>문신으로 새기려</span> 할 것입니다."; break;
+			default:
+				text = "Error: bad value: " + val;
+				val = 0;
+		}
+		// delete the below code when $bodywritingdisable is fully replaced by $bodywritingLvl
+		V.bodywritingdisable = "f";
+		if (val == 0) V.bodywritingdisable = "t";
+
+		jQuery('#numberslider-value-bodywritinglvl').text('').append(text).addClass('small-description');
+	};
+
+	jQuery(document).ready(() => {
+		updateText();
+		jQuery('#numberslider-input-bodywritinglvl').on('input change', function (e) { updateText(); });
+	});
+}
+
+window.settingsNamedNpcBreastSize = function (id, persist) {
 	const breastSizes = ["유두","약간 솟아오른","조그마한","작은","앙증맞은","평범한","봉긋한","큰","풍만한","커다란","매우 큰","엄청난","거대한"];
 
 	let updateText = () => {
-		const npcId = T.npcId;
-		const npc = V.NPCName[npcId];
+		const npc = persist ? V.per_npc[T.pNPCId] : V.NPCName[T.npcId];
 		const val = npc.breastsize;
 
 		const text = breastSizes[val];
@@ -363,11 +422,76 @@ window.settingsNamedNpcBreastSize = function () {
 			npc.breastsdesc = text;
 		}
 
-		jQuery('#numberslider-value-npcname-npcidbreastsize').text('').append(npc.breastsdesc);
+		jQuery('#numberslider-value-' + id).text(npc.breastsdesc);
 	};
 
 	jQuery(document).ready(() => {
 		updateText();
-		jQuery('#numberslider-input-npcname-npcidbreastsize').on('input change', function (e) { updateText(); });
+		jQuery('#numberslider-input-' + id).on('input change', function (e) { updateText(); });
 	});
+}
+
+window.settingsNamedNpcGenderUpdate = function () {
+	let updateButtonsActive = () => {
+		jQuery('[id*=radiobutton-npcname-npcidpenissize]').prop("disabled", V.NPCName[T.npcId].gender == "f");
+	};
+
+	jQuery(document).ready(() => {
+		updateButtonsActive();
+		jQuery('[id*=radiobutton-npcname-npcidgender]').on('change', function (e) { updateButtonsActive(); });
+	});
+}
+
+window.settingsPersistentNpcGenderUpdate = function () {
+	let updateButtonsActive = () => {
+		jQuery('[id*=radiobutton-' + Util.slugify('$per_npc[_pNPCId].penissize') + ']').prop("disabled", V.per_npc[T.pNPCId].gender == "f");
+		jQuery('[id*=radiobutton-' + Util.slugify('$per_npc[_pNPCId].pronoun') + ']').prop("disabled", V.per_npc[T.pNPCId].pronoun == "i");
+	};
+
+	jQuery(document).ready(() => {
+		updateButtonsActive();
+		jQuery('[id*=radiobutton-' + Util.slugify('$per_npc[_pNPCId].gender') + ']').on('change', function (e) { updateButtonsActive(); });
+	});
+}
+
+window.settingsPCGenderUpdate = function () {
+	let updateButtonsActive = () => {
+		jQuery('[id*=radiobutton-penissize]').prop("disabled", V.player.gender == "f");
+		jQuery('[id*=radiobutton-playerballsexist]').prop("disabled", V.player.gender !== "h");
+		jQuery('[id*=radiobutton-background-8]').prop("disabled", V.player.gender == "h");
+	};
+
+	jQuery(document).ready(() => {
+		updateButtonsActive();
+		jQuery('.playergender [id*=radiobutton-playergender]').on('change', function (e) { updateButtonsActive(); });
+	});
+}
+
+window.settingsDoubleAnalToggleGreyOut = function() {
+    let updateButtonsActive = () => {
+        jQuery('[id*=checkbox-analdoubledisable]').prop("disabled", V.analdisable == "t");
+    };
+
+    jQuery(document).ready(() => {
+        updateButtonsActive();
+        jQuery('[id*=checkbox-analdisable]').on('change', function (e) { updateButtonsActive(); });
+    });
+}
+
+$(document).on('click', '#cbtToggleMenu .cbtToggle', function (e) {
+	$('#cbtToggleMenu').toggleClass('visible');
+});
+
+function sliderPerc(e){
+	let valSpan = $(e.currentTarget).siblings().first();
+	let value = valSpan.text();
+
+	valSpan.text((i, value) => Math.round(value * 100) + '%');
+
+	if (value > 1)
+		valSpan.css('color', 'gold');
+	else if (value < 1)
+		valSpan.css('color', 'green');
+	else
+		valSpan.css('color', 'unset');
 }

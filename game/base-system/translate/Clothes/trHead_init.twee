@@ -1,10 +1,10 @@
 :: Widgets trHead [widget nobr]
 <<widget "init_trHead">>
-    <<set _trClothes.head to [
+    <<set setup.trClothes.head to [
         {
             index: 0,
             name: "naked",
-            name_ko: "알몸",
+            name_ko: "벗음",
             variable: "naked",
             post: 0,
             description: "naked"
@@ -323,6 +323,60 @@
             variable: "monster",
             post: 1,
             description: "크앙."
+        },
+		
+        {
+            index: 36,
+            name: "kitty ears",
+            name_ko: "고양이 귀",
+            variable: "kitty",
+            post: 1,
+            description: "귀엽다."
+        },
+		
+        {
+            index: 37,
+            name: "mini snowman",
+            name_ko: "작은 눈사람",
+            variable: "minisnowman",
+            post: 0,
+            description: "놀랍도록 따뜻하다."
+        },
+		
+        {
+            index: 38,
+            name: "cow onesie hood",
+            name_ko: "젖소 한벌옷 후드",
+            variable: "cowonesie",
+            post: 1,
+            description: "포근하다."
+        },
+		
+        {
+            index: 39,
+            name: "baseball cap",
+            name_ko: "야구모자",
+            variable: "baseball",
+            post: 1,
+            description: "태양으로부터 가려준다."
+        },
+		
+        {
+            index: 40,
+            name: "rose",
+            name_ko: "장미꽃",
+            variable: "rose",
+            post: 0,
+            description: "금방 딴 꽃냄새가 난다."
+        },
+		
+        {
+            index: 41,
+            name: "scarecrow hat",
+            name_ko: "허수아비 모자",
+            variable: "scarecrow",
+            post: 1,
+            description: "머리속이 텅 빈 누군가가 썼던 적이 있다."
         },
     ]>>
 <</widget>>

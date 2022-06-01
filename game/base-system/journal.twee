@@ -3,13 +3,14 @@
 
 <h4>일지</h4>
 
-
-<<if $season is "winter">>
-	<img id="world_map" src="img/misc/world_map_winter.png">
-<<else>>
-	<img id="world_map" src="img/misc/world_map.png">
+<<if $images is 1>>
+	<<if $season is "winter">>
+		<img id="world_map" src="img/misc/world_map_winter.png">
+	<<else>>
+		<img id="world_map" src="img/misc/world_map.png">
+	<</if>>
+	<br>
 <</if>>
-<br>
 
 
 <<if $rentday isnot undefined>>
@@ -44,15 +45,15 @@
 	<</if>>
 <</if>>
 
-<<if $brothelshow isnot "none" and $brothelshowintro is 1>>
-	<<if $weekday is 6 and $brothelshowdone isnot 1>>
+<<if $brothelshowdata.type isnot "none" and $brothelshowdata.intro>>
+	<<if $weekday is 6 and not $brothelshowdata.done>>
 		오늘은 창관에서 일할 날이다.
 		<br>
 	<<else>>
 		금요일은 창관에서 일하는 날이다.
 		<br>
 	<</if>>
-<<elseif $brothelshowintro is 1>>
+<<elseif $brothelshowdata.intro>>
 	창관의 쇼에서 주연을 맡을 수 있다.
 	<br>
 <</if>>
@@ -100,6 +101,8 @@
 <<if $community_service gte 1>>
 	<<if $community_service_done is 1>>
 		<span class="lblue">당신은 오늘 사회봉사를 하였다.</span>
+	<<elseif ["asylum","prison"].includes($location)>>
+		당신의 사회봉사 기간은 당신의 <<if $location is "prison">>교도소 수감<<else>>정신병원 입원<</if>> 동안 정지되어 있다.
 	<<elseif $hour gte 21>>
 		오늘은 너무 늦어서 사회봉사를 할 수 없다.
 	<<elseif $hour lt 6>>
@@ -120,7 +123,7 @@
 	<br>
 <</if>>
 
-<<if $averydate is 1 and $hour lte 21>>
+<<if $averydate is 1 and $hour lte 21 and $averydatedone isnot 1>>
 	에이버리와의 데이트가 예정되어 있다. <<ampm 20 00>>와 <<ampm 21 00>>사이에 도무스 가에서 기다리고 있을 것이다.
 	<br>
 <</if>>
@@ -170,7 +173,7 @@
 		<br>
 	<</if>>
 	<<if $christmas_gift_robin is undefined and $NPCName[$NPCNameList.indexOf("Robin")].init is 1>>
-		당신은 쇼핑센터나 숲가게에서 선물을 살 수 있다.
+		당신은 쇼핑센터<<if $forest_shop_intro is 1>>나 숲가게<</if>>에서 선물을 살 수 있다.
 		<br>
 	<<elseif $christmas_gift_robin and $christmas_gift_robin_wrapped isnot 1 and $NPCName[$NPCNameList.indexOf("Robin")].init is 1>>
 		당신은 방에서 로빈의 선물을 포장할 수 있다.
@@ -202,10 +205,10 @@
 <</if>>
 
 <<if $temple_rank is "prospective">>
-	조던이 교회의 한 자리를 권해주었으나, 우선 순결의 시험부터 거쳐야 한다.
+	조던이 사원의 한 자리를 권해주었으나, 우선 순결의 시험부터 거쳐야 한다.
 	<br>
 <<elseif $temple_rank is "initiate">>
-	당신은 교회의 견습이다.
+	당신은 사원의 견습이다.
 	<<if $temple_chastity_timer lte 0>>
 		<span class="pink">정조 시험이 예정되어 있다.</span>
 	<<elseif $temple_chastity_timer is 1>>
@@ -319,6 +322,24 @@
 	<br>
 <</if>>
 
+<<if $photo>>
+	<<if $photo.silly is "accepted">>
+		하이 가의 사업주가 낮에 당신이 오기를 기다리고 있다
+		<br>
+	<<elseif $photo.silly is "done">>
+		당신은 니키에게서 하이 가에서 한 일에 대한 보수를 받을 수 있다.
+		<br>
+	<</if>>
+<</if>>
+
+<<if $jordan_ritual_dance is 1>>
+	조던이 당신에게 다뉴브 가의 저택 중 하나를 조사해 달라고 부탁했다. 사원의 신도들 중 하나가 그곳에서 직업을 얻은 후 실종되었다. 당신은 당신의 댄스 실력으로, 찰리를 통해 그 곳에 들어갈 수 있을 것이다.
+	<br>
+<<elseif $jordan_ritual_dance is 2>>
+	당신은 다뉴브 가의 저택에서 수상한 의식과 맞닥뜨렸다. 사원의 수도승인 조던에게 알리자.
+	<br>
+<</if>>
+
 <br>
 <<if $scienceproject is "ongoing">>
 	<hr>
@@ -348,14 +369,14 @@
 		<</if>>
 		<<if $sciencelichentemple is 1>>
 			<<if $sciencelichentempleready is 1>>
-				--교회에서 자라고 있던 이끼를 프로젝트에 포함시켰다. <span class="gold">성공 확률 +25%.</span>
+				--사원에서 자라고 있던 이끼를 프로젝트에 포함시켰다. <span class="gold">성공 확률 +25%.</span>
 				<br>
 			<<else>>
-				--교회에서 자라고 있던 이끼를 조사했다. 집이나 도서관에서 그에 대한 것을 프로젝트에 추가해야 한다.
+				--사원에서 자라고 있던 이끼를 조사했다. 집이나 도서관에서 그에 대한 것을 프로젝트에 추가해야 한다.
 				<br>
 			<</if>>
 		<<else>>
-			--<span class="black">교회에서 분홍색 이끼를 조사하라.</span>
+			--<span class="black">사원에서 분홍색 이끼를 조사하라.</span>
 			<br>
 		<</if>>
 		<<if $sciencelichendrain is 1>>
@@ -476,18 +497,61 @@
 	<hr>
 <</if>>
 
-
-<h4>씨앗</h4>
-<<set _plant_keys to Object.keys(setup.plants)>>
-<<for _i to 0; _i lt _plant_keys.length; _i++>>
-	<<if setup.plants[_plant_keys[_i]].type is "flower" or setup.plants[_plant_keys[_i]].type is "vegetable">>
-		<<if $plants_known.includes( setup.plants[_plant_keys[_i]].name)>>
-			<<trPlants setup.plants[_plant_keys[_i]].name>><span class="green"><<print _trResult>></span> |
-		<<else>>
-			??? |
-		<</if>>
+<<if $studyBooks isnot undefined and $studyBooks.rented isnot "none">>
+	<<if $book_rent_timer is 0>>
+		<span class="blue">당신은 반납기한이 된 책을 가지고 있다.</span>
+	<<elseif $book_rent_timer lt 0>>
+		<span class="red">당신은 반납기한이 지난 책을 가지고 있다.</span>
+	<<else>>
+		당신은 반납기한이 <span class="gold">$book_rent_timer 일<<if $book_rent_timer gt 1>><</if>>남은 책을 가지고 있다.</span>
 	<</if>>
-<</for>>
+<</if>>
 
+<<adultShopOpeningProgressJournal>>
 
+<<if $farm>>
+	<br>
+	<<farm_upgrades_current>>
+<</if>>
+
+<<if $location is "prison">>
+	당신은 상어 이빨을 <span class="gold"><<trNumber $prison.teeth>></span> 개 가지고 있다.
+	<br>
+	<<if $prison_wren_intro isnot 1>>
+		당신은 금요일 점심식사 후에 교도소 마당에서 렌을 찾을 수 있다.
+		<br>
+	<</if>>
+<</if>>
+
+<<if $museumAntiqueJournalHints.length gte 1>>
+	<<museumAntiqueText>>
+	<br><br>
+	<h4>윈터가 박물관에 없는 물건들에 대해 언급했다</h4>
+	<ul>
+	<<set _hintslist to clone($museumAntiqueJournalHints).reverse()>>
+	<!-- most recent go on top -->
+	<<for _hint range _hintslist>>
+		<<if _museumAntiqueText[_hint]>>
+			<li><<print _museumAntiqueText[_hint].journal>></li>
+		<<else>>
+			<li><span class="red">warning: antique "_hint" doesn't have a hint. save exported from modded version?</span></li>
+			<<set $museumAntiqueJournalHints.delete(_hint)>>
+		<</if>>
+	<</for>>
+	</ul>
+<</if>>
+
+<<if $plants_known.length gt 0>>
+	<h4>씨앗</h4>
+	<<set _plant_keys to Object.keys(setup.plants)>>
+	<<for _i to 0; _i lt _plant_keys.length; _i++>>
+		<<if setup.plants[_plant_keys[_i]].type is "flower" or setup.plants[_plant_keys[_i]].type is "vegetable">>
+			<<if $plants_known.includes( setup.plants[_plant_keys[_i]].name)>>
+				<<trPlants setup.plants[_plant_keys[_i]].name>><span class="green"><<print _trResult>></span> |
+			<<else>>
+				??? |
+			<</if>>
+		<</if>>
+	<</for>>
+<</if>>
 <</widget>>

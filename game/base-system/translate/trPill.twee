@@ -1,5 +1,35 @@
 :: Widgets trPill[widget nobr]
 <<widget "trPill">><<silently>>
-    <<set _trPill to {"growth":"성장약","reduction":"축소약","blocker":"성장 억제약","none":"없음"}>>
-    <<set _trResult to _trPill[$args[0].toLowerCase()]>>
+	<<if _trPill is undefined>>
+		<<set _trPill to {
+			/* 구버전 */
+			"growth":"성장약",
+			"reduction":"축소약",
+			"blocker":"성장 억제약",
+			"fertility":"배란약", 
+			/* 구버전 끝 */
+			
+			"bottom reduction": "엉덩이 축소약",
+			"bottom growth": "엉덩이 성장약",
+			"bottom blocker": "엉덩이 성장 억제약",
+			"breast reduction": "가슴 축소약",
+			"breast growth": "가슴 성장약",
+			"breast blocker": "가슴 성장 억제약",
+			"penis reduction": "음경 축소약",
+			"penis growth": "음경 성장약",
+			"penis blocker": "음경 성장 억제약",
+			"fertility booster":"배란 촉진약",
+			"contraceptive":"피임약",
+			"asylum\'s prescription": "정신병원 처방약",
+			"dr harper\'s prescription": "의사 하퍼의 처방약",
+			"none":"없음"
+		}>>
+	<</if>>
+	
+    <<set _trResult to _trPill[_args[0].toLowerCase()]>>
+	<<if _trResult isnot undefined>>
+		<<trPost 0 _args[1] _args[2]>>
+	<<else>>
+		<<set _trResult to "[에러] trPill 에서 해당 이름을 찾을 수 없음: " + _args[0]>>
+	<</if>>
 <</silently>><</widget>>

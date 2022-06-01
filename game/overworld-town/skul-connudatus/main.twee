@@ -45,7 +45,7 @@ You scan the crowds.
 	<br><br>
 	<<link [[Take it|Connudatus Car]]>><<crimeup 5>><</link>><<crime>>
 	<br>
-	<<link [[Leave it|Connudatus Street]]>><</link>>
+	<<link [[Leave it|Connudatus Street]]>><<endevent>><</link>>
 	<br>
 <<else>>
 	<<generate1>><<person1>>A <<person>> sits on a bench, their <<wallet>> sat next to them.
@@ -94,7 +94,7 @@ You lean down, holding <<his>> arm with one hand, and taking <<his>> <<wallet>> 
 	<<neutral 1>>
 	<<maninit>>
 	<<promiscuity4>>
-	<<set $rescue to 1>>
+	<<enable_rescue>>
 <<elseif $molestationstart is 1>>
 	<<set $molestationstart to 0>>
 	<<controlloss>>
@@ -102,7 +102,7 @@ You lean down, holding <<his>> arm with one hand, and taking <<his>> <<wallet>> 
 	<<neutral 1>>
 	<<molested>>
 	<<maninit>>
-	<<set $rescue to 1>>
+	<<enable_rescue>>
 <</if>>
 <<effects>>
 <<effectsman>><<man>>
@@ -192,7 +192,7 @@ You grab the <<wallet>> as you walk past.
 	<<neutral 1>>
 	<<molested>>
 	<<maninit>><<set $enemyanger += 200>><<npcidlegenitals>>
-	<<set $rescue to 1>>
+	<<enable_rescue>>
 <</if>>
 <<effects>>
 <<effectsman>><<man>>

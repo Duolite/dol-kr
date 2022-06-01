@@ -21,11 +21,11 @@
 		<<if $noFinish isnot 1>>
 			<<set _askActions["그만 하고 싶다고" + _diffText] to "finish">>
 		<</if>>
-		<<if $enemytype is "man">>
-			<<if $vaginaexist is 1 and $vaginalchastity is 0 and $novaginal is 0>>
+		<<if $enemytype is "man" and !$npcSub>>
+			<<if $player.vaginaExist and $vaginalchastity is 0 and $novaginal is 0>>
 				<<set _askActions["보지에 아무 것도 넣고 싶지 않다고" + _diffText] to "novaginal">>
 			<</if>>
-			<<if $penisexist is 1 and $penilechastity is 0 and $nopenile is 0>>
+			<<if $player.penisExist and $penilechastity is 0 and $nopenile is 0>>
 				<<set _askActions["자지를 안에 넣고 싶지 않다고" + _diffText] to "nopenile">>
 			<</if>>
 			<<if $analchastity is 0 and $noanal is 0>>
@@ -35,6 +35,15 @@
 				<<set _askActions["목을 조르지 말라고" + _diffText] to "nochoke">>
 			<</if>>
 		<</if>>
+		
+        <<set $_npcname to $npc[$npcrow.indexOf($mouthtarget)]>>
+        <<if ["Robin","Kylar","Alex","Avery","Whitney","Eden","Sydney"].includes($_npcname) and !npcHasStrapon($mouthtarget)
+            and [0, "clothed"].includes($NPCList[$mouthtarget].vagina)>>
+            <<if ["Avery","Whitney"].includes($_npcname) or $npc[$npcrow.indexOf($mouthtarget)] is $_npcname and checkIfNPCHasCategorySextoy($_npcname,"strap-on")>>
+                <<set _askActions["페니스 밴드를 착용하라고"] to "wearStrapon">>
+            <</if>>
+        <</if>>
+
 	<<else>>
 		<<set _mouthaction["비명지른다"] to "scream">>
 		<<set _mouthaction["애원한다"] to "plead">>
@@ -46,20 +55,39 @@
 		<</if>>
 	<</if>>
 	<<if $worn.over_upper.name isnot "naked" and $worn.over_upper.cursed isnot 1 or $worn.upper.name isnot "naked" and $worn.upper.cursed isnot 1 or $worn.under_upper.name isnot "naked" and $worn.under_upper.cursed isnot 1>>
-		<<if $noupper isnot 1 and $noupperasked isnot 1 and $enemytype is "man">>
+		<<if $noupper isnot 1 and $noupperasked isnot 1 and $enemytype is "man" and !$npcSub>>
 			<<set _askActions["웃옷을 벗기지 말라고" + _diffText] to "noupper">>
 		<</if>>
 	<</if>>
-	<<if $submissive gte 1150>>
+	<<if $submissive gte 1150 and !$robinRentEvent>>
 		<<set _mouthaction["신음한다"] to "moan">>
 	<</if>>
-	<<if $asphyxiaLvl gte 1 and $consensual is 1 and $enemytype is "man" and ($choketrait or ($chokeorgasm gte 1 and $submissive gt 850) or ($awarelevel gte 2 and $submissive gte 1150))>>
+	<<if !$npcSub and $asphyxiaLvl gte 1 and $consensual is 1 and $enemytype is "man" and ($choketrait or ($chokeorgasm gte 1 and $submissive gt 850) or ($awarelevel gte 2 and $submissive gte 1150))>>
 		<<set _askActions["목을 졸라 달라고"] to "askchoke">>
+	<</if>>
+	/*ToDo: Pregnancy, remove $pregnancyTesting to properly enable*/
+	<<if $enemytype is "man" and $condomAsk is undefined and $pregnancyTesting and !$abomination>>
+		<<if $npcCondoms isnot undefined>>
+			<<set _askActions["콘돔을 사용해 달라고"] to "condoms">>
+		<</if>>
+		<<if $npcCondoms isnot undefined>>
+			<<set _askActions["콘돔을 사용하지 말라고"] to "noCondoms">>
+		<</if>>
+	<</if>>
+	<<if $robinRentEvent is 1 and $combatPhase is "pay">>
+		<<if $money gte $rentmoney>>
+			<<set _mouthaction["베일리에게 지불한다"] to "pay">>
+		<<else>>
+			<<set _mouthaction["베일리에게 낼 돈이 없다고 한다"] to "pay">>
+		<</if>>
+	<</if>>
+	<<if $worn.face.name isnot "naked" and $worn.face.type.includes("mask") and $consensual is 1 and $enemytype is "man" and !$npcSub>>
+			<<set _askActions["마스크를 벗기지 말라고" + _diffText] to "nomask">>
 	<</if>>
 	<<if Object.keys(_askActions).length gt 0>>
 		<<set _mouthaction[_pron+" 부탁한다"] to "ask">>
 		<<set _defaultsCombatAction to "askActions">>
-		<<set _actionsSet to $actionDefaults[$defaultsType][$defaultsCombatType][_defaultsCombatAction]>>
+		<<set _actionsSet = DefaultActions.get($defaultsCombatType, $defaultsType, _defaultsCombatAction)>>
 		<<set _pass to false>>
 		<<for _set to 0; _set lt $maxDefaultActionSets; _set++>>
 			<<if Object.values(_askActions).includes(_actionsSet[_set])>>
@@ -72,15 +100,15 @@
 			<<set $askAction to Object.values(_askActions)[0]>>
 		<</if>>
 		<<switch $askAction>>
-			<<case "askchoke">><<set $askActionColour to "sub">>
+			<<case "askchoke" "condoms" "damagedCondoms" "noCondoms">><<set $askActionColour to "sub">>
 			<<default>><<set $askActionColour to "brat">>
 		<</switch>>
 	<</if>>
 	<<if $awarelevel gte 2 and $enemytype is "man">>
 		<<if $consensual is 1>>
-			<<set _mouthaction["놀린다"] to "mock">>
+			<<set _mouthaction[$NPCList[$mouthtarget].pronouns.him + " 놀린다"] to "mock">>
 		<<else>>
-			<<set _mouthaction["조롱한다"] to "mock">>
+			<<set _mouthaction[$NPCList[$mouthtarget].pronouns.him + " 조롱한다"] to "mock">>
 		<</if>>
 	<</if>>
 <</if>>
@@ -88,7 +116,7 @@
 
 <<widget "replaceAskColour">>
 <<switch $askAction>>
-	<<case "askchoke">>
+	<<case "askchoke" "condoms" "damagedCondoms" "noCondoms">>
 		<<if $combatControls is "radio">>
 			<<addclass "#askLabel" "sub">><<removeclass "#askLabel" "brat">>
 		<<else>>

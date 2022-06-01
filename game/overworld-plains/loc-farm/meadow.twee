@@ -43,6 +43,9 @@ You are in a meadow ringed by tall trees. Long grass caresses your legs. A solit
 	<</if>>
 <</if>>
 <br><br>
+<<if $arousal gte $arousalmax>>
+	<<orgasmLocation "meadow">>
+<</if>>
 <<link [[Relax (1:00)|Meadow Relax]]>><<stress -6>><</link>><<lstress>>
 <br>
 <<if $worn.upper.exposed gte 1>>
@@ -50,12 +53,12 @@ You are in a meadow ringed by tall trees. Long grass caresses your legs. A solit
 	<br>
 <</if>>
 <<if $worn.lower.exposed gte 1>>
-	<<link [[Make a skirt out of plants and Twigs (0:10)|Meadow Plant]]>><<pass 10>><<set $phase to 2>><</link>>
+	<<link [[Make a skirt out of plants and twigs (0:10)|Meadow Plant]]>><<pass 10>><<set $phase to 2>><</link>>
 	<br>
 <</if>>
 
 <<if $historytrait gte 3>>
-	<<link [[Coastal Path (0:30)|Coast Path Meadow]]>><<pass 30>><</link>>
+	<<link [[Coastal path (0:30)|Coast Path Meadow]]>><<pass 30>><</link>>
 	<br>
 <</if>>
 
@@ -121,7 +124,7 @@ You search for plants long and sturdy enough to build an improvised garment. You
 					A foxgirl, carrying your clothes in her mouth. She looks over her shoulder, locks eyes with you, then disappears into the trees.
 					<<set $fox to "female">>
 				<<else>>
-					A foxboy, caryring your clothes in his mouth. He looks over his shoulder, locks eyes with you, then disappears into the trees.
+					A foxboy, carrying your clothes in his mouth. He looks over his shoulder, locks eyes with you, then disappears into the trees.
 					<<set $fox to "male">>
 				<</if>>
 			<<else>>
@@ -147,7 +150,7 @@ You search for plants long and sturdy enough to build an improvised garment. You
 					A foxgirl, carrying your clothes in her mouth. She looks over her shoulder, locks eyes with you, then disappears over the ridge.
 					<<set $fox to "female">>
 				<<else>>
-					A foxboy, caryring your clothes in his mouth. He looks over his shoulder, locks eyes with you, then disappears over the ridge.
+					A foxboy, carrying your clothes in his mouth. He looks over his shoulder, locks eyes with you, then disappears over the ridge.
 					<<set $fox to "male">>
 				<</if>>
 			<<else>>
@@ -194,7 +197,7 @@ You keep running, jumping over fallen branches, until you arrive at the hole. Yo
 	<<link [[Squeeze through|Meadow Squeeze]]>><</link>><<small_text>>
 	<br>
 <</if>>
-<<link [[Crawl Inside|Meadow Crawl]]>><</link>>
+<<link [[Crawl inside|Meadow Crawl]]>><</link>>
 <br>
 
 :: Meadow Ignore
@@ -394,8 +397,8 @@ Your eyes were so drawn by the water that it takes you a moment to notice the <<
 	<</if>>
 
 
-	<<if $submissive lte 500 and $promiscuity gte 55>>
-		<<link [[Punish|Meadow Cave Punish]]>><<def 1>><<trauma -6>><<stress -6>><</link>><<promiscuous4>><<defianttext>><<ltrauma>><<lstress>>
+	<<if $submissive lte 500 and $deviancy gte 55>>
+		<<link [[Punish|Meadow Cave Punish]]>><<def 1>><<trauma -6>><<stress -6>><</link>><<deviant4>><<defianttext>><<ltrauma>><<lstress>>
 		<br>
 	<</if>>
 <<else>>
@@ -514,7 +517,7 @@ You turn away from the water, and walk back down the tunnel.
 <br><br>
 
 You walk back to the tunnel, leaving the <<fox_text>> panting on the ground.
-<br><br>
+<<deviancy4>>
 
 <<link [[Next|Meadow Cave Exit]]>><<unset $fox>><</link>>
 <br>
@@ -541,7 +544,7 @@ You keep low as you move, though you see no one else around.
 	<br><br>
 
 	The <<fox_text>> makes a sudden turn near the trees, and then another.
-	<<if $skulduggery gte random(1, 1050)>>
+	<<if currentSkillValue('skulduggery') gte random(1, 1050)>>
 		You notice the hanging coils just in time, <span class="green">and evade them as the <<fox_text>> did.</span>
 		<br><br>
 
@@ -561,8 +564,8 @@ You keep low as you move, though you see no one else around.
 			<</if>>
 
 
-			<<if $submissive lte 500 and $promiscuity gte 55>>
-				<<link [[Punish|Meadow Chase Hill Punish]]>><<def 1>><<trauma -6>><<stress -6>><</link>><<promiscuous4>><<defianttext>><<ltrauma>><<lstress>>
+			<<if $submissive lte 500 and $deviancy gte 55>>
+				<<link [[Punish|Meadow Chase Hill Punish]]>><<def 1>><<trauma -6>><<stress -6>><</link>><<deviant4>><<defianttext>><<ltrauma>><<lstress>>
 				<br>
 			<</if>>
 		<<else>>
@@ -594,7 +597,7 @@ You keep low as you move, though you see no one else around.
 		<br>
 	<</if>>
 <<else>>
-	You crest the hillock, <span class="red">but don't see the <<fox_text>> anywhere.</span> It must have already made it to he surrounding woodland.
+	You crest the hillock, <span class="red">but don't see the <<fox_text>> anywhere.</span> It must have already made it to the surrounding woodland.
 	<br><br>
 
 	You creep back down. Maybe you can make some impromptu clothing from these plants.
@@ -617,7 +620,7 @@ You look up. A rope coils around your ankle, attaching you to a thick branch abo
 <</if>>
 <<link [[Squirm (0:10)|Meadow Chase Hill Squirm]]>><<pass 10>><</link>><<dancedifficulty 1 1000>>
 <br>
-<<link [[Call for Help|Meadow Chase Hill Call]]>><</link>>
+<<link [[Call for help|Meadow Chase Hill Call]]>><</link>>
 <br>
 
 
@@ -679,7 +682,7 @@ You look up. A rope coils around your ankle, attaching you to a thick branch abo
 	<<link [[Next|Meadow]]>><</link>>
 	<br>
 <<else>>
-	You squirm agains the rope, <span class="red">but it only tightens further.</span>
+	You squirm against the rope, <span class="red">but it only tightens further.</span>
 	<br><br>
 	<<generate1>><<person1>>
 	"Not what I was expecting," says a <<personsimple>>'s voice.
@@ -880,7 +883,7 @@ You release the <<fox_text>>.
 
 <<if $museumAntiques.antiques.antiquestonetalisman isnot "found" and $museumAntiques.antiques.antiquestonetalisman isnot "talk" and $museumAntiques.antiques.antiquestonetalisman isnot "museum">>
 	<<set $antiquemoney += 1200>><<museumAntiqueStatus "antiquestonetalisman" "found">>
-	"Thank you!" the <<fox_he>> says. "I'll be right back." <<He>> disappears between the trees.
+	"Thank you!" the <<fox_he>> says. "I'll be right back." <<fox_He>> disappears between the trees.
 	<br><br>
 	<<pass 2>>
 	<<clotheson>>
@@ -974,7 +977,7 @@ You release the <<fox_text>>.
 <</if>>
 
 You walk back to the meadow.
-<br><br>
+<<deviancy4>>
 
 <<link [[Next|Meadow]]>><<unset $fox>><</link>>
 <br>

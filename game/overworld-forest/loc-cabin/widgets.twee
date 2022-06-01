@@ -3,337 +3,398 @@
 
 	<<roomoptions>>
 
-	There's a large mattress with animal skin covers.
+	동물 가죽으로 덮인 커다란 매트리스가 있다.
+	<<if $hour gte 0 and $hour lte 6>>
+		에덴은 시트 사이에서 자고 있다.
+	<</if>>
 	<br>
-	<<bedicon>><<link [[Sleep|Eden Cabin Bed]]>><<endevent>><</link>>
+	<<if $nextPassageCheck is "Eden Cabin Bed">>
+		<span class="nextLink"><<bedicon>><<link [[에덴.|Eden Cabin Bed]]>><<endevent>><</link>></span>
+	<<else>>
+		<<bedicon>><<link [[잔다|Eden Cabin Bed]]>><<endevent>><</link>>
+	<</if>>
 	<br>
-
-	Your clothes are kept in the corner.
+	<<pregnancyTest "Eden Cabin">>
+	당신의 옷이 구석에 보관되어 있다.
 	<br>
-	<<wardrobeicon>><<link [[Wardrobe|Eden Wardrobe]]>><<endevent>><</link>>
+	<<wardrobeicon>><<link [[옷장|Eden Wardrobe]]>><<endevent>><</link>>
 	<br>
-	<<link [[거울|Eden Mirror]]>><<endevent>><</link>>
+	<<if playerHasSexToys()>>
+		<<sextoysicon>><<link [[섹스 장난감들|Sextoys Inventory]]>><<set $sextoyInvReturnLink to $passage>><</link>>
+		<br>
+	<</if>>
+	<<if $nextPassageCheck is "Eden Mirror">>
+		<span class="nextLink"><<mirroricon>><<link [[거울|Eden Mirror]]>><<endevent>><</link>></span>
+	<<else>>
+		<<mirroricon>><<link [[거울|Eden Mirror]]>><<endevent>><</link>>
+	<</if>>
 	<br><br>
-	<<link [[Go back|Eden Cabin]]>><<endevent>><</link>>
+	<<if $nextPassageCheck is "Eden Cabin">>
+		<span class="nextLink"><<link [[돌아간다|Eden Cabin]]>><<endevent>><</link>></span>
+	<<else>>
+		<<link [[돌아간다|Eden Cabin]]>><<endevent>><</link>>
+	<</if>>
 	<br><br>
 <</widget>>
 
 <<widget "cabinothers">>
-	<<link [[Go outside|Eden Clearing]]>><<endevent>><</link>>
+
+	<<if $nextPassageCheck is "Eden Clearing">>
+		<span class="nextLink"><<link [[밖으로 나간다|Eden Clearing]]>><</link>></span>
+	<<elseif ($exposed gte 1 and !$edenexposed and $hour is 7) or ($exposed gte 1 and !$edenexposed and $hour is 8)>>
+		<<link [[밖으로 나간다|Eden Exposed]]>><<endevent>><</link>>
+	<<elseif $exposed gte 1 and !$edenexposed and $hour gte 17>>
+		<<link [[밖으로 나간다|Eden Exposed]]>><<endevent>><</link>>
+	<<else>>
+		<<link [[밖으로 나간다|Eden Clearing]]>><<endevent>><</link>>
+	<</if>>
 	<br><br>
-	<<link [[Settings|Cabin Settings]]>><<endevent>><</link>>
+	<<link [[설정|Cabin Settings]]>><<endevent>><</link>>
 	<br>
 	<<attitudesControlCheck>>
 	<<if $attitudesControl.showGoldLink is true>>
-		<span class="goldLink"><<link [[Attitudes]]>><<endevent>><<set $attitudesExitPassage to $passage>><</link>> </span><span class="red">!!</span>
+		<span class="goldLink"><<link [[태도|Attitudes]]>><<endevent>><<set $attitudesExitPassage to $passage>><</link>> </span><span class="red">!!</span>
 	<<else>>
-		<<link [[Attitudes]]>><<endevent>><<set $attitudesExitPassage to $passage>><</link>>
+		<<link [[태도|Attitudes]]>><<endevent>><<set $attitudesExitPassage to $passage>><</link>>
 	<</if>>
-	<br>	
+	<br>
 <</widget>>
 
 <<widget "edenlust">>
-	<<if $exposed gte 1 and $exhibitionism gte 55>>
-		<span class="lewd">Eden keeps stealing glances at you.</span><<glust>>
+	<<if $exposed gte 1>>
+		<span class="lewd">에덴이 자꾸 당신을 훔쳐본다.</span><<glust>>
 		<<npcincr Eden lust 1>>
 		<br><br>
 	<</if>>
 <</widget>>
 
 <<widget "cabinhouseactions">>
+
+	당신은 잠시 오두막을 둘러본다.
+	<<if $eden_salve is 1 and $eden_soap is 1>>
+		연고가 든 병과 비누가 조리대 위에 놓여 있다.
+	<<elseif $eden_salve is 1>>
+		연고가 든 병이 조리대 위에 놓여 있다.
+	<<elseif $eden_soap is 1>>
+		비누가 조리대 위에 놓여 있다.
+	<</if>>
+	<<if $eden_sweep is 1>>
+		바닥이 깨끗하다.
+	<</if>>
+	<br><br>
+
 	<<if $edenpillow is 1>>
-		<<link [[Set up the rug and pillows|Eden Pillow Set]]>><<set $edenpillow to 2>><<npcincr Eden love 1>><<npcincr Eden dom 1>><</link>><<glove>><<gdom>>
+		<<link [[깔개와 침구를 정리한다|Eden Pillow Set]]>><<set $edenpillow to 2>><<npcincr Eden love 1>><<npcincr Eden dom 1>><</link>><<glove>><<gdom "Eden">>
 		<br><br>
 	<</if>>
 	<<if $edencurtains is 1>>
-		<<link [[Set up the curtains|Eden Curtains Set]]>><<set $edencurtains to 2>><<npcincr Eden love 1>><<npcincr Eden dom 1>><</link>><<glove>><<gdom>>
+		<<link [[커튼을 걷는다|Eden Curtains Set]]>><<set $edencurtains to 2>><<npcincr Eden love 1>><<npcincr Eden dom 1>><</link>><<glove>><<gdom "Eden">>
 		<br><br>
 	<</if>>
 	<<if $eden_sew isnot 1 or $edencushions is 1 or $edendesign lt 9 or ($season is "winter" and !$edenscarf and $edencoat is 2)>>
-		A sewing kit sits atop a cupboard.
+		반짇고리가 찬장 꼭대기에 놓여 있다.
 		<br>
 	<</if>>
 	<<if $eden_sew isnot 1>>
-		<<link [[Fix Eden's clothes (0:30)|Eden Fix]]>><<pass 30>><<npcincr Eden love 1>><<npcincr Eden dom 1>><<set $eden_sew to 1>><</link>><<glove>><<gdom>>
+		<<link [[에덴의 옷을 고친다 (0:30)|Eden Fix]]>><<pass 30>><<npcincr Eden love 1>><<set $eden_sew to 1>><<endevent>><</link>><<glove>>
 		<br>
 	<</if>>
 	<<if $edencushions is 1>>
-		<<link [[Make the cushions (3:00)|Eden Loveseat Work]]>><<pass 2 hours>><<pass 1 hour>><<set $edencushions to 2>><</link>>
+		<<link [[쿠션을 만든다 (3:00)|Eden Loveseat Work]]>><<pass 2 hours>><<pass 1 hour>><<set $edencushions to 2>><</link>>
 		<br>
 	<<elseif $edenloveseat is 7>>
-		<i>You could visit the shopping centre to buy cushion materials for your loveseat</i>
+		<i>당신은 쇼핑 센터에서 안락의자를 만드는 데 쓸 쿠션 재료를 구입할 수 있습니다.</i>
 		<br>
 	<</if>>
 	<<if $edencushions is 2 and $edenloveseat is 9 and $edenblanket is 0>>
-		<<link [[Sew a fur blanket (0:30)|Eden Blanket One]]>><<pass 30>><<npcincr Eden love 1>><<npcincr Eden dom 1>><<set $edenblanket to 1>><</link>><<glove>><<gdom>>
+		<<link [[털 담요를 꿰맨다 (0:30)|Eden Blanket One]]>><<pass 30>><<npcincr Eden love 1>><<npcincr Eden dom 1>><<set $edenblanket to 1>><</link>><<glove>><<gdom "Eden">>
 		<br>
 	<</if>>
 	<<if $edencushions is 2 and $edenloveseat is 9 and $edenblanket is 1>>
-		<<link [[Sew a fur blanket (0:30)|Eden Blanket Two]]>><<pass 30>><<npcincr Eden love 1>><<npcincr Eden dom 1>><<set $edenblanket to 2>><</link>><<glove>><<gdom>>
+		<<link [[털 담요를 꿰맨다 (0:30)|Eden Blanket Two]]>><<pass 30>><<npcincr Eden love 1>><<npcincr Eden dom 1>><<set $edenblanket to 2>><</link>><<glove>><<gdom "Eden">>
 		<br>
 	<</if>>
 	<<if $edencushions is 2 and $edenloveseat is 9 and $edenblanket is 2>>
-		<<link [[Sew a fur blanket (0:30)|Eden Blanket Three]]>><<pass 30>><<npcincr Eden love 1>><<npcincr Eden dom 1>><<set $edenblanket to 3>><</link>><<glove>><<gdom>>
+		<<link [[털 담요를 꿰맨다 (0:30)|Eden Blanket Three]]>><<pass 30>><<npcincr Eden love 1>><<npcincr Eden dom 1>><<set $edenblanket to 3>><</link>><<glove>><<gdom "Eden">>
 		<br>
 	<</if>>
 	<<if $edenpillow is 2 and $edendesign lt 9>>
 		<<if !$edendesign>><<set $edendesign to 0>><</if>>
-		<<link [[Sew designs in the pillows (0:30)|Eden Design]]>><<pass 30>><<npcincr Eden love 1>><<npcincr Eden dom 1>><<set $edendesign += 1>><</link>><<glove>><<gdom>>
+		<<link [[베개에 자수를 놓는다 (0:30)|Eden Design]]>><<pass 30>><<npcincr Eden love 1>><<npcincr Eden dom 1>><<set $edendesign += 1>><</link>><<glove>><<gdom "Eden">>
 		<br>
 	<</if>>
 	<<if $season is "winter" and !$edenscarf and $edencoat is 2>>
-		<<link [[Make a scarf for Eden (0:30)|Eden Scarf]]>><<pass 30>><<npcincr Eden love 1>><<npcincr Eden dom 1>><<set $edenscarf to 1>><</link>><<glove>><<gdom>>
+		<<link [[에덴을 위해 목도리를 짠다 (0:30)|Eden Scarf]]>><<pass 30>><<npcincr Eden love 1>><<npcincr Eden dom 1>><<set $edenscarf to 1>><</link>><<glove>><<gdom "Eden">>
 		<br>
 	<</if>>
 	<<if $eden_supplies isnot 1>>
-		Eden's supplies are kept in a cabinet.
+		벽장에 에덴의 저장품이 보관되어 있다.
 		<br>
-		<<link [[Take stock of Eden's supplies (0:30)|Eden Stock]]>><<pass 30>><<npcincr Eden love 1>><<npcincr Eden dom 1>><<set $eden_supplies to 1>><</link>><<gdom>><<glove>>
+		<<link [[저장품을 더 채운다 (0:30)|Eden Stock]]>><<pass 30>><<npcincr Eden love 1>><<set $eden_supplies to 1>><</link>><<glove>>
 		<br>
 	<</if>>
 	<<if $eden_sweep isnot 1>>
-		A broom and dustpan lie in the corner.
+		빗자루와 먼지떨이가 구석에 놓여 있다.
 		<br>
-		<<link [[Sweep the floor (0:30)|Eden Sweep]]>><<pass 30>><<npcincr Eden love 1>><<npcincr Eden dom 1>><<set $eden_sweep to 1>><</link>><<glove>><<gdom>>
+		<<link [[바닥을 쓴다 (0:30)|Eden Sweep]]>><<pass 30>><<npcincr Eden love 1>><<set $eden_sweep to 1>><</link>><<glove>>
 		<br>
 	<</if>>
 	<<if $eden_salve isnot 1 or $eden_soap isnot 1>>
-		A stove sits in the kitchen.
+		주방에 화덕이 있다.
 		<br>
 	<</if>>
 	<<if $eden_salve isnot 1>>
-		<<link [[Make Salves (0:30)|Eden Salve]]>><<pass 30>><<if !$salve>><<set $salve to 1>><<else>><<set $salve += 1>><</if>><<npcincr Eden love 1>><<npcincr Eden dom 1>><<set $eden_salve to 1>><</link>><<glove>><<gdom>>
+		<<link [[연고를 만든다 (0:30)|Eden Salve]]>><<pass 30>><<if !$salve>><<set $salve to 1>><<else>><<set $salve += 1>><</if>><<npcincr Eden love 1>><<set $eden_salve to 1>><</link>><<glove>>
 		<br>
 	<</if>>
 	<<if $eden_soap isnot 1>>
-		<<link [[Make Soap (0:30)|Eden Soap]]>><<pass 30>><<if !$soap>><<set $soap to 1>><<else>><<set $soap += 1>><</if>><<npcincr Eden love 1>><<npcincr Eden dom 1>><<set $eden_soap to 1>><</link>><<glove>><<gdom>>
+		<<link [[비누를 만든다 (0:30)|Eden Soap]]>><<pass 30>><<if !$soap>><<set $soap to 1>><<else>><<set $soap += 1>><</if>><<npcincr Eden love 1>><<set $eden_soap to 1>><</link>><<glove>>
 		<br>
 	<</if>>
+	<br>
+	<<link [[휴식한다 (0:15)|Eden Table]]>><<stress -2>><<endevent>><<pass 15>><</link>><<lstress>>
 	<br><br>
-	<<link [[Go back|Eden Cabin]]>><<endevent>><</link>>
+	<<link [[돌아간다|Eden Cabin]]>><<endevent>><</link>>
 	<br><br>
 <</widget>>
 
 <<widget "cabinedenactions">>
 
-	Eden glances at you.
+	에덴이 당신을 쳐다본다.
 	<br><br>
 
 	<<if $hour gte 18 and $hour lte 23>>
 		<<if $edencushions is 2 and $edenloveseat is 9>>
-			<<link [[Cuddle on the loveseat (0:30)|Eden Cuddle]]>><<trauma -3>><<stress -3>><<pass 30>><<npcincr Eden love 1>><<npcincr Eden lust 1>><</link>><<glove>><<glust>><<ltrauma>><<lstress>>
+			<<link [[안락의자 위에서 껴안는다 (0:30)|Eden Cuddle]]>><<trauma -3>><<stress -3>><<pass 30>><<npcincr Eden love 1>><<npcincr Eden lust 1>><</link>><<glove>><<glust>><<ltrauma>><<lstress>>
 			<br>
 		<<else>>
-			<<link [[Cuddle (0:30)|Eden Cuddle]]>><<trauma -3>><<stress -3>><<pass 30>><<npcincr Eden love 1>><<npcincr Eden lust 1>><</link>><<glove>><<glust>><<ltrauma>><<lstress>>
+			<<link [[껴안는다 (0:30)|Eden Cuddle]]>><<trauma -3>><<stress -3>><<pass 30>><<npcincr Eden love 1>><<npcincr Eden lust 1>><</link>><<glove>><<glust>><<ltrauma>><<lstress>>
 			<br>
 		<</if>>
 		<<if $days % 2 is 0>>
 			<<if $eden_shoot gte 1>>
-				<<link [[Practise shooting (0:30)|Eden Shoot]]>><<pass 30>><<stress -3>><</link>><<lstress>>
+				<<link [[사격 연습을 한다 (0:30)|Eden Shoot]]>><<pass 30>><<stress -3>><</link>><<lstress>>
 				<br>
 			<<else>>
-				<<link [[Say you want to learn how to shoot (0:05)|Eden Shoot Ask]]>><<pass 5>><</link>>
+				<<link [[어떻게 쏘아야 하는지 배우고 싶다고 한다 (0:05)|Eden Shoot Ask]]>><<pass 5>><</link>>
 				<br>
 			<</if>>
 		<<else>>
-			<<link [[Ask Eden to read to you (0:30)|Eden Read]]>><<trauma -3>><<pass 30>><<npcincr Eden love 1>><<set $phase to 0>><</link>><<glove>><<ltrauma>>
+			<<link [[에덴에게 읽어달라고 한다 (0:30)|Eden Read]]>><<trauma -3>><<pass 30>><<npcincr Eden love 1>><<set $phase to 0>><</link>><<glove>><<ltrauma>>
 			<br>
 		<</if>>
 		<<if $edenradiointro is 2>>
-			<<link [[Ask Eden to dance (0:30)|Eden Dance]]>><<trauma -3>><<stress -3>><<danceskill 5>><<pass 30>><<npcincr Eden love 1>><<npcincr Eden lust 1>><<set $phase to 0>><</link>><<glove>><<glust>><<ltrauma>><<lstress>><<gdanceskill>>
+			<<link [[에덴에게 춤추자고 한다 (0:30)|Eden Dance]]>><<trauma -3>><<stress -3>><<danceskill 5>><<pass 30>><<npcincr Eden love 1>><<npcincr Eden lust 1>><<set $phase to 0>><</link>><<glove>><<glust>><<ltrauma>><<lstress>><<gdanceskill>>
 			<br>
 		<</if>>
 		<<if $edenpillow is 2 and $edenmassage is 0>>
-			<<link [[Give Eden a massage (0:30)|Eden Massage]]>><<pass 30>><<npcincr Eden love 1>><<npcincr Eden lust 3>><<set $edenmassage to 1>><</link>><<glove>><<gglust>><<ltrauma>><<lstress>>
+			<<link [[에덴에게 마사지를 해준다 (0:30)|Eden Massage]]>><<pass 30>><<npcincr Eden love 1>><<npcincr Eden lust 3>><<set $edenmassage to 1>><</link>><<glove>><<gglust>><<ltrauma>><<lstress>>
 			<br>
 		<</if>>
 		<<if $edenpillow is 2 and $edenmassage is 1>>
-			<<link [[Give Eden a massage (0:30)|Eden Massage]]>><<pass 30>><<npcincr Eden love 1>><<npcincr Eden lust 3>><<set $edenmassage to 2>><</link>><<glove>><<gglust>><<ltrauma>><<lstress>>
+			<<link [[에덴에게 마사지를 해준다 (0:30)|Eden Massage]]>><<pass 30>><<npcincr Eden love 1>><<npcincr Eden lust 3>><<set $edenmassage to 2>><</link>><<glove>><<gglust>><<ltrauma>><<lstress>>
 			<br>
 		<</if>>
 		<<if $edenpillow is 2 and $edenmassage is 2>>
-			<<link [[Give Eden a massage (0:30)|Eden Massage]]>><<pass 30>><<npcincr Eden love 1>><<npcincr Eden lust 3>><<set $edenmassage to 3>><</link>><<glove>><<gglust>><<ltrauma>><<lstress>>
+			<<link [[에덴에게 마사지를 해준다 (0:30)|Eden Massage]]>><<pass 30>><<npcincr Eden love 1>><<npcincr Eden lust 3>><<set $edenmassage to 3>><</link>><<glove>><<gglust>><<ltrauma>><<lstress>>
 			<br>
 		<</if>>
 		<<if $edenpillow is 2 and $edenmassage is 3>>
-			<<link [[Give Eden a massage (0:30)|Eden Massage]]>><<pass 30>><<npcincr Eden love 1>><<npcincr Eden lust 3>><<set $edenmassage to 4>><</link>><<glove>><<gglust>><<ltrauma>><<lstress>>
+			<<link [[에덴에게 마사지를 해준다 (0:30)|Eden Massage]]>><<pass 30>><<npcincr Eden love 1>><<npcincr Eden lust 3>><<set $edenmassage to 4>><</link>><<glove>><<gglust>><<ltrauma>><<lstress>>
 			<br>
 		<</if>>
 		<<if $edenpillow is 2 and $edenmassage is 4>>
-			<<link [[Give Eden a massage (0:30)|Eden Massage]]>><<pass 30>><<npcincr Eden love 1>><<npcincr Eden lust 3>><<set $edenmassage to 5>><</link>><<glove>><<gglust>><<ltrauma>><<lstress>>
+			<<link [[에덴에게 마사지를 해준다 (0:30)|Eden Massage]]>><<pass 30>><<npcincr Eden love 1>><<npcincr Eden lust 3>><<set $edenmassage to 5>><</link>><<glove>><<gglust>><<ltrauma>><<lstress>>
 			<br>
 		<</if>>
 		<br>
 	<</if>>
 	<<if !$edenfurniture>>
-		<<link [[Ask Eden if you can buy a rug and pillows|Eden Pillows]]>><</link>>
+		<<link [[에덴에게 깔개와 침구를 사도 되는지 묻는다|Eden Pillows]]>><</link>>
 		<br>
 	<<elseif $edenfurniture is 1 and $edenpillow is 2>>
-		<<link [[Ask if you can get curtains and a coat stand|Eden Curtains]]>><</link>>
+		<<link [[에덴에게 코트걸이와 커튼을 사도 되는지 묻는다|Eden Curtains]]>><</link>>
 		<br>
 	<<elseif $edenfurniture gte 2 and !$edencoat and $edencurtains is 2>>
-		<<link [[Ask to make the coat stand (3:00)|Eden Coat Stand]]>><<set $edencoat to 1>><<pass 2 hours>><<pass 1 hour>><</link>>
+		<<link [[코트걸이를 만들자고 한다 (3:00)|Eden Coat Stand]]>><<set $edencoat to 1>><<pass 2 hours>><<pass 1 hour>><</link>>
 		<br>
 	<<elseif $edenfurniture is 2 and $edencurtains is 2 and $edencoat>>
-		<<link [[Ask for a loveseat|Eden Loveseat]]>><</link>>
+		<<link [[안락의자를 만들자고 한다|Eden Loveseat]]>><</link>>
 		<br>
 	<<elseif $edenfurniture is 3 and $edenloveseat lt 7>>
-		<<link [[Work on the loveseat (3:00)|Eden Loveseat Work]]>><<pass 2 hours>><<pass 1 hour>><</link>>
+		<<link [[안락의자를 만든다 (3:00)|Eden Loveseat Work]]>><<pass 2 hours>><<pass 1 hour>><</link>>
 		<br>
-	<</if>>	<<if $edenwalk isnot 1>>
-		<<link [[Ask Eden to accompany you to the lake|Eden Lake]]>><<set $edenwalk to 1>><</link>>
+	<</if>>	
+	<<if $hour is 17 and $edenjoin is 1>>
+		<<link [[에덴에게 같이 목욕할 건지 묻는다|Eden Bath Join]]>><<npcincr Eden love 1>><<pass 30>><</link>><<glove>>
+		<br>
+	<</if>>
+	<<if $worn.neck.collared isnot 1 and $NPCName[$NPCNameList.indexOf("Eden")].dom gte 100>>
+		<<link [[에덴에게 개목걸이를 줄 수 있는지 묻는다|Eden Collar]]>><<npcincr Eden love 5>><<npcincr Eden lust 5>><<npcincr Eden dom 5>><</link>><<gglove>><<gglust>><<ggdom>>
+		<br>
+	<</if>>
+	<<if $edenwalk isnot 1>>
+		<<link [[에덴에게 함께 호수에 가자고 한다|Eden Lake]]>><</link>>
 		<br>
 	<</if>>
 	<<if $eden_search is undefined or $eden_search lt ($NPCName[$NPCNameList.indexOf("Eden")].love / 40)>>
-		<<link [[Ask Eden to help search the forest (0:30)|Eden Search]]>><<if $eden_search is undefined>><<set $eden_search to 1>><<else>><<set $eden_search += 1>><</if>><</link>>
+		<<link [[에덴에게 숲을 수색하는 걸 도와달라고 한다 (0:30)|Eden Search]]>><<if $eden_search is undefined>><<set $eden_search to 1>><<else>><<set $eden_search += 1>><</if>><</link>>
 		<br>
 	<</if>>
 
 	<<if $monthday is 31 and $halloween_eden is 1 and $halloween_eden_bought is 1 and !$halloween_eden_candy_given>>
-		<<link [[Give Eden the hamper|Eden Halloween]]>><<npcincr Eden love 5>><<npcincr Eden dom 1>><<set $halloween_eden_candy_given to 1>><</link>>
+		<<link [[에덴에게 바구니를 건넨다|Eden Halloween]]>><<npcincr Eden love 5>><<npcincr Eden dom 1>><<set $halloween_eden_candy_given to 1>><</link>>
 		<br>
 	<</if>>
 
 	<<if $monthday is 25 and $christmas_gift_eden is 1 and $christmas_gift_eden_given isnot 1>>
-		<<link [[Give Eden the hunting jacket|Eden Jacket]]>><<npcincr Eden love 5>><<npcincr Eden dom 1>><<set $christmas_gift_eden_given to 1>><</link>>
+		<<link [[에덴에게 사냥용 조끼를 선물한다|Eden Jacket]]>><<npcincr Eden love 5>><<npcincr Eden dom 1>><<set $christmas_gift_eden_given to 1>><<set $edencoatjacket to 1>><</link>>
 		<br>
 	<</if>>
 
 	<<if $leftarm is "bound" or $rightarm is "bound" or $feetuse is "bound">>
-		<<link [[Ask Eden to undo your bindings (0:01)|Eden Bindings]]>><<pass 1>><<unbind>><</link>>
+		<<link [[에덴에게 구속을 풀어달라고 한다 (0:01)|Eden Bindings]]>><<pass 1>><<unbind>><</link>>
 		<br>
 	<</if>>
 
 	<<if $edenfreedom is undefined>>
-		<<link [[Ask for freedom to return to town|Eden Freedom]]>><</link>>
+		<<link [[마을로 돌아갈 자유를 달라고 한다|Eden Freedom]]>><</link>>
 		<br>
 	<</if>>
 	<<if $edenfreedom is 1>>
-		<<link [[Ask for freedom to remain in town|Eden Freedom 3]]>><</link>>
+		<<link [[마을에서 계속 살 자유를 달라고 한다|Eden Freedom 3]]>><</link>>
 		<br>
 	<</if>>
 	<<if $edenshopping is 1>>
-		<<link [[Give Eden the supplies|Eden Supplied]]>><</link>>
+		<<link [[에덴에게 저장품을 넘긴다|Eden Supplied]]>><</link>>
 		<br>
 	<</if>>
 	<<if $edenradiointro is 1>>
-		<<link [[Give Eden the radio|Eden Radio Intro]]>><</link>>
+		<<link [[에덴에게 라디오를 준다|Eden Radio Intro]]>><</link>>
 		<br>
 	<</if>>
 	<br>
-	<<link [[Go back|Eden Cabin]]>><<endevent>><</link>>
+	<<link [[돌아간다|Eden Cabin]]>><<endevent>><</link>>
 	<br><br>
 <</widget>>
 
 <<widget "clearingactions">>
 
+	<<link [[오두막에 들어간다|Eden Cabin]]>><<endevent>><</link>>
+	<br><br>
+
+	<<link [[베란다 아래서 휴식한다 (0:15)|Eden Porch]]>><<stress -2>><<pass 15>><</link>><<lstress>>
+	<br><br>
+
 	<<if $edengarden is 0>>
-		<span class="purple">Eden's crops are strangled by weeds.</span>
+		<span class="purple">에덴의 작물들이 잡초에 휘감겨 있다.</span>
 		<br>
 
-		<<link [[Remove the weeds (3:00)|Clearing Weeding]]>><<tending 1>><<pass 2 hours>><<pass 1 hour>><<tiredness 12>><<npcincr Eden love 1>><</link>><<gtiredness>><<glove>><<gtending>>
+		<<link [[잡초를 제거한다 (3:00)|Clearing Weeding]]>><<tending 1>><<pass 2 hours>><<pass 1 hour>><<tiredness 12>><<npcincr Eden love 1>><</link>><<gtiredness>><<glove>><<gtending>>
 		<br><br>
 	<<elseif $edengarden is 1>>
-		<span class="blue">Eden's crops are tangled with weeds.</span>
+		<span class="blue">에덴의 작물들이 잡초에 엮여 있다.</span>
 		<br>
 
-		<<link [[Remove the weeds (3:00)|Clearing Weeding]]>><<tending 1>><<pass 2 hours>><<pass 1 hour>><<tiredness 12>><<npcincr Eden love 1>><</link>><<gtiredness>><<glove>><<gtending>>
+		<<link [[잡초를 제거한다 (3:00)|Clearing Weeding]]>><<tending 1>><<pass 2 hours>><<pass 1 hour>><<tiredness 12>><<npcincr Eden love 1>><</link>><<gtiredness>><<glove>><<gtending>>
 		<br><br>
 	<<elseif $edengarden is 2>>
-		<span class="lblue">There are as many weeds growing in Eden's plot as there are vegetables.</span>
+		<span class="lblue">에덴의 밭에는 야채가 있는 만큼 잡초도 자라나 있다.</span>
 		<br>
 
-		<<link [[Remove the weeds (3:00)|Clearing Weeding]]>><<tending 1>><<pass 2 hours>><<pass 1 hour>><<tiredness 12>><<npcincr Eden love 1>><</link>><<gtiredness>><<glove>><<gtending>>
+		<<link [[잡초를 제거한다 (3:00)|Clearing Weeding]]>><<tending 1>><<pass 2 hours>><<pass 1 hour>><<tiredness 12>><<npcincr Eden love 1>><</link>><<gtiredness>><<glove>><<gtending>>
 		<br><br>
 	<<elseif $edengarden is 3>>
-		<span class="teal">Eden's crops are almost free of weeds, but more could be done.</span>
+		<span class="teal">에덴의 작물에 잡초는 거의 없지만, 이것보다 깔끔하게 할 수는 있다.</span>
 		<br>
 
-		<<link [[Remove the weeds (3:00)|Clearing Weeding]]>><<tending 1>><<pass 2 hours>><<pass 1 hour>><<tiredness 12>><<npcincr Eden love 1>><</link>><<gtiredness>><<glove>><<gtending>>
+		<<link [[잡초를 제거한다 (3:00)|Clearing Weeding]]>><<tending 1>><<pass 2 hours>><<pass 1 hour>><<tiredness 12>><<npcincr Eden love 1>><</link>><<gtiredness>><<glove>><<gtending>>
 		<br><br>
 	<<elseif $edengarden is 4>>
-		<span class="green">Eden's crops are free of weeds.</span>
+		<span class="green">에덴의 작물에 잡초가 하나도 없다.</span>
 		<br><br>
 	<</if>>
 
-	There are other bare plots of soil that Eden isn't using.
+	밭에 에덴이 현재 사용하고 있지 않은 흙이 있다.
 	<br>
-	<<link [[Examine|Eden Plots]]>><</link>>
+	<<link [[살펴본다|Eden Plots]]>><</link>>
 	<br><br>
 
 	<<if $edenshrooms is 0>>
-		<span class="purple">Eden's mushroom barrel is almost empty.</span>
+		<span class="purple">에덴의 버섯 통은 거의 비어 있다.</span>
 		<br>
 
-		<<link [[Look for mushrooms (1:00)|Clearing Mushrooms]]>><<pass 1 hour>><<npcincr Eden love 1>><</link>><<glove>>
+		<<link [[버섯을 딴다 (1:00)|Clearing Mushrooms]]>><<pass 1 hour>><<npcincr Eden love 1>><</link>><<glove>>
 		<br><br>
 	<<elseif $edenshrooms is 1>>
-		<span class="blue">Eden's mushroom barrel is almost empty.</span>
+		<span class="blue">에덴의 버섯 통은 거의 비어 있다.</span>
 		<br>
 
-		<<link [[Look for mushrooms (1:00)|Clearing Mushrooms]]>><<pass 1 hour>><<npcincr Eden love 1>><</link>><<glove>>
+		<<link [[버섯을 딴다 (1:00)|Clearing Mushrooms]]>><<pass 1 hour>><<npcincr Eden love 1>><</link>><<glove>>
 		<br><br>
 	<<elseif $edenshrooms is 2>>
-		<span class="lblue">Eden's mushroom barrel is half full.</span>
+		<span class="lblue">에덴의 버섯 통은 반쯤 차 있다.</span>
 		<br>
 
-		<<link [[Look for mushrooms (1:00)|Clearing Mushrooms]]>><<pass 1 hour>><<npcincr Eden love 1>><</link>><<glove>>
+		<<link [[버섯을 딴다 (1:00)|Clearing Mushrooms]]>><<pass 1 hour>><<npcincr Eden love 1>><</link>><<glove>>
 		<br><br>
 	<<elseif $edenshrooms is 3>>
-		<span class="teal">Eden's mushroom barrel is almost full.</span>
+		<span class="teal">에덴의 버섯 통은 거의 차 있다.</span>
 		<br>
 
-		<<link [[Look for mushrooms (1:00)|Clearing Mushrooms]]>><<pass 1 hour>><<npcincr Eden love 1>><</link>><<glove>>
+		<<link [[버섯을 딴다 (1:00)|Clearing Mushrooms]]>><<pass 1 hour>><<npcincr Eden love 1>><</link>><<glove>>
 		<br><br>
 	<<elseif $edenshrooms is 4>>
-		<span class="green">Eden's mushroom barrel is brimming with fungi.</span>
+		<span class="green">에덴의 버섯 통은 각종 버섯으로 가득 차 있다.</span>
 		<br><br>
 	<</if>>
 
 	<<if $edenspring is 0>>
-		<span class="purple">The spring is full of broken branches and twigs.</span>
+		<span class="purple">샘은 부러진 나뭇가지와 잔가지로 가득하다.</span>
 		<br>
 
-		<<link [[Clear the debris (0:30)|Clearing Debris]]>><<pass 30>><<tiredness 6>><<npcincr Eden love 1>><</link>><<gtiredness>><<glove>>
+		<<link [[잔해를 치운다 (0:30)|Clearing Debris]]>><<pass 30>><<tiredness 6>><<npcincr Eden love 1>><</link>><<gtiredness>><<glove>>
 		<br><br>
 	<<elseif $edenspring is 1>>
-		<span class="blue">The bottom of the spring is littered with branches.</span>
+		<span class="blue">샘의 바닥 부분에 나뭇가지가 잔뜩 가라앉아 있다.</span>
 		<br>
 
-		<<link [[Clear the debris (0:30)|Clearing Debris]]>><<pass 30>><<tiredness 6>><<npcincr Eden love 1>><</link>><<gtiredness>><<glove>>
+		<<link [[잔해를 치운다 (0:30)|Clearing Debris]]>><<pass 30>><<tiredness 6>><<npcincr Eden love 1>><</link>><<gtiredness>><<glove>>
 		<br><br>
 	<<elseif $edenspring is 2>>
-		<span class="lblue">You can see the bottom of the spring through the twigs and branches floating on its surface.</span>
+		<span class="lblue">나뭇가지와 잔가지가 수면에 떠 있긴 하지만, 샘의 바닥을 볼 수 있다.</span>
 		<br>
 
-		<<link [[Clear the debris (0:30)|Clearing Debris]]>><<pass 30>><<tiredness 6>><<npcincr Eden love 1>><</link>><<gtiredness>><<glove>>
+		<<link [[잔해를 치운다 (0:30)|Clearing Debris]]>><<pass 30>><<tiredness 6>><<npcincr Eden love 1>><</link>><<gtiredness>><<glove>>
 		<br><br>
 	<<elseif $edenspring is 3>>
-		<span class="teal">Twigs float on the surface of the spring.</span>
+		<span class="teal">잔가지들의 샘의 수면에 떠 있다.</span>
 		<br>
 
-		<<link [[Clear the debris (0:30)|Clearing Debris]]>><<pass 30>><<tiredness 6>><<npcincr Eden love 1>><</link>><<gtiredness>><<glove>>
+		<<link [[잔해를 치운다 (0:30)|Clearing Debris]]>><<pass 30>><<tiredness 6>><<npcincr Eden love 1>><</link>><<gtiredness>><<glove>>
 		<br><br>
 	<<elseif $edenspring is 4>>
-		<span class="green">The spring is clean and clear.</span>
+		<span class="green">샘은 깨끗하고 맑다.</span>
 		<br>
 
-		<<link [[Relax in the spring (0:30)|Clearing Spring]]>><<unset $edenpush>><<endevent>><<pass 30>><<stress -6>><</link>><<lstress>>
+		<<if !$edenspringintro and (($hour gte 9 and $hour lte 10) or ($hour is 15) or ($hour is 16))>> 
+			<<link [[샘에서 휴식을 취한다 (0:30)|Eden Spring Intro]]>><</link>><<lstress>>
+		<<else>>
+			<<link [[샘에서 휴식을 취한다 (0:30)|Clearing Spring]]>><<unset $edenpush>><<endevent>><<pass 30>><<stress -6>><</link>><<lstress>>
+		<</if>>
 		<br>
-	<<if $edenwash is undefined>>
-		<<link [[Wash Eden's clothes in the spring (0:30)|Wash Spring]]>><<pass 30>><<npcincr Eden love 1>><<npcincr Eden dom 1>><<set $edenwash to 1>><</link>>
-		<br><br>
+		<<if $edenwash is undefined>>
+			<<link [[샘에서 에덴의 옷을 세탁한다 (0:30)|Wash Spring]]>><<pass 30>><<npcincr Eden love 1>><<npcincr Eden dom 1>><<set $edenwash to 1>><</link>>
+			<br>
+		<</if>>
+		<br>
 	<</if>>
-	<</if>>
-
-	<<link [[Enter the cabin|Eden Cabin]]>><<endevent>><</link>>
-	<br>
 
 	<<if $edenfreedom gte 1>>
-		<<foresticon>><<link [[Enter the forest (0:10)|Forest]]>><<endevent>><<pass 10>><<set $forest to 60>><</link>>
+		<<foresticon>><<link [[숲에 들어간다 (0:10)|Forest]]>><<endevent>><<pass 10>><<set $forest to 60>><</link>>
 		<br>
 	<<else>>
-		<<link [[Escape|Eden Cabin Escape]]>><<set $forest to 80>><</link>>
+		<<link [[도망친다|Eden Cabin Escape]]>><<set $forest to 80>><</link>>
 		<br>
 	<</if>>
 	<br>
@@ -343,94 +404,232 @@
 <<widget "cabinprepare">>
 
 	<<if $edenwall lt 5>>
-		<<link [[Fix the cracks in the walls (3:00)|Eden Wall]]>><<pass 2 hours>><<pass 1 hour>><<npcincr Eden love 1>><<npcincr Eden dom 1>><</link>><<glove>><<gdom>>
+		<<link [[벽에 난 금을 메운다 (3:00)|Eden Wall]]>><<pass 2 hours>><<pass 1 hour>><<npcincr Eden love 1>><<npcincr Eden dom 1>><</link>><<glove>><<gdom "Eden">>
 	<<else>>
-		<span class="green">The walls are fully repaired.</span>
+		<span class="green">벽은 완전히 수리되었다.</span>
 	<</if>>
 	<br><br>
-	
+
 	<<if $edenchimney lt 5>>
-		<<link [[Clean the chimney (3:00)|Eden Chimney]]>><<pass 2 hours>><<pass 1 hour>><<npcincr Eden love 1>><<npcincr Eden dom 1>><</link>><<glove>><<gdom>>
+		<<link [[굴뚝을 닦는다 (3:00)|Eden Chimney]]>><<pass 2 hours>><<pass 1 hour>><<npcincr Eden love 1>><<npcincr Eden dom 1>><</link>><<glove>><<gdom "Eden">>
 	<<else>>
-		<span class="green">The chimney is clean.</span>
+		<span class="green">굴뚝은 깨끗하다.</span>
 	<</if>>
 	<br><br>
 
 	<<if $edenroof lt 5>>
-		<<link [[Fix the Roof (3:00)|Eden Roof]]>><<pass 2 hours>><<pass 1 hour>><<npcincr Eden love 1>><<npcincr Eden dom 1>><</link>><<glove>><<gdom>>
+		<<link [[천장을 고친다 (3:00)|Eden Roof]]>><<pass 2 hours>><<pass 1 hour>><<npcincr Eden love 1>><<npcincr Eden dom 1>><</link>><<glove>><<gdom "Eden">>
 	<<else>>
-		<span class="green">The roof is fixed.</span>
+		<span class="green">천장은 고쳐졌다.</span>
 	<</if>>
 	<br><br>
 
-	<<link [[Go back|Eden Clearing]]>><<endevent>><</link>>
+	<<link [[돌아간다|Eden Clearing]]>><<endevent>><</link>>
 	<br><br>
 
-<</widget>>	
+<</widget>>
 
 <<widget "clearingedenactions">>
 
-	Eden glances at you.
+	에덴이 당신을 쳐다본다.
 	<br><br>
 
 	<<if !$edenfurniture>>
-		<<link [[Ask Eden if you can buy a rug and pillows|Eden Pillows]]>><</link>>
+		<<link [[에덴에게 깔개와 침구를 사도 되는지 묻는다|Eden Pillows]]>><</link>>
 		<br>
 	<<elseif $edenfurniture is 1 and $edenpillow is 2>>
-		<<link [[Ask if you can get curtains and a coat stand|Eden Curtains]]>><</link>>
+		<<link [[에덴에게 코트걸이와 커튼을 사도 되는지 묻는다|Eden Curtains]]>><</link>>
 		<br>
 	<<elseif $edenfurniture gte 2 and !$edencoat and $edencurtains is 2>>
-		<<link [[Ask to make the coat stand (3:00)|Eden Coat Stand]]>><<set $edencoat to 1>><<pass 2 hours>><<pass 1 hour>><</link>>
+		<<link [[코트걸이를 만들자고 한다 (3:00)|Eden Coat Stand]]>><<set $edencoat to 1>><<pass 2 hours>><<pass 1 hour>><</link>>
 		<br>
 	<<elseif $edenfurniture is 2 and $edencurtains is 2 and $edencoat>>
-		<<link [[Ask for a loveseat|Eden Loveseat]]>><</link>>
+		<<link [[안락의자를 만들자고 한다|Eden Loveseat]]>><</link>>
 		<br>
 	<<elseif $edenfurniture is 3 and $edenloveseat lt 7>>
-		<<link [[Work on the loveseat (3:00)|Eden Loveseat Work]]>><<pass 2 hours>><<pass 1 hour>><</link>>
-		<br>
-	<</if>>
-	<<if $edenwalk isnot 1>>
-		<<link [[Ask Eden to accompany you to the lake|Eden Lake]]>><<set $edenwalk to 1>><</link>>
+		<<link [[안락의자를 만든다 (3:00)|Eden Loveseat Work]]>><<pass 2 hours>><<pass 1 hour>><</link>>
 		<br>
 	<</if>>
 
+	<<if $worn.neck.collared isnot 1 and $NPCName[$NPCNameList.indexOf("Eden")].dom gte 100>>
+		<<link [[에덴에게 개목걸이를 줄 수 있는지 묻는다|Eden Collar]]>><<npcincr Eden love 5>><<npcincr Eden lust 5>><<npcincr Eden dom 5>><</link>><<gglove>><<gglust>><<ggdom>>
+		<br>
+	<</if>>
+	<<if $edenspringintro is 1 and $edenspringjoin isnot 1 and $edenspring is 4>>
+		<<link [[에덴에게 샘에 같이 갈 수 있는지 묻는다|Eden Spring]]>><<set $edenspringjoin to 1>><<stress -6>><<npcincr Eden love 1>><</link>><<lstress>><<glove>>
+		<br>
+	<</if>>
+	<<if $edenwalk isnot 1>>
+		<<link [[에덴에게 함께 호수에 가자고 한다|Eden Lake]]>><</link>>
+		<br>
+	<</if>>
 	<<if $eden_search is undefined or $eden_search lt ($NPCName[$NPCNameList.indexOf("Eden")].love / 40)>>
-		<<link [[Ask Eden to help search the forest (0:30)|Eden Search]]>><<if $eden_search is undefined>><<set $eden_search to 1>><<else>><<set $eden_search += 1>><</if>><</link>>
+		<<link [[에덴에게 숲을 수색하는 걸 도와달라고 한다 (0:30)|Eden Search]]>><<if $eden_search is undefined>><<set $eden_search to 1>><<else>><<set $eden_search += 1>><</if>><</link>>
 		<br>
 	<</if>>
 	<br>
 
 	<<if $monthday is 31 and $halloween_eden is 1 and $halloween_eden_bought is 1 and !$halloween_eden_candy_given>>
-		<<link [[Give Eden the hamper|Eden Halloween]]>><<npcincr Eden love 5>><<npcincr Eden dom 1>><<set $halloween_eden_candy_given to 1>><</link>>
+		<<link [[에덴에게 바구니를 건넨다|Eden Halloween]]>><<npcincr Eden love 5>><<npcincr Eden dom 1>><<set $halloween_eden_candy_given to 1>><</link>>
 		<br>
 	<</if>>
 
 	<<if $monthday is 25 and $christmas_gift_eden is 1 and $christmas_gift_eden_given isnot 1>>
-		<<link [[Give Eden the hunting jacket|Eden Jacket]]>><<npcincr Eden love 5>><<npcincr Eden dom 1>><<set $christmas_gift_eden_given to 1>><<set $edencoatjacket to 1>><</link>>
+		<<link [[에덴에게 사냥용 조끼를 선물한다|Eden Jacket]]>><<npcincr Eden love 5>><<npcincr Eden dom 1>><<set $christmas_gift_eden_given to 1>><<set $edencoatjacket to 1>><</link>>
 		<br><br>
 	<</if>>
 
 	<<if $leftarm is "bound" or $rightarm is "bound" or $feetuse is "bound">>
-		<<link [[Ask Eden to undo your bindings (0:01)|Eden Bindings]]>><<pass 1>><<unbind>><</link>>
+		<<link [[에덴에게 구속을 풀어달라고 한다 (0:01)|Eden Bindings]]>><<pass 1>><<unbind>><</link>>
 		<br><br>
 	<</if>>
 
 	<<if $edenfreedom is undefined>>
-		<<link [[Ask for freedom to return to town|Eden Freedom]]>><</link>>
+		<<link [[마을로 돌아갈 자유를 달라고 한다|Eden Freedom]]>><</link>>
 		<br>
 	<</if>>
 	<<if $edenfreedom is 1>>
-		<<link [[Ask for freedom to remain in town|Eden Freedom 3]]>><</link>>
+		<<link [[마을에서 계속 살 자유를 달라고 한다|Eden Freedom 3]]>><</link>>
 		<br>
 	<</if>>
 	<<if $edenshopping is 1>>
-		<<link [[Give Eden the supplies|Eden Supplied]]>><</link>>
+		<<link [[에덴에게 저장품을 넘긴다|Eden Supplied]]>><</link>>
 		<br>
 	<</if>>
 	<<if $edenradiointro is 1>>
-		<<link [[Give Eden the radio|Eden Radio Intro]]>><</link>>
+		<<link [[에덴에게 라디오를 준다|Eden Radio Intro]]>><</link>>
 		<br>
 	<</if>>
-	<<link [[Go back|Eden Clearing]]>><<endevent>><</link>>
+	<<link [[돌아간다|Eden Clearing]]>><<endevent>><</link>>
 	<br><br>
+<</widget>>
+
+<<widget "edenpreystart">>
+	<<if $edenPreyWeekly or random(1, 3) gte 2>>
+	/* do nothing */
+	<<else>>
+		/* Checks to see if the player has one of the main virginities intact, and if Eden can take it */
+		<<if ($player.penisExist and $player.virginity.penile is true and ($NPCList[0].vagina isnot "none" or $analdisable is "f")) or ($player.vaginaExist and $player.virginity.vaginal is true and $NPCList[0].penis isnot "none")>>
+			<<set _virginityPresent to true>>
+		<</if>>
+
+		/* Lowers amount of love and lust required if player is not a virgin or hasnt seen the event before */
+		<<if $edenPrey gte 1 and _virginityPresent>>
+			<<set _edenPreyPhase to 3>>
+		<<elseif $edenPrey gte 1>>
+			<<set _edenPreyPhase to 2>>
+		<<elseif _virginityPresent>>
+			<<set _edenPreyPhase to 1>>
+		<<else>>
+			<<set _edenPreyPhase to 0>>
+		<</if>>
+
+		<<switch _edenPreyPhase>>
+			<<case 0>>
+				/* no virginity, first time */
+				<<if $NPCName[$NPCNameList.indexOf("Eden")].love gte 85 and $NPCName[$NPCNameList.indexOf("Eden")].lust gte 50>>
+					<<set _edenPreyEvent to true>>
+				<</if>>
+			<<case 1>>
+				/* virginity intact, first time */
+				<<if $NPCName[$NPCNameList.indexOf("Eden")].love gte 75 and $NPCName[$NPCNameList.indexOf("Eden")].lust gte 40>>
+					<<set _edenPreyEvent to true>>
+				<</if>>
+			<<case 2>>
+				/* non-virgin, repeat event */
+				<<if $NPCName[$NPCNameList.indexOf("Eden")].love gte 125 and $NPCName[$NPCNameList.indexOf("Eden")].lust gte 70>>
+					<<set _edenPreyEvent to true>>
+				<</if>>
+			<<case 3>>
+				/* virgin, repeat event */
+				<<if $NPCName[$NPCNameList.indexOf("Eden")].love gte 100 and $NPCName[$NPCNameList.indexOf("Eden")].lust gte 60>>
+					<<set _edenPreyEvent to true>>
+				<</if>>
+		<</switch>>
+		
+		<<if _edenPreyEvent>>
+			<<set $edenPreyWeekly to true>>
+		<</if>>
+	<</if>>
+<</widget>>
+
+<<widget "edenCagedSave">>
+	<<npc Eden>><<person1>>
+	Before you have a chance to recollect, you feel a hand on your shoulder. You're spun around, and come face-to-face with Eden, <<his>> eyes full of rage.
+	<br><br>
+
+	"You've got some nerve," <<he>> growls. "Abandoning me, acting like a fucking brat, then expecting me to save your helpless ass."
+	<br><br>
+
+	<<He>> grabs your wrist tight and begins marching you into the woods. "Come on. You're overdue for your punishment."
+	<br><br>
+
+	<<link [[Resist|Forest Eden Rage]]>><<set $phase to 0>><<def 1>><<npcincr Eden dom -1>><</link>><<physiquedifficulty 2000 18000>><<ldom>>
+	<br>
+	<<link [[Submit (0:30)|Forest Eden Rage]]>><<set $phase to 1>><<pass 30>><<sub 1>><<npcincr Eden dom 1>><</link>><<gdom>>
+	<br>
+<</widget>>
+
+<<widget "edenCagedCoopSave">>
+	<<npc Eden>><<person1>>
+
+	<<if $forest_shop_intro isnot 1 and $gwylan_rescue isnot 1>>
+		A mousy <<nnpc_gendery "Gwylan">>
+	<<else>>
+		Gwylan
+	<</if>>
+	 bursts from the treeline and rushes to your side. "Hey! You alright-"
+	<br><br>
+
+	<<if $gwylan_eden_coop gte 4>>
+		<<nnpc_He "Gwylan">>'s cut off as someone grabs <<nnpc_him "Gwylan">> by the arm and pulls <<nnpc_him "Gwylan">> aside. <span class="red">It's Eden.</span> <<He>> doesn't look happy to see you.
+		<br>
+		"You've got some nerve," Eden growls. "Abandoning me, acting like a fucking brat, then expecting me to save your helpless ass."
+		<br><br>
+
+		Gwylan swallows nervously and rests a hand on Eden's shoulder. "H-hey, take it easy. Let's just-"
+		<br><br>
+
+		Eden turns and punches Gwylan square in the jaw. <<nnpc_He "Gwylan">> cries out in pain, staggering backwards into the dirt.<<trauma 12>><<ggtrauma>>
+		<br>
+		"Don't touch me," Eden spits. "I don't need your help. And neither does <<pshe>>." <<He>> turns to you with a glare. "All <<pshe>> needs is to learn <<pher>> place.
+		<br><br>
+
+		<<He>> grabs you by the wrist and begins dragging you into the woods, leaving Gwylan behind.
+	<<elseif $gwylan_eden_coop gte 1>>
+		<<nnpc_He "Gwylan">>'s cut off by Eden shoving <<nnpc_him "Gwylan">> aside, eyes full of rage. Gwylan yelps as <<nnpc_he "Gwylan">> falls to the dirt.
+		<br>
+		"You've got some nerve," Eden growls. "Abandoning me, acting like a fucking brat, then expecting me to save your helpless ass."
+		<br><br>
+
+		Gwylan watches, mouth agape. Eden glares at <<nnpc_him "Gwylan">>. "Go. This is between me and <<pher>>."
+		<br>
+		Gwylan glances between the two of you, <<nnpc_his "Gwylan">> expression a mix of worry and fear, before scrambling to <<nnpc_his "Gwylan">> feet and scurrying away.<<trauma 6>><<gtrauma>>
+		<br><br>
+
+		Eden turns to you. "I told you I'd find you again," <<he>> spits. "And no one's getting in my way." <<He>> begins dragging you into the woods.
+	<<else>>
+		<<nnpc_He "Gwylan">> cuts off as a hand grabs <<nnpc_him "Gwylan">> by the arm and hurls <<nnpc_him "Gwylan">> into a nearby shrub.
+		<br><br>
+
+		<span class="red">It's Eden.</span> "I told you I'd find you again," <<he>> growls. "And no one's getting in my way."
+		<br><br>
+
+		<<He>> begins dragging you into the woods, leaving the dazed
+		<<if $forest_shop_intro isnot 1 and $gwylan_rescue isnot 1>>
+			<<nnpc_gendery "Gwylan">>
+		<<else>>
+			shopkeeper
+		<</if>>
+		groaning behind you.
+	<</if>>
+	<<set $gwylan_aborted to 1>>
+	<br><br>
+
+	<<link [[Fight|Eden Caged Caught Resist]]>><<set $fightstart to 1>><<def 1>><</link>>
+	<br>
+	<<link [[Try to pull away|Eden Caged Caught Pull]]>><<def 1>><<npcincr Eden dom -1>><</link>><<physiquedifficulty 2000 18000>><<ldom>>
+	<br>
+	<<link [[Submit (0:30)|Eden Caged Caught]]>><<set $phase to 1>><<pass 30>><<sub 1>><<npcincr Eden dom 1>><</link>><<gdom>>
+	<br>
 <</widget>>

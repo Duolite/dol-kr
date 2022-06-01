@@ -49,8 +49,10 @@ The warmth growing within you passes the point of no return. Your knees buckle. 
 		<br><br>
 		<<tearful>> you rise to your feet. You feel unnaturally aroused, despite your orgasm. It's a small feeling at first. Then it grows, until <span class="lewd">an overwhelming desire for lewdity overtakes you.</span>
 		<br><br>
-		<i>A corruption bar has appeared in the Characteristics tab.</i>
-		<br><br>
+		<<if !$corruption_slime>>
+			<i>A corruption bar has appeared in the Characteristics tab.</i>
+			<br><br>
+		<</if>>
 
 		<<link [[Next|Trash Slime]]>><</link>>
 		<br>
@@ -100,17 +102,24 @@ The warmth growing within you passes the point of no return. Your knees buckle. 
 The gate is barred by a heavy-duty padlock.
 <br><br>
 <<set $lock to 800>>
+<<if $trash_key is 1>>
+	<span class="green">It looks like a perfect fit for the key you found.</span>
+	<br><br>
 
-	<<if $skulduggery gte $lock>>
+	<<link [[Use the key (0:05)|Trash Enter]]>><<set $trash_unlocked to 1>><<pass 5>><</link>>
+	<br>
+<<elseif currentSkillValue('skulduggery') gte $lock>>
 	<span class="green">The lock looks easy to pick.</span>
 	<br><br>
 
 	<<link [[Pick lock (0:05)|Trash Lock Enter]]>><<pass 5>><<crimeup 1>><</link>><<crime>>
 	<br>
-	<<else>>
+<<else>>
 	<span class="red">The lock looks beyond your ability to pick.</span><<skulduggeryrequired>>
 	<br><br>
-	<</if>>
+	<span class="blue"><i>There must be a key, but you haven't any idea where you could find one.</i></span>
+	<br><br>
+<</if>>
 
 <<link [[Leave|Elk Street]]>><</link>>
 <br>
@@ -123,7 +132,7 @@ The gate is barred by a chain and padlock. You wonder if there's a key somewhere
 
 <<set $lock to 800>>
 
-	<<if $skulduggery gte $lock>>
+	<<if currentSkillValue('skulduggery') gte $lock>>
 	<span class="green">The lock looks easy to pick.</span>
 	<br><br>
 
@@ -361,7 +370,7 @@ You find a large, iron key. You wonder if it opens anything nearby.
 :: Trash Boys Compare
 <<effects>>
 	<<widget "npcpenissizetext">>
-		<<switch $args[0]>>
+		<<switch _args[0]>>
 			<<case 4>>
 				huge
 			<<case 3>>
@@ -403,7 +412,7 @@ You find a large, iron key. You wonder if it opens anything nearby.
 	<<elseif $NPCList[1].penissize lte 0>>
 		You try not to laugh at the sight of such a <<EZsmall>> penis on a boy taller than you.
 	<<else>>
-		You take a moment to take in the view, before the next boy decides its his turn.
+		You take a moment to take in the view, before the next boy decides it's his turn.
 	<</if>>
 	<br><br>
 
@@ -413,7 +422,7 @@ You find a large, iron key. You wonder if it opens anything nearby.
 	<<elseif $NPCList[0].penissize lte 0>>
 		You try not to laugh at the sight of such a <<EZsmall>> penis on a boy taller than you.
 	<<else>>
-		You take a moment to take in the view, before the next boy decides its his turn.
+		You take a moment to take in the view, before the next boy decides it's his turn.
 	<</if>>
 	<br><br>
 
@@ -423,7 +432,7 @@ You find a large, iron key. You wonder if it opens anything nearby.
 	<<elseif $NPCList[2].penissize lte 0>>
 		You try not to laugh at the sight of such a <<EZsmall>> penis on a boy taller than you.
 	<<else>>
-		You take a moment to take in the view, before the next boy decides its his turn.
+		You take a moment to take in the view, before the next boy decides it's his turn.
 	<</if>>
 	<br><br>
 
@@ -433,7 +442,7 @@ You find a large, iron key. You wonder if it opens anything nearby.
 	<<elseif $NPCList[3].penissize lte 0>>
 		You try not to laugh at the sight of such a <<EZsmall>> penis on a boy taller than you.
 	<<else>>
-		You take a moment to take in the view, before the next boy decides its his turn.
+		You take a moment to take in the view, before the next boy decides it's his turn.
 	<</if>>
 	<br><br>
 
@@ -443,7 +452,7 @@ You find a large, iron key. You wonder if it opens anything nearby.
 	<<elseif $NPCList[5].penissize lte 0>>
 		You try not to laugh at the sight of such a <<EZsmall>> penis on a boy taller than you.
 	<<else>>
-		You take a moment to take in the view, before the next boy decides its his turn.
+		You take a moment to take in the view, before the next boy decides it's his turn.
 	<</if>>
 	<br><br>
 
@@ -462,8 +471,10 @@ You find a large, iron key. You wonder if it opens anything nearby.
 
 	<<link [[Try and back out|Trash Boys Back Out]]>><</link>>
 	<br>
-	<<link [[Show them yours|Trash Boys Show]]>><</link>><<exhibitionist4>>
-	<br>
+	<<if $exhibitionism gte 55>>
+		<<link [[Show them yours|Trash Boys Show]]>><</link>><<exhibitionist4>>
+		<br>
+	<</if>>
 
 :: Trash Boys Back Out
 <<effects>>
@@ -471,8 +482,10 @@ You find a large, iron key. You wonder if it opens anything nearby.
 	<br><br>
 	"You made a promise" the <<person1>><<person>> retorts angrily, stepping forward. "Now you can either strip of your own free will, or we can make you" He states flatly. "It's ok if you feel a little embarrassed, but a promise is a promise."
 	<br><br>
-	<<link [[Strip|Trash Boys Show]]>><</link>><<exhibitionist4>>
-	<br>
+	<<if $exhibitionism gte 55>>
+		<<link [[Strip|Trash Boys Show]]>><</link>><<exhibitionist4>>
+		<br>
+	<</if>>
 	<<link [[Refuse|Trash Boys Forced Strip]]>><<set $molestationstart to 1>><</link>>
 	<br>
 
@@ -484,24 +497,24 @@ You find a large, iron key. You wonder if it opens anything nearby.
 		You nervously hook your thumbs into your waistband before hesitating, unsure if you really want to show a bunch of strangers your privates. Realising there's no way out of this but forward, you swallow your modesty and bring your trousers <<if !$worn.under_lower.exposed>>and underwear <</if>>down to your knees. With your <<genitals>> now exposed to the other boys you shift your weight nervously, your momentary bravado gone and the embarrassment from letting 6 other boys see your bare <<undies>> setting in.
 	<</if>>
 	<br><br>
-	<<if $penisexist>>
-		<<if $penissize lte 0>>
+	<<if $player.penisExist>>
+		<<if $player.penissize lte 0>>
 			The boys look down at your <<EZsmall>> <<EZpenis>> and then turn to each other, before breaking out into laughter. <<Penisremarkquote>> one of the boys says. "Don't worry, maybe it's still got some growing to do" says one of the other boys, trying not to laugh as he comforts you.
 			<<incggpenisinsecurity>>
 			<br><br>
 			You feel humiliated<<if $uncomfortable.nude is true>>, first you let a bunch of strangers look at your <<undies>> and now this<</if>>. You do your best to keep from crying as the boys settle down, but the laughter and the comments about your size hurt.
-		<<elseif $penissize is 4>>
+		<<elseif $player.penissize is 4>>
 			The boys look down at your <<EZbig>> <<EZpenis>> and gasp in surprise. <<Penisremarkquote>> one of the boys says. "I wish I had a dick that big" says one of the boys.
 			<br><br>
 			You feel a surge of pride as the boys express their awe at the size of your penis.
 			<<if $deviancy gte 75>>
 				A naughty thought occurs to you. You might be able to help the boy. You might even be able to make a little money from it.
 			<</if>>
-		<<elseif $penissize is 3>>
+		<<elseif $player.penissize is 3>>
 			The boys look down at your <<penis>> for a moment, and few of them gasp a little. "Wow, you're bigger than I thought you would be" one of them says. "Not that much bigger" says another, sheepishly.
 			<br><br>
 			You feel a little proud of the reactions you got, even if the other boy doesn't seem too impressed. It's kinda nice being the centre of attention like this.
-		<<elseif $penissize is 1>>
+		<<elseif $player.penissize is 1>>
 			The boys look down at your <<penis>> for a moment, and a couple of them let out a small chuckle. "A little on the small side there, buddy" one of them says. "Don't worry about it, it's no big deal" says another.
 			<br><br>
 			You feel a little embarrassed by their reaction, but the other boy doesn't think it's too bad so you're not too bothered by them. It's kinda nice being the centre of attention like this though.
@@ -512,7 +525,7 @@ You find a large, iron key. You wonder if it opens anything nearby.
 		<</if>>
 
 		<br><br>
-		<<if $penissize is 4 and $deviancy gte 75>>
+		<<if $player.penissize is 4 and $deviancy gte 75>>
 			<<link [[Offer to help the envious boy for a fee|Trash Boys Offer Secret]]>><</link>>
 			<br>
 			<<link [[Wrap things up|Trash Boys Wrap It Up]]>><</link>>
@@ -639,21 +652,21 @@ You shove the boys away from you. <<tearful>> you run to safety.
 	The boys hold your hands behind your back. "You should have kept your promise, then we wouldn't have had to do this" the <<person1>><<person>> says.
 	<br><br>
 	The boys gather around to have a good look at your naked body.
-	<<if $penisexist>>
-		<<if $penissize lte 0>>
+	<<if $player.penisExist>>
+		<<if $player.penissize lte 0>>
 			The boys look down at your <<EZsmall>> <<EZpenis>> and then turn to each other, before breaking out into laughter. <<Penisremarkquote>> one of the boys says. "Don't worry, maybe it's still got some growing to do" says one of the other boys, trying not to laugh as he comforts you.
 			<<incggpenisinsecurity>>
 			<br><br>
 			You feel humiliated<<if $uncomfortable.nude is true>>, first a bunch of strangers strip you naked and look at your <<undies>> and now this<</if>>. You do your best to keep from crying as the boys settle down, but the laughter and the comments about your size hurt.
-		<<elseif $penissize is 4>>
+		<<elseif $player.penissize is 4>>
 			The boys look down at your <<EZbig>> <<EZpenis>> and gasp in surprise. <<Penisremarkquote>> one of the boys says. "I wish I had a dick that big" says one of the boys.
 			<br><br>
 			You feel a surge of pride as the boys express their awe at the size of your penis.
-		<<elseif $penissize is 3>>
+		<<elseif $player.penissize is 3>>
 			The boys look down at your <<penis>> for a moment, and few of them gasp a little. "Wow, you're bigger than I thought you would be" one of them says. "Not that much bigger" says another, sheepishly.
 			<br><br>
 			You feel a little proud of the reactions you got, even if the other boy doesn't seem too impressed. It's kinda nice being the centre of attention like this.
-		<<elseif $penissize is 1>>
+		<<elseif $player.penissize is 1>>
 			The boys look down at your <<penis>> for a moment, and a couple of them let out a small chuckle. "A little on the small side there, buddy" one of them says. "Don't worry about it, it's no big deal" says another.
 			<br><br>
 			You feel a little embarrassed by their reaction, but the other boy doesn't think it's too bad so you're not too bothered by them. It's kinda nice being the centre of attention like this though.

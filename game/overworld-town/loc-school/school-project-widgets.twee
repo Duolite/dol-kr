@@ -88,20 +88,19 @@
 <<unset $mathsstimbeg>>
 <<unset $mathsprojectwhitney>>
 <<unset $mathschancestart>>
+<<unset $river_help>>
 
 <</widget>>
 
 <<widget "projectoptions">>
-
-<<if $scienceproject is "ongoing">>
-<<link [[과학 프로젝트에 몰두한다|Science Project]]>><</link>>
-<br>
-<</if>>
-<<if $mathsproject is "ongoing">>
-<<link [[수학 프로젝트에 몰두한다|Maths Project]]>><</link>>
-<br>
-<</if>>
-<br>
+	<<if $scienceproject is "ongoing">>
+		<<ind>><<link [[과학 프로젝트에 몰두한다|Science Project]]>><</link>>
+		<br>
+	<</if>>
+	<<if $mathsproject is "ongoing">>
+		<<ind>><<link [[수학 프로젝트에 몰두한다|Maths Project]]>><</link>>
+		<br>
+	<</if>>
 <</widget>>
 
 <<widget "scienceprojectchance">>
